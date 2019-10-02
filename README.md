@@ -34,11 +34,11 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-This project uses an OLTP relational database that automates the following business processes
+This project uses an OLTP relational database that automates the following business processes:
 
-    1. Club administration: (includes associations with other clubs): Reading clubs management, member's maintenance (payment control) and books management
-    2. Meetings administration: Manage the monthly calendar of reunions, book picking, and moderator's assignation, assistance control and discussions
-    3. Planning and execution of acted presentations (includes cast), manage the monthly calendar of presentations and actors or presentations ratings
+1. Club administration: (includes associations with other clubs): Reading clubs management, member's maintenance (payment control) and books management
+2. Meetings administration: Manage the monthly calendar of reunions, book picking, and moderator's assignation, assistance control and discussions
+3. Planning and execution of acted presentations (includes cast), manage the monthly calendar of presentations and actors or presentations ratings
 
 
 ### Built With
