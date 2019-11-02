@@ -1,16 +1,12 @@
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
-  <a href="https://github.com/github_username/repo">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
-  </a>
-
   <h3 align="center">Reading Club</h3>
 
   <p align="center">
-    YOUR_SHORT_DESCRIPTION
+    Organize meetings to discuss any book in less than a second
     <br />
-    <a href="https://github.com/github_username/repo"><strong>Explore the docs »</strong></a>
+    <a href="https://github.com/iSlidex/SBD1-Reading-club/tree/master/Docs"><strong>Explore the docs »</strong></a>
     <br />
   </p>
 </p>
