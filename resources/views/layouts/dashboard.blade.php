@@ -62,17 +62,17 @@
         Tip 2: you can also add an image using data-image tag
     -->
       <div class="logo">
-        <a href="#" class="simple-text logo-mini">
+        <a href="/home" class="simple-text logo-mini">
           CL
         </a>
-        <a href="#" class="simple-text logo-normal">
+        <a href="/home" class="simple-text logo-normal">
           Clubes de lectura
         </a>
       </div>
       <div class="sidebar-wrapper">
         <ul class="nav">
           <li class="nav-item">
-            <a class="nav-link" href="#">
+            <a class="nav-link" href="/home">
               <i class="material-icons">dashboard</i>
               <p> Inicio </p>
             </a>
@@ -106,7 +106,7 @@
                   
   
                   <li class="nav-item ">
-                    <a class="nav-link" href="#">
+                    <a class="nav-link" href="/browseclubs">
                       <span class="sidebar-normal"> Explorar clubes de lectura </span>
                     </a>
                   </li>
