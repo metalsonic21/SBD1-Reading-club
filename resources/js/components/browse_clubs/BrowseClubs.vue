@@ -42,7 +42,7 @@
                                                         <button type="button" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Visualizar" class="btn btn-info" v-b-modal.view-club>
                                                             <i class="material-icons">remove_red_eye</i>
                                                         </button>
-                                                        <button type="button" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Afiliarse a este club" class="btn btn-info">
+                                                        <button type="button" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Añadir miembro" class="btn btn-info">
                                                             <i class="material-icons">person_add</i>
                                                         </button>
                                                         <button type="button" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Modificar" v-b-modal.edit-club class="btn btn-success">
@@ -83,7 +83,7 @@
         </div>
     </b-modal>
 
-    <b-modal size="lg" id="view-club" ok-variant="info" cancel-variant="danger" ok-title="Unirme a este club" cancel-title="Cerrar">
+    <b-modal size="lg" id="view-club" ok-variant="info" cancel-variant="danger" ok-title="Añadir miembro a este club" cancel-title="Cerrar">
         <div class="card ">
             <div class="card-header card-header-info card-header-icon">
                 <div class="card-icon">
