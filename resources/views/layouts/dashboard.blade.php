@@ -87,12 +87,6 @@
             </b-link>
             <b-collapse class="collapse" id="d-1">
                 <ul class="nav">
-                    <li class="nav-item ">
-                        <a class="nav-link" href="#">
-                          <span class="sidebar-normal"> Mi club de lectura </span>
-                        </a>
-                      </li>
-  
                   <li class="nav-item ">
                     <a class="nav-link" href="#">
                       <span class="sidebar-normal"> Miembros del club </span>
@@ -100,7 +94,7 @@
                   </li>
                   <li class="nav-item ">
                     <a class="nav-link" href="#">
-                      <span class="sidebar-normal"> Mi membresía </span>
+                      <span class="sidebar-normal"> Libros analizados por club </span>
                     </a>
                   </li>
                   
@@ -125,11 +119,6 @@
                 <ul class="nav">
                     <li class="nav-item ">
                       <a class="nav-link" href="#">
-                        <span class="sidebar-normal"> Mi grupo de lectura </span>
-                      </a>
-                    </li>
-                    <li class="nav-item ">
-                      <a class="nav-link" href="#">
                         <span class="sidebar-normal"> Explorar grupos de lectura </span>
                       </a>
                     </li>
@@ -147,7 +136,7 @@
                 <ul class="nav">
                     <li class="nav-item ">
                       <a class="nav-link" href="#">
-                        <span class="sidebar-normal"> Mis reuniones </span>
+                        <span class="sidebar-normal"> Explorar reuniones </span>
                       </a>
                     </li>
                     <li class="nav-item ">
@@ -169,12 +158,12 @@
                 <ul class="nav">
                     <li class="nav-item ">
                       <a class="nav-link" href="#">
-                        <span class="sidebar-normal"> Mis libros preferidos </span>
+                        <span class="sidebar-normal"> Explorar libros preferidos de miembros de club </span>
                       </a>
                     </li>
                     <li class="nav-item ">
                       <a class="nav-link" href="#">
-                        <span class="sidebar-normal"> Explorar libros </span>
+                        <span class="sidebar-normal"> Gestión de libros </span>
                       </a>
                     </li>
                   </ul>
@@ -192,7 +181,7 @@
                 <ul class="nav">
                     <li class="nav-item ">
                       <a class="nav-link" href="#">
-                        <span class="sidebar-normal"> Obras actuadas en mi club </span>
+                        <span class="sidebar-normal"> Obras actuadas por club </span>
                       </a>
                     </li>
                     <li class="nav-item ">
