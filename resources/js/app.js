@@ -18,6 +18,9 @@ Vue.component('active-presentations', require('./components/home/ActivePresentat
 /*BROWSE CLUBS*/
 Vue.component('browse-clubs', require('./components/browse_clubs/BrowseClubs.vue').default);
 
+/* MEMBERS REPORTS */
+Vue.component('club-members', require('./components/club_members/ClubMembers.vue').default);
+
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 

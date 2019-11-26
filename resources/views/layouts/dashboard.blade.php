@@ -88,7 +88,7 @@
             <b-collapse class="collapse" id="d-1">
                 <ul class="nav">
                   <li class="nav-item ">
-                    <a class="nav-link" href="#">
+                    <a class="nav-link" href="/members">
                       <span class="sidebar-normal"> Miembros del club </span>
                     </a>
                   </li>

@@ -19,3 +19,4 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/browseclubs', 'clubs\BrowseClubsController@index')->name('browseclubs');
+Route::get('/members', 'clubs\ReportsClubMembersController@index')->name('members');
