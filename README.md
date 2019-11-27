@@ -79,68 +79,33 @@ Password: metalsonic21
 
 3. Under that user create a database called `ReadingClub`
 
-4. Create a .env file in the root directory with the following content
-```
-APP_NAME=Laravel
-APP_ENV=local
-APP_KEY=base64:ZDZqmToVmeBLfsxk/G7FKtDmYerfiT36fmOhgqzWN54=
-APP_DEBUG=true
-APP_URL=http://localhost
-
-LOG_CHANNEL=stack
-
-DB_CONNECTION=pgsql
-DB_HOST=127.0.0.1
-DB_PORT=5432
-DB_DATABASE=ReadingClub
-DB_USERNAME=FrankHesse
-DB_PASSWORD=metalsonic21
-
-BROADCAST_DRIVER=log
-CACHE_DRIVER=file
-QUEUE_CONNECTION=sync
-SESSION_DRIVER=file
-SESSION_LIFETIME=120
-
-REDIS_HOST=127.0.0.1
-REDIS_PASSWORD=null
-REDIS_PORT=6379
-
-MAIL_DRIVER=smtp
-MAIL_HOST=smtp.mailtrap.io
-MAIL_PORT=2525
-MAIL_USERNAME=null
-MAIL_PASSWORD=null
-MAIL_ENCRYPTION=null
-
-AWS_ACCESS_KEY_ID=
-AWS_SECRET_ACCESS_KEY=
-AWS_DEFAULT_REGION=us-east-1
-AWS_BUCKET=
-
-PUSHER_APP_ID=
-PUSHER_APP_KEY=
-PUSHER_APP_SECRET=
-PUSHER_APP_CLUSTER=mt1
-
-MIX_PUSHER_APP_KEY="${PUSHER_APP_KEY}"
-MIX_PUSHER_APP_CLUSTER="${PUSHER_APP_CLUSTER}"
-
-```
-
-5. Run the following commands
+4. Run the following commands
 
 ```
 php artisan migrate
 php artisan serve
 ```
 
-6. In another console run the following command
+5. In another console run the following command
 
 ```
 npm run watch
 ```
- 
+## Issues
+
+1. SQLSTATE[08006] [7] FATAL: password authentication failed for user frankhesse
+
+**SOLUTION**: Go to C:\Program Files\PostgreSQL\12\data, locate the pg_hba.conf file and edit the following lines:
+
+```
+host    all             all             127.0.0.1/32            trust
+host    all             all             ::1/128                 trust
+host    replication     all             127.0.0.1/32            trust
+host    replication     all             ::1/128                 trust
+```
+
+This allows replication connections from localhost, the method by default is md5. After making these changes shutdown the server and restart pgAdmin
+
 
 ## Notes
 1. This project has a spanish UI
