@@ -39,8 +39,11 @@
                                                         <button type="button" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Histórico de pagos de membresía" class="btn btn-success">
                                                             <i class="material-icons">attach_money</i> Pagos
                                                         </button>
-                                                        <button type="button" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Asistencia a reuniones" v-b-modal.edit-club class="btn btn-default">
+                                                        <button type="button" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Asistencia a reuniones" class="btn btn-default">
                                                             <i class="material-icons">list_alt</i> Actividad
+                                                        </button>
+                                                        <button type="button" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Clubes anteriores" class="btn btn-info">
+                                                            <i class="material-icons">book</i> Clubes anteriores
                                                         </button>
                                                     </td>
                                                 </tr>

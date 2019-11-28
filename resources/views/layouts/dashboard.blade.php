@@ -89,7 +89,12 @@
                 <ul class="nav">
                   <li class="nav-item ">
                     <a class="nav-link" href="/members">
-                      <span class="sidebar-normal"> Miembros del club </span>
+                      <span class="sidebar-normal"> Reportes Miembros del club </span>
+                    </a>
+                  </li>
+                  <li class="nav-item ">
+                    <a class="nav-link" href="#">
+                      <span class="sidebar-normal"> Gestión de Miembros del club </span>
                     </a>
                   </li>
                   <li class="nav-item ">
@@ -120,6 +125,11 @@
                     <li class="nav-item ">
                       <a class="nav-link" href="/browsegroups">
                         <span class="sidebar-normal"> Explorar grupos de lectura </span>
+                      </a>
+                    </li>
+                    <li class="nav-item ">
+                      <a class="nav-link" href="#">
+                        <span class="sidebar-normal"> Gestión de miembros de grupos</span>
                       </a>
                     </li>
                   </ul>
@@ -156,11 +166,6 @@
             </b-link>
             <b-collapse id="d-4" class="collapse">
                 <ul class="nav">
-                    <li class="nav-item ">
-                      <a class="nav-link" href="#">
-                        <span class="sidebar-normal"> Explorar libros preferidos de miembros de club </span>
-                      </a>
-                    </li>
                     <li class="nav-item ">
                       <a class="nav-link" href="#">
                         <span class="sidebar-normal"> Gestión de libros </span>

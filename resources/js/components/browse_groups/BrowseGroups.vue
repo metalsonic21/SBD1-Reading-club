@@ -15,7 +15,7 @@
                                 </div>
                                 <div class="col-lg-2">
 
-                                    <button class="btn btn-info float-right mt-3" v-b-modal.add-club>
+                                    <button class="btn btn-info float-right mt-3" v-b-modal.add-group>
                                         <span class="btn-label">
                                             <i class="material-icons">add</i>
                                         </span>
@@ -39,13 +39,13 @@
                                                 <tr>
                                                     <td class="text-center">Frank Hesse</td>
                                                     <td class="td-actions text-center">
-                                                        <button type="button" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Visualizar" class="btn btn-info" v-b-modal.view-club>
+                                                        <button type="button" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Visualizar" class="btn btn-info" v-b-modal.view-group>
                                                             <i class="material-icons">remove_red_eye</i>
                                                         </button>
                                                         <button type="button" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Añadir miembro" class="btn btn-info">
                                                             <i class="material-icons">person_add</i>
                                                         </button>
-                                                        <button type="button" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Modificar" v-b-modal.edit-club class="btn btn-success">
+                                                        <button type="button" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Modificar" v-b-modal.edit-group class="btn btn-success">
                                                             <i class="material-icons">edit</i>
                                                         </button>
                                                         <button type="button" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Eliminar" class="btn btn-danger">
@@ -67,13 +67,13 @@
         </div>
     </div>
 
-    <b-modal size="lg" id="add-club" ok-variant="info" ok-title="Continuar" cancel-title="Cancelar" cancel-variant="danger">
+    <b-modal size="lg" id="add-group" ok-variant="info" ok-title="Continuar" cancel-title="Cancelar" cancel-variant="danger">
         <div class="card ">
             <div class="card-header card-header-info card-header-icon">
                 <div class="card-icon">
                     <i class="material-icons">add</i>
                 </div>
-                <h4 class="card-title">Añadir nuevo club</h4>
+                <h4 class="card-title">Añadir nuevo grupo</h4>
             </div>
             <div class="card-body ">
                 <b-form>
@@ -83,13 +83,13 @@
         </div>
     </b-modal>
 
-    <b-modal size="lg" id="view-club" ok-variant="info" cancel-variant="danger" ok-title="Añadir miembro a este club" cancel-title="Cerrar">
+    <b-modal size="lg" id="view-group" ok-variant="info" cancel-variant="danger" ok-title="Añadir miembro a este grupo" cancel-title="Cerrar">
         <div class="card ">
             <div class="card-header card-header-info card-header-icon">
                 <div class="card-icon">
                     <i class="material-icons">book</i>
                 </div>
-                <h4 class="card-title">Detalles de club</h4>
+                <h4 class="card-title">Detalles de grupo</h4>
             </div>
             <div class="card-body ">
                 <b-form>
@@ -101,13 +101,13 @@
     </b-modal>
 
     
-    <b-modal size="lg" id="edit-club" ok-variant="info" cancel-variant="danger" ok-title="Modificar" cancel-title="Cancelar">
+    <b-modal size="lg" id="edit-group" ok-variant="info" cancel-variant="danger" ok-title="Modificar" cancel-title="Cancelar">
         <div class="card ">
             <div class="card-header card-header-info card-header-icon">
                 <div class="card-icon">
                     <i class="material-icons">edit</i>
                 </div>
-                <h4 class="card-title">Modificar club</h4>
+                <h4 class="card-title">Modificar grupo</h4>
             </div>
             <div class="card-body ">
                 <b-form>
