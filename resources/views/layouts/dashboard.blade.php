@@ -93,8 +93,8 @@
                     </a>
                   </li>
                   <li class="nav-item ">
-                    <a class="nav-link" href="#">
-                      <span class="sidebar-normal"> Libros analizados por club </span>
+                    <a class="nav-link" href="/clubreports">
+                      <span class="sidebar-normal"> Reportes por club </span>
                     </a>
                   </li>
                   
@@ -118,7 +118,7 @@
             <b-collapse class="collapse" id="d-2">
                 <ul class="nav">
                     <li class="nav-item ">
-                      <a class="nav-link" href="#">
+                      <a class="nav-link" href="/browsegroups">
                         <span class="sidebar-normal"> Explorar grupos de lectura </span>
                       </a>
                     </li>

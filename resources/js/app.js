@@ -21,6 +21,12 @@ Vue.component('browse-clubs', require('./components/browse_clubs/BrowseClubs.vue
 /* MEMBERS REPORTS */
 Vue.component('club-members', require('./components/club_members/ClubMembers.vue').default);
 
+/* REVIEWED BOOKS*/
+Vue.component('available-reports-club', require('./components/club_reports/AvailableReportsClub.vue').default);
+
+/*BROWSE GROUPS*/
+Vue.component('browse-groups', require('./components/browse_groups/BrowseGroups.vue').default);
+
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 
