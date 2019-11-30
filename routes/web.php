@@ -23,6 +23,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/browseclubs', 'clubs\BrowseClubsController@index')->name('browseclubs');
 Route::get('/members', 'clubs\ReportsClubMembersController@index')->name('members');
 Route::get('/clubreports', 'clubs\ClubReportsController@index')->name('clubreports');
+Route::get('/selectclub', 'clubs\SelectClubController@index')->name('selectclub');
+Route::get('/managemembers', 'clubs\MembersController@index')->name('managemembers');
 
 /*GROUPS*/
 Route::get('/browsegroups', 'groups\BrowseGroupsController@index')->name('browsegroups');

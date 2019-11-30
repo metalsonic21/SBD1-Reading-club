@@ -17,9 +17,13 @@ Vue.component('active-presentations', require('./components/home/ActivePresentat
 
 /*BROWSE CLUBS*/
 Vue.component('browse-clubs', require('./components/browse_clubs/BrowseClubs.vue').default);
+Vue.component('select-club', require('./components/browse_clubs/SelectClub.vue').default);
 
-/* MEMBERS REPORTS */
-Vue.component('club-members', require('./components/club_members/ClubMembers.vue').default);
+
+/* MEMBERS */
+Vue.component('club-members', require('./components/club_members/ClubMembers.vue').default); //reports
+Vue.component('browse-members', require('./components/club_members/BrowseMembers.vue').default); //crud members
+
 
 /* REVIEWED BOOKS*/
 Vue.component('available-reports-club', require('./components/club_reports/AvailableReportsClub.vue').default);

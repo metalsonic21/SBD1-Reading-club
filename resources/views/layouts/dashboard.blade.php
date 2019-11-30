@@ -93,7 +93,7 @@
                     </a>
                   </li>
                   <li class="nav-item ">
-                    <a class="nav-link" href="#">
+                    <a class="nav-link" href="/selectclub">
                       <span class="sidebar-normal"> Gestión de Miembros del club </span>
                     </a>
                   </li>
