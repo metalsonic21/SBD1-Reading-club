@@ -123,12 +123,12 @@
             <b-collapse class="collapse" id="d-2">
                 <ul class="nav">
                     <li class="nav-item ">
-                      <a class="nav-link" href="/browsegroups">
+                      <a class="nav-link" href="/selectclubg">
                         <span class="sidebar-normal"> Explorar grupos de lectura </span>
                       </a>
                     </li>
                     <li class="nav-item ">
-                      <a class="nav-link" href="#">
+                      <a class="nav-link" href="/selectclubgm">
                         <span class="sidebar-normal"> Gestión de miembros de grupos</span>
                       </a>
                     </li>

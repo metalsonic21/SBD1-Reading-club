@@ -64,9 +64,9 @@
         </div>
     </div>
 
-    <b-modal size="lg" id="add-member" ok-variant="info" ok-title="Continuar" cancel-title="Cancelar" cancel-variant="danger">
+    <b-modal size="lg" id="add-member" ok-variant="default" ok-title="Continuar" cancel-title="Cancelar" cancel-variant="danger">
         <div class="card ">
-            <div class="card-header card-header-info card-header-icon">
+            <div class="card-header card-header-log card-header-icon">
                 <div class="card-icon">
                     <i class="material-icons">add</i>
                 </div>
@@ -80,9 +80,9 @@
         </div>
     </b-modal>
 
-    <b-modal size="lg" id="view-member" ok-variant="info" ok-only ok-title="Continuar">
+    <b-modal size="lg" id="view-member" ok-variant="success" ok-only ok-title="Continuar">
         <div class="card ">
-            <div class="card-header card-header-info card-header-icon">
+            <div class="card-header card-header-log card-header-icon">
                 <div class="card-icon">
                     <i class="material-icons">book</i>
                 </div>
@@ -98,9 +98,9 @@
     </b-modal>
 
     
-    <b-modal size="lg" id="edit-member" ok-variant="info" cancel-variant="danger" ok-title="Modificar" cancel-title="Cancelar">
+    <b-modal size="lg" id="edit-member" ok-variant="default" cancel-variant="danger" ok-title="Modificar" cancel-title="Cancelar">
         <div class="card ">
-            <div class="card-header card-header-info card-header-icon">
+            <div class="card-header card-header-log card-header-icon">
                 <div class="card-icon">
                     <i class="material-icons">edit</i>
                 </div>

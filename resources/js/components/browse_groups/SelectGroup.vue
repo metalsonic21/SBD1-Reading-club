@@ -11,7 +11,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-lg-10">
-                                    <h4 class="card-title">Seleccione un club de lectura</h4>
+                                    <h4 class="card-title">Seleccione grupo de lectura</h4>
                                 </div>
                             </div>
                         </div>
@@ -30,7 +30,7 @@
                                                 <tr>
                                                     <td class="text-center">Frank Hesse</td>
                                                     <td class="td-actions text-center">
-                                                    <b-link href="/managemembers">    <button type="button" rel="tooltip" class="btn btn-default"> Seleccionar 
+                                                    <b-link href="/managemembersg">    <button type="button" rel="tooltip" class="btn btn-default"> Seleccionar 
                                                         </button></b-link>
                                                     </td>
                                                 </tr>

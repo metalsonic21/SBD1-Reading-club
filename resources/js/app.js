@@ -18,6 +18,8 @@ Vue.component('active-presentations', require('./components/home/ActivePresentat
 /*BROWSE CLUBS*/
 Vue.component('browse-clubs', require('./components/browse_clubs/BrowseClubs.vue').default);
 Vue.component('select-club', require('./components/browse_clubs/SelectClub.vue').default);
+Vue.component('select-club-group', require('./components/browse_clubs/SelectClubG.vue').default);
+Vue.component('select-club-group-member', require('./components/browse_clubs/SelectClubGM.vue').default);
 
 
 /* MEMBERS */
@@ -30,6 +32,8 @@ Vue.component('available-reports-club', require('./components/club_reports/Avail
 
 /*BROWSE GROUPS*/
 Vue.component('browse-groups', require('./components/browse_groups/BrowseGroups.vue').default);
+Vue.component('select-group', require('./components/browse_groups/SelectGroup.vue').default);
+Vue.component('group-members', require('./components/browse_groups/BrowseMembers.vue').default);
 
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);

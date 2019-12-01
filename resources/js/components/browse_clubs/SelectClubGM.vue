@@ -30,7 +30,7 @@
                                                 <tr>
                                                     <td class="text-center">Frank Hesse</td>
                                                     <td class="td-actions text-center">
-                                                    <b-link href="/managemembers">    <button type="button" rel="tooltip" class="btn btn-default"> Seleccionar 
+                                                    <b-link href="/selectgroup">    <button type="button" rel="tooltip" class="btn btn-default"> Seleccionar 
                                                         </button></b-link>
                                                     </td>
                                                 </tr>
@@ -48,7 +48,7 @@
         </div>
     </div>
 
-
+    
 </div>
 </template>
 
