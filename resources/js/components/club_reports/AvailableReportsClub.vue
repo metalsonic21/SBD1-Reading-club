@@ -5,7 +5,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="card">
-                        <div class="card-header card-header-info card-header-icon">
+                        <div class="card-header card-header-log card-header-icon">
                             <div class="card-icon">
                                 <i class="material-icons">library_books</i>
                             </div>
@@ -31,10 +31,10 @@
                                                     <td class="text-center">Killer Bees</td>
 
                                                     <td class="td-actions text-center">
-                                                        <button type="button" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Libros analizados por este club" class="btn btn-info" v-b-modal.view-club>
+                                                        <button type="button" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Libros analizados por este club" class="btn btn-danger" v-b-modal.view-club>
                                                             <i class="material-icons">comment</i> Libros analizados
                                                         </button>
-                                                        <button type="button" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Ficha club" class="btn btn-info" v-b-modal.view-club>
+                                                        <button type="button" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Ficha club" class="btn btn-default" v-b-modal.view-club>
                                                             <i class="material-icons">book</i> Ficha club
                                                         </button>
                                                     </td>

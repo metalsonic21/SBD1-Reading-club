@@ -5,7 +5,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="card">
-                        <div class="card-header card-header-info card-header-icon">
+                        <div class="card-header card-header-log card-header-icon">
                             <div class="card-icon">
                                 <i class="material-icons">done</i>
                             </div>

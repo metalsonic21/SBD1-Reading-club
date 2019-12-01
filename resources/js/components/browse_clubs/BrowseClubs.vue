@@ -5,7 +5,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="card">
-                        <div class="card-header card-header-info card-header-icon">
+                        <div class="card-header card-header-log card-header-icon">
                             <div class="card-icon">
                                 <i class="material-icons">group</i>
                             </div>
@@ -15,7 +15,7 @@
                                 </div>
                                 <div class="col-lg-2">
 
-                                    <button class="btn btn-info float-right mt-3" v-b-modal.add-club>
+                                    <button class="btn btn-default float-right mt-3" v-b-modal.add-club>
                                         <span class="btn-label">
                                             <i class="material-icons">add</i>
                                         </span>
@@ -42,7 +42,7 @@
                                                         <button type="button" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Visualizar" class="btn btn-info" v-b-modal.view-club>
                                                             <i class="material-icons">remove_red_eye</i>
                                                         </button>
-                                                        <button type="button" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Añadir miembro" class="btn btn-info">
+                                                        <button type="button" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Añadir miembro" class="btn btn-default">
                                                             <i class="material-icons">person_add</i>
                                                         </button>
                                                         <button type="button" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Modificar" v-b-modal.edit-club class="btn btn-success">

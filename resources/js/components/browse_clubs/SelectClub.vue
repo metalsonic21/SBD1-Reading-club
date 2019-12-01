@@ -5,7 +5,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="card">
-                        <div class="card-header card-header-info card-header-icon">
+                        <div class="card-header card-header-log card-header-icon">
                             <div class="card-icon">
                                 <i class="material-icons">group</i>
                             </div>
@@ -30,7 +30,7 @@
                                                 <tr>
                                                     <td class="text-center">Frank Hesse</td>
                                                     <td class="td-actions text-center">
-                                                    <b-link href="/managemembers">    <button type="button" rel="tooltip" class="btn btn-info"> Seleccionar 
+                                                    <b-link href="/managemembers">    <button type="button" rel="tooltip" class="btn btn-default"> Seleccionar 
                                                         </button></b-link>
                                                     </td>
                                                 </tr>

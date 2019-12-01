@@ -39,15 +39,15 @@
   <style>
   /*Top navbar hover color*/
   .dropdown-item:hover{
-            background-color:#26c6da !important;
+            background-color:#8B8378 !important;
         }
 
         .dropdown-item:focus{
-            background-color:#26c6da !important;
+            background-color:#8B8378 !important;
         }
 
         .dropdown-item:active{
-            background-color:#26c6da !important; 
+            background-color:#8B8378 !important; 
         }
   </style>
 
@@ -55,7 +55,7 @@
 </head>
 <div id="app">
   <div class="wrapper ">
-    <div class="sidebar" data-color="azure" data-background-color="black" data-image="./img/sidebar-1.jpg">
+    <div class="sidebar" data-color="azure" data-background-color="black" style="background-image:url('/img/dashboard/sidebar-2.jpg')">
       <!--
         Tip 1: You can change the color of the sidebar using: data-color="purple | azure | green | orange | danger"
 
@@ -273,5 +273,7 @@
               <script type="application/javascript" src="{{ asset('js/plugins/buttons.js') }}" defer></script>
               <!-- Chartist JS -->
               <script type="application/javascript" src="{{ asset('js/plugins/chartist.min.js') }}" defer></script>
+
+              
               </body>
 </html>

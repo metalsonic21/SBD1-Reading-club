@@ -68048,7 +68048,7 @@ var render = function() {
                 _c(
                   "div",
                   {
-                    staticClass: "card-header card-header-info card-header-icon"
+                    staticClass: "card-header card-header-log card-header-icon"
                   },
                   [
                     _vm._m(0),
@@ -68067,7 +68067,7 @@ var render = function() {
                                 modifiers: { "add-club": true }
                               }
                             ],
-                            staticClass: "btn btn-info float-right mt-3"
+                            staticClass: "btn btn-default float-right mt-3"
                           },
                           [
                             _vm._m(2),
@@ -68324,7 +68324,7 @@ var staticRenderFns = [
     return _c(
       "button",
       {
-        staticClass: "btn btn-info",
+        staticClass: "btn btn-default",
         attrs: {
           type: "button",
           rel: "tooltip",
@@ -68414,7 +68414,7 @@ var render = function() {
                                         _c(
                                           "button",
                                           {
-                                            staticClass: "btn btn-info",
+                                            staticClass: "btn btn-default",
                                             attrs: {
                                               type: "button",
                                               rel: "tooltip"
@@ -68554,7 +68554,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c(
       "div",
-      { staticClass: "card-header card-header-info card-header-icon" },
+      { staticClass: "card-header card-header-log card-header-icon" },
       [
         _c("div", { staticClass: "card-icon" }, [
           _c("i", { staticClass: "material-icons" }, [_vm._v("group")])
@@ -68615,7 +68615,7 @@ var render = function() {
                 _c(
                   "div",
                   {
-                    staticClass: "card-header card-header-info card-header-icon"
+                    staticClass: "card-header card-header-log card-header-icon"
                   },
                   [
                     _vm._m(0),
@@ -68634,7 +68634,7 @@ var render = function() {
                                 modifiers: { "add-group": true }
                               }
                             ],
-                            staticClass: "btn btn-info float-right mt-3"
+                            staticClass: "btn btn-default float-right mt-3"
                           },
                           [
                             _vm._m(2),
@@ -68891,7 +68891,7 @@ var staticRenderFns = [
     return _c(
       "button",
       {
-        staticClass: "btn btn-info",
+        staticClass: "btn btn-default",
         attrs: {
           type: "button",
           rel: "tooltip",
@@ -68955,7 +68955,7 @@ var render = function() {
                 _c(
                   "div",
                   {
-                    staticClass: "card-header card-header-info card-header-icon"
+                    staticClass: "card-header card-header-log card-header-icon"
                   },
                   [
                     _vm._m(0),
@@ -68974,7 +68974,7 @@ var render = function() {
                                 modifiers: { "add-member": true }
                               }
                             ],
-                            staticClass: "btn btn-info float-right mt-3"
+                            staticClass: "btn btn-default float-right mt-3"
                           },
                           [
                             _vm._m(2),
@@ -69297,7 +69297,7 @@ var render = function() {
                                         modifiers: { "view-club": true }
                                       }
                                     ],
-                                    staticClass: "btn btn-info",
+                                    staticClass: "btn btn-danger",
                                     attrs: {
                                       type: "button",
                                       rel: "tooltip",
@@ -69345,7 +69345,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c(
       "div",
-      { staticClass: "card-header card-header-info card-header-icon" },
+      { staticClass: "card-header card-header-log card-header-icon" },
       [
         _c("div", { staticClass: "card-icon" }, [
           _c("i", { staticClass: "material-icons" }, [_vm._v("group")])
@@ -69504,7 +69504,7 @@ var render = function() {
                                         modifiers: { "view-club": true }
                                       }
                                     ],
-                                    staticClass: "btn btn-info",
+                                    staticClass: "btn btn-danger",
                                     attrs: {
                                       type: "button",
                                       rel: "tooltip",
@@ -69533,7 +69533,7 @@ var render = function() {
                                         modifiers: { "view-club": true }
                                       }
                                     ],
-                                    staticClass: "btn btn-info",
+                                    staticClass: "btn btn-default",
                                     attrs: {
                                       type: "button",
                                       rel: "tooltip",
@@ -69574,7 +69574,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c(
       "div",
-      { staticClass: "card-header card-header-info card-header-icon" },
+      { staticClass: "card-header card-header-log card-header-icon" },
       [
         _c("div", { staticClass: "card-icon" }, [
           _c("i", { staticClass: "material-icons" }, [_vm._v("library_books")])
@@ -69642,7 +69642,7 @@ var staticRenderFns = [
                 _c(
                   "div",
                   {
-                    staticClass: "card-header card-header-info card-header-icon"
+                    staticClass: "card-header card-header-log card-header-icon"
                   },
                   [
                     _c("div", { staticClass: "card-icon" }, [
@@ -69713,7 +69713,7 @@ var staticRenderFns = [
                 _c(
                   "div",
                   {
-                    staticClass: "card-header card-header-info card-header-icon"
+                    staticClass: "card-header card-header-log card-header-icon"
                   },
                   [
                     _c("div", { staticClass: "card-icon" }, [
@@ -69784,7 +69784,7 @@ var staticRenderFns = [
                 _c(
                   "div",
                   {
-                    staticClass: "card-header card-header-info card-header-icon"
+                    staticClass: "card-header card-header-log card-header-icon"
                   },
                   [
                     _c("div", { staticClass: "card-icon" }, [

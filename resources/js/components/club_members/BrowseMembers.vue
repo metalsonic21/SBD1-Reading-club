@@ -5,7 +5,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="card">
-                        <div class="card-header card-header-info card-header-icon">
+                        <div class="card-header card-header-log card-header-icon">
                             <div class="card-icon">
                                 <i class="material-icons">group</i>
                             </div>
@@ -15,7 +15,7 @@
                                 </div>
                                 <div class="col-lg-2">
 
-                                    <button class="btn btn-info float-right mt-3" v-b-modal.add-member>
+                                    <button class="btn btn-default float-right mt-3" v-b-modal.add-member>
                                         <span class="btn-label">
                                             <i class="material-icons">add</i>
                                         </span>

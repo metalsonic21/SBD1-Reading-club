@@ -5,7 +5,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="card">
-                        <div class="card-header card-header-info card-header-icon">
+                        <div class="card-header card-header-log card-header-icon">
                             <div class="card-icon">
                                 <i class="material-icons">group</i>
                             </div>
@@ -33,7 +33,7 @@
                                                     <td class="text-center">Killer Bees</td>
 
                                                     <td class="td-actions text-center">
-                                                        <button type="button" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Libros analizados durante estadía de persona en club" class="btn btn-info" v-b-modal.view-club>
+                                                        <button type="button" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Libros analizados durante estadía de persona en club" class="btn btn-danger" v-b-modal.view-club>
                                                             <i class="material-icons">comment</i> Libros analizados
                                                         </button>
                                                         <button type="button" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Histórico de pagos de membresía" class="btn btn-success">
