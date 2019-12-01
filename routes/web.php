@@ -25,10 +25,15 @@ Route::get('/clubreports', 'clubs\ClubReportsController@index')->name('clubrepor
 Route::get('/selectclub', 'clubs\SelectClubController@index')->name('selectclub');
 Route::get('/selectclubg', 'clubs\SelectClubGController@index')->name('selectclub');
 Route::get('/selectclubgm', 'clubs\SelectClubGMController@index')->name('selectclub');
+Route::get('/selectclubr', 'clubs\SelectClubRController@index')->name('selectclub');
 Route::get('/managemembers', 'clubs\MembersController@index')->name('managemembers');
 
 /*GROUPS*/
 Route::get('/browsegroups', 'groups\BrowseGroupsController@index')->name('browsegroups');
 Route::get('/selectgroup', 'groups\SelectGroupController@index')->name('selectgroup');
+Route::get('/selectgroupr', 'groups\SelectGroupRController@index')->name('selectgroup');
 Route::get('/managemembersg', 'groups\GroupMembersController@index')->name('managemembers');
 
+/* MEETINGS */
+Route::get('/managemeetings', 'meetings\MeetingsController@index')->name('managemeetings');
+Route::get('/managemeetings/calendar', 'meetings\MeetingsController@calendar')->name('managemeetings');

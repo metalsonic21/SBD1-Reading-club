@@ -106,6 +106,24 @@ host    replication     all             ::1/128                 trust
 
 This allows replication connections from localhost, the method by default is md5. After making these changes shutdown the server and restart pgAdmin
 
+2. Missing the vendor folder
+
+**SOLUTION**: Run the following command
+
+```
+composer update
+```
+
+Then, restart pgAdmin and the server.
+
+3. Missing driver
+
+**SOLUTION**: Check your php.ini file and uncomment the following lines
+
+```
+;extension=pdo_pgsql
+;extension=pgsql
+```
 
 ## Notes
 1. This project has a spanish UI

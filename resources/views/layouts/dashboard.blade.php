@@ -36,6 +36,11 @@
   <!-- CSS Files -->
   <link href="{{ asset('css/material-dashboard.min.css') }}" rel="stylesheet" />
 
+  <!-- FULL CALENDAR -->
+
+  <link href="{{ asset('css/plugins/fullcalendar/main.min.css') }}" rel="stylesheet" />
+  <link href="{{ asset('css/plugins/fullcalendar/daygrid.min.css') }}" rel="stylesheet" />
+
   <style>
   /*Top navbar hover color*/
   .dropdown-item:hover{
@@ -145,13 +150,8 @@
             <b-collapse id="d-3" class="collapse">
                 <ul class="nav">
                     <li class="nav-item ">
-                      <a class="nav-link" href="#">
+                      <a class="nav-link" href="/selectclubr">
                         <span class="sidebar-normal"> Explorar reuniones </span>
-                      </a>
-                    </li>
-                    <li class="nav-item ">
-                      <a class="nav-link" href="#">
-                        <span class="sidebar-normal"> Control de asistencia </span>
                       </a>
                     </li>
                   </ul>
@@ -241,8 +241,8 @@
   </div>
 </div>
               <!--   Core JS Files   -->
-              <script type="application/javascript" src="{{ asset('js/jquery.min.js') }}" defer></script>
-              <script type="application/javascript" src="{{ asset('js/popper.min.js') }}" defer></script>
+              <script type="application/javascript" src="{{ asset('js/jquery.min.js') }}" ></script>
+              <script type="application/javascript" src="{{ asset('js/popper.min.js') }}" ></script>
 
               <script type="application/javascript" src="{{ asset('js/bootstrap-material-design.min.js') }}" defer></script>
               <!-- Plugin for the momentJs  -->
@@ -251,8 +251,6 @@
               <script type="application/javascript" src="{{ asset('js/plugins/jquery.validate.min.js') }}" defer></script>
               <!-- Plugin for the Wizard, full documentation here: https://github.com/VinceG/twitter-bootstrap-wizard -->
               <script type="application/javascript" src="{{ asset('js/plugins/jquery.bootstrap-wizard.js') }}" defer></script>
-              <!--	Plugin for Select, full documentation here: http://silviomoreto.github.io/bootstrap-select -->
-              <script type="application/javascript" src="{{ asset('js/plugins/bootstrap-selectpicker.js') }}" defer></script>
               <!--  Plugin for the DateTimePicker, full documentation here: https://eonasdan.github.io/bootstrap-datetimepicker/ -->
               <script type="application/javascript" src="{{ asset('js/plugins/bootstrap-datetimepicker.min.js') }}" defer></script>
               <!--  DataTables.net Plugin, full documentation here: https://datatables.net/  -->
@@ -261,9 +259,7 @@
               <script type="application/javascript" src="{{ asset('js/plugins/bootstrap-tagsinput.js') }}" defer></script>
               <!-- Plugin for Fileupload, full documentation here: http://www.jasny.net/bootstrap/javascript/#fileinput -->
               <script type="application/javascript" src="{{ asset('js/plugins/jasny-bootstrap.min.js') }}" defer></script>
-              <!--  Full Calendar Plugin, full documentation here: https://github.com/fullcalendar/fullcalendar    -->
-              <script type="application/javascript" src="{{ asset('js/plugins/fullcalendar.min.js') }}" defer></script>
-              <!-- Vector Map plugin, full documentation here: http://jvectormap.com/documentation/ -->
+             
               <script type="application/javascript" src="{{ asset('js/plugins/jquery-jvectormap.js') }}" defer></script>
               <!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
               <script type="application/javascript" src="{{ asset('js/plugins/nouislider.min.js') }}" defer></script>
@@ -273,6 +269,13 @@
               <script type="application/javascript" src="{{ asset('js/plugins/buttons.js') }}" defer></script>
               <!-- Chartist JS -->
               <script type="application/javascript" src="{{ asset('js/plugins/chartist.min.js') }}" defer></script>
+
+
+              <!-- FULL CALENDAR -->
+              <script type="application/javascript" src="{{ asset('js/plugins/fullcalendar/main.min.js') }}"></script>
+              <script type="application/javascript" src="{{ asset('js/plugins/fullcalendar/daygrid.min.js') }}"></script>
+
+
 
               
               </body>
