@@ -15,12 +15,12 @@
                                 </div>
                                 <div class="col-lg-2">
 
-                                    <button class="btn btn-default float-right mt-3" v-b-modal.add-book>
+                                    <b-link  href="/books/create" class="btn btn-default float-right mt-3">
                                         <span class="btn-label">
                                             <i class="material-icons">add</i>
                                         </span>
                                         Crear libro
-                                    </button>
+                                    </b-link>
                                 </div>
                             </div>
                         </div>
@@ -39,12 +39,12 @@
                                                 <tr>
                                                     <td class="text-center">Frank Hesse</td>
                                                     <td class="td-actions text-center">
-                                                        <button type="button" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Visualizar" class="btn btn-info" v-b-modal.view-book>
+                                                        <b-link href="/books/show" type="button" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Visualizar" class="btn btn-info" v-b-modal.view-book>
                                                             <i class="material-icons">remove_red_eye</i>
-                                                        </button>
-                                                        <button type="button" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Modificar" v-b-modal.edit-book class="btn btn-success">
+                                                        </b-link>
+                                                        <b-link href="/books/1/edit" type="button" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Modificar" v-b-modal.edit-book class="btn btn-success">
                                                             <i class="material-icons">edit</i>
-                                                        </button>
+                                                        </b-link>
                                                         <button type="button" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Eliminar" class="btn btn-danger">
                                                             <i class="material-icons">close</i>
                                                         </button>
@@ -63,57 +63,6 @@
 
         </div>
     </div>
-
-    <b-modal size="lg" id="add-book" ok-variant="default" ok-title="Continuar" cancel-title="Cancelar" cancel-variant="danger">
-        <div class="card ">
-            <div class="card-header card-header-log card-header-icon">
-                <div class="card-icon">
-                    <i class="material-icons">add</i>
-                </div>
-                <h4 class="card-title">Añadir nuevo libro</h4>
-            </div>
-            <div class="card-body ">
-                <b-form>
-
-                </b-form>
-            </div>
-        </div>
-    </b-modal>
-
-    <b-modal size="lg" id="view-book" ok-only ok-variant="default" ok-title="Continuar">
-        <div class="card ">
-            <div class="card-header card-header-log card-header-icon">
-                <div class="card-icon">
-                    <i class="material-icons">book</i>
-                </div>
-                <h4 class="card-title">Detalles de libro</h4>
-            </div>
-            <div class="card-body ">
-                <b-form>
-
-                </b-form>
-
-            </div>
-        </div>
-    </b-modal>
-
-    
-    <b-modal size="lg" id="edit-book" ok-variant="default" cancel-variant="danger" ok-title="Modificar" cancel-title="Cancelar">
-        <div class="card ">
-            <div class="card-header card-header-log card-header-icon">
-                <div class="card-icon">
-                    <i class="material-icons">edit</i>
-                </div>
-                <h4 class="card-title">Modificar libro</h4>
-            </div>
-            <div class="card-body ">
-                <b-form>
-
-                </b-form>
-
-            </div>
-        </div>
-    </b-modal>
 
 </div>
 </template>

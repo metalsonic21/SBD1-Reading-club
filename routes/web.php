@@ -40,4 +40,4 @@ Route::get('/managemeetings/calendar', 'meetings\MeetingsController@calendar')->
 
 
 /* BOOKS */
-Route::get('/browsebooks', 'books\BooksController@index')->name('managebooks');
+Route::resource('/books', 'books\BooksController');

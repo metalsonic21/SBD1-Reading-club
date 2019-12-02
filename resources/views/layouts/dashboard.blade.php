@@ -18,7 +18,7 @@
 <meta http-equiv="content-type" content="text/html;charset=utf-8" />
 <head>
   <meta charset="utf-8" />
-  <link rel="icon" type="image/png" href="./img/logo/ico-book.png">
+  <link rel="icon" type="image/png" href="{{ asset('img/logo/ico-book.png') }}">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
   <!-- Vue -->
@@ -167,7 +167,7 @@
             <b-collapse id="d-4" class="collapse">
                 <ul class="nav">
                     <li class="nav-item ">
-                      <a class="nav-link" href="/browsebooks">
+                      <a class="nav-link" href="/books">
                         <span class="sidebar-normal"> Gestión de libros </span>
                       </a>
                     </li>
