@@ -40,6 +40,10 @@ Vue.component('group-members', require('./components/browse_groups/BrowseMembers
 /*MEETINGS*/
 Vue.component('meetings', require('./components/browse_meetings/BrowseMeetings.vue').default);
 
+/* BOOKS */
+Vue.component('books', require('./components/books/Books.vue').default);
+
+
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 
 const app = new Vue({

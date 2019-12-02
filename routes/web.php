@@ -37,3 +37,7 @@ Route::get('/managemembersg', 'groups\GroupMembersController@index')->name('mana
 /* MEETINGS */
 Route::get('/managemeetings', 'meetings\MeetingsController@index')->name('managemeetings');
 Route::get('/managemeetings/calendar', 'meetings\MeetingsController@calendar')->name('managemeetings');
+
+
+/* BOOKS */
+Route::get('/browsebooks', 'books\BooksController@index')->name('managebooks');

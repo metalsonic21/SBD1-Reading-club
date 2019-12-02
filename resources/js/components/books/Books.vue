@@ -7,19 +7,19 @@
                     <div class="card">
                         <div class="card-header card-header-log card-header-icon">
                             <div class="card-icon">
-                                <i class="material-icons">group</i>
+                                <i class="material-icons">library_books</i>
                             </div>
                             <div class="row">
                                 <div class="col-lg-10">
-                                    <h4 class="card-title">Miembros del club</h4>
+                                    <h4 class="card-title">Explorar libros</h4>
                                 </div>
                                 <div class="col-lg-2">
 
-                                    <button class="btn btn-default float-right mt-3" v-b-modal.add-member>
+                                    <button class="btn btn-default float-right mt-3" v-b-modal.add-book>
                                         <span class="btn-label">
                                             <i class="material-icons">add</i>
                                         </span>
-                                        Añadir nuevo miembro
+                                        Crear libro
                                     </button>
                                 </div>
                             </div>
@@ -39,10 +39,10 @@
                                                 <tr>
                                                     <td class="text-center">Frank Hesse</td>
                                                     <td class="td-actions text-center">
-                                                        <button type="button" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Visualizar" class="btn btn-info" v-b-modal.view-member>
+                                                        <button type="button" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Visualizar" class="btn btn-info" v-b-modal.view-book>
                                                             <i class="material-icons">remove_red_eye</i>
                                                         </button>
-                                                        <button type="button" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Modificar" v-b-modal.edit-member class="btn btn-success">
+                                                        <button type="button" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Modificar" v-b-modal.edit-book class="btn btn-success">
                                                             <i class="material-icons">edit</i>
                                                         </button>
                                                         <button type="button" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Eliminar" class="btn btn-danger">
@@ -64,13 +64,13 @@
         </div>
     </div>
 
-    <b-modal size="lg" id="add-member" ok-variant="default" ok-title="Continuar" cancel-title="Cancelar" cancel-variant="danger">
+    <b-modal size="lg" id="add-book" ok-variant="default" ok-title="Continuar" cancel-title="Cancelar" cancel-variant="danger">
         <div class="card ">
             <div class="card-header card-header-log card-header-icon">
                 <div class="card-icon">
                     <i class="material-icons">add</i>
                 </div>
-                <h4 class="card-title">Añadir nuevo miembro</h4>
+                <h4 class="card-title">Añadir nuevo libro</h4>
             </div>
             <div class="card-body ">
                 <b-form>
@@ -80,13 +80,13 @@
         </div>
     </b-modal>
 
-    <b-modal size="lg" id="view-member" ok-variant="default" ok-only ok-title="Continuar">
+    <b-modal size="lg" id="view-book" ok-only ok-variant="default" ok-title="Continuar">
         <div class="card ">
             <div class="card-header card-header-log card-header-icon">
                 <div class="card-icon">
                     <i class="material-icons">book</i>
                 </div>
-                <h4 class="card-title">Detalles</h4>
+                <h4 class="card-title">Detalles de libro</h4>
             </div>
             <div class="card-body ">
                 <b-form>
@@ -98,13 +98,13 @@
     </b-modal>
 
     
-    <b-modal size="lg" id="edit-member" ok-variant="default" cancel-variant="danger" ok-title="Modificar" cancel-title="Cancelar">
+    <b-modal size="lg" id="edit-book" ok-variant="default" cancel-variant="danger" ok-title="Modificar" cancel-title="Cancelar">
         <div class="card ">
             <div class="card-header card-header-log card-header-icon">
                 <div class="card-icon">
                     <i class="material-icons">edit</i>
                 </div>
-                <h4 class="card-title">Modificar miembro</h4>
+                <h4 class="card-title">Modificar libro</h4>
             </div>
             <div class="card-body ">
                 <b-form>

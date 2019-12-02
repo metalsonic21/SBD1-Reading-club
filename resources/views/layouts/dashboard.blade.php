@@ -167,7 +167,7 @@
             <b-collapse id="d-4" class="collapse">
                 <ul class="nav">
                     <li class="nav-item ">
-                      <a class="nav-link" href="#">
+                      <a class="nav-link" href="/browsebooks">
                         <span class="sidebar-normal"> Gestión de libros </span>
                       </a>
                     </li>
