@@ -41,3 +41,13 @@ Route::get('/managemeetings/calendar', 'meetings\MeetingsController@calendar')->
 
 /* BOOKS */
 Route::resource('/books', 'books\BooksController');
+
+/*THEATER_PLAYS*/
+Route::get('/playsclubs', 'theater_plays\PlaysClubsController@index')->name('playsclubs');
+Route::get('/castplays', 'theater_plays\CastPlaysController@index')->name('castplays');
+Route::get('/charactercast', 'theater_plays\CharacterCastController@index')->name('charactercast');
+
+Route::get('/earningplays', 'theater_plays\EarningPlaysController@index')->name('earningplays');
+
+Route::get('/browseplays', 'theater_plays\BrowsePlaysController@index')->name('browseplays');
+Route::get('/charactercastadd', 'theater_plays\CharacterCastAddController@index')->name('charactercastadd');

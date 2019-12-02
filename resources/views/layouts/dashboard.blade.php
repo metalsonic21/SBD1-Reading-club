@@ -185,17 +185,17 @@
             <b-collapse id="d-5" class="collapse">
                 <ul class="nav">
                     <li class="nav-item ">
-                      <a class="nav-link" href="#">
+                      <a class="nav-link" href="/playsclubs">
                         <span class="sidebar-normal"> Obras actuadas por club </span>
                       </a>
                     </li>
                     <li class="nav-item ">
-                      <a class="nav-link" href="#">
+                      <a class="nav-link" href="/earningplays">
                         <span class="sidebar-normal"> Ganancias por obra </span>
                       </a>
                     </li>
                     <li class="nav-item ">
-                      <a class="nav-link" href="#">
+                      <a class="nav-link" href="/browseplays">
                         <span class="sidebar-normal"> Explorar obras de teatro </span>
                       </a>
                     </li>
