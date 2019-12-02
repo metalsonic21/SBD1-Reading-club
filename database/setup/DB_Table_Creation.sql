@@ -104,6 +104,15 @@ CREATE TABLE SJL_grupos_lectura (
     CONSTRAINT grupos_lectura PRIMARY KEY (id,id_club)
 );
 
+CREATE TABLE SJL_historicos_pagos_memb (
+    id        NUMERIC(28) NOT NULL,
+    id_mem    NUMERIC(28) NOT NULL,
+    id_club   NUMERIC(28) NOT NULL,
+    id_lec    NUMERIC(28) NOT NULL,
+    fec_emi   DATE NOT NULL,
+    CONSTRAINT historicos_pagos_memb_pk PRIMARY KEY (id,id_mem,id_club,id_lec)
+);
+
 CREATE TABLE SJL_historicos_presentaciones (
     fec         DATE NOT NULL,
     hora_i      DATE NOT NULL,
