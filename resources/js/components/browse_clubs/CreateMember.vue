@@ -20,7 +20,7 @@
                         </div>
                         <div class="card-body">
                             <div class="row">
-                                <div class="col-lg-12">´
+                                <div class="col-lg-12">
                                     <br>
                                     <b-form>
                                         <b-row>
@@ -102,15 +102,15 @@
 
                                         </b-row>
                                         <hr>
-                                    <div id="datos-representante" v-if="mayoredad==false">
-                                        <b-row>
-                                            <b-col cols="6">
-                                                <label style="color:black">
-                                                    <h6>DATOS DE REPRESENTANTE</h6>
-                                                </label>
+                                        <div id="datos-representante" v-if="mayoredad==false">
+                                            <b-row>
+                                                <b-col cols="6">
+                                                    <label style="color:black">
+                                                        <h6>DATOS DE REPRESENTANTE</h6>
+                                                    </label>
 
-                                            </b-col>
-                                        </b-row>
+                                                </b-col>
+                                            </b-row>
 
                                             <b-row>
                                                 <b-col cols="4">
@@ -140,13 +140,13 @@
                                                     <b-form-input type="text" v-model="ape2R" name="ape2R" id="ape2R" placeholder="Segundo apellido"></b-form-input>
                                                 </b-col>
                                             </b-row>
-<br>
+                                            <br>
                                             <b-row>
                                                 <b-col cols="4">
                                                     <label for="generoR">Género</label>
                                                     <b-form-select v-model="generoR" :options="generos" id="genero"></b-form-select>
                                                 </b-col>
-                                                
+
                                                 <b-col cols="4">
                                                     <label for="fec_nacR">Fecha de Nacimiento</label>
                                                     <b-form-input type="date" v-model="fec_nacR" name="fec_nacR" id="fec_nacR"></b-form-input>
@@ -158,38 +158,38 @@
                                                 </b-col>
                                             </b-row>
                                             <hr>
-                                        <b-row>
-                                            <b-col cols="6">
-                                                <label for="paisR">País</label>
-                                                <b-form-select v-model="paisR" id="paisR" name="paisR" :options="paises"></b-form-select>
-                                            </b-col>
+                                            <b-row>
+                                                <b-col cols="6">
+                                                    <label for="paisR">País</label>
+                                                    <b-form-select v-model="paisR" id="paisR" name="paisR" :options="paises"></b-form-select>
+                                                </b-col>
 
-                                            <b-col cols="6">
-                                                <label for="ciudadR">Ciudad</label>
-                                                <b-form-select v-model="ciudadR" id="ciudadR" name="ciudadR" :options="ciudades"></b-form-select>
-                                            </b-col>
+                                                <b-col cols="6">
+                                                    <label for="ciudadR">Ciudad</label>
+                                                    <b-form-select v-model="ciudadR" id="ciudadR" name="ciudadR" :options="ciudades"></b-form-select>
+                                                </b-col>
 
-                                        </b-row>
-                                        <br>
-                                        <b-row>
+                                            </b-row>
+                                            <br>
+                                            <b-row>
 
-                                            <b-col cols="4">
-                                                <label for="urbanizacionR">Urbanización</label>
-                                                <b-form-input v-model="urbanizacionR" id="urbanizacionR" name="urbanizacionR" placeholder="Urbanización"></b-form-input>
-                                            </b-col>
+                                                <b-col cols="4">
+                                                    <label for="urbanizacionR">Urbanización</label>
+                                                    <b-form-input v-model="urbanizacionR" id="urbanizacionR" name="urbanizacionR" placeholder="Urbanización"></b-form-input>
+                                                </b-col>
 
-                                            <b-col cols="4">
-                                                <label for="calleR">Calle</label>
-                                                <b-form-input v-model="calleR" id="calle" name="calleR" placeholder="Calle"></b-form-input>
-                                            </b-col>
+                                                <b-col cols="4">
+                                                    <label for="calleR">Calle</label>
+                                                    <b-form-input v-model="calleR" id="calle" name="calleR" placeholder="Calle"></b-form-input>
+                                                </b-col>
 
-                                            <b-col cols="4">
-                                                <label for="zipcodeR">Código postal</label>
-                                                <b-form-input v-model="zipcodeR" id="zipcodeR" name="zipcodeR" placeholder="Código postal"></b-form-input>
-                                            </b-col>
+                                                <b-col cols="4">
+                                                    <label for="zipcodeR">Código postal</label>
+                                                    <b-form-input v-model="zipcodeR" id="zipcodeR" name="zipcodeR" placeholder="Código postal"></b-form-input>
+                                                </b-col>
 
-                                        </b-row>
-                                        
+                                            </b-row>
+
                                         </div>
                                         <div class="d-flex flex-row-reverse bd-highlight">
                                             <b-button variant="default" type="submit">Continuar</b-button>
@@ -227,17 +227,18 @@ export default {
             genero: null,
             generoR: null,
             generos: [{
-                value: null,
-                text: 'Seleccionar'
-            },
-            {
-                value: 'M',
-                text: 'Masculino'
-            },
-            {
-                value: 'F',
-                text: 'Femenino'
-            }],
+                    value: null,
+                    text: 'Seleccionar'
+                },
+                {
+                    value: 'M',
+                    text: 'Masculino'
+                },
+                {
+                    value: 'F',
+                    text: 'Femenino'
+                }
+            ],
             fec_nac: null,
             fec_nacR: null,
             pais: null,
@@ -260,38 +261,37 @@ export default {
             zipcodeR: null,
             telefono: null,
             telefonoR: null,
-            mayoredad: true,            
+            mayoredad: true,
         }
     },
-    methods:{
-        verifyAge(memberAge){
+    methods: {
+        verifyAge(memberAge) {
             var today = new Date();
             var dd = today.getDate();
-            var mm = today.getMonth() +1;
+            var mm = today.getMonth() + 1;
             var yyyy = today.getFullYear();
 
-            if (dd<10){
-                dd = '0'+dd;
+            if (dd < 10) {
+                dd = '0' + dd;
             }
 
-            if(mm<10){
-                mm='0'+mm;
+            if (mm < 10) {
+                mm = '0' + mm;
             }
 
-            var today= yyyy+'-'+mm+'-'+dd;
+            var today = yyyy + '-' + mm + '-' + dd;
             var todaydate = new Date(today);
             var agedate = new Date(memberAge);
-            var verif = todaydate.valueOf()-agedate.valueOf();
-            var edad = verif/(1000*60*60*24);
-            edad = Math.trunc(edad/365);
+            var verif = todaydate.valueOf() - agedate.valueOf();
+            var edad = verif / (1000 * 60 * 60 * 24);
+            edad = Math.trunc(edad / 365);
 
-                if (edad < 18){
-                    this.mayoredad = false;
-                }
-                else if (edad <= 18){
-                    this.mayoredad = true;
-                }
-                console.log(this.mayoredad);
+            if (edad < 18) {
+                this.mayoredad = false;
+            } else if (edad <= 18) {
+                this.mayoredad = true;
+            }
+            console.log(this.mayoredad);
             return this.mayoredad;
         }
     }

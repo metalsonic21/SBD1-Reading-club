@@ -72412,7 +72412,6 @@ var render = function() {
                     "div",
                     { staticClass: "col-lg-12" },
                     [
-                      _vm._v("´\r\n                                    "),
                       _c("br"),
                       _vm._v(" "),
                       _c(
@@ -74001,7 +74000,6 @@ var render = function() {
                     "div",
                     { staticClass: "col-lg-12" },
                     [
-                      _vm._v("´\r\n                                    "),
                       _c("br"),
                       _vm._v(" "),
                       _c(
