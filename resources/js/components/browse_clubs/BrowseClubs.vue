@@ -31,20 +31,26 @@
                                         <table class="table">
                                             <thead>
                                                 <tr>
-                                                    <th class="text-center">Prueba 1</th>
+                                                    <th class="text-center">Nombre</th>
+                                                    <th class="text-center">Fecha de creación</th>
+                                                    <th class="text-center">Idioma</th>
+                                                    <th class="text-center">País</th>
                                                     <th class="text-center">Acción</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <tr>
-                                                    <td class="text-center">Frank Hesse</td>
+                                                    <td class="text-center">Killer Bees</td>
+                                                    <td class="text-center">12-12-2019</td>
+                                                    <td class="text-center">Inglés</td>
+                                                    <td class="text-center">Alemania</td>
                                                     <td class="td-actions text-center">
                                                         <button type="button" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Visualizar" class="btn btn-info" v-b-modal.view-club>
                                                             <i class="material-icons">remove_red_eye</i>
                                                         </button>
-                                                        <button type="button" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Añadir miembro" class="btn btn-default">
+                                                        <b-link href="/managemembers/create" type="button" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Añadir miembro" class="btn btn-default">
                                                             <i class="material-icons">person_add</i>
-                                                        </button>
+                                                        </b-link>
                                                         <b-link href="/browseclubs/1/edit" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Modificar" class="btn btn-success">
                                                             <i class="material-icons">edit</i>
                                                         </b-link>

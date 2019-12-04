@@ -2288,6 +2288,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({});
 
 /***/ }),
@@ -2507,6 +2513,313 @@ __webpack_require__.r(__webpack_exports__);
       }],
       cac: []
     };
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/browse_clubs/CreateMember.vue?vue&type=script&lang=js&":
+/*!************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/browse_clubs/CreateMember.vue?vue&type=script&lang=js& ***!
+  \************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      dociden: null,
+      docidenR: null,
+      nom1: null,
+      nom1R: null,
+      nom2: null,
+      nom2R: null,
+      ape1: null,
+      ape1R: null,
+      ape2: null,
+      ape2R: null,
+      genero: null,
+      generoR: null,
+      generos: [{
+        value: null,
+        text: 'Seleccionar'
+      }, {
+        value: 'M',
+        text: 'Masculino'
+      }, {
+        value: 'F',
+        text: 'Femenino'
+      }],
+      fec_nac: null,
+      fec_nacR: null,
+      pais: null,
+      paisR: null,
+      paises: [{
+        value: null,
+        text: 'Seleccionar'
+      }],
+      ciudad: null,
+      ciudadR: null,
+      ciudades: [{
+        value: null,
+        text: 'Seleccionar'
+      }],
+      urbanizacion: null,
+      urbanizacionR: null,
+      calle: null,
+      calleR: null,
+      zipcode: null,
+      zipcodeR: null,
+      telefono: null,
+      telefonoR: null,
+      mayoredad: true
+    };
+  },
+  methods: {
+    verifyAge: function verifyAge(memberAge) {
+      var today = new Date();
+      var dd = today.getDate();
+      var mm = today.getMonth() + 1;
+      var yyyy = today.getFullYear();
+
+      if (dd < 10) {
+        dd = '0' + dd;
+      }
+
+      if (mm < 10) {
+        mm = '0' + mm;
+      }
+
+      var today = yyyy + '-' + mm + '-' + dd;
+      var todaydate = new Date(today);
+      var agedate = new Date(memberAge);
+      var verif = todaydate.valueOf() - agedate.valueOf();
+      var edad = verif / (1000 * 60 * 60 * 24);
+      edad = Math.trunc(edad / 365);
+
+      if (edad < 18) {
+        this.mayoredad = false;
+      } else if (edad <= 18) {
+        this.mayoredad = true;
+      }
+
+      console.log(this.mayoredad);
+      return this.mayoredad;
+    }
   }
 });
 
@@ -2734,6 +3047,313 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/browse_clubs/EditMember.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/browse_clubs/EditMember.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      dociden: null,
+      docidenR: null,
+      nom1: null,
+      nom1R: null,
+      nom2: null,
+      nom2R: null,
+      ape1: null,
+      ape1R: null,
+      ape2: null,
+      ape2R: null,
+      genero: null,
+      generoR: null,
+      generos: [{
+        value: null,
+        text: 'Seleccionar'
+      }, {
+        value: 'M',
+        text: 'Masculino'
+      }, {
+        value: 'F',
+        text: 'Femenino'
+      }],
+      fec_nac: null,
+      fec_nacR: null,
+      pais: null,
+      paisR: null,
+      paises: [{
+        value: null,
+        text: 'Seleccionar'
+      }],
+      ciudad: null,
+      ciudadR: null,
+      ciudades: [{
+        value: null,
+        text: 'Seleccionar'
+      }],
+      urbanizacion: null,
+      urbanizacionR: null,
+      calle: null,
+      calleR: null,
+      zipcode: null,
+      zipcodeR: null,
+      telefono: null,
+      telefonoR: null,
+      mayoredad: true
+    };
+  },
+  methods: {
+    verifyAge: function verifyAge(memberAge) {
+      var today = new Date();
+      var dd = today.getDate();
+      var mm = today.getMonth() + 1;
+      var yyyy = today.getFullYear();
+
+      if (dd < 10) {
+        dd = '0' + dd;
+      }
+
+      if (mm < 10) {
+        mm = '0' + mm;
+      }
+
+      var today = yyyy + '-' + mm + '-' + dd;
+      var todaydate = new Date(today);
+      var agedate = new Date(memberAge);
+      var verif = todaydate.valueOf() - agedate.valueOf();
+      var edad = verif / (1000 * 60 * 60 * 24);
+      edad = Math.trunc(edad / 365);
+
+      if (edad < 18) {
+        this.mayoredad = false;
+      } else if (edad <= 18) {
+        this.mayoredad = true;
+      }
+
+      console.log(this.mayoredad);
+      return this.mayoredad;
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/browse_clubs/SelectClub.vue?vue&type=script&lang=js&":
 /*!**********************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/browse_clubs/SelectClub.vue?vue&type=script&lang=js& ***!
@@ -2743,6 +3363,12 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -2864,6 +3490,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({});
 
 /***/ }),
@@ -2877,6 +3509,12 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -3692,7 +4330,155 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-/* harmony default export */ __webpack_exports__["default"] = ({});
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      fec_nac: '01-03-1999',
+      mayoredad: false
+    };
+  },
+  methods: {
+    verifyAge: function verifyAge(memberAge) {
+      var today = new Date();
+      var dd = today.getDate();
+      var mm = today.getMonth() + 1;
+      var yyyy = today.getFullYear();
+
+      if (dd < 10) {
+        dd = '0' + dd;
+      }
+
+      if (mm < 10) {
+        mm = '0' + mm;
+      }
+
+      var today = yyyy + '-' + mm + '-' + dd;
+      var todaydate = new Date(today);
+      var agedate = new Date(memberAge);
+      var verif = todaydate.valueOf() - agedate.valueOf();
+      var edad = verif / (1000 * 60 * 60 * 24);
+      edad = Math.trunc(edad / 365);
+
+      if (edad < 18) {
+        this.mayoredad = false;
+      } else if (edad <= 18) {
+        this.mayoredad = true;
+      }
+
+      console.log(this.mayoredad);
+      return this.mayoredad;
+    },
+    showModal: function showModal() {
+      this.$refs['view-member'].show();
+    }
+  }
+});
 
 /***/ }),
 
@@ -70522,7 +71308,19 @@ var render = function() {
                             _c("tbody", [
                               _c("tr", [
                                 _c("td", { staticClass: "text-center" }, [
-                                  _vm._v("Frank Hesse")
+                                  _vm._v("Killer Bees")
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "text-center" }, [
+                                  _vm._v("12-12-2019")
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "text-center" }, [
+                                  _vm._v("Inglés")
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "text-center" }, [
+                                  _vm._v("Alemania")
                                 ]),
                                 _vm._v(" "),
                                 _c(
@@ -70557,7 +71355,27 @@ var render = function() {
                                       ]
                                     ),
                                     _vm._v(" "),
-                                    _vm._m(3),
+                                    _c(
+                                      "b-link",
+                                      {
+                                        staticClass: "btn btn-default",
+                                        attrs: {
+                                          href: "/managemembers/create",
+                                          type: "button",
+                                          rel: "tooltip",
+                                          "data-toggle": "tooltip",
+                                          "data-placement": "bottom",
+                                          title: "Añadir miembro"
+                                        }
+                                      },
+                                      [
+                                        _c(
+                                          "i",
+                                          { staticClass: "material-icons" },
+                                          [_vm._v("person_add")]
+                                        )
+                                      ]
+                                    ),
                                     _vm._v(" "),
                                     _c(
                                       "b-link",
@@ -70580,7 +71398,7 @@ var render = function() {
                                       ]
                                     ),
                                     _vm._v(" "),
-                                    _vm._m(4)
+                                    _vm._m(3)
                                   ],
                                   1
                                 )
@@ -70869,30 +71687,17 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("thead", [
       _c("tr", [
-        _c("th", { staticClass: "text-center" }, [_vm._v("Prueba 1")]),
+        _c("th", { staticClass: "text-center" }, [_vm._v("Nombre")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "text-center" }, [_vm._v("Fecha de creación")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "text-center" }, [_vm._v("Idioma")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "text-center" }, [_vm._v("País")]),
         _vm._v(" "),
         _c("th", { staticClass: "text-center" }, [_vm._v("Acción")])
       ])
     ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "button",
-      {
-        staticClass: "btn btn-default",
-        attrs: {
-          type: "button",
-          rel: "tooltip",
-          "data-toggle": "tooltip",
-          "data-placement": "bottom",
-          title: "Añadir miembro"
-        }
-      },
-      [_c("i", { staticClass: "material-icons" }, [_vm._v("person_add")])]
-    )
   },
   function() {
     var _vm = this
@@ -71578,6 +72383,937 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/browse_clubs/CreateMember.vue?vue&type=template&id=765c4a7c&":
+/*!****************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/browse_clubs/CreateMember.vue?vue&type=template&id=765c4a7c& ***!
+  \****************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c("div", { staticClass: "content" }, [
+      _c("div", { staticClass: "container-fluid" }, [
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-md-12" }, [
+            _c("div", { staticClass: "card" }, [
+              _vm._m(0),
+              _vm._v(" "),
+              _c("div", { staticClass: "card-body" }, [
+                _c("div", { staticClass: "row" }, [
+                  _c(
+                    "div",
+                    { staticClass: "col-lg-12" },
+                    [
+                      _vm._v("´\r\n                                    "),
+                      _c("br"),
+                      _vm._v(" "),
+                      _c(
+                        "b-form",
+                        [
+                          _c(
+                            "b-row",
+                            [
+                              _c(
+                                "b-col",
+                                { attrs: { cols: "4" } },
+                                [
+                                  _c("label", { attrs: { for: "dociden" } }, [
+                                    _vm._v("Documento de identidad")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("b-form-input", {
+                                    attrs: {
+                                      type: "text",
+                                      id: "dociden",
+                                      name: "dociden",
+                                      placeholder: "Documento de identidad"
+                                    },
+                                    model: {
+                                      value: _vm.dociden,
+                                      callback: function($$v) {
+                                        _vm.dociden = $$v
+                                      },
+                                      expression: "dociden"
+                                    }
+                                  })
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "b-col",
+                                { attrs: { cols: "4" } },
+                                [
+                                  _c("label", { attrs: { for: "nom1" } }, [
+                                    _vm._v("Primer nombre")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("b-form-input", {
+                                    attrs: {
+                                      type: "text",
+                                      id: "nom1",
+                                      name: "nom1",
+                                      placeholder: "Primer nombre"
+                                    },
+                                    model: {
+                                      value: _vm.nom1,
+                                      callback: function($$v) {
+                                        _vm.nom1 = $$v
+                                      },
+                                      expression: "nom1"
+                                    }
+                                  })
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "b-col",
+                                { attrs: { cols: "4" } },
+                                [
+                                  _c("label", { attrs: { for: "nom2" } }, [
+                                    _vm._v("Segundo nombre")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("b-form-input", {
+                                    attrs: {
+                                      type: "text",
+                                      id: "nom2",
+                                      name: "nom2",
+                                      placeholder: "Segundo nombre"
+                                    },
+                                    model: {
+                                      value: _vm.nom2,
+                                      callback: function($$v) {
+                                        _vm.nom2 = $$v
+                                      },
+                                      expression: "nom2"
+                                    }
+                                  })
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c("br"),
+                          _vm._v(" "),
+                          _c(
+                            "b-row",
+                            [
+                              _c(
+                                "b-col",
+                                { attrs: { cols: "6" } },
+                                [
+                                  _c("label", { attrs: { for: "ape1" } }, [
+                                    _vm._v("Primer apellido")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("b-form-input", {
+                                    attrs: {
+                                      type: "text",
+                                      name: "ape1",
+                                      id: "ape1",
+                                      placeholder: "Primer apellido"
+                                    },
+                                    model: {
+                                      value: _vm.ape1,
+                                      callback: function($$v) {
+                                        _vm.ape1 = $$v
+                                      },
+                                      expression: "ape1"
+                                    }
+                                  })
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "b-col",
+                                { attrs: { cols: "6" } },
+                                [
+                                  _c("label", { attrs: { for: "ape2" } }, [
+                                    _vm._v("Segundo apellido")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("b-form-input", {
+                                    attrs: {
+                                      type: "text",
+                                      name: "ape2",
+                                      id: "ape2",
+                                      placeholder: "Segundo apellido"
+                                    },
+                                    model: {
+                                      value: _vm.ape2,
+                                      callback: function($$v) {
+                                        _vm.ape2 = $$v
+                                      },
+                                      expression: "ape2"
+                                    }
+                                  })
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c("br"),
+                          _vm._v(" "),
+                          _c(
+                            "b-row",
+                            [
+                              _c(
+                                "b-col",
+                                { attrs: { cols: "4" } },
+                                [
+                                  _c("label", { attrs: { for: "genero" } }, [
+                                    _vm._v("Género")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("b-form-select", {
+                                    attrs: {
+                                      options: _vm.generos,
+                                      id: "genero"
+                                    },
+                                    model: {
+                                      value: _vm.genero,
+                                      callback: function($$v) {
+                                        _vm.genero = $$v
+                                      },
+                                      expression: "genero"
+                                    }
+                                  })
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "b-col",
+                                { attrs: { cols: "4" } },
+                                [
+                                  _c("label", { attrs: { for: "fec_nac" } }, [
+                                    _vm._v("Fecha de Nacimiento")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("b-form-input", {
+                                    attrs: {
+                                      type: "date",
+                                      name: "fec_nac",
+                                      id: "fec_nac"
+                                    },
+                                    on: {
+                                      input: function($event) {
+                                        return _vm.verifyAge(_vm.fec_nac)
+                                      }
+                                    },
+                                    model: {
+                                      value: _vm.fec_nac,
+                                      callback: function($$v) {
+                                        _vm.fec_nac = $$v
+                                      },
+                                      expression: "fec_nac"
+                                    }
+                                  })
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "b-col",
+                                { attrs: { cols: "4" } },
+                                [
+                                  _c("label", { attrs: { for: "telefono" } }, [
+                                    _vm._v("Teléfono")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("b-form-input", {
+                                    attrs: {
+                                      type: "tel",
+                                      name: "telefono",
+                                      id: "telefono"
+                                    },
+                                    model: {
+                                      value: _vm.telefono,
+                                      callback: function($$v) {
+                                        _vm.telefono = $$v
+                                      },
+                                      expression: "telefono"
+                                    }
+                                  })
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c("hr"),
+                          _vm._v(" "),
+                          _c(
+                            "b-row",
+                            [
+                              _c(
+                                "b-col",
+                                { attrs: { cols: "6" } },
+                                [
+                                  _c("label", { attrs: { for: "pais" } }, [
+                                    _vm._v("País")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("b-form-select", {
+                                    attrs: {
+                                      id: "pais",
+                                      name: "pais",
+                                      options: _vm.paises
+                                    },
+                                    model: {
+                                      value: _vm.pais,
+                                      callback: function($$v) {
+                                        _vm.pais = $$v
+                                      },
+                                      expression: "pais"
+                                    }
+                                  })
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "b-col",
+                                { attrs: { cols: "6" } },
+                                [
+                                  _c("label", { attrs: { for: "ciudad" } }, [
+                                    _vm._v("Ciudad")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("b-form-select", {
+                                    attrs: {
+                                      id: "ciudad",
+                                      name: "ciudad",
+                                      options: _vm.ciudades
+                                    },
+                                    model: {
+                                      value: _vm.ciudad,
+                                      callback: function($$v) {
+                                        _vm.ciudad = $$v
+                                      },
+                                      expression: "ciudad"
+                                    }
+                                  })
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c("br"),
+                          _vm._v(" "),
+                          _c(
+                            "b-row",
+                            [
+                              _c(
+                                "b-col",
+                                { attrs: { cols: "4" } },
+                                [
+                                  _c(
+                                    "label",
+                                    { attrs: { for: "urbanizacion" } },
+                                    [_vm._v("Urbanización")]
+                                  ),
+                                  _vm._v(" "),
+                                  _c("b-form-input", {
+                                    attrs: {
+                                      id: "urbanizacion",
+                                      name: "urbanizacion",
+                                      placeholder: "Urbanización"
+                                    },
+                                    model: {
+                                      value: _vm.urbanizacion,
+                                      callback: function($$v) {
+                                        _vm.urbanizacion = $$v
+                                      },
+                                      expression: "urbanizacion"
+                                    }
+                                  })
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "b-col",
+                                { attrs: { cols: "4" } },
+                                [
+                                  _c("label", { attrs: { for: "calle" } }, [
+                                    _vm._v("Calle")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("b-form-input", {
+                                    attrs: {
+                                      id: "calle",
+                                      name: "calle",
+                                      placeholder: "Calle"
+                                    },
+                                    model: {
+                                      value: _vm.calle,
+                                      callback: function($$v) {
+                                        _vm.calle = $$v
+                                      },
+                                      expression: "calle"
+                                    }
+                                  })
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "b-col",
+                                { attrs: { cols: "4" } },
+                                [
+                                  _c("label", { attrs: { for: "zipcode" } }, [
+                                    _vm._v("Código postal")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("b-form-input", {
+                                    attrs: {
+                                      id: "zipcode",
+                                      name: "zipcode",
+                                      placeholder: "Código postal"
+                                    },
+                                    model: {
+                                      value: _vm.zipcode,
+                                      callback: function($$v) {
+                                        _vm.zipcode = $$v
+                                      },
+                                      expression: "zipcode"
+                                    }
+                                  })
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c("hr"),
+                          _vm._v(" "),
+                          _vm.mayoredad == false
+                            ? _c(
+                                "div",
+                                { attrs: { id: "datos-representante" } },
+                                [
+                                  _c(
+                                    "b-row",
+                                    [
+                                      _c("b-col", { attrs: { cols: "6" } }, [
+                                        _c(
+                                          "label",
+                                          { staticStyle: { color: "black" } },
+                                          [
+                                            _c("h6", [
+                                              _vm._v("DATOS DE REPRESENTANTE")
+                                            ])
+                                          ]
+                                        )
+                                      ])
+                                    ],
+                                    1
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "b-row",
+                                    [
+                                      _c(
+                                        "b-col",
+                                        { attrs: { cols: "4" } },
+                                        [
+                                          _c(
+                                            "label",
+                                            { attrs: { for: "docidenR" } },
+                                            [_vm._v("Documento de identidad")]
+                                          ),
+                                          _vm._v(" "),
+                                          _c("b-form-input", {
+                                            attrs: {
+                                              type: "text",
+                                              id: "docidenR",
+                                              name: "docidenR",
+                                              placeholder:
+                                                "Documento de identidad"
+                                            },
+                                            model: {
+                                              value: _vm.docidenR,
+                                              callback: function($$v) {
+                                                _vm.docidenR = $$v
+                                              },
+                                              expression: "docidenR"
+                                            }
+                                          })
+                                        ],
+                                        1
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "b-col",
+                                        { attrs: { cols: "4" } },
+                                        [
+                                          _c(
+                                            "label",
+                                            { attrs: { for: "nom1R" } },
+                                            [_vm._v("Primer nombre")]
+                                          ),
+                                          _vm._v(" "),
+                                          _c("b-form-input", {
+                                            attrs: {
+                                              type: "text",
+                                              id: "nom1R",
+                                              name: "nom1R",
+                                              placeholder: "Primer nombre"
+                                            },
+                                            model: {
+                                              value: _vm.nom1R,
+                                              callback: function($$v) {
+                                                _vm.nom1R = $$v
+                                              },
+                                              expression: "nom1R"
+                                            }
+                                          })
+                                        ],
+                                        1
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "b-col",
+                                        { attrs: { cols: "4" } },
+                                        [
+                                          _c(
+                                            "label",
+                                            { attrs: { for: "nom2R" } },
+                                            [_vm._v("Segundo nombre")]
+                                          ),
+                                          _vm._v(" "),
+                                          _c("b-form-input", {
+                                            attrs: {
+                                              type: "text",
+                                              id: "nom2R",
+                                              name: "nom2R",
+                                              placeholder: "Segundo nombre"
+                                            },
+                                            model: {
+                                              value: _vm.nom2R,
+                                              callback: function($$v) {
+                                                _vm.nom2R = $$v
+                                              },
+                                              expression: "nom2R"
+                                            }
+                                          })
+                                        ],
+                                        1
+                                      )
+                                    ],
+                                    1
+                                  ),
+                                  _vm._v(" "),
+                                  _c("br"),
+                                  _vm._v(" "),
+                                  _c(
+                                    "b-row",
+                                    [
+                                      _c(
+                                        "b-col",
+                                        { attrs: { cols: "6" } },
+                                        [
+                                          _c(
+                                            "label",
+                                            { attrs: { for: "ape1R" } },
+                                            [_vm._v("Primer apellido")]
+                                          ),
+                                          _vm._v(" "),
+                                          _c("b-form-input", {
+                                            attrs: {
+                                              type: "text",
+                                              name: "ape1R",
+                                              id: "ape1R",
+                                              placeholder: "Primer apellido"
+                                            },
+                                            model: {
+                                              value: _vm.ape1R,
+                                              callback: function($$v) {
+                                                _vm.ape1R = $$v
+                                              },
+                                              expression: "ape1R"
+                                            }
+                                          })
+                                        ],
+                                        1
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "b-col",
+                                        { attrs: { cols: "6" } },
+                                        [
+                                          _c(
+                                            "label",
+                                            { attrs: { for: "ape2R" } },
+                                            [_vm._v("Segundo apellido")]
+                                          ),
+                                          _vm._v(" "),
+                                          _c("b-form-input", {
+                                            attrs: {
+                                              type: "text",
+                                              name: "ape2R",
+                                              id: "ape2R",
+                                              placeholder: "Segundo apellido"
+                                            },
+                                            model: {
+                                              value: _vm.ape2R,
+                                              callback: function($$v) {
+                                                _vm.ape2R = $$v
+                                              },
+                                              expression: "ape2R"
+                                            }
+                                          })
+                                        ],
+                                        1
+                                      )
+                                    ],
+                                    1
+                                  ),
+                                  _vm._v(" "),
+                                  _c("br"),
+                                  _vm._v(" "),
+                                  _c(
+                                    "b-row",
+                                    [
+                                      _c(
+                                        "b-col",
+                                        { attrs: { cols: "4" } },
+                                        [
+                                          _c(
+                                            "label",
+                                            { attrs: { for: "generoR" } },
+                                            [_vm._v("Género")]
+                                          ),
+                                          _vm._v(" "),
+                                          _c("b-form-select", {
+                                            attrs: {
+                                              options: _vm.generos,
+                                              id: "genero"
+                                            },
+                                            model: {
+                                              value: _vm.generoR,
+                                              callback: function($$v) {
+                                                _vm.generoR = $$v
+                                              },
+                                              expression: "generoR"
+                                            }
+                                          })
+                                        ],
+                                        1
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "b-col",
+                                        { attrs: { cols: "4" } },
+                                        [
+                                          _c(
+                                            "label",
+                                            { attrs: { for: "fec_nacR" } },
+                                            [_vm._v("Fecha de Nacimiento")]
+                                          ),
+                                          _vm._v(" "),
+                                          _c("b-form-input", {
+                                            attrs: {
+                                              type: "date",
+                                              name: "fec_nacR",
+                                              id: "fec_nacR"
+                                            },
+                                            model: {
+                                              value: _vm.fec_nacR,
+                                              callback: function($$v) {
+                                                _vm.fec_nacR = $$v
+                                              },
+                                              expression: "fec_nacR"
+                                            }
+                                          })
+                                        ],
+                                        1
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "b-col",
+                                        { attrs: { cols: "4" } },
+                                        [
+                                          _c(
+                                            "label",
+                                            { attrs: { for: "telefonoR" } },
+                                            [_vm._v("Teléfono")]
+                                          ),
+                                          _vm._v(" "),
+                                          _c("b-form-input", {
+                                            attrs: {
+                                              type: "tel",
+                                              id: "telefonoR",
+                                              name: "telefonoR"
+                                            },
+                                            model: {
+                                              value: _vm.telefonoR,
+                                              callback: function($$v) {
+                                                _vm.telefonoR = $$v
+                                              },
+                                              expression: "telefonoR"
+                                            }
+                                          })
+                                        ],
+                                        1
+                                      )
+                                    ],
+                                    1
+                                  ),
+                                  _vm._v(" "),
+                                  _c("hr"),
+                                  _vm._v(" "),
+                                  _c(
+                                    "b-row",
+                                    [
+                                      _c(
+                                        "b-col",
+                                        { attrs: { cols: "6" } },
+                                        [
+                                          _c(
+                                            "label",
+                                            { attrs: { for: "paisR" } },
+                                            [_vm._v("País")]
+                                          ),
+                                          _vm._v(" "),
+                                          _c("b-form-select", {
+                                            attrs: {
+                                              id: "paisR",
+                                              name: "paisR",
+                                              options: _vm.paises
+                                            },
+                                            model: {
+                                              value: _vm.paisR,
+                                              callback: function($$v) {
+                                                _vm.paisR = $$v
+                                              },
+                                              expression: "paisR"
+                                            }
+                                          })
+                                        ],
+                                        1
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "b-col",
+                                        { attrs: { cols: "6" } },
+                                        [
+                                          _c(
+                                            "label",
+                                            { attrs: { for: "ciudadR" } },
+                                            [_vm._v("Ciudad")]
+                                          ),
+                                          _vm._v(" "),
+                                          _c("b-form-select", {
+                                            attrs: {
+                                              id: "ciudadR",
+                                              name: "ciudadR",
+                                              options: _vm.ciudades
+                                            },
+                                            model: {
+                                              value: _vm.ciudadR,
+                                              callback: function($$v) {
+                                                _vm.ciudadR = $$v
+                                              },
+                                              expression: "ciudadR"
+                                            }
+                                          })
+                                        ],
+                                        1
+                                      )
+                                    ],
+                                    1
+                                  ),
+                                  _vm._v(" "),
+                                  _c("br"),
+                                  _vm._v(" "),
+                                  _c(
+                                    "b-row",
+                                    [
+                                      _c(
+                                        "b-col",
+                                        { attrs: { cols: "4" } },
+                                        [
+                                          _c(
+                                            "label",
+                                            { attrs: { for: "urbanizacionR" } },
+                                            [_vm._v("Urbanización")]
+                                          ),
+                                          _vm._v(" "),
+                                          _c("b-form-input", {
+                                            attrs: {
+                                              id: "urbanizacionR",
+                                              name: "urbanizacionR",
+                                              placeholder: "Urbanización"
+                                            },
+                                            model: {
+                                              value: _vm.urbanizacionR,
+                                              callback: function($$v) {
+                                                _vm.urbanizacionR = $$v
+                                              },
+                                              expression: "urbanizacionR"
+                                            }
+                                          })
+                                        ],
+                                        1
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "b-col",
+                                        { attrs: { cols: "4" } },
+                                        [
+                                          _c(
+                                            "label",
+                                            { attrs: { for: "calleR" } },
+                                            [_vm._v("Calle")]
+                                          ),
+                                          _vm._v(" "),
+                                          _c("b-form-input", {
+                                            attrs: {
+                                              id: "calle",
+                                              name: "calleR",
+                                              placeholder: "Calle"
+                                            },
+                                            model: {
+                                              value: _vm.calleR,
+                                              callback: function($$v) {
+                                                _vm.calleR = $$v
+                                              },
+                                              expression: "calleR"
+                                            }
+                                          })
+                                        ],
+                                        1
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "b-col",
+                                        { attrs: { cols: "4" } },
+                                        [
+                                          _c(
+                                            "label",
+                                            { attrs: { for: "zipcodeR" } },
+                                            [_vm._v("Código postal")]
+                                          ),
+                                          _vm._v(" "),
+                                          _c("b-form-input", {
+                                            attrs: {
+                                              id: "zipcodeR",
+                                              name: "zipcodeR",
+                                              placeholder: "Código postal"
+                                            },
+                                            model: {
+                                              value: _vm.zipcodeR,
+                                              callback: function($$v) {
+                                                _vm.zipcodeR = $$v
+                                              },
+                                              expression: "zipcodeR"
+                                            }
+                                          })
+                                        ],
+                                        1
+                                      )
+                                    ],
+                                    1
+                                  )
+                                ],
+                                1
+                              )
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              staticClass:
+                                "d-flex flex-row-reverse bd-highlight"
+                            },
+                            [
+                              _c(
+                                "b-button",
+                                {
+                                  attrs: { variant: "default", type: "submit" }
+                                },
+                                [_vm._v("Continuar")]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "b-link",
+                                {
+                                  staticClass: "btn btn-danger",
+                                  attrs: { href: "/managemembers" }
+                                },
+                                [_vm._v("Cancelar")]
+                              )
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                ])
+              ])
+            ])
+          ])
+        ])
+      ])
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "card-header card-header-log card-header-icon" },
+      [
+        _c("div", { staticClass: "card-icon" }, [
+          _c("i", { staticClass: "material-icons" }, [_vm._v("add")])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-lg-10" }, [
+            _c("h4", { staticClass: "card-title" }, [
+              _vm._v("Añadir miembro a club")
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-lg-2" })
+        ])
+      ]
+    )
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/browse_clubs/Edit.vue?vue&type=template&id=63e9c816&":
 /*!********************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/browse_clubs/Edit.vue?vue&type=template&id=63e9c816& ***!
@@ -72236,6 +73972,937 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/browse_clubs/EditMember.vue?vue&type=template&id=0c90bb50&":
+/*!**************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/browse_clubs/EditMember.vue?vue&type=template&id=0c90bb50& ***!
+  \**************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c("div", { staticClass: "content" }, [
+      _c("div", { staticClass: "container-fluid" }, [
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-md-12" }, [
+            _c("div", { staticClass: "card" }, [
+              _vm._m(0),
+              _vm._v(" "),
+              _c("div", { staticClass: "card-body" }, [
+                _c("div", { staticClass: "row" }, [
+                  _c(
+                    "div",
+                    { staticClass: "col-lg-12" },
+                    [
+                      _vm._v("´\r\n                                    "),
+                      _c("br"),
+                      _vm._v(" "),
+                      _c(
+                        "b-form",
+                        [
+                          _c(
+                            "b-row",
+                            [
+                              _c(
+                                "b-col",
+                                { attrs: { cols: "4" } },
+                                [
+                                  _c("label", { attrs: { for: "dociden" } }, [
+                                    _vm._v("Documento de identidad")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("b-form-input", {
+                                    attrs: {
+                                      type: "text",
+                                      id: "dociden",
+                                      name: "dociden",
+                                      placeholder: "Documento de identidad"
+                                    },
+                                    model: {
+                                      value: _vm.dociden,
+                                      callback: function($$v) {
+                                        _vm.dociden = $$v
+                                      },
+                                      expression: "dociden"
+                                    }
+                                  })
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "b-col",
+                                { attrs: { cols: "4" } },
+                                [
+                                  _c("label", { attrs: { for: "nom1" } }, [
+                                    _vm._v("Primer nombre")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("b-form-input", {
+                                    attrs: {
+                                      type: "text",
+                                      id: "nom1",
+                                      name: "nom1",
+                                      placeholder: "Primer nombre"
+                                    },
+                                    model: {
+                                      value: _vm.nom1,
+                                      callback: function($$v) {
+                                        _vm.nom1 = $$v
+                                      },
+                                      expression: "nom1"
+                                    }
+                                  })
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "b-col",
+                                { attrs: { cols: "4" } },
+                                [
+                                  _c("label", { attrs: { for: "nom2" } }, [
+                                    _vm._v("Segundo nombre")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("b-form-input", {
+                                    attrs: {
+                                      type: "text",
+                                      id: "nom2",
+                                      name: "nom2",
+                                      placeholder: "Segundo nombre"
+                                    },
+                                    model: {
+                                      value: _vm.nom2,
+                                      callback: function($$v) {
+                                        _vm.nom2 = $$v
+                                      },
+                                      expression: "nom2"
+                                    }
+                                  })
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c("br"),
+                          _vm._v(" "),
+                          _c(
+                            "b-row",
+                            [
+                              _c(
+                                "b-col",
+                                { attrs: { cols: "6" } },
+                                [
+                                  _c("label", { attrs: { for: "ape1" } }, [
+                                    _vm._v("Primer apellido")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("b-form-input", {
+                                    attrs: {
+                                      type: "text",
+                                      name: "ape1",
+                                      id: "ape1",
+                                      placeholder: "Primer apellido"
+                                    },
+                                    model: {
+                                      value: _vm.ape1,
+                                      callback: function($$v) {
+                                        _vm.ape1 = $$v
+                                      },
+                                      expression: "ape1"
+                                    }
+                                  })
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "b-col",
+                                { attrs: { cols: "6" } },
+                                [
+                                  _c("label", { attrs: { for: "ape2" } }, [
+                                    _vm._v("Segundo apellido")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("b-form-input", {
+                                    attrs: {
+                                      type: "text",
+                                      name: "ape2",
+                                      id: "ape2",
+                                      placeholder: "Segundo apellido"
+                                    },
+                                    model: {
+                                      value: _vm.ape2,
+                                      callback: function($$v) {
+                                        _vm.ape2 = $$v
+                                      },
+                                      expression: "ape2"
+                                    }
+                                  })
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c("br"),
+                          _vm._v(" "),
+                          _c(
+                            "b-row",
+                            [
+                              _c(
+                                "b-col",
+                                { attrs: { cols: "4" } },
+                                [
+                                  _c("label", { attrs: { for: "genero" } }, [
+                                    _vm._v("Género")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("b-form-select", {
+                                    attrs: {
+                                      options: _vm.generos,
+                                      id: "genero"
+                                    },
+                                    model: {
+                                      value: _vm.genero,
+                                      callback: function($$v) {
+                                        _vm.genero = $$v
+                                      },
+                                      expression: "genero"
+                                    }
+                                  })
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "b-col",
+                                { attrs: { cols: "4" } },
+                                [
+                                  _c("label", { attrs: { for: "fec_nac" } }, [
+                                    _vm._v("Fecha de Nacimiento")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("b-form-input", {
+                                    attrs: {
+                                      type: "date",
+                                      name: "fec_nac",
+                                      id: "fec_nac"
+                                    },
+                                    on: {
+                                      input: function($event) {
+                                        return _vm.verifyAge(_vm.fec_nac)
+                                      }
+                                    },
+                                    model: {
+                                      value: _vm.fec_nac,
+                                      callback: function($$v) {
+                                        _vm.fec_nac = $$v
+                                      },
+                                      expression: "fec_nac"
+                                    }
+                                  })
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "b-col",
+                                { attrs: { cols: "4" } },
+                                [
+                                  _c("label", { attrs: { for: "telefono" } }, [
+                                    _vm._v("Teléfono")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("b-form-input", {
+                                    attrs: {
+                                      type: "tel",
+                                      name: "telefono",
+                                      id: "telefono"
+                                    },
+                                    model: {
+                                      value: _vm.telefono,
+                                      callback: function($$v) {
+                                        _vm.telefono = $$v
+                                      },
+                                      expression: "telefono"
+                                    }
+                                  })
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c("hr"),
+                          _vm._v(" "),
+                          _c(
+                            "b-row",
+                            [
+                              _c(
+                                "b-col",
+                                { attrs: { cols: "6" } },
+                                [
+                                  _c("label", { attrs: { for: "pais" } }, [
+                                    _vm._v("País")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("b-form-select", {
+                                    attrs: {
+                                      id: "pais",
+                                      name: "pais",
+                                      options: _vm.paises
+                                    },
+                                    model: {
+                                      value: _vm.pais,
+                                      callback: function($$v) {
+                                        _vm.pais = $$v
+                                      },
+                                      expression: "pais"
+                                    }
+                                  })
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "b-col",
+                                { attrs: { cols: "6" } },
+                                [
+                                  _c("label", { attrs: { for: "ciudad" } }, [
+                                    _vm._v("Ciudad")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("b-form-select", {
+                                    attrs: {
+                                      id: "ciudad",
+                                      name: "ciudad",
+                                      options: _vm.ciudades
+                                    },
+                                    model: {
+                                      value: _vm.ciudad,
+                                      callback: function($$v) {
+                                        _vm.ciudad = $$v
+                                      },
+                                      expression: "ciudad"
+                                    }
+                                  })
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c("br"),
+                          _vm._v(" "),
+                          _c(
+                            "b-row",
+                            [
+                              _c(
+                                "b-col",
+                                { attrs: { cols: "4" } },
+                                [
+                                  _c(
+                                    "label",
+                                    { attrs: { for: "urbanizacion" } },
+                                    [_vm._v("Urbanización")]
+                                  ),
+                                  _vm._v(" "),
+                                  _c("b-form-input", {
+                                    attrs: {
+                                      id: "urbanizacion",
+                                      name: "urbanizacion",
+                                      placeholder: "Urbanización"
+                                    },
+                                    model: {
+                                      value: _vm.urbanizacion,
+                                      callback: function($$v) {
+                                        _vm.urbanizacion = $$v
+                                      },
+                                      expression: "urbanizacion"
+                                    }
+                                  })
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "b-col",
+                                { attrs: { cols: "4" } },
+                                [
+                                  _c("label", { attrs: { for: "calle" } }, [
+                                    _vm._v("Calle")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("b-form-input", {
+                                    attrs: {
+                                      id: "calle",
+                                      name: "calle",
+                                      placeholder: "Calle"
+                                    },
+                                    model: {
+                                      value: _vm.calle,
+                                      callback: function($$v) {
+                                        _vm.calle = $$v
+                                      },
+                                      expression: "calle"
+                                    }
+                                  })
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "b-col",
+                                { attrs: { cols: "4" } },
+                                [
+                                  _c("label", { attrs: { for: "zipcode" } }, [
+                                    _vm._v("Código postal")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("b-form-input", {
+                                    attrs: {
+                                      id: "zipcode",
+                                      name: "zipcode",
+                                      placeholder: "Código postal"
+                                    },
+                                    model: {
+                                      value: _vm.zipcode,
+                                      callback: function($$v) {
+                                        _vm.zipcode = $$v
+                                      },
+                                      expression: "zipcode"
+                                    }
+                                  })
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c("hr"),
+                          _vm._v(" "),
+                          _vm.mayoredad == false
+                            ? _c(
+                                "div",
+                                { attrs: { id: "datos-representante" } },
+                                [
+                                  _c(
+                                    "b-row",
+                                    [
+                                      _c("b-col", { attrs: { cols: "6" } }, [
+                                        _c(
+                                          "label",
+                                          { staticStyle: { color: "black" } },
+                                          [
+                                            _c("h6", [
+                                              _vm._v("DATOS DE REPRESENTANTE")
+                                            ])
+                                          ]
+                                        )
+                                      ])
+                                    ],
+                                    1
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "b-row",
+                                    [
+                                      _c(
+                                        "b-col",
+                                        { attrs: { cols: "4" } },
+                                        [
+                                          _c(
+                                            "label",
+                                            { attrs: { for: "docidenR" } },
+                                            [_vm._v("Documento de identidad")]
+                                          ),
+                                          _vm._v(" "),
+                                          _c("b-form-input", {
+                                            attrs: {
+                                              type: "text",
+                                              id: "docidenR",
+                                              name: "docidenR",
+                                              placeholder:
+                                                "Documento de identidad"
+                                            },
+                                            model: {
+                                              value: _vm.docidenR,
+                                              callback: function($$v) {
+                                                _vm.docidenR = $$v
+                                              },
+                                              expression: "docidenR"
+                                            }
+                                          })
+                                        ],
+                                        1
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "b-col",
+                                        { attrs: { cols: "4" } },
+                                        [
+                                          _c(
+                                            "label",
+                                            { attrs: { for: "nom1R" } },
+                                            [_vm._v("Primer nombre")]
+                                          ),
+                                          _vm._v(" "),
+                                          _c("b-form-input", {
+                                            attrs: {
+                                              type: "text",
+                                              id: "nom1R",
+                                              name: "nom1R",
+                                              placeholder: "Primer nombre"
+                                            },
+                                            model: {
+                                              value: _vm.nom1R,
+                                              callback: function($$v) {
+                                                _vm.nom1R = $$v
+                                              },
+                                              expression: "nom1R"
+                                            }
+                                          })
+                                        ],
+                                        1
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "b-col",
+                                        { attrs: { cols: "4" } },
+                                        [
+                                          _c(
+                                            "label",
+                                            { attrs: { for: "nom2R" } },
+                                            [_vm._v("Segundo nombre")]
+                                          ),
+                                          _vm._v(" "),
+                                          _c("b-form-input", {
+                                            attrs: {
+                                              type: "text",
+                                              id: "nom2R",
+                                              name: "nom2R",
+                                              placeholder: "Segundo nombre"
+                                            },
+                                            model: {
+                                              value: _vm.nom2R,
+                                              callback: function($$v) {
+                                                _vm.nom2R = $$v
+                                              },
+                                              expression: "nom2R"
+                                            }
+                                          })
+                                        ],
+                                        1
+                                      )
+                                    ],
+                                    1
+                                  ),
+                                  _vm._v(" "),
+                                  _c("br"),
+                                  _vm._v(" "),
+                                  _c(
+                                    "b-row",
+                                    [
+                                      _c(
+                                        "b-col",
+                                        { attrs: { cols: "6" } },
+                                        [
+                                          _c(
+                                            "label",
+                                            { attrs: { for: "ape1R" } },
+                                            [_vm._v("Primer apellido")]
+                                          ),
+                                          _vm._v(" "),
+                                          _c("b-form-input", {
+                                            attrs: {
+                                              type: "text",
+                                              name: "ape1R",
+                                              id: "ape1R",
+                                              placeholder: "Primer apellido"
+                                            },
+                                            model: {
+                                              value: _vm.ape1R,
+                                              callback: function($$v) {
+                                                _vm.ape1R = $$v
+                                              },
+                                              expression: "ape1R"
+                                            }
+                                          })
+                                        ],
+                                        1
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "b-col",
+                                        { attrs: { cols: "6" } },
+                                        [
+                                          _c(
+                                            "label",
+                                            { attrs: { for: "ape2R" } },
+                                            [_vm._v("Segundo apellido")]
+                                          ),
+                                          _vm._v(" "),
+                                          _c("b-form-input", {
+                                            attrs: {
+                                              type: "text",
+                                              name: "ape2R",
+                                              id: "ape2R",
+                                              placeholder: "Segundo apellido"
+                                            },
+                                            model: {
+                                              value: _vm.ape2R,
+                                              callback: function($$v) {
+                                                _vm.ape2R = $$v
+                                              },
+                                              expression: "ape2R"
+                                            }
+                                          })
+                                        ],
+                                        1
+                                      )
+                                    ],
+                                    1
+                                  ),
+                                  _vm._v(" "),
+                                  _c("br"),
+                                  _vm._v(" "),
+                                  _c(
+                                    "b-row",
+                                    [
+                                      _c(
+                                        "b-col",
+                                        { attrs: { cols: "4" } },
+                                        [
+                                          _c(
+                                            "label",
+                                            { attrs: { for: "generoR" } },
+                                            [_vm._v("Género")]
+                                          ),
+                                          _vm._v(" "),
+                                          _c("b-form-select", {
+                                            attrs: {
+                                              options: _vm.generos,
+                                              id: "genero"
+                                            },
+                                            model: {
+                                              value: _vm.generoR,
+                                              callback: function($$v) {
+                                                _vm.generoR = $$v
+                                              },
+                                              expression: "generoR"
+                                            }
+                                          })
+                                        ],
+                                        1
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "b-col",
+                                        { attrs: { cols: "4" } },
+                                        [
+                                          _c(
+                                            "label",
+                                            { attrs: { for: "fec_nacR" } },
+                                            [_vm._v("Fecha de Nacimiento")]
+                                          ),
+                                          _vm._v(" "),
+                                          _c("b-form-input", {
+                                            attrs: {
+                                              type: "date",
+                                              name: "fec_nacR",
+                                              id: "fec_nacR"
+                                            },
+                                            model: {
+                                              value: _vm.fec_nacR,
+                                              callback: function($$v) {
+                                                _vm.fec_nacR = $$v
+                                              },
+                                              expression: "fec_nacR"
+                                            }
+                                          })
+                                        ],
+                                        1
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "b-col",
+                                        { attrs: { cols: "4" } },
+                                        [
+                                          _c(
+                                            "label",
+                                            { attrs: { for: "telefonoR" } },
+                                            [_vm._v("Teléfono")]
+                                          ),
+                                          _vm._v(" "),
+                                          _c("b-form-input", {
+                                            attrs: {
+                                              type: "tel",
+                                              id: "telefonoR",
+                                              name: "telefonoR"
+                                            },
+                                            model: {
+                                              value: _vm.telefonoR,
+                                              callback: function($$v) {
+                                                _vm.telefonoR = $$v
+                                              },
+                                              expression: "telefonoR"
+                                            }
+                                          })
+                                        ],
+                                        1
+                                      )
+                                    ],
+                                    1
+                                  ),
+                                  _vm._v(" "),
+                                  _c("hr"),
+                                  _vm._v(" "),
+                                  _c(
+                                    "b-row",
+                                    [
+                                      _c(
+                                        "b-col",
+                                        { attrs: { cols: "6" } },
+                                        [
+                                          _c(
+                                            "label",
+                                            { attrs: { for: "paisR" } },
+                                            [_vm._v("País")]
+                                          ),
+                                          _vm._v(" "),
+                                          _c("b-form-select", {
+                                            attrs: {
+                                              id: "paisR",
+                                              name: "paisR",
+                                              options: _vm.paises
+                                            },
+                                            model: {
+                                              value: _vm.paisR,
+                                              callback: function($$v) {
+                                                _vm.paisR = $$v
+                                              },
+                                              expression: "paisR"
+                                            }
+                                          })
+                                        ],
+                                        1
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "b-col",
+                                        { attrs: { cols: "6" } },
+                                        [
+                                          _c(
+                                            "label",
+                                            { attrs: { for: "ciudadR" } },
+                                            [_vm._v("Ciudad")]
+                                          ),
+                                          _vm._v(" "),
+                                          _c("b-form-select", {
+                                            attrs: {
+                                              id: "ciudadR",
+                                              name: "ciudadR",
+                                              options: _vm.ciudades
+                                            },
+                                            model: {
+                                              value: _vm.ciudadR,
+                                              callback: function($$v) {
+                                                _vm.ciudadR = $$v
+                                              },
+                                              expression: "ciudadR"
+                                            }
+                                          })
+                                        ],
+                                        1
+                                      )
+                                    ],
+                                    1
+                                  ),
+                                  _vm._v(" "),
+                                  _c("br"),
+                                  _vm._v(" "),
+                                  _c(
+                                    "b-row",
+                                    [
+                                      _c(
+                                        "b-col",
+                                        { attrs: { cols: "4" } },
+                                        [
+                                          _c(
+                                            "label",
+                                            { attrs: { for: "urbanizacionR" } },
+                                            [_vm._v("Urbanización")]
+                                          ),
+                                          _vm._v(" "),
+                                          _c("b-form-input", {
+                                            attrs: {
+                                              id: "urbanizacionR",
+                                              name: "urbanizacionR",
+                                              placeholder: "Urbanización"
+                                            },
+                                            model: {
+                                              value: _vm.urbanizacionR,
+                                              callback: function($$v) {
+                                                _vm.urbanizacionR = $$v
+                                              },
+                                              expression: "urbanizacionR"
+                                            }
+                                          })
+                                        ],
+                                        1
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "b-col",
+                                        { attrs: { cols: "4" } },
+                                        [
+                                          _c(
+                                            "label",
+                                            { attrs: { for: "calleR" } },
+                                            [_vm._v("Calle")]
+                                          ),
+                                          _vm._v(" "),
+                                          _c("b-form-input", {
+                                            attrs: {
+                                              id: "calle",
+                                              name: "calleR",
+                                              placeholder: "Calle"
+                                            },
+                                            model: {
+                                              value: _vm.calleR,
+                                              callback: function($$v) {
+                                                _vm.calleR = $$v
+                                              },
+                                              expression: "calleR"
+                                            }
+                                          })
+                                        ],
+                                        1
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "b-col",
+                                        { attrs: { cols: "4" } },
+                                        [
+                                          _c(
+                                            "label",
+                                            { attrs: { for: "zipcodeR" } },
+                                            [_vm._v("Código postal")]
+                                          ),
+                                          _vm._v(" "),
+                                          _c("b-form-input", {
+                                            attrs: {
+                                              id: "zipcodeR",
+                                              name: "zipcodeR",
+                                              placeholder: "Código postal"
+                                            },
+                                            model: {
+                                              value: _vm.zipcodeR,
+                                              callback: function($$v) {
+                                                _vm.zipcodeR = $$v
+                                              },
+                                              expression: "zipcodeR"
+                                            }
+                                          })
+                                        ],
+                                        1
+                                      )
+                                    ],
+                                    1
+                                  )
+                                ],
+                                1
+                              )
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              staticClass:
+                                "d-flex flex-row-reverse bd-highlight"
+                            },
+                            [
+                              _c(
+                                "b-button",
+                                {
+                                  attrs: { variant: "default", type: "submit" }
+                                },
+                                [_vm._v("Continuar")]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "b-link",
+                                {
+                                  staticClass: "btn btn-danger",
+                                  attrs: { href: "/managemembers" }
+                                },
+                                [_vm._v("Cancelar")]
+                              )
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                ])
+              ])
+            ])
+          ])
+        ])
+      ])
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "card-header card-header-log card-header-icon" },
+      [
+        _c("div", { staticClass: "card-icon" }, [
+          _c("i", { staticClass: "material-icons" }, [_vm._v("edit")])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-lg-10" }, [
+            _c("h4", { staticClass: "card-title" }, [
+              _vm._v("Modificar miembro de club")
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-lg-2" })
+        ])
+      ]
+    )
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/browse_clubs/SelectClub.vue?vue&type=template&id=fca30244&":
 /*!**************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/browse_clubs/SelectClub.vue?vue&type=template&id=fca30244& ***!
@@ -72269,7 +74936,19 @@ var render = function() {
                         _c("tbody", [
                           _c("tr", [
                             _c("td", { staticClass: "text-center" }, [
-                              _vm._v("Frank Hesse")
+                              _vm._v("Killer Bees")
+                            ]),
+                            _vm._v(" "),
+                            _c("td", { staticClass: "text-center" }, [
+                              _vm._v("12-12-2019")
+                            ]),
+                            _vm._v(" "),
+                            _c("td", { staticClass: "text-center" }, [
+                              _vm._v("Inglés")
+                            ]),
+                            _vm._v(" "),
+                            _c("td", { staticClass: "text-center" }, [
+                              _vm._v("Alemania")
                             ]),
                             _vm._v(" "),
                             _c(
@@ -72343,7 +75022,13 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("thead", [
       _c("tr", [
-        _c("th", { staticClass: "text-center" }, [_vm._v("Prueba 1")]),
+        _c("th", { staticClass: "text-center" }, [_vm._v("Nombre")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "text-center" }, [_vm._v("Fecha de creación")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "text-center" }, [_vm._v("Idioma")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "text-center" }, [_vm._v("País")]),
         _vm._v(" "),
         _c("th", { staticClass: "text-center" }, [_vm._v("Acción")])
       ])
@@ -72389,7 +75074,19 @@ var render = function() {
                         _c("tbody", [
                           _c("tr", [
                             _c("td", { staticClass: "text-center" }, [
-                              _vm._v("Frank Hesse")
+                              _vm._v("Killer Bees")
+                            ]),
+                            _vm._v(" "),
+                            _c("td", { staticClass: "text-center" }, [
+                              _vm._v("12-12-2019")
+                            ]),
+                            _vm._v(" "),
+                            _c("td", { staticClass: "text-center" }, [
+                              _vm._v("Inglés")
+                            ]),
+                            _vm._v(" "),
+                            _c("td", { staticClass: "text-center" }, [
+                              _vm._v("Alemania")
                             ]),
                             _vm._v(" "),
                             _c(
@@ -72463,7 +75160,13 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("thead", [
       _c("tr", [
-        _c("th", { staticClass: "text-center" }, [_vm._v("Prueba 1")]),
+        _c("th", { staticClass: "text-center" }, [_vm._v("Nombre")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "text-center" }, [_vm._v("Fecha de creación")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "text-center" }, [_vm._v("Idioma")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "text-center" }, [_vm._v("País")]),
         _vm._v(" "),
         _c("th", { staticClass: "text-center" }, [_vm._v("Acción")])
       ])
@@ -72509,7 +75212,19 @@ var render = function() {
                         _c("tbody", [
                           _c("tr", [
                             _c("td", { staticClass: "text-center" }, [
-                              _vm._v("Frank Hesse")
+                              _vm._v("Killer Bees")
+                            ]),
+                            _vm._v(" "),
+                            _c("td", { staticClass: "text-center" }, [
+                              _vm._v("12-12-2019")
+                            ]),
+                            _vm._v(" "),
+                            _c("td", { staticClass: "text-center" }, [
+                              _vm._v("Inglés")
+                            ]),
+                            _vm._v(" "),
+                            _c("td", { staticClass: "text-center" }, [
+                              _vm._v("Alemania")
                             ]),
                             _vm._v(" "),
                             _c(
@@ -72583,7 +75298,13 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("thead", [
       _c("tr", [
-        _c("th", { staticClass: "text-center" }, [_vm._v("Prueba 1")]),
+        _c("th", { staticClass: "text-center" }, [_vm._v("Nombre")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "text-center" }, [_vm._v("Fecha de creación")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "text-center" }, [_vm._v("Idioma")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "text-center" }, [_vm._v("País")]),
         _vm._v(" "),
         _c("th", { staticClass: "text-center" }, [_vm._v("Acción")])
       ])
@@ -74050,27 +76771,30 @@ var render = function() {
                     _c("div", { staticClass: "row" }, [
                       _vm._m(1),
                       _vm._v(" "),
-                      _c("div", { staticClass: "col-lg-2" }, [
-                        _c(
-                          "button",
-                          {
-                            directives: [
-                              {
-                                name: "b-modal",
-                                rawName: "v-b-modal.add-member",
-                                modifiers: { "add-member": true }
-                              }
-                            ],
-                            staticClass: "btn btn-default float-right mt-3"
-                          },
-                          [
-                            _vm._m(2),
-                            _vm._v(
-                              "\r\n                                        Añadir nuevo miembro\r\n                                    "
-                            )
-                          ]
-                        )
-                      ])
+                      _c(
+                        "div",
+                        { staticClass: "col-lg-2" },
+                        [
+                          _c(
+                            "b-link",
+                            {
+                              staticClass: "btn btn-default float-right mt-3",
+                              attrs: { href: "/managemembers/create" }
+                            },
+                            [
+                              _c("span", { staticClass: "btn-label" }, [
+                                _c("i", { staticClass: "material-icons" }, [
+                                  _vm._v("add")
+                                ])
+                              ]),
+                              _vm._v(
+                                "\r\n                                        Añadir nuevo miembro\r\n                                    "
+                              )
+                            ]
+                          )
+                        ],
+                        1
+                      )
                     ])
                   ]
                 ),
@@ -74083,12 +76807,24 @@ var render = function() {
                         { staticClass: "table-responsive table-sales" },
                         [
                           _c("table", { staticClass: "table" }, [
-                            _vm._m(3),
+                            _vm._m(2),
                             _vm._v(" "),
                             _c("tbody", [
                               _c("tr", [
                                 _c("td", { staticClass: "text-center" }, [
-                                  _vm._v("Frank Hesse")
+                                  _vm._v("123456789101112")
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "text-center" }, [
+                                  _vm._v("Frank")
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "text-center" }, [
+                                  _vm._v("Hesse")
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "text-center" }, [
+                                  _vm._v(_vm._s(_vm.fec_nac))
                                 ]),
                                 _vm._v(" "),
                                 _c(
@@ -74098,13 +76834,6 @@ var render = function() {
                                     _c(
                                       "button",
                                       {
-                                        directives: [
-                                          {
-                                            name: "b-modal",
-                                            rawName: "v-b-modal.view-member",
-                                            modifiers: { "view-member": true }
-                                          }
-                                        ],
                                         staticClass: "btn btn-info",
                                         attrs: {
                                           type: "button",
@@ -74112,6 +76841,12 @@ var render = function() {
                                           "data-toggle": "tooltip",
                                           "data-placement": "bottom",
                                           title: "Visualizar"
+                                        },
+                                        on: {
+                                          click: function($event) {
+                                            _vm.verifyAge(_vm.fec_nac)
+                                            _vm.showModal()
+                                          }
                                         }
                                       },
                                       [
@@ -74124,17 +76859,11 @@ var render = function() {
                                     ),
                                     _vm._v(" "),
                                     _c(
-                                      "button",
+                                      "b-link",
                                       {
-                                        directives: [
-                                          {
-                                            name: "b-modal",
-                                            rawName: "v-b-modal.edit-member",
-                                            modifiers: { "edit-member": true }
-                                          }
-                                        ],
                                         staticClass: "btn btn-success",
                                         attrs: {
+                                          href: "/managemembers/1/edit",
                                           type: "button",
                                           rel: "tooltip",
                                           "data-toggle": "tooltip",
@@ -74151,8 +76880,9 @@ var render = function() {
                                       ]
                                     ),
                                     _vm._v(" "),
-                                    _vm._m(4)
-                                  ]
+                                    _vm._m(3)
+                                  ],
+                                  1
                                 )
                               ])
                             ])
@@ -74171,39 +76901,7 @@ var render = function() {
       _c(
         "b-modal",
         {
-          attrs: {
-            size: "lg",
-            id: "add-member",
-            "ok-variant": "default",
-            "ok-title": "Continuar",
-            "cancel-title": "Cancelar",
-            "cancel-variant": "danger"
-          }
-        },
-        [
-          _c("div", { staticClass: "card " }, [
-            _c(
-              "div",
-              { staticClass: "card-header card-header-log card-header-icon" },
-              [
-                _c("div", { staticClass: "card-icon" }, [
-                  _c("i", { staticClass: "material-icons" }, [_vm._v("add")])
-                ]),
-                _vm._v(" "),
-                _c("h4", { staticClass: "card-title" }, [
-                  _vm._v("Añadir nuevo miembro")
-                ])
-              ]
-            ),
-            _vm._v(" "),
-            _c("div", { staticClass: "card-body " }, [_c("b-form")], 1)
-          ])
-        ]
-      ),
-      _vm._v(" "),
-      _c(
-        "b-modal",
-        {
+          ref: "view-member",
           attrs: {
             size: "lg",
             id: "view-member",
@@ -74222,44 +76920,301 @@ var render = function() {
                   _c("i", { staticClass: "material-icons" }, [_vm._v("book")])
                 ]),
                 _vm._v(" "),
-                _c("h4", { staticClass: "card-title" }, [_vm._v("Detalles")])
-              ]
-            ),
-            _vm._v(" "),
-            _c("div", { staticClass: "card-body " }, [_c("b-form")], 1)
-          ])
-        ]
-      ),
-      _vm._v(" "),
-      _c(
-        "b-modal",
-        {
-          attrs: {
-            size: "lg",
-            id: "edit-member",
-            "ok-variant": "default",
-            "cancel-variant": "danger",
-            "ok-title": "Modificar",
-            "cancel-title": "Cancelar"
-          }
-        },
-        [
-          _c("div", { staticClass: "card " }, [
-            _c(
-              "div",
-              { staticClass: "card-header card-header-log card-header-icon" },
-              [
-                _c("div", { staticClass: "card-icon" }, [
-                  _c("i", { staticClass: "material-icons" }, [_vm._v("edit")])
-                ]),
-                _vm._v(" "),
                 _c("h4", { staticClass: "card-title" }, [
-                  _vm._v("Modificar miembro")
+                  _vm._v("Detalles de miembro")
                 ])
               ]
             ),
             _vm._v(" "),
-            _c("div", { staticClass: "card-body " }, [_c("b-form")], 1)
+            _c(
+              "div",
+              { staticClass: "card-body " },
+              [
+                _c(
+                  "b-row",
+                  [
+                    _c("b-col", { attrs: { cols: "8" } }, [
+                      _c("p", [
+                        _c("strong", [_vm._v("DOCUMENTO DE IDENTIDAD:")]),
+                        _vm._v(" 123456789101112131415")
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("b-col", { attrs: { cols: "4" } }, [
+                      _c("p", [
+                        _c("strong", [_vm._v("PRIMER NOMBRE:")]),
+                        _vm._v(" Frank")
+                      ])
+                    ])
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "b-row",
+                  [
+                    _c("b-col", { attrs: { cols: "4" } }, [
+                      _c("p", [_c("strong", [_vm._v("SEGUNDO NOMBRE: ")])])
+                    ]),
+                    _vm._v(" "),
+                    _c("b-col", { attrs: { cols: "4" } }, [
+                      _c("p", [
+                        _c("strong", [_vm._v("PRIMER APELLIDO: ")]),
+                        _vm._v("Hesse")
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("b-col", { attrs: { cols: "4" } }, [
+                      _c("p", [_c("strong", [_vm._v("SEGUNDO APELLIDO: ")])])
+                    ])
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "b-row",
+                  [
+                    _c("b-col", { attrs: { cols: "5" } }, [
+                      _c("p", [
+                        _c("strong", [_vm._v("FECHA DE NACIMIENTO: ")]),
+                        _vm._v(_vm._s(_vm.fec_nac))
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("b-col", { attrs: { cols: "3" } }, [
+                      _c("p", [
+                        _c("strong", [_vm._v("GÉNERO: ")]),
+                        _vm._v("Masculino")
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("b-col", { attrs: { cols: "4" } }, [
+                      _c("p", [
+                        _c("strong", [_vm._v("TELÉFONO: ")]),
+                        _vm._v("1234567891011")
+                      ])
+                    ])
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c("hr"),
+                _vm._v(" "),
+                _c(
+                  "b-row",
+                  [
+                    _c("b-col", { attrs: { cols: "4" } }, [
+                      _c("h6", [_c("strong", [_vm._v("DIRECCIÓN")])])
+                    ])
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "b-row",
+                  [
+                    _c("b-col", { attrs: { cols: "4" } }, [
+                      _c("p", [
+                        _c("strong", [_vm._v("PAÍS:")]),
+                        _vm._v(" Alemania")
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("b-col", { attrs: { cols: "4" } }, [
+                      _c("p", [
+                        _c("strong", [_vm._v("CIUDAD:")]),
+                        _vm._v(" Dresden")
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("b-col", { attrs: { cols: "4" } }, [
+                      _c("p", [
+                        _c("strong", [_vm._v("CALLE:")]),
+                        _vm._v(" Something")
+                      ])
+                    ])
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "b-row",
+                  [
+                    _c("b-col", { attrs: { cols: "4" } }, [
+                      _c("p", [
+                        _c("strong", [_vm._v("URBANIZACIÓN:")]),
+                        _vm._v(" Something2")
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("b-col", { attrs: { cols: "4" } }, [
+                      _c("p", [
+                        _c("strong", [_vm._v("CÓDIGO POSTAL:")]),
+                        _vm._v(" 676767")
+                      ])
+                    ])
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c("hr"),
+                _vm._v(" "),
+                _vm.mayoredad == false
+                  ? _c(
+                      "div",
+                      { attrs: { id: "datos_rep" } },
+                      [
+                        _c(
+                          "b-row",
+                          [
+                            _c("b-col", { attrs: { cols: "6" } }, [
+                              _c("h6", [
+                                _c("strong", [_vm._v("DATOS DE REPRESENTANTE")])
+                              ])
+                            ])
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "b-row",
+                          [
+                            _c("b-col", { attrs: { cols: "8" } }, [
+                              _c("p", [
+                                _c("strong", [
+                                  _vm._v("DOCUMENTO DE IDENTIDAD:")
+                                ]),
+                                _vm._v(" 123456789101112131415")
+                              ])
+                            ]),
+                            _vm._v(" "),
+                            _c("b-col", { attrs: { cols: "4" } }, [
+                              _c("p", [
+                                _c("strong", [_vm._v("PRIMER NOMBRE:")]),
+                                _vm._v(" Frank")
+                              ])
+                            ])
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "b-row",
+                          [
+                            _c("b-col", { attrs: { cols: "4" } }, [
+                              _c("p", [
+                                _c("strong", [_vm._v("SEGUNDO NOMBRE: ")])
+                              ])
+                            ]),
+                            _vm._v(" "),
+                            _c("b-col", { attrs: { cols: "4" } }, [
+                              _c("p", [
+                                _c("strong", [_vm._v("PRIMER APELLIDO: ")]),
+                                _vm._v("Hesse")
+                              ])
+                            ]),
+                            _vm._v(" "),
+                            _c("b-col", { attrs: { cols: "4" } }, [
+                              _c("p", [
+                                _c("strong", [_vm._v("SEGUNDO APELLIDO: ")])
+                              ])
+                            ])
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "b-row",
+                          [
+                            _c("b-col", { attrs: { cols: "5" } }, [
+                              _c("p", [
+                                _c("strong", [_vm._v("FECHA DE NACIMIENTO: ")]),
+                                _vm._v("01-08-1999")
+                              ])
+                            ]),
+                            _vm._v(" "),
+                            _c("b-col", { attrs: { cols: "3" } }, [
+                              _c("p", [
+                                _c("strong", [_vm._v("GÉNERO: ")]),
+                                _vm._v("Masculino")
+                              ])
+                            ]),
+                            _vm._v(" "),
+                            _c("b-col", { attrs: { cols: "4" } }, [
+                              _c("p", [
+                                _c("strong", [_vm._v("TELÉFONO: ")]),
+                                _vm._v("1234567891011")
+                              ])
+                            ])
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c("hr"),
+                        _vm._v(" "),
+                        _c(
+                          "b-row",
+                          [
+                            _c("b-col", { attrs: { cols: "4" } }, [
+                              _c("h6", [_c("strong", [_vm._v("DIRECCIÓN")])])
+                            ])
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "b-row",
+                          [
+                            _c("b-col", { attrs: { cols: "4" } }, [
+                              _c("p", [
+                                _c("strong", [_vm._v("PAÍS:")]),
+                                _vm._v(" Alemania")
+                              ])
+                            ]),
+                            _vm._v(" "),
+                            _c("b-col", { attrs: { cols: "4" } }, [
+                              _c("p", [
+                                _c("strong", [_vm._v("CIUDAD:")]),
+                                _vm._v(" Dresden")
+                              ])
+                            ]),
+                            _vm._v(" "),
+                            _c("b-col", { attrs: { cols: "4" } }, [
+                              _c("p", [
+                                _c("strong", [_vm._v("CALLE:")]),
+                                _vm._v(" Something")
+                              ])
+                            ])
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "b-row",
+                          [
+                            _c("b-col", { attrs: { cols: "4" } }, [
+                              _c("p", [
+                                _c("strong", [_vm._v("URBANIZACIÓN:")]),
+                                _vm._v(" Something2")
+                              ])
+                            ]),
+                            _vm._v(" "),
+                            _c("b-col", { attrs: { cols: "4" } }, [
+                              _c("p", [
+                                _c("strong", [_vm._v("CÓDIGO POSTAL:")]),
+                                _vm._v(" 676767")
+                              ])
+                            ])
+                          ],
+                          1
+                        )
+                      ],
+                      1
+                    )
+                  : _vm._e()
+              ],
+              1
+            )
           ])
         ]
       )
@@ -74288,17 +77243,19 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("span", { staticClass: "btn-label" }, [
-      _c("i", { staticClass: "material-icons" }, [_vm._v("add")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
     return _c("thead", [
       _c("tr", [
-        _c("th", { staticClass: "text-center" }, [_vm._v("Prueba 1")]),
+        _c("th", { staticClass: "text-center" }, [
+          _vm._v("Documento de identidad")
+        ]),
+        _vm._v(" "),
+        _c("th", { staticClass: "text-center" }, [_vm._v("Nombre")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "text-center" }, [_vm._v("Apellido")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "text-center" }, [
+          _vm._v("Fecha de nacimiento")
+        ]),
         _vm._v(" "),
         _c("th", { staticClass: "text-center" }, [_vm._v("Acción")])
       ])
@@ -88610,6 +91567,10 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('club-members', __webpack_r
 
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('browse-members', __webpack_require__(/*! ./components/club_members/BrowseMembers.vue */ "./resources/js/components/club_members/BrowseMembers.vue")["default"]); //crud members
 
+/* CRUD MEMBERS */
+
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('create-member', __webpack_require__(/*! ./components/browse_clubs/CreateMember.vue */ "./resources/js/components/browse_clubs/CreateMember.vue")["default"]);
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('edit-member', __webpack_require__(/*! ./components/browse_clubs/EditMember.vue */ "./resources/js/components/browse_clubs/EditMember.vue")["default"]);
 /* REVIEWED BOOKS*/
 
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('available-reports-club', __webpack_require__(/*! ./components/club_reports/AvailableReportsClub.vue */ "./resources/js/components/club_reports/AvailableReportsClub.vue")["default"]);
@@ -89171,6 +92132,75 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/browse_clubs/CreateMember.vue":
+/*!***************************************************************!*\
+  !*** ./resources/js/components/browse_clubs/CreateMember.vue ***!
+  \***************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _CreateMember_vue_vue_type_template_id_765c4a7c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CreateMember.vue?vue&type=template&id=765c4a7c& */ "./resources/js/components/browse_clubs/CreateMember.vue?vue&type=template&id=765c4a7c&");
+/* harmony import */ var _CreateMember_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CreateMember.vue?vue&type=script&lang=js& */ "./resources/js/components/browse_clubs/CreateMember.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _CreateMember_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _CreateMember_vue_vue_type_template_id_765c4a7c___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _CreateMember_vue_vue_type_template_id_765c4a7c___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/browse_clubs/CreateMember.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/browse_clubs/CreateMember.vue?vue&type=script&lang=js&":
+/*!****************************************************************************************!*\
+  !*** ./resources/js/components/browse_clubs/CreateMember.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CreateMember_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./CreateMember.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/browse_clubs/CreateMember.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CreateMember_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/browse_clubs/CreateMember.vue?vue&type=template&id=765c4a7c&":
+/*!**********************************************************************************************!*\
+  !*** ./resources/js/components/browse_clubs/CreateMember.vue?vue&type=template&id=765c4a7c& ***!
+  \**********************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CreateMember_vue_vue_type_template_id_765c4a7c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./CreateMember.vue?vue&type=template&id=765c4a7c& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/browse_clubs/CreateMember.vue?vue&type=template&id=765c4a7c&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CreateMember_vue_vue_type_template_id_765c4a7c___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CreateMember_vue_vue_type_template_id_765c4a7c___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/js/components/browse_clubs/Edit.vue":
 /*!*******************************************************!*\
   !*** ./resources/js/components/browse_clubs/Edit.vue ***!
@@ -89235,6 +92265,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Edit_vue_vue_type_template_id_63e9c816___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Edit_vue_vue_type_template_id_63e9c816___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/browse_clubs/EditMember.vue":
+/*!*************************************************************!*\
+  !*** ./resources/js/components/browse_clubs/EditMember.vue ***!
+  \*************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _EditMember_vue_vue_type_template_id_0c90bb50___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./EditMember.vue?vue&type=template&id=0c90bb50& */ "./resources/js/components/browse_clubs/EditMember.vue?vue&type=template&id=0c90bb50&");
+/* harmony import */ var _EditMember_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./EditMember.vue?vue&type=script&lang=js& */ "./resources/js/components/browse_clubs/EditMember.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _EditMember_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _EditMember_vue_vue_type_template_id_0c90bb50___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _EditMember_vue_vue_type_template_id_0c90bb50___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/browse_clubs/EditMember.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/browse_clubs/EditMember.vue?vue&type=script&lang=js&":
+/*!**************************************************************************************!*\
+  !*** ./resources/js/components/browse_clubs/EditMember.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_EditMember_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./EditMember.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/browse_clubs/EditMember.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_EditMember_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/browse_clubs/EditMember.vue?vue&type=template&id=0c90bb50&":
+/*!********************************************************************************************!*\
+  !*** ./resources/js/components/browse_clubs/EditMember.vue?vue&type=template&id=0c90bb50& ***!
+  \********************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_EditMember_vue_vue_type_template_id_0c90bb50___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./EditMember.vue?vue&type=template&id=0c90bb50& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/browse_clubs/EditMember.vue?vue&type=template&id=0c90bb50&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_EditMember_vue_vue_type_template_id_0c90bb50___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_EditMember_vue_vue_type_template_id_0c90bb50___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

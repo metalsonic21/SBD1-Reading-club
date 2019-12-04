@@ -26,12 +26,13 @@ Vue.component('select-club-group-meeting', require('./components/browse_clubs/Se
 Vue.component('create-club', require('./components/browse_clubs/Create.vue').default);
 Vue.component('edit-club', require('./components/browse_clubs/Edit.vue').default);
 
-
-
 /* MEMBERS */
 Vue.component('club-members', require('./components/club_members/ClubMembers.vue').default); //reports
 Vue.component('browse-members', require('./components/club_members/BrowseMembers.vue').default); //crud members
 
+/* CRUD MEMBERS */
+Vue.component('create-member', require('./components/browse_clubs/CreateMember.vue').default);
+Vue.component('edit-member', require('./components/browse_clubs/EditMember.vue').default);
 
 /* REVIEWED BOOKS*/
 Vue.component('available-reports-club', require('./components/club_reports/AvailableReportsClub.vue').default);

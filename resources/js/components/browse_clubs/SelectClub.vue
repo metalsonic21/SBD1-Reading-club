@@ -22,13 +22,19 @@
                                         <table class="table">
                                             <thead>
                                                 <tr>
-                                                    <th class="text-center">Prueba 1</th>
+                                                    <th class="text-center">Nombre</th>
+                                                    <th class="text-center">Fecha de creación</th>
+                                                    <th class="text-center">Idioma</th>
+                                                    <th class="text-center">País</th>
                                                     <th class="text-center">Acción</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <tr>
-                                                    <td class="text-center">Frank Hesse</td>
+                                                    <td class="text-center">Killer Bees</td>
+                                                    <td class="text-center">12-12-2019</td>
+                                                    <td class="text-center">Inglés</td>
+                                                    <td class="text-center">Alemania</td>
                                                     <td class="td-actions text-center">
                                                     <b-link href="/managemembers">    <button type="button" rel="tooltip" class="btn btn-default"> Seleccionar 
                                                         </button></b-link>

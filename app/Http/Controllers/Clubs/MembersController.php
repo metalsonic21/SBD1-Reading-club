@@ -24,7 +24,7 @@ class MembersController extends Controller
      */
     public function create()
     {
-        //
+        return view ('clubs.createmember');
     }
 
     /**
@@ -33,6 +33,7 @@ class MembersController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+    
     public function store(Request $request)
     {
         //
@@ -57,7 +58,7 @@ class MembersController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view ('clubs.editmember');
     }
 
     /**
