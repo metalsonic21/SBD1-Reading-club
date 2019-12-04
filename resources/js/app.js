@@ -22,6 +22,11 @@ Vue.component('select-club-group', require('./components/browse_clubs/SelectClub
 Vue.component('select-club-group-member', require('./components/browse_clubs/SelectClubGM.vue').default);
 Vue.component('select-club-group-meeting', require('./components/browse_clubs/SelectClubR.vue').default);
 
+/* CRUD CLUBS */
+Vue.component('create-club', require('./components/browse_clubs/Create.vue').default);
+Vue.component('edit-club', require('./components/browse_clubs/Edit.vue').default);
+
+
 
 /* MEMBERS */
 Vue.component('club-members', require('./components/club_members/ClubMembers.vue').default); //reports

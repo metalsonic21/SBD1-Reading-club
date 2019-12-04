@@ -24,7 +24,7 @@ class BrowseClubsController extends Controller
      */
     public function create()
     {
-        //
+        return view ('clubs.create');
     }
 
     /**
@@ -57,7 +57,7 @@ class BrowseClubsController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view ('clubs.edit');
     }
 
     /**

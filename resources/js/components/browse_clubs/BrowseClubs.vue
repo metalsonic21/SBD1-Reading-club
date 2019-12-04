@@ -15,12 +15,12 @@
                                 </div>
                                 <div class="col-lg-2">
 
-                                    <button class="btn btn-default float-right mt-3" v-b-modal.add-club>
+                                    <b-link href="/browseclubs/create" class="btn btn-default float-right mt-3">
                                         <span class="btn-label">
                                             <i class="material-icons">add</i>
                                         </span>
                                         Crear club de lectura
-                                    </button>
+                                    </b-link>
                                 </div>
                             </div>
                         </div>
@@ -45,9 +45,9 @@
                                                         <button type="button" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Añadir miembro" class="btn btn-default">
                                                             <i class="material-icons">person_add</i>
                                                         </button>
-                                                        <button type="button" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Modificar" v-b-modal.edit-club class="btn btn-success">
+                                                        <b-link href="/browseclubs/1/edit" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Modificar" class="btn btn-success">
                                                             <i class="material-icons">edit</i>
-                                                        </button>
+                                                        </b-link>
                                                         <button type="button" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Eliminar" class="btn btn-danger">
                                                             <i class="material-icons">close</i>
                                                         </button>
@@ -76,9 +76,7 @@
                 <h4 class="card-title">Añadir nuevo club</h4>
             </div>
             <div class="card-body ">
-                <b-form>
-
-                </b-form>
+                
             </div>
         </div>
     </b-modal>
@@ -92,32 +90,99 @@
                 <h4 class="card-title">Detalles de club</h4>
             </div>
             <div class="card-body ">
-                <b-form>
+                
+                    <b-row>
+                    <b-col cols="3">
+                        <p><strong>NOMBRE:</strong> Killer Bees</p>
+                    </b-col>
+                    <b-col cols="3">
+                        <p><strong>IDIOMA:</strong> Inglés</p>
+                    </b-col>
+                    </b-row>
+                    <hr>
+                    <b-row>
+                        <b-col cols="4">
+                        <h6> <strong>DIRECCIÓN</strong></h6>
+                        </b-col>
+                    </b-row>
+                    <b-row>
+                        <b-col cols="4">
+                            <p><strong>PAÍS:</strong> Alemania</p>
+                        </b-col>
+                        <b-col cols="4">
+                            <p><strong>CIUDAD:</strong> Dresden</p>
+                        </b-col>
+                        <b-col cols="4">
+                            <p><strong>CALLE:</strong> Something</p>
+                        </b-col>
+                    </b-row>
 
-                </b-form>
+                    <b-row>
+                        <b-col cols="4">
+                            <p><strong>URBANIZACIÓN:</strong> Something2</p>
+                        </b-col>
+
+                        <b-col cols="4">
+                            <p><strong>CÓDIGO POSTAL:</strong> 676767</p>
+                        </b-col>
+                    </b-row>
+                <hr>
+                    <b-row>
+                        <b-col cols="6">
+                            <h6><strong>INSTITUCIÓN ASOCIADA</strong></h6>
+                        </b-col>
+                    </b-row>
+
+                    <b-row>
+                        <b-col cols="4">
+                            <p><strong>NOMBRE: </strong>Leaf</p>
+                        </b-col>
+
+                        <b-col cols="4">
+                            <p><strong>TIPO: </strong>Biblioteca</p>
+                        </b-col>
+                    </b-row>
+
+                    
+                    <b-row>
+                        <b-col cols="4">
+                            <p><strong>PAÍS:</strong> Alemania</p>
+                        </b-col>
+                        <b-col cols="4">
+                            <p><strong>CIUDAD:</strong> Dresden</p>
+                        </b-col>
+                        <b-col cols="4">
+                            <p><strong>CALLE:</strong> Something</p>
+                        </b-col>
+                    </b-row>
+
+                    <b-row>
+                        <b-col cols="4">
+                            <p><strong>URBANIZACIÓN:</strong> Something2</p>
+                        </b-col>
+
+                        <b-col cols="4">
+                            <p><strong>CÓDIGO POSTAL:</strong> 676767</p>
+                        </b-col>
+                    </b-row>
+
+                    <hr>
+
+                    <b-row>
+                        <b-col cols="6">
+                            <h6><strong>CLUBES ASOCIADOS</strong></h6>
+                        </b-col>
+                    </b-row>
+
+                    <b-row>
+                        <ul>
+                            <li>G59</li>
+                        </ul>
+                    </b-row>
 
             </div>
         </div>
     </b-modal>
-
-    
-    <b-modal size="lg" id="edit-club" ok-variant="default" cancel-variant="danger" ok-title="Modificar" cancel-title="Cancelar">
-        <div class="card ">
-            <div class="card-header card-header-log card-header-icon">
-                <div class="card-icon">
-                    <i class="material-icons">edit</i>
-                </div>
-                <h4 class="card-title">Modificar club</h4>
-            </div>
-            <div class="card-body ">
-                <b-form>
-
-                </b-form>
-
-            </div>
-        </div>
-    </b-modal>
-
 </div>
 </template>
 

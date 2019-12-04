@@ -64,7 +64,7 @@ CREATE TABLE SJL_elenco_lectores (
     id_obra       NUMERIC(28) NOT NULL,
     id_hist_pre   NUMERIC(28) NOT NULL,        
     mej_act       bit NOT NULL,
-    CONSTRAINT elenco_lectores_pk PRIMARY KEY (id_elenco ,id_mem,id_club,id_lec,id_pers,id_obra,id_hist_pre)
+    CONSTRAINT elenco_lectores_pk PRIMARY KEY (id_elenco ,id_me,id_club,id_lec,id_pers,id_obra,id_hist_pre)
 );
 
 CREATE TABLE SJL_estructuras_libros (
@@ -89,7 +89,7 @@ CREATE TABLE SJL_grupos_lectores (
     id_lec     NUMERIC(28) NOT NULL,
     id_grupo   NUMERIC(28) NOT NULL,
     fec_f      DATE,
-    CONSTRAINT grupos_lectores_pk PRIMARY KEY (id_fec_i,id_mem,id_club,id_lec,id_grupo)
+    CONSTRAINT grupos_lectores_pk PRIMARY KEY (id_fec_i,id_mem,id_club,id_lec,id_grupo,id_club)
 );
 
 CREATE TABLE SJL_grupos_lectura (
@@ -172,7 +172,7 @@ CREATE TABLE SJL_libros (
     n_pag        NUMERIC(28) NOT NULL,
     fec_pub      DATE NOT NULL,
     id_prev      NUMERIC(28),
-    id_edit      NUMERIC(28) NOT NULL,
+    id_edit      NUMERIC(28) NOT NULL
     CONSTRAINT libros_pk PRIMARY KEY (isbn)
 );
 
@@ -244,7 +244,7 @@ CREATE TABLE SJL_representantes (
     ape1       VARCHAR(10) NOT NULL,
     ape2       varchar NOT NULL,
     fec_nac    DATE NOT NULL,
-    id_dir     NUMERIC(28) NOT NULL,
+    id_dir     NUMERIC(28) NOT NULL
     CONSTRAINT representates_pk PRIMARY KEY (doc_iden)
 );
 
@@ -255,7 +255,7 @@ CREATE TABLE SJL_reuniones_mensuales (
     id_grup_lec_mod   NUMERIC(28) NOT NULL,
     n_ses             NUMERIC(28) NOT NULL,
     conclu            VARCHAR(200),
-    valor             NUMERIC(28),
+    valor             NUMERIC(28)
     CONSTRAINT reuniones_mensuales_pk PRIMARY KEY (fec,id_lib,id_grupo)
 );
 
@@ -264,7 +264,7 @@ CREATE TABLE SJL_secciones_libros (
     nom      VARCHAR(20) NOT NULL,
     num      NUMERIC(28) NOT NULL,
     titulo   VARCHAR(20),
-    id_est   NUMERIC(28) NOT NULL,
+    id_est   NUMERIC(28) NOT NULL
     CONSTRAINT secciones_libros_pk PRIMARY KEY (id)
 );
 

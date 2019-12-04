@@ -2223,7 +2223,514 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/browse_clubs/Create.vue?vue&type=script&lang=js&":
+/*!******************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/browse_clubs/Create.vue?vue&type=script&lang=js& ***!
+  \******************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      nombre: null,
+      idioma: null,
+      idiomas: [{
+        value: null,
+        text: 'Seleccionar'
+      }],
+      asociado: false,
+      nombrei: null,
+      tipo: null,
+      tipos: [{
+        value: null,
+        text: 'Seleccionar'
+      }],
+      pais: null,
+      paisI: null,
+      paises: [{
+        value: null,
+        text: 'Seleccionar'
+      }],
+      ciudad: null,
+      ciudadI: null,
+      ciudades: [{
+        value: null,
+        text: 'Seleccionar'
+      }],
+      urbanizacion: null,
+      urbanizacionI: null,
+      calle: null,
+      calleI: null,
+      zipcode: null,
+      zipcodeI: null,
+      clubasociado: false,
+      asociados: [{
+        value: 1,
+        text: 'Killer Bees'
+      }],
+      cac: []
+    };
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/browse_clubs/Edit.vue?vue&type=script&lang=js&":
+/*!****************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/browse_clubs/Edit.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      nombre: null,
+      idioma: null,
+      idiomas: [{
+        value: null,
+        text: 'Seleccionar'
+      }],
+      asociado: false,
+      nombrei: null,
+      tipo: null,
+      tipos: [{
+        value: null,
+        text: 'Seleccionar'
+      }],
+      pais: null,
+      paisI: null,
+      paises: [{
+        value: null,
+        text: 'Seleccionar'
+      }],
+      ciudad: null,
+      ciudadI: null,
+      ciudades: [{
+        value: null,
+        text: 'Seleccionar'
+      }],
+      urbanizacion: null,
+      urbanizacionI: null,
+      calle: null,
+      calleI: null,
+      zipcode: null,
+      zipcodeI: null,
+      clubasociado: false,
+      asociados: [{
+        value: 1,
+        text: 'Killer Bees'
+      }],
+      cac: []
+    };
+  }
+});
 
 /***/ }),
 
@@ -69974,27 +70481,30 @@ var render = function() {
                     _c("div", { staticClass: "row" }, [
                       _vm._m(1),
                       _vm._v(" "),
-                      _c("div", { staticClass: "col-lg-2" }, [
-                        _c(
-                          "button",
-                          {
-                            directives: [
-                              {
-                                name: "b-modal",
-                                rawName: "v-b-modal.add-club",
-                                modifiers: { "add-club": true }
-                              }
-                            ],
-                            staticClass: "btn btn-default float-right mt-3"
-                          },
-                          [
-                            _vm._m(2),
-                            _vm._v(
-                              "\r\n                                        Crear club de lectura\r\n                                    "
-                            )
-                          ]
-                        )
-                      ])
+                      _c(
+                        "div",
+                        { staticClass: "col-lg-2" },
+                        [
+                          _c(
+                            "b-link",
+                            {
+                              staticClass: "btn btn-default float-right mt-3",
+                              attrs: { href: "/browseclubs/create" }
+                            },
+                            [
+                              _c("span", { staticClass: "btn-label" }, [
+                                _c("i", { staticClass: "material-icons" }, [
+                                  _vm._v("add")
+                                ])
+                              ]),
+                              _vm._v(
+                                "\r\n                                        Crear club de lectura\r\n                                    "
+                              )
+                            ]
+                          )
+                        ],
+                        1
+                      )
                     ])
                   ]
                 ),
@@ -70007,7 +70517,7 @@ var render = function() {
                         { staticClass: "table-responsive table-sales" },
                         [
                           _c("table", { staticClass: "table" }, [
-                            _vm._m(3),
+                            _vm._m(2),
                             _vm._v(" "),
                             _c("tbody", [
                               _c("tr", [
@@ -70047,21 +70557,14 @@ var render = function() {
                                       ]
                                     ),
                                     _vm._v(" "),
-                                    _vm._m(4),
+                                    _vm._m(3),
                                     _vm._v(" "),
                                     _c(
-                                      "button",
+                                      "b-link",
                                       {
-                                        directives: [
-                                          {
-                                            name: "b-modal",
-                                            rawName: "v-b-modal.edit-club",
-                                            modifiers: { "edit-club": true }
-                                          }
-                                        ],
                                         staticClass: "btn btn-success",
                                         attrs: {
-                                          type: "button",
+                                          href: "/browseclubs/1/edit",
                                           rel: "tooltip",
                                           "data-toggle": "tooltip",
                                           "data-placement": "bottom",
@@ -70077,8 +70580,9 @@ var render = function() {
                                       ]
                                     ),
                                     _vm._v(" "),
-                                    _vm._m(5)
-                                  ]
+                                    _vm._m(4)
+                                  ],
+                                  1
                                 )
                               ])
                             ])
@@ -70122,7 +70626,7 @@ var render = function() {
               ]
             ),
             _vm._v(" "),
-            _c("div", { staticClass: "card-body " }, [_c("b-form")], 1)
+            _c("div", { staticClass: "card-body " })
           ])
         ]
       ),
@@ -70155,40 +70659,184 @@ var render = function() {
               ]
             ),
             _vm._v(" "),
-            _c("div", { staticClass: "card-body " }, [_c("b-form")], 1)
-          ])
-        ]
-      ),
-      _vm._v(" "),
-      _c(
-        "b-modal",
-        {
-          attrs: {
-            size: "lg",
-            id: "edit-club",
-            "ok-variant": "default",
-            "cancel-variant": "danger",
-            "ok-title": "Modificar",
-            "cancel-title": "Cancelar"
-          }
-        },
-        [
-          _c("div", { staticClass: "card " }, [
             _c(
               "div",
-              { staticClass: "card-header card-header-log card-header-icon" },
+              { staticClass: "card-body " },
               [
-                _c("div", { staticClass: "card-icon" }, [
-                  _c("i", { staticClass: "material-icons" }, [_vm._v("edit")])
-                ]),
+                _c(
+                  "b-row",
+                  [
+                    _c("b-col", { attrs: { cols: "3" } }, [
+                      _c("p", [
+                        _c("strong", [_vm._v("NOMBRE:")]),
+                        _vm._v(" Killer Bees")
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("b-col", { attrs: { cols: "3" } }, [
+                      _c("p", [
+                        _c("strong", [_vm._v("IDIOMA:")]),
+                        _vm._v(" Inglés")
+                      ])
+                    ])
+                  ],
+                  1
+                ),
                 _vm._v(" "),
-                _c("h4", { staticClass: "card-title" }, [
-                  _vm._v("Modificar club")
-                ])
-              ]
-            ),
-            _vm._v(" "),
-            _c("div", { staticClass: "card-body " }, [_c("b-form")], 1)
+                _c("hr"),
+                _vm._v(" "),
+                _c(
+                  "b-row",
+                  [
+                    _c("b-col", { attrs: { cols: "4" } }, [
+                      _c("h6", [_c("strong", [_vm._v("DIRECCIÓN")])])
+                    ])
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "b-row",
+                  [
+                    _c("b-col", { attrs: { cols: "4" } }, [
+                      _c("p", [
+                        _c("strong", [_vm._v("PAÍS:")]),
+                        _vm._v(" Alemania")
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("b-col", { attrs: { cols: "4" } }, [
+                      _c("p", [
+                        _c("strong", [_vm._v("CIUDAD:")]),
+                        _vm._v(" Dresden")
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("b-col", { attrs: { cols: "4" } }, [
+                      _c("p", [
+                        _c("strong", [_vm._v("CALLE:")]),
+                        _vm._v(" Something")
+                      ])
+                    ])
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "b-row",
+                  [
+                    _c("b-col", { attrs: { cols: "4" } }, [
+                      _c("p", [
+                        _c("strong", [_vm._v("URBANIZACIÓN:")]),
+                        _vm._v(" Something2")
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("b-col", { attrs: { cols: "4" } }, [
+                      _c("p", [
+                        _c("strong", [_vm._v("CÓDIGO POSTAL:")]),
+                        _vm._v(" 676767")
+                      ])
+                    ])
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c("hr"),
+                _vm._v(" "),
+                _c(
+                  "b-row",
+                  [
+                    _c("b-col", { attrs: { cols: "6" } }, [
+                      _c("h6", [_c("strong", [_vm._v("INSTITUCIÓN ASOCIADA")])])
+                    ])
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "b-row",
+                  [
+                    _c("b-col", { attrs: { cols: "4" } }, [
+                      _c("p", [
+                        _c("strong", [_vm._v("NOMBRE: ")]),
+                        _vm._v("Leaf")
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("b-col", { attrs: { cols: "4" } }, [
+                      _c("p", [
+                        _c("strong", [_vm._v("TIPO: ")]),
+                        _vm._v("Biblioteca")
+                      ])
+                    ])
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "b-row",
+                  [
+                    _c("b-col", { attrs: { cols: "4" } }, [
+                      _c("p", [
+                        _c("strong", [_vm._v("PAÍS:")]),
+                        _vm._v(" Alemania")
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("b-col", { attrs: { cols: "4" } }, [
+                      _c("p", [
+                        _c("strong", [_vm._v("CIUDAD:")]),
+                        _vm._v(" Dresden")
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("b-col", { attrs: { cols: "4" } }, [
+                      _c("p", [
+                        _c("strong", [_vm._v("CALLE:")]),
+                        _vm._v(" Something")
+                      ])
+                    ])
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "b-row",
+                  [
+                    _c("b-col", { attrs: { cols: "4" } }, [
+                      _c("p", [
+                        _c("strong", [_vm._v("URBANIZACIÓN:")]),
+                        _vm._v(" Something2")
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("b-col", { attrs: { cols: "4" } }, [
+                      _c("p", [
+                        _c("strong", [_vm._v("CÓDIGO POSTAL:")]),
+                        _vm._v(" 676767")
+                      ])
+                    ])
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c("hr"),
+                _vm._v(" "),
+                _c(
+                  "b-row",
+                  [
+                    _c("b-col", { attrs: { cols: "6" } }, [
+                      _c("h6", [_c("strong", [_vm._v("CLUBES ASOCIADOS")])])
+                    ])
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c("b-row", [_c("ul", [_c("li", [_vm._v("G59")])])])
+              ],
+              1
+            )
           ])
         ]
       )
@@ -70213,14 +70861,6 @@ var staticRenderFns = [
       _c("h4", { staticClass: "card-title" }, [
         _vm._v("Explorar clubes de lectura")
       ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("span", { staticClass: "btn-label" }, [
-      _c("i", { staticClass: "material-icons" }, [_vm._v("add")])
     ])
   },
   function() {
@@ -70271,6 +70911,1322 @@ var staticRenderFns = [
         }
       },
       [_c("i", { staticClass: "material-icons" }, [_vm._v("close")])]
+    )
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/browse_clubs/Create.vue?vue&type=template&id=2d8be508&":
+/*!**********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/browse_clubs/Create.vue?vue&type=template&id=2d8be508& ***!
+  \**********************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c("div", { staticClass: "content" }, [
+      _c("div", { staticClass: "container-fluid" }, [
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-md-12" }, [
+            _c("div", { staticClass: "card" }, [
+              _vm._m(0),
+              _vm._v(" "),
+              _c("div", { staticClass: "card-body" }, [
+                _c("div", { staticClass: "row" }, [
+                  _c(
+                    "div",
+                    { staticClass: "col-lg-12" },
+                    [
+                      _c(
+                        "b-form",
+                        [
+                          _c(
+                            "b-row",
+                            [
+                              _c(
+                                "b-col",
+                                { attrs: { cols: "6" } },
+                                [
+                                  _c("label", { attrs: { for: "nom" } }, [
+                                    _vm._v("Nombre")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("b-form-input", {
+                                    attrs: {
+                                      id: "nom",
+                                      name: "nom",
+                                      required: "",
+                                      placeholder: "Nombre de club"
+                                    }
+                                  })
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "b-col",
+                                { attrs: { cols: "6" } },
+                                [
+                                  _c("label", { attrs: { for: "idioma" } }, [
+                                    _vm._v("Idioma")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("b-form-select", {
+                                    attrs: { options: _vm.idiomas },
+                                    model: {
+                                      value: _vm.idioma,
+                                      callback: function($$v) {
+                                        _vm.idioma = $$v
+                                      },
+                                      expression: "idioma"
+                                    }
+                                  })
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c("br"),
+                          _vm._v(" "),
+                          _c(
+                            "b-row",
+                            [
+                              _c(
+                                "b-col",
+                                { attrs: { cols: "6" } },
+                                [
+                                  _c("label", { attrs: { for: "pais" } }, [
+                                    _vm._v("País")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("b-form-select", {
+                                    attrs: {
+                                      id: "pais",
+                                      name: "pais",
+                                      options: _vm.paises
+                                    },
+                                    model: {
+                                      value: _vm.pais,
+                                      callback: function($$v) {
+                                        _vm.pais = $$v
+                                      },
+                                      expression: "pais"
+                                    }
+                                  })
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "b-col",
+                                { attrs: { cols: "6" } },
+                                [
+                                  _c("label", { attrs: { for: "ciudad" } }, [
+                                    _vm._v("Ciudad")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("b-form-select", {
+                                    attrs: {
+                                      id: "ciudad",
+                                      name: "ciudad",
+                                      options: _vm.ciudades
+                                    },
+                                    model: {
+                                      value: _vm.ciudad,
+                                      callback: function($$v) {
+                                        _vm.ciudad = $$v
+                                      },
+                                      expression: "ciudad"
+                                    }
+                                  })
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c("br"),
+                          _vm._v(" "),
+                          _c(
+                            "b-row",
+                            [
+                              _c(
+                                "b-col",
+                                { attrs: { cols: "4" } },
+                                [
+                                  _c(
+                                    "label",
+                                    { attrs: { for: "urbanizacion" } },
+                                    [_vm._v("Urbanización")]
+                                  ),
+                                  _vm._v(" "),
+                                  _c("b-form-input", {
+                                    attrs: {
+                                      id: "urbanizacion",
+                                      name: "urbanizacion",
+                                      placeholder: "Urbanización"
+                                    },
+                                    model: {
+                                      value: _vm.urbanizacion,
+                                      callback: function($$v) {
+                                        _vm.urbanizacion = $$v
+                                      },
+                                      expression: "urbanizacion"
+                                    }
+                                  })
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "b-col",
+                                { attrs: { cols: "4" } },
+                                [
+                                  _c("label", { attrs: { for: "calle" } }, [
+                                    _vm._v("Calle")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("b-form-input", {
+                                    attrs: {
+                                      id: "calle",
+                                      name: "calle",
+                                      placeholder: "Calle"
+                                    },
+                                    model: {
+                                      value: _vm.calle,
+                                      callback: function($$v) {
+                                        _vm.calle = $$v
+                                      },
+                                      expression: "calle"
+                                    }
+                                  })
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "b-col",
+                                { attrs: { cols: "4" } },
+                                [
+                                  _c("label", { attrs: { for: "zipcode" } }, [
+                                    _vm._v("Código postal")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("b-form-input", {
+                                    attrs: {
+                                      id: "zipcode",
+                                      name: "zipcode",
+                                      placeholder: "Código postal"
+                                    },
+                                    model: {
+                                      value: _vm.zipcode,
+                                      callback: function($$v) {
+                                        _vm.zipcode = $$v
+                                      },
+                                      expression: "zipcode"
+                                    }
+                                  })
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c("hr"),
+                          _vm._v(" "),
+                          _c(
+                            "b-row",
+                            [
+                              _c(
+                                "b-col",
+                                { attrs: { cols: "6" } },
+                                [
+                                  _c(
+                                    "b-form-group",
+                                    [
+                                      _c("label", [
+                                        _vm._v(
+                                          "¿Está asociado este club a alguna institución?"
+                                        )
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("b-radio-group", {
+                                        attrs: {
+                                          options: [
+                                            { text: "Sí", value: true },
+                                            { text: "No", value: false }
+                                          ]
+                                        },
+                                        model: {
+                                          value: _vm.asociado,
+                                          callback: function($$v) {
+                                            _vm.asociado = $$v
+                                          },
+                                          expression: "asociado"
+                                        }
+                                      })
+                                    ],
+                                    1
+                                  )
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _vm.asociado
+                            ? _c(
+                                "div",
+                                [
+                                  _c(
+                                    "b-row",
+                                    [
+                                      _c(
+                                        "b-col",
+                                        { attrs: { cols: "6" } },
+                                        [
+                                          _c(
+                                            "label",
+                                            { attrs: { for: "inom" } },
+                                            [_vm._v("Nombre")]
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "b-form-input",
+                                            {
+                                              attrs: {
+                                                type: "text",
+                                                id: "inom",
+                                                name: "inom",
+                                                placeholder: "Nombre"
+                                              },
+                                              model: {
+                                                value: _vm.nombrei,
+                                                callback: function($$v) {
+                                                  _vm.nombrei = $$v
+                                                },
+                                                expression: "nombrei"
+                                              }
+                                            },
+                                            [_vm._v("Nombre")]
+                                          )
+                                        ],
+                                        1
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "b-col",
+                                        { attrs: { cols: "6" } },
+                                        [
+                                          _c("label", { attrs: { for: "" } }, [
+                                            _vm._v("Tipo")
+                                          ]),
+                                          _vm._v(" "),
+                                          _c("b-form-select", {
+                                            attrs: {
+                                              id: "tipo",
+                                              name: "tipo",
+                                              options: _vm.tipos
+                                            },
+                                            model: {
+                                              value: _vm.tipo,
+                                              callback: function($$v) {
+                                                _vm.tipo = $$v
+                                              },
+                                              expression: "tipo"
+                                            }
+                                          })
+                                        ],
+                                        1
+                                      )
+                                    ],
+                                    1
+                                  ),
+                                  _vm._v(" "),
+                                  _c("br"),
+                                  _vm._v(" "),
+                                  _c(
+                                    "b-row",
+                                    [
+                                      _c(
+                                        "b-col",
+                                        { attrs: { cols: "6" } },
+                                        [
+                                          _c(
+                                            "label",
+                                            { attrs: { for: "pais" } },
+                                            [_vm._v("País")]
+                                          ),
+                                          _vm._v(" "),
+                                          _c("b-form-select", {
+                                            attrs: {
+                                              id: "paisI",
+                                              name: "paisI",
+                                              options: _vm.paises
+                                            },
+                                            model: {
+                                              value: _vm.paisI,
+                                              callback: function($$v) {
+                                                _vm.paisI = $$v
+                                              },
+                                              expression: "paisI"
+                                            }
+                                          })
+                                        ],
+                                        1
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "b-col",
+                                        { attrs: { cols: "6" } },
+                                        [
+                                          _c(
+                                            "label",
+                                            { attrs: { for: "ciudad" } },
+                                            [_vm._v("Ciudad")]
+                                          ),
+                                          _vm._v(" "),
+                                          _c("b-form-select", {
+                                            attrs: {
+                                              id: "ciudadI",
+                                              name: "ciudadI",
+                                              options: _vm.ciudades
+                                            },
+                                            model: {
+                                              value: _vm.ciudadI,
+                                              callback: function($$v) {
+                                                _vm.ciudadI = $$v
+                                              },
+                                              expression: "ciudadI"
+                                            }
+                                          })
+                                        ],
+                                        1
+                                      )
+                                    ],
+                                    1
+                                  ),
+                                  _vm._v(" "),
+                                  _c("br"),
+                                  _vm._v(" "),
+                                  _c(
+                                    "b-row",
+                                    [
+                                      _c(
+                                        "b-col",
+                                        { attrs: { cols: "4" } },
+                                        [
+                                          _c(
+                                            "label",
+                                            { attrs: { for: "urbanizacion" } },
+                                            [_vm._v("Urbanización")]
+                                          ),
+                                          _vm._v(" "),
+                                          _c("b-form-input", {
+                                            attrs: {
+                                              id: "urbanizacionI",
+                                              name: "urbanizacionI",
+                                              placeholder: "Urbanización"
+                                            },
+                                            model: {
+                                              value: _vm.urbanizacionI,
+                                              callback: function($$v) {
+                                                _vm.urbanizacionI = $$v
+                                              },
+                                              expression: "urbanizacionI"
+                                            }
+                                          })
+                                        ],
+                                        1
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "b-col",
+                                        { attrs: { cols: "4" } },
+                                        [
+                                          _c(
+                                            "label",
+                                            { attrs: { for: "calle" } },
+                                            [_vm._v("Calle")]
+                                          ),
+                                          _vm._v(" "),
+                                          _c("b-form-input", {
+                                            attrs: {
+                                              id: "calleI",
+                                              name: "calleI",
+                                              placeholder: "Calle"
+                                            },
+                                            model: {
+                                              value: _vm.calleI,
+                                              callback: function($$v) {
+                                                _vm.calleI = $$v
+                                              },
+                                              expression: "calleI"
+                                            }
+                                          })
+                                        ],
+                                        1
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "b-col",
+                                        { attrs: { cols: "4" } },
+                                        [
+                                          _c(
+                                            "label",
+                                            { attrs: { for: "zipcode" } },
+                                            [_vm._v("Código postal")]
+                                          ),
+                                          _vm._v(" "),
+                                          _c("b-form-input", {
+                                            attrs: {
+                                              id: "zipcodeI",
+                                              name: "zipcodeI",
+                                              placeholder: "Código postal"
+                                            },
+                                            model: {
+                                              value: _vm.zipcodeI,
+                                              callback: function($$v) {
+                                                _vm.zipcodeI = $$v
+                                              },
+                                              expression: "zipcodeI"
+                                            }
+                                          })
+                                        ],
+                                        1
+                                      )
+                                    ],
+                                    1
+                                  )
+                                ],
+                                1
+                              )
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _c("hr"),
+                          _vm._v(" "),
+                          _c(
+                            "b-row",
+                            [
+                              _c(
+                                "b-col",
+                                { attrs: { cols: "6" } },
+                                [
+                                  _c(
+                                    "b-form-group",
+                                    [
+                                      _c("label", [
+                                        _vm._v(
+                                          "¿Está asociado este club con otro club?"
+                                        )
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("b-radio-group", {
+                                        attrs: {
+                                          options: [
+                                            { text: "Sí", value: true },
+                                            { text: "No", value: false }
+                                          ]
+                                        },
+                                        model: {
+                                          value: _vm.clubasociado,
+                                          callback: function($$v) {
+                                            _vm.clubasociado = $$v
+                                          },
+                                          expression: "clubasociado"
+                                        }
+                                      })
+                                    ],
+                                    1
+                                  )
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _vm.clubasociado
+                            ? _c(
+                                "b-row",
+                                [
+                                  _c(
+                                    "b-col",
+                                    { attrs: { cols: "6" } },
+                                    [
+                                      _c("label", [
+                                        _vm._v(
+                                          "Seleccione los clubes asociados"
+                                        )
+                                      ]),
+                                      _vm._v(" "),
+                                      _c(
+                                        "b-form-group",
+                                        [
+                                          _c("b-form-checkbox-group", {
+                                            attrs: {
+                                              options: _vm.asociados,
+                                              name: "asociados",
+                                              stacked: ""
+                                            },
+                                            model: {
+                                              value: _vm.cac,
+                                              callback: function($$v) {
+                                                _vm.cac = $$v
+                                              },
+                                              expression: "cac"
+                                            }
+                                          })
+                                        ],
+                                        1
+                                      )
+                                    ],
+                                    1
+                                  )
+                                ],
+                                1
+                              )
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              staticClass:
+                                "d-flex flex-row-reverse bd-highlight"
+                            },
+                            [
+                              _c(
+                                "b-button",
+                                {
+                                  attrs: { variant: "default", type: "submit" }
+                                },
+                                [_vm._v("Continuar")]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "b-link",
+                                {
+                                  staticClass: "btn btn-danger",
+                                  attrs: { href: "/browseclubs" }
+                                },
+                                [_vm._v("Cancelar")]
+                              )
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                ])
+              ])
+            ])
+          ])
+        ])
+      ])
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "card-header card-header-log card-header-icon" },
+      [
+        _c("div", { staticClass: "card-icon" }, [
+          _c("i", { staticClass: "material-icons" }, [_vm._v("add")])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-lg-10" }, [
+            _c("h4", { staticClass: "card-title" }, [
+              _vm._v("Añadir club de lectura")
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-lg-2" })
+        ])
+      ]
+    )
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/browse_clubs/Edit.vue?vue&type=template&id=63e9c816&":
+/*!********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/browse_clubs/Edit.vue?vue&type=template&id=63e9c816& ***!
+  \********************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c("div", { staticClass: "content" }, [
+      _c("div", { staticClass: "container-fluid" }, [
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-md-12" }, [
+            _c("div", { staticClass: "card" }, [
+              _vm._m(0),
+              _vm._v(" "),
+              _c("div", { staticClass: "card-body" }, [
+                _c("div", { staticClass: "row" }, [
+                  _c(
+                    "div",
+                    { staticClass: "col-lg-12" },
+                    [
+                      _c(
+                        "b-form",
+                        [
+                          _c(
+                            "b-row",
+                            [
+                              _c(
+                                "b-col",
+                                { attrs: { cols: "6" } },
+                                [
+                                  _c("label", { attrs: { for: "nom" } }, [
+                                    _vm._v("Nombre")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("b-form-input", {
+                                    attrs: {
+                                      id: "nom",
+                                      name: "nom",
+                                      required: "",
+                                      placeholder: "Nombre de club"
+                                    }
+                                  })
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "b-col",
+                                { attrs: { cols: "6" } },
+                                [
+                                  _c("label", { attrs: { for: "idioma" } }, [
+                                    _vm._v("Idioma")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("b-form-select", {
+                                    attrs: { options: _vm.idiomas },
+                                    model: {
+                                      value: _vm.idioma,
+                                      callback: function($$v) {
+                                        _vm.idioma = $$v
+                                      },
+                                      expression: "idioma"
+                                    }
+                                  })
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c("br"),
+                          _vm._v(" "),
+                          _c(
+                            "b-row",
+                            [
+                              _c(
+                                "b-col",
+                                { attrs: { cols: "6" } },
+                                [
+                                  _c("label", { attrs: { for: "pais" } }, [
+                                    _vm._v("País")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("b-form-select", {
+                                    attrs: {
+                                      id: "pais",
+                                      name: "pais",
+                                      options: _vm.paises
+                                    },
+                                    model: {
+                                      value: _vm.pais,
+                                      callback: function($$v) {
+                                        _vm.pais = $$v
+                                      },
+                                      expression: "pais"
+                                    }
+                                  })
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "b-col",
+                                { attrs: { cols: "6" } },
+                                [
+                                  _c("label", { attrs: { for: "ciudad" } }, [
+                                    _vm._v("Ciudad")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("b-form-select", {
+                                    attrs: {
+                                      id: "ciudad",
+                                      name: "ciudad",
+                                      options: _vm.ciudades
+                                    },
+                                    model: {
+                                      value: _vm.ciudad,
+                                      callback: function($$v) {
+                                        _vm.ciudad = $$v
+                                      },
+                                      expression: "ciudad"
+                                    }
+                                  })
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c("br"),
+                          _vm._v(" "),
+                          _c(
+                            "b-row",
+                            [
+                              _c(
+                                "b-col",
+                                { attrs: { cols: "4" } },
+                                [
+                                  _c(
+                                    "label",
+                                    { attrs: { for: "urbanizacion" } },
+                                    [_vm._v("Urbanización")]
+                                  ),
+                                  _vm._v(" "),
+                                  _c("b-form-input", {
+                                    attrs: {
+                                      id: "urbanizacion",
+                                      name: "urbanizacion",
+                                      placeholder: "Urbanización"
+                                    },
+                                    model: {
+                                      value: _vm.urbanizacion,
+                                      callback: function($$v) {
+                                        _vm.urbanizacion = $$v
+                                      },
+                                      expression: "urbanizacion"
+                                    }
+                                  })
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "b-col",
+                                { attrs: { cols: "4" } },
+                                [
+                                  _c("label", { attrs: { for: "calle" } }, [
+                                    _vm._v("Calle")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("b-form-input", {
+                                    attrs: {
+                                      id: "calle",
+                                      name: "calle",
+                                      placeholder: "Calle"
+                                    },
+                                    model: {
+                                      value: _vm.calle,
+                                      callback: function($$v) {
+                                        _vm.calle = $$v
+                                      },
+                                      expression: "calle"
+                                    }
+                                  })
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "b-col",
+                                { attrs: { cols: "4" } },
+                                [
+                                  _c("label", { attrs: { for: "zipcode" } }, [
+                                    _vm._v("Código postal")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("b-form-input", {
+                                    attrs: {
+                                      id: "zipcode",
+                                      name: "zipcode",
+                                      placeholder: "Código postal"
+                                    },
+                                    model: {
+                                      value: _vm.zipcode,
+                                      callback: function($$v) {
+                                        _vm.zipcode = $$v
+                                      },
+                                      expression: "zipcode"
+                                    }
+                                  })
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c("hr"),
+                          _vm._v(" "),
+                          _c(
+                            "b-row",
+                            [
+                              _c(
+                                "b-col",
+                                { attrs: { cols: "6" } },
+                                [
+                                  _c(
+                                    "b-form-group",
+                                    [
+                                      _c("label", [
+                                        _vm._v(
+                                          "¿Está asociado este club a alguna institución?"
+                                        )
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("b-radio-group", {
+                                        attrs: {
+                                          options: [
+                                            { text: "Sí", value: true },
+                                            { text: "No", value: false }
+                                          ]
+                                        },
+                                        model: {
+                                          value: _vm.asociado,
+                                          callback: function($$v) {
+                                            _vm.asociado = $$v
+                                          },
+                                          expression: "asociado"
+                                        }
+                                      })
+                                    ],
+                                    1
+                                  )
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _vm.asociado
+                            ? _c(
+                                "div",
+                                [
+                                  _c(
+                                    "b-row",
+                                    [
+                                      _c(
+                                        "b-col",
+                                        { attrs: { cols: "6" } },
+                                        [
+                                          _c(
+                                            "label",
+                                            { attrs: { for: "inom" } },
+                                            [_vm._v("Nombre")]
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "b-form-input",
+                                            {
+                                              attrs: {
+                                                type: "text",
+                                                id: "inom",
+                                                name: "inom",
+                                                placeholder: "Nombre"
+                                              },
+                                              model: {
+                                                value: _vm.nombrei,
+                                                callback: function($$v) {
+                                                  _vm.nombrei = $$v
+                                                },
+                                                expression: "nombrei"
+                                              }
+                                            },
+                                            [_vm._v("Nombre")]
+                                          )
+                                        ],
+                                        1
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "b-col",
+                                        { attrs: { cols: "6" } },
+                                        [
+                                          _c("label", { attrs: { for: "" } }, [
+                                            _vm._v("Tipo")
+                                          ]),
+                                          _vm._v(" "),
+                                          _c("b-form-select", {
+                                            attrs: {
+                                              id: "tipo",
+                                              name: "tipo",
+                                              options: _vm.tipos
+                                            },
+                                            model: {
+                                              value: _vm.tipo,
+                                              callback: function($$v) {
+                                                _vm.tipo = $$v
+                                              },
+                                              expression: "tipo"
+                                            }
+                                          })
+                                        ],
+                                        1
+                                      )
+                                    ],
+                                    1
+                                  ),
+                                  _vm._v(" "),
+                                  _c("br"),
+                                  _vm._v(" "),
+                                  _c(
+                                    "b-row",
+                                    [
+                                      _c(
+                                        "b-col",
+                                        { attrs: { cols: "6" } },
+                                        [
+                                          _c(
+                                            "label",
+                                            { attrs: { for: "pais" } },
+                                            [_vm._v("País")]
+                                          ),
+                                          _vm._v(" "),
+                                          _c("b-form-select", {
+                                            attrs: {
+                                              id: "paisI",
+                                              name: "paisI",
+                                              options: _vm.paises
+                                            },
+                                            model: {
+                                              value: _vm.paisI,
+                                              callback: function($$v) {
+                                                _vm.paisI = $$v
+                                              },
+                                              expression: "paisI"
+                                            }
+                                          })
+                                        ],
+                                        1
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "b-col",
+                                        { attrs: { cols: "6" } },
+                                        [
+                                          _c(
+                                            "label",
+                                            { attrs: { for: "ciudad" } },
+                                            [_vm._v("Ciudad")]
+                                          ),
+                                          _vm._v(" "),
+                                          _c("b-form-select", {
+                                            attrs: {
+                                              id: "ciudadI",
+                                              name: "ciudadI",
+                                              options: _vm.ciudades
+                                            },
+                                            model: {
+                                              value: _vm.ciudadI,
+                                              callback: function($$v) {
+                                                _vm.ciudadI = $$v
+                                              },
+                                              expression: "ciudadI"
+                                            }
+                                          })
+                                        ],
+                                        1
+                                      )
+                                    ],
+                                    1
+                                  ),
+                                  _vm._v(" "),
+                                  _c("br"),
+                                  _vm._v(" "),
+                                  _c(
+                                    "b-row",
+                                    [
+                                      _c(
+                                        "b-col",
+                                        { attrs: { cols: "4" } },
+                                        [
+                                          _c(
+                                            "label",
+                                            { attrs: { for: "urbanizacion" } },
+                                            [_vm._v("Urbanización")]
+                                          ),
+                                          _vm._v(" "),
+                                          _c("b-form-input", {
+                                            attrs: {
+                                              id: "urbanizacionI",
+                                              name: "urbanizacionI",
+                                              placeholder: "Urbanización"
+                                            },
+                                            model: {
+                                              value: _vm.urbanizacionI,
+                                              callback: function($$v) {
+                                                _vm.urbanizacionI = $$v
+                                              },
+                                              expression: "urbanizacionI"
+                                            }
+                                          })
+                                        ],
+                                        1
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "b-col",
+                                        { attrs: { cols: "4" } },
+                                        [
+                                          _c(
+                                            "label",
+                                            { attrs: { for: "calle" } },
+                                            [_vm._v("Calle")]
+                                          ),
+                                          _vm._v(" "),
+                                          _c("b-form-input", {
+                                            attrs: {
+                                              id: "calleI",
+                                              name: "calleI",
+                                              placeholder: "Calle"
+                                            },
+                                            model: {
+                                              value: _vm.calleI,
+                                              callback: function($$v) {
+                                                _vm.calleI = $$v
+                                              },
+                                              expression: "calleI"
+                                            }
+                                          })
+                                        ],
+                                        1
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "b-col",
+                                        { attrs: { cols: "4" } },
+                                        [
+                                          _c(
+                                            "label",
+                                            { attrs: { for: "zipcode" } },
+                                            [_vm._v("Código postal")]
+                                          ),
+                                          _vm._v(" "),
+                                          _c("b-form-input", {
+                                            attrs: {
+                                              id: "zipcodeI",
+                                              name: "zipcodeI",
+                                              placeholder: "Código postal"
+                                            },
+                                            model: {
+                                              value: _vm.zipcodeI,
+                                              callback: function($$v) {
+                                                _vm.zipcodeI = $$v
+                                              },
+                                              expression: "zipcodeI"
+                                            }
+                                          })
+                                        ],
+                                        1
+                                      )
+                                    ],
+                                    1
+                                  )
+                                ],
+                                1
+                              )
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _c("hr"),
+                          _vm._v(" "),
+                          _c(
+                            "b-row",
+                            [
+                              _c(
+                                "b-col",
+                                { attrs: { cols: "6" } },
+                                [
+                                  _c(
+                                    "b-form-group",
+                                    [
+                                      _c("label", [
+                                        _vm._v(
+                                          "¿Está asociado este club con otro club?"
+                                        )
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("b-radio-group", {
+                                        attrs: {
+                                          options: [
+                                            { text: "Sí", value: true },
+                                            { text: "No", value: false }
+                                          ]
+                                        },
+                                        model: {
+                                          value: _vm.clubasociado,
+                                          callback: function($$v) {
+                                            _vm.clubasociado = $$v
+                                          },
+                                          expression: "clubasociado"
+                                        }
+                                      })
+                                    ],
+                                    1
+                                  )
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _vm.clubasociado
+                            ? _c(
+                                "b-row",
+                                [
+                                  _c(
+                                    "b-col",
+                                    { attrs: { cols: "6" } },
+                                    [
+                                      _c("label", [
+                                        _vm._v(
+                                          "Seleccione los clubes asociados"
+                                        )
+                                      ]),
+                                      _vm._v(" "),
+                                      _c(
+                                        "b-form-group",
+                                        [
+                                          _c("b-form-checkbox-group", {
+                                            attrs: {
+                                              options: _vm.asociados,
+                                              name: "asociados",
+                                              stacked: ""
+                                            },
+                                            model: {
+                                              value: _vm.cac,
+                                              callback: function($$v) {
+                                                _vm.cac = $$v
+                                              },
+                                              expression: "cac"
+                                            }
+                                          })
+                                        ],
+                                        1
+                                      )
+                                    ],
+                                    1
+                                  )
+                                ],
+                                1
+                              )
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              staticClass:
+                                "d-flex flex-row-reverse bd-highlight"
+                            },
+                            [
+                              _c(
+                                "b-button",
+                                {
+                                  attrs: { variant: "default", type: "submit" }
+                                },
+                                [_vm._v("Continuar")]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "b-link",
+                                {
+                                  staticClass: "btn btn-danger",
+                                  attrs: { href: "/browseclubs" }
+                                },
+                                [_vm._v("Cancelar")]
+                              )
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                ])
+              ])
+            ])
+          ])
+        ])
+      ])
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "card-header card-header-log card-header-icon" },
+      [
+        _c("div", { staticClass: "card-icon" }, [
+          _c("i", { staticClass: "material-icons" }, [_vm._v("edit")])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-lg-10" }, [
+            _c("h4", { staticClass: "card-title" }, [
+              _vm._v("Modificar club de lectura")
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-lg-2" })
+        ])
+      ]
     )
   }
 ]
@@ -86644,6 +88600,10 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('select-club', __webpack_re
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('select-club-group', __webpack_require__(/*! ./components/browse_clubs/SelectClubG.vue */ "./resources/js/components/browse_clubs/SelectClubG.vue")["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('select-club-group-member', __webpack_require__(/*! ./components/browse_clubs/SelectClubGM.vue */ "./resources/js/components/browse_clubs/SelectClubGM.vue")["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('select-club-group-meeting', __webpack_require__(/*! ./components/browse_clubs/SelectClubR.vue */ "./resources/js/components/browse_clubs/SelectClubR.vue")["default"]);
+/* CRUD CLUBS */
+
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('create-club', __webpack_require__(/*! ./components/browse_clubs/Create.vue */ "./resources/js/components/browse_clubs/Create.vue")["default"]);
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('edit-club', __webpack_require__(/*! ./components/browse_clubs/Edit.vue */ "./resources/js/components/browse_clubs/Edit.vue")["default"]);
 /* MEMBERS */
 
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('club-members', __webpack_require__(/*! ./components/club_members/ClubMembers.vue */ "./resources/js/components/club_members/ClubMembers.vue")["default"]); //reports
@@ -87137,6 +89097,144 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_BrowseClubs_vue_vue_type_template_id_e6fb2792___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_BrowseClubs_vue_vue_type_template_id_e6fb2792___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/browse_clubs/Create.vue":
+/*!*********************************************************!*\
+  !*** ./resources/js/components/browse_clubs/Create.vue ***!
+  \*********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Create_vue_vue_type_template_id_2d8be508___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Create.vue?vue&type=template&id=2d8be508& */ "./resources/js/components/browse_clubs/Create.vue?vue&type=template&id=2d8be508&");
+/* harmony import */ var _Create_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Create.vue?vue&type=script&lang=js& */ "./resources/js/components/browse_clubs/Create.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _Create_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _Create_vue_vue_type_template_id_2d8be508___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _Create_vue_vue_type_template_id_2d8be508___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/browse_clubs/Create.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/browse_clubs/Create.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************!*\
+  !*** ./resources/js/components/browse_clubs/Create.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Create_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./Create.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/browse_clubs/Create.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Create_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/browse_clubs/Create.vue?vue&type=template&id=2d8be508&":
+/*!****************************************************************************************!*\
+  !*** ./resources/js/components/browse_clubs/Create.vue?vue&type=template&id=2d8be508& ***!
+  \****************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Create_vue_vue_type_template_id_2d8be508___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./Create.vue?vue&type=template&id=2d8be508& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/browse_clubs/Create.vue?vue&type=template&id=2d8be508&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Create_vue_vue_type_template_id_2d8be508___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Create_vue_vue_type_template_id_2d8be508___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/browse_clubs/Edit.vue":
+/*!*******************************************************!*\
+  !*** ./resources/js/components/browse_clubs/Edit.vue ***!
+  \*******************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Edit_vue_vue_type_template_id_63e9c816___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Edit.vue?vue&type=template&id=63e9c816& */ "./resources/js/components/browse_clubs/Edit.vue?vue&type=template&id=63e9c816&");
+/* harmony import */ var _Edit_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Edit.vue?vue&type=script&lang=js& */ "./resources/js/components/browse_clubs/Edit.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _Edit_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _Edit_vue_vue_type_template_id_63e9c816___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _Edit_vue_vue_type_template_id_63e9c816___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/browse_clubs/Edit.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/browse_clubs/Edit.vue?vue&type=script&lang=js&":
+/*!********************************************************************************!*\
+  !*** ./resources/js/components/browse_clubs/Edit.vue?vue&type=script&lang=js& ***!
+  \********************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Edit_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./Edit.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/browse_clubs/Edit.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Edit_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/browse_clubs/Edit.vue?vue&type=template&id=63e9c816&":
+/*!**************************************************************************************!*\
+  !*** ./resources/js/components/browse_clubs/Edit.vue?vue&type=template&id=63e9c816& ***!
+  \**************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Edit_vue_vue_type_template_id_63e9c816___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./Edit.vue?vue&type=template&id=63e9c816& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/browse_clubs/Edit.vue?vue&type=template&id=63e9c816&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Edit_vue_vue_type_template_id_63e9c816___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Edit_vue_vue_type_template_id_63e9c816___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
