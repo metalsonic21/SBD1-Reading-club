@@ -30,9 +30,9 @@ Route::resource('/managemembers', 'clubs\MembersController');
 
 /*GROUPS*/
 Route::resource('/browsegroups', 'groups\BrowseGroupsController');
+Route::resource('/managemembersg', 'groups\GroupMembersController');
 Route::get('/selectgroup', 'groups\SelectGroupController@index')->name('selectgroup');
 Route::get('/selectgroupr', 'groups\SelectGroupRController@index')->name('selectgroup');
-Route::get('/managemembersg', 'groups\GroupMembersController@index')->name('managemembers');
 
 /* MEETINGS */
 Route::get('/managemeetings', 'meetings\MeetingsController@index')->name('managemeetings');

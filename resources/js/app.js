@@ -43,6 +43,9 @@ Vue.component('select-group', require('./components/browse_groups/SelectGroup.vu
 Vue.component('select-group-meeting', require('./components/browse_groups/SelectGroupR.vue').default);
 Vue.component('group-members', require('./components/browse_groups/BrowseMembers.vue').default);
 
+/* CRUD GROUP MEMBERS*/
+Vue.component('create-group-member', require('./components/browse_groups/CreateGroupMember.vue').default);
+
 /*MEETINGS*/
 Vue.component('meetings', require('./components/browse_meetings/BrowseMeetings.vue').default);
 
