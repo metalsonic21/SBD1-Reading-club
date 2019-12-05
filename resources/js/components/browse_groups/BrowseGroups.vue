@@ -46,7 +46,7 @@
                                                         <button type="button" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Visualizar" class="btn btn-info" v-b-modal.view-group>
                                                             <i class="material-icons">remove_red_eye</i>
                                                         </button>
-                                                        <button type="button" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Añadir miembro" class="btn btn-default">
+                                                        <button type="button" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Añadir miembro" v-b-modal.add-member class="btn btn-default">
                                                             <i class="material-icons">person_add</i>
                                                         </button>
                                                         <button type="button" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Modificar" v-b-modal.edit-group class="btn btn-success">
@@ -100,19 +100,14 @@
                     </b-row>
 
                     <b-row>
-                        <b-col cols="4">
+                        <b-col cols="6">
                             <label for="dia">Día</label>
                             <b-form-select v-model="dia" :options="dias" id="dia" name="dia"></b-form-select>
                         </b-col>
 
-                        <b-col cols="4">
+                        <b-col cols="6">
                             <label for="horai">Hora Inicio</label>
                             <b-form-input type="time" v-model="horai" id="horai" name="horai"></b-form-input>
-                        </b-col>
-
-                        <b-col cols="4">
-                            <label for="horaf">Hora Fin</label>
-                            <b-form-input type="time" v-model="horaf" id="horaf" name="horaf"></b-form-input>
                         </b-col>
                     </b-row>
                 </b-form>
@@ -162,6 +157,8 @@
             </div>
         </div>
     </b-modal>
+
+    <create-group-member></create-group-member>
 
     <b-modal size="lg" id="edit-group" ok-variant="default" cancel-variant="danger" ok-title="Modificar" cancel-title="Cancelar">
         <div class="card ">

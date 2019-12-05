@@ -50,7 +50,7 @@ Vue.component('create-group-member', require('./components/browse_groups/CreateG
 Vue.component('meetings', require('./components/browse_meetings/BrowseMeetings.vue').default);
 Vue.component('meeting-details', require('./components/browse_meetings/Details.vue').default);
 Vue.component('meeting-attendance', require('./components/browse_meetings/Attendance.vue').default);
-
+Vue.component('set-meeting', require('./components/browse_meetings/SetMeeting.vue').default);
 /* BOOKS */
 Vue.component('books', require('./components/books/Books.vue').default);
 Vue.component('books-create', require('./components/books/Create.vue').default);

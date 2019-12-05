@@ -14,14 +14,7 @@
                                     <h4 class="card-title">Reuniones para el grupo</h4>
                                 </div>
                                 <div class="col-lg-7">
-
-                                    <button class="btn btn-default float-right mt-3" v-b-modal.add-meeting>
-                                        <span class="btn-label">
-                                            <i class="material-icons">add</i>
-                                        </span>
-                                        Crear reunión
-                                    </button>
-                                    <b-link  href="/managemeetings/calendar" class="btn btn-default float-right mt-3">
+                                    <b-link href="/managemeetings/calendar" class="btn btn-default float-right mt-3">
                                         <span class="btn-label">
                                             <i class="material-icons">calendar_today</i>
                                         </span>
@@ -59,8 +52,8 @@
                                                         <button type="button" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Control de asistencia para esta reunión" class="btn btn-default" v-b-modal.attendance>
                                                             <i class="material-icons">list</i>
                                                         </button>
-                                                        <button type="button" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Modificar" v-b-modal.edit-meeting class="btn btn-success">
-                                                            <i class="material-icons">edit</i>
+                                                        <button type="button" rel="tooltip" data-toggle="tooltip" v-b-modal.add-meeting data-placement="bottom" title="Programar reunión" class="btn btn-success">
+                                                            <i class="material-icons" >edit</i>
                                                         </button>
                                                         <button type="button" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Eliminar" class="btn btn-danger">
                                                             <i class="material-icons">close</i>
@@ -80,48 +73,15 @@
 
         </div>
     </div>
-
-    <b-modal size="lg" id="add-meeting" ok-variant="default" ok-title="Continuar" cancel-title="Cancelar" cancel-variant="danger">
-        <div class="card ">
-            <div class="card-header card-header-log card-header-icon">
-                <div class="card-icon">
-                    <i class="material-icons">add</i>
-                </div>
-                <h4 class="card-title">Añadir nueva reunión</h4>
-            </div>
-            <div class="card-body ">
-                <b-form>
-
-                </b-form>
-            </div>
-        </div>
-    </b-modal>
+    <set-meeting></set-meeting>
     <meeting-attendance></meeting-attendance>
     <meeting-details></meeting-details>
-
-    <b-modal size="lg" id="edit-meeting" ok-variant="default" cancel-variant="danger" ok-title="Modificar" cancel-title="Cancelar">
-        <div class="card ">
-            <div class="card-header card-header-log card-header-icon">
-                <div class="card-icon">
-                    <i class="material-icons">edit</i>
-                </div>
-                <h4 class="card-title">Modificar reunión</h4>
-            </div>
-            <div class="card-body ">
-                <b-form>
-
-                </b-form>
-
-            </div>
-        </div>
-    </b-modal>
-
 </div>
 </template>
 
 <script>
 export default {
-
+    
 }
 </script>
 

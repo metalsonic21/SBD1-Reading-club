@@ -13,7 +13,7 @@
                 <p>Seleccione uno o varios miembros del club para agregar al grupo</p>
 
                 <b-form>
-                    <b-table ref="selectableTable" selectable :select-mode="selectMode" :items="items" :fields="fields" @row-selected="onRowSelected" responsive="sm">
+                    <b-table ref="selectableTable" selectable :select-mode="multi" :items="items" :fields="fields" @row-selected="onRowSelected" responsive="sm">
                         <!-- Example scoped slot for select state illustrative purposes -->
                         <template v-slot:cell(seleccionado)="{ rowSelected }">
                             <template v-if="rowSelected">
