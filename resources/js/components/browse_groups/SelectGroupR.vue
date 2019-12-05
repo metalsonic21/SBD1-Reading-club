@@ -22,13 +22,17 @@
                                         <table class="table">
                                             <thead>
                                                 <tr>
-                                                    <th class="text-center">Prueba 1</th>
+                                                    <th class="text-center">Nombre</th>
+                                                    <th class="text-center">Día disponible</th>
+                                                    <th class="text-center">Horario disponible</th>
                                                     <th class="text-center">Acción</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <tr>
-                                                    <td class="text-center">Frank Hesse</td>
+                                                    <td class="text-center">Acheron River</td>
+                                                    <td class="text-center">Lunes</td>
+                                                    <td class="text-center">9:00 AM - 11:00 AM</td>
                                                     <td class="td-actions text-center">
                                                     <b-link href="/managemeetings">    <button type="button" rel="tooltip" class="btn btn-default"> Seleccionar 
                                                         </button></b-link>

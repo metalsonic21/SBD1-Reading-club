@@ -37,13 +37,21 @@
                                         <table class="table">
                                             <thead>
                                                 <tr>
-                                                    <th class="text-center">Prueba 1</th>
+                                                    <th class="text-center">Libro</th>
+                                                    <th class="text-center">Fecha</th>
+                                                    <th class="text-center">Grupo</th>
+                                                    <th class="text-center">Moderador</th>
+                                                    <th class="text-center">Sesión</th>
                                                     <th class="text-center">Acción</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <tr>
+                                                    <td class="text-center">Juan Salvador Gaviota</td>
+                                                    <td class="text-center">05-12-2019</td>
+                                                    <td class="text-center">Acheron River</td>
                                                     <td class="text-center">Frank Hesse</td>
+                                                    <td class="text-center">1</td>
                                                     <td class="td-actions text-center">
                                                         <button type="button" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Visualizar" class="btn btn-info" v-b-modal.meeting-details>
                                                             <i class="material-icons">remove_red_eye</i>
@@ -88,41 +96,9 @@
             </div>
         </div>
     </b-modal>
+    <meeting-attendance></meeting-attendance>
+    <meeting-details></meeting-details>
 
-    <b-modal size="lg" id="attendance" ok-variant="default" cancel-variant="danger" ok-title="Actualizar" cancel-title="Cerrar">
-        <div class="card ">
-            <div class="card-header card-header-log card-header-icon">
-                <div class="card-icon">
-                    <i class="material-icons">list</i>
-                </div>
-                <h4 class="card-title">Control de asistencia reunión</h4>
-            </div>
-            <div class="card-body ">
-                <b-form>
-
-                </b-form>
-
-            </div>
-        </div>
-    </b-modal>
-
-    <b-modal size="lg" id="meeting-details" ok-only ok-variant="default" ok-title="Continuar">
-        <div class="card ">
-            <div class="card-header card-header-log card-header-icon">
-                <div class="card-icon">
-                    <i class="material-icons">book</i>
-                </div>
-                <h4 class="card-title">Detalles reunión</h4>
-            </div>
-            <div class="card-body ">
-                <b-form>
-
-                </b-form>
-
-            </div>
-        </div>
-    </b-modal>
-    
     <b-modal size="lg" id="edit-meeting" ok-variant="default" cancel-variant="danger" ok-title="Modificar" cancel-title="Cancelar">
         <div class="card ">
             <div class="card-header card-header-log card-header-icon">

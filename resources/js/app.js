@@ -48,6 +48,8 @@ Vue.component('create-group-member', require('./components/browse_groups/CreateG
 
 /*MEETINGS*/
 Vue.component('meetings', require('./components/browse_meetings/BrowseMeetings.vue').default);
+Vue.component('meeting-details', require('./components/browse_meetings/Details.vue').default);
+Vue.component('meeting-attendance', require('./components/browse_meetings/Attendance.vue').default);
 
 /* BOOKS */
 Vue.component('books', require('./components/books/Books.vue').default);
