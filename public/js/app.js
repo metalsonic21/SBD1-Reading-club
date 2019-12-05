@@ -3772,7 +3772,135 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-/* harmony default export */ __webpack_exports__["default"] = ({});
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      nom: null,
+      club: null,
+      clubes: [{
+        value: null,
+        text: 'Seleccionar'
+      }],
+      dia: null,
+      dias: [{
+        value: null,
+        text: 'Seleccionar'
+      }, {
+        value: 'L',
+        text: 'Lunes'
+      }, {
+        value: 'M',
+        text: 'Martes'
+      }, {
+        value: 'Mi',
+        text: 'Miércoles'
+      }, {
+        value: 'J',
+        text: 'Jueves'
+      }, {
+        value: 'V',
+        text: 'Viernes'
+      }],
+      horai: null,
+      horaf: null
+    };
+  }
+});
 
 /***/ }),
 
@@ -3918,6 +4046,10 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
 //
 //
 //
@@ -75507,7 +75639,15 @@ var render = function() {
                             _c("tbody", [
                               _c("tr", [
                                 _c("td", { staticClass: "text-center" }, [
-                                  _vm._v("Frank Hesse")
+                                  _vm._v("Acheron River")
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "text-center" }, [
+                                  _vm._v("Lunes")
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "text-center" }, [
+                                  _vm._v("9:00 AM - 11:00 AM")
                                 ]),
                                 _vm._v(" "),
                                 _c(
@@ -75617,7 +75757,173 @@ var render = function() {
               ]
             ),
             _vm._v(" "),
-            _c("div", { staticClass: "card-body " }, [_c("b-form")], 1)
+            _c(
+              "div",
+              { staticClass: "card-body " },
+              [
+                _c(
+                  "b-form",
+                  [
+                    _c(
+                      "b-row",
+                      [
+                        _c(
+                          "b-col",
+                          { attrs: { cols: "6" } },
+                          [
+                            _c("label", { attrs: { for: "nom" } }, [
+                              _vm._v("Nombre")
+                            ]),
+                            _vm._v(" "),
+                            _c("b-form-input", {
+                              attrs: {
+                                type: "text",
+                                id: "nom",
+                                name: "nom",
+                                placeholder: "Nombre"
+                              },
+                              model: {
+                                value: _vm.nom,
+                                callback: function($$v) {
+                                  _vm.nom = $$v
+                                },
+                                expression: "nom"
+                              }
+                            })
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "b-col",
+                          { attrs: { cols: "6" } },
+                          [
+                            _c("label", { attrs: { for: "club" } }, [
+                              _vm._v("Club Asociado")
+                            ]),
+                            _vm._v(" "),
+                            _c("b-form-select", {
+                              attrs: {
+                                options: _vm.clubes,
+                                id: "club",
+                                name: "club"
+                              },
+                              model: {
+                                value: _vm.club,
+                                callback: function($$v) {
+                                  _vm.club = $$v
+                                },
+                                expression: "club"
+                              }
+                            })
+                          ],
+                          1
+                        )
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c("hr"),
+                    _vm._v(" "),
+                    _c(
+                      "b-row",
+                      [
+                        _c("b-col", { attrs: { cols: "6" } }, [
+                          _c("h6", [_c("strong", [_vm._v("DISPONIBILIDAD")])])
+                        ])
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "b-row",
+                      [
+                        _c(
+                          "b-col",
+                          { attrs: { cols: "4" } },
+                          [
+                            _c("label", { attrs: { for: "dia" } }, [
+                              _vm._v("Día")
+                            ]),
+                            _vm._v(" "),
+                            _c("b-form-select", {
+                              attrs: {
+                                options: _vm.dias,
+                                id: "dia",
+                                name: "dia"
+                              },
+                              model: {
+                                value: _vm.dia,
+                                callback: function($$v) {
+                                  _vm.dia = $$v
+                                },
+                                expression: "dia"
+                              }
+                            })
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "b-col",
+                          { attrs: { cols: "4" } },
+                          [
+                            _c("label", { attrs: { for: "horai" } }, [
+                              _vm._v("Hora Inicio")
+                            ]),
+                            _vm._v(" "),
+                            _c("b-form-input", {
+                              attrs: {
+                                type: "time",
+                                id: "horai",
+                                name: "horai"
+                              },
+                              model: {
+                                value: _vm.horai,
+                                callback: function($$v) {
+                                  _vm.horai = $$v
+                                },
+                                expression: "horai"
+                              }
+                            })
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "b-col",
+                          { attrs: { cols: "4" } },
+                          [
+                            _c("label", { attrs: { for: "horaf" } }, [
+                              _vm._v("Hora Fin")
+                            ]),
+                            _vm._v(" "),
+                            _c("b-form-input", {
+                              attrs: {
+                                type: "time",
+                                id: "horaf",
+                                name: "horaf"
+                              },
+                              model: {
+                                value: _vm.horaf,
+                                callback: function($$v) {
+                                  _vm.horaf = $$v
+                                },
+                                expression: "horaf"
+                              }
+                            })
+                          ],
+                          1
+                        )
+                      ],
+                      1
+                    )
+                  ],
+                  1
+                )
+              ],
+              1
+            )
           ])
         ]
       ),
@@ -75650,7 +75956,73 @@ var render = function() {
               ]
             ),
             _vm._v(" "),
-            _c("div", { staticClass: "card-body " }, [_c("b-form")], 1)
+            _c(
+              "div",
+              { staticClass: "card-body " },
+              [
+                _c(
+                  "b-row",
+                  [
+                    _c("b-col", { attrs: { cols: "3" } }, [
+                      _c("p", [
+                        _c("strong", [_vm._v("NOMBRE: ")]),
+                        _vm._v("Acheron River")
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("b-col", { attrs: { cols: "5" } }, [
+                      _c("p", [
+                        _c("strong", [_vm._v("CLUB: ")]),
+                        _vm._v("Killer Bees")
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("hr")
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c("hr"),
+                _vm._v(" "),
+                _c(
+                  "b-row",
+                  [
+                    _c("b-col", { attrs: { cols: "6" } }, [
+                      _c("h6", [_c("strong", [_vm._v("DISPONIBILIDAD")])])
+                    ])
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "b-row",
+                  [
+                    _c("b-col", { attrs: { cols: "4" } }, [
+                      _c("p", [
+                        _c("strong", [_vm._v("DÍA: ")]),
+                        _vm._v("Lunes")
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("b-col", { attrs: { cols: "4" } }, [
+                      _c("p", [
+                        _c("strong", [_vm._v("HORA INICIO: ")]),
+                        _vm._v("9:00 AM")
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("b-col", { attrs: { cols: "4" } }, [
+                      _c("p", [
+                        _c("strong", [_vm._v("HORA FIN: ")]),
+                        _vm._v("11:00 AM")
+                      ])
+                    ])
+                  ],
+                  1
+                )
+              ],
+              1
+            )
           ])
         ]
       ),
@@ -75683,7 +76055,173 @@ var render = function() {
               ]
             ),
             _vm._v(" "),
-            _c("div", { staticClass: "card-body " }, [_c("b-form")], 1)
+            _c(
+              "div",
+              { staticClass: "card-body " },
+              [
+                _c(
+                  "b-form",
+                  [
+                    _c(
+                      "b-row",
+                      [
+                        _c(
+                          "b-col",
+                          { attrs: { cols: "6" } },
+                          [
+                            _c("label", { attrs: { for: "nom" } }, [
+                              _vm._v("Nombre")
+                            ]),
+                            _vm._v(" "),
+                            _c("b-form-input", {
+                              attrs: {
+                                type: "text",
+                                id: "nom",
+                                name: "nom",
+                                placeholder: "Nombre"
+                              },
+                              model: {
+                                value: _vm.nom,
+                                callback: function($$v) {
+                                  _vm.nom = $$v
+                                },
+                                expression: "nom"
+                              }
+                            })
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "b-col",
+                          { attrs: { cols: "6" } },
+                          [
+                            _c("label", { attrs: { for: "club" } }, [
+                              _vm._v("Club Asociado")
+                            ]),
+                            _vm._v(" "),
+                            _c("b-form-select", {
+                              attrs: {
+                                options: _vm.clubes,
+                                id: "club",
+                                name: "club"
+                              },
+                              model: {
+                                value: _vm.club,
+                                callback: function($$v) {
+                                  _vm.club = $$v
+                                },
+                                expression: "club"
+                              }
+                            })
+                          ],
+                          1
+                        )
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c("hr"),
+                    _vm._v(" "),
+                    _c(
+                      "b-row",
+                      [
+                        _c("b-col", { attrs: { cols: "6" } }, [
+                          _c("h6", [_c("strong", [_vm._v("DISPONIBILIDAD")])])
+                        ])
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "b-row",
+                      [
+                        _c(
+                          "b-col",
+                          { attrs: { cols: "4" } },
+                          [
+                            _c("label", { attrs: { for: "dia" } }, [
+                              _vm._v("Día")
+                            ]),
+                            _vm._v(" "),
+                            _c("b-form-select", {
+                              attrs: {
+                                options: _vm.dias,
+                                id: "dia",
+                                name: "dia"
+                              },
+                              model: {
+                                value: _vm.dia,
+                                callback: function($$v) {
+                                  _vm.dia = $$v
+                                },
+                                expression: "dia"
+                              }
+                            })
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "b-col",
+                          { attrs: { cols: "4" } },
+                          [
+                            _c("label", { attrs: { for: "horai" } }, [
+                              _vm._v("Hora Inicio")
+                            ]),
+                            _vm._v(" "),
+                            _c("b-form-input", {
+                              attrs: {
+                                type: "time",
+                                id: "horai",
+                                name: "horai"
+                              },
+                              model: {
+                                value: _vm.horai,
+                                callback: function($$v) {
+                                  _vm.horai = $$v
+                                },
+                                expression: "horai"
+                              }
+                            })
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "b-col",
+                          { attrs: { cols: "4" } },
+                          [
+                            _c("label", { attrs: { for: "horaf" } }, [
+                              _vm._v("Hora Fin")
+                            ]),
+                            _vm._v(" "),
+                            _c("b-form-input", {
+                              attrs: {
+                                type: "time",
+                                id: "horaf",
+                                name: "horaf"
+                              },
+                              model: {
+                                value: _vm.horaf,
+                                callback: function($$v) {
+                                  _vm.horaf = $$v
+                                },
+                                expression: "horaf"
+                              }
+                            })
+                          ],
+                          1
+                        )
+                      ],
+                      1
+                    )
+                  ],
+                  1
+                )
+              ],
+              1
+            )
           ])
         ]
       )
@@ -75724,7 +76262,13 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("thead", [
       _c("tr", [
-        _c("th", { staticClass: "text-center" }, [_vm._v("Prueba 1")]),
+        _c("th", { staticClass: "text-center" }, [_vm._v("Nombre")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "text-center" }, [_vm._v("Día disponible")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "text-center" }, [
+          _vm._v("Horario disponible")
+        ]),
         _vm._v(" "),
         _c("th", { staticClass: "text-center" }, [_vm._v("Acción")])
       ])
@@ -76122,7 +76666,15 @@ var render = function() {
                         _c("tbody", [
                           _c("tr", [
                             _c("td", { staticClass: "text-center" }, [
-                              _vm._v("Frank Hesse")
+                              _vm._v("Acheron River")
+                            ]),
+                            _vm._v(" "),
+                            _c("td", { staticClass: "text-center" }, [
+                              _vm._v("Lunes")
+                            ]),
+                            _vm._v(" "),
+                            _c("td", { staticClass: "text-center" }, [
+                              _vm._v("9:00 AM - 11:00 AM")
                             ]),
                             _vm._v(" "),
                             _c(
@@ -76196,7 +76748,13 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("thead", [
       _c("tr", [
-        _c("th", { staticClass: "text-center" }, [_vm._v("Prueba 1")]),
+        _c("th", { staticClass: "text-center" }, [_vm._v("Nombre")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "text-center" }, [_vm._v("Día disponible")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "text-center" }, [
+          _vm._v("Horario disponible")
+        ]),
         _vm._v(" "),
         _c("th", { staticClass: "text-center" }, [_vm._v("Acción")])
       ])

@@ -29,7 +29,7 @@ Route::get('/selectclubr', 'clubs\SelectClubRController@index')->name('selectclu
 Route::resource('/managemembers', 'clubs\MembersController');
 
 /*GROUPS*/
-Route::get('/browsegroups', 'groups\BrowseGroupsController@index')->name('browsegroups');
+Route::resource('/browsegroups', 'groups\BrowseGroupsController');
 Route::get('/selectgroup', 'groups\SelectGroupController@index')->name('selectgroup');
 Route::get('/selectgroupr', 'groups\SelectGroupRController@index')->name('selectgroup');
 Route::get('/managemembersg', 'groups\GroupMembersController@index')->name('managemembers');
