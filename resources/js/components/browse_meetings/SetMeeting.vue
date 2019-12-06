@@ -6,7 +6,7 @@
                 <div class="card-icon">
                     <i class="material-icons">add</i>
                 </div>
-                <h4 class="card-title">Programar reunión</h4>
+                <h4 class="card-title">Datos reunión</h4>
             </div>
             <div class="card-body ">
                 <b-form>
@@ -50,6 +50,28 @@
                         Selected Rows:<br>
                         {{ selected }}
                     </p>
+                    <hr>
+                    <div id="conclusiones">
+                        <b-row>
+                            <b-col cols="6">
+                                <h6><strong>CONCLUSIONES</strong></h6>
+                            </b-col>
+                        </b-row>
+
+                        <b-row>
+                            <b-col cols="12">
+                                <label for="conclusion"></label>
+                                <b-form-textarea v-model="conclusion" id="conclusion" name="conclusion"></b-form-textarea>
+                            </b-col>
+                        </b-row>
+                        <br>
+                        <b-row>
+                            <b-col cols="6">
+                                <label for="valoracion">Valoración</label>
+                                <b-form-select v-model="valoracion" id="valoracion" :options="valoraciones" name="valoracion"></b-form-select>
+                            </b-col>
+                        </b-row>
+                    </div>
                 </b-form>
             </div>
         </div>
@@ -88,7 +110,54 @@ export default {
                     fecha_de_nacimiento: '04-04-1993',
                 }
             ],
-            selected: []
+            selected: [],
+            valoracion: null,
+            valoraciones: [{
+                value: null,
+                text: 'Seleccionar'
+            },
+            {
+                value: 1,
+                text: '1'
+            },
+            {
+                value: 2,
+                text: '2'
+            },
+            {
+                value: 3,
+                text: '3'
+            },{
+                value: 4,
+                text: '4'
+            },
+            {
+                value: 5,
+                text: '5'
+            }],
+            conclusion: null,
+            moderador: null,
+            miembros: [{
+                value: null,
+                text: 'Seleccionar'
+            }],
+            sesion: null,
+            sesiones:[{
+                value: null,
+                text: 'Seleccionar'
+            },
+            {
+                value: 1,
+                text: '1'
+            },
+            {
+                value: 2,
+                text: '2'
+            },
+            {
+                value: 3,
+                text: '3'
+            }]
         }
     },
     methods: {

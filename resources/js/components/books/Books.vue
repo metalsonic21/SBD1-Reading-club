@@ -31,13 +31,19 @@
                                         <table class="table">
                                             <thead>
                                                 <tr>
-                                                    <th class="text-center">Prueba 1</th>
+                                                    <th class="text-center">Título en español</th>
+                                                    <th class="text-center">Título original</th>
+                                                    <th class="text-center">Editorial</th>
+                                                    <th class="text-center">Fecha de publicación</th>
                                                     <th class="text-center">Acción</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <tr>
-                                                    <td class="text-center">Frank Hesse</td>
+                                                    <td class="text-center">No tengo tiempo para leer</td>
+                                                    <td class="text-center">No me sé ningún título xd</td>
+                                                    <td class="text-center">Ola</td>
+                                                    <td class="text-center">08-08-1997</td>
                                                     <td class="td-actions text-center">
                                                         <b-link href="/books/show" type="button" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Visualizar" class="btn btn-info" v-b-modal.view-book>
                                                             <i class="material-icons">remove_red_eye</i>

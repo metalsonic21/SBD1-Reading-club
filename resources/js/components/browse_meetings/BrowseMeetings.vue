@@ -52,7 +52,7 @@
                                                         <button type="button" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Control de asistencia para esta reunión" class="btn btn-default" v-b-modal.attendance>
                                                             <i class="material-icons">list</i>
                                                         </button>
-                                                        <button type="button" rel="tooltip" data-toggle="tooltip" v-b-modal.add-meeting data-placement="bottom" title="Programar reunión" class="btn btn-success">
+                                                        <button type="button" rel="tooltip" data-toggle="tooltip" v-b-modal.add-meeting data-placement="bottom" title="Modificar reunión" class="btn btn-success">
                                                             <i class="material-icons" >edit</i>
                                                         </button>
                                                         <button type="button" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Eliminar" class="btn btn-danger">
