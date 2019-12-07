@@ -27,6 +27,8 @@
 
   <title>Los clubes de lectura</title>
   <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
+  <meta name="csrf-token" content="{{ csrf_token() }}">
+
   <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet" />
 
   <!--     Fonts and icons     -->

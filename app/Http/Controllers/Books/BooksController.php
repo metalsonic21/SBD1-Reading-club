@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Books;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Models\Book;
+use App\Models\Editorial;
 
 class BooksController extends Controller
 {
@@ -22,9 +25,16 @@ class BooksController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        return view ('books.create');
+        if($request->ajax()){
+            return response()->json([
+                'data' => DB::table('sjl_editoriales')->select('id as value', 'nom as text')->get()
+            ]);
+        }
+        else{
+            return view('books.create');
+        }
     }
 
     /**
@@ -35,7 +45,17 @@ class BooksController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $book = new Book();
+        $book->isbn = $request->isbn;
+        $book->titulo_esp = $request->titulo_esp;
+        $book->titulo_ori = $request->titulo_ori;
+        $book->tema_princ = $request->tema_princ;
+        $book->sinop = $request->sinop;
+        $book->n_pag = $request->n_pag;
+        $book->fec_pub = $request->fec_pub;
+        $book->id_edit = $request->editorial;
+        $book->save();
+        return $book;
     }
 
     /**
