@@ -184,7 +184,7 @@ INSERT INTO sjl_paises(
 
 INSERT INTO sjl_paises(
 	id, nom, nac, moneda)
-	VALUES (47, 'Rusia', 'Ruso', 'Rublo');
+	VALUES (47, 'Reino Unido', 'Ingles', 'Libra Esterlina');
 
 INSERT INTO sjl_paises(
 	id, nom, nac, moneda)

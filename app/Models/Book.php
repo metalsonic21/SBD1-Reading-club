@@ -14,6 +14,6 @@ class Book extends Model
     protected $table = 'sjl_libros';
     protected $primaryKey = 'isbn';
     public $incrementing = false;
-    protected $fillable = ['isbn', 'titulo_esp', 'titulo_ori', 'tema_princ', 'sinop', 'n_pag', 'fec_pub', 'id_prev', 'id_edit'];
+    protected $fillable = ['isbn', 'titulo_esp', 'titulo_ori', 'tema_princ', 'sinop', 'n_pag', 'fec_pub', 'autor', 'id_prev', 'id_edit'];
     public $timestamps = false;
 }

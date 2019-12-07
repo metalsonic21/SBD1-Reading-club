@@ -13,4 +13,6 @@ class Genre extends Model
      */
     protected $table = 'sjl_subgeneros';
     public $timestamps = false;
+    public $incrementing = false;
+    protected $fillable = ['id_gen', 'id_lib'];
 }

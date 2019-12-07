@@ -162,13 +162,14 @@ CREATE TABLE SJL_reuniones_mensuales (
 );
 
 CREATE TABLE SJL_libros (
-    isbn         INTEGER NOT NULL,
+    isbn         BIGINT NOT NULL,
     titulo_esp   VARCHAR(30),
     titulo_ori   VARCHAR(30) NOT NULL,
-    tema_princ   VARCHAR(50),
-    sinop        VARCHAR(200) NOT NULL,
+    tema_princ   VARCHAR(200),
+    sinop        VARCHAR(1000) NOT NULL,
     n_pag        INTEGER NOT NULL,
     fec_pub      DATE NOT NULL,
+    autor        VARCHAR(50) NOT NULL,
     id_prev      INTEGER,
     id_edit      INTEGER NOT NULL,
     CONSTRAINT libros_pk PRIMARY KEY (isbn)

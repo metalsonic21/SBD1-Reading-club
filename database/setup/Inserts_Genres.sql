@@ -75,3 +75,11 @@ INSERT INTO sjl_subgeneros(
 INSERT INTO sjl_subgeneros(
 	id, nom, tipo, id_subg)
 	VALUES (19, 'Satira', 'SG', 4);
+
+INSERT INTO sjl_subgeneros(
+	id, nom, tipo, id_subg)
+	VALUES (20, 'Ensayo Psicologico', 'SG', 3);
+
+INSERT INTO sjl_subgeneros(
+	id, nom, tipo, id_subg)
+	VALUES (21, 'Ensayo Social', 'SG', 3);

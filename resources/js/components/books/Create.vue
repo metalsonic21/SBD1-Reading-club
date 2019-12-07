@@ -69,56 +69,13 @@
                                         </b-row>
                                         <br>
                                         <b-row>
-
-                                            <b-col cols="6">
-                                                <label for="prev">Predecesor</label>
-                                                <b-form-input v-model="book.prev" id="prev" name="prev"></b-form-input>
+                                            <b-col cols="4">
+                                                <label for="autor">Autor</label>
+                                                <b-form-input v-model="book.autor" id="autor" name="autor" placeholder="Autor"></b-form-input>
                                             </b-col>
                                         </b-row>
                                         <hr>
 
-                                        <b-row>
-                                            <b-col cols="6">
-                                                <h6><strong>ESTRUCTURA</strong></h6>
-                                            </b-col>
-                                        </b-row>
-                                        <br>
-                                        <b-row>
-                                            <b-col cols="12">
-                                                <div class="table-responsive table-sales">
-                                                    <table class="table">
-                                                        <thead>
-                                                            <tr>
-                                                                <th class="text-center">Nombre</th>
-                                                                <th class="text-center">Tipo</th>
-                                                                <th class="text-center">Título</th>
-                                                                <th class="text-center">Acción</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            <tr>
-                                                                <td class="text-center">Prólogo</td>
-                                                                <td class="text-center">Capítulo</td>
-                                                                <td class="text-center">¿Qué es esto?</td>
-                                                                <td class="td-actions text-center">
-                                                                    <b-button @click="showAddForm" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Añadir" class="btn btn-info">
-                                                                        <i class="material-icons">add</i>
-                                                                    </b-button>
-                                                                    <b-button @click="showEditForm" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Modificar" class="btn btn-success">
-                                                                        <i class="material-icons">edit</i>
-                                                                    </b-button>
-                                                                    <button type="button" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Eliminar" class="btn btn-danger">
-                                                                        <i class="material-icons">close</i>
-                                                                    </button>
-                                                                </td>
-                                                            </tr>
-
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                            </b-col>
-                                        </b-row>
-                                        <hr>
                                         <b-row>
                                             <b-col cols="6">
                                                 <h6><strong>GÉNEROS Y SUBGÉNEROS</strong></h6>
@@ -127,69 +84,15 @@
                                         <b-row>
                                             <b-col cols="6">
                                                 <label for="genero">Genero</label>
-                                                <b-form-select v-model="genero" :options="generos" id="genero" name="genero"></b-form-select>
+                                                <b-form-select v-model="book.genero" :options="generos" @change="filter()" id="genero" name="genero"></b-form-select>
                                             </b-col>
+
+                                            <b-col cols="6">
+                                                <label for="subg">Subgenero</label>
+                                                <b-form-select v-model="book.subg" :options="subgeneros" id="subg" name="subg"></b-form-select>
+                                            </b-col>
+
                                         </b-row>
-                                        <br>
-
-                                        <genres></genres>
-                                        <hr>
-
-                                        <div id="add-structure" v-if="wants_to_add">
-                                            <b-row>
-                                                <b-col cols="6">
-                                                    <h6><strong>AÑADIR ESTRUCTURA</strong></h6>
-                                                </b-col>
-                                            </b-row>
-                                            <br>
-                                            <b-row>
-                                                <b-col cols="4">
-                                                    <label for="nombre">Nombre</label>
-                                                    <b-form-input type="text" v-model="nombre" id="nombre" name="nombre" placeholder="Nombre"></b-form-input>
-                                                </b-col>
-
-                                                <b-col cols="4">
-                                                    <label for="tipo">Tipo</label>
-                                                    <b-form-select v-model="tipo" :options="tipos" id="tipo" name="tipo"></b-form-select>
-                                                </b-col>
-
-                                                <b-col cols="4">
-                                                    <label for="titulo">Título</label>
-                                                    <b-form-input type="text" v-model="titulo" id="titulo" name="tipo"></b-form-input>
-                                                </b-col>
-                                            </b-row>
-                                            <div class="d-flex flex-row-reverse bd-highlight">
-                                                <b-button variant="default" @click="hideAddForm">Continuar</b-button>
-                                            </div>
-                                        </div>
-                                        <div id="edit-structure" v-if="wants_to_edit">
-                                            <b-row>
-                                                <b-col cols="6">
-                                                    <h6><strong>MODIFICAR ESTRUCTURA</strong></h6>
-                                                </b-col>
-                                            </b-row>
-                                            <br>
-                                            <b-row>
-                                                <b-col cols="4">
-                                                    <label for="nombre">Nombre</label>
-                                                    <b-form-input type="text" v-model="nombre" id="nombre" name="nombre" placeholder="Nombre"></b-form-input>
-                                                </b-col>
-
-                                                <b-col cols="4">
-                                                    <label for="tipo">Tipo</label>
-                                                    <b-form-select v-model="tipo" :options="tipos" id="tipo" name="tipo"></b-form-select>
-                                                </b-col>
-
-                                                <b-col cols="4">
-                                                    <label for="titulo">Título</label>
-                                                    <b-form-input type="text" v-model="titulo" id="titulo" name="tipo"></b-form-input>
-                                                </b-col>
-                                            </b-row>
-                                            <div class="d-flex flex-row-reverse bd-highlight">
-                                                <b-button variant="default" @click="hideEditForm">Continuar</b-button>
-                                            </div>
-                                        </div>
-
                                         <br>
                                         <div class="d-flex flex-row-reverse bd-highlight">
                                             <b-button variant="default" @click="add">Continuar</b-button>
@@ -226,14 +129,24 @@ export default {
                 subg: null,
                 fec_pub: null,
                 editorial: null,
-                prev: null,
+                autor: null,
+                genero: null,
+
             },
+            generos: [{
+                value: null,
+                text: 'Seleccionar'
+            }],
+            subgenerosfiltered: [{}],
             subgeneros: [{
                 value: null,
                 text: 'Seleccionar'
             }],
-            editoriales: [{
-            }],
+            libros: [{}],
+            librosfiltered: [{}],
+            subgbackup: [{}],
+            librosbackup: [{}],
+            editoriales: [{}],
             wants_to_add: false,
             wants_to_edit: false,
             nombre: null,
@@ -246,17 +159,19 @@ export default {
         }
     },
 
-    created(){
+    created() {
         axios.get('/books/create')
             .then(res => {
                 this.editoriales = res.data.data;
+                this.generos = res.data.genres;
+                this.subgbackup = res.data.sg;
             }).catch(e => {
                 console.log(e);
             })
     },
     methods: {
 
-    /* ADD OR HIDE STRUCTURE FORM*/
+        /* ADD OR HIDE STRUCTURE FORM*/
 
         showAddForm() {
             this.wants_to_add = true;
@@ -277,7 +192,43 @@ export default {
             return this.wants_to_edit;
         },
 
-    /* CRUD BOOKS */
+        convert(id, length) {
+            let pos = id.indexOf("-");
+            let res = id.substring(pos + 1, length);
+            parseInt(res, 10);
+            return res;
+        },
+
+        filter() {
+            /* Filter subgenres according to the genre*/
+            this.subgeneros = [{}],
+                this.subgenerosfiltered = [{}],
+                this.book.subg = null,
+                this.subgeneros = this.subgbackup;
+
+            let i = 0;
+
+            for (i = 0; i < this.subgeneros.length; i++) {
+                /* Converted ID is id_sub*/
+                let convertedid = this.convert(this.subgeneros[i].value, this.subgeneros.length);
+                if (this.book.genero == convertedid) {
+                    let actualid = this.subgeneros[i].value.substring(0, this.subgeneros[i].value.indexOf("-"));
+                    actualid = parseInt(actualid, 10);
+                    this.subgenerosfiltered.push({
+                        value: actualid,
+                        text: this.subgeneros[i].text
+                    });
+                }
+            }
+
+            this.subgeneros = [{}];
+            this.subgeneros = this.subgenerosfiltered;
+
+            this.subgeneros[0].value = null;
+            this.subgeneros[0].text = 'Seleccionar';
+        },
+
+        /* CRUD BOOKS */
         add() {
             const params = {
                 isbn: this.book.isbn,
@@ -285,12 +236,12 @@ export default {
                 titulo_esp: this.book.titulo_esp,
                 tema_princ: this.book.tema_princ,
                 sinop: this.book.sinop,
+                autor: this.book.autor,
                 n_pag: this.book.n_pag,
-                //subg: this.book.subg,
-                subg: 'Prueba',
+                genero: this.book.genero,
+                subg: this.book.subg,
                 fec_pub: this.book.fec_pub,
                 editorial: this.book.editorial,
-                prev: this.book.prev,
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
@@ -302,11 +253,12 @@ export default {
             this.book.titulo_ori = '';
             this.book.tema_princ = '';
             this.book.titulo_esp = '';
+            this.book.autor = '';
             this.book.n_pag = '';
+            this.book.genero = '';
             this.book.subg = '';
             this.book.fec_pub = '';
             this.book.editorial = '';
-            this.book.prev = '';
 
             axios.post('/books', params)
 

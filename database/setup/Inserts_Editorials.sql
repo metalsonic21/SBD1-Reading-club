@@ -37,3 +37,11 @@ INSERT INTO sjl_editoriales(
 INSERT INTO sjl_editoriales(
 	id, nom, id_pais)
 	VALUES (10, 'Akal', 26);
+
+INSERT INTO sjl_editoriales(
+	id, nom, id_pais)
+	VALUES (11, 'Collins Crime Club', 47);
+
+INSERT INTO sjl_editoriales(
+	id, nom, id_pais)
+	VALUES (12, 'Scholastic Corporation', 27);

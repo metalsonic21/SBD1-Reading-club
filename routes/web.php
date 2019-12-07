@@ -40,7 +40,7 @@ Route::get('/managemeetings/calendar', 'meetings\MeetingsController@calendar')->
 
 
 /* BOOKS */
-Route::resource('/books', 'books\BooksController')->middleware('auth');
+Route::resource('/books', 'books\BooksController');
 
 /*THEATER_PLAYS*/
 Route::get('/playsclubs', 'theater_plays\PlaysClubsController@index')->name('playsclubs');

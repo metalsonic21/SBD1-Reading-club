@@ -4,9 +4,11 @@ namespace App\Http\Controllers\Books;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Response;
 use Illuminate\Support\Facades\DB;
 use App\Models\Book;
 use App\Models\Editorial;
+use App\Models\Genre;
 
 class BooksController extends Controller
 {
@@ -28,9 +30,11 @@ class BooksController extends Controller
     public function create(Request $request)
     {
         if($request->ajax()){
-            return response()->json([
-                'data' => DB::table('sjl_editoriales')->select('id as value', 'nom as text')->get()
-            ]);
+            $data = DB::table('sjl_editoriales')->select('id as value', 'nom as text')->get();
+            $genres = DB::select( DB::raw("SELECT id as value, nom as text FROM sjl_subgeneros WHERE id_subg IS NULL"));
+            $sg = DB::select( DB::raw("SELECT id || '-' || id_subg as value, nom as text FROM sjl_subgeneros WHERE id_subg IS NOT NULL"));
+            $prev = DB::table('sjl_libros')->select('isbn as value', 'titulo_esp as text')->get();
+            return Response::json(array('data'=>$data,'genres'=>$genres,'sg'=>$sg,'prev'=>$prev));
         }
         else{
             return view('books.create');
@@ -54,7 +58,21 @@ class BooksController extends Controller
         $book->n_pag = $request->n_pag;
         $book->fec_pub = $request->fec_pub;
         $book->id_edit = $request->editorial;
+        $book->autor = $request->autor;
         $book->save();
+
+        $genre = new Genre();
+        $genre->id_gen = $request->genero;
+        $genre->id_lib = $request->isbn;
+        DB::insert('INSERT INTO sjl_generos_libros (id_gen, id_lib) values (?, ?)', [$genre->id_gen, $genre->id_lib]);
+
+
+        /*SUBGENRE*/
+        $subg = new Genre();
+        $subg->id_gen = $request->subg;
+        $subg->id_lib = $request->isbn;
+        DB::insert('INSERT INTO sjl_generos_libros (id_gen, id_lib) values (?, ?)', [$subg->id_gen, $subg->id_lib]);
+
         return $book;
     }
 
