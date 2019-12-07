@@ -15,7 +15,8 @@ class CastPlaysController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function playsCreate() {
-        return view('theater_plays.PlaysCreate');
+
+    public function create() {
+        return view('theater_plays.create');
     }
 }

@@ -14,7 +14,7 @@
                                     <h4 class="card-title">Obras acutuadas por club</h4>
                                 </div>
                                 <div class="col-lg-2">
-                                    <b-link  href="/castplays/PlaysCreate" class="btn btn-default float-right mt-3">
+                                    <b-link  href="/castplays/create" class="btn btn-default float-right mt-3">
                                         <span class="btn-label">
                                             <i class="material-icons">add</i>
                                         </span>

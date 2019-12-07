@@ -7,6 +7,6 @@
     </div>
 @endif
 
-<plays-playsCreate></plays-playsCreate>
+<plays-create></plays-create>
 
 @endsection
