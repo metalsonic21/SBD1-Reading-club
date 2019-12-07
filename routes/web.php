@@ -12,12 +12,8 @@
 */
 
 Route::redirect('/', 'login');
-
-
 Auth::routes();
-
 Route::get('/home', 'HomeController@index')->name('home');
-
 /*CLUBS*/
 Route::resource('/browseclubs', 'clubs\BrowseClubsController');
 Route::get('/members', 'clubs\ReportsClubMembersController@index')->name('members');
@@ -27,27 +23,20 @@ Route::get('/selectclubg', 'clubs\SelectClubGController@index')->name('selectclu
 Route::get('/selectclubgm', 'clubs\SelectClubGMController@index')->name('selectclub');
 Route::get('/selectclubr', 'clubs\SelectClubRController@index')->name('selectclub');
 Route::resource('/managemembers', 'clubs\MembersController');
-
 /*GROUPS*/
 Route::resource('/browsegroups', 'groups\BrowseGroupsController');
 Route::resource('/managemembersg', 'groups\GroupMembersController');
 Route::get('/selectgroup', 'groups\SelectGroupController@index')->name('selectgroup');
 Route::get('/selectgroupr', 'groups\SelectGroupRController@index')->name('selectgroup');
-
 /* MEETINGS */
 Route::get('/managemeetings', 'meetings\MeetingsController@index')->name('managemeetings');
 Route::get('/managemeetings/calendar', 'meetings\MeetingsController@calendar')->name('managemeetings');
-
-
 /* BOOKS */
 Route::resource('/books', 'books\BooksController');
-
 /*THEATER_PLAYS*/
 Route::get('/playsclubs', 'theater_plays\PlaysClubsController@index')->name('playsclubs');
-Route::get('/castplays', 'theater_plays\CastPlaysController@index')->name('castplays');
+Route::resource('/castplays', 'theater_plays\CastPlaysController');
 Route::get('/charactercast', 'theater_plays\CharacterCastController@index')->name('charactercast');
-
 Route::get('/earningplays', 'theater_plays\EarningPlaysController@index')->name('earningplays');
-
 Route::get('/browseplays', 'theater_plays\BrowsePlaysController@index')->name('browseplays');
 Route::get('/charactercastadd', 'theater_plays\CharacterCastAddController@index')->name('charactercastadd');

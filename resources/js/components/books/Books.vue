@@ -14,7 +14,6 @@
                                     <h4 class="card-title">Explorar libros</h4>
                                 </div>
                                 <div class="col-lg-2">
-
                                     <b-link  href="/books/create" class="btn btn-default float-right mt-3">
                                         <span class="btn-label">
                                             <i class="material-icons">add</i>
