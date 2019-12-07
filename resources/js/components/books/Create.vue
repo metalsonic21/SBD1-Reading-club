@@ -119,6 +119,21 @@
                                             </b-col>
                                         </b-row>
                                         <hr>
+                                        <b-row>
+                                            <b-col cols="6">
+                                                <h6><strong>GÉNEROS Y SUBGÉNEROS</strong></h6>
+                                            </b-col>
+                                        </b-row>
+                                        <b-row>
+                                            <b-col cols="6">
+                                                <label for="genero">Genero</label>
+                                                <b-form-select v-model="genero" :options="generos" id="genero" name="genero"></b-form-select>
+                                            </b-col>
+                                        </b-row>
+                                        <br>
+
+                                        <genres></genres>
+                                        <hr>
 
                                         <div id="add-structure" v-if="wants_to_add">
                                             <b-row>
@@ -176,8 +191,6 @@
                                         </div>
 
                                         <br>
-                                        <genres></genres>
-
                                         <div class="d-flex flex-row-reverse bd-highlight">
                                             <b-button variant="default" @click="add">Continuar</b-button>
 

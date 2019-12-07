@@ -190,7 +190,7 @@ CREATE TABLE SJL_editoriales (
 
 CREATE TABLE SJL_subgeneros (
     id        SERIAL NOT NULL,
-    nom       VARCHAR(20) NOT NULL,
+    nom       VARCHAR(40) NOT NULL,
     tipo      VARCHAR(3) NOT NULL,
     id_subg   INTEGER,
     CONSTRAINT subgeneros_pk PRIMARY KEY (id)
@@ -399,4 +399,3 @@ ALTER TABLE SJL_historicos_presentaciones ADD CONSTRAINT hisorico_presentaciones
 /* Constraint Unique */
 
 ALTER TABLE SJL_libros ADD CONSTRAINT libros_id_prev_unq UNIQUE (id_prev);
-ALTER TABLE SJL_subgeneros ADD CONSTRAINT subgeneros_id_subg_unq UNIQUE (id_subg);

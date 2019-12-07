@@ -1,7 +1,12 @@
 <template>
 <div>
-    <b-row class="ml-5">
-        <b-col cols="10">
+    <b-row>
+        <b-col cols="6">
+            <label>Subgéneros</label>
+        </b-col>
+    </b-row>
+    <b-row>
+        <b-col cols="12">
             <b-table ref="selectableTable" selectable :select-mode="'multi'" :items="items" :fields="fields" @row-selected="onRowSelected" responsive="md">
                 <!-- Example scoped slot for select state illustrative purposes -->
                 <template v-slot:cell(seleccionado)="{ rowSelected }">

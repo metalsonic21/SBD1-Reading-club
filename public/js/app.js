@@ -2159,6 +2159,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2534,6 +2547,11 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
 //
 //
 //
@@ -72749,6 +72767,56 @@ var render = function() {
                           _vm._v(" "),
                           _c("hr"),
                           _vm._v(" "),
+                          _c(
+                            "b-row",
+                            [
+                              _c("b-col", { attrs: { cols: "6" } }, [
+                                _c("h6", [
+                                  _c("strong", [_vm._v("GÉNEROS Y SUBGÉNEROS")])
+                                ])
+                              ])
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "b-row",
+                            [
+                              _c(
+                                "b-col",
+                                { attrs: { cols: "6" } },
+                                [
+                                  _c("label", { attrs: { for: "genero" } }, [
+                                    _vm._v("Genero")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("b-form-select", {
+                                    attrs: {
+                                      options: _vm.generos,
+                                      id: "genero",
+                                      name: "genero"
+                                    },
+                                    model: {
+                                      value: _vm.genero,
+                                      callback: function($$v) {
+                                        _vm.genero = $$v
+                                      },
+                                      expression: "genero"
+                                    }
+                                  })
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c("br"),
+                          _vm._v(" "),
+                          _c("genres"),
+                          _vm._v(" "),
+                          _c("hr"),
+                          _vm._v(" "),
                           _vm.wants_to_add
                             ? _c(
                                 "div",
@@ -73020,8 +73088,6 @@ var render = function() {
                             : _vm._e(),
                           _vm._v(" "),
                           _c("br"),
-                          _vm._v(" "),
-                          _c("genres"),
                           _vm._v(" "),
                           _c(
                             "div",
@@ -73886,11 +73952,20 @@ var render = function() {
     [
       _c(
         "b-row",
-        { staticClass: "ml-5" },
+        [
+          _c("b-col", { attrs: { cols: "6" } }, [
+            _c("label", [_vm._v("Subgéneros")])
+          ])
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "b-row",
         [
           _c(
             "b-col",
-            { attrs: { cols: "10" } },
+            { attrs: { cols: "12" } },
             [
               _c("b-table", {
                 ref: "selectableTable",
