@@ -62,6 +62,9 @@
                                                         <b-link href="/books/{{$book->isbn}}/edit" type="button" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Modificar" class="btn btn-success">
                                                             <i class="material-icons">edit</i>
                                                         </b-link>
+                                                        <b-link href="/books/{{$book->isbn}}/structure" type="button" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Explorar Estructura" class="btn btn-default">
+                                                            <i class="material-icons">list</i>
+                                                        </b-link>
                                                         <!--
                                                         <div class="d-inline-block">
                                                         {!! Form::open(['route'=> ['books.destroy', $book->isbn], 'method'=>'DELETE']) !!}

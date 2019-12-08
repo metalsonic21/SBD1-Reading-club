@@ -99,7 +99,7 @@
                                             <b-col cols="6">
                                                 <label for="subg">Subgenero</label>
                                                 <b-form-select v-model="book.subg" :options="subgeneros" id="subg" name="subg"></b-form-select>
-                                                <b-form-select :state="validateSG">El subgénero no puede estar vacío</b-form-select>
+                                                <b-form-invalid-feedback :state="validateSG">El subgénero no puede estar vacío</b-form-invalid-feedback>
                                             </b-col>
 
                                         </b-row>

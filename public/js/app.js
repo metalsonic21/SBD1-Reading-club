@@ -2592,6 +2592,377 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/books/StructAdd.vue?vue&type=script&lang=js&":
+/*!**************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/books/StructAdd.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      struct: [{
+        titulo: '',
+        tipo: '',
+        nom: '',
+        secnom: '',
+        sectit: '',
+        num: ''
+      }],
+      tipos: [{
+        value: null,
+        text: 'Seleccionar'
+      }, {
+        value: 'C',
+        text: 'Capítulo'
+      }, {
+        value: 'O',
+        text: 'Otro'
+      }]
+    };
+  },
+  computed: {
+    validateN: function validateN() {
+      return this.struct.nom != '';
+    },
+    validateT: function validateT() {
+      return this.struct.tipo != null;
+    },
+    validateSN: function validateSN() {
+      return this.struct.secnom != '';
+    },
+    validateNUM: function validateNUM() {
+      return this.struct.num != null && !isNaN(this.struct.num) && this.struct.num < 99999;
+    }
+  },
+  methods: {
+    add: function add() {
+      var path = window.location.pathname;
+      path = path.replace(/\D/g, '');
+      var params = {
+        tipo: this.struct.tipo,
+        titulo: this.struct.titulo,
+        nom: this.struct.nom,
+        secnom: this.struct.secnom,
+        num: this.struct.num,
+        sectit: this.struct.sectit
+      };
+      this.struct.tipo = '';
+      this.struct.titulo = '';
+      this.struct.nom = '';
+      this.struct.num = 0, this.struct.sectit = '', this.struct.secnom = '', console.log(params);
+      axios.post("/books/".concat(path, "/structure"), params).then(function (res) {
+        window.location = "/books/".concat(path, "/structure");
+      })["catch"](function (e) {
+        console.log(e);
+      });
+    },
+    revalidate: function revalidate() {
+      var msg = '';
+      if (!this.validateN) msg = msg + "El campo Nombre de Estructura no puede estar vacío\n";
+      if (!this.validateT) msg = msg + "El campo Tipo de Estructura no puede estar vacío\n";
+      if (!this.validateSN) msg = msg + "El campo Nombre de Sección no puede estar vacío\n";
+      if (!this.validateNUM) msg = msg + "El campo Número de Sección debe ser numérico\n";
+
+      if (msg == '') {
+        this.add();
+      } else {
+        alert(msg);
+      }
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/books/StructEdit.vue?vue&type=script&lang=js&":
+/*!***************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/books/StructEdit.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      struct: {
+        titulo: '',
+        tipo: '',
+        nom: '',
+        secnom: '',
+        sectit: '',
+        num: ''
+      },
+      tipos: [{
+        value: null,
+        text: 'Seleccionar'
+      }, {
+        value: 'C',
+        text: 'Capítulo'
+      }, {
+        value: 'O',
+        text: 'Otro'
+      }]
+    };
+  },
+  computed: {
+    validateN: function validateN() {
+      return this.struct.nom != '';
+    },
+    validateT: function validateT() {
+      return this.struct.tipo != null;
+    },
+    validateSN: function validateSN() {
+      return this.struct.secnom != '';
+    },
+    validateNUM: function validateNUM() {
+      return this.struct.num != null && !isNaN(this.struct.num) && this.struct.num < 99999;
+    }
+  },
+  created: function created() {
+    var _this = this;
+
+    var path = window.location.pathname;
+    var isbn = path.indexOf("k") + 3;
+    var isbnend = path.indexOf("t") - 2;
+    var id = path.substring(isbn, isbnend);
+    id = parseInt(id, 10);
+    var newpath = path.substring(isbnend, path.length);
+    newpath = newpath.replace(/\D/g, '');
+    var ide = parseInt(newpath, 10);
+    axios.get("/books/".concat(id, "/structure/").concat(ide, "/edit")).then(function (res) {
+      _this.struct.titulo = res.data.data[0].structit;
+      _this.struct.tipo = res.data.data[0].tipo;
+      _this.struct.nom = res.data.data[0].structname;
+      _this.struct.secnom = res.data.data[0].nom;
+      _this.struct.sectit = res.data.data[0].titulo;
+      _this.struct.num = res.data.data[0].num;
+      console.log(res.data.data);
+    })["catch"](function (e) {
+      console.log(e);
+    });
+  },
+  methods: {
+    update: function update() {
+      var path = window.location.pathname;
+      var isbn = path.indexOf("k") + 3;
+      var isbnend = path.indexOf("t") - 2;
+      var id = path.substring(isbn, isbnend);
+      id = parseInt(id, 10);
+      var newpath = path.substring(isbnend, path.length);
+      newpath = newpath.replace(/\D/g, '');
+      var ide = parseInt(newpath, 10);
+      var params = {
+        tipo: this.struct.tipo,
+        titulo: this.struct.titulo,
+        nom: this.struct.nom,
+        secnom: this.struct.secnom,
+        num: this.struct.num,
+        sectit: this.struct.sectit
+      };
+      this.struct.tipo = '';
+      this.struct.titulo = '';
+      this.struct.nom = '';
+      this.struct.num = 0, this.struct.sectit = '', this.struct.secnom = '', console.log(params);
+      axios.put("/books/".concat(id, "/structure/").concat(ide), params).then(function (res) {
+        window.location = "/books/".concat(id, "/structure");
+      })["catch"](function (e) {
+        console.log(e);
+      });
+    },
+    revalidate: function revalidate() {
+      var msg = '';
+      if (!this.validateN) msg = msg + "El campo Nombre de Estructura no puede estar vacío\n";
+      if (!this.validateT) msg = msg + "El campo Tipo de Estructura no puede estar vacío\n";
+      if (!this.validateSN) msg = msg + "El campo Nombre de Sección no puede estar vacío\n";
+      if (!this.validateNUM) msg = msg + "El campo Número de Sección debe ser numérico\n";
+
+      if (msg == '') {
+        this.update();
+      } else {
+        alert(msg);
+      }
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/browse_clubs/BrowseClubs.vue?vue&type=script&lang=js&":
 /*!***********************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/browse_clubs/BrowseClubs.vue?vue&type=script&lang=js& ***!
@@ -72409,7 +72780,7 @@ var render = function() {
                                   }),
                                   _vm._v(" "),
                                   _c(
-                                    "b-form-select",
+                                    "b-form-invalid-feedback",
                                     { attrs: { state: _vm.validateSG } },
                                     [
                                       _vm._v(
@@ -73119,6 +73490,670 @@ var render = function() {
   )
 }
 var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/books/StructAdd.vue?vue&type=template&id=84722768&":
+/*!******************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/books/StructAdd.vue?vue&type=template&id=84722768& ***!
+  \******************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c("div", { staticClass: "content" }, [
+      _c("div", { staticClass: "container-fluid" }, [
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-md-12" }, [
+            _c("div", { staticClass: "card" }, [
+              _vm._m(0),
+              _vm._v(" "),
+              _c("div", { staticClass: "card-body" }, [
+                _c("div", { staticClass: "row" }, [
+                  _c(
+                    "div",
+                    { staticClass: "col-lg-12" },
+                    [
+                      _c(
+                        "b-form",
+                        {
+                          on: {
+                            submit: function($event) {
+                              $event.preventDefault()
+                              return _vm.revalidate($event)
+                            }
+                          }
+                        },
+                        [
+                          _c(
+                            "b-row",
+                            [
+                              _c(
+                                "b-col",
+                                { attrs: { cols: "4" } },
+                                [
+                                  _c("label", { attrs: { for: "nombre" } }, [
+                                    _vm._v("Nombre")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("b-form-input", {
+                                    attrs: {
+                                      type: "text",
+                                      id: "nom",
+                                      name: "nom",
+                                      placeholder: "Nombre"
+                                    },
+                                    model: {
+                                      value: _vm.struct.nom,
+                                      callback: function($$v) {
+                                        _vm.$set(_vm.struct, "nom", $$v)
+                                      },
+                                      expression: "struct.nom"
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "b-form-invalid-feedback",
+                                    { attrs: { state: _vm.validateN } },
+                                    [
+                                      _vm._v(
+                                        "Nombre de estructura no puede estar vacío"
+                                      )
+                                    ]
+                                  )
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "b-col",
+                                { attrs: { cols: "4" } },
+                                [
+                                  _c("label", { attrs: { for: "tipo" } }, [
+                                    _vm._v("Tipo")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("b-form-select", {
+                                    attrs: {
+                                      options: _vm.tipos,
+                                      id: "tipo",
+                                      name: "tipo"
+                                    },
+                                    model: {
+                                      value: _vm.struct.tipo,
+                                      callback: function($$v) {
+                                        _vm.$set(_vm.struct, "tipo", $$v)
+                                      },
+                                      expression: "struct.tipo"
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "b-form-invalid-feedback",
+                                    { attrs: { state: _vm.validateT } },
+                                    [
+                                      _vm._v(
+                                        "Tipo de estructura no puede estar vacío"
+                                      )
+                                    ]
+                                  )
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "b-col",
+                                { attrs: { cols: "4" } },
+                                [
+                                  _c("label", { attrs: { for: "titulo" } }, [
+                                    _vm._v("Título")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("b-form-input", {
+                                    attrs: {
+                                      type: "text",
+                                      id: "titulo",
+                                      name: "tipo"
+                                    },
+                                    model: {
+                                      value: _vm.struct.titulo,
+                                      callback: function($$v) {
+                                        _vm.$set(_vm.struct, "titulo", $$v)
+                                      },
+                                      expression: "struct.titulo"
+                                    }
+                                  })
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c("hr"),
+                          _vm._v(" "),
+                          _c(
+                            "b-row",
+                            [
+                              _c("b-col", { attrs: { cols: "6" } }, [
+                                _c("h6", [
+                                  _c("strong", [_vm._v("DATOS DE LA SECCIÓN")])
+                                ])
+                              ])
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c("br"),
+                          _vm._v(" "),
+                          _c(
+                            "b-row",
+                            [
+                              _c(
+                                "b-col",
+                                { attrs: { cols: "4" } },
+                                [
+                                  _c("label", { attrs: { for: "num" } }, [
+                                    _vm._v("Número")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("b-form-input", {
+                                    attrs: {
+                                      type: "text",
+                                      id: "num",
+                                      name: "num"
+                                    },
+                                    model: {
+                                      value: _vm.struct.num,
+                                      callback: function($$v) {
+                                        _vm.$set(_vm.struct, "num", $$v)
+                                      },
+                                      expression: "struct.num"
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "b-form-invalid-feedback",
+                                    { attrs: { state: _vm.validateNUM } },
+                                    [
+                                      _vm._v(
+                                        "Número de sección debe ser dato numérico"
+                                      )
+                                    ]
+                                  )
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "b-col",
+                                { attrs: { cols: "4" } },
+                                [
+                                  _c("label", { attrs: { for: "secnom" } }, [
+                                    _vm._v("Nombre de la sección")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("b-form-input", {
+                                    attrs: {
+                                      type: "text",
+                                      id: "secnom",
+                                      name: "secnom"
+                                    },
+                                    model: {
+                                      value: _vm.struct.secnom,
+                                      callback: function($$v) {
+                                        _vm.$set(_vm.struct, "secnom", $$v)
+                                      },
+                                      expression: "struct.secnom"
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "b-form-invalid-feedback",
+                                    { attrs: { state: _vm.validateSN } },
+                                    [
+                                      _vm._v(
+                                        "Nombre de la sección no puede estar vacío"
+                                      )
+                                    ]
+                                  )
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "b-col",
+                                { attrs: { cols: "4" } },
+                                [
+                                  _c("label", { attrs: { for: "sectitulo" } }, [
+                                    _vm._v("Título de la sección")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("b-form-input", {
+                                    attrs: {
+                                      type: "text",
+                                      id: "sectitulo",
+                                      name: "sectitulo"
+                                    },
+                                    model: {
+                                      value: _vm.struct.sectit,
+                                      callback: function($$v) {
+                                        _vm.$set(_vm.struct, "sectit", $$v)
+                                      },
+                                      expression: "struct.sectit"
+                                    }
+                                  })
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c("br"),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              staticClass:
+                                "d-flex flex-row-reverse bd-highlight"
+                            },
+                            [
+                              _c(
+                                "b-button",
+                                {
+                                  attrs: { variant: "default" },
+                                  on: { click: _vm.revalidate }
+                                },
+                                [_vm._v("Continuar")]
+                              )
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                ])
+              ])
+            ])
+          ])
+        ])
+      ])
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "card-header card-header-log card-header-icon" },
+      [
+        _c("div", { staticClass: "card-icon" }, [
+          _c("i", { staticClass: "material-icons" }, [_vm._v("add")])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-lg-10" }, [
+            _c("h4", { staticClass: "card-title" }, [
+              _vm._v("Añadir Capítulo/Sección")
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-lg-2" })
+        ])
+      ]
+    )
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/books/StructEdit.vue?vue&type=template&id=b2457722&":
+/*!*******************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/books/StructEdit.vue?vue&type=template&id=b2457722& ***!
+  \*******************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c("div", { staticClass: "content" }, [
+      _c("div", { staticClass: "container-fluid" }, [
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-md-12" }, [
+            _c("div", { staticClass: "card" }, [
+              _vm._m(0),
+              _vm._v(" "),
+              _c("div", { staticClass: "card-body" }, [
+                _c("div", { staticClass: "row" }, [
+                  _c(
+                    "div",
+                    { staticClass: "col-lg-12" },
+                    [
+                      _c(
+                        "b-form",
+                        {
+                          on: {
+                            submit: function($event) {
+                              $event.preventDefault()
+                              return _vm.revalidate($event)
+                            }
+                          }
+                        },
+                        [
+                          _c(
+                            "b-row",
+                            [
+                              _c(
+                                "b-col",
+                                { attrs: { cols: "4" } },
+                                [
+                                  _c("label", { attrs: { for: "nombre" } }, [
+                                    _vm._v("Nombre")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("b-form-input", {
+                                    attrs: {
+                                      type: "text",
+                                      id: "nom",
+                                      name: "nom",
+                                      placeholder: "Nombre"
+                                    },
+                                    model: {
+                                      value: _vm.struct.nom,
+                                      callback: function($$v) {
+                                        _vm.$set(_vm.struct, "nom", $$v)
+                                      },
+                                      expression: "struct.nom"
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "b-form-invalid-feedback",
+                                    { attrs: { state: _vm.validateN } },
+                                    [
+                                      _vm._v(
+                                        "Nombre de estructura no puede estar vacío"
+                                      )
+                                    ]
+                                  )
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "b-col",
+                                { attrs: { cols: "4" } },
+                                [
+                                  _c("label", { attrs: { for: "tipo" } }, [
+                                    _vm._v("Tipo")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("b-form-select", {
+                                    attrs: {
+                                      options: _vm.tipos,
+                                      id: "tipo",
+                                      name: "tipo"
+                                    },
+                                    model: {
+                                      value: _vm.struct.tipo,
+                                      callback: function($$v) {
+                                        _vm.$set(_vm.struct, "tipo", $$v)
+                                      },
+                                      expression: "struct.tipo"
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "b-form-invalid-feedback",
+                                    { attrs: { state: _vm.validateT } },
+                                    [
+                                      _vm._v(
+                                        "Tipo de estructura no puede estar vacío"
+                                      )
+                                    ]
+                                  )
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "b-col",
+                                { attrs: { cols: "4" } },
+                                [
+                                  _c("label", { attrs: { for: "titulo" } }, [
+                                    _vm._v("Título")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("b-form-input", {
+                                    attrs: {
+                                      type: "text",
+                                      id: "titulo",
+                                      name: "tipo"
+                                    },
+                                    model: {
+                                      value: _vm.struct.titulo,
+                                      callback: function($$v) {
+                                        _vm.$set(_vm.struct, "titulo", $$v)
+                                      },
+                                      expression: "struct.titulo"
+                                    }
+                                  })
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c("hr"),
+                          _vm._v(" "),
+                          _c(
+                            "b-row",
+                            [
+                              _c("b-col", { attrs: { cols: "6" } }, [
+                                _c("h6", [
+                                  _c("strong", [_vm._v("DATOS DE LA SECCIÓN")])
+                                ])
+                              ])
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c("br"),
+                          _vm._v(" "),
+                          _c(
+                            "b-row",
+                            [
+                              _c(
+                                "b-col",
+                                { attrs: { cols: "4" } },
+                                [
+                                  _c("label", { attrs: { for: "num" } }, [
+                                    _vm._v("Número")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("b-form-input", {
+                                    attrs: {
+                                      type: "text",
+                                      id: "num",
+                                      name: "num"
+                                    },
+                                    model: {
+                                      value: _vm.struct.num,
+                                      callback: function($$v) {
+                                        _vm.$set(_vm.struct, "num", $$v)
+                                      },
+                                      expression: "struct.num"
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "b-form-invalid-feedback",
+                                    { attrs: { state: _vm.validateNUM } },
+                                    [
+                                      _vm._v(
+                                        "Número de sección debe ser dato numérico"
+                                      )
+                                    ]
+                                  )
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "b-col",
+                                { attrs: { cols: "4" } },
+                                [
+                                  _c("label", { attrs: { for: "secnom" } }, [
+                                    _vm._v("Nombre de la sección")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("b-form-input", {
+                                    attrs: {
+                                      type: "text",
+                                      id: "secnom",
+                                      name: "secnom"
+                                    },
+                                    model: {
+                                      value: _vm.struct.secnom,
+                                      callback: function($$v) {
+                                        _vm.$set(_vm.struct, "secnom", $$v)
+                                      },
+                                      expression: "struct.secnom"
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "b-form-invalid-feedback",
+                                    { attrs: { state: _vm.validateSN } },
+                                    [
+                                      _vm._v(
+                                        "Nombre de la sección no puede estar vacío"
+                                      )
+                                    ]
+                                  )
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "b-col",
+                                { attrs: { cols: "4" } },
+                                [
+                                  _c("label", { attrs: { for: "sectitulo" } }, [
+                                    _vm._v("Título de la sección")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("b-form-input", {
+                                    attrs: {
+                                      type: "text",
+                                      id: "sectitulo",
+                                      name: "sectitulo"
+                                    },
+                                    model: {
+                                      value: _vm.struct.sectit,
+                                      callback: function($$v) {
+                                        _vm.$set(_vm.struct, "sectit", $$v)
+                                      },
+                                      expression: "struct.sectit"
+                                    }
+                                  })
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c("br"),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              staticClass:
+                                "d-flex flex-row-reverse bd-highlight"
+                            },
+                            [
+                              _c(
+                                "b-button",
+                                {
+                                  attrs: { variant: "default" },
+                                  on: { click: _vm.revalidate }
+                                },
+                                [_vm._v("Continuar")]
+                              )
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                ])
+              ])
+            ])
+          ])
+        ])
+      ])
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "card-header card-header-log card-header-icon" },
+      [
+        _c("div", { staticClass: "card-icon" }, [
+          _c("i", { staticClass: "material-icons" }, [_vm._v("edit")])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-lg-10" }, [
+            _c("h4", { staticClass: "card-title" }, [
+              _vm._v("Editar Capítulo/Sección")
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-lg-2" })
+        ])
+      ]
+    )
+  }
+]
 render._withStripped = true
 
 
@@ -94767,6 +95802,8 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('set-meeting', __webpack_re
 
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('books-create', __webpack_require__(/*! ./components/books/Create.vue */ "./resources/js/components/books/Create.vue")["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('books-edit', __webpack_require__(/*! ./components/books/Edit.vue */ "./resources/js/components/books/Edit.vue")["default"]);
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('struct-create', __webpack_require__(/*! ./components/books/StructAdd.vue */ "./resources/js/components/books/StructAdd.vue")["default"]);
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('struct-edit', __webpack_require__(/*! ./components/books/StructEdit.vue */ "./resources/js/components/books/StructEdit.vue")["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('genres', __webpack_require__(/*! ./components/books/Genres.vue */ "./resources/js/components/books/Genres.vue")["default"]);
 /*THEATER PLAYS*/
 
@@ -95099,6 +96136,145 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Genres_vue_vue_type_template_id_7b354bc0___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Genres_vue_vue_type_template_id_7b354bc0___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/books/StructAdd.vue":
+/*!*****************************************************!*\
+  !*** ./resources/js/components/books/StructAdd.vue ***!
+  \*****************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _StructAdd_vue_vue_type_template_id_84722768___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./StructAdd.vue?vue&type=template&id=84722768& */ "./resources/js/components/books/StructAdd.vue?vue&type=template&id=84722768&");
+/* harmony import */ var _StructAdd_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./StructAdd.vue?vue&type=script&lang=js& */ "./resources/js/components/books/StructAdd.vue?vue&type=script&lang=js&");
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _StructAdd_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _StructAdd_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _StructAdd_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _StructAdd_vue_vue_type_template_id_84722768___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _StructAdd_vue_vue_type_template_id_84722768___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/books/StructAdd.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/books/StructAdd.vue?vue&type=script&lang=js&":
+/*!******************************************************************************!*\
+  !*** ./resources/js/components/books/StructAdd.vue?vue&type=script&lang=js& ***!
+  \******************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_StructAdd_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./StructAdd.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/books/StructAdd.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_StructAdd_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/books/StructAdd.vue?vue&type=template&id=84722768&":
+/*!************************************************************************************!*\
+  !*** ./resources/js/components/books/StructAdd.vue?vue&type=template&id=84722768& ***!
+  \************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_StructAdd_vue_vue_type_template_id_84722768___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./StructAdd.vue?vue&type=template&id=84722768& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/books/StructAdd.vue?vue&type=template&id=84722768&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_StructAdd_vue_vue_type_template_id_84722768___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_StructAdd_vue_vue_type_template_id_84722768___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/books/StructEdit.vue":
+/*!******************************************************!*\
+  !*** ./resources/js/components/books/StructEdit.vue ***!
+  \******************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _StructEdit_vue_vue_type_template_id_b2457722___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./StructEdit.vue?vue&type=template&id=b2457722& */ "./resources/js/components/books/StructEdit.vue?vue&type=template&id=b2457722&");
+/* harmony import */ var _StructEdit_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./StructEdit.vue?vue&type=script&lang=js& */ "./resources/js/components/books/StructEdit.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _StructEdit_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _StructEdit_vue_vue_type_template_id_b2457722___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _StructEdit_vue_vue_type_template_id_b2457722___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/books/StructEdit.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/books/StructEdit.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************!*\
+  !*** ./resources/js/components/books/StructEdit.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_StructEdit_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./StructEdit.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/books/StructEdit.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_StructEdit_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/books/StructEdit.vue?vue&type=template&id=b2457722&":
+/*!*************************************************************************************!*\
+  !*** ./resources/js/components/books/StructEdit.vue?vue&type=template&id=b2457722& ***!
+  \*************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_StructEdit_vue_vue_type_template_id_b2457722___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./StructEdit.vue?vue&type=template&id=b2457722& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/books/StructEdit.vue?vue&type=template&id=b2457722&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_StructEdit_vue_vue_type_template_id_b2457722___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_StructEdit_vue_vue_type_template_id_b2457722___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

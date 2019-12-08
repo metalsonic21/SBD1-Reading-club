@@ -162,7 +162,7 @@ CREATE TABLE SJL_reuniones_mensuales (
 );
 
 CREATE TABLE SJL_libros (
-    isbn         BIGINT NOT NULL,
+    isbn         INTEGER NOT NULL,
     titulo_esp   VARCHAR(30),
     titulo_ori   VARCHAR(30) NOT NULL,
     tema_princ   VARCHAR(200),
@@ -215,7 +215,7 @@ CREATE TABLE SJL_estructuras_libros (
 CREATE TABLE SJL_secciones_libros (
     id       SERIAL NOT NULL,
     nom      VARCHAR(20) NOT NULL,
-    num      INTEGER NOT NULL,
+    num      NUMERIC NOT NULL,
     titulo   VARCHAR(20),
     id_est   INTEGER NOT NULL,
     id_lib   INTEGER NOT NULL,
@@ -353,7 +353,7 @@ ALTER TABLE SJL_generos_libros ADD CONSTRAINT libros_generos_fk FOREIGN KEY(id_l
 
 ALTER TABLE SJL_estructuras_libros ADD CONSTRAINT estructura_libros_fk FOREIGN KEY(id_lib) REFERENCES SJL_libros(isbn);
 
-ALTER TABLE SJL_secciones_libros ADD CONSTRAINT secciones_estructuras_prev_fk FOREIGN KEY(id_est,id_lib) REFERENCES SJL_estructuras_libros(id,id_lib);
+ALTER TABLE SJL_secciones_libros ADD CONSTRAINT secciones_estructuras_prev_fk FOREIGN KEY(id_est,id_lib) REFERENCES SJL_estructuras_libros(id,id_lib) ON DELETE CASCADE;
 
 ALTER TABLE SJL_obras_libros ADD CONSTRAINT obras_libros_fk FOREIGN KEY(id_obra) REFERENCES SJL_obras(id);
 ALTER TABLE SJL_obras_libros ADD CONSTRAINT libros_obras_fk FOREIGN KEY(id_lib) REFERENCES SJL_libros(isbn);
