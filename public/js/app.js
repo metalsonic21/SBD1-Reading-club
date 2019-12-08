@@ -1862,110 +1862,6 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/books/Books.vue?vue&type=script&lang=js&":
-/*!**********************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/books/Books.vue?vue&type=script&lang=js& ***!
-  \**********************************************************************************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-/* harmony default export */ __webpack_exports__["default"] = ({
-  data: function data() {
-    return {
-      books: [{}]
-    };
-  },
-  created: function created() {
-    var _this = this;
-
-    axios.get('/books').then(function (res) {
-      _this.books = res.data.data;
-      console.log(res.data.data);
-    })["catch"](function (e) {
-      console.log(e);
-    });
-  }
-});
-
-/***/ }),
-
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/books/Create.vue?vue&type=script&lang=js&":
 /*!***********************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/books/Create.vue?vue&type=script&lang=js& ***!
@@ -1975,6 +1871,9 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
 //
 //
 //
@@ -2166,6 +2065,15 @@ __webpack_require__.r(__webpack_exports__);
     },
     validateA: function validateA() {
       return this.book.autor != '';
+    },
+    validateG: function validateG() {
+      return this.book.genero != null;
+    },
+    validateSG: function validateSG() {
+      return this.book.subg != null;
+    },
+    validateE: function validateE() {
+      return this.book.editorial != null;
     }
   },
   methods: {
@@ -2231,6 +2139,9 @@ __webpack_require__.r(__webpack_exports__);
       if (this.book.genero == null) msg = msg + "El campo Genero no puede estar vacío\n";
       if (this.book.genero != null && this.book.subg == null) msg = msg + "El campo Subgénro no puede estar vacío\n";
       if (this.validateA == false) msg = msg + "El campo Autor no puede estar vacío\n";
+      if (this.validateG == false) msg = msg + "El campo Género no puede estar vacío\n";
+      if (this.validateSG == false) msg = msg + "El campo Subgénero no puede estar vacío\n";
+      if (this.validateE == false) msg = msg + "El campo Editorial no puede estar vacío\n";
 
       if (msg != '') {
         isValid = false;
@@ -2397,20 +2308,39 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       book: {
-        isbn: null,
-        titulo_ori: null,
-        titulo_esp: null,
-        tema_princ: null,
-        sinop: null,
-        editorial: null,
+        isbn: 0,
+        titulo_ori: '',
+        titulo_esp: '',
+        tema_princ: '',
+        sinop: '',
         n_pag: null,
+        subg: null,
         fec_pub: null,
-        genero: null,
-        subg: null
+        editorial: null,
+        autor: '',
+        genero: null
       },
       generos: [{
         value: null,
@@ -2469,6 +2399,37 @@ __webpack_require__.r(__webpack_exports__);
     })["catch"](function (e) {
       console.log(e);
     });
+  },
+  computed: {
+    validateTO: function validateTO() {
+      return this.book.titulo_ori != '';
+    },
+    validateTE: function validateTE() {
+      return this.book.titulo_esp != '';
+    },
+    validateSinopsis: function validateSinopsis() {
+      return this.book.sinop.length > 9;
+    },
+    validateNP: function validateNP() {
+      var isValid = null;
+      if (this.book.n_pag != null && (isNaN(this.book.n_pag) || this.book.n_pag.toString().indexOf(".") != -1 || this.book.n_pag < 0 || this.book.n_pag > 999999)) isValid = false;else isValid = true;
+      return isValid;
+    },
+    validateF: function validateF() {
+      return this.book.fec_pub != null;
+    },
+    validateA: function validateA() {
+      return this.book.autor != '';
+    },
+    validateG: function validateG() {
+      return this.book.genero != null;
+    },
+    validateSG: function validateSG() {
+      return this.book.subg != null;
+    },
+    validateE: function validateE() {
+      return this.book.editorial != null;
+    }
   },
   methods: {
     convert: function convert(id, length) {
@@ -2534,10 +2495,34 @@ __webpack_require__.r(__webpack_exports__);
       url = url.replace(/\D/g, '');
       console.log(params);
       axios.put("/books/".concat(url), params).then(function (res) {
-        console.log(res.data); //window.location = "/books";
+        window.location = "/books";
       })["catch"](function (e) {
         console.log(e);
       });
+    },
+    revalidate: function revalidate() {
+      var msg = '';
+      var isValid = true;
+      if (this.validateISBN == false) msg = msg + "El ISBN debe ser un campo numérico entero de al menos 5 caracteres\n";
+      if (this.validateTO == false) msg = msg + "El campo Título Original no puede estar vacío\n";
+      if (this.validateTE == false) msg = msg + "El campo Título en Español no puede estar vacío\n";
+      if (this.validateSinopsis == false) msg = msg + "El campo Sinopsis debe tener al menos 10 caracteres\n";
+      if (this.validateNP == false) msg = msg + "El campo número de páginas debe ser numérico entero\n";
+      if (this.validateF == false) msg = msg + "El campo Fecha de publicación no puede estar vacío\n";
+      if (this.book.editorial == null) msg = msg + "El campo Editorial no puede estar vacío\n";
+      if (this.book.genero == null) msg = msg + "El campo Genero no puede estar vacío\n";
+      if (this.book.genero != null && this.book.subg == null) msg = msg + "El campo Subgénro no puede estar vacío\n";
+      if (this.validateA == false) msg = msg + "El campo Autor no puede estar vacío\n";
+      if (this.validateG == false) msg = msg + "El campo Género no puede estar vacío\n";
+      if (this.validateSG == false) msg = msg + "El campo Subgénero no puede estar vacío\n";
+      if (this.validateE == false) msg = msg + "El campo Editorial no puede estar vacío\n";
+
+      if (msg != '') {
+        isValid = false;
+        alert(msg);
+      } else {
+        this.update();
+      }
     }
   }
 });
@@ -2604,110 +2589,6 @@ __webpack_require__.r(__webpack_exports__);
     }
   }
 });
-
-/***/ }),
-
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/books/Show.vue?vue&type=script&lang=js&":
-/*!*********************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/books/Show.vue?vue&type=script&lang=js& ***!
-  \*********************************************************************************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-/* harmony default export */ __webpack_exports__["default"] = ({});
 
 /***/ }),
 
@@ -72061,236 +71942,6 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/books/Books.vue?vue&type=template&id=6ab1892c&":
-/*!**************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/books/Books.vue?vue&type=template&id=6ab1892c& ***!
-  \**************************************************************************************************************************************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("div", [
-    _c("div", { staticClass: "content" }, [
-      _c("div", { staticClass: "container-fluid" }, [
-        _c("div", { staticClass: "row" }, [
-          _c("div", { staticClass: "col-md-12" }, [
-            _c("div", { staticClass: "card" }, [
-              _c(
-                "div",
-                { staticClass: "card-header card-header-log card-header-icon" },
-                [
-                  _vm._m(0),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "row" }, [
-                    _vm._m(1),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "col-lg-2" },
-                      [
-                        _c(
-                          "b-link",
-                          {
-                            staticClass: "btn btn-default float-right mt-3",
-                            attrs: { href: "/books/create" }
-                          },
-                          [
-                            _c("span", { staticClass: "btn-label" }, [
-                              _c("i", { staticClass: "material-icons" }, [
-                                _vm._v("add")
-                              ])
-                            ]),
-                            _vm._v(
-                              "\r\n                                        Crear libro\r\n                                    "
-                            )
-                          ]
-                        )
-                      ],
-                      1
-                    )
-                  ])
-                ]
-              ),
-              _vm._v(" "),
-              _c("div", { staticClass: "card-body" }, [
-                _c("div", { staticClass: "row" }, [
-                  _c("div", { staticClass: "col-lg-12" }, [
-                    _c("div", { staticClass: "table-responsive table-sales" }, [
-                      _c("table", { staticClass: "table" }, [
-                        _vm._m(2),
-                        _vm._v(" "),
-                        _c(
-                          "tbody",
-                          _vm._l(_vm.books, function(item, index) {
-                            return _c("tr", { key: index }, [
-                              _c("td", { staticClass: "text-center" }, [
-                                _vm._v(_vm._s(item.titulo_esp))
-                              ]),
-                              _vm._v(" "),
-                              _c("td", { staticClass: "text-center" }, [
-                                _vm._v(_vm._s(item.titulo_ori))
-                              ]),
-                              _vm._v(" "),
-                              _c("td", { staticClass: "text-center" }, [
-                                _vm._v(_vm._s(item.editorial))
-                              ]),
-                              _vm._v(" "),
-                              _c("td", { staticClass: "text-center" }, [
-                                _vm._v(_vm._s(item.fec_pub))
-                              ]),
-                              _vm._v(" "),
-                              _c(
-                                "td",
-                                { staticClass: "td-actions text-center" },
-                                [
-                                  _c(
-                                    "b-link",
-                                    {
-                                      directives: [
-                                        {
-                                          name: "b-modal",
-                                          rawName: "v-b-modal.view-book",
-                                          modifiers: { "view-book": true }
-                                        }
-                                      ],
-                                      staticClass: "btn btn-info",
-                                      attrs: {
-                                        href: "/books/show",
-                                        type: "button",
-                                        rel: "tooltip",
-                                        "data-toggle": "tooltip",
-                                        "data-placement": "bottom",
-                                        title: "Visualizar"
-                                      }
-                                    },
-                                    [
-                                      _c(
-                                        "i",
-                                        { staticClass: "material-icons" },
-                                        [_vm._v("remove_red_eye")]
-                                      )
-                                    ]
-                                  ),
-                                  _vm._v(" "),
-                                  _c(
-                                    "b-link",
-                                    {
-                                      directives: [
-                                        {
-                                          name: "b-modal",
-                                          rawName: "v-b-modal.edit-book",
-                                          modifiers: { "edit-book": true }
-                                        }
-                                      ],
-                                      staticClass: "btn btn-success",
-                                      attrs: {
-                                        href: "/books/1/edit",
-                                        type: "button",
-                                        rel: "tooltip",
-                                        "data-toggle": "tooltip",
-                                        "data-placement": "bottom",
-                                        title: "Modificar"
-                                      }
-                                    },
-                                    [
-                                      _c(
-                                        "i",
-                                        { staticClass: "material-icons" },
-                                        [_vm._v("edit")]
-                                      )
-                                    ]
-                                  ),
-                                  _vm._v(" "),
-                                  _vm._m(3, true)
-                                ],
-                                1
-                              )
-                            ])
-                          }),
-                          0
-                        )
-                      ])
-                    ])
-                  ])
-                ])
-              ])
-            ])
-          ])
-        ])
-      ])
-    ])
-  ])
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card-icon" }, [
-      _c("i", { staticClass: "material-icons" }, [_vm._v("library_books")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-lg-10" }, [
-      _c("h4", { staticClass: "card-title" }, [_vm._v("Explorar libros")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("thead", [
-      _c("tr", [
-        _c("th", { staticClass: "text-center" }, [_vm._v("Título en español")]),
-        _vm._v(" "),
-        _c("th", { staticClass: "text-center" }, [_vm._v("Título original")]),
-        _vm._v(" "),
-        _c("th", { staticClass: "text-center" }, [_vm._v("Editorial")]),
-        _vm._v(" "),
-        _c("th", { staticClass: "text-center" }, [
-          _vm._v("Fecha de publicación")
-        ]),
-        _vm._v(" "),
-        _c("th", { staticClass: "text-center" }, [_vm._v("Acción")])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "button",
-      {
-        staticClass: "btn btn-danger",
-        attrs: {
-          type: "button",
-          rel: "tooltip",
-          "data-toggle": "tooltip",
-          "data-placement": "bottom",
-          title: "Eliminar"
-        }
-      },
-      [_c("i", { staticClass: "material-icons" }, [_vm._v("close")])]
-    )
-  }
-]
-render._withStripped = true
-
-
-
-/***/ }),
-
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/books/Create.vue?vue&type=template&id=20280f6c&":
 /*!***************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/books/Create.vue?vue&type=template&id=20280f6c& ***!
@@ -72622,7 +72273,17 @@ var render = function() {
                                       },
                                       expression: "book.editorial"
                                     }
-                                  })
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "b-form-invalid-feedback",
+                                    { attrs: { state: _vm.validateE } },
+                                    [
+                                      _vm._v(
+                                        "La editorial no puede estar vacía"
+                                      )
+                                    ]
+                                  )
                                 ],
                                 1
                               )
@@ -72713,7 +72374,13 @@ var render = function() {
                                       },
                                       expression: "book.genero"
                                     }
-                                  })
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "b-form-invalid-feedback",
+                                    { attrs: { state: _vm.validateG } },
+                                    [_vm._v("El género no puede estar vacío")]
+                                  )
                                 ],
                                 1
                               ),
@@ -72739,7 +72406,17 @@ var render = function() {
                                       },
                                       expression: "book.subg"
                                     }
-                                  })
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "b-form-select",
+                                    { attrs: { state: _vm.validateSG } },
+                                    [
+                                      _vm._v(
+                                        "El subgénero no puede estar vacío"
+                                      )
+                                    ]
+                                  )
                                 ],
                                 1
                               )
@@ -72878,6 +72555,7 @@ var render = function() {
                                     _c("b-form-input", {
                                       attrs: {
                                         type: "text",
+                                        disabled: "",
                                         id: "isbn",
                                         name: "isbn"
                                       },
@@ -72916,7 +72594,13 @@ var render = function() {
                                         },
                                         expression: "book.titulo_ori"
                                       }
-                                    })
+                                    }),
+                                    _vm._v(" "),
+                                    _c(
+                                      "b-form-invalid-feedback",
+                                      { attrs: { state: _vm.validateTO } },
+                                      [_vm._v("El título no puede estar vacío")]
+                                    )
                                   ],
                                   1
                                 ),
@@ -72944,7 +72628,13 @@ var render = function() {
                                         },
                                         expression: "book.titulo_esp"
                                       }
-                                    })
+                                    }),
+                                    _vm._v(" "),
+                                    _c(
+                                      "b-form-invalid-feedback",
+                                      { attrs: { state: _vm.validateTE } },
+                                      [_vm._v("El título no puede estar vacío")]
+                                    )
                                   ],
                                   1
                                 )
@@ -73015,7 +72705,19 @@ var render = function() {
                                         },
                                         expression: "book.sinop"
                                       }
-                                    })
+                                    }),
+                                    _vm._v(" "),
+                                    _c(
+                                      "b-form-invalid-feedback",
+                                      {
+                                        attrs: { state: _vm.validateSinopsis }
+                                      },
+                                      [
+                                        _vm._v(
+                                          "La sinopsis debe ser al menos de 10 caracteres"
+                                        )
+                                      ]
+                                    )
                                   ],
                                   1
                                 )
@@ -73045,7 +72747,17 @@ var render = function() {
                                         },
                                         expression: "book.n_pag"
                                       }
-                                    })
+                                    }),
+                                    _vm._v(" "),
+                                    _c(
+                                      "b-form-invalid-feedback",
+                                      { attrs: { state: _vm.validateNP } },
+                                      [
+                                        _vm._v(
+                                          "El número de páginas debe ser numérico entero"
+                                        )
+                                      ]
+                                    )
                                   ],
                                   1
                                 ),
@@ -73071,7 +72783,13 @@ var render = function() {
                                         },
                                         expression: "book.fec_pub"
                                       }
-                                    })
+                                    }),
+                                    _vm._v(" "),
+                                    _c(
+                                      "b-form-invalid-feedback",
+                                      { attrs: { state: _vm.validateF } },
+                                      [_vm._v("La fecha no puede estar vacía")]
+                                    )
                                   ],
                                   1
                                 ),
@@ -73099,7 +72817,55 @@ var render = function() {
                                         },
                                         expression: "book.editorial"
                                       }
-                                    })
+                                    }),
+                                    _vm._v(" "),
+                                    _c(
+                                      "b-form-invalid-feedback",
+                                      { attrs: { state: _vm.validateE } },
+                                      [
+                                        _vm._v(
+                                          "La editorial no puede estar vacía"
+                                        )
+                                      ]
+                                    )
+                                  ],
+                                  1
+                                )
+                              ],
+                              1
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "b-row",
+                              [
+                                _c(
+                                  "b-col",
+                                  { attrs: { cols: "4" } },
+                                  [
+                                    _c("label", { attrs: { for: "autor" } }, [
+                                      _vm._v("Autor")
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("b-form-input", {
+                                      attrs: {
+                                        id: "autor",
+                                        name: "autor",
+                                        placeholder: "Autor"
+                                      },
+                                      model: {
+                                        value: _vm.book.autor,
+                                        callback: function($$v) {
+                                          _vm.$set(_vm.book, "autor", $$v)
+                                        },
+                                        expression: "book.autor"
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c(
+                                      "b-form-invalid-feedback",
+                                      { attrs: { state: _vm.validateA } },
+                                      [_vm._v("El autor no puede estar vacío")]
+                                    )
                                   ],
                                   1
                                 )
@@ -73152,7 +72918,13 @@ var render = function() {
                                         },
                                         expression: "book.genero"
                                       }
-                                    })
+                                    }),
+                                    _vm._v(" "),
+                                    _c(
+                                      "b-form-invalid-feedback",
+                                      { attrs: { state: _vm.validateG } },
+                                      [_vm._v("El género no puede estar vacío")]
+                                    )
                                   ],
                                   1
                                 ),
@@ -73178,7 +72950,17 @@ var render = function() {
                                         },
                                         expression: "book.subg"
                                       }
-                                    })
+                                    }),
+                                    _vm._v(" "),
+                                    _c(
+                                      "b-form-invalid-feedback",
+                                      { attrs: { state: _vm.validateSG } },
+                                      [
+                                        _vm._v(
+                                          "El subgénero no puede estar vacío"
+                                        )
+                                      ]
+                                    )
                                   ],
                                   1
                                 )
@@ -73337,204 +73119,6 @@ var render = function() {
   )
 }
 var staticRenderFns = []
-render._withStripped = true
-
-
-
-/***/ }),
-
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/books/Show.vue?vue&type=template&id=1fe5f6ed&":
-/*!*************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/books/Show.vue?vue&type=template&id=1fe5f6ed& ***!
-  \*************************************************************************************************************************************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("div", [
-    _c("div", { staticClass: "content" }, [
-      _c("div", { staticClass: "container-fluid" }, [
-        _c("div", { staticClass: "row" }, [
-          _c("div", { staticClass: "col-md-12" }, [
-            _c("div", { staticClass: "card" }, [
-              _vm._m(0),
-              _vm._v(" "),
-              _c("div", { staticClass: "card-body" }, [
-                _c("div", { staticClass: "row" }, [
-                  _c(
-                    "div",
-                    { staticClass: "col-lg-12" },
-                    [
-                      _c(
-                        "b-row",
-                        [
-                          _c("b-col", { attrs: { cols: "4" } }, [
-                            _c("p", [
-                              _c("strong", [_vm._v("ISBN:")]),
-                              _vm._v(" 123456789101112")
-                            ])
-                          ]),
-                          _vm._v(" "),
-                          _c("b-col", { attrs: { cols: "6" } }, [
-                            _c("p", [
-                              _c("strong", [_vm._v("TÍTULO ORIGINAL:")]),
-                              _vm._v(" Hola como estas")
-                            ])
-                          ])
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "b-row",
-                        [
-                          _c("b-col", { attrs: { cols: "4" } }, [
-                            _c("p", [
-                              _c("strong", [_vm._v("TÍTULO EN ESPAÑOL:")]),
-                              _vm._v(" Dummy")
-                            ])
-                          ]),
-                          _vm._v(" "),
-                          _c("b-col", { attrs: { cols: "4" } }, [
-                            _c("p", [
-                              _c("strong", [_vm._v("NÚMERO DE PÁGINAS:")]),
-                              _vm._v(" 214")
-                            ])
-                          ]),
-                          _vm._v(" "),
-                          _c("b-col", { attrs: { cols: "4" } }, [
-                            _c("p", [
-                              _c("strong", [_vm._v("EDITORIAL:")]),
-                              _vm._v(" Planeta")
-                            ])
-                          ])
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "b-row",
-                        [
-                          _c("b-col", { attrs: { cols: "4" } }, [
-                            _c("p", [
-                              _c("strong", [_vm._v("FECHA DE PUBLICACIÓN")]),
-                              _vm._v("08-08-1999")
-                            ])
-                          ]),
-                          _vm._v(" "),
-                          _c("b-col", { attrs: { cols: "4" } }, [
-                            _c("p", [
-                              _c("strong", [_vm._v("PREDECESOR: ")]),
-                              _vm._v(" Otro libro")
-                            ])
-                          ]),
-                          _vm._v(" "),
-                          _c("b-col", { attrs: { cols: "4" } }, [
-                            _c("p", [
-                              _c("strong", [_vm._v("TEMA PRINCIPAL: ")]),
-                              _vm._v("Something")
-                            ])
-                          ])
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c("hr"),
-                      _vm._v(" "),
-                      _c(
-                        "b-row",
-                        [
-                          _c("b-col", { attrs: { cols: "12" } }, [
-                            _c("p", [
-                              _c("strong", [_vm._v("SINOPSIS: ")]),
-                              _vm._v(
-                                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam scelerisque leo et fermentum auctor. Donec tempus orci velit, eget ultricies risus commodo nec. Cras pharetra cursus nunc quis ultrices. Donec molestie imperdiet nibh nec fermentum. Curabitur gravida risus id posuere rutrum. Sed tincidunt lorem odio, in volutpat dolor faucibus quis. Integer pulvinar egestas ante, at euismod felis ornare in. Proin blandit nec justo sit amet dapibus. Quisque convallis semper tellus, eu vestibulum nulla congue et. Sed nec dolor sit amet lectus iaculis congue eget non sapien. Curabitur et venenatis lacus. Aliquam tortor mauris, molestie sit amet bibendum eu, cursus eu augue. Suspendisse dictum eros et ex porttitor imperdiet. Nullam et porta justo. Donec condimentum nunc id ante volutpat, at pellentesque odio placerat. "
-                              )
-                            ])
-                          ])
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c("hr"),
-                      _vm._v(" "),
-                      _c(
-                        "b-row",
-                        [
-                          _c("b-col", { attrs: { cols: "6" } }, [
-                            _c("h6", [_c("strong", [_vm._v("ESTRUCTURA")])])
-                          ])
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "b-row",
-                        [
-                          _c("b-col", { attrs: { cols: "4" } }, [
-                            _c("p", [
-                              _c("strong", [_vm._v("NOMBRE: ")]),
-                              _vm._v("Uno")
-                            ])
-                          ]),
-                          _vm._v(" "),
-                          _c("b-col", { attrs: { cols: "4" } }, [
-                            _c("p", [
-                              _c("strong", [_vm._v("TIPO: ")]),
-                              _vm._v("No se")
-                            ])
-                          ]),
-                          _vm._v(" "),
-                          _c("b-col", { attrs: { cols: "4" } }, [
-                            _c("p", [
-                              _c("strong", [_vm._v("TÍTULO: ")]),
-                              _vm._v(" ¿Qué es esto?")
-                            ])
-                          ])
-                        ],
-                        1
-                      )
-                    ],
-                    1
-                  )
-                ])
-              ])
-            ])
-          ])
-        ])
-      ])
-    ])
-  ])
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      { staticClass: "card-header card-header-log card-header-icon" },
-      [
-        _c("div", { staticClass: "card-icon" }, [
-          _c("i", { staticClass: "material-icons" }, [_vm._v("library_books")])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "row" }, [
-          _c("div", { staticClass: "col-lg-10" }, [
-            _c("h4", { staticClass: "card-title" }, [_vm._v("Detalles libro")])
-          ])
-        ])
-      ]
-    )
-  }
-]
 render._withStripped = true
 
 
@@ -95181,9 +94765,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('meeting-attendance', __web
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('set-meeting', __webpack_require__(/*! ./components/browse_meetings/SetMeeting.vue */ "./resources/js/components/browse_meetings/SetMeeting.vue")["default"]);
 /* BOOKS */
 
-vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('books', __webpack_require__(/*! ./components/books/Books.vue */ "./resources/js/components/books/Books.vue")["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('books-create', __webpack_require__(/*! ./components/books/Create.vue */ "./resources/js/components/books/Create.vue")["default"]);
-vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('books-show', __webpack_require__(/*! ./components/books/Show.vue */ "./resources/js/components/books/Show.vue")["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('books-edit', __webpack_require__(/*! ./components/books/Edit.vue */ "./resources/js/components/books/Edit.vue")["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('genres', __webpack_require__(/*! ./components/books/Genres.vue */ "./resources/js/components/books/Genres.vue")["default"]);
 /*THEATER PLAYS*/
@@ -95310,75 +94892,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ExampleComponent_vue_vue_type_template_id_299e239e___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ExampleComponent_vue_vue_type_template_id_299e239e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
-
-
-
-/***/ }),
-
-/***/ "./resources/js/components/books/Books.vue":
-/*!*************************************************!*\
-  !*** ./resources/js/components/books/Books.vue ***!
-  \*************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _Books_vue_vue_type_template_id_6ab1892c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Books.vue?vue&type=template&id=6ab1892c& */ "./resources/js/components/books/Books.vue?vue&type=template&id=6ab1892c&");
-/* harmony import */ var _Books_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Books.vue?vue&type=script&lang=js& */ "./resources/js/components/books/Books.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-
-
-
-
-
-/* normalize component */
-
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _Books_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _Books_vue_vue_type_template_id_6ab1892c___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _Books_vue_vue_type_template_id_6ab1892c___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
-  false,
-  null,
-  null,
-  null
-  
-)
-
-/* hot reload */
-if (false) { var api; }
-component.options.__file = "resources/js/components/books/Books.vue"
-/* harmony default export */ __webpack_exports__["default"] = (component.exports);
-
-/***/ }),
-
-/***/ "./resources/js/components/books/Books.vue?vue&type=script&lang=js&":
-/*!**************************************************************************!*\
-  !*** ./resources/js/components/books/Books.vue?vue&type=script&lang=js& ***!
-  \**************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Books_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./Books.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/books/Books.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Books_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
-
-/***/ }),
-
-/***/ "./resources/js/components/books/Books.vue?vue&type=template&id=6ab1892c&":
-/*!********************************************************************************!*\
-  !*** ./resources/js/components/books/Books.vue?vue&type=template&id=6ab1892c& ***!
-  \********************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Books_vue_vue_type_template_id_6ab1892c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./Books.vue?vue&type=template&id=6ab1892c& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/books/Books.vue?vue&type=template&id=6ab1892c&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Books_vue_vue_type_template_id_6ab1892c___WEBPACK_IMPORTED_MODULE_0__["render"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Books_vue_vue_type_template_id_6ab1892c___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
@@ -95586,75 +95099,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Genres_vue_vue_type_template_id_7b354bc0___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Genres_vue_vue_type_template_id_7b354bc0___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
-
-
-
-/***/ }),
-
-/***/ "./resources/js/components/books/Show.vue":
-/*!************************************************!*\
-  !*** ./resources/js/components/books/Show.vue ***!
-  \************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _Show_vue_vue_type_template_id_1fe5f6ed___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Show.vue?vue&type=template&id=1fe5f6ed& */ "./resources/js/components/books/Show.vue?vue&type=template&id=1fe5f6ed&");
-/* harmony import */ var _Show_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Show.vue?vue&type=script&lang=js& */ "./resources/js/components/books/Show.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-
-
-
-
-
-/* normalize component */
-
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _Show_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _Show_vue_vue_type_template_id_1fe5f6ed___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _Show_vue_vue_type_template_id_1fe5f6ed___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
-  false,
-  null,
-  null,
-  null
-  
-)
-
-/* hot reload */
-if (false) { var api; }
-component.options.__file = "resources/js/components/books/Show.vue"
-/* harmony default export */ __webpack_exports__["default"] = (component.exports);
-
-/***/ }),
-
-/***/ "./resources/js/components/books/Show.vue?vue&type=script&lang=js&":
-/*!*************************************************************************!*\
-  !*** ./resources/js/components/books/Show.vue?vue&type=script&lang=js& ***!
-  \*************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Show_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./Show.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/books/Show.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Show_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
-
-/***/ }),
-
-/***/ "./resources/js/components/books/Show.vue?vue&type=template&id=1fe5f6ed&":
-/*!*******************************************************************************!*\
-  !*** ./resources/js/components/books/Show.vue?vue&type=template&id=1fe5f6ed& ***!
-  \*******************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Show_vue_vue_type_template_id_1fe5f6ed___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./Show.vue?vue&type=template&id=1fe5f6ed& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/books/Show.vue?vue&type=template&id=1fe5f6ed&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Show_vue_vue_type_template_id_1fe5f6ed___WEBPACK_IMPORTED_MODULE_0__["render"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Show_vue_vue_type_template_id_1fe5f6ed___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

@@ -22,17 +22,19 @@
                                         <b-row>
                                             <b-col cols="4">
                                                 <label for="isbn">ISBN</label>
-                                                <b-form-input type="text" v-model="book.isbn" id="isbn" name="isbn"></b-form-input>
+                                                <b-form-input type="text" disabled v-model="book.isbn" id="isbn" name="isbn"></b-form-input>
                                             </b-col>
 
                                             <b-col cols="4">
                                                 <label for="titulo_ori">Título Original</label>
                                                 <b-form-input type="text" v-model="book.titulo_ori" id="titulo_ori" name="titulo_ori"></b-form-input>
+                                                <b-form-invalid-feedback :state="validateTO">El título no puede estar vacío</b-form-invalid-feedback>
                                             </b-col>
 
                                             <b-col cols="4">
                                                 <label for="titulo_esp">Título en Español</label>
                                                 <b-form-input type="text" v-model="book.titulo_esp" id="titulo_esp" name="titulo_esp"></b-form-input>
+                                                <b-form-invalid-feedback :state="validateTE">El título no puede estar vacío</b-form-invalid-feedback>
                                             </b-col>
                                         </b-row>
                                         <br>
@@ -40,6 +42,7 @@
                                             <b-col cols="6">
                                                 <label for="tema_princ">Tema principal</label>
                                                 <b-form-textarea type="text" v-model="book.tema_princ" id="tema_princ" name="tema_princ"></b-form-textarea>
+
                                             </b-col>
 
                                         </b-row>
@@ -48,6 +51,7 @@
                                             <b-col cols="12">
                                                 <label for="sinop">Sinopsis</label>
                                                 <b-form-textarea v-model="book.sinop" size="lg" rows="8" id="sinop" name="sinop"></b-form-textarea>
+                                                <b-form-invalid-feedback :state="validateSinopsis">La sinopsis debe ser al menos de 10 caracteres</b-form-invalid-feedback>
                                             </b-col>
                                         </b-row>
                                         <hr>
@@ -55,16 +59,28 @@
                                             <b-col cols="4">
                                                 <label for="n_pag">Número de páginas</label>
                                                 <b-form-input v-model="book.n_pag" id="n_pag" name="n_pag"></b-form-input>
+                                                <b-form-invalid-feedback :state="validateNP">El número de páginas debe ser numérico entero</b-form-invalid-feedback>
+
                                             </b-col>
 
                                             <b-col cols="4">
                                                 <label for="fec_pub">Fecha de publicación</label>
                                                 <b-form-input type="date" v-model="book.fec_pub" id="fec_pub" name="fec_pub"></b-form-input>
+                                                <b-form-invalid-feedback :state="validateF">La fecha no puede estar vacía</b-form-invalid-feedback>
+
                                             </b-col>
 
                                             <b-col cols="4">
                                                 <label for="editorial">Editorial</label>
                                                 <b-form-select v-model="book.editorial" :options="editoriales" id="editorial" name="editorial"></b-form-select>
+                                                <b-form-invalid-feedback :state="validateE">La editorial no puede estar vacía</b-form-invalid-feedback>
+                                            </b-col>
+                                        </b-row>
+                                        <b-row>
+                                            <b-col cols="4">
+                                                <label for="autor">Autor</label>
+                                                <b-form-input v-model="book.autor" id="autor" name="autor" placeholder="Autor"></b-form-input>
+                                                <b-form-invalid-feedback :state="validateA">El autor no puede estar vacío</b-form-invalid-feedback>
                                             </b-col>
                                         </b-row>
                                         <hr>
@@ -77,11 +93,13 @@
                                             <b-col cols="6">
                                                 <label for="genero">Genero</label>
                                                 <b-form-select v-model="book.genero" :options="generos" @change="filter()" id="genero" name="genero"></b-form-select>
+                                                <b-form-invalid-feedback :state="validateG">El género no puede estar vacío</b-form-invalid-feedback>
                                             </b-col>
 
                                             <b-col cols="6">
                                                 <label for="subg">Subgenero</label>
                                                 <b-form-select v-model="book.subg" :options="subgeneros" id="subg" name="subg"></b-form-select>
+                                                <b-form-invalid-feedback :state="validateSG">El subgénero no puede estar vacío</b-form-invalid-feedback>
                                             </b-col>
 
                                         </b-row>
@@ -112,16 +130,17 @@ export default {
     data() {
         return {
             book: {
-                isbn: null,
-                titulo_ori: null,
-                titulo_esp: null,
-                tema_princ: null,
-                sinop: null,
-                editorial: null,
+                isbn: 0,
+                titulo_ori: '',
+                titulo_esp: '',
+                tema_princ: '',
+                sinop: '',
                 n_pag: null,
-                fec_pub: null,
-                genero: null,
                 subg: null,
+                fec_pub: null,
+                editorial: null,
+                autor: '',
+                genero: null,
             },
             generos: [{
                 value: null,
@@ -181,8 +200,39 @@ export default {
                 console.log(e);
             })
     },
+        computed: {
+        validateTO(){
+            return (this.book.titulo_ori!='');
+        },
+        validateTE(){
+            return (this.book.titulo_esp!='');
+        },
+        validateSinopsis(){
+            return (this.book.sinop.length > 9);
+        },
+        validateNP(){
+            let isValid = null;
+                if (this.book.n_pag!=null && (isNaN(this.book.n_pag) || this.book.n_pag.toString().indexOf(".")!=-1 || this.book.n_pag<0 || this.book.n_pag > 999999)) isValid = false;
+                else isValid = true;
+            return isValid;
+        },
+        validateF(){
+            return (this.book.fec_pub != null);
+        },
+        validateA(){
+            return(this.book.autor !='');
+        },
+        validateG(){
+            return(this.book.genero != null);
+        },
+        validateSG(){
+            return(this.book.subg != null);
+        },
+        validateE(){
+            return(this.book.editorial != null);
+        }
+        },
     methods: {
-
         convert(id, length) {
             let pos = id.indexOf("-");
             let res = id.substring(pos + 1, length);
@@ -254,11 +304,36 @@ export default {
             console.log(params);
             axios.put(`/books/${url}`, params)
                 .then(res => {
-                    console.log(res.data);
-                    //window.location = "/books";
+                    window.location = "/books";
                 }).catch(e => {
                     console.log(e);
                 })
+        },
+
+        revalidate(){
+          let msg = '';
+          let isValid = true;
+
+            if (this.validateISBN == false) msg = msg + "El ISBN debe ser un campo numérico entero de al menos 5 caracteres\n";
+            if (this.validateTO == false) msg = msg +  "El campo Título Original no puede estar vacío\n";
+            if (this.validateTE == false) msg = msg + "El campo Título en Español no puede estar vacío\n";
+            if (this.validateSinopsis == false) msg = msg + "El campo Sinopsis debe tener al menos 10 caracteres\n";
+            if (this.validateNP == false) msg = msg + "El campo número de páginas debe ser numérico entero\n";
+            if (this.validateF == false) msg = msg + "El campo Fecha de publicación no puede estar vacío\n";
+            if (this.book.editorial == null) msg = msg + "El campo Editorial no puede estar vacío\n";
+            if (this.book.genero == null) msg = msg + "El campo Genero no puede estar vacío\n";
+            if (this.book.genero != null && this.book.subg == null) msg = msg + "El campo Subgénro no puede estar vacío\n";
+            if (this.validateA == false) msg = msg + "El campo Autor no puede estar vacío\n";
+            if (this.validateG == false) msg = msg + "El campo Género no puede estar vacío\n";
+            if (this.validateSG == false) msg = msg + "El campo Subgénero no puede estar vacío\n";
+            if (this.validateE == false) msg = msg + "El campo Editorial no puede estar vacío\n";
+            if (msg!=''){
+                isValid = false;
+                alert(msg);
+            }
+            else {
+                this.update();
+            }
         },
     }
 

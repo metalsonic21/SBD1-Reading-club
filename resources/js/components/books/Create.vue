@@ -71,6 +71,7 @@
                                             <b-col cols="4">
                                                 <label for="editorial">Editorial</label>
                                                 <b-form-select v-model="book.editorial" :options="editoriales" id="editorial" name="editorial"></b-form-select>
+                                                <b-form-invalid-feedback :state="validateE">La editorial no puede estar vacía</b-form-invalid-feedback>
                                             </b-col>
                                         </b-row>
                                         <br>
@@ -92,11 +93,13 @@
                                             <b-col cols="6">
                                                 <label for="genero">Genero</label>
                                                 <b-form-select v-model="book.genero" :options="generos" @change="filter()" id="genero" name="genero"></b-form-select>
+                                                <b-form-invalid-feedback :state="validateG">El género no puede estar vacío</b-form-invalid-feedback>
                                             </b-col>
 
                                             <b-col cols="6">
                                                 <label for="subg">Subgenero</label>
                                                 <b-form-select v-model="book.subg" :options="subgeneros" id="subg" name="subg"></b-form-select>
+                                                <b-form-select :state="validateSG">El subgénero no puede estar vacío</b-form-select>
                                             </b-col>
 
                                         </b-row>
@@ -194,6 +197,15 @@ export default {
         },
         validateA(){
             return(this.book.autor !='');
+        },
+        validateG(){
+            return(this.book.genero != null);
+        },
+        validateSG(){
+            return(this.book.subg != null);
+        },
+        validateE(){
+            return(this.book.editorial != null);
         }
     },
     methods: {
@@ -272,6 +284,9 @@ export default {
             if (this.book.genero == null) msg = msg + "El campo Genero no puede estar vacío\n";
             if (this.book.genero != null && this.book.subg == null) msg = msg + "El campo Subgénro no puede estar vacío\n";
             if (this.validateA == false) msg = msg + "El campo Autor no puede estar vacío\n";
+            if (this.validateG == false) msg = msg + "El campo Género no puede estar vacío\n";
+            if (this.validateSG == false) msg = msg + "El campo Subgénero no puede estar vacío\n";
+            if (this.validateE == false) msg = msg + "El campo Editorial no puede estar vacío\n";
             if (msg!=''){
                 isValid = false;
                 alert(msg);
