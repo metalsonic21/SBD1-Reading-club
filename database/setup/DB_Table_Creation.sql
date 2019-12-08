@@ -351,7 +351,7 @@ ALTER TABLE SJL_subgeneros ADD CONSTRAINT subgeneros_subgeneros_fk FOREIGN KEY(i
 ALTER TABLE SJL_generos_libros ADD CONSTRAINT generos_libros_fk FOREIGN KEY(id_gen) REFERENCES SJL_subgeneros(id);
 ALTER TABLE SJL_generos_libros ADD CONSTRAINT libros_generos_fk FOREIGN KEY(id_lib) REFERENCES SJL_libros(isbn);
 
-ALTER TABLE SJL_estructuras_libros ADD CONSTRAINT estructura_libros_fk FOREIGN KEY(id_lib) REFERENCES SJL_libros(isbn);
+ALTER TABLE SJL_estructuras_libros ADD CONSTRAINT estructura_libros_fk FOREIGN KEY(id_lib) REFERENCES SJL_libros(isbn) ON DELETE CASCADE;
 
 ALTER TABLE SJL_secciones_libros ADD CONSTRAINT secciones_estructuras_prev_fk FOREIGN KEY(id_est,id_lib) REFERENCES SJL_estructuras_libros(id,id_lib) ON DELETE CASCADE;
 

@@ -11,7 +11,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-lg-10">
-                                    <h4 class="card-title">Añadir nuevo libro</h4>
+                                    <h4 class="card-title">Añadir nuev  o libro</h4>
                                 </div>
                             </div>
                         </div>
@@ -220,7 +220,10 @@ export default {
         },
         validateP(){
             let verif = (this.libros.findIndex(isbn => isbn.isbn == this.book.prev)!=-1);
-            return (this.book.prev != this.book.isbn && verif);
+            let validPrev=null;
+                if (this.book.prev!='' && (this.book.prev.length != 5 || isNaN(this.prev.isbn) || this.book.prev.indexOf(".")!=-1 || this.prev.isbn<0)) validPrev = false;
+                else validPrev = true;
+            return ((this.book.prev != this.book.isbn && verif) || validPrev );
         }
     },
     methods: {

@@ -186,7 +186,7 @@ class BooksController extends Controller
      */
     public function destroy(Book $book)
     {
-        $book->delete()->onDelete('cascade');
-        return redirect()->action('\Books\BooksController@index');
+        $book->delete();
+        return redirect('books');
     }
 }
