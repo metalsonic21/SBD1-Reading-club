@@ -1946,7 +1946,23 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-/* harmony default export */ __webpack_exports__["default"] = ({});
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      books: [{}]
+    };
+  },
+  created: function created() {
+    var _this = this;
+
+    axios.get('/books').then(function (res) {
+      _this.books = res.data.data;
+      console.log(res.data.data);
+    })["catch"](function (e) {
+      console.log(e);
+    });
+  }
+});
 
 /***/ }),
 
@@ -2075,21 +2091,27 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      books: [],
       book: {
-        isbn: null,
-        titulo_ori: null,
-        titulo_esp: null,
-        tema_princ: null,
-        sinop: null,
+        isbn: '',
+        titulo_ori: '',
+        titulo_esp: '',
+        tema_princ: '',
+        sinop: '',
         n_pag: null,
         subg: null,
         fec_pub: null,
         editorial: null,
-        autor: null,
+        autor: '',
         genero: null
       },
       generos: [{
@@ -2105,16 +2127,7 @@ __webpack_require__.r(__webpack_exports__);
       librosfiltered: [{}],
       subgbackup: [{}],
       librosbackup: [{}],
-      editoriales: [{}],
-      wants_to_add: false,
-      wants_to_edit: false,
-      nombre: null,
-      tipo: null,
-      tipos: [{
-        value: null,
-        text: 'Seleccionar'
-      }],
-      titulo: null
+      editoriales: [{}]
     };
   },
   created: function created() {
@@ -2127,6 +2140,33 @@ __webpack_require__.r(__webpack_exports__);
     })["catch"](function (e) {
       console.log(e);
     });
+  },
+  computed: {
+    validateISBN: function validateISBN() {
+      var isValid = null;
+      if (this.book.isbn != '' && (this.book.isbn.length != 5 || isNaN(this.book.isbn) || this.book.isbn.indexOf(".") != -1 || this.book.isbn < 0)) isValid = false;else isValid = true;
+      return isValid;
+    },
+    validateTO: function validateTO() {
+      return this.book.titulo_ori != '';
+    },
+    validateTE: function validateTE() {
+      return this.book.titulo_esp != '';
+    },
+    validateSinopsis: function validateSinopsis() {
+      return this.book.sinop.length > 9;
+    },
+    validateNP: function validateNP() {
+      var isValid = null;
+      if (this.book.n_pag != null && (isNaN(this.book.n_pag) || this.book.n_pag.indexOf(".") != -1 || this.book.n_pag < 0 || this.book.n_pag > 999999)) isValid = false;else isValid = true;
+      return isValid;
+    },
+    validateF: function validateF() {
+      return this.book.fec_pub != null;
+    },
+    validateA: function validateA() {
+      return this.book.autor != '';
+    }
   },
   methods: {
     /* ADD OR HIDE STRUCTURE FORM*/
@@ -2178,6 +2218,27 @@ __webpack_require__.r(__webpack_exports__);
       this.subgeneros[0].value = null;
       this.subgeneros[0].text = 'Seleccionar';
     },
+    revalidate: function revalidate() {
+      var msg = '';
+      var isValid = true;
+      if (this.validateISBN == false) msg = msg + "El ISBN debe ser un campo numérico entero de al menos 5 caracteres\n";
+      if (this.validateTO == false) msg = msg + "El campo Título Original no puede estar vacío\n";
+      if (this.validateTE == false) msg = msg + "El campo Título en Español no puede estar vacío\n";
+      if (this.validateSinopsis == false) msg = msg + "El campo Sinopsis debe tener al menos 10 caracteres\n";
+      if (this.validateNP == false) msg = msg + "El campo número de páginas debe ser numérico entero\n";
+      if (this.validateF == false) msg = msg + "El campo Fecha de publicación no puede estar vacío\n";
+      if (this.book.editorial == null) msg = msg + "El campo Editorial no puede estar vacío\n";
+      if (this.book.genero == null) msg = msg + "El campo Genero no puede estar vacío\n";
+      if (this.book.genero != null && this.book.subg == null) msg = msg + "El campo Subgénro no puede estar vacío\n";
+      if (this.validateA == false) msg = msg + "El campo Autor no puede estar vacío\n";
+
+      if (msg != '') {
+        isValid = false;
+        alert(msg);
+      } else {
+        this.add();
+      }
+    },
 
     /* CRUD BOOKS */
     add: function add() {
@@ -2197,7 +2258,6 @@ __webpack_require__.r(__webpack_exports__);
           'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
       };
-      console.log(params);
       this.book.isbn = '';
       this.book.titulo_ori = '';
       this.book.tema_princ = '';
@@ -2209,8 +2269,7 @@ __webpack_require__.r(__webpack_exports__);
       this.book.fec_pub = '';
       this.book.editorial = '';
       axios.post('/books', params).then(function (res) {
-        alert('Libro añadido con éxito');
-        console.log(res.data); //this.books.push(res.data)
+        window.location = "/books";
       })["catch"](function (e) {
         console.log(e);
       });
@@ -72066,88 +72125,96 @@ var render = function() {
                       _c("table", { staticClass: "table" }, [
                         _vm._m(2),
                         _vm._v(" "),
-                        _c("tbody", [
-                          _c("tr", [
-                            _c("td", { staticClass: "text-center" }, [
-                              _vm._v("No tengo tiempo para leer")
-                            ]),
-                            _vm._v(" "),
-                            _c("td", { staticClass: "text-center" }, [
-                              _vm._v("No me sé ningún título xd")
-                            ]),
-                            _vm._v(" "),
-                            _c("td", { staticClass: "text-center" }, [
-                              _vm._v("Ola")
-                            ]),
-                            _vm._v(" "),
-                            _c("td", { staticClass: "text-center" }, [
-                              _vm._v("08-08-1997")
-                            ]),
-                            _vm._v(" "),
-                            _c(
-                              "td",
-                              { staticClass: "td-actions text-center" },
-                              [
-                                _c(
-                                  "b-link",
-                                  {
-                                    directives: [
-                                      {
-                                        name: "b-modal",
-                                        rawName: "v-b-modal.view-book",
-                                        modifiers: { "view-book": true }
+                        _c(
+                          "tbody",
+                          _vm._l(_vm.books, function(item, index) {
+                            return _c("tr", { key: index }, [
+                              _c("td", { staticClass: "text-center" }, [
+                                _vm._v(_vm._s(item.titulo_esp))
+                              ]),
+                              _vm._v(" "),
+                              _c("td", { staticClass: "text-center" }, [
+                                _vm._v(_vm._s(item.titulo_ori))
+                              ]),
+                              _vm._v(" "),
+                              _c("td", { staticClass: "text-center" }, [
+                                _vm._v(_vm._s(item.editorial))
+                              ]),
+                              _vm._v(" "),
+                              _c("td", { staticClass: "text-center" }, [
+                                _vm._v(_vm._s(item.fec_pub))
+                              ]),
+                              _vm._v(" "),
+                              _c(
+                                "td",
+                                { staticClass: "td-actions text-center" },
+                                [
+                                  _c(
+                                    "b-link",
+                                    {
+                                      directives: [
+                                        {
+                                          name: "b-modal",
+                                          rawName: "v-b-modal.view-book",
+                                          modifiers: { "view-book": true }
+                                        }
+                                      ],
+                                      staticClass: "btn btn-info",
+                                      attrs: {
+                                        href: "/books/show",
+                                        type: "button",
+                                        rel: "tooltip",
+                                        "data-toggle": "tooltip",
+                                        "data-placement": "bottom",
+                                        title: "Visualizar"
                                       }
-                                    ],
-                                    staticClass: "btn btn-info",
-                                    attrs: {
-                                      href: "/books/show",
-                                      type: "button",
-                                      rel: "tooltip",
-                                      "data-toggle": "tooltip",
-                                      "data-placement": "bottom",
-                                      title: "Visualizar"
-                                    }
-                                  },
-                                  [
-                                    _c("i", { staticClass: "material-icons" }, [
-                                      _vm._v("remove_red_eye")
-                                    ])
-                                  ]
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "b-link",
-                                  {
-                                    directives: [
-                                      {
-                                        name: "b-modal",
-                                        rawName: "v-b-modal.edit-book",
-                                        modifiers: { "edit-book": true }
+                                    },
+                                    [
+                                      _c(
+                                        "i",
+                                        { staticClass: "material-icons" },
+                                        [_vm._v("remove_red_eye")]
+                                      )
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "b-link",
+                                    {
+                                      directives: [
+                                        {
+                                          name: "b-modal",
+                                          rawName: "v-b-modal.edit-book",
+                                          modifiers: { "edit-book": true }
+                                        }
+                                      ],
+                                      staticClass: "btn btn-success",
+                                      attrs: {
+                                        href: "/books/1/edit",
+                                        type: "button",
+                                        rel: "tooltip",
+                                        "data-toggle": "tooltip",
+                                        "data-placement": "bottom",
+                                        title: "Modificar"
                                       }
-                                    ],
-                                    staticClass: "btn btn-success",
-                                    attrs: {
-                                      href: "/books/1/edit",
-                                      type: "button",
-                                      rel: "tooltip",
-                                      "data-toggle": "tooltip",
-                                      "data-placement": "bottom",
-                                      title: "Modificar"
-                                    }
-                                  },
-                                  [
-                                    _c("i", { staticClass: "material-icons" }, [
-                                      _vm._v("edit")
-                                    ])
-                                  ]
-                                ),
-                                _vm._v(" "),
-                                _vm._m(3)
-                              ],
-                              1
-                            )
-                          ])
-                        ])
+                                    },
+                                    [
+                                      _c(
+                                        "i",
+                                        { staticClass: "material-icons" },
+                                        [_vm._v("edit")]
+                                      )
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _vm._m(3, true)
+                                ],
+                                1
+                              )
+                            ])
+                          }),
+                          0
+                        )
                       ])
                     ])
                   ])
@@ -72278,7 +72345,9 @@ var render = function() {
                                     attrs: {
                                       type: "text",
                                       id: "isbn",
-                                      name: "isbn"
+                                      name: "isbn",
+                                      placeholder:
+                                        "Tip: el ISBN tiene 5 caracteres"
                                     },
                                     model: {
                                       value: _vm.book.isbn,
@@ -72287,7 +72356,17 @@ var render = function() {
                                       },
                                       expression: "book.isbn"
                                     }
-                                  })
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "b-form-invalid-feedback",
+                                    { attrs: { state: _vm.validateISBN } },
+                                    [
+                                      _vm._v(
+                                        "El código ISBN es numérico entero debe tener al menos 5 caracteres"
+                                      )
+                                    ]
+                                  )
                                 ],
                                 1
                               ),
@@ -72306,7 +72385,8 @@ var render = function() {
                                     attrs: {
                                       type: "text",
                                       id: "titulo_ori",
-                                      name: "titulo_ori"
+                                      name: "titulo_ori",
+                                      placeholder: "Título original"
                                     },
                                     model: {
                                       value: _vm.book.titulo_ori,
@@ -72315,7 +72395,13 @@ var render = function() {
                                       },
                                       expression: "book.titulo_ori"
                                     }
-                                  })
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "b-form-invalid-feedback",
+                                    { attrs: { state: _vm.validateTO } },
+                                    [_vm._v("El título no puede estar vacío")]
+                                  )
                                 ],
                                 1
                               ),
@@ -72334,7 +72420,8 @@ var render = function() {
                                     attrs: {
                                       type: "text",
                                       id: "titulo_esp",
-                                      name: "titulo_esp"
+                                      name: "titulo_esp",
+                                      placeholder: "Título en español"
                                     },
                                     model: {
                                       value: _vm.book.titulo_esp,
@@ -72343,7 +72430,13 @@ var render = function() {
                                       },
                                       expression: "book.titulo_esp"
                                     }
-                                  })
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "b-form-invalid-feedback",
+                                    { attrs: { state: _vm.validateTE } },
+                                    [_vm._v("El título no puede estar vacío")]
+                                  )
                                 ],
                                 1
                               )
@@ -72370,6 +72463,7 @@ var render = function() {
                                     attrs: {
                                       type: "text",
                                       id: "tema_princ",
+                                      placeholder: "Tema principal",
                                       name: "tema_princ"
                                     },
                                     model: {
@@ -72405,7 +72499,8 @@ var render = function() {
                                       size: "lg",
                                       rows: "8",
                                       id: "sinop",
-                                      name: "sinop"
+                                      name: "sinop",
+                                      placeholder: "Sinopsis"
                                     },
                                     model: {
                                       value: _vm.book.sinop,
@@ -72414,7 +72509,17 @@ var render = function() {
                                       },
                                       expression: "book.sinop"
                                     }
-                                  })
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "b-form-invalid-feedback",
+                                    { attrs: { state: _vm.validateSinopsis } },
+                                    [
+                                      _vm._v(
+                                        "La sinopsis debe ser al menos de 10 caracteres"
+                                      )
+                                    ]
+                                  )
                                 ],
                                 1
                               )
@@ -72436,7 +72541,11 @@ var render = function() {
                                   ]),
                                   _vm._v(" "),
                                   _c("b-form-input", {
-                                    attrs: { id: "n_pag", name: "n_pag" },
+                                    attrs: {
+                                      id: "n_pag",
+                                      name: "n_pag",
+                                      placeholder: "Número de páginas"
+                                    },
                                     model: {
                                       value: _vm.book.n_pag,
                                       callback: function($$v) {
@@ -72444,7 +72553,17 @@ var render = function() {
                                       },
                                       expression: "book.n_pag"
                                     }
-                                  })
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "b-form-invalid-feedback",
+                                    { attrs: { state: _vm.validateNP } },
+                                    [
+                                      _vm._v(
+                                        "El número de páginas debe ser numérico entero"
+                                      )
+                                    ]
+                                  )
                                 ],
                                 1
                               ),
@@ -72470,7 +72589,13 @@ var render = function() {
                                       },
                                       expression: "book.fec_pub"
                                     }
-                                  })
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "b-form-invalid-feedback",
+                                    { attrs: { state: _vm.validateF } },
+                                    [_vm._v("La fecha no puede estar vacía")]
+                                  )
                                 ],
                                 1
                               ),
@@ -72530,7 +72655,13 @@ var render = function() {
                                       },
                                       expression: "book.autor"
                                     }
-                                  })
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "b-form-invalid-feedback",
+                                    { attrs: { state: _vm.validateA } },
+                                    [_vm._v("El autor no puede estar vacío")]
+                                  )
                                 ],
                                 1
                               )
@@ -72628,7 +72759,7 @@ var render = function() {
                                 "b-button",
                                 {
                                   attrs: { variant: "default" },
-                                  on: { click: _vm.add }
+                                  on: { click: _vm.revalidate }
                                 },
                                 [_vm._v("Continuar")]
                               ),

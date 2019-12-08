@@ -39,11 +39,11 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td class="text-center">No tengo tiempo para leer</td>
-                                                    <td class="text-center">No me sé ningún título xd</td>
-                                                    <td class="text-center">Ola</td>
-                                                    <td class="text-center">08-08-1997</td>
+                                                <tr v-for="(item,index) in books" :key="index">
+                                                    <td class="text-center">{{item.titulo_esp}}</td>
+                                                    <td class="text-center">{{item.titulo_ori}}</td>
+                                                    <td class="text-center">{{item.editorial}}</td>
+                                                    <td class="text-center">{{item.fec_pub}}</td>
                                                     <td class="td-actions text-center">
                                                         <b-link href="/books/show" type="button" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Visualizar" class="btn btn-info" v-b-modal.view-book>
                                                             <i class="material-icons">remove_red_eye</i>
@@ -75,6 +75,21 @@
 
 <script>
 export default {
+    data(){
+        return{
+            books:[{}],
+        }
+    },
+
+    created(){
+        axios.get('/books')
+            .then(res => {
+                this.books = res.data.data;
+                console.log(res.data.data);
+            }).catch(e => {
+                console.log(e);
+            })
+    }
 
 }
 </script>

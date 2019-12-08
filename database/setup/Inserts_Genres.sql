@@ -50,36 +50,32 @@ INSERT INTO sjl_subgeneros(
 
 INSERT INTO sjl_subgeneros(
 	id, nom, tipo, id_subg)
-	VALUES (13, 'Novela de Autoficcion', 'SG', 2);
+	VALUES (13, 'Cuento', 'SG', 2);
 
 INSERT INTO sjl_subgeneros(
 	id, nom, tipo, id_subg)
-	VALUES (14, 'Cuento', 'SG', 2);
+	VALUES (14, 'Cronica', 'SG', 2);
 
 INSERT INTO sjl_subgeneros(
 	id, nom, tipo, id_subg)
-	VALUES (15, 'Cronica', 'SG', 2);
+	VALUES (15, 'Cancion', 'SG', 4);
 
 INSERT INTO sjl_subgeneros(
 	id, nom, tipo, id_subg)
-	VALUES (16, 'Cancion', 'SG', 4);
+	VALUES (16, 'Elegia', 'SG', 4);
 
 INSERT INTO sjl_subgeneros(
 	id, nom, tipo, id_subg)
-	VALUES (17, 'Elegia', 'SG', 4);
+	VALUES (19, 'Oda', 'SG', 4);
 
 INSERT INTO sjl_subgeneros(
 	id, nom, tipo, id_subg)
-	VALUES (18, 'Oda', 'SG', 4);
+	VALUES (20, 'Satira', 'SG', 4);
 
 INSERT INTO sjl_subgeneros(
 	id, nom, tipo, id_subg)
-	VALUES (19, 'Satira', 'SG', 4);
+	VALUES (21, 'Ensayo Psicologico', 'SG', 3);
 
 INSERT INTO sjl_subgeneros(
 	id, nom, tipo, id_subg)
-	VALUES (20, 'Ensayo Psicologico', 'SG', 3);
-
-INSERT INTO sjl_subgeneros(
-	id, nom, tipo, id_subg)
-	VALUES (21, 'Ensayo Social', 'SG', 3);
+	VALUES (22, 'Ensayo Social', 'SG', 3);
