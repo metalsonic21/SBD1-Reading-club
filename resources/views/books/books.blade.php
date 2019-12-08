@@ -62,9 +62,11 @@
                                                         <b-link href="/books/{{$book->isbn}}/edit" type="button" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Modificar" class="btn btn-success">
                                                             <i class="material-icons">edit</i>
                                                         </b-link>
+                                                        <div class="d-inline-block">
                                                         {!! Form::open(['route'=> ['books.destroy', $book->isbn], 'method'=>'DELETE']) !!}
                                                         {!! Form::button('<i class="material-icons">close</i>', ['type' => 'submit','class' => 'btn btn-danger']) !!}
                                                         {!! Form::close() !!}
+                                                    </div>
 
                                                     </td>
                                                 </tr>

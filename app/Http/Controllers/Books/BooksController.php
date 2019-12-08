@@ -104,32 +104,32 @@ class BooksController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Book $book)
+    public function edit(Request $request, Book $book)
     {   
-        $edit = DB::select( DB::raw("SELECT nom FROM sjl_editoriales WHERE id = '$book->id_edit'"))[0];
-        $book->editorial = $edit->nom;
 
-        $editoriales = DB::select( DB::raw("SELECT id, nom FROM sjl_editoriales"));
-
-        $generos = DB::select( DB::raw("SELECT id, nom FROM sjl_subgeneros WHERE id_subg IS NULL"));
-        $currentgenero = DB::select(DB::raw("SELECT x.id_lib, (
-            SELECT sg.nom FROM sjl_subgeneros sg WHERE (x.id_gen = sg.id)
-        )as genname, x.id_gen
-            FROM sjl_generos_libros x WHERE x.id_lib = '$book->isbn' AND (
-            SELECT sg.id FROM sjl_subgeneros sg WHERE (x.id_gen = sg.id) AND (sg.tipo LIKE 'SG%')
-        ) IS NULL"));
-        $aux = $currentgenero[0]->id_gen;
-        $subgeneros = DB::select(DB::raw("SELECT id, nom FROM sjl_subgeneros WHERE id_subg = '$aux'"));
-                
-        $currentsubg = DB::select(DB::raw("SELECT x.id_lib, (
-            SELECT sg.nom FROM sjl_subgeneros sg WHERE (x.id_gen = sg.id)
-        )as genname, x.id_gen
-            FROM sjl_generos_libros x WHERE x.id_lib = '$book->isbn' AND (
-            SELECT sg.id FROM sjl_subgeneros sg WHERE (x.id_gen = sg.id) AND (sg.tipo LIKE 'SG%')
-        ) IS NOT NULL"));
-
-        return view('books.edit')->with('book', $book)->with('editoriales', $editoriales)->with('generos', $generos)->with('currentgenero', $currentgenero)->with('subgeneros', $subgeneros)->with('currentsubg', $currentsubg);
-        //return $currentsubg;
+        if($request->ajax()){
+            $edit = DB::select( DB::raw("SELECT nom FROM sjl_editoriales WHERE id = '$book->id_edit'"))[0];
+            $book->editorial = $edit->nom;
+    
+            $editoriales = DB::select( DB::raw("SELECT id as value , nom as text FROM sjl_editoriales"));
+    
+            $generos = DB::select( DB::raw("SELECT id as value, nom as text FROM sjl_subgeneros WHERE id_subg IS NULL"));
+            $currentgenero = DB::select(DB::raw("SELECT x.id_lib, (
+                SELECT sg.nom FROM sjl_subgeneros sg WHERE (x.id_gen = sg.id)
+            )as genname, x.id_gen
+                FROM sjl_generos_libros x WHERE x.id_lib = '$book->isbn' AND (
+                SELECT sg.id FROM sjl_subgeneros sg WHERE (x.id_gen = sg.id) AND (sg.tipo LIKE 'SG%')
+            ) IS NULL"));
+            $aux = $currentgenero[0]->id_gen;
+            $sg = DB::select( DB::raw("SELECT id || '-' || id_subg as value, nom as text FROM sjl_subgeneros WHERE id_subg IS NOT NULL"));
+                    
+            $currentsubg = DB::select(DB::raw("SELECT sg.id_gen from sjl_generos_libros sg WHERE sg.id_lib = '$book->isbn' AND sg.id_gen<>'$aux'"));
+            return Response::json(array('data'=>$book,'editoriales'=>$editoriales,'generos'=>$generos, 'currentg'=>$aux
+            ,'subgeneros'=>$sg,'currentsubg'=>$currentsubg[0]->id_gen));
+        }
+        else{
+            return view('books.edit');
+        }
     }
 
     /**
@@ -141,8 +141,7 @@ class BooksController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $book = new Book();
-        $book->isbn = $request->isbn;
+        $book = Book::find($id);
         $book->titulo_esp = $request->titulo_esp;
         $book->titulo_ori = $request->titulo_ori;
         $book->tema_princ = $request->tema_princ;
@@ -151,22 +150,20 @@ class BooksController extends Controller
         $book->fec_pub = $request->fec_pub;
         $book->id_edit = $request->editorial;
         $book->autor = $request->autor;
-        DB::table('sjl_libros')
-            ->where('isbn', $book->isbn)
-            ->update(['titulo_esp'=>$book->titulo_esp], ['titulo_ori'=>$book->titulo_ori],['id_edit'=>$book->id_edit],['tema_princ'=>$book->tema_princ],
-        ['sinop'=>$book->sinop],['n_pag'=>$book->n_pag],['fec_pub'=>$book->fec_pub],['isbn'=>$book->isbn]);
-
-        $id_gen = $request->input('genero');
-        $id_subg = $request->input('subgenero');
+        $book->save();
 
         DB::table('sjl_generos_libros')
-            ->where('id_lib',$book->isbn)
-            ->delete();
-        DB::insert('INSERT INTO sjl_generos_libros (id_gen, id_lib) values (?, ?)', [$id_gen, $book->isbn]);
-        DB::insert('INSERT INTO sjl_generos_libros (id_gen, id_lib) values (?, ?)', [$id_subg, $book->isbn]);
-        //DB::statement("UPDATE favorite_contents, contents SET favorite_contents.type = contents.type where favorite_contents.content_id = contents.id");
+        ->where('id_lib',$book->isbn)
+        ->delete();
 
-        return $book;
+        $genre = new Genre();
+        $genre->id_gen = $request->genero;
+        DB::insert('INSERT INTO sjl_generos_libros (id_gen, id_lib) values (?, ?)', [$genre->id_gen, $book->isbn]);
+        $subg = new Genre();
+        $subg->id_gen = $request->subg;
+        DB::insert('INSERT INTO sjl_generos_libros (id_gen, id_lib) values (?, ?)', [$subg->id_gen, $book->isbn]);
+
+        return $genre;
     }
     /**
      * Remove the specified resource from storage.
@@ -176,7 +173,7 @@ class BooksController extends Controller
      */
     public function destroy(Book $book)
     {
-        $book->delete();
+        $book->delete()->onDelete('cascade');
         return redirect()->action('\Books\BooksController@index');
     }
 }

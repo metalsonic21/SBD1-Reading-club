@@ -256,6 +256,8 @@ export default {
             this.subgeneros[0].text = 'Seleccionar';
         },
 
+        
+
         revalidate(){
           let msg = '';
           let isValid = true;
