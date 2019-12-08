@@ -67,7 +67,7 @@ Vue.component('character-cast', require('./components/theater_plays/CharacterCas
 Vue.component('earning-plays', require('./components/theater_plays/EarningPlays.vue').default);
 Vue.component('browse-plays',  require('./components/theater_plays/BrowsePlays.vue').default);
 Vue.component('characteradd-cast', require('./components/theater_plays/CharacterCastAdd.vue').default);
-
+Vue.component('character-add', require('./components/theater_plays/character_add.vue').default);
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 
 const app = new Vue({

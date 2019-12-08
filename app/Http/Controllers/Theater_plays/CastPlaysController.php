@@ -10,13 +10,10 @@ class CastPlaysController extends Controller
     public function index(){
         return view('theater_plays.castplays');
     }
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-
     public function create() {
         return view('theater_plays.create');
     }
-}
+    public function add() {
+        return view('theater_plays.character_add');
+    }
+ }

@@ -11,7 +11,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-lg-10">
-                                    <h4 class="card-title">Añadir Nueva Obra</h4>
+                                    <h4 class="card-title">Añadir Nuevo Personaje</h4>
                                 </div>
                             </div>
                         </div>
@@ -19,51 +19,40 @@
                             <div class="row">
                                 <div class="col-lg-12">
                                     <b-row>
-                                        <b-col cols="6">
-                                            <label for="Nombre">Nombre</label>
-                                            <b-form-input type="text" v-model="Nombre" id="nombre" name="nombre"></b-form-input>
-                                        </b-col>
-                                            <b-col cols="6  ">
-                                            <label for="Nombre">Obra Base</label>
+                                        <b-col cols="10">
+                                            <label for="Nombre">Obra</label>
                                             <b-form-select v-model="selected" :options="options" ></b-form-select>
                                             <div class="mt-3">Selected: <strong>{{ selected }}</strong></div>
                                         </b-col>
                                     </b-row>
                                     <br>
                                     <b-row>
-                                        <b-col cols="12">
-                                            <label for="tema_princ">Resumen de la Obra</label>
-                                            <b-form-textarea type="text" v-model="tema_princ" id="tema_princ" name="tema_princ"></b-form-textarea>
+                                    </b-row>
+
+
+                                    <b-row>
+                                        <b-col cols="10">
+                                            <label for="n_pag">Personaje</label>
+                                            <b-form-input v-model="personaje" id="personaje" name="personaje"></b-form-input>
                                         </b-col>
                                     </b-row>
-                                    <hr>
+
+
                                     <b-row>
-                                        <b-col cols="7">
-                                            <label for="Nombre">Lugar</label>
+                                        <b-col cols="10">
+                                            <label for="Nombre">Interprete</label>
                                             <b-form-select v-model="selected2" :options="options2" ></b-form-select>
                                             <div class="mt-3">Selected: <strong>{{ selected2 }}</strong></div>
                                         </b-col>
-                                        <b-col cols="5">
-                                            <label for="n_pag">Costo de la entrada</label>
-                                            <b-form-input v-model="costo" type=number id="costo" name="costo"></b-form-input>
+                                    </b-row>
+                                    <b-row>
+                                        <b-col cols="10">
+                                            <label for="tema_princ">Descripción</label>
+                                            <b-form-textarea type="text" v-model="tema_princ" id="tema_princ" name="tema_princ"></b-form-textarea>
                                         </b-col>
                                     </b-row>
-                                    <br>
-                                    <b-row>
-                                                <b-col cols="6">
-                                                <label for="fec_pub">Fecha de la presentación</label>
-                                                <b-form-input type="date" v-model="fec_pre" id="fec_pre" name="fec_pre"></b-form-input>
-                                                </b-col>
-                                                <b-col cols="3">
-                                                <label for="editorial">Hora Inicio: </label>
-                                                <b-form-input v-model="time" type=time placeholder="Enter your name"></b-form-input>
-                                                </b-col>
-                                                <b-col cols="3">                                        
-                                                <label for="editorial">Hora Fin: </label>
-                                                <b-form-input v-model="time" type=time placeholder="Enter your name"></b-form-input>                                        
-                                                </b-col>
-                                    </b-row>
-                                    <hr>
+                                    <br>                           
+
                                     <div class="d-flex flex-row-reverse bd-highlight">
                                         <b-button variant="default" type="submit">Continuar</b-button>
 
@@ -125,11 +114,10 @@ export default {
                 ],
                 selected2: null,
                 options2: [
-                    { value: null, text: 'Por favor elija un lugar' },
-                    { value: 'Petare', text: 'Petare' },
-                    { value: 'Tierra de nadie 420', text: 'Tierra de nadie 420' },
-                    { value: 'Grama de Letras UCAB', text: 'Grama de Letras UCAB' },
-                    { value: 'Poemario 1', text: 'Poemario 1' }
+                    { value: null, text: 'Por favor elija un interprete' },
+                    { value: 'Roberto Lopez', text: 'Roberto Lopez' },
+                    { value: 'Karla Mata', text: 'Karla Mata' },
+                    { value: 'Frak Martinez', text: 'Frak Martinez' }
                     ]
         }
     },

@@ -6382,6 +6382,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
     console.log('Component mounted.');
@@ -6675,6 +6683,177 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/theater_plays/character_add.vue?vue&type=script&lang=js&":
+/*!**************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/theater_plays/character_add.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      isbn: null,
+      titulo_ori: null,
+      titulo_esp: null,
+      tema_princ: null,
+      sinop: null,
+      n_pag: null,
+      subg: null,
+      subgeneros: [{
+        value: null,
+        text: 'Seleccionar'
+      }],
+      fec_pub: null,
+      editorial: null,
+      editoriales: [{
+        value: null,
+        text: 'Seleccionar'
+      }],
+      prev: null,
+      wants_to_add: false,
+      wants_to_edit: false,
+      nombre: null,
+      tipo: null,
+      tipos: [{
+        value: null,
+        text: 'Seleccionar'
+      }],
+      titulo: null,
+      selected: null,
+      options: [{
+        value: null,
+        text: 'Por favor elija una obra base'
+      }, {
+        value: 'Novela 1',
+        text: 'Novela 1'
+      }, {
+        value: 'Epica 1',
+        text: 'Epica 1'
+      }, {
+        value: 'Narrativa 1',
+        text: 'Narrativa 1'
+      }, {
+        value: 'Poemario 1',
+        text: 'Poemario 1'
+      }],
+      selected2: null,
+      options2: [{
+        value: null,
+        text: 'Por favor elija un interprete'
+      }, {
+        value: 'Roberto Lopez',
+        text: 'Roberto Lopez'
+      }, {
+        value: 'Karla Mata',
+        text: 'Karla Mata'
+      }, {
+        value: 'Frak Martinez',
+        text: 'Frak Martinez'
+      }]
+    };
+  },
+  methods: {
+    showAddForm: function showAddForm() {
+      this.wants_to_add = true;
+      this.wants_to_edit = false;
+      return this.wants_to_add;
+    },
+    hideAddForm: function hideAddForm() {
+      this.wants_to_add = false;
+      return this.wants_to_add;
+    },
+    showEditForm: function showEditForm() {
+      this.wants_to_edit = true;
+      this.wants_to_add = false;
+      return this.wants_to_edit;
+    },
+    hideEditForm: function hideEditForm() {
+      this.wants_to_edit = false;
+      return this.wants_to_edit;
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/theater_plays/create.vue?vue&type=script&lang=js&":
 /*!*******************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/theater_plays/create.vue?vue&type=script&lang=js& ***!
@@ -6803,7 +6982,7 @@ __webpack_require__.r(__webpack_exports__);
       selected: null,
       options: [{
         value: null,
-        text: 'Porfavor elija una obra base'
+        text: 'Por favor elija una obra base'
       }, {
         value: 'Novela 1',
         text: 'Novela 1'
@@ -6820,7 +6999,7 @@ __webpack_require__.r(__webpack_exports__);
       selected2: null,
       options2: [{
         value: null,
-        text: 'Porfavor elija un lugar'
+        text: 'Por favor elija un lugar'
       }, {
         value: 'Petare',
         text: 'Petare'
@@ -82612,7 +82791,7 @@ var render = function() {
                             "b-link",
                             {
                               staticClass: "btn btn-default float-right mt-3",
-                              attrs: { href: "/castplays/create" }
+                              attrs: { href: "castplays/create" }
                             },
                             [
                               _c("span", { staticClass: "btn-label" }, [
@@ -82959,7 +83138,44 @@ var render = function() {
           _c("div", { staticClass: "row" }, [
             _c("div", { staticClass: "col-md-12" }, [
               _c("div", { staticClass: "card" }, [
-                _vm._m(0),
+                _c(
+                  "div",
+                  {
+                    staticClass: "card-header card-header-log card-header-icon"
+                  },
+                  [
+                    _vm._m(0),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "row" }, [
+                      _vm._m(1),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        { staticClass: "col-lg-2" },
+                        [
+                          _c(
+                            "b-link",
+                            {
+                              staticClass: "btn btn-default float-right mt-3",
+                              attrs: { href: "/charactercast/character_add" }
+                            },
+                            [
+                              _c("span", { staticClass: "btn-label" }, [
+                                _c("i", { staticClass: "material-icons" }, [
+                                  _vm._v("add")
+                                ])
+                              ]),
+                              _vm._v(
+                                "\r\n                                        Agregar Personaje\r\n                                    "
+                              )
+                            ]
+                          )
+                        ],
+                        1
+                      )
+                    ])
+                  ]
+                ),
                 _vm._v(" "),
                 _c("div", { staticClass: "card-body" }, [
                   _c("div", { staticClass: "row" }, [
@@ -82973,7 +83189,7 @@ var render = function() {
                         { staticClass: "table-responsive table-sales" },
                         [
                           _c("table", { staticClass: "table" }, [
-                            _vm._m(1),
+                            _vm._m(2),
                             _vm._v(" "),
                             _c("tbody", [
                               _c("tr", [
@@ -83084,21 +83300,17 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      { staticClass: "card-header card-header-log card-header-icon" },
-      [
-        _c("div", { staticClass: "card-icon" }, [
-          _c("i", { staticClass: "material-icons" }, [_vm._v("theaters")])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "row" }, [
-          _c("div", { staticClass: "col-lg-10" }, [
-            _c("h4", { staticClass: "card-title" }, [_vm._v("Elenco")])
-          ])
-        ])
-      ]
-    )
+    return _c("div", { staticClass: "card-icon" }, [
+      _c("i", { staticClass: "material-icons" }, [_vm._v("theaters")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-lg-10" }, [
+      _c("h4", { staticClass: "card-title" }, [_vm._v("Elenco")])
+    ])
   },
   function() {
     var _vm = this
@@ -83703,6 +83915,230 @@ var staticRenderFns = [
         _c("th", { staticClass: "text-center" }, [_vm._v("Acción")])
       ])
     ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/theater_plays/character_add.vue?vue&type=template&id=0268d992&":
+/*!******************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/theater_plays/character_add.vue?vue&type=template&id=0268d992& ***!
+  \******************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c("div", { staticClass: "content" }, [
+      _c("div", { staticClass: "container-fluid" }, [
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-md-12" }, [
+            _c("div", { staticClass: "card" }, [
+              _vm._m(0),
+              _vm._v(" "),
+              _c("div", { staticClass: "card-body" }, [
+                _c("div", { staticClass: "row" }, [
+                  _c(
+                    "div",
+                    { staticClass: "col-lg-12" },
+                    [
+                      _c(
+                        "b-row",
+                        [
+                          _c(
+                            "b-col",
+                            { attrs: { cols: "10" } },
+                            [
+                              _c("label", { attrs: { for: "Nombre" } }, [
+                                _vm._v("Obra")
+                              ]),
+                              _vm._v(" "),
+                              _c("b-form-select", {
+                                attrs: { options: _vm.options },
+                                model: {
+                                  value: _vm.selected,
+                                  callback: function($$v) {
+                                    _vm.selected = $$v
+                                  },
+                                  expression: "selected"
+                                }
+                              }),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "mt-3" }, [
+                                _vm._v("Selected: "),
+                                _c("strong", [_vm._v(_vm._s(_vm.selected))])
+                              ])
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c("br"),
+                      _vm._v(" "),
+                      _c("b-row"),
+                      _vm._v(" "),
+                      _c(
+                        "b-row",
+                        [
+                          _c(
+                            "b-col",
+                            { attrs: { cols: "10" } },
+                            [
+                              _c("label", { attrs: { for: "n_pag" } }, [
+                                _vm._v("Personaje")
+                              ]),
+                              _vm._v(" "),
+                              _c("b-form-input", {
+                                attrs: { id: "personaje", name: "personaje" },
+                                model: {
+                                  value: _vm.personaje,
+                                  callback: function($$v) {
+                                    _vm.personaje = $$v
+                                  },
+                                  expression: "personaje"
+                                }
+                              })
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "b-row",
+                        [
+                          _c(
+                            "b-col",
+                            { attrs: { cols: "10" } },
+                            [
+                              _c("label", { attrs: { for: "Nombre" } }, [
+                                _vm._v("Interprete")
+                              ]),
+                              _vm._v(" "),
+                              _c("b-form-select", {
+                                attrs: { options: _vm.options2 },
+                                model: {
+                                  value: _vm.selected2,
+                                  callback: function($$v) {
+                                    _vm.selected2 = $$v
+                                  },
+                                  expression: "selected2"
+                                }
+                              }),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "mt-3" }, [
+                                _vm._v("Selected: "),
+                                _c("strong", [_vm._v(_vm._s(_vm.selected2))])
+                              ])
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "b-row",
+                        [
+                          _c(
+                            "b-col",
+                            { attrs: { cols: "10" } },
+                            [
+                              _c("label", { attrs: { for: "tema_princ" } }, [
+                                _vm._v("Descripción")
+                              ]),
+                              _vm._v(" "),
+                              _c("b-form-textarea", {
+                                attrs: {
+                                  type: "text",
+                                  id: "tema_princ",
+                                  name: "tema_princ"
+                                },
+                                model: {
+                                  value: _vm.tema_princ,
+                                  callback: function($$v) {
+                                    _vm.tema_princ = $$v
+                                  },
+                                  expression: "tema_princ"
+                                }
+                              })
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c("br"),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        { staticClass: "d-flex flex-row-reverse bd-highlight" },
+                        [
+                          _c(
+                            "b-button",
+                            { attrs: { variant: "default", type: "submit" } },
+                            [_vm._v("Continuar")]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "b-link",
+                            {
+                              staticClass: "btn btn-danger",
+                              attrs: { href: "/castplays" }
+                            },
+                            [_vm._v("Cancelar")]
+                          )
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                ])
+              ])
+            ])
+          ])
+        ])
+      ])
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "card-header card-header-log card-header-icon" },
+      [
+        _c("div", { staticClass: "card-icon" }, [
+          _c("i", { staticClass: "material-icons" }, [_vm._v("add")])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-lg-10" }, [
+            _c("h4", { staticClass: "card-title" }, [
+              _vm._v("Añadir Nuevo Personaje")
+            ])
+          ])
+        ])
+      ]
+    )
   }
 ]
 render._withStripped = true
@@ -96264,6 +96700,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('character-cast', __webpack
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('earning-plays', __webpack_require__(/*! ./components/theater_plays/EarningPlays.vue */ "./resources/js/components/theater_plays/EarningPlays.vue")["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('browse-plays', __webpack_require__(/*! ./components/theater_plays/BrowsePlays.vue */ "./resources/js/components/theater_plays/BrowsePlays.vue")["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('characteradd-cast', __webpack_require__(/*! ./components/theater_plays/CharacterCastAdd.vue */ "./resources/js/components/theater_plays/CharacterCastAdd.vue")["default"]);
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('character-add', __webpack_require__(/*! ./components/theater_plays/character_add.vue */ "./resources/js/components/theater_plays/character_add.vue")["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('example-component', __webpack_require__(/*! ./components/ExampleComponent.vue */ "./resources/js/components/ExampleComponent.vue")["default"]);
 var app = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
   el: '#app'
@@ -98795,6 +99232,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PlaysClubs_vue_vue_type_template_id_870ed3b2___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PlaysClubs_vue_vue_type_template_id_870ed3b2___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/theater_plays/character_add.vue":
+/*!*****************************************************************!*\
+  !*** ./resources/js/components/theater_plays/character_add.vue ***!
+  \*****************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _character_add_vue_vue_type_template_id_0268d992___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./character_add.vue?vue&type=template&id=0268d992& */ "./resources/js/components/theater_plays/character_add.vue?vue&type=template&id=0268d992&");
+/* harmony import */ var _character_add_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./character_add.vue?vue&type=script&lang=js& */ "./resources/js/components/theater_plays/character_add.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _character_add_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _character_add_vue_vue_type_template_id_0268d992___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _character_add_vue_vue_type_template_id_0268d992___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/theater_plays/character_add.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/theater_plays/character_add.vue?vue&type=script&lang=js&":
+/*!******************************************************************************************!*\
+  !*** ./resources/js/components/theater_plays/character_add.vue?vue&type=script&lang=js& ***!
+  \******************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_character_add_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./character_add.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/theater_plays/character_add.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_character_add_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/theater_plays/character_add.vue?vue&type=template&id=0268d992&":
+/*!************************************************************************************************!*\
+  !*** ./resources/js/components/theater_plays/character_add.vue?vue&type=template&id=0268d992& ***!
+  \************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_character_add_vue_vue_type_template_id_0268d992___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./character_add.vue?vue&type=template&id=0268d992& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/theater_plays/character_add.vue?vue&type=template&id=0268d992&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_character_add_vue_vue_type_template_id_0268d992___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_character_add_vue_vue_type_template_id_0268d992___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
