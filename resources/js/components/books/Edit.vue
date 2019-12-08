@@ -82,6 +82,12 @@
                                                 <b-form-input v-model="book.autor" id="autor" name="autor" placeholder="Autor"></b-form-input>
                                                 <b-form-invalid-feedback :state="validateA">El autor no puede estar vacío</b-form-invalid-feedback>
                                             </b-col>
+
+                                            <b-col cols="4">
+                                                <label for="id_prev">ISBN Predecesor</label>
+                                                <b-form-input v-model="book.prev" id="id_prev" name="id_prev" placeholder="ISBN"></b-form-input>
+                                                <b-form-invalid-feedback :state="validateP">El ISBN no puede ser el del mismo libro y tiene que ser un ISBN válido</b-form-invalid-feedback>
+                                            </b-col>
                                         </b-row>
                                         <hr>
                                         <b-row>
@@ -106,7 +112,7 @@
                                         <br>
 
                                         <div class="d-flex flex-row-reverse bd-highlight">
-                                            <b-button variant="default" @click="update">Continuar</b-button>
+                                            <b-button variant="default" @click="revalidate">Continuar</b-button>
 
                                             <b-link class="btn btn-danger" href="/books">Cancelar</b-link>
                                         </div>
@@ -140,6 +146,7 @@ export default {
                 fec_pub: null,
                 editorial: null,
                 autor: '',
+                prev: '',
                 genero: null,
             },
             generos: [{
@@ -156,7 +163,8 @@ export default {
                 value: null,
                 text: 'Seleccionar'
             }],
-            prev: null,
+            libros: [{}],
+
         }
     },
     created() {
@@ -172,9 +180,11 @@ export default {
                 this.book.genero = res.data.currentg;
                 this.subgbackup = res.data.subgeneros;
                 this.book.subg = res.data.currentsubg;
+                this.book.prev = res.data.data.id_prev;
 
                 this.subgeneros = [{}];
-                //console.log(this.subgbackup[1].value);
+                this.libros = res.data.prev;
+                console.log(res.data.data);
 
                 var i = 0;
                 for (i = 0; i < this.subgbackup.length; i++) {
@@ -230,6 +240,10 @@ export default {
         },
         validateE(){
             return(this.book.editorial != null);
+        },
+        validateP(){
+            let verif = (this.libros.findIndex(isbn => isbn.isbn == this.book.prev)!=-1);
+            return (verif);
         }
         },
     methods: {
@@ -238,6 +252,11 @@ export default {
             let res = id.substring(pos + 1, length);
             parseInt(res, 10);
             return res;
+        },
+
+        validatePrev(){
+            let verif = (this.libros.findIndex(isbn => isbn.isbn == this.book.prev)!=-1);
+            return (verif);
         },
 
         filter() {
@@ -282,6 +301,7 @@ export default {
                 genero: this.book.genero,
                 subg: this.book.subg,
                 fec_pub: this.book.fec_pub,
+                prev: this.book.prev,
                 editorial: this.book.editorial,
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -293,6 +313,7 @@ export default {
             this.book.tema_princ = '';
             this.book.titulo_esp = '';
             this.book.autor = '';
+            this.book.prev = '';
             this.book.n_pag = '';
             this.book.genero = '';
             this.book.subg = '';
@@ -327,6 +348,8 @@ export default {
             if (this.validateG == false) msg = msg + "El campo Género no puede estar vacío\n";
             if (this.validateSG == false) msg = msg + "El campo Subgénero no puede estar vacío\n";
             if (this.validateE == false) msg = msg + "El campo Editorial no puede estar vacío\n";
+            if (this.validatePrev == false) msg = msg + "En el campo libro predecesor debe haber un ISBN válido\n";
+
             if (msg!=''){
                 isValid = false;
                 alert(msg);

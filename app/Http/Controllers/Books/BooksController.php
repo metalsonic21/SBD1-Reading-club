@@ -49,7 +49,7 @@ class BooksController extends Controller
             $data = DB::table('sjl_editoriales')->select('id as value', 'nom as text')->get();
             $genres = DB::select( DB::raw("SELECT id as value, nom as text FROM sjl_subgeneros WHERE id_subg IS NULL"));
             $sg = DB::select( DB::raw("SELECT id || '-' || id_subg as value, nom as text FROM sjl_subgeneros WHERE id_subg IS NOT NULL"));
-            $prev = DB::table('sjl_libros')->select('isbn as value', 'titulo_esp as text')->get();
+            $prev = DB::select( DB::raw("SELECT isbn FROM sjl_libros"));
             return Response::json(array('data'=>$data,'genres'=>$genres,'sg'=>$sg,'prev'=>$prev));
         }
         else{
@@ -75,6 +75,7 @@ class BooksController extends Controller
         $book->fec_pub = $request->fec_pub;
         $book->id_edit = $request->editorial;
         $book->autor = $request->autor;
+        $book->id_prev = $request->prev;
         $book->save();
 
         $genre = new Genre();
@@ -101,10 +102,9 @@ class BooksController extends Controller
     public function show(Book $book)
     {
         $edit = DB::select( DB::raw("SELECT nom FROM sjl_editoriales WHERE id = '$book->id_edit'"))[0];
-        $prev = DB::select( DB::raw("SELECT titulo_esp FROM sjl_libros WHERE isbn = '$book->id_prev'"))[0];
+        $prev = Book::find($book->id_prev);
         $book->editorial = $edit->nom;
-        $book->prev = $prev->titulo_esp;
-        return view ('books.show', compact('book'));
+        return view('books.show')->with('edit', $edit)->with('book', $book)->with('prev', $prev);
         //return $book;
     }
 
@@ -134,8 +134,10 @@ class BooksController extends Controller
             $sg = DB::select( DB::raw("SELECT id || '-' || id_subg as value, nom as text FROM sjl_subgeneros WHERE id_subg IS NOT NULL"));
                     
             $currentsubg = DB::select(DB::raw("SELECT sg.id_gen from sjl_generos_libros sg WHERE sg.id_lib = '$book->isbn' AND sg.id_gen<>'$aux'"));
+            $prev = DB::select( DB::raw("SELECT isbn FROM sjl_libros"));
+            
             return Response::json(array('data'=>$book,'editoriales'=>$editoriales,'generos'=>$generos, 'currentg'=>$aux
-            ,'subgeneros'=>$sg,'currentsubg'=>$currentsubg[0]->id_gen));
+            ,'subgeneros'=>$sg,'currentsubg'=>$currentsubg[0]->id_gen,'prev'=>$prev));
         }
         else{
             return view('books.edit');
@@ -160,6 +162,7 @@ class BooksController extends Controller
         $book->fec_pub = $request->fec_pub;
         $book->id_edit = $request->editorial;
         $book->autor = $request->autor;
+        $book->id_prev = $request->prev;
         $book->save();
 
         DB::table('sjl_generos_libros')

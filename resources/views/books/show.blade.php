@@ -56,7 +56,7 @@
                                         </b-col>
 
                                         <b-col cols="4">
-                                            <p><strong>PREDECESOR: </strong> {{$book->prev}}</p>
+                                            <p><strong>PREDECESOR: </strong> {{$prev->titulo_esp}}</p>
                                         </b-col>
 
                                         <b-col cols="4">

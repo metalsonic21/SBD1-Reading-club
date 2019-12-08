@@ -1997,6 +1997,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2011,6 +2018,7 @@ __webpack_require__.r(__webpack_exports__);
         fec_pub: null,
         editorial: null,
         autor: '',
+        prev: '',
         genero: null
       },
       generos: [{
@@ -2036,6 +2044,10 @@ __webpack_require__.r(__webpack_exports__);
       _this.editoriales = res.data.data;
       _this.generos = res.data.genres;
       _this.subgbackup = res.data.sg;
+      _this.libros = res.data.prev;
+      console.log(_this.libros.findIndex(function (isbn) {
+        return isbn.isbn === 21354;
+      }) != -1);
     })["catch"](function (e) {
       console.log(e);
     });
@@ -2074,6 +2086,14 @@ __webpack_require__.r(__webpack_exports__);
     },
     validateE: function validateE() {
       return this.book.editorial != null;
+    },
+    validateP: function validateP() {
+      var _this2 = this;
+
+      var verif = this.libros.findIndex(function (isbn) {
+        return isbn.isbn == _this2.book.prev;
+      }) != -1;
+      return this.book.prev != this.book.isbn && verif;
     }
   },
   methods: {
@@ -2142,6 +2162,7 @@ __webpack_require__.r(__webpack_exports__);
       if (this.validateG == false) msg = msg + "El campo Género no puede estar vacío\n";
       if (this.validateSG == false) msg = msg + "El campo Subgénero no puede estar vacío\n";
       if (this.validateE == false) msg = msg + "El campo Editorial no puede estar vacío\n";
+      if (this.validateP == false) msg = msg + "En el campo libro predecesor debe haber un ISBN válido\n";
 
       if (msg != '') {
         isValid = false;
@@ -2164,6 +2185,7 @@ __webpack_require__.r(__webpack_exports__);
         genero: this.book.genero,
         subg: this.book.subg,
         fec_pub: this.book.fec_pub,
+        prev: this.book.prev,
         editorial: this.book.editorial,
         headers: {
           'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -2326,6 +2348,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2340,6 +2368,7 @@ __webpack_require__.r(__webpack_exports__);
         fec_pub: null,
         editorial: null,
         autor: '',
+        prev: '',
         genero: null
       },
       generos: [{
@@ -2356,7 +2385,7 @@ __webpack_require__.r(__webpack_exports__);
         value: null,
         text: 'Seleccionar'
       }],
-      prev: null
+      libros: [{}]
     };
   },
   created: function created() {
@@ -2373,8 +2402,10 @@ __webpack_require__.r(__webpack_exports__);
       _this.book.genero = res.data.currentg;
       _this.subgbackup = res.data.subgeneros;
       _this.book.subg = res.data.currentsubg;
-      _this.subgeneros = [{}]; //console.log(this.subgbackup[1].value);
-
+      _this.book.prev = res.data.data.id_prev;
+      _this.subgeneros = [{}];
+      _this.libros = res.data.prev;
+      console.log(res.data.data);
       var i = 0;
 
       for (i = 0; i < _this.subgbackup.length; i++) {
@@ -2429,6 +2460,14 @@ __webpack_require__.r(__webpack_exports__);
     },
     validateE: function validateE() {
       return this.book.editorial != null;
+    },
+    validateP: function validateP() {
+      var _this2 = this;
+
+      var verif = this.libros.findIndex(function (isbn) {
+        return isbn.isbn == _this2.book.prev;
+      }) != -1;
+      return verif;
     }
   },
   methods: {
@@ -2437,6 +2476,14 @@ __webpack_require__.r(__webpack_exports__);
       var res = id.substring(pos + 1, length);
       parseInt(res, 10);
       return res;
+    },
+    validatePrev: function validatePrev() {
+      var _this3 = this;
+
+      var verif = this.libros.findIndex(function (isbn) {
+        return isbn.isbn == _this3.book.prev;
+      }) != -1;
+      return verif;
     },
     filter: function filter() {
       /* Filter subgenres according to the genre*/
@@ -2476,6 +2523,7 @@ __webpack_require__.r(__webpack_exports__);
         genero: this.book.genero,
         subg: this.book.subg,
         fec_pub: this.book.fec_pub,
+        prev: this.book.prev,
         editorial: this.book.editorial,
         headers: {
           'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -2486,6 +2534,7 @@ __webpack_require__.r(__webpack_exports__);
       this.book.tema_princ = '';
       this.book.titulo_esp = '';
       this.book.autor = '';
+      this.book.prev = '';
       this.book.n_pag = '';
       this.book.genero = '';
       this.book.subg = '';
@@ -2516,6 +2565,7 @@ __webpack_require__.r(__webpack_exports__);
       if (this.validateG == false) msg = msg + "El campo Género no puede estar vacío\n";
       if (this.validateSG == false) msg = msg + "El campo Subgénero no puede estar vacío\n";
       if (this.validateE == false) msg = msg + "El campo Editorial no puede estar vacío\n";
+      if (this.validatePrev == false) msg = msg + "En el campo libro predecesor debe haber un ISBN válido\n";
 
       if (msg != '') {
         isValid = false;
@@ -72697,6 +72747,42 @@ var render = function() {
                                   )
                                 ],
                                 1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "b-col",
+                                { attrs: { cols: "4" } },
+                                [
+                                  _c("label", { attrs: { for: "id_prev" } }, [
+                                    _vm._v("ISBN Predecesor")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("b-form-input", {
+                                    attrs: {
+                                      id: "id_prev",
+                                      name: "id_prev",
+                                      placeholder: "ISBN"
+                                    },
+                                    model: {
+                                      value: _vm.book.prev,
+                                      callback: function($$v) {
+                                        _vm.$set(_vm.book, "prev", $$v)
+                                      },
+                                      expression: "book.prev"
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "b-form-invalid-feedback",
+                                    { attrs: { state: _vm.validateP } },
+                                    [
+                                      _vm._v(
+                                        "El ISBN no puede ser el del mismo libro y tiene que ser un ISBN válido"
+                                      )
+                                    ]
+                                  )
+                                ],
+                                1
                               )
                             ],
                             1
@@ -73239,6 +73325,42 @@ var render = function() {
                                     )
                                   ],
                                   1
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "b-col",
+                                  { attrs: { cols: "4" } },
+                                  [
+                                    _c("label", { attrs: { for: "id_prev" } }, [
+                                      _vm._v("ISBN Predecesor")
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("b-form-input", {
+                                      attrs: {
+                                        id: "id_prev",
+                                        name: "id_prev",
+                                        placeholder: "ISBN"
+                                      },
+                                      model: {
+                                        value: _vm.book.prev,
+                                        callback: function($$v) {
+                                          _vm.$set(_vm.book, "prev", $$v)
+                                        },
+                                        expression: "book.prev"
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c(
+                                      "b-form-invalid-feedback",
+                                      { attrs: { state: _vm.validateP } },
+                                      [
+                                        _vm._v(
+                                          "El ISBN no puede ser el del mismo libro y tiene que ser un ISBN válido"
+                                        )
+                                      ]
+                                    )
+                                  ],
+                                  1
                                 )
                               ],
                               1
@@ -73352,7 +73474,7 @@ var render = function() {
                                   "b-button",
                                   {
                                     attrs: { variant: "default" },
-                                    on: { click: _vm.update }
+                                    on: { click: _vm.revalidate }
                                   },
                                   [_vm._v("Continuar")]
                                 ),
@@ -96145,15 +96267,14 @@ __webpack_require__.r(__webpack_exports__);
 /*!*****************************************************!*\
   !*** ./resources/js/components/books/StructAdd.vue ***!
   \*****************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _StructAdd_vue_vue_type_template_id_84722768___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./StructAdd.vue?vue&type=template&id=84722768& */ "./resources/js/components/books/StructAdd.vue?vue&type=template&id=84722768&");
 /* harmony import */ var _StructAdd_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./StructAdd.vue?vue&type=script&lang=js& */ "./resources/js/components/books/StructAdd.vue?vue&type=script&lang=js&");
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _StructAdd_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _StructAdd_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -96183,7 +96304,7 @@ component.options.__file = "resources/js/components/books/StructAdd.vue"
 /*!******************************************************************************!*\
   !*** ./resources/js/components/books/StructAdd.vue?vue&type=script&lang=js& ***!
   \******************************************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
