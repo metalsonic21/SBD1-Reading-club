@@ -1862,94 +1862,6 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/books/Books.vue?vue&type=script&lang=js&":
-/*!**********************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/books/Books.vue?vue&type=script&lang=js& ***!
-  \**********************************************************************************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-/* harmony default export */ __webpack_exports__["default"] = ({});
-
-/***/ }),
-
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/books/Create.vue?vue&type=script&lang=js&":
 /*!***********************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/books/Create.vue?vue&type=script&lang=js& ***!
@@ -2092,105 +2004,103 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      isbn: null,
-      titulo_ori: null,
-      titulo_esp: null,
-      tema_princ: null,
-      sinop: null,
-      n_pag: null,
-      subg: null,
+      book: {
+        isbn: '',
+        titulo_ori: '',
+        titulo_esp: '',
+        tema_princ: '',
+        sinop: '',
+        n_pag: null,
+        subg: null,
+        fec_pub: null,
+        editorial: null,
+        autor: '',
+        prev: '',
+        genero: null
+      },
+      generos: [{
+        value: null,
+        text: 'Seleccionar'
+      }],
+      subgenerosfiltered: [{}],
       subgeneros: [{
         value: null,
         text: 'Seleccionar'
       }],
-      fec_pub: null,
-      editorial: null,
-      editoriales: [{
-        value: null,
-        text: 'Seleccionar'
-      }],
-      prev: null,
-      wants_to_add: false,
-      wants_to_edit: false,
-      nombre: null,
-      tipo: null,
-      tipos: [{
-        value: null,
-        text: 'Seleccionar'
-      }],
-      titulo: null
+      libros: [{}],
+      librosfiltered: [{}],
+      subgbackup: [{}],
+      librosbackup: [{}],
+      editoriales: [{}]
     };
   },
+  created: function created() {
+    var _this = this;
+
+    axios.get('/books/create').then(function (res) {
+      _this.editoriales = res.data.data;
+      _this.generos = res.data.genres;
+      _this.subgbackup = res.data.sg;
+      _this.libros = res.data.prev;
+      console.log(_this.libros.findIndex(function (isbn) {
+        return isbn.isbn === 21354;
+      }) != -1);
+    })["catch"](function (e) {
+      console.log(e);
+    });
+  },
+  computed: {
+    validateISBN: function validateISBN() {
+      var isValid = null;
+      if (this.book.isbn != '' && (this.book.isbn.length != 5 || isNaN(this.book.isbn) || this.book.isbn.indexOf(".") != -1 || this.book.isbn < 0)) isValid = false;else isValid = true;
+      return isValid;
+    },
+    validateTO: function validateTO() {
+      return this.book.titulo_ori != '';
+    },
+    validateTE: function validateTE() {
+      return this.book.titulo_esp != '';
+    },
+    validateSinopsis: function validateSinopsis() {
+      return this.book.sinop.length > 9;
+    },
+    validateNP: function validateNP() {
+      var isValid = null;
+      if (this.book.n_pag != null && (isNaN(this.book.n_pag) || this.book.n_pag.indexOf(".") != -1 || this.book.n_pag < 0 || this.book.n_pag > 999999)) isValid = false;else isValid = true;
+      return isValid;
+    },
+    validateF: function validateF() {
+      return this.book.fec_pub != null;
+    },
+    validateA: function validateA() {
+      return this.book.autor != '';
+    },
+    validateG: function validateG() {
+      return this.book.genero != null;
+    },
+    validateSG: function validateSG() {
+      return this.book.subg != null;
+    },
+    validateE: function validateE() {
+      return this.book.editorial != null;
+    },
+    validateP: function validateP() {
+      var _this2 = this;
+
+      var verif = this.libros.findIndex(function (isbn) {
+        return isbn.isbn == _this2.book.prev;
+      }) != -1;
+      var validPrev = null;
+      if (this.book.prev != '' && (this.book.prev.length != 5 || isNaN(this.book.prev.isbn) || this.book.prev.indexOf(".") != -1 || this.book.prev.isbn < 0)) validPrev = false;else validPrev = true;
+      if (this.book.prev == '') return true;
+      return this.book.prev != this.book.isbn && verif || validPrev;
+    }
+  },
   methods: {
+    /* ADD OR HIDE STRUCTURE FORM*/
     showAddForm: function showAddForm() {
       this.wants_to_add = true;
       this.wants_to_edit = false;
@@ -2208,6 +2118,97 @@ __webpack_require__.r(__webpack_exports__);
     hideEditForm: function hideEditForm() {
       this.wants_to_edit = false;
       return this.wants_to_edit;
+    },
+    convert: function convert(id, length) {
+      var pos = id.indexOf("-");
+      var res = id.substring(pos + 1, length);
+      parseInt(res, 10);
+      return res;
+    },
+    filter: function filter() {
+      /* Filter subgenres according to the genre*/
+      this.subgeneros = [{}], this.subgenerosfiltered = [{}], this.book.subg = null, this.subgeneros = this.subgbackup;
+      var i = 0;
+
+      for (i = 0; i < this.subgeneros.length; i++) {
+        /* Converted ID is id_sub*/
+        var convertedid = this.convert(this.subgeneros[i].value, this.subgeneros.length);
+
+        if (this.book.genero == convertedid) {
+          var actualid = this.subgeneros[i].value.substring(0, this.subgeneros[i].value.indexOf("-"));
+          actualid = parseInt(actualid, 10);
+          this.subgenerosfiltered.push({
+            value: actualid,
+            text: this.subgeneros[i].text
+          });
+        }
+      }
+
+      this.subgeneros = [{}];
+      this.subgeneros = this.subgenerosfiltered;
+      this.subgeneros[0].value = null;
+      this.subgeneros[0].text = 'Seleccionar';
+    },
+    revalidate: function revalidate() {
+      var msg = '';
+      var isValid = true;
+      if (this.validateISBN == false) msg = msg + "El ISBN debe ser un campo numérico entero de al menos 5 caracteres\n";
+      if (this.validateTO == false) msg = msg + "El campo Título Original no puede estar vacío\n";
+      if (this.validateTE == false) msg = msg + "El campo Título en Español no puede estar vacío\n";
+      if (this.validateSinopsis == false) msg = msg + "El campo Sinopsis debe tener al menos 10 caracteres\n";
+      if (this.validateNP == false) msg = msg + "El campo número de páginas debe ser numérico entero\n";
+      if (this.validateF == false) msg = msg + "El campo Fecha de publicación no puede estar vacío\n";
+      if (this.book.editorial == null) msg = msg + "El campo Editorial no puede estar vacío\n";
+      if (this.book.genero == null) msg = msg + "El campo Genero no puede estar vacío\n";
+      if (this.book.genero != null && this.book.subg == null) msg = msg + "El campo Subgénro no puede estar vacío\n";
+      if (this.validateA == false) msg = msg + "El campo Autor no puede estar vacío\n";
+      if (this.validateG == false) msg = msg + "El campo Género no puede estar vacío\n";
+      if (this.validateSG == false) msg = msg + "El campo Subgénero no puede estar vacío\n";
+      if (this.validateE == false) msg = msg + "El campo Editorial no puede estar vacío\n";
+      if (this.validateP == false) msg = msg + "En el campo libro predecesor debe haber un ISBN válido\n";
+
+      if (msg != '') {
+        isValid = false;
+        alert(msg);
+      } else {
+        this.add();
+      }
+    },
+
+    /* CRUD BOOKS */
+    add: function add() {
+      var params = {
+        isbn: this.book.isbn,
+        titulo_ori: this.book.titulo_ori,
+        titulo_esp: this.book.titulo_esp,
+        tema_princ: this.book.tema_princ,
+        sinop: this.book.sinop,
+        autor: this.book.autor,
+        n_pag: this.book.n_pag,
+        genero: this.book.genero,
+        subg: this.book.subg,
+        fec_pub: this.book.fec_pub,
+        prev: this.book.prev,
+        editorial: this.book.editorial,
+        headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+      };
+      this.book.isbn = '';
+      this.book.titulo_ori = '';
+      this.book.tema_princ = '';
+      this.book.titulo_esp = '';
+      this.book.autor = '';
+      this.book.n_pag = '';
+      this.book.genero = '';
+      this.book.subg = '';
+      this.book.fec_pub = '';
+      this.book.editorial = '';
+      axios.post('/books', params).then(function (res) {
+        window.location = "/books";
+      })["catch"](function (e) {
+        console.log(e);
+      });
     }
   }
 });
@@ -2356,122 +2357,227 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      isbn: null,
-      titulo_ori: null,
-      titulo_esp: null,
-      tema_princ: null,
-      sinop: null,
-      n_pag: null,
-      subg: null,
+      book: {
+        isbn: 0,
+        titulo_ori: '',
+        titulo_esp: '',
+        tema_princ: '',
+        sinop: '',
+        n_pag: null,
+        subg: null,
+        fec_pub: null,
+        editorial: null,
+        autor: '',
+        prev: '',
+        genero: null
+      },
+      generos: [{
+        value: null,
+        text: 'Seleccionar'
+      }],
+      subgenerosfiltered: [{}],
+      subgbackup: [{}],
       subgeneros: [{
         value: null,
         text: 'Seleccionar'
       }],
-      fec_pub: null,
-      editorial: null,
       editoriales: [{
         value: null,
         text: 'Seleccionar'
       }],
-      prev: null,
-      wants_to_add: false,
-      wants_to_edit: false,
-      nombre: null,
-      tipo: null,
-      tipos: [{
-        value: null,
-        text: 'Seleccionar'
-      }],
-      titulo: null
+      libros: [{}]
     };
   },
+  created: function created() {
+    var _this = this;
+
+    var params = window.location.pathname;
+    params = params.replace(/\D/g, ''); //console.log(params);
+
+    axios.get("/books/".concat(params, "/edit")).then(function (res) {
+      _this.book = res.data.data;
+      _this.editoriales = res.data.editoriales;
+      _this.book.editorial = res.data.data.id_edit;
+      _this.generos = res.data.generos;
+      _this.book.genero = res.data.currentg;
+      _this.subgbackup = res.data.subgeneros;
+      _this.book.subg = res.data.currentsubg;
+      _this.book.prev = res.data.data.id_prev;
+      _this.subgeneros = [{}];
+      _this.libros = res.data.prev;
+      console.log(res.data.data);
+      var i = 0;
+
+      for (i = 0; i < _this.subgbackup.length; i++) {
+        var gid = _this.subgbackup[i].value;
+        var posgid = gid.indexOf("-") + 1;
+        gid = gid.substr(posgid, gid.length);
+        gid = parseInt(gid, 10);
+        var sid = _this.subgbackup[i].value;
+        sid = sid.substr(0, posgid);
+        sid = parseInt(sid, 10);
+
+        if (gid == _this.book.genero) {
+          _this.subgeneros.push({
+            value: sid,
+            text: _this.subgbackup[i].text
+          });
+        }
+      }
+
+      _this.subgeneros[0].value = null;
+      _this.subgeneros[0].text = 'Seleccionar';
+    })["catch"](function (e) {
+      console.log(e);
+    });
+  },
+  computed: {
+    validateTO: function validateTO() {
+      return this.book.titulo_ori != '';
+    },
+    validateTE: function validateTE() {
+      return this.book.titulo_esp != '';
+    },
+    validateSinopsis: function validateSinopsis() {
+      return this.book.sinop.length > 9;
+    },
+    validateNP: function validateNP() {
+      var isValid = null;
+      if (this.book.n_pag != null && (isNaN(this.book.n_pag) || this.book.n_pag.toString().indexOf(".") != -1 || this.book.n_pag < 0 || this.book.n_pag > 999999)) isValid = false;else isValid = true;
+      return isValid;
+    },
+    validateF: function validateF() {
+      return this.book.fec_pub != null;
+    },
+    validateA: function validateA() {
+      return this.book.autor != '';
+    },
+    validateG: function validateG() {
+      return this.book.genero != null;
+    },
+    validateSG: function validateSG() {
+      return this.book.subg != null;
+    },
+    validateE: function validateE() {
+      return this.book.editorial != null;
+    },
+    validateP: function validateP() {
+      var _this2 = this;
+
+      var verif = this.libros.findIndex(function (isbn) {
+        return isbn.isbn == _this2.book.prev;
+      }) != -1;
+      verif = verif && this.book.prev != this.book.isbn;
+      if (this.book.prev == '') return true;else return verif;
+    }
+  },
   methods: {
-    showAddForm: function showAddForm() {
-      this.wants_to_add = true;
-      this.wants_to_edit = false;
-      return this.wants_to_add;
+    convert: function convert(id, length) {
+      var pos = id.indexOf("-");
+      var res = id.substring(pos + 1, length);
+      parseInt(res, 10);
+      return res;
     },
-    hideAddForm: function hideAddForm() {
-      this.wants_to_add = false;
-      return this.wants_to_add;
+    validatePrev: function validatePrev() {
+      var _this3 = this;
+
+      var verif = this.libros.findIndex(function (isbn) {
+        return isbn.isbn == _this3.book.prev;
+      }) != -1;
+      verif = verif && this.book.prev != this.book.isbn;
+      if (this.book.prev == '') return true;else return verif;
     },
-    showEditForm: function showEditForm() {
-      this.wants_to_edit = true;
-      this.wants_to_add = false;
-      return this.wants_to_edit;
+    filter: function filter() {
+      /* Filter subgenres according to the genre*/
+      this.subgeneros = [{}], this.subgenerosfiltered = [{}], this.book.subg = null, this.subgeneros = this.subgbackup;
+      var i = 0;
+
+      for (i = 0; i < this.subgeneros.length; i++) {
+        /* Converted ID is id_sub*/
+        var convertedid = this.convert(this.subgeneros[i].value, this.subgeneros.length);
+
+        if (this.book.genero == convertedid) {
+          var actualid = this.subgeneros[i].value.substring(0, this.subgeneros[i].value.indexOf("-"));
+          actualid = parseInt(actualid, 10);
+          this.subgenerosfiltered.push({
+            value: actualid,
+            text: this.subgeneros[i].text
+          });
+        }
+      }
+
+      this.subgeneros = [{}];
+      this.subgeneros = this.subgenerosfiltered;
+      this.subgeneros[0].value = null;
+      this.subgeneros[0].text = 'Seleccionar';
     },
-    hideEditForm: function hideEditForm() {
-      this.wants_to_edit = false;
-      return this.wants_to_edit;
+
+    /* CRUD BOOKS */
+    update: function update() {
+      var params = {
+        isbn: this.book.isbn,
+        titulo_ori: this.book.titulo_ori,
+        titulo_esp: this.book.titulo_esp,
+        tema_princ: this.book.tema_princ,
+        sinop: this.book.sinop,
+        autor: this.book.autor,
+        n_pag: this.book.n_pag,
+        genero: this.book.genero,
+        subg: this.book.subg,
+        fec_pub: this.book.fec_pub,
+        prev: this.book.prev,
+        editorial: this.book.editorial,
+        headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+      };
+      this.book.isbn = '';
+      this.book.titulo_ori = '';
+      this.book.tema_princ = '';
+      this.book.titulo_esp = '';
+      this.book.autor = '';
+      this.book.prev = '';
+      this.book.n_pag = '';
+      this.book.genero = '';
+      this.book.subg = '';
+      this.book.fec_pub = '';
+      this.book.editorial = '';
+      var url = window.location.pathname;
+      url = url.replace(/\D/g, '');
+      console.log(params);
+      axios.put("/books/".concat(url), params).then(function (res) {
+        window.location = "/books";
+      })["catch"](function (e) {
+        console.log(e);
+      });
+    },
+    revalidate: function revalidate() {
+      var msg = '';
+      var isValid = true;
+      if (this.validateISBN == false) msg = msg + "El ISBN debe ser un campo numérico entero de al menos 5 caracteres\n";
+      if (this.validateTO == false) msg = msg + "El campo Título Original no puede estar vacío\n";
+      if (this.validateTE == false) msg = msg + "El campo Título en Español no puede estar vacío\n";
+      if (this.validateSinopsis == false) msg = msg + "El campo Sinopsis debe tener al menos 10 caracteres\n";
+      if (this.validateNP == false) msg = msg + "El campo número de páginas debe ser numérico entero\n";
+      if (this.validateF == false) msg = msg + "El campo Fecha de publicación no puede estar vacío\n";
+      if (this.book.editorial == null) msg = msg + "El campo Editorial no puede estar vacío\n";
+      if (this.book.genero == null) msg = msg + "El campo Genero no puede estar vacío\n";
+      if (this.book.genero != null && this.book.subg == null) msg = msg + "El campo Subgénro no puede estar vacío\n";
+      if (this.validateA == false) msg = msg + "El campo Autor no puede estar vacío\n";
+      if (this.validateG == false) msg = msg + "El campo Género no puede estar vacío\n";
+      if (this.validateSG == false) msg = msg + "El campo Subgénero no puede estar vacío\n";
+      if (this.validateE == false) msg = msg + "El campo Editorial no puede estar vacío\n";
+      if (this.validatePrev == false) msg = msg + "En el campo libro predecesor debe haber un ISBN válido\n";
+
+      if (msg != '') {
+        isValid = false;
+        alert(msg);
+      } else {
+        this.update();
+      }
     }
   }
 });
@@ -2512,27 +2618,22 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      fields: ['seleccionado', 'nombre', 'tipo', 'subgenero'],
+      fields: ['seleccionado', 'nombre', 'id_subg'],
       items: [{
         nombre: 'Uno',
-        tipo: '1',
-        subgenero: 'Dos'
+        id_subg: 1
       }, {
         nombre: 'Dos',
-        tipo: '2',
-        subgenero: 'Tres'
+        id_subg: 1
       }, {
         nombre: 'Tres',
-        tipo: '3',
-        subgenero: 'Cinco'
+        id_subg: 1
       }, {
         nombre: 'Cinco',
-        tipo: '3',
-        subgenero: 'Dos'
+        id_subg: 1
       }],
       selected: []
     };
@@ -2546,10 +2647,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/books/Show.vue?vue&type=script&lang=js&":
-/*!*********************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/books/Show.vue?vue&type=script&lang=js& ***!
-  \*********************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/books/StructAdd.vue?vue&type=script&lang=js&":
+/*!**************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/books/StructAdd.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -2640,13 +2741,282 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      struct: [{
+        titulo: '',
+        tipo: '',
+        nom: '',
+        secnom: '',
+        sectit: '',
+        num: ''
+      }],
+      tipos: [{
+        value: null,
+        text: 'Seleccionar'
+      }, {
+        value: 'C',
+        text: 'Capítulo'
+      }, {
+        value: 'O',
+        text: 'Otro'
+      }]
+    };
+  },
+  computed: {
+    validateN: function validateN() {
+      if (this.struct.nom == '' || this.struct.nom == undefined || this.struct.nom == null) return false;else return true;
+    },
+    validateT: function validateT() {
+      return this.struct.tipo != null;
+    },
+    validateSN: function validateSN() {
+      if (this.struct.secnom == '') return false;else return true;
+    },
+    validateNUM: function validateNUM() {
+      if (this.struct.num == '') return false;
+      return this.struct.num != null && !isNaN(this.struct.num) && this.struct.num < 99999;
+    }
+  },
+  methods: {
+    add: function add() {
+      var path = window.location.pathname;
+      path = path.replace(/\D/g, '');
+      var params = {
+        tipo: this.struct.tipo,
+        titulo: this.struct.titulo,
+        nom: this.struct.nom,
+        secnom: this.struct.secnom,
+        num: this.struct.num,
+        sectit: this.struct.sectit
+      };
+      this.struct.tipo = '';
+      this.struct.titulo = '';
+      this.struct.nom = '';
+      this.struct.num = 0, this.struct.sectit = '', this.struct.secnom = '', console.log(params);
+      axios.post("/books/".concat(path, "/structure"), params).then(function (res) {
+        window.location = "/books/".concat(path, "/structure");
+      })["catch"](function (e) {
+        console.log(e);
+      });
+    },
+    revalidate: function revalidate() {
+      var msg = '';
+      if (!this.validateN) msg = msg + "El campo Nombre de Estructura no puede estar vacío\n";
+      if (!this.validateT) msg = msg + "El campo Tipo de Estructura no puede estar vacío\n";
+      if (!this.validateSN) msg = msg + "El campo Nombre de Sección no puede estar vacío\n";
+      if (!this.validateNUM) msg = msg + "El campo Número de Sección debe ser numérico\n";
+
+      if (msg == '') {
+        this.add();
+      } else {
+        alert(msg);
+      }
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/books/StructEdit.vue?vue&type=script&lang=js&":
+/*!***************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/books/StructEdit.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
 //
 //
 //
 //
 //
 //
-/* harmony default export */ __webpack_exports__["default"] = ({});
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      struct: {
+        titulo: '',
+        tipo: '',
+        nom: '',
+        secnom: '',
+        sectit: '',
+        num: ''
+      },
+      tipos: [{
+        value: null,
+        text: 'Seleccionar'
+      }, {
+        value: 'C',
+        text: 'Capítulo'
+      }, {
+        value: 'O',
+        text: 'Otro'
+      }]
+    };
+  },
+  computed: {
+    validateN: function validateN() {
+      if (this.struct.nom == '' || this.struct.nom == undefined || this.struct.nom == null) return false;else return true;
+    },
+    validateT: function validateT() {
+      return this.struct.tipo != null;
+    },
+    validateSN: function validateSN() {
+      if (this.struct.secnom == '') return false;else return true;
+    },
+    validateNUM: function validateNUM() {
+      if (this.struct.num == '') return false;
+      return this.struct.num != null && !isNaN(this.struct.num) && this.struct.num < 99999;
+    }
+  },
+  created: function created() {
+    var _this = this;
+
+    var path = window.location.pathname;
+    var isbn = path.indexOf("k") + 3;
+    var isbnend = path.indexOf("t") - 2;
+    var id = path.substring(isbn, isbnend);
+    id = parseInt(id, 10);
+    var newpath = path.substring(isbnend, path.length);
+    newpath = newpath.replace(/\D/g, '');
+    var ide = parseInt(newpath, 10);
+    axios.get("/books/".concat(id, "/structure/").concat(ide, "/edit")).then(function (res) {
+      _this.struct.titulo = res.data.data[0].structit;
+      _this.struct.tipo = res.data.data[0].tipo;
+      _this.struct.nom = res.data.data[0].structname;
+      _this.struct.secnom = res.data.data[0].nom;
+      _this.struct.sectit = res.data.data[0].titulo;
+      _this.struct.num = res.data.data[0].num;
+      console.log(res.data.data);
+    })["catch"](function (e) {
+      console.log(e);
+    });
+  },
+  methods: {
+    update: function update() {
+      var path = window.location.pathname;
+      var isbn = path.indexOf("k") + 3;
+      var isbnend = path.indexOf("t") - 2;
+      var id = path.substring(isbn, isbnend);
+      id = parseInt(id, 10);
+      var newpath = path.substring(isbnend, path.length);
+      newpath = newpath.replace(/\D/g, '');
+      var ide = parseInt(newpath, 10);
+      var params = {
+        tipo: this.struct.tipo,
+        titulo: this.struct.titulo,
+        nom: this.struct.nom,
+        secnom: this.struct.secnom,
+        num: this.struct.num,
+        sectit: this.struct.sectit
+      };
+      this.struct.tipo = '';
+      this.struct.titulo = '';
+      this.struct.nom = '';
+      this.struct.num = 0, this.struct.sectit = '', this.struct.secnom = '', console.log(params);
+      axios.put("/books/".concat(id, "/structure/").concat(ide), params).then(function (res) {
+        window.location = "/books/".concat(id, "/structure");
+      })["catch"](function (e) {
+        console.log(e);
+      });
+    },
+    revalidate: function revalidate() {
+      var msg = '';
+      if (!this.validateN) msg = msg + "El campo Nombre de Estructura no puede estar vacío\n";
+      if (!this.validateT) msg = msg + "El campo Tipo de Estructura no puede estar vacío\n";
+      if (!this.validateSN) msg = msg + "El campo Nombre de Sección no puede estar vacío\n";
+      if (!this.validateNUM) msg = msg + "El campo Número de Sección debe ser numérico\n";
+
+      if (msg == '') {
+        this.update();
+      } else {
+        alert(msg);
+      }
+    }
+  }
+});
 
 /***/ }),
 
@@ -72000,228 +72370,6 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/books/Books.vue?vue&type=template&id=6ab1892c&":
-/*!**************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/books/Books.vue?vue&type=template&id=6ab1892c& ***!
-  \**************************************************************************************************************************************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("div", [
-    _c("div", { staticClass: "content" }, [
-      _c("div", { staticClass: "container-fluid" }, [
-        _c("div", { staticClass: "row" }, [
-          _c("div", { staticClass: "col-md-12" }, [
-            _c("div", { staticClass: "card" }, [
-              _c(
-                "div",
-                { staticClass: "card-header card-header-log card-header-icon" },
-                [
-                  _vm._m(0),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "row" }, [
-                    _vm._m(1),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "col-lg-2" },
-                      [
-                        _c(
-                          "b-link",
-                          {
-                            staticClass: "btn btn-default float-right mt-3",
-                            attrs: { href: "/books/create" }
-                          },
-                          [
-                            _c("span", { staticClass: "btn-label" }, [
-                              _c("i", { staticClass: "material-icons" }, [
-                                _vm._v("add")
-                              ])
-                            ]),
-                            _vm._v(
-                              "\r\n                                        Crear libro\r\n                                    "
-                            )
-                          ]
-                        )
-                      ],
-                      1
-                    )
-                  ])
-                ]
-              ),
-              _vm._v(" "),
-              _c("div", { staticClass: "card-body" }, [
-                _c("div", { staticClass: "row" }, [
-                  _c("div", { staticClass: "col-lg-12" }, [
-                    _c("div", { staticClass: "table-responsive table-sales" }, [
-                      _c("table", { staticClass: "table" }, [
-                        _vm._m(2),
-                        _vm._v(" "),
-                        _c("tbody", [
-                          _c("tr", [
-                            _c("td", { staticClass: "text-center" }, [
-                              _vm._v("No tengo tiempo para leer")
-                            ]),
-                            _vm._v(" "),
-                            _c("td", { staticClass: "text-center" }, [
-                              _vm._v("No me sé ningún título xd")
-                            ]),
-                            _vm._v(" "),
-                            _c("td", { staticClass: "text-center" }, [
-                              _vm._v("Ola")
-                            ]),
-                            _vm._v(" "),
-                            _c("td", { staticClass: "text-center" }, [
-                              _vm._v("08-08-1997")
-                            ]),
-                            _vm._v(" "),
-                            _c(
-                              "td",
-                              { staticClass: "td-actions text-center" },
-                              [
-                                _c(
-                                  "b-link",
-                                  {
-                                    directives: [
-                                      {
-                                        name: "b-modal",
-                                        rawName: "v-b-modal.view-book",
-                                        modifiers: { "view-book": true }
-                                      }
-                                    ],
-                                    staticClass: "btn btn-info",
-                                    attrs: {
-                                      href: "/books/show",
-                                      type: "button",
-                                      rel: "tooltip",
-                                      "data-toggle": "tooltip",
-                                      "data-placement": "bottom",
-                                      title: "Visualizar"
-                                    }
-                                  },
-                                  [
-                                    _c("i", { staticClass: "material-icons" }, [
-                                      _vm._v("remove_red_eye")
-                                    ])
-                                  ]
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "b-link",
-                                  {
-                                    directives: [
-                                      {
-                                        name: "b-modal",
-                                        rawName: "v-b-modal.edit-book",
-                                        modifiers: { "edit-book": true }
-                                      }
-                                    ],
-                                    staticClass: "btn btn-success",
-                                    attrs: {
-                                      href: "/books/1/edit",
-                                      type: "button",
-                                      rel: "tooltip",
-                                      "data-toggle": "tooltip",
-                                      "data-placement": "bottom",
-                                      title: "Modificar"
-                                    }
-                                  },
-                                  [
-                                    _c("i", { staticClass: "material-icons" }, [
-                                      _vm._v("edit")
-                                    ])
-                                  ]
-                                ),
-                                _vm._v(" "),
-                                _vm._m(3)
-                              ],
-                              1
-                            )
-                          ])
-                        ])
-                      ])
-                    ])
-                  ])
-                ])
-              ])
-            ])
-          ])
-        ])
-      ])
-    ])
-  ])
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card-icon" }, [
-      _c("i", { staticClass: "material-icons" }, [_vm._v("library_books")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-lg-10" }, [
-      _c("h4", { staticClass: "card-title" }, [_vm._v("Explorar libros")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("thead", [
-      _c("tr", [
-        _c("th", { staticClass: "text-center" }, [_vm._v("Título en español")]),
-        _vm._v(" "),
-        _c("th", { staticClass: "text-center" }, [_vm._v("Título original")]),
-        _vm._v(" "),
-        _c("th", { staticClass: "text-center" }, [_vm._v("Editorial")]),
-        _vm._v(" "),
-        _c("th", { staticClass: "text-center" }, [
-          _vm._v("Fecha de publicación")
-        ]),
-        _vm._v(" "),
-        _c("th", { staticClass: "text-center" }, [_vm._v("Acción")])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "button",
-      {
-        staticClass: "btn btn-danger",
-        attrs: {
-          type: "button",
-          rel: "tooltip",
-          "data-toggle": "tooltip",
-          "data-placement": "bottom",
-          title: "Eliminar"
-        }
-      },
-      [_c("i", { staticClass: "material-icons" }, [_vm._v("close")])]
-    )
-  }
-]
-render._withStripped = true
-
-
-
-/***/ }),
-
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/books/Create.vue?vue&type=template&id=20280f6c&":
 /*!***************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/books/Create.vue?vue&type=template&id=20280f6c& ***!
@@ -72252,703 +72400,522 @@ var render = function() {
                     { staticClass: "col-lg-12" },
                     [
                       _c(
-                        "b-row",
+                        "b-form",
+                        {
+                          on: {
+                            submit: function($event) {
+                              $event.preventDefault()
+                              return _vm.add($event)
+                            }
+                          }
+                        },
                         [
                           _c(
-                            "b-col",
-                            { attrs: { cols: "4" } },
+                            "b-row",
                             [
-                              _c("label", { attrs: { for: "isbn" } }, [
-                                _vm._v("ISBN")
-                              ]),
-                              _vm._v(" "),
-                              _c("b-form-input", {
-                                attrs: {
-                                  type: "text",
-                                  id: "isbn",
-                                  name: "isbn"
-                                },
-                                model: {
-                                  value: _vm.isbn,
-                                  callback: function($$v) {
-                                    _vm.isbn = $$v
-                                  },
-                                  expression: "isbn"
-                                }
-                              })
-                            ],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "b-col",
-                            { attrs: { cols: "4" } },
-                            [
-                              _c("label", { attrs: { for: "titulo_ori" } }, [
-                                _vm._v("Título Original")
-                              ]),
-                              _vm._v(" "),
-                              _c("b-form-input", {
-                                attrs: {
-                                  type: "text",
-                                  id: "titulo_ori",
-                                  name: "titulo_ori"
-                                },
-                                model: {
-                                  value: _vm.titulo_ori,
-                                  callback: function($$v) {
-                                    _vm.titulo_ori = $$v
-                                  },
-                                  expression: "titulo_ori"
-                                }
-                              })
-                            ],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "b-col",
-                            { attrs: { cols: "4" } },
-                            [
-                              _c("label", { attrs: { for: "titulo_esp" } }, [
-                                _vm._v("Título en Español")
-                              ]),
-                              _vm._v(" "),
-                              _c("b-form-input", {
-                                attrs: {
-                                  type: "text",
-                                  id: "titulo_esp",
-                                  name: "titulo_esp"
-                                },
-                                model: {
-                                  value: _vm.titulo_esp,
-                                  callback: function($$v) {
-                                    _vm.titulo_esp = $$v
-                                  },
-                                  expression: "titulo_esp"
-                                }
-                              })
-                            ],
-                            1
-                          )
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c("br"),
-                      _vm._v(" "),
-                      _c(
-                        "b-row",
-                        [
-                          _c(
-                            "b-col",
-                            { attrs: { cols: "6" } },
-                            [
-                              _c("label", { attrs: { for: "tema_princ" } }, [
-                                _vm._v("Tema principal")
-                              ]),
-                              _vm._v(" "),
-                              _c("b-form-textarea", {
-                                attrs: {
-                                  type: "text",
-                                  id: "tema_princ",
-                                  name: "tema_princ"
-                                },
-                                model: {
-                                  value: _vm.tema_princ,
-                                  callback: function($$v) {
-                                    _vm.tema_princ = $$v
-                                  },
-                                  expression: "tema_princ"
-                                }
-                              })
-                            ],
-                            1
-                          )
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c("hr"),
-                      _vm._v(" "),
-                      _c(
-                        "b-row",
-                        [
-                          _c(
-                            "b-col",
-                            { attrs: { cols: "12" } },
-                            [
-                              _c("label", { attrs: { for: "sinop" } }, [
-                                _vm._v("Sinopsis")
-                              ]),
-                              _vm._v(" "),
-                              _c("b-form-textarea", {
-                                attrs: {
-                                  size: "lg",
-                                  rows: "8",
-                                  id: "sinop",
-                                  name: "sinop"
-                                },
-                                model: {
-                                  value: _vm.sinop,
-                                  callback: function($$v) {
-                                    _vm.sinop = $$v
-                                  },
-                                  expression: "sinop"
-                                }
-                              })
-                            ],
-                            1
-                          )
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c("hr"),
-                      _vm._v(" "),
-                      _c(
-                        "b-row",
-                        [
-                          _c(
-                            "b-col",
-                            { attrs: { cols: "4" } },
-                            [
-                              _c("label", { attrs: { for: "n_pag" } }, [
-                                _vm._v("Número de páginas")
-                              ]),
-                              _vm._v(" "),
-                              _c("b-form-input", {
-                                attrs: { id: "n_pag", name: "n_pag" },
-                                model: {
-                                  value: _vm.n_pag,
-                                  callback: function($$v) {
-                                    _vm.n_pag = $$v
-                                  },
-                                  expression: "n_pag"
-                                }
-                              })
-                            ],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "b-col",
-                            { attrs: { cols: "4" } },
-                            [
-                              _c("label", { attrs: { for: "fec_pub" } }, [
-                                _vm._v("Fecha de publicación")
-                              ]),
-                              _vm._v(" "),
-                              _c("b-form-input", {
-                                attrs: {
-                                  type: "date",
-                                  id: "fec_pub",
-                                  name: "fec_pub"
-                                },
-                                model: {
-                                  value: _vm.fec_pub,
-                                  callback: function($$v) {
-                                    _vm.fec_pub = $$v
-                                  },
-                                  expression: "fec_pub"
-                                }
-                              })
-                            ],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "b-col",
-                            { attrs: { cols: "4" } },
-                            [
-                              _c("label", { attrs: { for: "editorial" } }, [
-                                _vm._v("Editorial")
-                              ]),
-                              _vm._v(" "),
-                              _c("b-form-select", {
-                                attrs: {
-                                  options: _vm.editoriales,
-                                  id: "editorial",
-                                  name: "editorial"
-                                },
-                                model: {
-                                  value: _vm.editorial,
-                                  callback: function($$v) {
-                                    _vm.editorial = $$v
-                                  },
-                                  expression: "editorial"
-                                }
-                              })
-                            ],
-                            1
-                          )
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c("br"),
-                      _vm._v(" "),
-                      _c(
-                        "b-row",
-                        [
-                          _c(
-                            "b-col",
-                            { attrs: { cols: "6" } },
-                            [
-                              _c("label", { attrs: { for: "prev" } }, [
-                                _vm._v("Predecesor")
-                              ]),
-                              _vm._v(" "),
-                              _c("b-form-input", {
-                                attrs: { id: "prev", name: "prev" },
-                                model: {
-                                  value: _vm.prev,
-                                  callback: function($$v) {
-                                    _vm.prev = $$v
-                                  },
-                                  expression: "prev"
-                                }
-                              })
-                            ],
-                            1
-                          )
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c("hr"),
-                      _vm._v(" "),
-                      _c(
-                        "b-row",
-                        [
-                          _c("b-col", { attrs: { cols: "6" } }, [
-                            _c("h6", [_c("strong", [_vm._v("ESTRUCTURA")])])
-                          ])
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c("br"),
-                      _vm._v(" "),
-                      _c(
-                        "b-row",
-                        [
-                          _c("b-col", { attrs: { cols: "12" } }, [
-                            _c(
-                              "div",
-                              { staticClass: "table-responsive table-sales" },
-                              [
-                                _c("table", { staticClass: "table" }, [
-                                  _c("thead", [
-                                    _c("tr", [
-                                      _c("th", { staticClass: "text-center" }, [
-                                        _vm._v("Nombre")
-                                      ]),
-                                      _vm._v(" "),
-                                      _c("th", { staticClass: "text-center" }, [
-                                        _vm._v("Tipo")
-                                      ]),
-                                      _vm._v(" "),
-                                      _c("th", { staticClass: "text-center" }, [
-                                        _vm._v("Título")
-                                      ]),
-                                      _vm._v(" "),
-                                      _c("th", { staticClass: "text-center" }, [
-                                        _vm._v("Acción")
-                                      ])
-                                    ])
+                              _c(
+                                "b-col",
+                                { attrs: { cols: "4" } },
+                                [
+                                  _c("label", { attrs: { for: "isbn" } }, [
+                                    _vm._v("ISBN")
                                   ]),
                                   _vm._v(" "),
-                                  _c("tbody", [
-                                    _c("tr", [
-                                      _c("td", { staticClass: "text-center" }, [
-                                        _vm._v("Prólogo")
-                                      ]),
-                                      _vm._v(" "),
-                                      _c("td", { staticClass: "text-center" }, [
-                                        _vm._v("Capítulo")
-                                      ]),
-                                      _vm._v(" "),
-                                      _c("td", { staticClass: "text-center" }, [
-                                        _vm._v("¿Qué es esto?")
-                                      ]),
-                                      _vm._v(" "),
-                                      _c(
-                                        "td",
-                                        {
-                                          staticClass: "td-actions text-center"
-                                        },
-                                        [
-                                          _c(
-                                            "b-button",
-                                            {
-                                              staticClass: "btn btn-info",
-                                              attrs: {
-                                                rel: "tooltip",
-                                                "data-toggle": "tooltip",
-                                                "data-placement": "bottom",
-                                                title: "Añadir"
-                                              },
-                                              on: { click: _vm.showAddForm }
-                                            },
-                                            [
-                                              _c(
-                                                "i",
-                                                {
-                                                  staticClass: "material-icons"
-                                                },
-                                                [_vm._v("add")]
-                                              )
-                                            ]
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "b-button",
-                                            {
-                                              staticClass: "btn btn-success",
-                                              attrs: {
-                                                rel: "tooltip",
-                                                "data-toggle": "tooltip",
-                                                "data-placement": "bottom",
-                                                title: "Modificar"
-                                              },
-                                              on: { click: _vm.showEditForm }
-                                            },
-                                            [
-                                              _c(
-                                                "i",
-                                                {
-                                                  staticClass: "material-icons"
-                                                },
-                                                [_vm._v("edit")]
-                                              )
-                                            ]
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "button",
-                                            {
-                                              staticClass: "btn btn-danger",
-                                              attrs: {
-                                                type: "button",
-                                                rel: "tooltip",
-                                                "data-toggle": "tooltip",
-                                                "data-placement": "bottom",
-                                                title: "Eliminar"
-                                              }
-                                            },
-                                            [
-                                              _c(
-                                                "i",
-                                                {
-                                                  staticClass: "material-icons"
-                                                },
-                                                [_vm._v("close")]
-                                              )
-                                            ]
-                                          )
-                                        ],
-                                        1
+                                  _c("b-form-input", {
+                                    attrs: {
+                                      type: "text",
+                                      id: "isbn",
+                                      name: "isbn",
+                                      placeholder:
+                                        "Tip: el ISBN tiene 5 caracteres"
+                                    },
+                                    model: {
+                                      value: _vm.book.isbn,
+                                      callback: function($$v) {
+                                        _vm.$set(_vm.book, "isbn", $$v)
+                                      },
+                                      expression: "book.isbn"
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "b-form-invalid-feedback",
+                                    { attrs: { state: _vm.validateISBN } },
+                                    [
+                                      _vm._v(
+                                        "El código ISBN es numérico entero debe tener al menos 5 caracteres"
                                       )
-                                    ])
-                                  ])
-                                ])
-                              ]
-                            )
-                          ])
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c("hr"),
-                      _vm._v(" "),
-                      _vm.wants_to_add
-                        ? _c(
-                            "div",
-                            { attrs: { id: "add-structure" } },
-                            [
-                              _c(
-                                "b-row",
-                                [
-                                  _c("b-col", { attrs: { cols: "6" } }, [
-                                    _c("h6", [
-                                      _c("strong", [
-                                        _vm._v("AÑADIR ESTRUCTURA")
-                                      ])
-                                    ])
-                                  ])
-                                ],
-                                1
-                              ),
-                              _vm._v(" "),
-                              _c("br"),
-                              _vm._v(" "),
-                              _c(
-                                "b-row",
-                                [
-                                  _c(
-                                    "b-col",
-                                    { attrs: { cols: "4" } },
-                                    [
-                                      _c(
-                                        "label",
-                                        { attrs: { for: "nombre" } },
-                                        [_vm._v("Nombre")]
-                                      ),
-                                      _vm._v(" "),
-                                      _c("b-form-input", {
-                                        attrs: {
-                                          type: "text",
-                                          id: "nombre",
-                                          name: "nombre",
-                                          placeholder: "Nombre"
-                                        },
-                                        model: {
-                                          value: _vm.nombre,
-                                          callback: function($$v) {
-                                            _vm.nombre = $$v
-                                          },
-                                          expression: "nombre"
-                                        }
-                                      })
-                                    ],
-                                    1
-                                  ),
-                                  _vm._v(" "),
-                                  _c(
-                                    "b-col",
-                                    { attrs: { cols: "4" } },
-                                    [
-                                      _c("label", { attrs: { for: "tipo" } }, [
-                                        _vm._v("Tipo")
-                                      ]),
-                                      _vm._v(" "),
-                                      _c("b-form-select", {
-                                        attrs: {
-                                          options: _vm.tipos,
-                                          id: "tipo",
-                                          name: "tipo"
-                                        },
-                                        model: {
-                                          value: _vm.tipo,
-                                          callback: function($$v) {
-                                            _vm.tipo = $$v
-                                          },
-                                          expression: "tipo"
-                                        }
-                                      })
-                                    ],
-                                    1
-                                  ),
-                                  _vm._v(" "),
-                                  _c(
-                                    "b-col",
-                                    { attrs: { cols: "4" } },
-                                    [
-                                      _c(
-                                        "label",
-                                        { attrs: { for: "titulo" } },
-                                        [_vm._v("Título")]
-                                      ),
-                                      _vm._v(" "),
-                                      _c("b-form-input", {
-                                        attrs: {
-                                          type: "text",
-                                          id: "titulo",
-                                          name: "tipo"
-                                        },
-                                        model: {
-                                          value: _vm.titulo,
-                                          callback: function($$v) {
-                                            _vm.titulo = $$v
-                                          },
-                                          expression: "titulo"
-                                        }
-                                      })
-                                    ],
-                                    1
+                                    ]
                                   )
                                 ],
                                 1
                               ),
                               _vm._v(" "),
                               _c(
-                                "div",
-                                {
-                                  staticClass:
-                                    "d-flex flex-row-reverse bd-highlight"
-                                },
+                                "b-col",
+                                { attrs: { cols: "4" } },
                                 [
                                   _c(
-                                    "b-button",
-                                    {
-                                      attrs: { variant: "default" },
-                                      on: { click: _vm.hideAddForm }
+                                    "label",
+                                    { attrs: { for: "titulo_ori" } },
+                                    [_vm._v("Título Original")]
+                                  ),
+                                  _vm._v(" "),
+                                  _c("b-form-input", {
+                                    attrs: {
+                                      type: "text",
+                                      id: "titulo_ori",
+                                      name: "titulo_ori",
+                                      placeholder: "Título original"
                                     },
-                                    [_vm._v("Continuar")]
+                                    model: {
+                                      value: _vm.book.titulo_ori,
+                                      callback: function($$v) {
+                                        _vm.$set(_vm.book, "titulo_ori", $$v)
+                                      },
+                                      expression: "book.titulo_ori"
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "b-form-invalid-feedback",
+                                    { attrs: { state: _vm.validateTO } },
+                                    [_vm._v("El título no puede estar vacío")]
+                                  )
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "b-col",
+                                { attrs: { cols: "4" } },
+                                [
+                                  _c(
+                                    "label",
+                                    { attrs: { for: "titulo_esp" } },
+                                    [_vm._v("Título en Español")]
+                                  ),
+                                  _vm._v(" "),
+                                  _c("b-form-input", {
+                                    attrs: {
+                                      type: "text",
+                                      id: "titulo_esp",
+                                      name: "titulo_esp",
+                                      placeholder: "Título en español"
+                                    },
+                                    model: {
+                                      value: _vm.book.titulo_esp,
+                                      callback: function($$v) {
+                                        _vm.$set(_vm.book, "titulo_esp", $$v)
+                                      },
+                                      expression: "book.titulo_esp"
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "b-form-invalid-feedback",
+                                    { attrs: { state: _vm.validateTE } },
+                                    [_vm._v("El título no puede estar vacío")]
                                   )
                                 ],
                                 1
                               )
                             ],
                             1
-                          )
-                        : _vm._e(),
-                      _vm._v(" "),
-                      _vm.wants_to_edit
-                        ? _c(
-                            "div",
-                            { attrs: { id: "edit-structure" } },
-                            [
-                              _c(
-                                "b-row",
-                                [
-                                  _c("b-col", { attrs: { cols: "6" } }, [
-                                    _c("h6", [
-                                      _c("strong", [
-                                        _vm._v("MODIFICAR ESTRUCTURA")
-                                      ])
-                                    ])
-                                  ])
-                                ],
-                                1
-                              ),
-                              _vm._v(" "),
-                              _c("br"),
-                              _vm._v(" "),
-                              _c(
-                                "b-row",
-                                [
-                                  _c(
-                                    "b-col",
-                                    { attrs: { cols: "4" } },
-                                    [
-                                      _c(
-                                        "label",
-                                        { attrs: { for: "nombre" } },
-                                        [_vm._v("Nombre")]
-                                      ),
-                                      _vm._v(" "),
-                                      _c("b-form-input", {
-                                        attrs: {
-                                          type: "text",
-                                          id: "nombre",
-                                          name: "nombre",
-                                          placeholder: "Nombre"
-                                        },
-                                        model: {
-                                          value: _vm.nombre,
-                                          callback: function($$v) {
-                                            _vm.nombre = $$v
-                                          },
-                                          expression: "nombre"
-                                        }
-                                      })
-                                    ],
-                                    1
-                                  ),
-                                  _vm._v(" "),
-                                  _c(
-                                    "b-col",
-                                    { attrs: { cols: "4" } },
-                                    [
-                                      _c("label", { attrs: { for: "tipo" } }, [
-                                        _vm._v("Tipo")
-                                      ]),
-                                      _vm._v(" "),
-                                      _c("b-form-select", {
-                                        attrs: {
-                                          options: _vm.tipos,
-                                          id: "tipo",
-                                          name: "tipo"
-                                        },
-                                        model: {
-                                          value: _vm.tipo,
-                                          callback: function($$v) {
-                                            _vm.tipo = $$v
-                                          },
-                                          expression: "tipo"
-                                        }
-                                      })
-                                    ],
-                                    1
-                                  ),
-                                  _vm._v(" "),
-                                  _c(
-                                    "b-col",
-                                    { attrs: { cols: "4" } },
-                                    [
-                                      _c(
-                                        "label",
-                                        { attrs: { for: "titulo" } },
-                                        [_vm._v("Título")]
-                                      ),
-                                      _vm._v(" "),
-                                      _c("b-form-input", {
-                                        attrs: {
-                                          type: "text",
-                                          id: "titulo",
-                                          name: "tipo"
-                                        },
-                                        model: {
-                                          value: _vm.titulo,
-                                          callback: function($$v) {
-                                            _vm.titulo = $$v
-                                          },
-                                          expression: "titulo"
-                                        }
-                                      })
-                                    ],
-                                    1
-                                  )
-                                ],
-                                1
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "div",
-                                {
-                                  staticClass:
-                                    "d-flex flex-row-reverse bd-highlight"
-                                },
-                                [
-                                  _c(
-                                    "b-button",
-                                    {
-                                      attrs: { variant: "default" },
-                                      on: { click: _vm.hideEditForm }
-                                    },
-                                    [_vm._v("Continuar")]
-                                  )
-                                ],
-                                1
-                              )
-                            ],
-                            1
-                          )
-                        : _vm._e(),
-                      _vm._v(" "),
-                      _c("br"),
-                      _vm._v(" "),
-                      _c("genres"),
-                      _vm._v(" "),
-                      _c(
-                        "div",
-                        { staticClass: "d-flex flex-row-reverse bd-highlight" },
-                        [
+                          ),
+                          _vm._v(" "),
+                          _c("br"),
+                          _vm._v(" "),
                           _c(
-                            "b-button",
-                            { attrs: { variant: "default", type: "submit" } },
-                            [_vm._v("Continuar")]
+                            "b-row",
+                            [
+                              _c(
+                                "b-col",
+                                { attrs: { cols: "6" } },
+                                [
+                                  _c(
+                                    "label",
+                                    { attrs: { for: "tema_princ" } },
+                                    [_vm._v("Tema principal")]
+                                  ),
+                                  _vm._v(" "),
+                                  _c("b-form-textarea", {
+                                    attrs: {
+                                      type: "text",
+                                      id: "tema_princ",
+                                      placeholder: "Tema principal",
+                                      name: "tema_princ"
+                                    },
+                                    model: {
+                                      value: _vm.book.tema_princ,
+                                      callback: function($$v) {
+                                        _vm.$set(_vm.book, "tema_princ", $$v)
+                                      },
+                                      expression: "book.tema_princ"
+                                    }
+                                  })
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c("hr"),
+                          _vm._v(" "),
+                          _c(
+                            "b-row",
+                            [
+                              _c(
+                                "b-col",
+                                { attrs: { cols: "12" } },
+                                [
+                                  _c("label", { attrs: { for: "sinop" } }, [
+                                    _vm._v("Sinopsis")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("b-form-textarea", {
+                                    attrs: {
+                                      size: "lg",
+                                      rows: "8",
+                                      id: "sinop",
+                                      name: "sinop",
+                                      placeholder: "Sinopsis"
+                                    },
+                                    model: {
+                                      value: _vm.book.sinop,
+                                      callback: function($$v) {
+                                        _vm.$set(_vm.book, "sinop", $$v)
+                                      },
+                                      expression: "book.sinop"
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "b-form-invalid-feedback",
+                                    { attrs: { state: _vm.validateSinopsis } },
+                                    [
+                                      _vm._v(
+                                        "La sinopsis debe ser al menos de 10 caracteres"
+                                      )
+                                    ]
+                                  )
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c("hr"),
+                          _vm._v(" "),
+                          _c(
+                            "b-row",
+                            [
+                              _c(
+                                "b-col",
+                                { attrs: { cols: "4" } },
+                                [
+                                  _c("label", { attrs: { for: "n_pag" } }, [
+                                    _vm._v("Número de páginas")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("b-form-input", {
+                                    attrs: {
+                                      id: "n_pag",
+                                      name: "n_pag",
+                                      placeholder: "Número de páginas"
+                                    },
+                                    model: {
+                                      value: _vm.book.n_pag,
+                                      callback: function($$v) {
+                                        _vm.$set(_vm.book, "n_pag", $$v)
+                                      },
+                                      expression: "book.n_pag"
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "b-form-invalid-feedback",
+                                    { attrs: { state: _vm.validateNP } },
+                                    [
+                                      _vm._v(
+                                        "El número de páginas debe ser numérico entero"
+                                      )
+                                    ]
+                                  )
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "b-col",
+                                { attrs: { cols: "4" } },
+                                [
+                                  _c("label", { attrs: { for: "fec_pub" } }, [
+                                    _vm._v("Fecha de publicación")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("b-form-input", {
+                                    attrs: {
+                                      type: "date",
+                                      id: "fec_pub",
+                                      name: "fec_pub"
+                                    },
+                                    model: {
+                                      value: _vm.book.fec_pub,
+                                      callback: function($$v) {
+                                        _vm.$set(_vm.book, "fec_pub", $$v)
+                                      },
+                                      expression: "book.fec_pub"
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "b-form-invalid-feedback",
+                                    { attrs: { state: _vm.validateF } },
+                                    [_vm._v("La fecha no puede estar vacía")]
+                                  )
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "b-col",
+                                { attrs: { cols: "4" } },
+                                [
+                                  _c("label", { attrs: { for: "editorial" } }, [
+                                    _vm._v("Editorial")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("b-form-select", {
+                                    attrs: {
+                                      options: _vm.editoriales,
+                                      id: "editorial",
+                                      name: "editorial"
+                                    },
+                                    model: {
+                                      value: _vm.book.editorial,
+                                      callback: function($$v) {
+                                        _vm.$set(_vm.book, "editorial", $$v)
+                                      },
+                                      expression: "book.editorial"
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "b-form-invalid-feedback",
+                                    { attrs: { state: _vm.validateE } },
+                                    [
+                                      _vm._v(
+                                        "La editorial no puede estar vacía"
+                                      )
+                                    ]
+                                  )
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c("br"),
+                          _vm._v(" "),
+                          _c(
+                            "b-row",
+                            [
+                              _c(
+                                "b-col",
+                                { attrs: { cols: "4" } },
+                                [
+                                  _c("label", { attrs: { for: "autor" } }, [
+                                    _vm._v("Autor")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("b-form-input", {
+                                    attrs: {
+                                      id: "autor",
+                                      name: "autor",
+                                      placeholder: "Autor"
+                                    },
+                                    model: {
+                                      value: _vm.book.autor,
+                                      callback: function($$v) {
+                                        _vm.$set(_vm.book, "autor", $$v)
+                                      },
+                                      expression: "book.autor"
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "b-form-invalid-feedback",
+                                    { attrs: { state: _vm.validateA } },
+                                    [_vm._v("El autor no puede estar vacío")]
+                                  )
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "b-col",
+                                { attrs: { cols: "4" } },
+                                [
+                                  _c("label", { attrs: { for: "id_prev" } }, [
+                                    _vm._v("ISBN Predecesor")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("b-form-input", {
+                                    attrs: {
+                                      id: "id_prev",
+                                      name: "id_prev",
+                                      placeholder: "ISBN"
+                                    },
+                                    model: {
+                                      value: _vm.book.prev,
+                                      callback: function($$v) {
+                                        _vm.$set(_vm.book, "prev", $$v)
+                                      },
+                                      expression: "book.prev"
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "b-form-invalid-feedback",
+                                    { attrs: { state: _vm.validateP } },
+                                    [
+                                      _vm._v(
+                                        "El ISBN no puede ser el del mismo libro y tiene que ser un ISBN válido"
+                                      )
+                                    ]
+                                  )
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c("hr"),
+                          _vm._v(" "),
+                          _c(
+                            "b-row",
+                            [
+                              _c("b-col", { attrs: { cols: "6" } }, [
+                                _c("h6", [
+                                  _c("strong", [_vm._v("GÉNEROS Y SUBGÉNEROS")])
+                                ])
+                              ])
+                            ],
+                            1
                           ),
                           _vm._v(" "),
                           _c(
-                            "b-link",
+                            "b-row",
+                            [
+                              _c(
+                                "b-col",
+                                { attrs: { cols: "6" } },
+                                [
+                                  _c("label", { attrs: { for: "genero" } }, [
+                                    _vm._v("Genero")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("b-form-select", {
+                                    attrs: {
+                                      options: _vm.generos,
+                                      id: "genero",
+                                      name: "genero"
+                                    },
+                                    on: {
+                                      change: function($event) {
+                                        return _vm.filter()
+                                      }
+                                    },
+                                    model: {
+                                      value: _vm.book.genero,
+                                      callback: function($$v) {
+                                        _vm.$set(_vm.book, "genero", $$v)
+                                      },
+                                      expression: "book.genero"
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "b-form-invalid-feedback",
+                                    { attrs: { state: _vm.validateG } },
+                                    [_vm._v("El género no puede estar vacío")]
+                                  )
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "b-col",
+                                { attrs: { cols: "6" } },
+                                [
+                                  _c("label", { attrs: { for: "subg" } }, [
+                                    _vm._v("Subgenero")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("b-form-select", {
+                                    attrs: {
+                                      options: _vm.subgeneros,
+                                      id: "subg",
+                                      name: "subg"
+                                    },
+                                    model: {
+                                      value: _vm.book.subg,
+                                      callback: function($$v) {
+                                        _vm.$set(_vm.book, "subg", $$v)
+                                      },
+                                      expression: "book.subg"
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "b-form-invalid-feedback",
+                                    { attrs: { state: _vm.validateSG } },
+                                    [
+                                      _vm._v(
+                                        "El subgénero no puede estar vacío"
+                                      )
+                                    ]
+                                  )
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c("br"),
+                          _vm._v(" "),
+                          _c(
+                            "div",
                             {
-                              staticClass: "btn btn-danger",
-                              attrs: { href: "/books" }
+                              staticClass:
+                                "d-flex flex-row-reverse bd-highlight"
                             },
-                            [_vm._v("Cancelar")]
+                            [
+                              _c(
+                                "b-button",
+                                {
+                                  attrs: { variant: "default" },
+                                  on: { click: _vm.revalidate }
+                                },
+                                [_vm._v("Continuar")]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "b-link",
+                                {
+                                  staticClass: "btn btn-danger",
+                                  attrs: { href: "/books" }
+                                },
+                                [_vm._v("Cancelar")]
+                              )
+                            ],
+                            1
                           )
                         ],
                         1
@@ -72981,7 +72948,7 @@ var staticRenderFns = [
         _c("div", { staticClass: "row" }, [
           _c("div", { staticClass: "col-lg-10" }, [
             _c("h4", { staticClass: "card-title" }, [
-              _vm._v("Añadir nuevo libro")
+              _vm._v("Añadir nuev  o libro")
             ])
           ])
         ])
@@ -73018,719 +72985,527 @@ var render = function() {
             _c("div", { staticClass: "card" }, [
               _vm._m(0),
               _vm._v(" "),
-              _c("div", { staticClass: "card-body" }, [
-                _c("div", { staticClass: "row" }, [
+              _c(
+                "div",
+                { staticClass: "card-body" },
+                [
                   _c(
-                    "div",
-                    { staticClass: "col-lg-12" },
+                    "b-form",
+                    {
+                      on: {
+                        submit: function($event) {
+                          $event.preventDefault()
+                          return _vm.update($event)
+                        }
+                      }
+                    },
                     [
-                      _c(
-                        "b-row",
-                        [
-                          _c(
-                            "b-col",
-                            { attrs: { cols: "4" } },
-                            [
-                              _c("label", { attrs: { for: "isbn" } }, [
-                                _vm._v("ISBN")
-                              ]),
-                              _vm._v(" "),
-                              _c("b-form-input", {
-                                attrs: {
-                                  type: "text",
-                                  id: "isbn",
-                                  name: "isbn"
-                                },
-                                model: {
-                                  value: _vm.isbn,
-                                  callback: function($$v) {
-                                    _vm.isbn = $$v
-                                  },
-                                  expression: "isbn"
-                                }
-                              })
-                            ],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "b-col",
-                            { attrs: { cols: "4" } },
-                            [
-                              _c("label", { attrs: { for: "titulo_ori" } }, [
-                                _vm._v("Título Original")
-                              ]),
-                              _vm._v(" "),
-                              _c("b-form-input", {
-                                attrs: {
-                                  type: "text",
-                                  id: "titulo_ori",
-                                  name: "titulo_ori"
-                                },
-                                model: {
-                                  value: _vm.titulo_ori,
-                                  callback: function($$v) {
-                                    _vm.titulo_ori = $$v
-                                  },
-                                  expression: "titulo_ori"
-                                }
-                              })
-                            ],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "b-col",
-                            { attrs: { cols: "4" } },
-                            [
-                              _c("label", { attrs: { for: "titulo_esp" } }, [
-                                _vm._v("Título en Español")
-                              ]),
-                              _vm._v(" "),
-                              _c("b-form-input", {
-                                attrs: {
-                                  type: "text",
-                                  id: "titulo_esp",
-                                  name: "titulo_esp"
-                                },
-                                model: {
-                                  value: _vm.titulo_esp,
-                                  callback: function($$v) {
-                                    _vm.titulo_esp = $$v
-                                  },
-                                  expression: "titulo_esp"
-                                }
-                              })
-                            ],
-                            1
-                          )
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c("br"),
-                      _vm._v(" "),
-                      _c(
-                        "b-row",
-                        [
-                          _c(
-                            "b-col",
-                            { attrs: { cols: "6" } },
-                            [
-                              _c("label", { attrs: { for: "tema_princ" } }, [
-                                _vm._v("Tema principal")
-                              ]),
-                              _vm._v(" "),
-                              _c("b-form-textarea", {
-                                attrs: {
-                                  type: "text",
-                                  id: "tema_princ",
-                                  name: "tema_princ"
-                                },
-                                model: {
-                                  value: _vm.tema_princ,
-                                  callback: function($$v) {
-                                    _vm.tema_princ = $$v
-                                  },
-                                  expression: "tema_princ"
-                                }
-                              })
-                            ],
-                            1
-                          )
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c("hr"),
-                      _vm._v(" "),
-                      _c(
-                        "b-row",
-                        [
-                          _c(
-                            "b-col",
-                            { attrs: { cols: "12" } },
-                            [
-                              _c("label", { attrs: { for: "sinop" } }, [
-                                _vm._v("Sinopsis")
-                              ]),
-                              _vm._v(" "),
-                              _c("b-form-textarea", {
-                                attrs: {
-                                  size: "lg",
-                                  rows: "8",
-                                  id: "sinop",
-                                  name: "sinop"
-                                },
-                                model: {
-                                  value: _vm.sinop,
-                                  callback: function($$v) {
-                                    _vm.sinop = $$v
-                                  },
-                                  expression: "sinop"
-                                }
-                              })
-                            ],
-                            1
-                          )
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c("hr"),
-                      _vm._v(" "),
-                      _c(
-                        "b-row",
-                        [
-                          _c(
-                            "b-col",
-                            { attrs: { cols: "4" } },
-                            [
-                              _c("label", { attrs: { for: "n_pag" } }, [
-                                _vm._v("Número de páginas")
-                              ]),
-                              _vm._v(" "),
-                              _c("b-form-input", {
-                                attrs: { id: "n_pag", name: "n_pag" },
-                                model: {
-                                  value: _vm.n_pag,
-                                  callback: function($$v) {
-                                    _vm.n_pag = $$v
-                                  },
-                                  expression: "n_pag"
-                                }
-                              })
-                            ],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "b-col",
-                            { attrs: { cols: "4" } },
-                            [
-                              _c("label", { attrs: { for: "fec_pub" } }, [
-                                _vm._v("Fecha de publicación")
-                              ]),
-                              _vm._v(" "),
-                              _c("b-form-input", {
-                                attrs: {
-                                  type: "date",
-                                  id: "fec_pub",
-                                  name: "fec_pub"
-                                },
-                                model: {
-                                  value: _vm.fec_pub,
-                                  callback: function($$v) {
-                                    _vm.fec_pub = $$v
-                                  },
-                                  expression: "fec_pub"
-                                }
-                              })
-                            ],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "b-col",
-                            { attrs: { cols: "4" } },
-                            [
-                              _c("label", { attrs: { for: "editorial" } }, [
-                                _vm._v("Editorial")
-                              ]),
-                              _vm._v(" "),
-                              _c("b-form-select", {
-                                attrs: {
-                                  options: _vm.editoriales,
-                                  id: "editorial",
-                                  name: "editorial"
-                                },
-                                model: {
-                                  value: _vm.editorial,
-                                  callback: function($$v) {
-                                    _vm.editorial = $$v
-                                  },
-                                  expression: "editorial"
-                                }
-                              })
-                            ],
-                            1
-                          )
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c("br"),
-                      _vm._v(" "),
-                      _c(
-                        "b-row",
-                        [
-                          _c(
-                            "b-col",
-                            { attrs: { cols: "6" } },
-                            [
-                              _c("label", { attrs: { for: "prev" } }, [
-                                _vm._v("Predecesor")
-                              ]),
-                              _vm._v(" "),
-                              _c("b-form-input", {
-                                attrs: { id: "prev", name: "prev" },
-                                model: {
-                                  value: _vm.prev,
-                                  callback: function($$v) {
-                                    _vm.prev = $$v
-                                  },
-                                  expression: "prev"
-                                }
-                              })
-                            ],
-                            1
-                          )
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c("hr"),
-                      _vm._v(" "),
-                      _c(
-                        "b-row",
-                        [
-                          _c("b-col", { attrs: { cols: "6" } }, [
-                            _c("h6", [_c("strong", [_vm._v("ESTRUCTURA")])])
-                          ])
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c("br"),
-                      _vm._v(" "),
-                      _c(
-                        "b-row",
-                        [
-                          _c("b-col", { attrs: { cols: "12" } }, [
+                      _c("div", { staticClass: "row" }, [
+                        _c(
+                          "div",
+                          { staticClass: "col-lg-12" },
+                          [
                             _c(
-                              "div",
-                              { staticClass: "table-responsive table-sales" },
+                              "b-row",
                               [
-                                _c("table", { staticClass: "table" }, [
-                                  _c("thead", [
-                                    _c("tr", [
-                                      _c("th", { staticClass: "text-center" }, [
-                                        _vm._v("Nombre")
-                                      ]),
-                                      _vm._v(" "),
-                                      _c("th", { staticClass: "text-center" }, [
-                                        _vm._v("Tipo")
-                                      ]),
-                                      _vm._v(" "),
-                                      _c("th", { staticClass: "text-center" }, [
-                                        _vm._v("Título")
-                                      ]),
-                                      _vm._v(" "),
-                                      _c("th", { staticClass: "text-center" }, [
-                                        _vm._v("Acción")
-                                      ])
-                                    ])
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("tbody", [
-                                    _c("tr", [
-                                      _c("td", { staticClass: "text-center" }, [
-                                        _vm._v("Prólogo")
-                                      ]),
-                                      _vm._v(" "),
-                                      _c("td", { staticClass: "text-center" }, [
-                                        _vm._v("Capítulo")
-                                      ]),
-                                      _vm._v(" "),
-                                      _c("td", { staticClass: "text-center" }, [
-                                        _vm._v("¿Qué es esto?")
-                                      ]),
-                                      _vm._v(" "),
-                                      _c(
-                                        "td",
-                                        {
-                                          staticClass: "td-actions text-center"
+                                _c(
+                                  "b-col",
+                                  { attrs: { cols: "4" } },
+                                  [
+                                    _c("label", { attrs: { for: "isbn" } }, [
+                                      _vm._v("ISBN")
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("b-form-input", {
+                                      attrs: {
+                                        type: "text",
+                                        disabled: "",
+                                        id: "isbn",
+                                        name: "isbn"
+                                      },
+                                      model: {
+                                        value: _vm.book.isbn,
+                                        callback: function($$v) {
+                                          _vm.$set(_vm.book, "isbn", $$v)
                                         },
-                                        [
-                                          _c(
-                                            "b-button",
-                                            {
-                                              staticClass: "btn btn-info",
-                                              attrs: {
-                                                rel: "tooltip",
-                                                "data-toggle": "tooltip",
-                                                "data-placement": "bottom",
-                                                title: "Añadir"
-                                              },
-                                              on: { click: _vm.showAddForm }
-                                            },
-                                            [
-                                              _c(
-                                                "i",
-                                                {
-                                                  staticClass: "material-icons"
-                                                },
-                                                [_vm._v("add")]
-                                              )
-                                            ]
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "b-button",
-                                            {
-                                              staticClass: "btn btn-success",
-                                              attrs: {
-                                                rel: "tooltip",
-                                                "data-toggle": "tooltip",
-                                                "data-placement": "bottom",
-                                                title: "Modificar"
-                                              },
-                                              on: { click: _vm.showEditForm }
-                                            },
-                                            [
-                                              _c(
-                                                "i",
-                                                {
-                                                  staticClass: "material-icons"
-                                                },
-                                                [_vm._v("edit")]
-                                              )
-                                            ]
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "button",
-                                            {
-                                              staticClass: "btn btn-danger",
-                                              attrs: {
-                                                type: "button",
-                                                rel: "tooltip",
-                                                "data-toggle": "tooltip",
-                                                "data-placement": "bottom",
-                                                title: "Eliminar"
-                                              }
-                                            },
-                                            [
-                                              _c(
-                                                "i",
-                                                {
-                                                  staticClass: "material-icons"
-                                                },
-                                                [_vm._v("close")]
-                                              )
-                                            ]
-                                          )
-                                        ],
-                                        1
-                                      )
+                                        expression: "book.isbn"
+                                      }
+                                    })
+                                  ],
+                                  1
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "b-col",
+                                  { attrs: { cols: "4" } },
+                                  [
+                                    _c(
+                                      "label",
+                                      { attrs: { for: "titulo_ori" } },
+                                      [_vm._v("Título Original")]
+                                    ),
+                                    _vm._v(" "),
+                                    _c("b-form-input", {
+                                      attrs: {
+                                        type: "text",
+                                        id: "titulo_ori",
+                                        name: "titulo_ori"
+                                      },
+                                      model: {
+                                        value: _vm.book.titulo_ori,
+                                        callback: function($$v) {
+                                          _vm.$set(_vm.book, "titulo_ori", $$v)
+                                        },
+                                        expression: "book.titulo_ori"
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c(
+                                      "b-form-invalid-feedback",
+                                      { attrs: { state: _vm.validateTO } },
+                                      [_vm._v("El título no puede estar vacío")]
+                                    )
+                                  ],
+                                  1
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "b-col",
+                                  { attrs: { cols: "4" } },
+                                  [
+                                    _c(
+                                      "label",
+                                      { attrs: { for: "titulo_esp" } },
+                                      [_vm._v("Título en Español")]
+                                    ),
+                                    _vm._v(" "),
+                                    _c("b-form-input", {
+                                      attrs: {
+                                        type: "text",
+                                        id: "titulo_esp",
+                                        name: "titulo_esp"
+                                      },
+                                      model: {
+                                        value: _vm.book.titulo_esp,
+                                        callback: function($$v) {
+                                          _vm.$set(_vm.book, "titulo_esp", $$v)
+                                        },
+                                        expression: "book.titulo_esp"
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c(
+                                      "b-form-invalid-feedback",
+                                      { attrs: { state: _vm.validateTE } },
+                                      [_vm._v("El título no puede estar vacío")]
+                                    )
+                                  ],
+                                  1
+                                )
+                              ],
+                              1
+                            ),
+                            _vm._v(" "),
+                            _c("br"),
+                            _vm._v(" "),
+                            _c(
+                              "b-row",
+                              [
+                                _c(
+                                  "b-col",
+                                  { attrs: { cols: "6" } },
+                                  [
+                                    _c(
+                                      "label",
+                                      { attrs: { for: "tema_princ" } },
+                                      [_vm._v("Tema principal")]
+                                    ),
+                                    _vm._v(" "),
+                                    _c("b-form-textarea", {
+                                      attrs: {
+                                        type: "text",
+                                        id: "tema_princ",
+                                        name: "tema_princ"
+                                      },
+                                      model: {
+                                        value: _vm.book.tema_princ,
+                                        callback: function($$v) {
+                                          _vm.$set(_vm.book, "tema_princ", $$v)
+                                        },
+                                        expression: "book.tema_princ"
+                                      }
+                                    })
+                                  ],
+                                  1
+                                )
+                              ],
+                              1
+                            ),
+                            _vm._v(" "),
+                            _c("hr"),
+                            _vm._v(" "),
+                            _c(
+                              "b-row",
+                              [
+                                _c(
+                                  "b-col",
+                                  { attrs: { cols: "12" } },
+                                  [
+                                    _c("label", { attrs: { for: "sinop" } }, [
+                                      _vm._v("Sinopsis")
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("b-form-textarea", {
+                                      attrs: {
+                                        size: "lg",
+                                        rows: "8",
+                                        id: "sinop",
+                                        name: "sinop"
+                                      },
+                                      model: {
+                                        value: _vm.book.sinop,
+                                        callback: function($$v) {
+                                          _vm.$set(_vm.book, "sinop", $$v)
+                                        },
+                                        expression: "book.sinop"
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c(
+                                      "b-form-invalid-feedback",
+                                      {
+                                        attrs: { state: _vm.validateSinopsis }
+                                      },
+                                      [
+                                        _vm._v(
+                                          "La sinopsis debe ser al menos de 10 caracteres"
+                                        )
+                                      ]
+                                    )
+                                  ],
+                                  1
+                                )
+                              ],
+                              1
+                            ),
+                            _vm._v(" "),
+                            _c("hr"),
+                            _vm._v(" "),
+                            _c(
+                              "b-row",
+                              [
+                                _c(
+                                  "b-col",
+                                  { attrs: { cols: "4" } },
+                                  [
+                                    _c("label", { attrs: { for: "n_pag" } }, [
+                                      _vm._v("Número de páginas")
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("b-form-input", {
+                                      attrs: { id: "n_pag", name: "n_pag" },
+                                      model: {
+                                        value: _vm.book.n_pag,
+                                        callback: function($$v) {
+                                          _vm.$set(_vm.book, "n_pag", $$v)
+                                        },
+                                        expression: "book.n_pag"
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c(
+                                      "b-form-invalid-feedback",
+                                      { attrs: { state: _vm.validateNP } },
+                                      [
+                                        _vm._v(
+                                          "El número de páginas debe ser numérico entero"
+                                        )
+                                      ]
+                                    )
+                                  ],
+                                  1
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "b-col",
+                                  { attrs: { cols: "4" } },
+                                  [
+                                    _c("label", { attrs: { for: "fec_pub" } }, [
+                                      _vm._v("Fecha de publicación")
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("b-form-input", {
+                                      attrs: {
+                                        type: "date",
+                                        id: "fec_pub",
+                                        name: "fec_pub"
+                                      },
+                                      model: {
+                                        value: _vm.book.fec_pub,
+                                        callback: function($$v) {
+                                          _vm.$set(_vm.book, "fec_pub", $$v)
+                                        },
+                                        expression: "book.fec_pub"
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c(
+                                      "b-form-invalid-feedback",
+                                      { attrs: { state: _vm.validateF } },
+                                      [_vm._v("La fecha no puede estar vacía")]
+                                    )
+                                  ],
+                                  1
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "b-col",
+                                  { attrs: { cols: "4" } },
+                                  [
+                                    _c(
+                                      "label",
+                                      { attrs: { for: "editorial" } },
+                                      [_vm._v("Editorial")]
+                                    ),
+                                    _vm._v(" "),
+                                    _c("b-form-select", {
+                                      attrs: {
+                                        options: _vm.editoriales,
+                                        id: "editorial",
+                                        name: "editorial"
+                                      },
+                                      model: {
+                                        value: _vm.book.editorial,
+                                        callback: function($$v) {
+                                          _vm.$set(_vm.book, "editorial", $$v)
+                                        },
+                                        expression: "book.editorial"
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c(
+                                      "b-form-invalid-feedback",
+                                      { attrs: { state: _vm.validateE } },
+                                      [
+                                        _vm._v(
+                                          "La editorial no puede estar vacía"
+                                        )
+                                      ]
+                                    )
+                                  ],
+                                  1
+                                )
+                              ],
+                              1
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "b-row",
+                              [
+                                _c(
+                                  "b-col",
+                                  { attrs: { cols: "4" } },
+                                  [
+                                    _c("label", { attrs: { for: "autor" } }, [
+                                      _vm._v("Autor")
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("b-form-input", {
+                                      attrs: {
+                                        id: "autor",
+                                        name: "autor",
+                                        placeholder: "Autor"
+                                      },
+                                      model: {
+                                        value: _vm.book.autor,
+                                        callback: function($$v) {
+                                          _vm.$set(_vm.book, "autor", $$v)
+                                        },
+                                        expression: "book.autor"
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c(
+                                      "b-form-invalid-feedback",
+                                      { attrs: { state: _vm.validateA } },
+                                      [_vm._v("El autor no puede estar vacío")]
+                                    )
+                                  ],
+                                  1
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "b-col",
+                                  { attrs: { cols: "4" } },
+                                  [
+                                    _c("label", { attrs: { for: "id_prev" } }, [
+                                      _vm._v("ISBN Predecesor")
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("b-form-input", {
+                                      attrs: {
+                                        id: "id_prev",
+                                        name: "id_prev",
+                                        placeholder: "ISBN"
+                                      },
+                                      model: {
+                                        value: _vm.book.prev,
+                                        callback: function($$v) {
+                                          _vm.$set(_vm.book, "prev", $$v)
+                                        },
+                                        expression: "book.prev"
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c(
+                                      "b-form-invalid-feedback",
+                                      { attrs: { state: _vm.validateP } },
+                                      [
+                                        _vm._v(
+                                          "El ISBN no puede ser el del mismo libro y tiene que ser un ISBN válido"
+                                        )
+                                      ]
+                                    )
+                                  ],
+                                  1
+                                )
+                              ],
+                              1
+                            ),
+                            _vm._v(" "),
+                            _c("hr"),
+                            _vm._v(" "),
+                            _c(
+                              "b-row",
+                              [
+                                _c("b-col", { attrs: { cols: "6" } }, [
+                                  _c("h6", [
+                                    _c("strong", [
+                                      _vm._v("GÉNEROS Y SUBGÉNEROS")
                                     ])
                                   ])
                                 ])
-                              ]
+                              ],
+                              1
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "b-row",
+                              [
+                                _c(
+                                  "b-col",
+                                  { attrs: { cols: "6" } },
+                                  [
+                                    _c("label", { attrs: { for: "genero" } }, [
+                                      _vm._v("Genero")
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("b-form-select", {
+                                      attrs: {
+                                        options: _vm.generos,
+                                        id: "genero",
+                                        name: "genero"
+                                      },
+                                      on: {
+                                        change: function($event) {
+                                          return _vm.filter()
+                                        }
+                                      },
+                                      model: {
+                                        value: _vm.book.genero,
+                                        callback: function($$v) {
+                                          _vm.$set(_vm.book, "genero", $$v)
+                                        },
+                                        expression: "book.genero"
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c(
+                                      "b-form-invalid-feedback",
+                                      { attrs: { state: _vm.validateG } },
+                                      [_vm._v("El género no puede estar vacío")]
+                                    )
+                                  ],
+                                  1
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "b-col",
+                                  { attrs: { cols: "6" } },
+                                  [
+                                    _c("label", { attrs: { for: "subg" } }, [
+                                      _vm._v("Subgenero")
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("b-form-select", {
+                                      attrs: {
+                                        options: _vm.subgeneros,
+                                        id: "subg",
+                                        name: "subg"
+                                      },
+                                      model: {
+                                        value: _vm.book.subg,
+                                        callback: function($$v) {
+                                          _vm.$set(_vm.book, "subg", $$v)
+                                        },
+                                        expression: "book.subg"
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c(
+                                      "b-form-invalid-feedback",
+                                      { attrs: { state: _vm.validateSG } },
+                                      [
+                                        _vm._v(
+                                          "El subgénero no puede estar vacío"
+                                        )
+                                      ]
+                                    )
+                                  ],
+                                  1
+                                )
+                              ],
+                              1
+                            ),
+                            _vm._v(" "),
+                            _c("br"),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              {
+                                staticClass:
+                                  "d-flex flex-row-reverse bd-highlight"
+                              },
+                              [
+                                _c(
+                                  "b-button",
+                                  {
+                                    attrs: { variant: "default" },
+                                    on: { click: _vm.revalidate }
+                                  },
+                                  [_vm._v("Continuar")]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "b-link",
+                                  {
+                                    staticClass: "btn btn-danger",
+                                    attrs: { href: "/books" }
+                                  },
+                                  [_vm._v("Cancelar")]
+                                )
+                              ],
+                              1
                             )
-                          ])
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c("hr"),
-                      _vm._v(" "),
-                      _vm.wants_to_add
-                        ? _c(
-                            "div",
-                            { attrs: { id: "add-structure" } },
-                            [
-                              _c(
-                                "b-row",
-                                [
-                                  _c("b-col", { attrs: { cols: "6" } }, [
-                                    _c("h6", [
-                                      _c("strong", [
-                                        _vm._v("AÑADIR ESTRUCTURA")
-                                      ])
-                                    ])
-                                  ])
-                                ],
-                                1
-                              ),
-                              _vm._v(" "),
-                              _c("br"),
-                              _vm._v(" "),
-                              _c(
-                                "b-row",
-                                [
-                                  _c(
-                                    "b-col",
-                                    { attrs: { cols: "4" } },
-                                    [
-                                      _c(
-                                        "label",
-                                        { attrs: { for: "nombre" } },
-                                        [_vm._v("Nombre")]
-                                      ),
-                                      _vm._v(" "),
-                                      _c("b-form-input", {
-                                        attrs: {
-                                          type: "text",
-                                          id: "nombre",
-                                          name: "nombre",
-                                          placeholder: "Nombre"
-                                        },
-                                        model: {
-                                          value: _vm.nombre,
-                                          callback: function($$v) {
-                                            _vm.nombre = $$v
-                                          },
-                                          expression: "nombre"
-                                        }
-                                      })
-                                    ],
-                                    1
-                                  ),
-                                  _vm._v(" "),
-                                  _c(
-                                    "b-col",
-                                    { attrs: { cols: "4" } },
-                                    [
-                                      _c("label", { attrs: { for: "tipo" } }, [
-                                        _vm._v("Tipo")
-                                      ]),
-                                      _vm._v(" "),
-                                      _c("b-form-select", {
-                                        attrs: {
-                                          options: _vm.tipos,
-                                          id: "tipo",
-                                          name: "tipo"
-                                        },
-                                        model: {
-                                          value: _vm.tipo,
-                                          callback: function($$v) {
-                                            _vm.tipo = $$v
-                                          },
-                                          expression: "tipo"
-                                        }
-                                      })
-                                    ],
-                                    1
-                                  ),
-                                  _vm._v(" "),
-                                  _c(
-                                    "b-col",
-                                    { attrs: { cols: "4" } },
-                                    [
-                                      _c(
-                                        "label",
-                                        { attrs: { for: "titulo" } },
-                                        [_vm._v("Título")]
-                                      ),
-                                      _vm._v(" "),
-                                      _c("b-form-input", {
-                                        attrs: {
-                                          type: "text",
-                                          id: "titulo",
-                                          name: "tipo"
-                                        },
-                                        model: {
-                                          value: _vm.titulo,
-                                          callback: function($$v) {
-                                            _vm.titulo = $$v
-                                          },
-                                          expression: "titulo"
-                                        }
-                                      })
-                                    ],
-                                    1
-                                  )
-                                ],
-                                1
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "div",
-                                {
-                                  staticClass:
-                                    "d-flex flex-row-reverse bd-highlight"
-                                },
-                                [
-                                  _c(
-                                    "b-button",
-                                    {
-                                      attrs: { variant: "default" },
-                                      on: { click: _vm.hideAddForm }
-                                    },
-                                    [_vm._v("Continuar")]
-                                  )
-                                ],
-                                1
-                              )
-                            ],
-                            1
-                          )
-                        : _vm._e(),
-                      _vm._v(" "),
-                      _vm.wants_to_edit
-                        ? _c(
-                            "div",
-                            { attrs: { id: "edit-structure" } },
-                            [
-                              _c(
-                                "b-row",
-                                [
-                                  _c("b-col", { attrs: { cols: "6" } }, [
-                                    _c("h6", [
-                                      _c("strong", [
-                                        _vm._v("MODIFICAR ESTRUCTURA")
-                                      ])
-                                    ])
-                                  ])
-                                ],
-                                1
-                              ),
-                              _vm._v(" "),
-                              _c("br"),
-                              _vm._v(" "),
-                              _c(
-                                "b-row",
-                                [
-                                  _c(
-                                    "b-col",
-                                    { attrs: { cols: "4" } },
-                                    [
-                                      _c(
-                                        "label",
-                                        { attrs: { for: "nombre" } },
-                                        [_vm._v("Nombre")]
-                                      ),
-                                      _vm._v(" "),
-                                      _c("b-form-input", {
-                                        attrs: {
-                                          type: "text",
-                                          id: "nombre",
-                                          name: "nombre",
-                                          placeholder: "Nombre"
-                                        },
-                                        model: {
-                                          value: _vm.nombre,
-                                          callback: function($$v) {
-                                            _vm.nombre = $$v
-                                          },
-                                          expression: "nombre"
-                                        }
-                                      })
-                                    ],
-                                    1
-                                  ),
-                                  _vm._v(" "),
-                                  _c(
-                                    "b-col",
-                                    { attrs: { cols: "4" } },
-                                    [
-                                      _c("label", { attrs: { for: "tipo" } }, [
-                                        _vm._v("Tipo")
-                                      ]),
-                                      _vm._v(" "),
-                                      _c("b-form-select", {
-                                        attrs: {
-                                          options: _vm.tipos,
-                                          id: "tipo",
-                                          name: "tipo"
-                                        },
-                                        model: {
-                                          value: _vm.tipo,
-                                          callback: function($$v) {
-                                            _vm.tipo = $$v
-                                          },
-                                          expression: "tipo"
-                                        }
-                                      })
-                                    ],
-                                    1
-                                  ),
-                                  _vm._v(" "),
-                                  _c(
-                                    "b-col",
-                                    { attrs: { cols: "4" } },
-                                    [
-                                      _c(
-                                        "label",
-                                        { attrs: { for: "titulo" } },
-                                        [_vm._v("Título")]
-                                      ),
-                                      _vm._v(" "),
-                                      _c("b-form-input", {
-                                        attrs: {
-                                          type: "text",
-                                          id: "titulo",
-                                          name: "tipo"
-                                        },
-                                        model: {
-                                          value: _vm.titulo,
-                                          callback: function($$v) {
-                                            _vm.titulo = $$v
-                                          },
-                                          expression: "titulo"
-                                        }
-                                      })
-                                    ],
-                                    1
-                                  )
-                                ],
-                                1
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "div",
-                                {
-                                  staticClass:
-                                    "d-flex flex-row-reverse bd-highlight"
-                                },
-                                [
-                                  _c(
-                                    "b-button",
-                                    {
-                                      attrs: { variant: "default" },
-                                      on: { click: _vm.hideEditForm }
-                                    },
-                                    [_vm._v("Continuar")]
-                                  )
-                                ],
-                                1
-                              )
-                            ],
-                            1
-                          )
-                        : _vm._e(),
-                      _vm._v(" "),
-                      _c("br"),
-                      _vm._v(" "),
-                      _c("genres"),
-                      _vm._v(" "),
-                      _c(
-                        "div",
-                        { staticClass: "d-flex flex-row-reverse bd-highlight" },
-                        [
-                          _c(
-                            "b-button",
-                            { attrs: { variant: "default", type: "submit" } },
-                            [_vm._v("Continuar")]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "b-link",
-                            {
-                              staticClass: "btn btn-danger",
-                              attrs: { href: "/books" }
-                            },
-                            [_vm._v("Cancelar")]
-                          )
-                        ],
-                        1
-                      )
-                    ],
-                    1
+                          ],
+                          1
+                        )
+                      ])
+                    ]
                   )
-                ])
-              ])
+                ],
+                1
+              )
             ])
           ])
         ])
@@ -73785,56 +73560,51 @@ var render = function() {
     "div",
     [
       _c(
-        "b-row",
-        { staticClass: "ml-5" },
+        "b-col",
+        { attrs: { cols: "7" } },
         [
-          _c(
-            "b-col",
-            { attrs: { cols: "10" } },
-            [
-              _c("b-table", {
-                ref: "selectableTable",
-                attrs: {
-                  selectable: "",
-                  "select-mode": "multi",
-                  items: _vm.items,
-                  fields: _vm.fields,
-                  responsive: "md"
-                },
-                on: { "row-selected": _vm.onRowSelected },
-                scopedSlots: _vm._u([
-                  {
-                    key: "cell(seleccionado)",
-                    fn: function(ref) {
-                      var rowSelected = ref.rowSelected
-                      return [
-                        rowSelected
-                          ? [
-                              _c("span", { attrs: { "aria-hidden": "true" } }, [
-                                _vm._v("✓")
-                              ]),
-                              _vm._v(" "),
-                              _c("span", { staticClass: "sr-only" }, [
-                                _vm._v("Seleccionado")
-                              ])
-                            ]
-                          : [
-                              _c("span", { attrs: { "aria-hidden": "true" } }, [
-                                _vm._v(" ")
-                              ]),
-                              _vm._v(" "),
-                              _c("span", { staticClass: "sr-only" }, [
-                                _vm._v("No seleccionado")
-                              ])
-                            ]
-                      ]
-                    }
-                  }
-                ])
-              })
-            ],
-            1
-          )
+          _c("label", [_vm._v("Subgéneros")]),
+          _vm._v(" "),
+          _c("b-table", {
+            ref: "selectableTable",
+            attrs: {
+              selectable: "",
+              "select-mode": "multi",
+              items: _vm.items,
+              fields: _vm.fields,
+              responsive: "lg"
+            },
+            on: { "row-selected": _vm.onRowSelected },
+            scopedSlots: _vm._u([
+              {
+                key: "cell(seleccionado)",
+                fn: function(ref) {
+                  var rowSelected = ref.rowSelected
+                  return [
+                    rowSelected
+                      ? [
+                          _c("span", { attrs: { "aria-hidden": "true" } }, [
+                            _vm._v("✓")
+                          ]),
+                          _vm._v(" "),
+                          _c("span", { staticClass: "sr-only" }, [
+                            _vm._v("Seleccionado")
+                          ])
+                        ]
+                      : [
+                          _c("span", { attrs: { "aria-hidden": "true" } }, [
+                            _vm._v(" ")
+                          ]),
+                          _vm._v(" "),
+                          _c("span", { staticClass: "sr-only" }, [
+                            _vm._v("No seleccionado")
+                          ])
+                        ]
+                  ]
+                }
+              }
+            ])
+          })
         ],
         1
       ),
@@ -73855,10 +73625,10 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/books/Show.vue?vue&type=template&id=1fe5f6ed&":
-/*!*************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/books/Show.vue?vue&type=template&id=1fe5f6ed& ***!
-  \*************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/books/StructAdd.vue?vue&type=template&id=84722768&":
+/*!******************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/books/StructAdd.vue?vue&type=template&id=84722768& ***!
+  \******************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -73885,131 +73655,261 @@ var render = function() {
                     { staticClass: "col-lg-12" },
                     [
                       _c(
-                        "b-row",
+                        "b-form",
+                        {
+                          on: {
+                            submit: function($event) {
+                              $event.preventDefault()
+                              return _vm.revalidate($event)
+                            }
+                          }
+                        },
                         [
-                          _c("b-col", { attrs: { cols: "4" } }, [
-                            _c("p", [
-                              _c("strong", [_vm._v("ISBN:")]),
-                              _vm._v(" 123456789101112")
-                            ])
-                          ]),
-                          _vm._v(" "),
-                          _c("b-col", { attrs: { cols: "6" } }, [
-                            _c("p", [
-                              _c("strong", [_vm._v("TÍTULO ORIGINAL:")]),
-                              _vm._v(" Hola como estas")
-                            ])
-                          ])
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "b-row",
-                        [
-                          _c("b-col", { attrs: { cols: "4" } }, [
-                            _c("p", [
-                              _c("strong", [_vm._v("TÍTULO EN ESPAÑOL:")]),
-                              _vm._v(" Dummy")
-                            ])
-                          ]),
-                          _vm._v(" "),
-                          _c("b-col", { attrs: { cols: "4" } }, [
-                            _c("p", [
-                              _c("strong", [_vm._v("NÚMERO DE PÁGINAS:")]),
-                              _vm._v(" 214")
-                            ])
-                          ]),
-                          _vm._v(" "),
-                          _c("b-col", { attrs: { cols: "4" } }, [
-                            _c("p", [
-                              _c("strong", [_vm._v("EDITORIAL:")]),
-                              _vm._v(" Planeta")
-                            ])
-                          ])
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "b-row",
-                        [
-                          _c("b-col", { attrs: { cols: "4" } }, [
-                            _c("p", [
-                              _c("strong", [_vm._v("FECHA DE PUBLICACIÓN")]),
-                              _vm._v("08-08-1999")
-                            ])
-                          ]),
-                          _vm._v(" "),
-                          _c("b-col", { attrs: { cols: "4" } }, [
-                            _c("p", [
-                              _c("strong", [_vm._v("PREDECESOR: ")]),
-                              _vm._v(" Otro libro")
-                            ])
-                          ]),
-                          _vm._v(" "),
-                          _c("b-col", { attrs: { cols: "4" } }, [
-                            _c("p", [
-                              _c("strong", [_vm._v("TEMA PRINCIPAL: ")]),
-                              _vm._v("Something")
-                            ])
-                          ])
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c("hr"),
-                      _vm._v(" "),
-                      _c(
-                        "b-row",
-                        [
-                          _c("b-col", { attrs: { cols: "12" } }, [
-                            _c("p", [
-                              _c("strong", [_vm._v("SINOPSIS: ")]),
-                              _vm._v(
-                                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam scelerisque leo et fermentum auctor. Donec tempus orci velit, eget ultricies risus commodo nec. Cras pharetra cursus nunc quis ultrices. Donec molestie imperdiet nibh nec fermentum. Curabitur gravida risus id posuere rutrum. Sed tincidunt lorem odio, in volutpat dolor faucibus quis. Integer pulvinar egestas ante, at euismod felis ornare in. Proin blandit nec justo sit amet dapibus. Quisque convallis semper tellus, eu vestibulum nulla congue et. Sed nec dolor sit amet lectus iaculis congue eget non sapien. Curabitur et venenatis lacus. Aliquam tortor mauris, molestie sit amet bibendum eu, cursus eu augue. Suspendisse dictum eros et ex porttitor imperdiet. Nullam et porta justo. Donec condimentum nunc id ante volutpat, at pellentesque odio placerat. "
+                          _c(
+                            "b-row",
+                            [
+                              _c(
+                                "b-col",
+                                { attrs: { cols: "4" } },
+                                [
+                                  _c("label", { attrs: { for: "nombre" } }, [
+                                    _vm._v("Nombre")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("b-form-input", {
+                                    attrs: {
+                                      type: "text",
+                                      id: "nom",
+                                      name: "nom",
+                                      placeholder: "Nombre"
+                                    },
+                                    model: {
+                                      value: _vm.struct.nom,
+                                      callback: function($$v) {
+                                        _vm.$set(_vm.struct, "nom", $$v)
+                                      },
+                                      expression: "struct.nom"
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "b-form-invalid-feedback",
+                                    { attrs: { state: _vm.validateN } },
+                                    [
+                                      _vm._v(
+                                        "Nombre de estructura no puede estar vacío"
+                                      )
+                                    ]
+                                  )
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "b-col",
+                                { attrs: { cols: "4" } },
+                                [
+                                  _c("label", { attrs: { for: "tipo" } }, [
+                                    _vm._v("Tipo")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("b-form-select", {
+                                    attrs: {
+                                      options: _vm.tipos,
+                                      id: "tipo",
+                                      name: "tipo"
+                                    },
+                                    model: {
+                                      value: _vm.struct.tipo,
+                                      callback: function($$v) {
+                                        _vm.$set(_vm.struct, "tipo", $$v)
+                                      },
+                                      expression: "struct.tipo"
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "b-form-invalid-feedback",
+                                    { attrs: { state: _vm.validateT } },
+                                    [
+                                      _vm._v(
+                                        "Tipo de estructura no puede estar vacío"
+                                      )
+                                    ]
+                                  )
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "b-col",
+                                { attrs: { cols: "4" } },
+                                [
+                                  _c("label", { attrs: { for: "titulo" } }, [
+                                    _vm._v("Título")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("b-form-input", {
+                                    attrs: {
+                                      type: "text",
+                                      id: "titulo",
+                                      name: "tipo"
+                                    },
+                                    model: {
+                                      value: _vm.struct.titulo,
+                                      callback: function($$v) {
+                                        _vm.$set(_vm.struct, "titulo", $$v)
+                                      },
+                                      expression: "struct.titulo"
+                                    }
+                                  })
+                                ],
+                                1
                               )
-                            ])
-                          ])
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c("hr"),
-                      _vm._v(" "),
-                      _c(
-                        "b-row",
-                        [
-                          _c("b-col", { attrs: { cols: "6" } }, [
-                            _c("h6", [_c("strong", [_vm._v("ESTRUCTURA")])])
-                          ])
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "b-row",
-                        [
-                          _c("b-col", { attrs: { cols: "4" } }, [
-                            _c("p", [
-                              _c("strong", [_vm._v("NOMBRE: ")]),
-                              _vm._v("Uno")
-                            ])
-                          ]),
+                            ],
+                            1
+                          ),
                           _vm._v(" "),
-                          _c("b-col", { attrs: { cols: "4" } }, [
-                            _c("p", [
-                              _c("strong", [_vm._v("TIPO: ")]),
-                              _vm._v("No se")
-                            ])
-                          ]),
+                          _c("hr"),
                           _vm._v(" "),
-                          _c("b-col", { attrs: { cols: "4" } }, [
-                            _c("p", [
-                              _c("strong", [_vm._v("TÍTULO: ")]),
-                              _vm._v(" ¿Qué es esto?")
-                            ])
-                          ])
+                          _c(
+                            "b-row",
+                            [
+                              _c("b-col", { attrs: { cols: "6" } }, [
+                                _c("h6", [
+                                  _c("strong", [_vm._v("DATOS DE LA SECCIÓN")])
+                                ])
+                              ])
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c("br"),
+                          _vm._v(" "),
+                          _c(
+                            "b-row",
+                            [
+                              _c(
+                                "b-col",
+                                { attrs: { cols: "4" } },
+                                [
+                                  _c("label", { attrs: { for: "num" } }, [
+                                    _vm._v("Número")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("b-form-input", {
+                                    attrs: {
+                                      type: "text",
+                                      id: "num",
+                                      name: "num"
+                                    },
+                                    model: {
+                                      value: _vm.struct.num,
+                                      callback: function($$v) {
+                                        _vm.$set(_vm.struct, "num", $$v)
+                                      },
+                                      expression: "struct.num"
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "b-form-invalid-feedback",
+                                    { attrs: { state: _vm.validateNUM } },
+                                    [
+                                      _vm._v(
+                                        "Número de sección debe ser dato numérico"
+                                      )
+                                    ]
+                                  )
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "b-col",
+                                { attrs: { cols: "4" } },
+                                [
+                                  _c("label", { attrs: { for: "secnom" } }, [
+                                    _vm._v("Nombre de la sección")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("b-form-input", {
+                                    attrs: {
+                                      type: "text",
+                                      id: "secnom",
+                                      name: "secnom"
+                                    },
+                                    model: {
+                                      value: _vm.struct.secnom,
+                                      callback: function($$v) {
+                                        _vm.$set(_vm.struct, "secnom", $$v)
+                                      },
+                                      expression: "struct.secnom"
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "b-form-invalid-feedback",
+                                    { attrs: { state: _vm.validateSN } },
+                                    [
+                                      _vm._v(
+                                        "Nombre de la sección no puede estar vacío"
+                                      )
+                                    ]
+                                  )
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "b-col",
+                                { attrs: { cols: "4" } },
+                                [
+                                  _c("label", { attrs: { for: "sectitulo" } }, [
+                                    _vm._v("Título de la sección")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("b-form-input", {
+                                    attrs: {
+                                      type: "text",
+                                      id: "sectitulo",
+                                      name: "sectitulo"
+                                    },
+                                    model: {
+                                      value: _vm.struct.sectit,
+                                      callback: function($$v) {
+                                        _vm.$set(_vm.struct, "sectit", $$v)
+                                      },
+                                      expression: "struct.sectit"
+                                    }
+                                  })
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c("br"),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              staticClass:
+                                "d-flex flex-row-reverse bd-highlight"
+                            },
+                            [
+                              _c(
+                                "b-button",
+                                {
+                                  attrs: { variant: "default" },
+                                  on: { click: _vm.revalidate }
+                                },
+                                [_vm._v("Continuar")]
+                              )
+                            ],
+                            1
+                          )
                         ],
                         1
                       )
@@ -74035,13 +73935,349 @@ var staticRenderFns = [
       { staticClass: "card-header card-header-log card-header-icon" },
       [
         _c("div", { staticClass: "card-icon" }, [
-          _c("i", { staticClass: "material-icons" }, [_vm._v("library_books")])
+          _c("i", { staticClass: "material-icons" }, [_vm._v("add")])
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "row" }, [
           _c("div", { staticClass: "col-lg-10" }, [
-            _c("h4", { staticClass: "card-title" }, [_vm._v("Detalles libro")])
+            _c("h4", { staticClass: "card-title" }, [
+              _vm._v("Añadir Capítulo/Sección")
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-lg-2" })
+        ])
+      ]
+    )
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/books/StructEdit.vue?vue&type=template&id=b2457722&":
+/*!*******************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/books/StructEdit.vue?vue&type=template&id=b2457722& ***!
+  \*******************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c("div", { staticClass: "content" }, [
+      _c("div", { staticClass: "container-fluid" }, [
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-md-12" }, [
+            _c("div", { staticClass: "card" }, [
+              _vm._m(0),
+              _vm._v(" "),
+              _c("div", { staticClass: "card-body" }, [
+                _c("div", { staticClass: "row" }, [
+                  _c(
+                    "div",
+                    { staticClass: "col-lg-12" },
+                    [
+                      _c(
+                        "b-form",
+                        {
+                          on: {
+                            submit: function($event) {
+                              $event.preventDefault()
+                              return _vm.revalidate($event)
+                            }
+                          }
+                        },
+                        [
+                          _c(
+                            "b-row",
+                            [
+                              _c(
+                                "b-col",
+                                { attrs: { cols: "4" } },
+                                [
+                                  _c("label", { attrs: { for: "nombre" } }, [
+                                    _vm._v("Nombre")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("b-form-input", {
+                                    attrs: {
+                                      type: "text",
+                                      id: "nom",
+                                      name: "nom",
+                                      placeholder: "Nombre"
+                                    },
+                                    model: {
+                                      value: _vm.struct.nom,
+                                      callback: function($$v) {
+                                        _vm.$set(_vm.struct, "nom", $$v)
+                                      },
+                                      expression: "struct.nom"
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "b-form-invalid-feedback",
+                                    { attrs: { state: _vm.validateN } },
+                                    [
+                                      _vm._v(
+                                        "Nombre de estructura no puede estar vacío"
+                                      )
+                                    ]
+                                  )
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "b-col",
+                                { attrs: { cols: "4" } },
+                                [
+                                  _c("label", { attrs: { for: "tipo" } }, [
+                                    _vm._v("Tipo")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("b-form-select", {
+                                    attrs: {
+                                      options: _vm.tipos,
+                                      id: "tipo",
+                                      name: "tipo"
+                                    },
+                                    model: {
+                                      value: _vm.struct.tipo,
+                                      callback: function($$v) {
+                                        _vm.$set(_vm.struct, "tipo", $$v)
+                                      },
+                                      expression: "struct.tipo"
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "b-form-invalid-feedback",
+                                    { attrs: { state: _vm.validateT } },
+                                    [
+                                      _vm._v(
+                                        "Tipo de estructura no puede estar vacío"
+                                      )
+                                    ]
+                                  )
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "b-col",
+                                { attrs: { cols: "4" } },
+                                [
+                                  _c("label", { attrs: { for: "titulo" } }, [
+                                    _vm._v("Título")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("b-form-input", {
+                                    attrs: {
+                                      type: "text",
+                                      id: "titulo",
+                                      name: "tipo"
+                                    },
+                                    model: {
+                                      value: _vm.struct.titulo,
+                                      callback: function($$v) {
+                                        _vm.$set(_vm.struct, "titulo", $$v)
+                                      },
+                                      expression: "struct.titulo"
+                                    }
+                                  })
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c("hr"),
+                          _vm._v(" "),
+                          _c(
+                            "b-row",
+                            [
+                              _c("b-col", { attrs: { cols: "6" } }, [
+                                _c("h6", [
+                                  _c("strong", [_vm._v("DATOS DE LA SECCIÓN")])
+                                ])
+                              ])
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c("br"),
+                          _vm._v(" "),
+                          _c(
+                            "b-row",
+                            [
+                              _c(
+                                "b-col",
+                                { attrs: { cols: "4" } },
+                                [
+                                  _c("label", { attrs: { for: "num" } }, [
+                                    _vm._v("Número")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("b-form-input", {
+                                    attrs: {
+                                      type: "text",
+                                      id: "num",
+                                      name: "num"
+                                    },
+                                    model: {
+                                      value: _vm.struct.num,
+                                      callback: function($$v) {
+                                        _vm.$set(_vm.struct, "num", $$v)
+                                      },
+                                      expression: "struct.num"
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "b-form-invalid-feedback",
+                                    { attrs: { state: _vm.validateNUM } },
+                                    [
+                                      _vm._v(
+                                        "Número de sección debe ser dato numérico"
+                                      )
+                                    ]
+                                  )
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "b-col",
+                                { attrs: { cols: "4" } },
+                                [
+                                  _c("label", { attrs: { for: "secnom" } }, [
+                                    _vm._v("Nombre de la sección")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("b-form-input", {
+                                    attrs: {
+                                      type: "text",
+                                      id: "secnom",
+                                      name: "secnom"
+                                    },
+                                    model: {
+                                      value: _vm.struct.secnom,
+                                      callback: function($$v) {
+                                        _vm.$set(_vm.struct, "secnom", $$v)
+                                      },
+                                      expression: "struct.secnom"
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "b-form-invalid-feedback",
+                                    { attrs: { state: _vm.validateSN } },
+                                    [
+                                      _vm._v(
+                                        "Nombre de la sección no puede estar vacío"
+                                      )
+                                    ]
+                                  )
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "b-col",
+                                { attrs: { cols: "4" } },
+                                [
+                                  _c("label", { attrs: { for: "sectitulo" } }, [
+                                    _vm._v("Título de la sección")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("b-form-input", {
+                                    attrs: {
+                                      type: "text",
+                                      id: "sectitulo",
+                                      name: "sectitulo"
+                                    },
+                                    model: {
+                                      value: _vm.struct.sectit,
+                                      callback: function($$v) {
+                                        _vm.$set(_vm.struct, "sectit", $$v)
+                                      },
+                                      expression: "struct.sectit"
+                                    }
+                                  })
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c("br"),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              staticClass:
+                                "d-flex flex-row-reverse bd-highlight"
+                            },
+                            [
+                              _c(
+                                "b-button",
+                                {
+                                  attrs: { variant: "default" },
+                                  on: { click: _vm.revalidate }
+                                },
+                                [_vm._v("Continuar")]
+                              )
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                ])
+              ])
+            ])
           ])
+        ])
+      ])
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "card-header card-header-log card-header-icon" },
+      [
+        _c("div", { staticClass: "card-icon" }, [
+          _c("i", { staticClass: "material-icons" }, [_vm._v("edit")])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-lg-10" }, [
+            _c("h4", { staticClass: "card-title" }, [
+              _vm._v("Editar Capítulo/Sección")
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-lg-2" })
         ])
       ]
     )
@@ -95693,10 +95929,10 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('meeting-attendance', __web
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('set-meeting', __webpack_require__(/*! ./components/browse_meetings/SetMeeting.vue */ "./resources/js/components/browse_meetings/SetMeeting.vue")["default"]);
 /* BOOKS */
 
-vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('books', __webpack_require__(/*! ./components/books/Books.vue */ "./resources/js/components/books/Books.vue")["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('books-create', __webpack_require__(/*! ./components/books/Create.vue */ "./resources/js/components/books/Create.vue")["default"]);
-vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('books-show', __webpack_require__(/*! ./components/books/Show.vue */ "./resources/js/components/books/Show.vue")["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('books-edit', __webpack_require__(/*! ./components/books/Edit.vue */ "./resources/js/components/books/Edit.vue")["default"]);
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('struct-create', __webpack_require__(/*! ./components/books/StructAdd.vue */ "./resources/js/components/books/StructAdd.vue")["default"]);
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('struct-edit', __webpack_require__(/*! ./components/books/StructEdit.vue */ "./resources/js/components/books/StructEdit.vue")["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('genres', __webpack_require__(/*! ./components/books/Genres.vue */ "./resources/js/components/books/Genres.vue")["default"]);
 /*THEATER PLAYS*/
 
@@ -95822,75 +96058,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ExampleComponent_vue_vue_type_template_id_299e239e___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ExampleComponent_vue_vue_type_template_id_299e239e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
-
-
-
-/***/ }),
-
-/***/ "./resources/js/components/books/Books.vue":
-/*!*************************************************!*\
-  !*** ./resources/js/components/books/Books.vue ***!
-  \*************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _Books_vue_vue_type_template_id_6ab1892c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Books.vue?vue&type=template&id=6ab1892c& */ "./resources/js/components/books/Books.vue?vue&type=template&id=6ab1892c&");
-/* harmony import */ var _Books_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Books.vue?vue&type=script&lang=js& */ "./resources/js/components/books/Books.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-
-
-
-
-
-/* normalize component */
-
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _Books_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _Books_vue_vue_type_template_id_6ab1892c___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _Books_vue_vue_type_template_id_6ab1892c___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
-  false,
-  null,
-  null,
-  null
-  
-)
-
-/* hot reload */
-if (false) { var api; }
-component.options.__file = "resources/js/components/books/Books.vue"
-/* harmony default export */ __webpack_exports__["default"] = (component.exports);
-
-/***/ }),
-
-/***/ "./resources/js/components/books/Books.vue?vue&type=script&lang=js&":
-/*!**************************************************************************!*\
-  !*** ./resources/js/components/books/Books.vue?vue&type=script&lang=js& ***!
-  \**************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Books_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./Books.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/books/Books.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Books_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
-
-/***/ }),
-
-/***/ "./resources/js/components/books/Books.vue?vue&type=template&id=6ab1892c&":
-/*!********************************************************************************!*\
-  !*** ./resources/js/components/books/Books.vue?vue&type=template&id=6ab1892c& ***!
-  \********************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Books_vue_vue_type_template_id_6ab1892c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./Books.vue?vue&type=template&id=6ab1892c& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/books/Books.vue?vue&type=template&id=6ab1892c&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Books_vue_vue_type_template_id_6ab1892c___WEBPACK_IMPORTED_MODULE_0__["render"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Books_vue_vue_type_template_id_6ab1892c___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
@@ -96103,17 +96270,17 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/components/books/Show.vue":
-/*!************************************************!*\
-  !*** ./resources/js/components/books/Show.vue ***!
-  \************************************************/
+/***/ "./resources/js/components/books/StructAdd.vue":
+/*!*****************************************************!*\
+  !*** ./resources/js/components/books/StructAdd.vue ***!
+  \*****************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _Show_vue_vue_type_template_id_1fe5f6ed___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Show.vue?vue&type=template&id=1fe5f6ed& */ "./resources/js/components/books/Show.vue?vue&type=template&id=1fe5f6ed&");
-/* harmony import */ var _Show_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Show.vue?vue&type=script&lang=js& */ "./resources/js/components/books/Show.vue?vue&type=script&lang=js&");
+/* harmony import */ var _StructAdd_vue_vue_type_template_id_84722768___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./StructAdd.vue?vue&type=template&id=84722768& */ "./resources/js/components/books/StructAdd.vue?vue&type=template&id=84722768&");
+/* harmony import */ var _StructAdd_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./StructAdd.vue?vue&type=script&lang=js& */ "./resources/js/components/books/StructAdd.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -96123,9 +96290,9 @@ __webpack_require__.r(__webpack_exports__);
 /* normalize component */
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _Show_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _Show_vue_vue_type_template_id_1fe5f6ed___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _Show_vue_vue_type_template_id_1fe5f6ed___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _StructAdd_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _StructAdd_vue_vue_type_template_id_84722768___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _StructAdd_vue_vue_type_template_id_84722768___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
   null,
@@ -96135,38 +96302,107 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/components/books/Show.vue"
+component.options.__file = "resources/js/components/books/StructAdd.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/components/books/Show.vue?vue&type=script&lang=js&":
-/*!*************************************************************************!*\
-  !*** ./resources/js/components/books/Show.vue?vue&type=script&lang=js& ***!
-  \*************************************************************************/
+/***/ "./resources/js/components/books/StructAdd.vue?vue&type=script&lang=js&":
+/*!******************************************************************************!*\
+  !*** ./resources/js/components/books/StructAdd.vue?vue&type=script&lang=js& ***!
+  \******************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Show_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./Show.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/books/Show.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Show_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_StructAdd_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./StructAdd.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/books/StructAdd.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_StructAdd_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./resources/js/components/books/Show.vue?vue&type=template&id=1fe5f6ed&":
-/*!*******************************************************************************!*\
-  !*** ./resources/js/components/books/Show.vue?vue&type=template&id=1fe5f6ed& ***!
-  \*******************************************************************************/
+/***/ "./resources/js/components/books/StructAdd.vue?vue&type=template&id=84722768&":
+/*!************************************************************************************!*\
+  !*** ./resources/js/components/books/StructAdd.vue?vue&type=template&id=84722768& ***!
+  \************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Show_vue_vue_type_template_id_1fe5f6ed___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./Show.vue?vue&type=template&id=1fe5f6ed& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/books/Show.vue?vue&type=template&id=1fe5f6ed&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Show_vue_vue_type_template_id_1fe5f6ed___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_StructAdd_vue_vue_type_template_id_84722768___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./StructAdd.vue?vue&type=template&id=84722768& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/books/StructAdd.vue?vue&type=template&id=84722768&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_StructAdd_vue_vue_type_template_id_84722768___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Show_vue_vue_type_template_id_1fe5f6ed___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_StructAdd_vue_vue_type_template_id_84722768___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/books/StructEdit.vue":
+/*!******************************************************!*\
+  !*** ./resources/js/components/books/StructEdit.vue ***!
+  \******************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _StructEdit_vue_vue_type_template_id_b2457722___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./StructEdit.vue?vue&type=template&id=b2457722& */ "./resources/js/components/books/StructEdit.vue?vue&type=template&id=b2457722&");
+/* harmony import */ var _StructEdit_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./StructEdit.vue?vue&type=script&lang=js& */ "./resources/js/components/books/StructEdit.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _StructEdit_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _StructEdit_vue_vue_type_template_id_b2457722___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _StructEdit_vue_vue_type_template_id_b2457722___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/books/StructEdit.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/books/StructEdit.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************!*\
+  !*** ./resources/js/components/books/StructEdit.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_StructEdit_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./StructEdit.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/books/StructEdit.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_StructEdit_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/books/StructEdit.vue?vue&type=template&id=b2457722&":
+/*!*************************************************************************************!*\
+  !*** ./resources/js/components/books/StructEdit.vue?vue&type=template&id=b2457722& ***!
+  \*************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_StructEdit_vue_vue_type_template_id_b2457722___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./StructEdit.vue?vue&type=template&id=b2457722& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/books/StructEdit.vue?vue&type=template&id=b2457722&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_StructEdit_vue_vue_type_template_id_b2457722___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_StructEdit_vue_vue_type_template_id_b2457722___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

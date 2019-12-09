@@ -8,6 +8,6 @@
     </div>
 @endif
 
-<books-edit></books-edit>
-
+<!-- DESIGN HERE -->
+<struct-create></struct-create>
 @endsection
