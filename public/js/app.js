@@ -2946,6 +2946,7 @@ __webpack_require__.r(__webpack_exports__);
       return this.struct.secnom != '';
     },
     validateNUM: function validateNUM() {
+      if (this.struct.num == '') return false;
       return this.struct.num != null && !isNaN(this.struct.num) && this.struct.num < 99999;
     }
   },

@@ -124,6 +124,7 @@ export default {
             return (this.struct.secnom != '');
         },
         validateNUM(){
+            if (this.struct.num == '') return false;
             return (this.struct.num != null && !isNaN(this.struct.num) && this.struct.num < 99999);
         }
     },
