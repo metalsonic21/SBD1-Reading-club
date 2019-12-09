@@ -70,10 +70,17 @@
                                                         </b-link>
                                                         
                                                         <div class="d-inline-block">
-                                                        {!! Form::open(['route'=> ['books.destroy', $book->isbn], 'method'=>'DELETE']) !!}
-                                                        {!! Form::button('<i class="material-icons">close</i>', ['type' => 'submit','class' => 'btn btn-danger']) !!}
-                                                        {!! Form::close() !!}
-                                                        
+                                                            <form class="delete" action="{{ route('books.destroy', $book->isbn) }}" method="POST">
+                                                                <input type="hidden" name="_method" value="DELETE">
+                                                                <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+                                                                <button type="submit" class="btn btn-danger"><i class="material-icons">close</i></button>
+                                                            </form>
+
+                                                            <script type="application/javascript">
+                                                                $(".delete").on("submit", function(){
+                                                                    return confirm("¿Está usted seguro que desea eliminar este libro?");
+                                                                });
+                                                            </script>
                                                     </div>
 
                                                     </td>

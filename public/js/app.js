@@ -2094,7 +2094,7 @@ __webpack_require__.r(__webpack_exports__);
         return isbn.isbn == _this2.book.prev;
       }) != -1;
       var validPrev = null;
-      if (this.book.prev != '' && (this.book.prev.length != 5 || isNaN(this.prev.isbn) || this.book.prev.indexOf(".") != -1 || this.prev.isbn < 0)) validPrev = false;else validPrev = true;
+      if (this.book.prev != '' && (this.book.prev.length != 5 || isNaN(this.book.prev.isbn) || this.book.prev.indexOf(".") != -1 || this.book.prev.isbn < 0)) validPrev = false;else validPrev = true;
       if (this.book.prev == '') return true;
       return this.book.prev != this.book.isbn && verif || validPrev;
     }
@@ -96065,15 +96065,14 @@ __webpack_require__.r(__webpack_exports__);
 /*!**************************************************!*\
   !*** ./resources/js/components/books/Create.vue ***!
   \**************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Create_vue_vue_type_template_id_20280f6c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Create.vue?vue&type=template&id=20280f6c& */ "./resources/js/components/books/Create.vue?vue&type=template&id=20280f6c&");
 /* harmony import */ var _Create_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Create.vue?vue&type=script&lang=js& */ "./resources/js/components/books/Create.vue?vue&type=script&lang=js&");
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _Create_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _Create_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -96103,7 +96102,7 @@ component.options.__file = "resources/js/components/books/Create.vue"
 /*!***************************************************************************!*\
   !*** ./resources/js/components/books/Create.vue?vue&type=script&lang=js& ***!
   \***************************************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
