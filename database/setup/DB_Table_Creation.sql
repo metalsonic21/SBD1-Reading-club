@@ -401,3 +401,5 @@ ALTER TABLE SJL_historicos_presentaciones ADD CONSTRAINT hisorico_presentaciones
 /* Constraint Unique */
 
 ALTER TABLE SJL_libros ADD CONSTRAINT libros_id_prev_unq UNIQUE (id_prev);
+
+CREATE SEQUENCE IF NOT EXISTS id_ciudad INCREMENT BY 1 MINVALUE 1 NO MAXVALUE START WITH 1 OWNED BY sjl_ciudades.id;
