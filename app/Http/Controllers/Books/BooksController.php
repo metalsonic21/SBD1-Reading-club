@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Book;
 use App\Models\Editorial;
 use App\Models\Genre;
+use App\Models\Structure;
+use App\Models\Section;
 
 class BooksController extends Controller
 {
@@ -104,8 +106,15 @@ class BooksController extends Controller
         $edit = DB::select( DB::raw("SELECT nom FROM sjl_editoriales WHERE id = '$book->id_edit'"))[0];
         $prev = Book::find($book->id_prev);
         $book->editorial = $edit->nom;
-        return view('books.show')->with('edit', $edit)->with('book', $book)->with('prev', $prev);
-        //return $book;
+        $structure = DB::select(DB::raw("SELECT e.id, e.nom as ename, e.titulo as etit, e.tipo, (
+            SELECT s.num FROM sjl_secciones_libros s WHERE s.id_est = e.id
+        ), (
+            SELECT s.titulo FROM sjl_secciones_libros s WHERE s.id_est = e.id
+        ), (
+            SELECT s.nom FROM sjl_secciones_libros s WHERE s.id_est = e.id
+        ) FROM sjl_estructuras_libros e WHERE id_lib ='$book->isbn'"));
+        return view('books.show')->with('edit', $edit)->with('book', $book)->with('prev', $prev)->with('structure', $structure);
+        //return $structure;
     }
 
     /**

@@ -56,7 +56,9 @@
                                         </b-col>
 
                                         <b-col cols="4">
+                                            @if ($prev)
                                             <p><strong>PREDECESOR: </strong> {{$prev->titulo_esp}}</p>
+                                            @endif
                                         </b-col>
 
                                         <b-col cols="4">
@@ -75,20 +77,35 @@
                                             <h6><strong>ESTRUCTURA</strong></h6>
                                         </b-col>
                                     </b-row>
-
+                                    @foreach ($structure as $struct)
                                     <b-row>
                                         <b-col cols="4">
-                                            <p><strong>NOMBRE: </strong>Uno</p>
+                                            <p><strong>NOMBRE DE ESTRUCTURA: </strong>{{$struct->ename}}</p>
                                         </b-col>
 
                                         <b-col cols="4">
-                                            <p><strong>TIPO: </strong>No se</p>
+                                            <p><strong>TIPO DE ESTRUCTURA: </strong>{{$struct->tipo}}</p>
                                         </b-col>
 
                                         <b-col cols="4">
-                                            <p><strong>TÍTULO: </strong> ¿Qué es esto?</p>
+                                            <p><strong>TÍTULO DE ESTRUCTURA: </strong> {{$struct->etit}}</p>
                                         </b-col>
                                     </b-row>
+                                    <b-row>
+                                        <b-col cols="4">
+                                            <p><strong>TÍTULO DE SECCIÓN: </strong>{{$struct->titulo}}</p>
+                                        </b-col>
+
+                                        <b-col cols="4">
+                                            <p><strong>NÚMERO DE SECCIÓN: </strong>{{$struct->num}}</p>
+                                        </b-col>
+
+                                        <b-col cols="4">
+                                            <p><strong>TÍTULO DE SECCIÓN: </strong>{{$struct->titulo}}</p>
+                                        </b-col>
+                                    </b-row>
+                                    <hr>
+                                    @endforeach
                                 </div>
                             </div>
                         </div>
