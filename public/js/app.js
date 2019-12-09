@@ -2766,15 +2766,16 @@ __webpack_require__.r(__webpack_exports__);
   },
   computed: {
     validateN: function validateN() {
-      return this.struct.nom != '';
+      if (this.struct.nom == '' || this.struct.nom == undefined || this.struct.nom == null) return false;else return true;
     },
     validateT: function validateT() {
       return this.struct.tipo != null;
     },
     validateSN: function validateSN() {
-      return this.struct.secnom != '';
+      if (this.struct.secnom == '') return false;else return true;
     },
     validateNUM: function validateNUM() {
+      if (this.struct.num == '') return false;
       return this.struct.num != null && !isNaN(this.struct.num) && this.struct.num < 99999;
     }
   },
@@ -2937,13 +2938,13 @@ __webpack_require__.r(__webpack_exports__);
   },
   computed: {
     validateN: function validateN() {
-      return this.struct.nom != '';
+      if (this.struct.nom == '' || this.struct.nom == undefined || this.struct.nom == null) return false;else return true;
     },
     validateT: function validateT() {
       return this.struct.tipo != null;
     },
     validateSN: function validateSN() {
-      return this.struct.secnom != '';
+      if (this.struct.secnom == '') return false;else return true;
     },
     validateNUM: function validateNUM() {
       if (this.struct.num == '') return false;

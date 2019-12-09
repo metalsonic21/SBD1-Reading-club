@@ -113,7 +113,8 @@ export default {
 
     computed:{
         validateN(){
-            return (this.struct.nom != '');
+            if (this.struct.nom == '' || this.struct.nom == undefined || this.struct.nom == null) return false;
+            else return true;
         },
 
         validateT(){
@@ -121,7 +122,8 @@ export default {
         },
 
         validateSN(){
-            return (this.struct.secnom != '');
+            if (this.struct.secnom == '') return false;
+            else return true;
         },
         validateNUM(){
             if (this.struct.num == '') return false;
