@@ -52,7 +52,7 @@ CREATE TABLE SJL_clubes_clubes (
     CONSTRAINT clubes_clubes_pk PRIMARY KEY (id_club1,id_club2)
 );
 
-CREATE TABLE SJL_insituciones (
+CREATE TABLE SJL_instituciones (
     id          SERIAL NOT NULL,
     nom         VARCHAR(20) NOT NULL,
     tipo        VARCHAR(2) NOT NULL,
@@ -203,6 +203,7 @@ CREATE TABLE SJL_generos_libros (
     CONSTRAINT generos_libros_pk PRIMARY KEY(id_gen,id_lib)
 );
 
+
 CREATE TABLE SJL_estructuras_libros (
     id       SERIAL NOT NULL,
     id_lib   INTEGER NOT NULL,
@@ -342,14 +343,15 @@ ALTER TABLE SJL_reuniones_mensuales ADD CONSTRAINT reuniones_grupo_mod_fk FOREIG
 
 ALTER TABLE SJL_libros ADD CONSTRAINT libros_libro_prev_fk FOREIGN KEY(id_prev) REFERENCES SJL_libros(isbn);
 ALTER TABLE SJL_libros ADD CONSTRAINT libros_editorial_fk FOREIGN KEY(id_edit) REFERENCES SJL_editoriales(id);
+ALTER TABLE SJL_generos_libros ADD CONSTRAINT libros_generos_fk FOREIGN KEY(replace) REFERENCES SJL_generos(isbn);
 
 ALTER TABLE SJL_lista_favoritos ADD CONSTRAINT favoritos_lectores_fk FOREIGN KEY(id_lec) REFERENCES SJL_lectores(doc_iden);
 ALTER TABLE SJL_lista_favoritos ADD CONSTRAINT favoritos_libros_fk FOREIGN KEY(id_lib) REFERENCES SJL_libros(isbn);
 
 ALTER TABLE SJL_subgeneros ADD CONSTRAINT subgeneros_subgeneros_fk FOREIGN KEY(id_subg) REFERENCES SJL_subgeneros(id);
 
-ALTER TABLE SJL_generos_libros ADD CONSTRAINT generos_libros_fk FOREIGN KEY(id_gen) REFERENCES SJL_subgeneros(id);
-ALTER TABLE SJL_generos_libros ADD CONSTRAINT libros_generos_fk FOREIGN KEY(id_lib) REFERENCES SJL_libros(isbn);
+ALTER TABLE SJL_generos_libros ADD CONSTRAINT generos_libros_fk FOREIGN KEY(id_gen) REFERENCES SJL_subgeneros(id) ON DELETE CASCADE;
+ALTER TABLE SJL_generos_libros ADD CONSTRAINT libros_generos_fk FOREIGN KEY(id_lib) REFERENCES SJL_libros(isbn) ON DELETE CASCADE;
 
 ALTER TABLE SJL_estructuras_libros ADD CONSTRAINT estructura_libros_fk FOREIGN KEY(id_lib) REFERENCES SJL_libros(isbn) ON DELETE CASCADE;
 
