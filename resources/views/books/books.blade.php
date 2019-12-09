@@ -66,20 +66,35 @@
                                                             <i class="material-icons">list</i>
                                                         </b-link>
                                                        <!-- <b-link href="/books/{{$book->isbn}}" type="button" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Eliminar" class="btn btn-danger">
-                                                            <i class="material-icons">close</i>-->
-                                                        </b-link>
-                                                        
-                                                        <div class="d-inline-block">
-                                                        {!! Form::open(['route'=> ['books.destroy', $book->isbn], 'method'=>'DELETE']) !!}
-                                                        {!! Form::button('<i class="material-icons">close</i>', ['type' => 'submit','class' => 'btn btn-danger']) !!}
-                                                        {!! Form::close() !!}
-                                                        
-                                                    </div>
+                                                            <i class="material-icons">close</i>
+                                                        </b-link>                 -->                                 
+                                                                                                               
+                                                    <b-button class="btn btn-danger" id="show-btn" @click=";$bvModal.show('bv-modal') "><i class="material-icons">close</i>
+                                                    <?php
 
+                                                    ?>
+                                                    </b-button>
+
+                                                                                                                                                                                                     
                                                     </td>
                                                 </tr>
                                                 @endforeach
-
+                                                <b-modal id="bv-modal" hide-footer>
+                                                                <template v-slot:modal-title>
+                                                                <div>
+                                                                Porfavor confirme que desea eliminar el libro
+                                                                </div><div>
+                                                                <code>{{$book->titulo_ori}}</code> 
+                                                                </div>
+                                                                </template>                                                                
+                                                                <div>                                                                
+                                                                {!! Form::open(['route'=> ['books.destroy', $book->isbn], 'method'=>'DELETE']) !!}
+                                                                {!! Form::button('Eliminar', ['type' => 'submit','class' => 'btn btn-danger btn-block','size'=>'sm']) !!}
+                                                                {!! Form::close() !!}
+                                                                </div>
+                                                                <b-button class="mt-3" block @click="$bvModal.hide('bv-modal')">Cancelar</b-button>
+                                                            </b-modal>
+                                                            </div>
                                             </tbody>
                                         </table>
                                     </div>
@@ -95,4 +110,6 @@
 
 </div>
 
+
+ 
 @endsection
