@@ -65,6 +65,7 @@
                                                         <b-link href="/books/{{$book->isbn}}/structure" type="button" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Explorar Estructura" class="btn btn-default">
                                                             <i class="material-icons">list</i>
                                                         </b-link>
+<<<<<<< Updated upstream
                                                         <div class="d-inline-block">
                                                                 <form class="delete" id="from1" action="{{ route('books.destroy', $book->isbn) }}" method="POST">
                                                                     <input type="hidden" name="_method" value="DELETE">
@@ -82,6 +83,56 @@
                                                 </tr>
                                                 @endforeach
                                             </div>
+=======
+<<<<<<< HEAD
+                                                       <!-- <b-link href="/books/{{$book->isbn}}" type="button" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Eliminar" class="btn btn-danger">
+                                                            <i class="material-icons">close</i>
+                                                        </b-link>                 -->                                 
+                                                                                                               
+
+                                                    <b-button class="btn btn-danger" id="show-btn" @click=";$bvModal.show('bv-modal-{{$loop->iteration}}') "><i class="material-icons">close</i>
+                                                    </b-button>
+                                                    <b-modal id="bv-modal-{{$loop->iteration}}" hide-footer>
+                                                                <template v-slot:modal-title>
+                                                                <div>
+                                                                Porfavor confirme que desea eliminar el libro
+                                                                </div><div>
+                                                                <code>{{$book->titulo_ori}}</code> 
+                                                                </div>
+                                                                </template>                                                                
+                                                                <div>                                                                
+                                                                {!! Form::open(['route'=> ['books.destroy', $book->isbn], 'method'=>'DELETE']) !!}
+                                                                {!! Form::button('Eliminar', ['type' => 'submit','class' => 'btn btn-danger btn-block','size'=>'sm']) !!}
+                                                                {!! Form::close() !!}
+                                                                </div>
+                                                                <b-button class="mt-3" block @click="$bvModal.hide('bv-modal')">Cancelar</b-button>
+                                                    </b-modal>
+                                                    </div>
+                                                                                                                                                                                                     
+                                                    </td>
+                                                </tr>
+                                                @endforeach
+
+=======
+                                                        <div class="d-inline-block">
+                                                                <form class="delete" id="from1" action="{{ route('books.destroy', $book->isbn) }}" method="POST">
+                                                                    <input type="hidden" name="_method" value="DELETE">
+                                                                    <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+                                                                    <button type="submit" class="btn btn-danger"><i class="material-icons">close</i></button>
+                                                                </form>
+                                                        </div>
+                                                        
+                                                        <script type="application/javascript">
+                                                            $(".delete").on("submit", function(){
+                                                                return confirm("¿Está usted seguro que desea eliminar este libro?");
+                                                            });
+                                                        </script>
+                                                    </td>
+                                                </tr>
+                                                @endforeach
+                                            </div>
+>>>>>>> 53da4913de06411c93c2c79dd78683678a2628f7
+>>>>>>> Stashed changes
                                             </tbody>
                                         </table>
                                     </div>
