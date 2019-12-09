@@ -313,7 +313,7 @@ ALTER TABLE SJL_grupos_lectura ADD CONSTRAINT grupos_clubes_fk FOREIGN KEY(id_cl
 
 ALTER TABLE SJL_clubes_lectura ADD CONSTRAINT clubes_calles_fk FOREIGN KEY(id_dir) REFERENCES SJL_calles(id);
 ALTER TABLE SJL_clubes_lectura ADD CONSTRAINT clubes_idiomas_fk FOREIGN KEY(id_idiom) REFERENCES SJL_idiomas(id);
-ALTER TABLE SJL_clubes_lectura ADD CONSTRAINT clubes_inst_fk FOREIGN KEY(id_inst) REFERENCES SJL_insituciones(id);
+ALTER TABLE SJL_clubes_lectura ADD CONSTRAINT clubes_inst_fk FOREIGN KEY(id_inst) REFERENCES SJL_instituciones(id);
 
 ALTER TABLE SJL_clubes_clubes ADD CONSTRAINT clubes_club1_fk FOREIGN KEY(id_club1) REFERENCES SJL_clubes_lectura(id);
 ALTER TABLE SJL_clubes_clubes ADD CONSTRAINT clubes_club2_fk FOREIGN KEY(id_club2) REFERENCES SJL_clubes_lectura(id);
@@ -343,7 +343,6 @@ ALTER TABLE SJL_reuniones_mensuales ADD CONSTRAINT reuniones_grupo_mod_fk FOREIG
 
 ALTER TABLE SJL_libros ADD CONSTRAINT libros_libro_prev_fk FOREIGN KEY(id_prev) REFERENCES SJL_libros(isbn);
 ALTER TABLE SJL_libros ADD CONSTRAINT libros_editorial_fk FOREIGN KEY(id_edit) REFERENCES SJL_editoriales(id);
-ALTER TABLE SJL_generos_libros ADD CONSTRAINT libros_generos_fk FOREIGN KEY(replace) REFERENCES SJL_generos(isbn);
 
 ALTER TABLE SJL_lista_favoritos ADD CONSTRAINT favoritos_lectores_fk FOREIGN KEY(id_lec) REFERENCES SJL_lectores(doc_iden);
 ALTER TABLE SJL_lista_favoritos ADD CONSTRAINT favoritos_libros_fk FOREIGN KEY(id_lib) REFERENCES SJL_libros(isbn);
