@@ -221,9 +221,12 @@ export default {
         validateP(){
             let verif = (this.libros.findIndex(isbn => isbn.isbn == this.book.prev)!=-1);
             let validPrev=null;
-                if (this.book.prev!='' && (this.book.prev.length != 5 || isNaN(this.prev.isbn) || this.book.prev.indexOf(".")!=-1 || this.prev.isbn<0)) validPrev = false;
+                if (this.book.prev!='' && (this.book.prev.length != 5 || isNaN(this.book.prev.isbn) || this.book.prev.indexOf(".")!=-1 || this.book.prev.isbn<0)) validPrev = false;
                 else validPrev = true;
+                if (this.book.prev == '')
+                    return true;
             return ((this.book.prev != this.book.isbn && verif) || validPrev );
+
         }
     },
     methods: {

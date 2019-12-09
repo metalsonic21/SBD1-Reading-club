@@ -243,7 +243,10 @@ export default {
         },
         validateP(){
             let verif = (this.libros.findIndex(isbn => isbn.isbn == this.book.prev)!=-1);
-            return (verif);
+            verif = verif && this.book.prev != this.book.isbn;
+                if (this.book.prev == '')
+                    return true;
+            else return verif;
         }
         },
     methods: {
@@ -256,7 +259,10 @@ export default {
 
         validatePrev(){
             let verif = (this.libros.findIndex(isbn => isbn.isbn == this.book.prev)!=-1);
-            return (verif);
+            verif = verif && this.book.prev != this.book.isbn;
+                if (this.book.prev == '')
+                    return true;
+            else return verif;
         },
 
         filter() {

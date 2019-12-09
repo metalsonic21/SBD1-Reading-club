@@ -2094,7 +2094,8 @@ __webpack_require__.r(__webpack_exports__);
         return isbn.isbn == _this2.book.prev;
       }) != -1;
       var validPrev = null;
-      if (this.book.prev != '' && (this.book.prev.length != 5 || isNaN(this.prev.isbn) || this.book.prev.indexOf(".") != -1 || this.prev.isbn < 0)) validPrev = false;else validPrev = true;
+      if (this.book.prev != '' && (this.book.prev.length != 5 || isNaN(this.book.prev.isbn) || this.book.prev.indexOf(".") != -1 || this.book.prev.isbn < 0)) validPrev = false;else validPrev = true;
+      if (this.book.prev == '') return true;
       return this.book.prev != this.book.isbn && verif || validPrev;
     }
   },
@@ -2469,7 +2470,8 @@ __webpack_require__.r(__webpack_exports__);
       var verif = this.libros.findIndex(function (isbn) {
         return isbn.isbn == _this2.book.prev;
       }) != -1;
-      return verif;
+      verif = verif && this.book.prev != this.book.isbn;
+      if (this.book.prev == '') return true;else return verif;
     }
   },
   methods: {
@@ -2485,7 +2487,8 @@ __webpack_require__.r(__webpack_exports__);
       var verif = this.libros.findIndex(function (isbn) {
         return isbn.isbn == _this3.book.prev;
       }) != -1;
-      return verif;
+      verif = verif && this.book.prev != this.book.isbn;
+      if (this.book.prev == '') return true;else return verif;
     },
     filter: function filter() {
       /* Filter subgenres according to the genre*/
@@ -98491,8 +98494,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! E:\SBD1-Reading-club\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! E:\SBD1-Reading-club\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\Hyper\Documents\GitHub\SBD1-Reading-club\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\Hyper\Documents\GitHub\SBD1-Reading-club\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
