@@ -115,3 +115,74 @@ INSERT INTO sjl_ciudades(id, nom, id_pais)
 /* China */ 
 INSERT INTO sjl_ciudades(id, nom, id_pais)
 	VALUES (nextval('id_ciudad'), 'Shanghai', 14);
+
+/* Colombia */
+INSERT INTO sjl_ciudades(id, nom, id_pais)
+	VALUES (nextval('id_ciudad'), 'Bogota', 15);
+
+INSERT INTO sjl_ciudades(id, nom, id_pais)
+	VALUES (nextval('id_ciudad'), 'Medellin', 15);
+
+/* Corea del sur */
+INSERT INTO sjl_ciudades(id, nom, id_pais)
+	VALUES (nextval('id_ciudad'), 'Seul', 16);
+
+/* Costa Rica */
+INSERT INTO sjl_ciudades(id, nom, id_pais)
+	VALUES (nextval('id_ciudad'), 'San Jose', 17);
+
+/* Croacia */
+INSERT INTO sjl_ciudades(id, nom, id_pais)
+	VALUES (nextval('id_ciudad'), 'Zagreb', 18);
+
+/* Cuba */
+INSERT INTO sjl_ciudades(id, nom, id_pais)
+	VALUES (nextval('id_ciudad'), 'La Habana', 19);
+
+/* Dinamarca */
+INSERT INTO sjl_ciudades(id, nom, id_pais)
+	VALUES (nextval('id_ciudad'), 'Copenhague', 20);
+
+/* Ecuador */
+INSERT INTO sjl_ciudades(id, nom, id_pais)
+	VALUES (nextval('id_ciudad'), 'Quito', 21);
+
+/* Eslovaquia */
+INSERT INTO sjl_ciudades(id, nom, id_pais)
+	VALUES (nextval('id_ciudad'), 'Bratislava', 24);
+
+/* Eslovenia */
+INSERT INTO sjl_ciudades(id, nom, id_pais)
+	VALUES (nextval('id_ciudad'), 'Liubliana', 25);
+
+/* España */
+INSERT INTO sjl_ciudades(id, nom, id_pais)
+	VALUES (nextval('id_ciudad'), 'Madrid', 26);
+
+INSERT INTO sjl_ciudades(id, nom, id_pais)
+	VALUES (nextval('id_ciudad'), 'Barcelona', 26); 
+
+INSERT INTO sjl_ciudades(id, nom, id_pais)
+	VALUES (nextval('id_ciudad'), 'Sevilla', 26);
+
+INSERT INTO sjl_ciudades(id, nom, id_pais)
+	VALUES (nextval('id_ciudad'), 'Valencia', 26);
+
+INSERT INTO sjl_ciudades(id, nom, id_pais)
+	VALUES (nextval('id_ciudad'), 'Huelva', 26);
+
+INSERT INTO sjl_ciudades(id, nom, id_pais)
+	VALUES (nextval('id_ciudad'), 'Villarreal', 26);
+
+/* Estados Unidos */
+INSERT INTO sjl_ciudades(id, nom, id_pais)
+	VALUES (nextval('id_ciudad'), 'California', 27);
+
+INSERT INTO sjl_ciudades(id, nom, id_pais)
+	VALUES (nextval('id_ciudad'), 'Lousiana', 27);
+
+INSERT INTO sjl_ciudades(id, nom, id_pais)
+	VALUES (nextval('id_ciudad'), 'Texas', 27);
+
+INSERT INTO sjl_ciudades(id, nom, id_pais)
+	VALUES (nextval('id_ciudad'), 'Alabama', 27);
