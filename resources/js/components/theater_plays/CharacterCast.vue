@@ -13,6 +13,14 @@
                                 <div class="col-lg-10">
                                     <h4 class="card-title">Elenco</h4>
                                 </div>
+                                <div class="col-lg-2">
+                                    <b-link  href="/charactercast/character_add" class="btn btn-default float-right mt-3">
+                                        <span class="btn-label">
+                                            <i class="material-icons">add</i>
+                                        </span>
+                                        Agregar Personaje
+                                    </b-link>
+                                </div>
                             </div>
                         </div>
                         <div class="card-body">

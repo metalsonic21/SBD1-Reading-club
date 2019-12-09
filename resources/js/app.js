@@ -62,11 +62,12 @@ Vue.component('genres', require('./components/books/Genres.vue').default);
 /*THEATER PLAYS*/
 Vue.component('plays-clubs', require('./components/theater_plays/PlaysClubs.vue').default);
 Vue.component('cast-plays', require('./components/theater_plays/CastPlays.vue').default);
+Vue.component('plays-create', require('./components/theater_plays/create.vue').default);
 Vue.component('character-cast', require('./components/theater_plays/CharacterCast.vue').default);
 Vue.component('earning-plays', require('./components/theater_plays/EarningPlays.vue').default);
 Vue.component('browse-plays',  require('./components/theater_plays/BrowsePlays.vue').default);
 Vue.component('characteradd-cast', require('./components/theater_plays/CharacterCastAdd.vue').default);
-
+Vue.component('character-add', require('./components/theater_plays/character_add.vue').default);
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 
 const app = new Vue({
