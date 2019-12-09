@@ -64,27 +64,8 @@
                                                         </b-link>
                                                         <b-link href="/books/{{$book->isbn}}/structure" type="button" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Explorar Estructura" class="btn btn-default">
                                                             <i class="material-icons">list</i>
-                                                        </b-link>
-<<<<<<< Updated upstream
-                                                        <div class="d-inline-block">
-                                                                <form class="delete" id="from1" action="{{ route('books.destroy', $book->isbn) }}" method="POST">
-                                                                    <input type="hidden" name="_method" value="DELETE">
-                                                                    <input type="hidden" name="_token" value="{{ csrf_token() }}" />
-                                                                    <button type="submit" class="btn btn-danger"><i class="material-icons">close</i></button>
-                                                                </form>
-                                                        </div>
-                                                        
-                                                        <script type="application/javascript">
-                                                            $(".delete").on("submit", function(){
-                                                                return confirm("¿Está usted seguro que desea eliminar este libro?");
-                                                            });
-                                                        </script>
-                                                    </td>
-                                                </tr>
-                                                @endforeach
-                                            </div>
-=======
-<<<<<<< HEAD
+                                                        </b-link>                                       
+
                                                        <!-- <b-link href="/books/{{$book->isbn}}" type="button" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Eliminar" class="btn btn-danger">
                                                             <i class="material-icons">close</i>
                                                         </b-link>                 -->                                 
@@ -108,31 +89,10 @@
                                                                 <b-button class="mt-3" block @click="$bvModal.hide('bv-modal')">Cancelar</b-button>
                                                     </b-modal>
                                                     </div>
-                                                                                                                                                                                                     
-                                                    </td>
-                                                </tr>
-                                                @endforeach
-
-=======
-                                                        <div class="d-inline-block">
-                                                                <form class="delete" id="from1" action="{{ route('books.destroy', $book->isbn) }}" method="POST">
-                                                                    <input type="hidden" name="_method" value="DELETE">
-                                                                    <input type="hidden" name="_token" value="{{ csrf_token() }}" />
-                                                                    <button type="submit" class="btn btn-danger"><i class="material-icons">close</i></button>
-                                                                </form>
-                                                        </div>
-                                                        
-                                                        <script type="application/javascript">
-                                                            $(".delete").on("submit", function(){
-                                                                return confirm("¿Está usted seguro que desea eliminar este libro?");
-                                                            });
-                                                        </script>
                                                     </td>
                                                 </tr>
                                                 @endforeach
                                             </div>
->>>>>>> 53da4913de06411c93c2c79dd78683678a2628f7
->>>>>>> Stashed changes
                                             </tbody>
                                         </table>
                                     </div>
