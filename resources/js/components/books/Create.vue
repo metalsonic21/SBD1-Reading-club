@@ -223,7 +223,10 @@ export default {
             let validPrev=null;
                 if (this.book.prev!='' && (this.book.prev.length != 5 || isNaN(this.prev.isbn) || this.book.prev.indexOf(".")!=-1 || this.prev.isbn<0)) validPrev = false;
                 else validPrev = true;
+                if (this.book.prev == '')
+                    return true;
             return ((this.book.prev != this.book.isbn && verif) || validPrev );
+
         }
     },
     methods: {

@@ -2095,6 +2095,7 @@ __webpack_require__.r(__webpack_exports__);
       }) != -1;
       var validPrev = null;
       if (this.book.prev != '' && (this.book.prev.length != 5 || isNaN(this.prev.isbn) || this.book.prev.indexOf(".") != -1 || this.prev.isbn < 0)) validPrev = false;else validPrev = true;
+      if (this.book.prev == '') return true;
       return this.book.prev != this.book.isbn && verif || validPrev;
     }
   },
@@ -2469,7 +2470,8 @@ __webpack_require__.r(__webpack_exports__);
       var verif = this.libros.findIndex(function (isbn) {
         return isbn.isbn == _this2.book.prev;
       }) != -1;
-      return verif;
+      verif = verif && this.book.prev != this.book.isbn;
+      if (this.book.prev == '') return true;else return verif;
     }
   },
   methods: {
@@ -2485,7 +2487,8 @@ __webpack_require__.r(__webpack_exports__);
       var verif = this.libros.findIndex(function (isbn) {
         return isbn.isbn == _this3.book.prev;
       }) != -1;
-      return verif;
+      verif = verif && this.book.prev != this.book.isbn;
+      if (this.book.prev == '') return true;else return verif;
     },
     filter: function filter() {
       /* Filter subgenres according to the genre*/
@@ -96062,14 +96065,15 @@ __webpack_require__.r(__webpack_exports__);
 /*!**************************************************!*\
   !*** ./resources/js/components/books/Create.vue ***!
   \**************************************************/
-/*! exports provided: default */
+/*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Create_vue_vue_type_template_id_20280f6c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Create.vue?vue&type=template&id=20280f6c& */ "./resources/js/components/books/Create.vue?vue&type=template&id=20280f6c&");
 /* harmony import */ var _Create_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Create.vue?vue&type=script&lang=js& */ "./resources/js/components/books/Create.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _Create_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _Create_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -96099,7 +96103,7 @@ component.options.__file = "resources/js/components/books/Create.vue"
 /*!***************************************************************************!*\
   !*** ./resources/js/components/books/Create.vue?vue&type=script&lang=js& ***!
   \***************************************************************************/
-/*! exports provided: default */
+/*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -98491,8 +98495,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! E:\SBD1-Reading-club\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! E:\SBD1-Reading-club\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\Hyper\Documents\GitHub\SBD1-Reading-club\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\Hyper\Documents\GitHub\SBD1-Reading-club\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
