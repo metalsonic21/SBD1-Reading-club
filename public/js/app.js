@@ -2407,7 +2407,6 @@ __webpack_require__.r(__webpack_exports__);
       _this.book.subg = res.data.currentsubg;
       _this.book.prev = res.data.data.id_prev;
       _this.subgeneros = [{}];
-      console.log(_this.book.subg);
       var i = 0;
 
       for (i = 0; i < _this.subgbackup.length; i++) {
@@ -4566,7 +4565,6 @@ __webpack_require__.r(__webpack_exports__);
     var ide = parseInt(newpath, 10); //console.log('id club '+id+' id member '+ide );
 
     axios.get("/clubs/".concat(id, "/members/").concat(ide, "/edit")).then(function (res) {
-      console.log(res.data);
       _this.paises = res.data.paises;
       _this.ciudadesbackup = res.data.ciudades;
       _this.member.dociden = res.data.data.doc_iden;
@@ -4588,8 +4586,37 @@ __webpack_require__.r(__webpack_exports__);
       _this.member.telefono = res.data.currentTEL.num;
 
       _this.verifyAge(_this.member.fec_nac);
-      /* REPRESENTANTE */
 
+      _this.ciudades = [{}];
+      var i = 0;
+
+      for (i = 0; i < _this.ciudadesbackup.length; i++) {
+        var gid = _this.ciudadesbackup[i].value;
+
+        var _posgid = gid.indexOf("-") + 1;
+
+        gid = gid.substr(_posgid, _this.member.ciudad.length);
+        gid = parseInt(gid, 10);
+        var sid = _this.ciudadesbackup[i].value;
+        sid = sid.substr(0, _posgid);
+        sid = parseInt(sid, 10);
+
+        if (gid == _this.member.pais) {
+          _this.ciudades.push({
+            value: sid,
+            text: _this.ciudadesbackup[i].text
+          }); //console.log(this.ciudadesbackup[i].text);
+
+        }
+      }
+
+      var posgid = _this.member.ciudad.indexOf("-") + 1;
+      _this.member.ciudad = _this.member.ciudad.substr(0, posgid);
+      _this.member.ciudad = parseInt(_this.member.ciudad, 10); //console.log(this.member.ciudad);
+
+      _this.ciudades[0].value = null;
+      _this.ciudades[0].text = 'Seleccionar';
+      /* REPRESENTANTE */
 
       if (_this.mayoredad == false && res.data.representante) {
         _this.rep.dociden = res.data.representante.doc_iden;
@@ -4603,9 +4630,40 @@ __webpack_require__.r(__webpack_exports__);
         _this.rep.urbanizacion = res.data.currentUR;
         _this.rep.ciudad = res.data.currentCR;
         _this.rep.zipcode = res.data.currentZR;
-      }
+        /*Filter out the first time for rep */
 
-      console.log(res.data);
+        var i = 0;
+        console.log(_this.rep.pais);
+
+        for (i = 0; i < _this.ciudadesbackup.length; i++) {
+          var _gid = _this.ciudadesbackup[i].value;
+
+          var _posgid3 = _gid.indexOf("-") + 1;
+
+          _gid = _gid.substr(_posgid3, _this.rep.ciudad.length);
+          _gid = parseInt(_gid, 10);
+          var _sid = _this.ciudadesbackup[i].value;
+          _sid = _sid.substr(0, _posgid3);
+          _sid = parseInt(_sid, 10);
+
+          if (_gid == _this.rep.pais) {
+            _this.ciudadesR.push({
+              value: _sid,
+              text: _this.ciudadesbackup[i].text
+            }); //console.log(this.ciudadesbackup[i].text);
+
+          }
+        }
+
+        var _posgid2 = _this.rep.ciudad.indexOf("-") + 1;
+
+        _this.rep.ciudad = _this.rep.ciudad.substr(0, _posgid2);
+        _this.rep.ciudad = parseInt(_this.rep.ciudad, 10); //console.log(this.rep.ciudad);
+
+        _this.ciudadesR[0].value = null;
+        _this.ciudadesR[0].text = 'Seleccionar';
+      } //console.log(res.data);
+
     })["catch"](function (e) {
       console.log(e);
     });

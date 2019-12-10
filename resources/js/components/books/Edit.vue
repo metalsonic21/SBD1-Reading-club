@@ -183,8 +183,6 @@ export default {
                 this.book.prev = res.data.data.id_prev;
 
                 this.subgeneros = [{}];
-                console.log(this.book.subg);
-
 
                 var i = 0;
                 for (i = 0; i < this.subgbackup.length; i++) {
