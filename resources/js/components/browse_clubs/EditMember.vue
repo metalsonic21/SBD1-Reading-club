@@ -26,7 +26,7 @@
                                         <b-row>
                                             <b-col cols="4">
                                                 <label for="dociden">Documento de identidad</label>
-                                                <b-form-input type="text" v-model="member.dociden" id="dociden" name="dociden" placeholder="Documento de identidad"></b-form-input>
+                                                <b-form-input type="text" v-model="member.dociden" disabled id="dociden" name="dociden" placeholder="Documento de identidad"></b-form-input>
                                                 <b-form-invalid-feedback :state="validateD">El documento de identidad debe ser un número entero de 8 caracteres</b-form-invalid-feedback>
                                             </b-col>
 
@@ -341,8 +341,8 @@ export default {
             .then(res => {
                 console.log(res.data);
                 this.paises = res.data.paises;
-                this.ciudadesR = res.data.ciudades;
-                this.ciudades = res.data.ciudades;
+                this.ciudadesbackup = res.data.ciudades;
+
 
                 this.member.dociden = res.data.data.doc_iden;
                 this.member.nom1 = res.data.data.nom1;
@@ -355,6 +355,8 @@ export default {
                 this.member.calle = res.data.currentSM;
                 this.member.urbanizacion = res.data.currentUM;
                 this.member.ciudad = res.data.currentCM;
+
+                
                 this.member.zipcode = res.data.currentZM;
 
                 /* PHONE NUMBER */
@@ -365,7 +367,7 @@ export default {
                 this.verifyAge(this.member.fec_nac);
 
                 /* REPRESENTANTE */ 
-                    if (this.mayoredad == false){
+                    if (this.mayoredad == false && res.data.representante){
                         this.rep.dociden = res.data.representante.doc_iden;
                         this.rep.nom1 = res.data.representante.nom1;
                         this.rep.nom2 = res.data.representante.nom2;
@@ -608,8 +610,14 @@ export default {
         },
 
         update() {
-            var path = window.location.pathname;
-            path = path.replace(/\D/g, '');
+        var path = window.location.pathname;
+        var isbn = path.indexOf("/clubs", 0)+7;
+        var isbnend = path.indexOf("/members",0);
+        var id = path.substring(isbn,isbnend);
+        id = parseInt(id,10);
+        var newpath = path.substring(isbnend,path.length);
+        newpath = newpath.replace(/\D/g, '');
+        var ide = parseInt(newpath,10);
             const params = {
                 dociden: this.member.dociden,
                 nom1: this.member.nom1,
@@ -640,9 +648,17 @@ export default {
                 calleR: this.rep.calle,
                 zipcodeR: this.rep.zipcode,
 
-                club: path,
+                club: id,
                 today: this.today,
             };
+
+            params.ciudad = params.ciudad.substring(0, params.ciudad.indexOf("-"));
+            params.ciudad = parseInt(params.ciudad, 10);
+
+            if (params.ciudadR){
+                params.ciudadR = params.ciudadR.substring(0, params.ciudadR.indexOf("-"));
+                params.ciudadR = parseInt(params.ciudadR, 10);
+            }
 
             console.log(params);
 

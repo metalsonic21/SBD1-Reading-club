@@ -183,25 +183,29 @@ export default {
                 this.book.prev = res.data.data.id_prev;
 
                 this.subgeneros = [{}];
-                this.libros = res.data.prev;
-                console.log(res.data.data);
+                console.log(this.book.subg);
+
 
                 var i = 0;
                 for (i = 0; i < this.subgbackup.length; i++) {
                     let gid = this.subgbackup[i].value;
                     let posgid = gid.indexOf("-") + 1;
-                    gid = gid.substr(posgid, gid.length);
+                    gid = gid.substr(0, posgid);
                     gid = parseInt(gid, 10);
                     let sid = this.subgbackup[i].value;
-                    sid = sid.substr(0, posgid);
+                    sid = sid.substr(posgid, this.book.subg.length);
                     sid = parseInt(sid, 10);
                     if (gid == this.book.genero) {
                         this.subgeneros.push({
                             value: sid,
                             text: this.subgbackup[i].text,
                         });
+                        console.log(this.subgbackup[i].text);
                     }
                 }
+                let posgid = this.book.subg.indexOf("-") + 1;
+                this.book.subg = this.book.subg.substr(posgid,this.book.subg.length);
+                this.book.subg = parseInt(this.book.subg,10);
 
                 this.subgeneros[0].value = null;
                 this.subgeneros[0].text = 'Seleccionar';
@@ -276,9 +280,10 @@ export default {
 
             for (i = 0; i < this.subgeneros.length; i++) {
                 /* Converted ID is id_sub*/
-                let convertedid = this.convert(this.subgeneros[i].value, this.subgeneros.length);
+                let convertedid = this.subgeneros[i].value.substring(0, this.subgeneros[i].value.indexOf("-"));
+                //console.log(convertedid);
                 if (this.book.genero == convertedid) {
-                    let actualid = this.subgeneros[i].value.substring(0, this.subgeneros[i].value.indexOf("-"));
+                    let actualid = this.convert(this.subgeneros[i].value, this.subgeneros.length);
                     actualid = parseInt(actualid, 10);
                     this.subgenerosfiltered.push({
                         value: actualid,
