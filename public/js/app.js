@@ -4560,6 +4560,7 @@ __webpack_require__.r(__webpack_exports__);
     var ide = parseInt(newpath, 10); //console.log('id club '+id+' id member '+ide );
 
     axios.get("/clubs/".concat(id, "/members/").concat(ide, "/edit")).then(function (res) {
+      console.log(res.data);
       _this.paises = res.data.paises;
       _this.ciudadesR = res.data.ciudades;
       _this.ciudades = res.data.ciudades;
@@ -4599,7 +4600,7 @@ __webpack_require__.r(__webpack_exports__);
         _this.rep.zipcode = res.data.currentZR;
       }
 
-      console.log(res.data.currentZR);
+      console.log(res.data);
     })["catch"](function (e) {
       console.log(e);
     });
@@ -4741,7 +4742,7 @@ __webpack_require__.r(__webpack_exports__);
       var i = 0;
 
       for (i = 0; i < this.ciudadesR.length; i++) {
-        /* Converted ID is id_sub*/
+        /* Converted ID is id_ciudad*/
         var convertedid = this.convert(this.ciudadesR[i].value, this.ciudadesR.length);
 
         if (currentcountry == convertedid) {

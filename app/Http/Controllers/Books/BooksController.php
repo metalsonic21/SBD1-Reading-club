@@ -127,8 +127,14 @@ class BooksController extends Controller
     {   
 
         if($request->ajax()){
-            $edit = DB::select( DB::raw("SELECT nom FROM sjl_editoriales WHERE id = '$book->id_edit'"))[0];
-            $book->editorial = $edit->nom;
+            $aux = '';
+            $sg = '';
+            $currentsubg = '';
+            $csbg = '';
+
+            $edit = DB::select( DB::raw("SELECT nom FROM sjl_editoriales WHERE id = '$book->id_edit'"));
+            $editorial = $edit[0]->nom;
+            $book->editorial = $editorial;
     
             $editoriales = DB::select( DB::raw("SELECT id as value , nom as text FROM sjl_editoriales"));
     
@@ -139,14 +145,18 @@ class BooksController extends Controller
                 FROM sjl_generos_libros x WHERE x.id_lib = '$book->isbn' AND (
                 SELECT sg.id FROM sjl_subgeneros sg WHERE (x.id_gen = sg.id) AND (sg.tipo LIKE 'SG%')
             ) IS NULL"));
-            $aux = $currentgenero[0]->id_gen;
-            $sg = DB::select( DB::raw("SELECT id || '-' || id_subg as value, nom as text FROM sjl_subgeneros WHERE id_subg IS NOT NULL"));
-                    
-            $currentsubg = DB::select(DB::raw("SELECT sg.id_gen from sjl_generos_libros sg WHERE sg.id_lib = '$book->isbn' AND sg.id_gen<>'$aux'"));
+
+            if ($currentgenero){
+                $aux = $currentgenero[0]->nom;
+                $sg = DB::select( DB::raw("SELECT id || '-' || id_subg as value, nom as text FROM sjl_subgeneros WHERE id_subg IS NOT NULL"));
+                        
+                $currentsubg = DB::select(DB::raw("SELECT sg.id_gen from sjl_generos_libros sg WHERE sg.id_lib = '$book->isbn' AND sg.id_gen<>'$currentgenero'"));
+                $csbg = $currentsubg[0]->nom;
+            }
             $prev = DB::select( DB::raw("SELECT isbn FROM sjl_libros"));
             
             return Response::json(array('data'=>$book,'editoriales'=>$editoriales,'generos'=>$generos, 'currentg'=>$aux
-            ,'subgeneros'=>$sg,'currentsubg'=>$currentsubg[0]->id_gen,'prev'=>$prev));
+            ,'subgeneros'=>$sg,'currentsubg'=>$csbg,'prev'=>$prev));
         }
         else{
             return view('books.edit');

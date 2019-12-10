@@ -339,7 +339,7 @@ export default {
 
         axios.get(`/clubs/${id}/members/${ide}/edit`)
             .then(res => {
-
+                console.log(res.data);
                 this.paises = res.data.paises;
                 this.ciudadesR = res.data.ciudades;
                 this.ciudades = res.data.ciudades;
@@ -379,7 +379,7 @@ export default {
                         this.rep.zipcode = res.data.currentZR;
                     }
 
-                console.log(res.data.currentZR);
+                console.log(res.data);
             }).catch(e => {
                 console.log(e);
             })
@@ -559,7 +559,7 @@ export default {
             let i = 0;
 
             for (i = 0; i < this.ciudadesR.length; i++) {
-                /* Converted ID is id_sub*/
+                /* Converted ID is id_ciudad*/
                 let convertedid = this.convert(this.ciudadesR[i].value, this.ciudadesR.length);
                 if (currentcountry == convertedid) {
                     let actualid = this.ciudadesR[i].value.substring(0, this.ciudadesR[i].value.indexOf("-"));

@@ -231,27 +231,31 @@ class MembersController extends Controller
     public function edit($club, $id, Request $request)
     {
         if($request->ajax()){
-            $member = new Member();
-            $member = DB::select(DB::raw("SELECT doc_iden, nom1, nom2, ape1, ape2, fec_nac, genero, id_calle, id_rep, id_rep_lec, id_nac FROM sjl_lectores WHERE doc_iden = '$id'"));
-            $member = $member[0];
+            $mem = new Member();
+            $mem = DB::select(DB::raw("SELECT doc_iden, nom1, nom2, ape1, ape2, fec_nac, genero, id_calle, id_rep, id_rep_lec, id_nac FROM sjl_lectores WHERE doc_iden = '$id'"));
+            $member = $mem[0];
             $paises = DB::select(DB::raw("SELECT id as value, nom as text FROM sjl_paises"));
             $ciudades = DB::select( DB::raw("SELECT id || '-' || id_pais as value, nom as text FROM sjl_ciudades"));
  
-            $currentCM = DB::select(DB::raw("SELECT e.nom as text, e.id || '-' || e.id_pais as value from sjl_calles ca, sjl_urbanizaciones u, sjl_ciudades e WHERE ca.id = '$member->id_calle' AND ca.id_urb = u.id AND u.id_ciudad = e.id"));
-            $currentCM = $currentCM[0]->value;
+            $currentCMB = DB::select(DB::raw("SELECT e.nom as text, e.id || '-' || e.id_pais as value from sjl_calles ca, sjl_urbanizaciones u, sjl_ciudades e WHERE ca.id = '$member->id_calle' AND ca.id_urb = u.id AND u.id_ciudad = e.id"));
+            $currentCM = $currentCMB[0]->value;
 
-            $currentUM = DB::select(DB::raw("SELECT u.nom as nombre from sjl_calles ca, sjl_urbanizaciones u WHERE ca.id = '$member->id_calle' AND ca.id_urb = u.id"));
-            $currentUM = $currentUM[0]->nombre;
+            $currentUMB = DB::select(DB::raw("SELECT u.nom as nombre from sjl_calles ca, sjl_urbanizaciones u WHERE ca.id = '$member->id_calle' AND ca.id_urb = u.id"));
+            $currentUM = $currentUMB[0]->nombre;
             
-            $currentSM = DB::select(DB::raw("SELECT ca.nom as nombre from sjl_calles ca WHERE ca.id = '$member->id_calle'"));
-            $currentSM = $currentSM[0]->nombre;
+            $currentSMB = DB::select(DB::raw("SELECT ca.nom as nombre from sjl_calles ca WHERE ca.id = '$member->id_calle'"));
+            $currentSM = $currentSMB[0]->nombre;
 
 
-            $currentZM = DB::select(DB::raw("SELECT cod_post as code from sjl_calles WHERE id = '$member->id_calle'"));
-            $currentZM = $currentZM[0]->code;
+            $currentZMB = DB::select(DB::raw("SELECT cod_post as code from sjl_calles WHERE id = '$member->id_calle'"));
+            $currentZM = $currentZMB[0]->code;
             
-            $currentTEL = DB::select(DB::raw("SELECT cod_pais, cod_area, num, id_lector FROM sjl_telefonos WHERE id_lector = '$id'"));
-            $currentTEL = $currentTEL[0];
+            $currentTELB = DB::select(DB::raw("SELECT cod_pais, cod_area, num, id_lector FROM sjl_telefonos WHERE id_lector = '$id'"));
+            $currentTEL = '';
+
+            if ($currentTELB){
+                $currentTEL = $currentTELB[0];
+            }
 
             /* REPRESENTANTE: Search if it is on rep or member table*/
             $representante = '';
@@ -259,49 +263,51 @@ class MembersController extends Controller
             $currentPR = '';
             $currentUR = '';
             $currentZR = '';
+            $currentSR = '';
 
             if ($member->id_rep != NULL){
-                $representante = new Representante();
-                $representante = DB::select(DB::raw("SELECT doc_iden, nom1, nom2, ape1, ape2, fec_nac, id_dir FROM sjl_representantes WHERE doc_iden = '$member->id_rep'"));
-                $representante = $representante[0];
-                $currentPR = DB::select(DB::raw("SELECT p.nom as text, p.id as value from sjl_calles ca, sjl_urbanizaciones u, sjl_ciudades e, sjl_paises p WHERE ca.id = '$representante->id_dir' AND ca.id_urb = u.id AND u.id_ciudad = e.id AND e.id_pais = p.id"));
-                $currentPR = $currentPR[0]->value;
+                $rep = new Representante();
+                $rep = DB::select(DB::raw("SELECT doc_iden, nom1, nom2, ape1, ape2, fec_nac, id_dir FROM sjl_representantes WHERE doc_iden = '$member->id_rep'"));
+                $representante = $rep[0];
+                $currentPRB = DB::select(DB::raw("SELECT p.nom as text, p.id as value from sjl_calles ca, sjl_urbanizaciones u, sjl_ciudades e, sjl_paises p WHERE ca.id = '$representante->id_dir' AND ca.id_urb = u.id AND u.id_ciudad = e.id AND e.id_pais = p.id"));
+                $currentPR = $currentPRB[0]->value;
 
-                $currentCR = DB::select(DB::raw("SELECT e.nom as text, e.id || '-' || e.id_pais as value from sjl_calles ca, sjl_urbanizaciones u, sjl_ciudades e WHERE ca.id = '$representante->id_dir' AND ca.id_urb = u.id AND u.id_ciudad = e.id"));
-                $currentCR = $currentCR[0]->value;
+                $currentCRB = DB::select(DB::raw("SELECT e.nom as text, e.id || '-' || e.id_pais as value from sjl_calles ca, sjl_urbanizaciones u, sjl_ciudades e WHERE ca.id = '$representante->id_dir' AND ca.id_urb = u.id AND u.id_ciudad = e.id"));
+                $currentCR = $currentCRB[0]->value;
 
-                $currentUR = DB::select(DB::raw("SELECT u.nom from sjl_calles ca, sjl_urbanizaciones u WHERE ca.id = '$representante->id_dir' AND ca.id_urb = u.id"));
-                $currentUR = $currentUR[0]->nom;
-                $currentSR = DB::select(DB::raw("SELECT ca.nom from sjl_calles ca WHERE ca.id = '$representante->id_dir'"));
-                $currentSR = $currentSR[0]->nom;
+                $currentURB = DB::select(DB::raw("SELECT u.nom from sjl_calles ca, sjl_urbanizaciones u WHERE ca.id = '$representante->id_dir' AND ca.id_urb = u.id"));
+                $currentUR = $currentURB[0]->nom;
+                $currentSRB = DB::select(DB::raw("SELECT ca.nom from sjl_calles ca WHERE ca.id = '$representante->id_dir'"));
+                $currentSR = $currentSRB[0]->nom;
                 
-                $currentZR = DB::select(DB::raw("SELECT cod_post as code from sjl_calles WHERE id = '$representante->id_dir'"));
-                $currentZR = $currentZR[0]->code;    
+                $currentZRB = DB::select(DB::raw("SELECT cod_post as code from sjl_calles WHERE id = '$representante->id_dir'"));
+                $currentZR = $currentZRB[0]->code;    
             }
 
             else if ($member->id_rep_lec != NULL) {
-                $representante = new Member();
-                $representante = DB::select(DB::raw("SELECT doc_iden, nom1, nom2, ape1, ape2, fec_nac, id_calle FROM sjl_lectores WHERE doc_iden = '$member->id_rep_lec'"));
-                $representante = $representante[0];
-                $currentPR = DB::select(DB::raw("SELECT p.nom as text, p.id as value from sjl_calles ca, sjl_urbanizaciones u, sjl_ciudades e, sjl_paises p WHERE ca.id = '$representante->id_calle' AND ca.id_urb = u.id AND u.id_ciudad = e.id AND e.id_pais = p.id"));
-                $currentPR = $currentPR[0]->value;
+                $rep = new Member();
+                $rep = DB::select(DB::raw("SELECT doc_iden, nom1, nom2, ape1, ape2, fec_nac, id_calle FROM sjl_lectores WHERE doc_iden = '$member->id_rep_lec'"));
+                $representante = $rep[0];
+                $currentPRB = DB::select(DB::raw("SELECT p.nom as text, p.id as value from sjl_calles ca, sjl_urbanizaciones u, sjl_ciudades e, sjl_paises p WHERE ca.id = '$representante->id_calle' AND ca.id_urb = u.id AND u.id_ciudad = e.id AND e.id_pais = p.id"));
+                $currentPR = $currentPRB[0]->value;
 
-                $currentCR = DB::select(DB::raw("SELECT e.nom as text, e.id || '-' || e.id_pais as value from sjl_calles ca, sjl_urbanizaciones u, sjl_ciudades e WHERE ca.id = '$representante->id_calle' AND ca.id_urb = u.id AND u.id_ciudad = e.id"));
-                $currentCR = $currentCR[0]->value;
+                $currentCRB = DB::select(DB::raw("SELECT e.nom as text, e.id || '-' || e.id_pais as value from sjl_calles ca, sjl_urbanizaciones u, sjl_ciudades e WHERE ca.id = '$representante->id_calle' AND ca.id_urb = u.id AND u.id_ciudad = e.id"));
+                $currentCR = $currentCRB[0]->value;
 
-                $currentUR = DB::select(DB::raw("SELECT u.nom from sjl_calles ca, sjl_urbanizaciones u WHERE ca.id = '$representante->id_calle' AND ca.id_urb = u.id"));
-                $currentUR = $currentUR[0]->nom;
+                $currentURB = DB::select(DB::raw("SELECT u.nom from sjl_calles ca, sjl_urbanizaciones u WHERE ca.id = '$representante->id_calle' AND ca.id_urb = u.id"));
+                $currentUR = $currentURB[0]->nom;
 
-                $currentSR = DB::select(DB::raw("SELECT ca.nom from sjl_calles ca WHERE ca.id = '$representante->id_calle'"));
-                $currentSR = $currentSR[0]->nom;
+                $currentSRB = DB::select(DB::raw("SELECT ca.nom from sjl_calles ca WHERE ca.id = '$representante->id_calle'"));
+                $currentSR = $currentSRB[0]->nom;
 
-                $currentZR = DB::select(DB::raw("SELECT cod_post as code from sjl_calles WHERE id = '$representante->id_calle'"));
-                $currentZR = $currentZR[0]->code;    
+                $currentZRB = DB::select(DB::raw("SELECT cod_post as code from sjl_calles WHERE id = '$representante->id_calle'"));
+                $currentZR = $currentZRB[0]->code;    
 
             }
             return Response::json(array('data'=>$member,'paises'=>$paises,'ciudades'=>$ciudades, 'currentCM'=>$currentCM, 
             'currentUM'=>$currentUM, 'currentSM'=>$currentSM,'currentZM'=>$currentZM, 'representante'=>$representante, 'currentCR'=>$currentCR,
             'currentUR'=>$currentUR, 'currentSR'=>$currentSR, 'currentZR'=>$currentZR,'currentTEL'=>$currentTEL,'currentPR'=>$currentPR));
+        
         }
         else{
             return view('clubs.editmember');
