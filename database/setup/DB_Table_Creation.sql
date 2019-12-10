@@ -305,7 +305,7 @@ CREATE TABLE SJL_historicos_pagos_memb (
 ALTER TABLE SJL_lectores ADD CONSTRAINT lectores_clubes_fk FOREIGN KEY(id_club) REFERENCES SJL_clubes_lectura(id);
 ALTER TABLE SJL_lectores ADD CONSTRAINT lectores_grupos_fk FOREIGN KEY(id_grup,id_club) REFERENCES SJL_grupos_lectura(id,id_club);
 ALTER TABLE SJL_lectores ADD CONSTRAINT lectores_calles_fk FOREIGN KEY(id_calle) REFERENCES SJL_calles(id);
-ALTER TABLE SJL_lectores ADD CONSTRAINT lectores_rep_fk FOREIGN KEY(id_rep) REFERENCES SJL_representantes(doc_iden);
+ALTER TABLE SJL_lectores ADD CONSTRAINT lectores_rep_fk FOREIGN KEY(id_rep) REFERENCES SJL_representantes(doc_iden) ON DELETE CASCADE;
 ALTER TABLE SJL_lectores ADD CONSTRAINT lectores_rep_lec_fk FOREIGN KEY(id_rep_lec) REFERENCES SJL_lectores(doc_iden);
 ALTER TABLE SJL_lectores ADD CONSTRAINT lectores_pais_fk FOREIGN KEY(id_nac) REFERENCES SJL_paises(id);
 

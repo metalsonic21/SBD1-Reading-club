@@ -127,6 +127,7 @@ class MembersController extends Controller
                 $representante->save();
             }
         }
+
             /* LECTOR */
             $member = new Member();
             $member->doc_iden = $request->dociden;
@@ -157,7 +158,9 @@ class MembersController extends Controller
                 else if (!$q && $q2){
                     $member->id_rep_lec = $request->docidenR;
                 }
-                
+
+            /*Si agrego un lector que ya estaba en la tabla representantes actualizo todos los id de representantes y luego lo elimino de la tabla*/
+            $testmem = DB::select(DB::raw("SELECT doc_iden FROM sjl_representantes WHERE doc_iden = '$request->dociden'"));
             DB::insert('INSERT INTO sjl_lectores (doc_iden, nom1, nom2, ape1, ape2, genero, fec_nac, 
             id_club, id_calle, id_rep, id_rep_lec, id_nac) values 
             (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', [$member->doc_iden, 
@@ -165,6 +168,19 @@ class MembersController extends Controller
             $member->fec_nac, $member->id_club, $member->id_calle, $member->id_rep, $member->id_rep_lec, 
             $member->id_nac]);
 
+                if ($testmem){
+                    Member::where('id_rep',$request->dociden)->update(array(
+                        'id_rep'=>NULL,
+                        'id_rep_lec'=>$request->dociden,
+                    ));
+
+                DB::table('sjl_representantes')
+                    ->where('doc_iden',$request->dociden)
+                    ->delete();
+                }
+
+
+                
             /* PHONE */
 
             $telefono = new Telefono();
@@ -191,6 +207,8 @@ class MembersController extends Controller
             $pago->id_lec = $request->dociden;
             $pago->fec_emi = $request->today;
             $pago->save();
+
+            return $testmem;
     }
 
     /**
@@ -210,9 +228,56 @@ class MembersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($club, $id, Request $request)
     {
-        return view ('clubs.editmember');
+        if($request->ajax()){
+            $member = new Member();
+            $member = DB::select(DB::raw("SELECT doc_iden, nom1, nom2, ape1, ape2, fec_nac, genero, id_calle, id_rep, id_rep_lec, id_nac FROM sjl_lectores WHERE doc_iden = '$id'"));
+            $member = $member[0];
+            $paises = DB::select(DB::raw("SELECT id as value, nom as text FROM sjl_paises"));
+            $ciudades = DB::select(DB::raw("SELECT id as value, nom as text FROM sjl_ciudades"));
+
+            $currentCM = DB::select(DB::raw("SELECT e.nom from sjl_calles ca, sjl_urbanizaciones u, sjl_ciudades e WHERE ca.id = '$member->id_calle' AND ca.id_urb = u.id AND u.id_ciudad = e.id"));
+            
+            $currentUM = DB::select(DB::raw("SELECT u.nom from sjl_calles ca, sjl_urbanizaciones u WHERE ca.id = '$member->id_calle' AND ca.id_urb = u.id"));
+            $currentZM = DB::select(DB::raw("SELECT cod_post from sjl_calles WHERE id = '$member->id_calle'"));
+            
+
+            /* REPRESENTANTE: Search if it is on rep or member table*/
+            $representante = '';
+            $currentCR = '';
+            $currentUR = '';
+            $currentZR = '';
+
+            if ($member->id_rep != NULL){
+                $representante = new Representante();
+                $representante = DB::select(DB::raw("SELECT doc_iden, nom1, nom2, ape1, ape2, fec_nac, id_dir FROM sjl_representantes WHERE doc_iden = '$member->id_rep'"));
+                $representante = $representante[0];
+    
+                $currentCR = DB::select(DB::raw("SELECT e.nom from sjl_calles ca, sjl_urbanizaciones u, sjl_ciudades e WHERE ca.id = '$representante->id_dir' AND ca.id_urb = u.id AND u.id_ciudad = e.id"));
+                
+                $currentUR = DB::select(DB::raw("SELECT u.nom from sjl_calles ca, sjl_urbanizaciones u WHERE ca.id = '$representante->id_dir' AND ca.id_urb = u.id"));
+                $currentZR = DB::select(DB::raw("SELECT cod_post from sjl_calles WHERE id = '$representante->id_dir'"));
+                    
+            }
+
+            else if ($member->id_rep_lec != NULL) {
+                $representante = new Member();
+                $representante = DB::select(DB::raw("SELECT doc_iden, nom1, nom2, ape1, ape2, fec_nac, id_calle FROM sjl_lectores WHERE doc_iden = '$member->id_rep_lec'"));
+                $representante = $representante[0];
+    
+                $currentCR = DB::select(DB::raw("SELECT e.nom from sjl_calles ca, sjl_urbanizaciones u, sjl_ciudades e WHERE ca.id = '$representante->id_calle' AND ca.id_urb = u.id AND u.id_ciudad = e.id"));
+                
+                $currentUR = DB::select(DB::raw("SELECT u.nom from sjl_calles ca, sjl_urbanizaciones u WHERE ca.id = '$representante->id_calle' AND ca.id_urb = u.id"));
+                $currentZR = DB::select(DB::raw("SELECT cod_post from sjl_calles WHERE id = '$representante->id_calle'"));
+            }
+            return Response::json(array('data'=>$member,'paises'=>$paises,'ciudades'=>$ciudades, 'currentCM'=>$currentCM, 
+            'currentUM'=>$currentUM, 'currentZM'=>$currentZM, 'representante'=>$representante, 'currentCR'=>$currentCR,
+            'currentUR'=>$currentUR, 'currentZR'=>$currentZR));
+        }
+        else{
+            return view('clubs.editmember');
+        }
     }
 
     /**

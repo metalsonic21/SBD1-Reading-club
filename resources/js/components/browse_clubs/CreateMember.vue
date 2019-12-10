@@ -353,7 +353,7 @@ export default {
             else return true;
         },
         validateSN(){
-            if (this.member.nom2 == null || this.member.nom2.length>20) return false;
+            if (this.member.nom2 != null && this.member.nom2.length>20) return false;
             else return true;
         },
         validateA(){
@@ -426,7 +426,7 @@ export default {
             else return true;
         },
         validateSNR(){
-            if (this.rep.nom2 == null || this.rep.nom2.length>20) return false;
+            if (this.rep.nom2 != null && this.rep.nom2.length>20) return false;
             else return true;
         },
         validateAR(){
@@ -602,6 +602,7 @@ export default {
             //console.log(params);
             axios.post(`/clubs/${path}/members`, params)
                 .then(res => {
+                    //console.log(res.data);
                     window.location = `/clubs/${path}/members`;
                 }).catch(e => {
                     console.log(e);

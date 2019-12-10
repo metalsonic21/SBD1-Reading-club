@@ -2584,69 +2584,6 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/books/Genres.vue?vue&type=script&lang=js&":
-/*!***********************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/books/Genres.vue?vue&type=script&lang=js& ***!
-  \***********************************************************************************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-/* harmony default export */ __webpack_exports__["default"] = ({
-  data: function data() {
-    return {
-      fields: ['seleccionado', 'nombre', 'id_subg'],
-      items: [{
-        nombre: 'Uno',
-        id_subg: 1
-      }, {
-        nombre: 'Dos',
-        id_subg: 1
-      }, {
-        nombre: 'Tres',
-        id_subg: 1
-      }, {
-        nombre: 'Cinco',
-        id_subg: 1
-      }],
-      selected: []
-    };
-  },
-  methods: {
-    onRowSelected: function onRowSelected(items) {
-      this.selected = items;
-    }
-  }
-});
-
-/***/ }),
-
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/books/StructAdd.vue?vue&type=script&lang=js&":
 /*!**************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/books/StructAdd.vue?vue&type=script&lang=js& ***!
@@ -3668,21 +3605,80 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      dociden: null,
-      docidenR: null,
-      nom1: null,
-      nom1R: null,
-      nom2: null,
-      nom2R: null,
-      ape1: null,
-      ape1R: null,
-      ape2: null,
-      ape2R: null,
-      genero: null,
-      generoR: null,
+      member: [{
+        dociden: null,
+        nom1: null,
+        nom2: null,
+        ape1: null,
+        ape2: null,
+        genero: null,
+        fec_nac: null,
+        pais: null,
+        ciudad: null,
+        urbanizacion: null,
+        calle: null,
+        zipcode: null,
+        coda: null,
+        codp: null,
+        telefono: null
+      }],
+      rep: [{
+        dociden: '',
+        nom1: '',
+        nom2: '',
+        ape1: '',
+        ape2: '',
+        genero: '',
+        fec_nac: null,
+        pais: null,
+        ciudad: null,
+        calle: '',
+        urbanizacion: '',
+        zipcode: ''
+      }],
       generos: [{
         value: null,
         text: 'Seleccionar'
@@ -3693,37 +3689,202 @@ __webpack_require__.r(__webpack_exports__);
         value: 'F',
         text: 'Femenino'
       }],
-      fec_nac: null,
-      fec_nacR: null,
-      pais: null,
-      paisR: null,
       paises: [{
         value: null,
         text: 'Seleccionar'
       }],
-      ciudad: null,
-      ciudadR: null,
+      ciudadesbackup: [{
+        value: null,
+        text: 'Seleccionar'
+      }],
+      mayoredad: true,
       ciudades: [{
         value: null,
         text: 'Seleccionar'
       }],
-      urbanizacion: null,
-      urbanizacionR: null,
-      calle: null,
-      calleR: null,
-      zipcode: null,
-      zipcodeR: null,
-      telefono: null,
-      telefonoR: null,
-      mayoredad: true
+      ciudadesR: [{
+        value: null,
+        text: 'Seleccionar'
+      }],
+      ciudadesfiltered: [{}],
+      ciudadesfilteredR: [{}],
+      today: null
     };
   },
+  created: function created() {
+    var _this = this;
+
+    var params = window.location.pathname;
+    params = params.replace(/\D/g, ''); //console.log(params);
+
+    axios.get("/clubs/".concat(params, "/members/create")).then(function (res) {
+      _this.paises = res.data.countries;
+      _this.ciudadesbackup = res.data.cities;
+    })["catch"](function (e) {
+      console.log(e);
+    });
+  },
+  computed: {
+    validateD: function validateD() {
+      var verif = true;
+      if (this.member.dociden == null || this.member.dociden == '') return false;
+      if (this.member.dociden.toString().length > 8 || isNaN(this.member.dociden)) verif = false;
+      if (this.member.dociden.toString().indexOf(".") != -1 || this.member.dociden < 0) verif = false;
+      return verif;
+    },
+    validateN: function validateN() {
+      if (this.member.nom1 == null || this.member.nom1 == '' || this.member.nom1.length > 20) return false;else return true;
+    },
+    validateSN: function validateSN() {
+      if (this.member.nom2 != null && this.member.nom2.length > 20) return false;else return true;
+    },
+    validateA: function validateA() {
+      if (this.member.ape1 == null || this.member.ape1 == '' || this.member.ape1.length > 20) return false;else return true;
+    },
+    validateSA: function validateSA() {
+      if (this.member.ape2 == null || this.member.ape2 == '' || this.member.ape2.length > 20) return false;else return true;
+    },
+    validateG: function validateG() {
+      return this.member.genero != null;
+    },
+    validateF: function validateF() {
+      return this.member.fec_nac != null;
+    },
+    validateCP: function validateCP() {
+      if (this.member.codp == null || this.member.codp == '') return false;
+      if (isNaN(this.member.codp || !Number.isInteger(this.member.codp) || this.member.codp < 0 || this.member.codp > 999)) return false;else return true;
+    },
+    validateCODA: function validateCODA() {
+      var verif = true;
+      if (this.member.coda == null || this.member.coda == '') return false;
+      if (isNaN(this.member.coda || !Number.isInteger(this.member.coda) || this.member.coda < 0 || this.member.coda > 99999)) return false;else return true;
+    },
+    validateT: function validateT() {
+      var verif = true;
+      if (this.member.telefono == null || this.member.telefono == '') return false;
+      if (isNaN(this.member.telefono || !Number.isInteger(this.member.telefono) || this.member.telefono < 0 || this.member.telefono > 9999999)) return false;else return true;
+    },
+    validateP: function validateP() {
+      return this.member.pais != null;
+    },
+    validateCI: function validateCI() {
+      return this.member.ciudad != null;
+    },
+    validateU: function validateU() {
+      if (this.member.urbanizacion == null || this.member.urbanizacion == '' || this.member.urbanizacion.length > 20) return false;else return true;
+    },
+    validateCA: function validateCA() {
+      if (this.member.calle == null || this.member.calle == '' || this.member.calle.length > 20) return false;else return true;
+    },
+    validateZ: function validateZ() {
+      var verif = true;
+      if (this.member.zipcode == null || this.member.zipcode == '') return false;
+      if (!isNaN(this.member.zipcode && Number.isInteger(this.member.zipcode) && this.member.zipcode > 0 && this.member.zipcode < 99999)) return true;else return false;
+    },
+    validateDR: function validateDR() {
+      var verif = true;
+      if (this.rep.dociden == null || this.rep.dociden == '') return false;
+      if (this.rep.dociden.toString().length > 8 || isNaN(this.rep.dociden)) verif = false;
+      if (this.rep.dociden.toString().indexOf(".") != -1 || this.rep.dociden < 0) verif = false;
+      return verif;
+    },
+    validateNR: function validateNR() {
+      if (this.rep.nom1 == null || this.rep.nom1 == '' || this.rep.nom1.length > 20) return false;else return true;
+    },
+    validateSNR: function validateSNR() {
+      if (this.rep.nom2 != null && this.rep.nom2.length > 20) return false;else return true;
+    },
+    validateAR: function validateAR() {
+      if (this.rep.ape1 == null || this.rep.ape1 == '' || this.rep.ape1.length > 20) return false;else return true;
+    },
+    validateSAR: function validateSAR() {
+      if (this.rep.ape2 == null || this.rep.ape2 == '' || this.rep.ape2.length > 20) return false;else return true;
+    },
+    validateGR: function validateGR() {
+      return this.rep.genero != null;
+    },
+    validateFR: function validateFR() {
+      return this.rep.fec_nac != null;
+    },
+    validatePR: function validatePR() {
+      return this.rep.pais != null;
+    },
+    validateCIR: function validateCIR() {
+      return this.rep.ciudad != null;
+    },
+    validateUR: function validateUR() {
+      if (this.rep.urbanizacion == null || this.rep.urbanizacion == '' || this.rep.urbanizacion.length > 20) return false;else return true;
+    },
+    validateCAR: function validateCAR() {
+      if (this.rep.calle == null || this.rep.calle == '' || this.rep.calle.length > 20) return false;else return true;
+    },
+    validateZR: function validateZR() {
+      var verif = true;
+      if (this.rep.zipcode == null || this.rep.zipcode == '') return false;
+      if (!isNaN(this.rep.zipcode && Number.isInteger(this.rep.zipcode) && this.rep.zipcode > 0 && this.rep.zipcode < 99999)) return true;else return false;
+    }
+  },
   methods: {
+    convert: function convert(id, length) {
+      var pos = id.indexOf("-");
+      var res = id.substring(pos + 1, length);
+      parseInt(res, 10);
+      return res;
+    },
+    filter: function filter(currentcountry, currentcity) {
+      /* Filter cities according to the country*/
+      this.ciudades = [{}], this.ciudadesfiltered = [{}], currentcity = null, this.ciudades = this.ciudadesbackup;
+      var i = 0;
+
+      for (i = 0; i < this.ciudades.length; i++) {
+        /* Converted ID is id_sub*/
+        var convertedid = this.convert(this.ciudades[i].value, this.ciudades.length);
+
+        if (currentcountry == convertedid) {
+          var actualid = this.ciudades[i].value.substring(0, this.ciudades[i].value.indexOf("-"));
+          actualid = parseInt(actualid, 10);
+          this.ciudadesfiltered.push({
+            value: actualid,
+            text: this.ciudades[i].text
+          });
+        }
+      }
+
+      this.ciudades = [{}];
+      this.ciudades = this.ciudadesfiltered;
+      this.ciudades[0].value = null;
+      this.ciudades[0].text = 'Seleccionar';
+    },
+    filterR: function filterR(currentcountry, currentcity) {
+      /* Filter cities according to the country*/
+      this.ciudadesR = [{}], this.ciudadesfilteredR = [{}], currentcity = null, this.ciudadesR = this.ciudadesbackup;
+      var i = 0;
+
+      for (i = 0; i < this.ciudadesR.length; i++) {
+        /* Converted ID is id_sub*/
+        var convertedid = this.convert(this.ciudadesR[i].value, this.ciudadesR.length);
+
+        if (currentcountry == convertedid) {
+          var actualid = this.ciudadesR[i].value.substring(0, this.ciudadesR[i].value.indexOf("-"));
+          actualid = parseInt(actualid, 10);
+          this.ciudadesfilteredR.push({
+            value: actualid,
+            text: this.ciudadesR[i].text
+          });
+        }
+      }
+
+      this.ciudadesR = [{}];
+      this.ciudadesR = this.ciudadesfilteredR;
+      this.ciudadesR[0].value = null;
+      this.ciudadesR[0].text = 'Seleccionar';
+    },
     verifyAge: function verifyAge(memberAge) {
-      var today = new Date();
-      var dd = today.getDate();
-      var mm = today.getMonth() + 1;
-      var yyyy = today.getFullYear();
+      if (memberAge == '' || memberAge == null) return true;
+      this.today = new Date();
+      var dd = this.today.getDate();
+      var mm = this.today.getMonth() + 1;
+      var yyyy = this.today.getFullYear();
 
       if (dd < 10) {
         dd = '0' + dd;
@@ -3733,8 +3894,8 @@ __webpack_require__.r(__webpack_exports__);
         mm = '0' + mm;
       }
 
-      var today = yyyy + '-' + mm + '-' + dd;
-      var todaydate = new Date(today);
+      this.today = yyyy + '-' + mm + '-' + dd;
+      var todaydate = new Date(this.today);
       var agedate = new Date(memberAge);
       var verif = todaydate.valueOf() - agedate.valueOf();
       var edad = verif / (1000 * 60 * 60 * 24);
@@ -3746,8 +3907,91 @@ __webpack_require__.r(__webpack_exports__);
         this.mayoredad = true;
       }
 
-      console.log(this.mayoredad);
       return this.mayoredad;
+    },
+    add: function add() {
+      var path = window.location.pathname;
+      path = path.replace(/\D/g, '');
+      var params = {
+        dociden: this.member.dociden,
+        nom1: this.member.nom1,
+        nom2: this.member.nom2,
+        ape1: this.member.ape1,
+        ape2: this.member.ape2,
+        genero: this.member.genero,
+        fec_nac: this.member.fec_nac,
+        pais: this.member.pais,
+        ciudad: this.member.ciudad,
+        urbanizacion: this.member.urbanizacion,
+        calle: this.member.calle,
+        zipcode: this.member.zipcode,
+        codp: this.member.codp,
+        coda: this.member.coda,
+        telefono: this.member.telefono,
+
+        /* Representante*/
+        docidenR: this.rep.dociden,
+        nom1R: this.rep.nom1,
+        nom2R: this.rep.nom2,
+        ape1R: this.rep.ape1,
+        ape2R: this.rep.ape2,
+        fec_nacR: this.rep.fec_nac,
+        paisR: this.rep.pais,
+        ciudadR: this.rep.ciudad,
+        urbanizacionR: this.rep.urbanizacion,
+        calleR: this.rep.calle,
+        zipcodeR: this.rep.zipcode,
+        club: path,
+        today: this.today
+      };
+      console.log(params); //console.log(params);
+
+      axios.post("/clubs/".concat(path, "/members"), params).then(function (res) {
+        //console.log(res.data);
+        window.location = "/clubs/".concat(path, "/members");
+      })["catch"](function (e) {
+        console.log(e);
+      });
+    },
+    revalidate: function revalidate() {
+      var msg = '';
+      /* MEMBER */
+
+      if (this.validateD == false) msg = msg + "El campo Documento de Identidad debe ser un número entero positivo de no más de 8 caracteres\n";
+      if (this.validateN == false) msg = msg + "El campo Nombre de Lector no puede estar vacío ni tener más de 20 caracteres\n";
+      if (this.validateSN == false) msg = msg + "El campo Segundo Nombre de Lector no puede tener más de 20 caracteres\n";
+      if (this.validateA == false) msg = msg + "El campo Apellido de Lector no puede estar vacío ni tener más de 20 caracteres\n";
+      if (this.validateSA == false) msg = msg + "El campo Segundo Apellido de Lector no puede estar vacío ni tener más de 20 caracteres\n";
+      if (this.validateG == false) msg = msg + "El campo Género no puede estar vacío\n";
+      if (this.validateF == false) msg = msg + "El campo Fecha de Nacimiento de Lector no puede estar vacío";
+      if (this.validateCP == false) msg = msg + "El campo Código de País debe ser número entero, no puede estar vacío ni tener más de 3 caracteres\n";
+      if (this.validateCODA == false) msg = msg + "El campo Código de Área debe ser número entero, no puede estar vacío ni tener más de 5 caracteres\n";
+      if (this.validateT == false) msg = msg + "El campo Número de Teléfono debe ser un número entero, no puede estar vacío ni tener más de 10 caracteres\n";
+      if (this.validateP == false) msg = msg + "El campo País de Lector no puede estar vacío\n";
+      if (this.validateCI == false) msg = msg + "El campo Ciudad de Lector no puede estar vacío\n";
+      if (this.validateU == false) msg = msg + "El campo Urbanización (Lector) no puede estar vacío ni tener más de 20 caracteres\n";
+      if (this.validateCA == false) msg = msg + "El campo Calle (Lector) no puede estar vacío ni tener más de 20 caracteres\n";
+      if (this.validateZ == false) msg = msg + "El campo Código postal (Lector) no puede estar vacío, debe ser numérico entero y no puede tener más de 7 caracteres\n";
+
+      if (!this.mayoredad) {
+        if (this.validateDR == false) msg = msg + "El campo Documento de Identidad debe ser un número entero positivo de no más de 8 caracteres\n";
+        if (this.validateNR == false) msg = msg + "El campo Nombre (Representante) no puede estar vacío ni tener más de 20 caracteres\n";
+        if (this.validateSNR == false) msg = msg + "El campo Segundo Nombre (Representante) no puede tener más de 20 caracteres\n";
+        if (this.validateAR == false) msg = msg + "El campo Apellido (Representante) no puede estar vacío ni tener más de 20 caracteres\n";
+        if (this.validateSAR == false) msg = msg + "El campo Segundo Apellido (Representante) no puede estar vacío ni tener más de 20 caracteres\n";
+        if (this.validateFR == false) msg = msg + "El campo Fecha de Nacimiento (Representante) no puede estar vacío";
+        if (this.validatePR == false) msg = msg + "El campo País (Representante) no puede estar vacío\n";
+        if (this.validateCIR == false) msg = msg + "El campo Ciudad (Representante) no puede estar vacío\n";
+        if (this.validateUR == false) msg = msg + "El campo Urbanización (Representante) no puede estar vacío ni tener más de 20 caracteres\n";
+        if (this.validateCAR == false) msg = msg + "El campo Calle (Representante) no puede estar vacío ni tener más de 20 caracteres\n";
+        if (this.validateZR == false) msg = msg + "El campo Código postal (Representante) no puede estar vacío, debe ser numérico entero y no puede tener más de 7 caracteres\n";
+      }
+
+      if (msg == '') {
+        this.add();
+      } else {
+        alert(msg);
+      }
     }
   }
 });
@@ -4197,21 +4441,80 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      dociden: null,
-      docidenR: null,
-      nom1: null,
-      nom1R: null,
-      nom2: null,
-      nom2R: null,
-      ape1: null,
-      ape1R: null,
-      ape2: null,
-      ape2R: null,
-      genero: null,
-      generoR: null,
+      member: [{
+        dociden: null,
+        nom1: null,
+        nom2: null,
+        ape1: null,
+        ape2: null,
+        genero: null,
+        fec_nac: null,
+        pais: null,
+        ciudad: null,
+        urbanizacion: null,
+        calle: null,
+        zipcode: null,
+        coda: null,
+        codp: null,
+        telefono: null
+      }],
+      rep: [{
+        dociden: '',
+        nom1: '',
+        nom2: '',
+        ape1: '',
+        ape2: '',
+        genero: '',
+        fec_nac: null,
+        pais: null,
+        ciudad: null,
+        calle: '',
+        urbanizacion: '',
+        zipcode: ''
+      }],
       generos: [{
         value: null,
         text: 'Seleccionar'
@@ -4222,37 +4525,205 @@ __webpack_require__.r(__webpack_exports__);
         value: 'F',
         text: 'Femenino'
       }],
-      fec_nac: null,
-      fec_nacR: null,
-      pais: null,
-      paisR: null,
       paises: [{
         value: null,
         text: 'Seleccionar'
       }],
-      ciudad: null,
-      ciudadR: null,
+      ciudadesbackup: [{
+        value: null,
+        text: 'Seleccionar'
+      }],
+      mayoredad: true,
       ciudades: [{
         value: null,
         text: 'Seleccionar'
       }],
-      urbanizacion: null,
-      urbanizacionR: null,
-      calle: null,
-      calleR: null,
-      zipcode: null,
-      zipcodeR: null,
-      telefono: null,
-      telefonoR: null,
-      mayoredad: true
+      ciudadesR: [{
+        value: null,
+        text: 'Seleccionar'
+      }],
+      ciudadesfiltered: [{}],
+      ciudadesfilteredR: [{}],
+      today: null
     };
   },
+  created: function created() {
+    var path = window.location.pathname;
+    var isbn = path.indexOf("/clubs", 0) + 7;
+    var isbnend = path.indexOf("/members", 0);
+    var id = path.substring(isbn, isbnend);
+    id = parseInt(id, 10);
+    var newpath = path.substring(isbnend, path.length);
+    newpath = newpath.replace(/\D/g, '');
+    var ide = parseInt(newpath, 10);
+    console.log('id club ' + id + ' id member ' + ide);
+    axios.get("/clubs/".concat(id, "/members/").concat(ide, "/edit")).then(function (res) {
+      console.log(res.data.representante);
+    })["catch"](function (e) {
+      console.log(e);
+    });
+  },
+  computed: {
+    validateD: function validateD() {
+      var verif = true;
+      if (this.member.dociden == null || this.member.dociden == '') return false;
+      if (this.member.dociden.toString().length > 8 || isNaN(this.member.dociden)) verif = false;
+      if (this.member.dociden.toString().indexOf(".") != -1 || this.member.dociden < 0) verif = false;
+      return verif;
+    },
+    validateN: function validateN() {
+      if (this.member.nom1 == null || this.member.nom1 == '' || this.member.nom1.length > 20) return false;else return true;
+    },
+    validateSN: function validateSN() {
+      if (this.member.nom2 == null || this.member.nom2.length > 20) return false;else return true;
+    },
+    validateA: function validateA() {
+      if (this.member.ape1 == null || this.member.ape1 == '' || this.member.ape1.length > 20) return false;else return true;
+    },
+    validateSA: function validateSA() {
+      if (this.member.ape2 == null || this.member.ape2 == '' || this.member.ape2.length > 20) return false;else return true;
+    },
+    validateG: function validateG() {
+      return this.member.genero != null;
+    },
+    validateF: function validateF() {
+      return this.member.fec_nac != null;
+    },
+    validateCP: function validateCP() {
+      if (this.member.codp == null || this.member.codp == '') return false;
+      if (isNaN(this.member.codp || !Number.isInteger(this.member.codp) || this.member.codp < 0 || this.member.codp > 999)) return false;else return true;
+    },
+    validateCODA: function validateCODA() {
+      var verif = true;
+      if (this.member.coda == null || this.member.coda == '') return false;
+      if (isNaN(this.member.coda || !Number.isInteger(this.member.coda) || this.member.coda < 0 || this.member.coda > 99999)) return false;else return true;
+    },
+    validateT: function validateT() {
+      var verif = true;
+      if (this.member.telefono == null || this.member.telefono == '') return false;
+      if (isNaN(this.member.telefono || !Number.isInteger(this.member.telefono) || this.member.telefono < 0 || this.member.telefono > 9999999)) return false;else return true;
+    },
+    validateP: function validateP() {
+      return this.member.pais != null;
+    },
+    validateCI: function validateCI() {
+      return this.member.ciudad != null;
+    },
+    validateU: function validateU() {
+      if (this.member.urbanizacion == null || this.member.urbanizacion == '' || this.member.urbanizacion.length > 20) return false;else return true;
+    },
+    validateCA: function validateCA() {
+      if (this.member.calle == null || this.member.calle == '' || this.member.calle.length > 20) return false;else return true;
+    },
+    validateZ: function validateZ() {
+      var verif = true;
+      if (this.member.zipcode == null || this.member.zipcode == '') return false;
+      if (!isNaN(this.member.zipcode && Number.isInteger(this.member.zipcode) && this.member.zipcode > 0 && this.member.zipcode < 99999)) return true;else return false;
+    },
+    validateDR: function validateDR() {
+      var verif = true;
+      if (this.rep.dociden == null || this.rep.dociden == '') return false;
+      if (this.rep.dociden.toString().length > 8 || isNaN(this.rep.dociden)) verif = false;
+      if (this.rep.dociden.toString().indexOf(".") != -1 || this.rep.dociden < 0) verif = false;
+      return verif;
+    },
+    validateNR: function validateNR() {
+      if (this.rep.nom1 == null || this.rep.nom1 == '' || this.rep.nom1.length > 20) return false;else return true;
+    },
+    validateSNR: function validateSNR() {
+      if (this.rep.nom2 == null || this.rep.nom2.length > 20) return false;else return true;
+    },
+    validateAR: function validateAR() {
+      if (this.rep.ape1 == null || this.rep.ape1 == '' || this.rep.ape1.length > 20) return false;else return true;
+    },
+    validateSAR: function validateSAR() {
+      if (this.rep.ape2 == null || this.rep.ape2 == '' || this.rep.ape2.length > 20) return false;else return true;
+    },
+    validateGR: function validateGR() {
+      return this.rep.genero != null;
+    },
+    validateFR: function validateFR() {
+      return this.rep.fec_nac != null;
+    },
+    validatePR: function validatePR() {
+      return this.rep.pais != null;
+    },
+    validateCIR: function validateCIR() {
+      return this.rep.ciudad != null;
+    },
+    validateUR: function validateUR() {
+      if (this.rep.urbanizacion == null || this.rep.urbanizacion == '' || this.rep.urbanizacion.length > 20) return false;else return true;
+    },
+    validateCAR: function validateCAR() {
+      if (this.rep.calle == null || this.rep.calle == '' || this.rep.calle.length > 20) return false;else return true;
+    },
+    validateZR: function validateZR() {
+      var verif = true;
+      if (this.rep.zipcode == null || this.rep.zipcode == '') return false;
+      if (!isNaN(this.rep.zipcode && Number.isInteger(this.rep.zipcode) && this.rep.zipcode > 0 && this.rep.zipcode < 99999)) return true;else return false;
+    }
+  },
   methods: {
+    convert: function convert(id, length) {
+      var pos = id.indexOf("-");
+      var res = id.substring(pos + 1, length);
+      parseInt(res, 10);
+      return res;
+    },
+    filter: function filter(currentcountry, currentcity) {
+      /* Filter cities according to the country*/
+      this.ciudades = [{}], this.ciudadesfiltered = [{}], currentcity = null, this.ciudades = this.ciudadesbackup;
+      var i = 0;
+
+      for (i = 0; i < this.ciudades.length; i++) {
+        /* Converted ID is id_sub*/
+        var convertedid = this.convert(this.ciudades[i].value, this.ciudades.length);
+
+        if (currentcountry == convertedid) {
+          var actualid = this.ciudades[i].value.substring(0, this.ciudades[i].value.indexOf("-"));
+          actualid = parseInt(actualid, 10);
+          this.ciudadesfiltered.push({
+            value: actualid,
+            text: this.ciudades[i].text
+          });
+        }
+      }
+
+      this.ciudades = [{}];
+      this.ciudades = this.ciudadesfiltered;
+      this.ciudades[0].value = null;
+      this.ciudades[0].text = 'Seleccionar';
+    },
+    filterR: function filterR(currentcountry, currentcity) {
+      /* Filter cities according to the country*/
+      this.ciudadesR = [{}], this.ciudadesfilteredR = [{}], currentcity = null, this.ciudadesR = this.ciudadesbackup;
+      var i = 0;
+
+      for (i = 0; i < this.ciudadesR.length; i++) {
+        /* Converted ID is id_sub*/
+        var convertedid = this.convert(this.ciudadesR[i].value, this.ciudadesR.length);
+
+        if (currentcountry == convertedid) {
+          var actualid = this.ciudadesR[i].value.substring(0, this.ciudadesR[i].value.indexOf("-"));
+          actualid = parseInt(actualid, 10);
+          this.ciudadesfilteredR.push({
+            value: actualid,
+            text: this.ciudadesR[i].text
+          });
+        }
+      }
+
+      this.ciudadesR = [{}];
+      this.ciudadesR = this.ciudadesfilteredR;
+      this.ciudadesR[0].value = null;
+      this.ciudadesR[0].text = 'Seleccionar';
+    },
     verifyAge: function verifyAge(memberAge) {
-      var today = new Date();
-      var dd = today.getDate();
-      var mm = today.getMonth() + 1;
-      var yyyy = today.getFullYear();
+      if (memberAge == '' || memberAge == null) return true;
+      this.today = new Date();
+      var dd = this.today.getDate();
+      var mm = this.today.getMonth() + 1;
+      var yyyy = this.today.getFullYear();
 
       if (dd < 10) {
         dd = '0' + dd;
@@ -4262,8 +4733,8 @@ __webpack_require__.r(__webpack_exports__);
         mm = '0' + mm;
       }
 
-      var today = yyyy + '-' + mm + '-' + dd;
-      var todaydate = new Date(today);
+      this.today = yyyy + '-' + mm + '-' + dd;
+      var todaydate = new Date(this.today);
       var agedate = new Date(memberAge);
       var verif = todaydate.valueOf() - agedate.valueOf();
       var edad = verif / (1000 * 60 * 60 * 24);
@@ -4275,8 +4746,90 @@ __webpack_require__.r(__webpack_exports__);
         this.mayoredad = true;
       }
 
-      console.log(this.mayoredad);
       return this.mayoredad;
+    },
+    add: function add() {
+      var path = window.location.pathname;
+      path = path.replace(/\D/g, '');
+      var params = {
+        dociden: this.member.dociden,
+        nom1: this.member.nom1,
+        nom2: this.member.nom2,
+        ape1: this.member.ape1,
+        ape2: this.member.ape2,
+        genero: this.member.genero,
+        fec_nac: this.member.fec_nac,
+        pais: this.member.pais,
+        ciudad: this.member.ciudad,
+        urbanizacion: this.member.urbanizacion,
+        calle: this.member.calle,
+        zipcode: this.member.zipcode,
+        codp: this.member.codp,
+        coda: this.member.coda,
+        telefono: this.member.telefono,
+
+        /* Representante*/
+        docidenR: this.rep.dociden,
+        nom1R: this.rep.nom1,
+        nom2R: this.rep.nom2,
+        ape1R: this.rep.ape1,
+        ape2R: this.rep.ape2,
+        fec_nacR: this.rep.fec_nac,
+        paisR: this.rep.pais,
+        ciudadR: this.rep.ciudad,
+        urbanizacionR: this.rep.urbanizacion,
+        calleR: this.rep.calle,
+        zipcodeR: this.rep.zipcode,
+        club: path,
+        today: this.today
+      };
+      console.log(params); //console.log(params);
+
+      axios.post("/clubs/".concat(path, "/members"), params).then(function (res) {
+        window.location = "/clubs/".concat(path, "/members");
+      })["catch"](function (e) {
+        console.log(e);
+      });
+    },
+    revalidate: function revalidate() {
+      var msg = '';
+      /* MEMBER */
+
+      if (this.validateD == false) msg = msg + "El campo Documento de Identidad debe ser un número entero positivo de no más de 8 caracteres\n";
+      if (this.validateN == false) msg = msg + "El campo Nombre de Lector no puede estar vacío ni tener más de 20 caracteres\n";
+      if (this.validateSN == false) msg = msg + "El campo Segundo Nombre de Lector no puede tener más de 20 caracteres\n";
+      if (this.validateA == false) msg = msg + "El campo Apellido de Lector no puede estar vacío ni tener más de 20 caracteres\n";
+      if (this.validateSA == false) msg = msg + "El campo Segundo Apellido de Lector no puede estar vacío ni tener más de 20 caracteres\n";
+      if (this.validateG == false) msg = msg + "El campo Género no puede estar vacío\n";
+      if (this.validateF == false) msg = msg + "El campo Fecha de Nacimiento de Lector no puede estar vacío";
+      if (this.validateCP == false) msg = msg + "El campo Código de País debe ser número entero, no puede estar vacío ni tener más de 3 caracteres\n";
+      if (this.validateCODA == false) msg = msg + "El campo Código de Área debe ser número entero, no puede estar vacío ni tener más de 5 caracteres\n";
+      if (this.validateT == false) msg = msg + "El campo Número de Teléfono debe ser un número entero, no puede estar vacío ni tener más de 10 caracteres\n";
+      if (this.validateP == false) msg = msg + "El campo País de Lector no puede estar vacío\n";
+      if (this.validateCI == false) msg = msg + "El campo Ciudad de Lector no puede estar vacío\n";
+      if (this.validateU == false) msg = msg + "El campo Urbanización (Lector) no puede estar vacío ni tener más de 20 caracteres\n";
+      if (this.validateCA == false) msg = msg + "El campo Calle (Lector) no puede estar vacío ni tener más de 20 caracteres\n";
+      if (this.validateZ == false) msg = msg + "El campo Código postal (Lector) no puede estar vacío, debe ser numérico entero y no puede tener más de 7 caracteres\n";
+
+      if (!this.mayoredad) {
+        if (this.validateDR == false) msg = msg + "El campo Documento de Identidad debe ser un número entero positivo de no más de 8 caracteres\n";
+        if (this.validateNR == false) msg = msg + "El campo Nombre (Representante) no puede estar vacío ni tener más de 20 caracteres\n";
+        if (this.validateSNR == false) msg = msg + "El campo Segundo Nombre (Representante) no puede tener más de 20 caracteres\n";
+        if (this.validateAR == false) msg = msg + "El campo Apellido (Representante) no puede estar vacío ni tener más de 20 caracteres\n";
+        if (this.validateSAR == false) msg = msg + "El campo Segundo Apellido (Representante) no puede estar vacío ni tener más de 20 caracteres\n";
+        if (this.validateFR == false) msg = msg + "El campo Fecha de Nacimiento (Representante) no puede estar vacío";
+        if (this.validatePR == false) msg = msg + "El campo País (Representante) no puede estar vacío\n";
+        if (this.validateCIR == false) msg = msg + "El campo Ciudad (Representante) no puede estar vacío\n";
+        if (this.validateUR == false) msg = msg + "El campo Urbanización (Representante) no puede estar vacío ni tener más de 20 caracteres\n";
+        if (this.validateCAR == false) msg = msg + "El campo Calle (Representante) no puede estar vacío ni tener más de 20 caracteres\n";
+        if (this.validateZR == false) msg = msg + "El campo Código postal (Representante) no puede estar vacío, debe ser numérico entero y no puede tener más de 7 caracteres\n";
+      }
+
+      if (msg == '') {
+        this.add();
+      } else {
+        alert(msg);
+      }
     }
   }
 });
@@ -73913,90 +74466,6 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/books/Genres.vue?vue&type=template&id=7b354bc0&":
-/*!***************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/books/Genres.vue?vue&type=template&id=7b354bc0& ***!
-  \***************************************************************************************************************************************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    [
-      _c(
-        "b-col",
-        { attrs: { cols: "7" } },
-        [
-          _c("label", [_vm._v("Subgéneros")]),
-          _vm._v(" "),
-          _c("b-table", {
-            ref: "selectableTable",
-            attrs: {
-              selectable: "",
-              "select-mode": "multi",
-              items: _vm.items,
-              fields: _vm.fields,
-              responsive: "lg"
-            },
-            on: { "row-selected": _vm.onRowSelected },
-            scopedSlots: _vm._u([
-              {
-                key: "cell(seleccionado)",
-                fn: function(ref) {
-                  var rowSelected = ref.rowSelected
-                  return [
-                    rowSelected
-                      ? [
-                          _c("span", { attrs: { "aria-hidden": "true" } }, [
-                            _vm._v("✓")
-                          ]),
-                          _vm._v(" "),
-                          _c("span", { staticClass: "sr-only" }, [
-                            _vm._v("Seleccionado")
-                          ])
-                        ]
-                      : [
-                          _c("span", { attrs: { "aria-hidden": "true" } }, [
-                            _vm._v(" ")
-                          ]),
-                          _vm._v(" "),
-                          _c("span", { staticClass: "sr-only" }, [
-                            _vm._v("No seleccionado")
-                          ])
-                        ]
-                  ]
-                }
-              }
-            ])
-          })
-        ],
-        1
-      ),
-      _vm._v(" "),
-      _c("p", [
-        _vm._v("\r\n        Selected Rows:"),
-        _c("br"),
-        _vm._v("\r\n        " + _vm._s(_vm.selected) + "\r\n    ")
-      ])
-    ],
-    1
-  )
-}
-var staticRenderFns = []
-render._withStripped = true
-
-
-
-/***/ }),
-
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/books/StructAdd.vue?vue&type=template&id=84722768&":
 /*!******************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/books/StructAdd.vue?vue&type=template&id=84722768& ***!
@@ -75844,6 +76313,14 @@ var render = function() {
                       _vm._v(" "),
                       _c(
                         "b-form",
+                        {
+                          on: {
+                            submit: function($event) {
+                              $event.preventDefault()
+                              return _vm.add($event)
+                            }
+                          }
+                        },
                         [
                           _c(
                             "b-row",
@@ -75864,13 +76341,23 @@ var render = function() {
                                       placeholder: "Documento de identidad"
                                     },
                                     model: {
-                                      value: _vm.dociden,
+                                      value: _vm.member.dociden,
                                       callback: function($$v) {
-                                        _vm.dociden = $$v
+                                        _vm.$set(_vm.member, "dociden", $$v)
                                       },
-                                      expression: "dociden"
+                                      expression: "member.dociden"
                                     }
-                                  })
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "b-form-invalid-feedback",
+                                    { attrs: { state: _vm.validateD } },
+                                    [
+                                      _vm._v(
+                                        "El documento de identidad debe ser un número entero de 8 caracteres"
+                                      )
+                                    ]
+                                  )
                                 ],
                                 1
                               ),
@@ -75891,13 +76378,23 @@ var render = function() {
                                       placeholder: "Primer nombre"
                                     },
                                     model: {
-                                      value: _vm.nom1,
+                                      value: _vm.member.nom1,
                                       callback: function($$v) {
-                                        _vm.nom1 = $$v
+                                        _vm.$set(_vm.member, "nom1", $$v)
                                       },
-                                      expression: "nom1"
+                                      expression: "member.nom1"
                                     }
-                                  })
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "b-form-invalid-feedback",
+                                    { attrs: { state: _vm.validateN } },
+                                    [
+                                      _vm._v(
+                                        "El nombre no puede estar vacío y no debe tener más de 15 caracteres"
+                                      )
+                                    ]
+                                  )
                                 ],
                                 1
                               ),
@@ -75918,13 +76415,23 @@ var render = function() {
                                       placeholder: "Segundo nombre"
                                     },
                                     model: {
-                                      value: _vm.nom2,
+                                      value: _vm.member.nom2,
                                       callback: function($$v) {
-                                        _vm.nom2 = $$v
+                                        _vm.$set(_vm.member, "nom2", $$v)
                                       },
-                                      expression: "nom2"
+                                      expression: "member.nom2"
                                     }
-                                  })
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "b-form-invalid-feedback",
+                                    { attrs: { state: _vm.validateSN } },
+                                    [
+                                      _vm._v(
+                                        "El segundo nombre no debe tener más de 15 caracteres"
+                                      )
+                                    ]
+                                  )
                                 ],
                                 1
                               )
@@ -75953,13 +76460,23 @@ var render = function() {
                                       placeholder: "Primer apellido"
                                     },
                                     model: {
-                                      value: _vm.ape1,
+                                      value: _vm.member.ape1,
                                       callback: function($$v) {
-                                        _vm.ape1 = $$v
+                                        _vm.$set(_vm.member, "ape1", $$v)
                                       },
-                                      expression: "ape1"
+                                      expression: "member.ape1"
                                     }
-                                  })
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "b-form-invalid-feedback",
+                                    { attrs: { state: _vm.validateA } },
+                                    [
+                                      _vm._v(
+                                        "El apellido no puede estar vacío ni tener más de 15 caracteres"
+                                      )
+                                    ]
+                                  )
                                 ],
                                 1
                               ),
@@ -75980,13 +76497,23 @@ var render = function() {
                                       placeholder: "Segundo apellido"
                                     },
                                     model: {
-                                      value: _vm.ape2,
+                                      value: _vm.member.ape2,
                                       callback: function($$v) {
-                                        _vm.ape2 = $$v
+                                        _vm.$set(_vm.member, "ape2", $$v)
                                       },
-                                      expression: "ape2"
+                                      expression: "member.ape2"
                                     }
-                                  })
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "b-form-invalid-feedback",
+                                    { attrs: { state: _vm.validateSA } },
+                                    [
+                                      _vm._v(
+                                        "El segundo apellido no puede estar vacío ni tener más de 15 caracteres"
+                                      )
+                                    ]
+                                  )
                                 ],
                                 1
                               )
@@ -76001,7 +76528,7 @@ var render = function() {
                             [
                               _c(
                                 "b-col",
-                                { attrs: { cols: "4" } },
+                                { attrs: { cols: "2" } },
                                 [
                                   _c("label", { attrs: { for: "genero" } }, [
                                     _vm._v("Género")
@@ -76013,20 +76540,26 @@ var render = function() {
                                       id: "genero"
                                     },
                                     model: {
-                                      value: _vm.genero,
+                                      value: _vm.member.genero,
                                       callback: function($$v) {
-                                        _vm.genero = $$v
+                                        _vm.$set(_vm.member, "genero", $$v)
                                       },
-                                      expression: "genero"
+                                      expression: "member.genero"
                                     }
-                                  })
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "b-form-invalid-feedback",
+                                    { attrs: { state: _vm.validateG } },
+                                    [_vm._v("Seleccione un género")]
+                                  )
                                 ],
                                 1
                               ),
                               _vm._v(" "),
                               _c(
                                 "b-col",
-                                { attrs: { cols: "4" } },
+                                { attrs: { cols: "2" } },
                                 [
                                   _c("label", { attrs: { for: "fec_nac" } }, [
                                     _vm._v("Fecha de Nacimiento")
@@ -76040,17 +76573,100 @@ var render = function() {
                                     },
                                     on: {
                                       input: function($event) {
-                                        return _vm.verifyAge(_vm.fec_nac)
+                                        _vm.mayoredad = true
+                                        _vm.verifyAge(_vm.member.fec_nac)
                                       }
                                     },
                                     model: {
-                                      value: _vm.fec_nac,
+                                      value: _vm.member.fec_nac,
                                       callback: function($$v) {
-                                        _vm.fec_nac = $$v
+                                        _vm.$set(_vm.member, "fec_nac", $$v)
                                       },
-                                      expression: "fec_nac"
+                                      expression: "member.fec_nac"
                                     }
-                                  })
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "b-form-invalid-feedback",
+                                    { attrs: { state: _vm.validateF } },
+                                    [
+                                      _vm._v(
+                                        "Seleccione una fecha de nacimiento"
+                                      )
+                                    ]
+                                  )
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "b-col",
+                                { attrs: { cols: "2" } },
+                                [
+                                  _c("label", { attrs: { for: "codpais" } }, [
+                                    _vm._v("Código de país")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("b-form-input", {
+                                    attrs: {
+                                      type: "text",
+                                      name: "codpais",
+                                      id: "codpais"
+                                    },
+                                    model: {
+                                      value: _vm.member.codp,
+                                      callback: function($$v) {
+                                        _vm.$set(_vm.member, "codp", $$v)
+                                      },
+                                      expression: "member.codp"
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "b-form-invalid-feedback",
+                                    { attrs: { state: _vm.validateCP } },
+                                    [
+                                      _vm._v(
+                                        "El código de país no puede tener más de 3 caracteres"
+                                      )
+                                    ]
+                                  )
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "b-col",
+                                { attrs: { cols: "2" } },
+                                [
+                                  _c("label", { attrs: { for: "codarea" } }, [
+                                    _vm._v("Código de área")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("b-form-input", {
+                                    attrs: {
+                                      type: "text",
+                                      name: "codarea",
+                                      id: "codarea"
+                                    },
+                                    model: {
+                                      value: _vm.member.coda,
+                                      callback: function($$v) {
+                                        _vm.$set(_vm.member, "coda", $$v)
+                                      },
+                                      expression: "member.coda"
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "b-form-invalid-feedback",
+                                    { attrs: { state: _vm.validateCODA } },
+                                    [
+                                      _vm._v(
+                                        "El código de área debe ser un valor numérico entero de no más de 5 caracteres"
+                                      )
+                                    ]
+                                  )
                                 ],
                                 1
                               ),
@@ -76059,24 +76675,34 @@ var render = function() {
                                 "b-col",
                                 { attrs: { cols: "4" } },
                                 [
-                                  _c("label", { attrs: { for: "telefono" } }, [
-                                    _vm._v("Teléfono")
+                                  _c("label", { attrs: { for: "num" } }, [
+                                    _vm._v("Número telefónico")
                                   ]),
                                   _vm._v(" "),
                                   _c("b-form-input", {
                                     attrs: {
-                                      type: "tel",
-                                      name: "telefono",
-                                      id: "telefono"
+                                      type: "text",
+                                      name: "num",
+                                      id: "num"
                                     },
                                     model: {
-                                      value: _vm.telefono,
+                                      value: _vm.member.telefono,
                                       callback: function($$v) {
-                                        _vm.telefono = $$v
+                                        _vm.$set(_vm.member, "telefono", $$v)
                                       },
-                                      expression: "telefono"
+                                      expression: "member.telefono"
                                     }
-                                  })
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "b-form-invalid-feedback",
+                                    { attrs: { state: _vm.validateT } },
+                                    [
+                                      _vm._v(
+                                        "El teléfono debe ser un valor numérico entero de máximo 10 caracteres"
+                                      )
+                                    ]
+                                  )
                                 ],
                                 1
                               )
@@ -76103,14 +76729,28 @@ var render = function() {
                                       name: "pais",
                                       options: _vm.paises
                                     },
+                                    on: {
+                                      change: function($event) {
+                                        return _vm.filter(
+                                          _vm.member.pais,
+                                          _vm.member.ciudad
+                                        )
+                                      }
+                                    },
                                     model: {
-                                      value: _vm.pais,
+                                      value: _vm.member.pais,
                                       callback: function($$v) {
-                                        _vm.pais = $$v
+                                        _vm.$set(_vm.member, "pais", $$v)
                                       },
-                                      expression: "pais"
+                                      expression: "member.pais"
                                     }
-                                  })
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "b-form-invalid-feedback",
+                                    { attrs: { state: _vm.validateP } },
+                                    [_vm._v("Seleccione un país")]
+                                  )
                                 ],
                                 1
                               ),
@@ -76130,13 +76770,19 @@ var render = function() {
                                       options: _vm.ciudades
                                     },
                                     model: {
-                                      value: _vm.ciudad,
+                                      value: _vm.member.ciudad,
                                       callback: function($$v) {
-                                        _vm.ciudad = $$v
+                                        _vm.$set(_vm.member, "ciudad", $$v)
                                       },
-                                      expression: "ciudad"
+                                      expression: "member.ciudad"
                                     }
-                                  })
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "b-form-invalid-feedback",
+                                    { attrs: { state: _vm.validateCI } },
+                                    [_vm._v("Seleccione una ciudad")]
+                                  )
                                 ],
                                 1
                               )
@@ -76166,13 +76812,27 @@ var render = function() {
                                       placeholder: "Urbanización"
                                     },
                                     model: {
-                                      value: _vm.urbanizacion,
+                                      value: _vm.member.urbanizacion,
                                       callback: function($$v) {
-                                        _vm.urbanizacion = $$v
+                                        _vm.$set(
+                                          _vm.member,
+                                          "urbanizacion",
+                                          $$v
+                                        )
                                       },
-                                      expression: "urbanizacion"
+                                      expression: "member.urbanizacion"
                                     }
-                                  })
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "b-form-invalid-feedback",
+                                    { attrs: { state: _vm.validateU } },
+                                    [
+                                      _vm._v(
+                                        "Campo urbanización no puede estar vacío ni tener más de 20 caracteres"
+                                      )
+                                    ]
+                                  )
                                 ],
                                 1
                               ),
@@ -76192,13 +76852,23 @@ var render = function() {
                                       placeholder: "Calle"
                                     },
                                     model: {
-                                      value: _vm.calle,
+                                      value: _vm.member.calle,
                                       callback: function($$v) {
-                                        _vm.calle = $$v
+                                        _vm.$set(_vm.member, "calle", $$v)
                                       },
-                                      expression: "calle"
+                                      expression: "member.calle"
                                     }
-                                  })
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "b-form-invalid-feedback",
+                                    { attrs: { state: _vm.validateCA } },
+                                    [
+                                      _vm._v(
+                                        "Campo calle no puede estar vacío ni tener más de 20 caracteres"
+                                      )
+                                    ]
+                                  )
                                 ],
                                 1
                               ),
@@ -76218,13 +76888,23 @@ var render = function() {
                                       placeholder: "Código postal"
                                     },
                                     model: {
-                                      value: _vm.zipcode,
+                                      value: _vm.member.zipcode,
                                       callback: function($$v) {
-                                        _vm.zipcode = $$v
+                                        _vm.$set(_vm.member, "zipcode", $$v)
                                       },
-                                      expression: "zipcode"
+                                      expression: "member.zipcode"
                                     }
-                                  })
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "b-form-invalid-feedback",
+                                    { attrs: { state: _vm.validateZ } },
+                                    [
+                                      _vm._v(
+                                        "El código postal debe ser un campo numérico de no más de 7 caracteres"
+                                      )
+                                    ]
+                                  )
                                 ],
                                 1
                               )
@@ -76279,13 +76959,29 @@ var render = function() {
                                                 "Documento de identidad"
                                             },
                                             model: {
-                                              value: _vm.docidenR,
+                                              value: _vm.rep.dociden,
                                               callback: function($$v) {
-                                                _vm.docidenR = $$v
+                                                _vm.$set(
+                                                  _vm.rep,
+                                                  "dociden",
+                                                  $$v
+                                                )
                                               },
-                                              expression: "docidenR"
+                                              expression: "rep.dociden"
                                             }
-                                          })
+                                          }),
+                                          _vm._v(" "),
+                                          _c(
+                                            "b-form-invalid-feedback",
+                                            {
+                                              attrs: { state: _vm.validateDR }
+                                            },
+                                            [
+                                              _vm._v(
+                                                "El documento de identidad debe ser un número entero de 8 caracteres"
+                                              )
+                                            ]
+                                          )
                                         ],
                                         1
                                       ),
@@ -76308,13 +77004,25 @@ var render = function() {
                                               placeholder: "Primer nombre"
                                             },
                                             model: {
-                                              value: _vm.nom1R,
+                                              value: _vm.rep.nom1,
                                               callback: function($$v) {
-                                                _vm.nom1R = $$v
+                                                _vm.$set(_vm.rep, "nom1", $$v)
                                               },
-                                              expression: "nom1R"
+                                              expression: "rep.nom1"
                                             }
-                                          })
+                                          }),
+                                          _vm._v(" "),
+                                          _c(
+                                            "b-form-invalid-feedback",
+                                            {
+                                              attrs: { state: _vm.validateNR }
+                                            },
+                                            [
+                                              _vm._v(
+                                                "El nombre no puede estar vacío y no debe tener más de 15 caracteres"
+                                              )
+                                            ]
+                                          )
                                         ],
                                         1
                                       ),
@@ -76337,13 +77045,25 @@ var render = function() {
                                               placeholder: "Segundo nombre"
                                             },
                                             model: {
-                                              value: _vm.nom2R,
+                                              value: _vm.rep.nom2,
                                               callback: function($$v) {
-                                                _vm.nom2R = $$v
+                                                _vm.$set(_vm.rep, "nom2", $$v)
                                               },
-                                              expression: "nom2R"
+                                              expression: "rep.nom2"
                                             }
-                                          })
+                                          }),
+                                          _vm._v(" "),
+                                          _c(
+                                            "b-form-invalid-feedback",
+                                            {
+                                              attrs: { state: _vm.validateSNR }
+                                            },
+                                            [
+                                              _vm._v(
+                                                "El segundo nombre no debe tener más de 15 caracteres"
+                                              )
+                                            ]
+                                          )
                                         ],
                                         1
                                       )
@@ -76374,13 +77094,25 @@ var render = function() {
                                               placeholder: "Primer apellido"
                                             },
                                             model: {
-                                              value: _vm.ape1R,
+                                              value: _vm.rep.ape1,
                                               callback: function($$v) {
-                                                _vm.ape1R = $$v
+                                                _vm.$set(_vm.rep, "ape1", $$v)
                                               },
-                                              expression: "ape1R"
+                                              expression: "rep.ape1"
                                             }
-                                          })
+                                          }),
+                                          _vm._v(" "),
+                                          _c(
+                                            "b-form-invalid-feedback",
+                                            {
+                                              attrs: { state: _vm.validateAR }
+                                            },
+                                            [
+                                              _vm._v(
+                                                "El apellido no puede estar vacío ni tener más de 15 caracteres"
+                                              )
+                                            ]
+                                          )
                                         ],
                                         1
                                       ),
@@ -76403,13 +77135,25 @@ var render = function() {
                                               placeholder: "Segundo apellido"
                                             },
                                             model: {
-                                              value: _vm.ape2R,
+                                              value: _vm.rep.ape2,
                                               callback: function($$v) {
-                                                _vm.ape2R = $$v
+                                                _vm.$set(_vm.rep, "ape2", $$v)
                                               },
-                                              expression: "ape2R"
+                                              expression: "rep.ape2"
                                             }
-                                          })
+                                          }),
+                                          _vm._v(" "),
+                                          _c(
+                                            "b-form-invalid-feedback",
+                                            {
+                                              attrs: { state: _vm.validateSAR }
+                                            },
+                                            [
+                                              _vm._v(
+                                                "El segundo apellido no puede estar vacío ni tener más de 15 caracteres"
+                                              )
+                                            ]
+                                          )
                                         ],
                                         1
                                       )
@@ -76424,34 +77168,7 @@ var render = function() {
                                     [
                                       _c(
                                         "b-col",
-                                        { attrs: { cols: "4" } },
-                                        [
-                                          _c(
-                                            "label",
-                                            { attrs: { for: "generoR" } },
-                                            [_vm._v("Género")]
-                                          ),
-                                          _vm._v(" "),
-                                          _c("b-form-select", {
-                                            attrs: {
-                                              options: _vm.generos,
-                                              id: "genero"
-                                            },
-                                            model: {
-                                              value: _vm.generoR,
-                                              callback: function($$v) {
-                                                _vm.generoR = $$v
-                                              },
-                                              expression: "generoR"
-                                            }
-                                          })
-                                        ],
-                                        1
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "b-col",
-                                        { attrs: { cols: "4" } },
+                                        { attrs: { cols: "6" } },
                                         [
                                           _c(
                                             "label",
@@ -76466,41 +77183,29 @@ var render = function() {
                                               id: "fec_nacR"
                                             },
                                             model: {
-                                              value: _vm.fec_nacR,
+                                              value: _vm.rep.fec_nac,
                                               callback: function($$v) {
-                                                _vm.fec_nacR = $$v
+                                                _vm.$set(
+                                                  _vm.rep,
+                                                  "fec_nac",
+                                                  $$v
+                                                )
                                               },
-                                              expression: "fec_nacR"
+                                              expression: "rep.fec_nac"
                                             }
-                                          })
-                                        ],
-                                        1
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "b-col",
-                                        { attrs: { cols: "4" } },
-                                        [
-                                          _c(
-                                            "label",
-                                            { attrs: { for: "telefonoR" } },
-                                            [_vm._v("Teléfono")]
-                                          ),
+                                          }),
                                           _vm._v(" "),
-                                          _c("b-form-input", {
-                                            attrs: {
-                                              type: "tel",
-                                              id: "telefonoR",
-                                              name: "telefonoR"
+                                          _c(
+                                            "b-form-invalid-feedback",
+                                            {
+                                              attrs: { state: _vm.validateFR }
                                             },
-                                            model: {
-                                              value: _vm.telefonoR,
-                                              callback: function($$v) {
-                                                _vm.telefonoR = $$v
-                                              },
-                                              expression: "telefonoR"
-                                            }
-                                          })
+                                            [
+                                              _vm._v(
+                                                "Seleccione una fecha de nacimiento"
+                                              )
+                                            ]
+                                          )
                                         ],
                                         1
                                       )
@@ -76529,14 +77234,30 @@ var render = function() {
                                               name: "paisR",
                                               options: _vm.paises
                                             },
+                                            on: {
+                                              change: function($event) {
+                                                return _vm.filterR(
+                                                  _vm.rep.pais,
+                                                  _vm.rep.ciudad
+                                                )
+                                              }
+                                            },
                                             model: {
-                                              value: _vm.paisR,
+                                              value: _vm.rep.pais,
                                               callback: function($$v) {
-                                                _vm.paisR = $$v
+                                                _vm.$set(_vm.rep, "pais", $$v)
                                               },
-                                              expression: "paisR"
+                                              expression: "rep.pais"
                                             }
-                                          })
+                                          }),
+                                          _vm._v(" "),
+                                          _c(
+                                            "b-form-invalid-feedback",
+                                            {
+                                              attrs: { state: _vm.validatePR }
+                                            },
+                                            [_vm._v("Seleccione un país")]
+                                          )
                                         ],
                                         1
                                       ),
@@ -76555,16 +77276,24 @@ var render = function() {
                                             attrs: {
                                               id: "ciudadR",
                                               name: "ciudadR",
-                                              options: _vm.ciudades
+                                              options: _vm.ciudadesR
                                             },
                                             model: {
-                                              value: _vm.ciudadR,
+                                              value: _vm.rep.ciudad,
                                               callback: function($$v) {
-                                                _vm.ciudadR = $$v
+                                                _vm.$set(_vm.rep, "ciudad", $$v)
                                               },
-                                              expression: "ciudadR"
+                                              expression: "rep.ciudad"
                                             }
-                                          })
+                                          }),
+                                          _vm._v(" "),
+                                          _c(
+                                            "b-form-invalid-feedback",
+                                            {
+                                              attrs: { state: _vm.validateCIR }
+                                            },
+                                            [_vm._v("Seleccione una ciudad")]
+                                          )
                                         ],
                                         1
                                       )
@@ -76594,13 +77323,29 @@ var render = function() {
                                               placeholder: "Urbanización"
                                             },
                                             model: {
-                                              value: _vm.urbanizacionR,
+                                              value: _vm.rep.urbanizacion,
                                               callback: function($$v) {
-                                                _vm.urbanizacionR = $$v
+                                                _vm.$set(
+                                                  _vm.rep,
+                                                  "urbanizacion",
+                                                  $$v
+                                                )
                                               },
-                                              expression: "urbanizacionR"
+                                              expression: "rep.urbanizacion"
                                             }
-                                          })
+                                          }),
+                                          _vm._v(" "),
+                                          _c(
+                                            "b-form-invalid-feedback",
+                                            {
+                                              attrs: { state: _vm.validateUR }
+                                            },
+                                            [
+                                              _vm._v(
+                                                "Campo urbanización no puede estar vacío ni tener más de 20 caracteres"
+                                              )
+                                            ]
+                                          )
                                         ],
                                         1
                                       ),
@@ -76622,13 +77367,25 @@ var render = function() {
                                               placeholder: "Calle"
                                             },
                                             model: {
-                                              value: _vm.calleR,
+                                              value: _vm.rep.calle,
                                               callback: function($$v) {
-                                                _vm.calleR = $$v
+                                                _vm.$set(_vm.rep, "calle", $$v)
                                               },
-                                              expression: "calleR"
+                                              expression: "rep.calle"
                                             }
-                                          })
+                                          }),
+                                          _vm._v(" "),
+                                          _c(
+                                            "b-form-invalid-feedback",
+                                            {
+                                              attrs: { state: _vm.validateCA }
+                                            },
+                                            [
+                                              _vm._v(
+                                                "Campo calle no puede estar vacío ni tener más de 20 caracteres"
+                                              )
+                                            ]
+                                          )
                                         ],
                                         1
                                       ),
@@ -76650,13 +77407,29 @@ var render = function() {
                                               placeholder: "Código postal"
                                             },
                                             model: {
-                                              value: _vm.zipcodeR,
+                                              value: _vm.rep.zipcode,
                                               callback: function($$v) {
-                                                _vm.zipcodeR = $$v
+                                                _vm.$set(
+                                                  _vm.rep,
+                                                  "zipcode",
+                                                  $$v
+                                                )
                                               },
-                                              expression: "zipcodeR"
+                                              expression: "rep.zipcode"
                                             }
-                                          })
+                                          }),
+                                          _vm._v(" "),
+                                          _c(
+                                            "b-form-invalid-feedback",
+                                            {
+                                              attrs: { state: _vm.validateZR }
+                                            },
+                                            [
+                                              _vm._v(
+                                                "El código postal debe ser un campo numérico de no más de 7 caracteres"
+                                              )
+                                            ]
+                                          )
                                         ],
                                         1
                                       )
@@ -76668,6 +77441,8 @@ var render = function() {
                               )
                             : _vm._e(),
                           _vm._v(" "),
+                          _c("br"),
+                          _vm._v(" "),
                           _c(
                             "div",
                             {
@@ -76678,7 +77453,8 @@ var render = function() {
                               _c(
                                 "b-button",
                                 {
-                                  attrs: { variant: "default", type: "submit" }
+                                  attrs: { variant: "default" },
+                                  on: { click: _vm.revalidate }
                                 },
                                 [_vm._v("Continuar")]
                               ),
@@ -77432,6 +78208,14 @@ var render = function() {
                       _vm._v(" "),
                       _c(
                         "b-form",
+                        {
+                          on: {
+                            submit: function($event) {
+                              $event.preventDefault()
+                              return _vm.add($event)
+                            }
+                          }
+                        },
                         [
                           _c(
                             "b-row",
@@ -77452,13 +78236,23 @@ var render = function() {
                                       placeholder: "Documento de identidad"
                                     },
                                     model: {
-                                      value: _vm.dociden,
+                                      value: _vm.member.dociden,
                                       callback: function($$v) {
-                                        _vm.dociden = $$v
+                                        _vm.$set(_vm.member, "dociden", $$v)
                                       },
-                                      expression: "dociden"
+                                      expression: "member.dociden"
                                     }
-                                  })
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "b-form-invalid-feedback",
+                                    { attrs: { state: _vm.validateD } },
+                                    [
+                                      _vm._v(
+                                        "El documento de identidad debe ser un número entero de 8 caracteres"
+                                      )
+                                    ]
+                                  )
                                 ],
                                 1
                               ),
@@ -77479,13 +78273,23 @@ var render = function() {
                                       placeholder: "Primer nombre"
                                     },
                                     model: {
-                                      value: _vm.nom1,
+                                      value: _vm.member.nom1,
                                       callback: function($$v) {
-                                        _vm.nom1 = $$v
+                                        _vm.$set(_vm.member, "nom1", $$v)
                                       },
-                                      expression: "nom1"
+                                      expression: "member.nom1"
                                     }
-                                  })
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "b-form-invalid-feedback",
+                                    { attrs: { state: _vm.validateN } },
+                                    [
+                                      _vm._v(
+                                        "El nombre no puede estar vacío y no debe tener más de 15 caracteres"
+                                      )
+                                    ]
+                                  )
                                 ],
                                 1
                               ),
@@ -77506,13 +78310,23 @@ var render = function() {
                                       placeholder: "Segundo nombre"
                                     },
                                     model: {
-                                      value: _vm.nom2,
+                                      value: _vm.member.nom2,
                                       callback: function($$v) {
-                                        _vm.nom2 = $$v
+                                        _vm.$set(_vm.member, "nom2", $$v)
                                       },
-                                      expression: "nom2"
+                                      expression: "member.nom2"
                                     }
-                                  })
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "b-form-invalid-feedback",
+                                    { attrs: { state: _vm.validateSN } },
+                                    [
+                                      _vm._v(
+                                        "El segundo nombre no debe tener más de 15 caracteres"
+                                      )
+                                    ]
+                                  )
                                 ],
                                 1
                               )
@@ -77541,13 +78355,23 @@ var render = function() {
                                       placeholder: "Primer apellido"
                                     },
                                     model: {
-                                      value: _vm.ape1,
+                                      value: _vm.member.ape1,
                                       callback: function($$v) {
-                                        _vm.ape1 = $$v
+                                        _vm.$set(_vm.member, "ape1", $$v)
                                       },
-                                      expression: "ape1"
+                                      expression: "member.ape1"
                                     }
-                                  })
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "b-form-invalid-feedback",
+                                    { attrs: { state: _vm.validateA } },
+                                    [
+                                      _vm._v(
+                                        "El apellido no puede estar vacío ni tener más de 15 caracteres"
+                                      )
+                                    ]
+                                  )
                                 ],
                                 1
                               ),
@@ -77568,13 +78392,23 @@ var render = function() {
                                       placeholder: "Segundo apellido"
                                     },
                                     model: {
-                                      value: _vm.ape2,
+                                      value: _vm.member.ape2,
                                       callback: function($$v) {
-                                        _vm.ape2 = $$v
+                                        _vm.$set(_vm.member, "ape2", $$v)
                                       },
-                                      expression: "ape2"
+                                      expression: "member.ape2"
                                     }
-                                  })
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "b-form-invalid-feedback",
+                                    { attrs: { state: _vm.validateSA } },
+                                    [
+                                      _vm._v(
+                                        "El segundo apellido no puede estar vacío ni tener más de 15 caracteres"
+                                      )
+                                    ]
+                                  )
                                 ],
                                 1
                               )
@@ -77589,7 +78423,7 @@ var render = function() {
                             [
                               _c(
                                 "b-col",
-                                { attrs: { cols: "4" } },
+                                { attrs: { cols: "2" } },
                                 [
                                   _c("label", { attrs: { for: "genero" } }, [
                                     _vm._v("Género")
@@ -77601,20 +78435,26 @@ var render = function() {
                                       id: "genero"
                                     },
                                     model: {
-                                      value: _vm.genero,
+                                      value: _vm.member.genero,
                                       callback: function($$v) {
-                                        _vm.genero = $$v
+                                        _vm.$set(_vm.member, "genero", $$v)
                                       },
-                                      expression: "genero"
+                                      expression: "member.genero"
                                     }
-                                  })
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "b-form-invalid-feedback",
+                                    { attrs: { state: _vm.validateG } },
+                                    [_vm._v("Seleccione un género")]
+                                  )
                                 ],
                                 1
                               ),
                               _vm._v(" "),
                               _c(
                                 "b-col",
-                                { attrs: { cols: "4" } },
+                                { attrs: { cols: "2" } },
                                 [
                                   _c("label", { attrs: { for: "fec_nac" } }, [
                                     _vm._v("Fecha de Nacimiento")
@@ -77628,17 +78468,100 @@ var render = function() {
                                     },
                                     on: {
                                       input: function($event) {
-                                        return _vm.verifyAge(_vm.fec_nac)
+                                        _vm.mayoredad = true
+                                        _vm.verifyAge(_vm.member.fec_nac)
                                       }
                                     },
                                     model: {
-                                      value: _vm.fec_nac,
+                                      value: _vm.member.fec_nac,
                                       callback: function($$v) {
-                                        _vm.fec_nac = $$v
+                                        _vm.$set(_vm.member, "fec_nac", $$v)
                                       },
-                                      expression: "fec_nac"
+                                      expression: "member.fec_nac"
                                     }
-                                  })
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "b-form-invalid-feedback",
+                                    { attrs: { state: _vm.validateF } },
+                                    [
+                                      _vm._v(
+                                        "Seleccione una fecha de nacimiento"
+                                      )
+                                    ]
+                                  )
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "b-col",
+                                { attrs: { cols: "2" } },
+                                [
+                                  _c("label", { attrs: { for: "codpais" } }, [
+                                    _vm._v("Código de país")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("b-form-input", {
+                                    attrs: {
+                                      type: "text",
+                                      name: "codpais",
+                                      id: "codpais"
+                                    },
+                                    model: {
+                                      value: _vm.member.codp,
+                                      callback: function($$v) {
+                                        _vm.$set(_vm.member, "codp", $$v)
+                                      },
+                                      expression: "member.codp"
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "b-form-invalid-feedback",
+                                    { attrs: { state: _vm.validateCP } },
+                                    [
+                                      _vm._v(
+                                        "El código de país no puede tener más de 3 caracteres"
+                                      )
+                                    ]
+                                  )
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "b-col",
+                                { attrs: { cols: "2" } },
+                                [
+                                  _c("label", { attrs: { for: "codarea" } }, [
+                                    _vm._v("Código de área")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("b-form-input", {
+                                    attrs: {
+                                      type: "text",
+                                      name: "codarea",
+                                      id: "codarea"
+                                    },
+                                    model: {
+                                      value: _vm.member.coda,
+                                      callback: function($$v) {
+                                        _vm.$set(_vm.member, "coda", $$v)
+                                      },
+                                      expression: "member.coda"
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "b-form-invalid-feedback",
+                                    { attrs: { state: _vm.validateCODA } },
+                                    [
+                                      _vm._v(
+                                        "El código de área debe ser un valor numérico entero de no más de 5 caracteres"
+                                      )
+                                    ]
+                                  )
                                 ],
                                 1
                               ),
@@ -77647,24 +78570,34 @@ var render = function() {
                                 "b-col",
                                 { attrs: { cols: "4" } },
                                 [
-                                  _c("label", { attrs: { for: "telefono" } }, [
-                                    _vm._v("Teléfono")
+                                  _c("label", { attrs: { for: "num" } }, [
+                                    _vm._v("Número telefónico")
                                   ]),
                                   _vm._v(" "),
                                   _c("b-form-input", {
                                     attrs: {
-                                      type: "tel",
-                                      name: "telefono",
-                                      id: "telefono"
+                                      type: "text",
+                                      name: "num",
+                                      id: "num"
                                     },
                                     model: {
-                                      value: _vm.telefono,
+                                      value: _vm.member.telefono,
                                       callback: function($$v) {
-                                        _vm.telefono = $$v
+                                        _vm.$set(_vm.member, "telefono", $$v)
                                       },
-                                      expression: "telefono"
+                                      expression: "member.telefono"
                                     }
-                                  })
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "b-form-invalid-feedback",
+                                    { attrs: { state: _vm.validateT } },
+                                    [
+                                      _vm._v(
+                                        "El teléfono debe ser un valor numérico entero de máximo 10 caracteres"
+                                      )
+                                    ]
+                                  )
                                 ],
                                 1
                               )
@@ -77691,14 +78624,28 @@ var render = function() {
                                       name: "pais",
                                       options: _vm.paises
                                     },
+                                    on: {
+                                      change: function($event) {
+                                        return _vm.filter(
+                                          _vm.member.pais,
+                                          _vm.member.ciudad
+                                        )
+                                      }
+                                    },
                                     model: {
-                                      value: _vm.pais,
+                                      value: _vm.member.pais,
                                       callback: function($$v) {
-                                        _vm.pais = $$v
+                                        _vm.$set(_vm.member, "pais", $$v)
                                       },
-                                      expression: "pais"
+                                      expression: "member.pais"
                                     }
-                                  })
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "b-form-invalid-feedback",
+                                    { attrs: { state: _vm.validateP } },
+                                    [_vm._v("Seleccione un país")]
+                                  )
                                 ],
                                 1
                               ),
@@ -77718,13 +78665,19 @@ var render = function() {
                                       options: _vm.ciudades
                                     },
                                     model: {
-                                      value: _vm.ciudad,
+                                      value: _vm.member.ciudad,
                                       callback: function($$v) {
-                                        _vm.ciudad = $$v
+                                        _vm.$set(_vm.member, "ciudad", $$v)
                                       },
-                                      expression: "ciudad"
+                                      expression: "member.ciudad"
                                     }
-                                  })
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "b-form-invalid-feedback",
+                                    { attrs: { state: _vm.validateCI } },
+                                    [_vm._v("Seleccione una ciudad")]
+                                  )
                                 ],
                                 1
                               )
@@ -77754,13 +78707,27 @@ var render = function() {
                                       placeholder: "Urbanización"
                                     },
                                     model: {
-                                      value: _vm.urbanizacion,
+                                      value: _vm.member.urbanizacion,
                                       callback: function($$v) {
-                                        _vm.urbanizacion = $$v
+                                        _vm.$set(
+                                          _vm.member,
+                                          "urbanizacion",
+                                          $$v
+                                        )
                                       },
-                                      expression: "urbanizacion"
+                                      expression: "member.urbanizacion"
                                     }
-                                  })
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "b-form-invalid-feedback",
+                                    { attrs: { state: _vm.validateU } },
+                                    [
+                                      _vm._v(
+                                        "Campo urbanización no puede estar vacío ni tener más de 20 caracteres"
+                                      )
+                                    ]
+                                  )
                                 ],
                                 1
                               ),
@@ -77780,13 +78747,23 @@ var render = function() {
                                       placeholder: "Calle"
                                     },
                                     model: {
-                                      value: _vm.calle,
+                                      value: _vm.member.calle,
                                       callback: function($$v) {
-                                        _vm.calle = $$v
+                                        _vm.$set(_vm.member, "calle", $$v)
                                       },
-                                      expression: "calle"
+                                      expression: "member.calle"
                                     }
-                                  })
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "b-form-invalid-feedback",
+                                    { attrs: { state: _vm.validateCA } },
+                                    [
+                                      _vm._v(
+                                        "Campo calle no puede estar vacío ni tener más de 20 caracteres"
+                                      )
+                                    ]
+                                  )
                                 ],
                                 1
                               ),
@@ -77806,13 +78783,23 @@ var render = function() {
                                       placeholder: "Código postal"
                                     },
                                     model: {
-                                      value: _vm.zipcode,
+                                      value: _vm.member.zipcode,
                                       callback: function($$v) {
-                                        _vm.zipcode = $$v
+                                        _vm.$set(_vm.member, "zipcode", $$v)
                                       },
-                                      expression: "zipcode"
+                                      expression: "member.zipcode"
                                     }
-                                  })
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "b-form-invalid-feedback",
+                                    { attrs: { state: _vm.validateZ } },
+                                    [
+                                      _vm._v(
+                                        "El código postal debe ser un campo numérico de no más de 7 caracteres"
+                                      )
+                                    ]
+                                  )
                                 ],
                                 1
                               )
@@ -77867,13 +78854,29 @@ var render = function() {
                                                 "Documento de identidad"
                                             },
                                             model: {
-                                              value: _vm.docidenR,
+                                              value: _vm.rep.dociden,
                                               callback: function($$v) {
-                                                _vm.docidenR = $$v
+                                                _vm.$set(
+                                                  _vm.rep,
+                                                  "dociden",
+                                                  $$v
+                                                )
                                               },
-                                              expression: "docidenR"
+                                              expression: "rep.dociden"
                                             }
-                                          })
+                                          }),
+                                          _vm._v(" "),
+                                          _c(
+                                            "b-form-invalid-feedback",
+                                            {
+                                              attrs: { state: _vm.validateDR }
+                                            },
+                                            [
+                                              _vm._v(
+                                                "El documento de identidad debe ser un número entero de 8 caracteres"
+                                              )
+                                            ]
+                                          )
                                         ],
                                         1
                                       ),
@@ -77896,13 +78899,25 @@ var render = function() {
                                               placeholder: "Primer nombre"
                                             },
                                             model: {
-                                              value: _vm.nom1R,
+                                              value: _vm.rep.nom1,
                                               callback: function($$v) {
-                                                _vm.nom1R = $$v
+                                                _vm.$set(_vm.rep, "nom1", $$v)
                                               },
-                                              expression: "nom1R"
+                                              expression: "rep.nom1"
                                             }
-                                          })
+                                          }),
+                                          _vm._v(" "),
+                                          _c(
+                                            "b-form-invalid-feedback",
+                                            {
+                                              attrs: { state: _vm.validateNR }
+                                            },
+                                            [
+                                              _vm._v(
+                                                "El nombre no puede estar vacío y no debe tener más de 15 caracteres"
+                                              )
+                                            ]
+                                          )
                                         ],
                                         1
                                       ),
@@ -77925,13 +78940,25 @@ var render = function() {
                                               placeholder: "Segundo nombre"
                                             },
                                             model: {
-                                              value: _vm.nom2R,
+                                              value: _vm.rep.nom2,
                                               callback: function($$v) {
-                                                _vm.nom2R = $$v
+                                                _vm.$set(_vm.rep, "nom2", $$v)
                                               },
-                                              expression: "nom2R"
+                                              expression: "rep.nom2"
                                             }
-                                          })
+                                          }),
+                                          _vm._v(" "),
+                                          _c(
+                                            "b-form-invalid-feedback",
+                                            {
+                                              attrs: { state: _vm.validateSNR }
+                                            },
+                                            [
+                                              _vm._v(
+                                                "El segundo nombre no debe tener más de 15 caracteres"
+                                              )
+                                            ]
+                                          )
                                         ],
                                         1
                                       )
@@ -77962,13 +78989,25 @@ var render = function() {
                                               placeholder: "Primer apellido"
                                             },
                                             model: {
-                                              value: _vm.ape1R,
+                                              value: _vm.rep.ape1,
                                               callback: function($$v) {
-                                                _vm.ape1R = $$v
+                                                _vm.$set(_vm.rep, "ape1", $$v)
                                               },
-                                              expression: "ape1R"
+                                              expression: "rep.ape1"
                                             }
-                                          })
+                                          }),
+                                          _vm._v(" "),
+                                          _c(
+                                            "b-form-invalid-feedback",
+                                            {
+                                              attrs: { state: _vm.validateAR }
+                                            },
+                                            [
+                                              _vm._v(
+                                                "El apellido no puede estar vacío ni tener más de 15 caracteres"
+                                              )
+                                            ]
+                                          )
                                         ],
                                         1
                                       ),
@@ -77991,13 +79030,25 @@ var render = function() {
                                               placeholder: "Segundo apellido"
                                             },
                                             model: {
-                                              value: _vm.ape2R,
+                                              value: _vm.rep.ape2,
                                               callback: function($$v) {
-                                                _vm.ape2R = $$v
+                                                _vm.$set(_vm.rep, "ape2", $$v)
                                               },
-                                              expression: "ape2R"
+                                              expression: "rep.ape2"
                                             }
-                                          })
+                                          }),
+                                          _vm._v(" "),
+                                          _c(
+                                            "b-form-invalid-feedback",
+                                            {
+                                              attrs: { state: _vm.validateSAR }
+                                            },
+                                            [
+                                              _vm._v(
+                                                "El segundo apellido no puede estar vacío ni tener más de 15 caracteres"
+                                              )
+                                            ]
+                                          )
                                         ],
                                         1
                                       )
@@ -78012,34 +79063,7 @@ var render = function() {
                                     [
                                       _c(
                                         "b-col",
-                                        { attrs: { cols: "4" } },
-                                        [
-                                          _c(
-                                            "label",
-                                            { attrs: { for: "generoR" } },
-                                            [_vm._v("Género")]
-                                          ),
-                                          _vm._v(" "),
-                                          _c("b-form-select", {
-                                            attrs: {
-                                              options: _vm.generos,
-                                              id: "genero"
-                                            },
-                                            model: {
-                                              value: _vm.generoR,
-                                              callback: function($$v) {
-                                                _vm.generoR = $$v
-                                              },
-                                              expression: "generoR"
-                                            }
-                                          })
-                                        ],
-                                        1
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "b-col",
-                                        { attrs: { cols: "4" } },
+                                        { attrs: { cols: "6" } },
                                         [
                                           _c(
                                             "label",
@@ -78054,41 +79078,29 @@ var render = function() {
                                               id: "fec_nacR"
                                             },
                                             model: {
-                                              value: _vm.fec_nacR,
+                                              value: _vm.rep.fec_nac,
                                               callback: function($$v) {
-                                                _vm.fec_nacR = $$v
+                                                _vm.$set(
+                                                  _vm.rep,
+                                                  "fec_nac",
+                                                  $$v
+                                                )
                                               },
-                                              expression: "fec_nacR"
+                                              expression: "rep.fec_nac"
                                             }
-                                          })
-                                        ],
-                                        1
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "b-col",
-                                        { attrs: { cols: "4" } },
-                                        [
-                                          _c(
-                                            "label",
-                                            { attrs: { for: "telefonoR" } },
-                                            [_vm._v("Teléfono")]
-                                          ),
+                                          }),
                                           _vm._v(" "),
-                                          _c("b-form-input", {
-                                            attrs: {
-                                              type: "tel",
-                                              id: "telefonoR",
-                                              name: "telefonoR"
+                                          _c(
+                                            "b-form-invalid-feedback",
+                                            {
+                                              attrs: { state: _vm.validateFR }
                                             },
-                                            model: {
-                                              value: _vm.telefonoR,
-                                              callback: function($$v) {
-                                                _vm.telefonoR = $$v
-                                              },
-                                              expression: "telefonoR"
-                                            }
-                                          })
+                                            [
+                                              _vm._v(
+                                                "Seleccione una fecha de nacimiento"
+                                              )
+                                            ]
+                                          )
                                         ],
                                         1
                                       )
@@ -78117,14 +79129,30 @@ var render = function() {
                                               name: "paisR",
                                               options: _vm.paises
                                             },
+                                            on: {
+                                              change: function($event) {
+                                                return _vm.filterR(
+                                                  _vm.rep.pais,
+                                                  _vm.rep.ciudad
+                                                )
+                                              }
+                                            },
                                             model: {
-                                              value: _vm.paisR,
+                                              value: _vm.rep.pais,
                                               callback: function($$v) {
-                                                _vm.paisR = $$v
+                                                _vm.$set(_vm.rep, "pais", $$v)
                                               },
-                                              expression: "paisR"
+                                              expression: "rep.pais"
                                             }
-                                          })
+                                          }),
+                                          _vm._v(" "),
+                                          _c(
+                                            "b-form-invalid-feedback",
+                                            {
+                                              attrs: { state: _vm.validatePR }
+                                            },
+                                            [_vm._v("Seleccione un país")]
+                                          )
                                         ],
                                         1
                                       ),
@@ -78143,16 +79171,24 @@ var render = function() {
                                             attrs: {
                                               id: "ciudadR",
                                               name: "ciudadR",
-                                              options: _vm.ciudades
+                                              options: _vm.ciudadesR
                                             },
                                             model: {
-                                              value: _vm.ciudadR,
+                                              value: _vm.rep.ciudad,
                                               callback: function($$v) {
-                                                _vm.ciudadR = $$v
+                                                _vm.$set(_vm.rep, "ciudad", $$v)
                                               },
-                                              expression: "ciudadR"
+                                              expression: "rep.ciudad"
                                             }
-                                          })
+                                          }),
+                                          _vm._v(" "),
+                                          _c(
+                                            "b-form-invalid-feedback",
+                                            {
+                                              attrs: { state: _vm.validateCIR }
+                                            },
+                                            [_vm._v("Seleccione una ciudad")]
+                                          )
                                         ],
                                         1
                                       )
@@ -78182,13 +79218,29 @@ var render = function() {
                                               placeholder: "Urbanización"
                                             },
                                             model: {
-                                              value: _vm.urbanizacionR,
+                                              value: _vm.rep.urbanizacion,
                                               callback: function($$v) {
-                                                _vm.urbanizacionR = $$v
+                                                _vm.$set(
+                                                  _vm.rep,
+                                                  "urbanizacion",
+                                                  $$v
+                                                )
                                               },
-                                              expression: "urbanizacionR"
+                                              expression: "rep.urbanizacion"
                                             }
-                                          })
+                                          }),
+                                          _vm._v(" "),
+                                          _c(
+                                            "b-form-invalid-feedback",
+                                            {
+                                              attrs: { state: _vm.validateUR }
+                                            },
+                                            [
+                                              _vm._v(
+                                                "Campo urbanización no puede estar vacío ni tener más de 20 caracteres"
+                                              )
+                                            ]
+                                          )
                                         ],
                                         1
                                       ),
@@ -78210,13 +79262,25 @@ var render = function() {
                                               placeholder: "Calle"
                                             },
                                             model: {
-                                              value: _vm.calleR,
+                                              value: _vm.rep.calle,
                                               callback: function($$v) {
-                                                _vm.calleR = $$v
+                                                _vm.$set(_vm.rep, "calle", $$v)
                                               },
-                                              expression: "calleR"
+                                              expression: "rep.calle"
                                             }
-                                          })
+                                          }),
+                                          _vm._v(" "),
+                                          _c(
+                                            "b-form-invalid-feedback",
+                                            {
+                                              attrs: { state: _vm.validateCA }
+                                            },
+                                            [
+                                              _vm._v(
+                                                "Campo calle no puede estar vacío ni tener más de 20 caracteres"
+                                              )
+                                            ]
+                                          )
                                         ],
                                         1
                                       ),
@@ -78238,13 +79302,29 @@ var render = function() {
                                               placeholder: "Código postal"
                                             },
                                             model: {
-                                              value: _vm.zipcodeR,
+                                              value: _vm.rep.zipcode,
                                               callback: function($$v) {
-                                                _vm.zipcodeR = $$v
+                                                _vm.$set(
+                                                  _vm.rep,
+                                                  "zipcode",
+                                                  $$v
+                                                )
                                               },
-                                              expression: "zipcodeR"
+                                              expression: "rep.zipcode"
                                             }
-                                          })
+                                          }),
+                                          _vm._v(" "),
+                                          _c(
+                                            "b-form-invalid-feedback",
+                                            {
+                                              attrs: { state: _vm.validateZR }
+                                            },
+                                            [
+                                              _vm._v(
+                                                "El código postal debe ser un campo numérico de no más de 7 caracteres"
+                                              )
+                                            ]
+                                          )
                                         ],
                                         1
                                       )
@@ -78256,6 +79336,8 @@ var render = function() {
                               )
                             : _vm._e(),
                           _vm._v(" "),
+                          _c("br"),
+                          _vm._v(" "),
                           _c(
                             "div",
                             {
@@ -78266,7 +79348,8 @@ var render = function() {
                               _c(
                                 "b-button",
                                 {
-                                  attrs: { variant: "default", type: "submit" }
+                                  attrs: { variant: "default" },
+                                  on: { click: _vm.revalidate }
                                 },
                                 [_vm._v("Continuar")]
                               ),
@@ -78307,13 +79390,13 @@ var staticRenderFns = [
       { staticClass: "card-header card-header-log card-header-icon" },
       [
         _c("div", { staticClass: "card-icon" }, [
-          _c("i", { staticClass: "material-icons" }, [_vm._v("edit")])
+          _c("i", { staticClass: "material-icons" }, [_vm._v("add")])
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "row" }, [
           _c("div", { staticClass: "col-lg-10" }, [
             _c("h4", { staticClass: "card-title" }, [
-              _vm._v("Modificar miembro de club")
+              _vm._v("Añadir miembro a club")
             ])
           ]),
           _vm._v(" "),
@@ -96927,7 +98010,6 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('books-create', __webpack_r
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('books-edit', __webpack_require__(/*! ./components/books/Edit.vue */ "./resources/js/components/books/Edit.vue")["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('struct-create', __webpack_require__(/*! ./components/books/StructAdd.vue */ "./resources/js/components/books/StructAdd.vue")["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('struct-edit', __webpack_require__(/*! ./components/books/StructEdit.vue */ "./resources/js/components/books/StructEdit.vue")["default"]);
-vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('genres', __webpack_require__(/*! ./components/books/Genres.vue */ "./resources/js/components/books/Genres.vue")["default"]);
 /*THEATER PLAYS*/
 
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('plays-clubs', __webpack_require__(/*! ./components/theater_plays/PlaysClubs.vue */ "./resources/js/components/theater_plays/PlaysClubs.vue")["default"]);
@@ -97192,75 +98274,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Edit_vue_vue_type_template_id_d8d5890c___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Edit_vue_vue_type_template_id_d8d5890c___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
-
-
-
-/***/ }),
-
-/***/ "./resources/js/components/books/Genres.vue":
-/*!**************************************************!*\
-  !*** ./resources/js/components/books/Genres.vue ***!
-  \**************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _Genres_vue_vue_type_template_id_7b354bc0___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Genres.vue?vue&type=template&id=7b354bc0& */ "./resources/js/components/books/Genres.vue?vue&type=template&id=7b354bc0&");
-/* harmony import */ var _Genres_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Genres.vue?vue&type=script&lang=js& */ "./resources/js/components/books/Genres.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-
-
-
-
-
-/* normalize component */
-
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _Genres_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _Genres_vue_vue_type_template_id_7b354bc0___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _Genres_vue_vue_type_template_id_7b354bc0___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
-  false,
-  null,
-  null,
-  null
-  
-)
-
-/* hot reload */
-if (false) { var api; }
-component.options.__file = "resources/js/components/books/Genres.vue"
-/* harmony default export */ __webpack_exports__["default"] = (component.exports);
-
-/***/ }),
-
-/***/ "./resources/js/components/books/Genres.vue?vue&type=script&lang=js&":
-/*!***************************************************************************!*\
-  !*** ./resources/js/components/books/Genres.vue?vue&type=script&lang=js& ***!
-  \***************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Genres_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./Genres.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/books/Genres.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Genres_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
-
-/***/ }),
-
-/***/ "./resources/js/components/books/Genres.vue?vue&type=template&id=7b354bc0&":
-/*!*********************************************************************************!*\
-  !*** ./resources/js/components/books/Genres.vue?vue&type=template&id=7b354bc0& ***!
-  \*********************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Genres_vue_vue_type_template_id_7b354bc0___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./Genres.vue?vue&type=template&id=7b354bc0& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/books/Genres.vue?vue&type=template&id=7b354bc0&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Genres_vue_vue_type_template_id_7b354bc0___WEBPACK_IMPORTED_MODULE_0__["render"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Genres_vue_vue_type_template_id_7b354bc0___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

@@ -326,13 +326,20 @@ export default {
     },
 
     created() {
-        var params = window.location.pathname;
-        params = params.replace(/\D/g, '');
-        //console.log(params);
-        axios.get(`/clubs/${params}/members/create`)
+        var path = window.location.pathname;
+        var isbn = path.indexOf("/clubs", 0)+7;
+        var isbnend = path.indexOf("/members",0);
+        var id = path.substring(isbn,isbnend);
+        id = parseInt(id,10);
+        var newpath = path.substring(isbnend,path.length);
+        newpath = newpath.replace(/\D/g, '');
+        var ide = parseInt(newpath,10);
+
+        console.log('id club '+id+' id member '+ide );
+
+        axios.get(`/clubs/${id}/members/${ide}/edit`)
             .then(res => {
-                this.paises = res.data.countries;
-                this.ciudadesbackup = res.data.cities;
+                console.log(res.data.representante);
             }).catch(e => {
                 console.log(e);
             })

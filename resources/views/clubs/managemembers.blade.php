@@ -55,10 +55,10 @@
                                                     <td class="text-center">{{$member->ape}}</td>
                                                     <td class="text-center">{{$member->fec_nac}}</td>
                                                         <td class="td-actions text-center">
-                                                        <b-link href="/clubs/{{$club}}/{{$member->doc_iden}}" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Visualizar" class="btn btn-info">
+                                                        <b-link href="/clubs/{{$club}}/members/{{$member->doc_iden}}" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Visualizar" class="btn btn-info">
                                                             <i class="material-icons">remove_red_eye</i>
                                                         </b-link>
-                                                        <b-link href="/clubs/{{$club}}/{{$member->doc_iden}}/edit" type="button" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Modificar" class="btn btn-success">
+                                                        <b-link href="/clubs/{{$club}}/members/{{$member->doc_iden}}/edit" type="button" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Modificar" class="btn btn-success">
                                                             <i class="material-icons">edit</i>
                                                         </b-link>
                                                     </td>
