@@ -4484,7 +4484,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      member: [{
+      member: {
         dociden: null,
         nom1: null,
         nom2: null,
@@ -4500,8 +4500,8 @@ __webpack_require__.r(__webpack_exports__);
         coda: null,
         codp: null,
         telefono: null
-      }],
-      rep: [{
+      },
+      rep: {
         dociden: '',
         nom1: '',
         nom2: '',
@@ -4513,8 +4513,8 @@ __webpack_require__.r(__webpack_exports__);
         ciudad: null,
         calle: '',
         urbanizacion: '',
-        zipcode: ''
-      }],
+        zipcode: null
+      },
       generos: [{
         value: null,
         text: 'Seleccionar'
@@ -4548,6 +4548,8 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   created: function created() {
+    var _this = this;
+
     var path = window.location.pathname;
     var isbn = path.indexOf("/clubs", 0) + 7;
     var isbnend = path.indexOf("/members", 0);
@@ -4555,10 +4557,49 @@ __webpack_require__.r(__webpack_exports__);
     id = parseInt(id, 10);
     var newpath = path.substring(isbnend, path.length);
     newpath = newpath.replace(/\D/g, '');
-    var ide = parseInt(newpath, 10);
-    console.log('id club ' + id + ' id member ' + ide);
+    var ide = parseInt(newpath, 10); //console.log('id club '+id+' id member '+ide );
+
     axios.get("/clubs/".concat(id, "/members/").concat(ide, "/edit")).then(function (res) {
-      console.log(res.data.representante);
+      _this.paises = res.data.paises;
+      _this.ciudadesR = res.data.ciudades;
+      _this.ciudades = res.data.ciudades;
+      _this.member.dociden = res.data.data.doc_iden;
+      _this.member.nom1 = res.data.data.nom1;
+      _this.member.nom2 = res.data.data.nom2;
+      _this.member.ape1 = res.data.data.ape1;
+      _this.member.ape2 = res.data.data.ape2;
+      _this.member.fec_nac = res.data.data.fec_nac;
+      _this.member.genero = res.data.data.genero;
+      _this.member.pais = res.data.data.id_nac;
+      _this.member.calle = res.data.currentSM;
+      _this.member.urbanizacion = res.data.currentUM;
+      _this.member.ciudad = res.data.currentCM;
+      _this.member.zipcode = res.data.currentZM;
+      /* PHONE NUMBER */
+
+      _this.member.codp = res.data.currentTEL.cod_pais;
+      _this.member.coda = res.data.currentTEL.cod_area;
+      _this.member.telefono = res.data.currentTEL.num;
+
+      _this.verifyAge(_this.member.fec_nac);
+      /* REPRESENTANTE */
+
+
+      if (_this.mayoredad == false) {
+        _this.rep.dociden = res.data.representante.doc_iden;
+        _this.rep.nom1 = res.data.representante.nom1;
+        _this.rep.nom2 = res.data.representante.nom2;
+        _this.rep.ape1 = res.data.representante.ape1;
+        _this.rep.ape2 = res.data.representante.ape2;
+        _this.rep.fec_nac = res.data.representante.fec_nac;
+        _this.rep.pais = res.data.currentPR;
+        _this.rep.calle = res.data.currentSR;
+        _this.rep.urbanizacion = res.data.currentUR;
+        _this.rep.ciudad = res.data.currentCR;
+        _this.rep.zipcode = res.data.currentZR;
+      }
+
+      console.log(res.data.currentZR);
     })["catch"](function (e) {
       console.log(e);
     });
@@ -4748,7 +4789,7 @@ __webpack_require__.r(__webpack_exports__);
 
       return this.mayoredad;
     },
-    add: function add() {
+    update: function update() {
       var path = window.location.pathname;
       path = path.replace(/\D/g, '');
       var params = {
@@ -4783,10 +4824,19 @@ __webpack_require__.r(__webpack_exports__);
         club: path,
         today: this.today
       };
-      console.log(params); //console.log(params);
+      console.log(params);
+      var path = window.location.pathname;
+      var isbn = path.indexOf("/clubs", 0) + 7;
+      var isbnend = path.indexOf("/members", 0);
+      var id = path.substring(isbn, isbnend);
+      id = parseInt(id, 10);
+      var newpath = path.substring(isbnend, path.length);
+      newpath = newpath.replace(/\D/g, '');
+      var ide = parseInt(newpath, 10); //console.log('id club '+id+' id member '+ide );
+      //console.log(params);
 
-      axios.post("/clubs/".concat(path, "/members"), params).then(function (res) {
-        window.location = "/clubs/".concat(path, "/members");
+      axios.put("/clubs/".concat(id, "/members/").concat(ide), params).then(function (res) {
+        console.log(res.data); //window.location = `/clubs/${path}/members`;
       })["catch"](function (e) {
         console.log(e);
       });
@@ -4826,7 +4876,7 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       if (msg == '') {
-        this.add();
+        this.update();
       } else {
         alert(msg);
       }
@@ -79390,13 +79440,13 @@ var staticRenderFns = [
       { staticClass: "card-header card-header-log card-header-icon" },
       [
         _c("div", { staticClass: "card-icon" }, [
-          _c("i", { staticClass: "material-icons" }, [_vm._v("add")])
+          _c("i", { staticClass: "material-icons" }, [_vm._v("edit")])
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "row" }, [
           _c("div", { staticClass: "col-lg-10" }, [
             _c("h4", { staticClass: "card-title" }, [
-              _vm._v("Añadir miembro a club")
+              _vm._v("Editar miembro de club")
             ])
           ]),
           _vm._v(" "),

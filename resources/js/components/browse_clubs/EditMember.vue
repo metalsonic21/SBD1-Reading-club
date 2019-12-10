@@ -7,11 +7,11 @@
                     <div class="card">
                         <div class="card-header card-header-log card-header-icon">
                             <div class="card-icon">
-                                <i class="material-icons">add</i>
+                                <i class="material-icons">edit</i>
                             </div>
                             <div class="row">
                                 <div class="col-lg-10">
-                                    <h4 class="card-title">Añadir miembro a club</h4>
+                                    <h4 class="card-title">Editar miembro de club</h4>
                                 </div>
                                 <div class="col-lg-2">
 
@@ -254,7 +254,7 @@
 export default {
     data() {
         return {
-            member: [{
+            member: {
                 dociden: null,
                 nom1: null,
                 nom2: null,
@@ -270,9 +270,9 @@ export default {
                 coda: null,
                 codp: null,
                 telefono: null,
-            }],
+            },
 
-            rep: [{
+            rep: {
                 dociden: '',
                 nom1: '',
                 nom2: '',
@@ -284,8 +284,8 @@ export default {
                 ciudad: null,
                 calle: '',
                 urbanizacion: '',
-                zipcode: '',
-            }],
+                zipcode: null,
+            },
 
             generos: [{
                     value: null,
@@ -335,11 +335,51 @@ export default {
         newpath = newpath.replace(/\D/g, '');
         var ide = parseInt(newpath,10);
 
-        console.log('id club '+id+' id member '+ide );
+        //console.log('id club '+id+' id member '+ide );
 
         axios.get(`/clubs/${id}/members/${ide}/edit`)
             .then(res => {
-                console.log(res.data.representante);
+
+                this.paises = res.data.paises;
+                this.ciudadesR = res.data.ciudades;
+                this.ciudades = res.data.ciudades;
+
+                this.member.dociden = res.data.data.doc_iden;
+                this.member.nom1 = res.data.data.nom1;
+                this.member.nom2 = res.data.data.nom2;
+                this.member.ape1 = res.data.data.ape1;
+                this.member.ape2 = res.data.data.ape2;
+                this.member.fec_nac = res.data.data.fec_nac;
+                this.member.genero = res.data.data.genero;
+                this.member.pais = res.data.data.id_nac;
+                this.member.calle = res.data.currentSM;
+                this.member.urbanizacion = res.data.currentUM;
+                this.member.ciudad = res.data.currentCM;
+                this.member.zipcode = res.data.currentZM;
+
+                /* PHONE NUMBER */
+                this.member.codp = res.data.currentTEL.cod_pais;
+                this.member.coda = res.data.currentTEL.cod_area;
+                this.member.telefono = res.data.currentTEL.num;
+
+                this.verifyAge(this.member.fec_nac);
+
+                /* REPRESENTANTE */ 
+                    if (this.mayoredad == false){
+                        this.rep.dociden = res.data.representante.doc_iden;
+                        this.rep.nom1 = res.data.representante.nom1;
+                        this.rep.nom2 = res.data.representante.nom2;
+                        this.rep.ape1 = res.data.representante.ape1;
+                        this.rep.ape2 = res.data.representante.ape2;
+                        this.rep.fec_nac = res.data.representante.fec_nac;
+                        this.rep.pais = res.data.currentPR;
+                        this.rep.calle = res.data.currentSR;
+                        this.rep.urbanizacion = res.data.currentUR;
+                        this.rep.ciudad = res.data.currentCR;
+                        this.rep.zipcode = res.data.currentZR;
+                    }
+
+                console.log(res.data.currentZR);
             }).catch(e => {
                 console.log(e);
             })
@@ -567,7 +607,7 @@ export default {
             return this.mayoredad;
         },
 
-        add() {
+        update() {
             var path = window.location.pathname;
             path = path.replace(/\D/g, '');
             const params = {
@@ -606,10 +646,22 @@ export default {
 
             console.log(params);
 
+            var path = window.location.pathname;
+            var isbn = path.indexOf("/clubs", 0)+7;
+            var isbnend = path.indexOf("/members",0);
+            var id = path.substring(isbn,isbnend);
+            id = parseInt(id,10);
+            var newpath = path.substring(isbnend,path.length);
+            newpath = newpath.replace(/\D/g, '');
+            var ide = parseInt(newpath,10);
+
+            //console.log('id club '+id+' id member '+ide );
+
             //console.log(params);
-            axios.post(`/clubs/${path}/members`, params)
+            axios.put(`/clubs/${id}/members/${ide}`, params)
                 .then(res => {
-                    window.location = `/clubs/${path}/members`;
+                    console.log(res.data);
+                    //window.location = `/clubs/${path}/members`;
                 }).catch(e => {
                     console.log(e);
                 })
@@ -650,7 +702,7 @@ export default {
             }
 
             if (msg == ''){
-                this.add();
+                this.update();
             }
             else{
                 alert(msg);
