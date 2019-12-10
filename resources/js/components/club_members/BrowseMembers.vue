@@ -71,7 +71,7 @@
     </div>
 
     <b-modal ref="view-member" size="lg" id="view-member" ok-variant="default" ok-only ok-title="Continuar">
-                <div class="card ">
+        <div class="card ">
             <div class="card-header card-header-log card-header-icon">
                 <div class="card-icon">
                     <i class="material-icons">book</i>

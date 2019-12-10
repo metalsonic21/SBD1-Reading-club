@@ -57,8 +57,6 @@ Vue.component('books-edit', require('./components/books/Edit.vue').default);
 Vue.component('struct-create', require('./components/books/StructAdd.vue').default);
 Vue.component('struct-edit', require('./components/books/StructEdit.vue').default);
 
-Vue.component('genres', require('./components/books/Genres.vue').default);
-
 /*THEATER PLAYS*/
 Vue.component('plays-clubs', require('./components/theater_plays/PlaysClubs.vue').default);
 Vue.component('cast-plays', require('./components/theater_plays/CastPlays.vue').default);
