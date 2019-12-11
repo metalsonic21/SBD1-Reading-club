@@ -236,6 +236,7 @@ class MembersController extends Controller
             $member = $mem[0];
             $paises = DB::select(DB::raw("SELECT id as value, nom as text FROM sjl_paises"));
             $ciudades = DB::select( DB::raw("SELECT id || '-' || id_pais as value, nom as text FROM sjl_ciudades"));
+            $ciudadesFiltered = DB::select(DB::raw("SELECT id || '-' || id_pais as value, nom as text FROM sjl_ciudades WHERE id_pais = '$member->id_nac'"));
  
             $currentCMB = DB::select(DB::raw("SELECT e.nom as text, e.id || '-' || e.id_pais as value from sjl_calles ca, sjl_urbanizaciones u, sjl_ciudades e WHERE ca.id = '$member->id_calle' AND ca.id_urb = u.id AND u.id_ciudad = e.id"));
             $currentCM = $currentCMB[0]->value;
@@ -306,7 +307,8 @@ class MembersController extends Controller
             }
             return Response::json(array('data'=>$member,'paises'=>$paises,'ciudades'=>$ciudades, 'currentCM'=>$currentCM, 
             'currentUM'=>$currentUM, 'currentSM'=>$currentSM,'currentZM'=>$currentZM, 'representante'=>$representante, 'currentCR'=>$currentCR,
-            'currentUR'=>$currentUR, 'currentSR'=>$currentSR, 'currentZR'=>$currentZR,'currentTEL'=>$currentTEL,'currentPR'=>$currentPR));
+            'currentUR'=>$currentUR, 'currentSR'=>$currentSR, 'currentZR'=>$currentZR,'currentTEL'=>$currentTEL,
+            'cf'=>$ciudadesFiltered,'currentPR'=>$currentPR));
         
         }
         else{
@@ -326,6 +328,8 @@ class MembersController extends Controller
         /* Searches for urb with the same name and city if it doesn't exist it will insert it, same with the street*/
         $q = NULL;
         $q2 = NULL;
+        $calle = NULL;
+
         $test = DB::select(DB::raw("SELECT id from sjl_urbanizaciones WHERE nom = '$request->urbanizacion' AND id_ciudad = '$request->ciudad'"));
             if (!$test){
                 $urbanizacion = new Urbanizacion();
@@ -431,18 +435,45 @@ class MembersController extends Controller
 
             /*Si agrego un lector que ya estaba en la tabla representantes actualizo todos los id de representantes y luego lo elimino de la tabla*/
             $testmem = DB::select(DB::raw("SELECT doc_iden FROM sjl_representantes WHERE doc_iden = '$request->dociden'"));
-            $member->save();
+            if (!$testcalle){
+            Member::where('doc_iden',$request->dociden)->update(array(
+                'nom1'=>$member->nom1,
+                'nom2'=>$member->nom2,
+                'ape1'=>$member->ape1,
+                'ape2'=>$member->ape2,
+                'fec_nac'=>$member->fec_nac,
+                'genero'=>$member->genero,
+                'id_calle'=>$calle->id,
+            ));
+            }
+            else{
+                Member::where('doc_iden',$request->dociden)->update(array(
+                    'nom1'=>$member->nom1,
+                    'nom2'=>$member->nom2,
+                    'ape1'=>$member->ape1,
+                    'ape2'=>$member->ape2,
+                    'fec_nac'=>$member->fec_nac,
+                    'genero'=>$member->genero,
+                    'id_calle'=>$testcalle[0]->id,
+                )); 
+            }
 
                 if ($testmem){
                     Member::where('id_rep',$request->dociden)->update(array(
                         'id_rep'=>NULL,
                         'id_rep_lec'=>$request->dociden,
                     ));
-
-                DB::table('sjl_representantes')
+                    DB::table('sjl_representantes')
                     ->where('doc_iden',$request->dociden)
                     ->delete();
                 }
+                else if (!$testmem && $request->docidenR){
+                    Member::where('id_rep',$request->dociden)->update(array(
+                        'id_rep'=>$request->docidenR,
+                    ));
+                }
+
+
 
 
                 
@@ -453,7 +484,12 @@ class MembersController extends Controller
             $telefono->cod_area = $request->coda;
             $telefono->num = $request->telefono;
             $telefono->id_lector = $member->doc_iden;
-            $telefono->save();
+
+            $testtel = DB::select(DB::raw("SELECT cod_pais, cod_area, num, id_lector FROM sjl_telefonos WHERE cod_pais = '$telefono->cod_pais' AND cod_area = '$telefono->cod_area' AND num = '$telefono->num' AND id_lector = '$request->dociden'"));
+            
+            if (!$testtel){
+                $telefono->save();
+            }
 
             /* MEMBERSHIP */
 

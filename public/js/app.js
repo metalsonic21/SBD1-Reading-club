@@ -2407,17 +2407,17 @@ __webpack_require__.r(__webpack_exports__);
       _this.book.subg = res.data.currentsubg;
       _this.book.prev = res.data.data.id_prev;
       _this.subgeneros = [{}];
-      _this.libros = res.data.prev;
-      console.log(res.data.data);
       var i = 0;
 
       for (i = 0; i < _this.subgbackup.length; i++) {
         var gid = _this.subgbackup[i].value;
-        var posgid = gid.indexOf("-") + 1;
-        gid = gid.substr(posgid, gid.length);
+
+        var _posgid = gid.indexOf("-") + 1;
+
+        gid = gid.substr(0, _posgid);
         gid = parseInt(gid, 10);
         var sid = _this.subgbackup[i].value;
-        sid = sid.substr(0, posgid);
+        sid = sid.substr(_posgid, _this.book.subg.length);
         sid = parseInt(sid, 10);
 
         if (gid == _this.book.genero) {
@@ -2425,9 +2425,14 @@ __webpack_require__.r(__webpack_exports__);
             value: sid,
             text: _this.subgbackup[i].text
           });
+
+          console.log(_this.subgbackup[i].text);
         }
       }
 
+      var posgid = _this.book.subg.indexOf("-") + 1;
+      _this.book.subg = _this.book.subg.substr(posgid, _this.book.subg.length);
+      _this.book.subg = parseInt(_this.book.subg, 10);
       _this.subgeneros[0].value = null;
       _this.subgeneros[0].text = 'Seleccionar';
     })["catch"](function (e) {
@@ -2497,10 +2502,10 @@ __webpack_require__.r(__webpack_exports__);
 
       for (i = 0; i < this.subgeneros.length; i++) {
         /* Converted ID is id_sub*/
-        var convertedid = this.convert(this.subgeneros[i].value, this.subgeneros.length);
+        var convertedid = this.subgeneros[i].value.substring(0, this.subgeneros[i].value.indexOf("-")); //console.log(convertedid);
 
         if (this.book.genero == convertedid) {
-          var actualid = this.subgeneros[i].value.substring(0, this.subgeneros[i].value.indexOf("-"));
+          var actualid = this.convert(this.subgeneros[i].value, this.subgeneros.length);
           actualid = parseInt(actualid, 10);
           this.subgenerosfiltered.push({
             value: actualid,
@@ -4560,10 +4565,8 @@ __webpack_require__.r(__webpack_exports__);
     var ide = parseInt(newpath, 10); //console.log('id club '+id+' id member '+ide );
 
     axios.get("/clubs/".concat(id, "/members/").concat(ide, "/edit")).then(function (res) {
-      console.log(res.data);
       _this.paises = res.data.paises;
-      _this.ciudadesR = res.data.ciudades;
-      _this.ciudades = res.data.ciudades;
+      _this.ciudadesbackup = res.data.ciudades;
       _this.member.dociden = res.data.data.doc_iden;
       _this.member.nom1 = res.data.data.nom1;
       _this.member.nom2 = res.data.data.nom2;
@@ -4583,10 +4586,39 @@ __webpack_require__.r(__webpack_exports__);
       _this.member.telefono = res.data.currentTEL.num;
 
       _this.verifyAge(_this.member.fec_nac);
+
+      _this.ciudades = [{}];
+      var i = 0;
+
+      for (i = 0; i < _this.ciudadesbackup.length; i++) {
+        var gid = _this.ciudadesbackup[i].value;
+
+        var _posgid = gid.indexOf("-") + 1;
+
+        gid = gid.substr(_posgid, _this.member.ciudad.length);
+        gid = parseInt(gid, 10);
+        var sid = _this.ciudadesbackup[i].value;
+        sid = sid.substr(0, _posgid);
+        sid = parseInt(sid, 10);
+
+        if (gid == _this.member.pais) {
+          _this.ciudades.push({
+            value: sid,
+            text: _this.ciudadesbackup[i].text
+          }); //console.log(this.ciudadesbackup[i].text);
+
+        }
+      }
+
+      var posgid = _this.member.ciudad.indexOf("-") + 1;
+      _this.member.ciudad = _this.member.ciudad.substr(0, posgid);
+      _this.member.ciudad = parseInt(_this.member.ciudad, 10); //console.log(this.member.ciudad);
+
+      _this.ciudades[0].value = null;
+      _this.ciudades[0].text = 'Seleccionar';
       /* REPRESENTANTE */
 
-
-      if (_this.mayoredad == false) {
+      if (_this.mayoredad == false && res.data.representante) {
         _this.rep.dociden = res.data.representante.doc_iden;
         _this.rep.nom1 = res.data.representante.nom1;
         _this.rep.nom2 = res.data.representante.nom2;
@@ -4598,9 +4630,40 @@ __webpack_require__.r(__webpack_exports__);
         _this.rep.urbanizacion = res.data.currentUR;
         _this.rep.ciudad = res.data.currentCR;
         _this.rep.zipcode = res.data.currentZR;
-      }
+        /*Filter out the first time for rep */
 
-      console.log(res.data);
+        var i = 0;
+        console.log(_this.rep.pais);
+
+        for (i = 0; i < _this.ciudadesbackup.length; i++) {
+          var _gid = _this.ciudadesbackup[i].value;
+
+          var _posgid3 = _gid.indexOf("-") + 1;
+
+          _gid = _gid.substr(_posgid3, _this.rep.ciudad.length);
+          _gid = parseInt(_gid, 10);
+          var _sid = _this.ciudadesbackup[i].value;
+          _sid = _sid.substr(0, _posgid3);
+          _sid = parseInt(_sid, 10);
+
+          if (_gid == _this.rep.pais) {
+            _this.ciudadesR.push({
+              value: _sid,
+              text: _this.ciudadesbackup[i].text
+            }); //console.log(this.ciudadesbackup[i].text);
+
+          }
+        }
+
+        var _posgid2 = _this.rep.ciudad.indexOf("-") + 1;
+
+        _this.rep.ciudad = _this.rep.ciudad.substr(0, _posgid2);
+        _this.rep.ciudad = parseInt(_this.rep.ciudad, 10); //console.log(this.rep.ciudad);
+
+        _this.ciudadesR[0].value = null;
+        _this.ciudadesR[0].text = 'Seleccionar';
+      } //console.log(res.data);
+
     })["catch"](function (e) {
       console.log(e);
     });
@@ -4792,7 +4855,13 @@ __webpack_require__.r(__webpack_exports__);
     },
     update: function update() {
       var path = window.location.pathname;
-      path = path.replace(/\D/g, '');
+      var isbn = path.indexOf("/clubs", 0) + 7;
+      var isbnend = path.indexOf("/members", 0);
+      var id = path.substring(isbn, isbnend);
+      id = parseInt(id, 10);
+      var newpath = path.substring(isbnend, path.length);
+      newpath = newpath.replace(/\D/g, '');
+      var ide = parseInt(newpath, 10);
       var params = {
         dociden: this.member.dociden,
         nom1: this.member.nom1,
@@ -4822,9 +4891,17 @@ __webpack_require__.r(__webpack_exports__);
         urbanizacionR: this.rep.urbanizacion,
         calleR: this.rep.calle,
         zipcodeR: this.rep.zipcode,
-        club: path,
+        club: id,
         today: this.today
       };
+      params.ciudad = params.ciudad.substring(0, params.ciudad.indexOf("-"));
+      params.ciudad = parseInt(params.ciudad, 10);
+
+      if (params.ciudadR) {
+        params.ciudadR = params.ciudadR.substring(0, params.ciudadR.indexOf("-"));
+        params.ciudadR = parseInt(params.ciudadR, 10);
+      }
+
       console.log(params);
       var path = window.location.pathname;
       var isbn = path.indexOf("/clubs", 0) + 7;
@@ -78282,6 +78359,7 @@ var render = function() {
                                   _c("b-form-input", {
                                     attrs: {
                                       type: "text",
+                                      disabled: "",
                                       id: "dociden",
                                       name: "dociden",
                                       placeholder: "Documento de identidad"

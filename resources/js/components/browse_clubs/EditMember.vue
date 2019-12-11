@@ -26,7 +26,7 @@
                                         <b-row>
                                             <b-col cols="4">
                                                 <label for="dociden">Documento de identidad</label>
-                                                <b-form-input type="text" v-model="member.dociden" id="dociden" name="dociden" placeholder="Documento de identidad"></b-form-input>
+                                                <b-form-input type="text" v-model="member.dociden" disabled id="dociden" name="dociden" placeholder="Documento de identidad"></b-form-input>
                                                 <b-form-invalid-feedback :state="validateD">El documento de identidad debe ser un número entero de 8 caracteres</b-form-invalid-feedback>
                                             </b-col>
 
@@ -171,10 +171,10 @@
                                                 <b-col cols="6">
                                                     <label for="ape2R">Segundo apellido</label>
                                                     <b-form-input type="text" v-model="rep.ape2" name="ape2R" id="ape2R" placeholder="Segundo apellido"></b-form-input>
-                                                <b-form-invalid-feedback :state="validateSAR">El segundo apellido no puede estar vacío ni tener más de 15 caracteres</b-form-invalid-feedback>
+                                                    <b-form-invalid-feedback :state="validateSAR">El segundo apellido no puede estar vacío ni tener más de 15 caracteres</b-form-invalid-feedback>
 
                                                 </b-col>
-                                                
+
                                             </b-row>
                                             <br>
                                             <b-row>
@@ -327,22 +327,20 @@ export default {
 
     created() {
         var path = window.location.pathname;
-        var isbn = path.indexOf("/clubs", 0)+7;
-        var isbnend = path.indexOf("/members",0);
-        var id = path.substring(isbn,isbnend);
-        id = parseInt(id,10);
-        var newpath = path.substring(isbnend,path.length);
+        var isbn = path.indexOf("/clubs", 0) + 7;
+        var isbnend = path.indexOf("/members", 0);
+        var id = path.substring(isbn, isbnend);
+        id = parseInt(id, 10);
+        var newpath = path.substring(isbnend, path.length);
         newpath = newpath.replace(/\D/g, '');
-        var ide = parseInt(newpath,10);
+        var ide = parseInt(newpath, 10);
 
         //console.log('id club '+id+' id member '+ide );
 
         axios.get(`/clubs/${id}/members/${ide}/edit`)
             .then(res => {
-                console.log(res.data);
                 this.paises = res.data.paises;
-                this.ciudadesR = res.data.ciudades;
-                this.ciudades = res.data.ciudades;
+                this.ciudadesbackup = res.data.ciudades;
 
                 this.member.dociden = res.data.data.doc_iden;
                 this.member.nom1 = res.data.data.nom1;
@@ -355,6 +353,7 @@ export default {
                 this.member.calle = res.data.currentSM;
                 this.member.urbanizacion = res.data.currentUM;
                 this.member.ciudad = res.data.currentCM;
+
                 this.member.zipcode = res.data.currentZM;
 
                 /* PHONE NUMBER */
@@ -364,152 +363,207 @@ export default {
 
                 this.verifyAge(this.member.fec_nac);
 
-                /* REPRESENTANTE */ 
-                    if (this.mayoredad == false){
-                        this.rep.dociden = res.data.representante.doc_iden;
-                        this.rep.nom1 = res.data.representante.nom1;
-                        this.rep.nom2 = res.data.representante.nom2;
-                        this.rep.ape1 = res.data.representante.ape1;
-                        this.rep.ape2 = res.data.representante.ape2;
-                        this.rep.fec_nac = res.data.representante.fec_nac;
-                        this.rep.pais = res.data.currentPR;
-                        this.rep.calle = res.data.currentSR;
-                        this.rep.urbanizacion = res.data.currentUR;
-                        this.rep.ciudad = res.data.currentCR;
-                        this.rep.zipcode = res.data.currentZR;
-                    }
+                this.ciudades = [{}];
 
-                console.log(res.data);
+                var i = 0;
+                for (i = 0; i < this.ciudadesbackup.length; i++) {
+                    let gid = this.ciudadesbackup[i].value;
+                    let posgid = gid.indexOf("-") + 1;
+                    gid = gid.substr(posgid, this.member.ciudad.length);
+                    gid = parseInt(gid, 10);
+                    let sid = this.ciudadesbackup[i].value;
+                    sid = sid.substr(0, posgid);
+                    sid = parseInt(sid, 10);
+                    if (gid == this.member.pais) {
+                        this.ciudades.push({
+                            value: sid,
+                            text: this.ciudadesbackup[i].text,
+                        });
+                        //console.log(this.ciudadesbackup[i].text);
+                    }
+                }
+                let posgid = this.member.ciudad.indexOf("-") + 1;
+                this.member.ciudad = this.member.ciudad.substr(0, posgid);
+                this.member.ciudad = parseInt(this.member.ciudad, 10);
+                //console.log(this.member.ciudad);
+
+                this.ciudades[0].value = null;
+                this.ciudades[0].text = 'Seleccionar';
+
+                /* REPRESENTANTE */
+                if (this.mayoredad == false && res.data.representante) {
+                    this.rep.dociden = res.data.representante.doc_iden;
+                    this.rep.nom1 = res.data.representante.nom1;
+                    this.rep.nom2 = res.data.representante.nom2;
+                    this.rep.ape1 = res.data.representante.ape1;
+                    this.rep.ape2 = res.data.representante.ape2;
+                    this.rep.fec_nac = res.data.representante.fec_nac;
+                    this.rep.pais = res.data.currentPR;
+                    this.rep.calle = res.data.currentSR;
+                    this.rep.urbanizacion = res.data.currentUR;
+                    this.rep.ciudad = res.data.currentCR;
+                    this.rep.zipcode = res.data.currentZR;
+
+                    /*Filter out the first time for rep */
+
+                    var i = 0;
+                    console.log(this.rep.pais);
+                    for (i = 0; i < this.ciudadesbackup.length; i++) {
+                        let gid = this.ciudadesbackup[i].value;
+                        let posgid = gid.indexOf("-") + 1;
+                        gid = gid.substr(posgid, this.rep.ciudad.length);
+                        gid = parseInt(gid, 10);
+                        let sid = this.ciudadesbackup[i].value;
+                        sid = sid.substr(0, posgid);
+                        sid = parseInt(sid, 10);
+                        if (gid == this.rep.pais) {
+                            this.ciudadesR.push({
+                                value: sid,
+                                text: this.ciudadesbackup[i].text,
+                            });
+                            //console.log(this.ciudadesbackup[i].text);
+                        }
+                    }
+                    let posgid = this.rep.ciudad.indexOf("-") + 1;
+                    this.rep.ciudad = this.rep.ciudad.substr(0, posgid);
+                    this.rep.ciudad = parseInt(this.rep.ciudad, 10);
+                    //console.log(this.rep.ciudad);
+
+                    this.ciudadesR[0].value = null;
+                    this.ciudadesR[0].text = 'Seleccionar';
+                }
+
+                //console.log(res.data);
             }).catch(e => {
                 console.log(e);
             })
     },
     computed: {
-        validateD(){
+        validateD() {
             let verif = true;
             if (this.member.dociden == null || this.member.dociden == '') return false;
             if (this.member.dociden.toString().length > 8 || isNaN(this.member.dociden))
                 verif = false;
-            if (this.member.dociden.toString().indexOf(".") != -1 || this.member.dociden<0)
+            if (this.member.dociden.toString().indexOf(".") != -1 || this.member.dociden < 0)
                 verif = false;
             return verif;
         },
 
-        validateN(){
-            if (this.member.nom1 == null || this.member.nom1 == '' || this.member.nom1.length>20) return false;
+        validateN() {
+            if (this.member.nom1 == null || this.member.nom1 == '' || this.member.nom1.length > 20) return false;
             else return true;
         },
-        validateSN(){
-            if (this.member.nom2 == null || this.member.nom2.length>20) return false;
+        validateSN() {
+            if (this.member.nom2 == null || this.member.nom2.length > 20) return false;
             else return true;
         },
-        validateA(){
-            if (this.member.ape1 == null || this.member.ape1 == '' || this.member.ape1.length>20) return false;
+        validateA() {
+            if (this.member.ape1 == null || this.member.ape1 == '' || this.member.ape1.length > 20) return false;
             else return true;
         },
-        validateSA(){
-            if (this.member.ape2 == null || this.member.ape2 == '' || this.member.ape2.length>20) return false;
+        validateSA() {
+            if (this.member.ape2 == null || this.member.ape2 == '' || this.member.ape2.length > 20) return false;
             else return true;
         },
-        validateG(){
+        validateG() {
             return (this.member.genero != null)
         },
-        validateF(){
+        validateF() {
             return (this.member.fec_nac != null)
         },
-        validateCP(){
+        validateCP() {
             if (this.member.codp == null || this.member.codp == '') return false;
-            if (isNaN(this.member.codp || !Number.isInteger(this.member.codp) || this.member.codp<0 || this.member.codp>999))
-            return false;
+            if (isNaN(this.member.codp || !Number.isInteger(this.member.codp) || this.member.codp < 0 || this.member.codp > 999))
+                return false;
             else return true;
         },
-        validateCODA(){
+        validateCODA() {
             let verif = true;
-                if (this.member.coda == null || this.member.coda == '') return false;
-                if (isNaN(this.member.coda || !Number.isInteger(this.member.coda) || this.member.coda<0 || this.member.coda>99999))
+            if (this.member.coda == null || this.member.coda == '') return false;
+            if (isNaN(this.member.coda || !Number.isInteger(this.member.coda) || this.member.coda < 0 || this.member.coda > 99999))
                 return false
-                else return true;
+            else return true;
         },
-        validateT(){
+        validateT() {
             let verif = true;
-                if (this.member.telefono == null || this.member.telefono == '') return false;
-                if (isNaN(this.member.telefono || !Number.isInteger(this.member.telefono) || this.member.telefono<0 || this.member.telefono>9999999))
+            if (this.member.telefono == null || this.member.telefono == '') return false;
+            if (isNaN(this.member.telefono || !Number.isInteger(this.member.telefono) || this.member.telefono < 0 || this.member.telefono > 9999999))
                 return false
-                else return true;
+            else return true;
         },
-        validateP(){
+        validateP() {
             return (this.member.pais != null);
         },
-        validateCI(){
+        validateCI() {
             return (this.member.ciudad != null);
         },
-        validateU(){
-            if (this.member.urbanizacion == null || this.member.urbanizacion == '' || this.member.urbanizacion.length>20) return false;
+        validateU() {
+            if (this.member.urbanizacion == null || this.member.urbanizacion == '' || this.member.urbanizacion.length > 20) return false;
             else return true;
         },
-        validateCA(){
-            if (this.member.calle == null || this.member.calle == '' || this.member.calle.length>20) return false;
+        validateCA() {
+            if (this.member.calle == null || this.member.calle == '' || this.member.calle.length > 20) return false;
             else return true;
         },
-        validateZ(){
+        validateZ() {
             let verif = true;
-                if (this.member.zipcode == null || this.member.zipcode == '') return false;
-                if (!isNaN(this.member.zipcode && Number.isInteger(this.member.zipcode) && this.member.zipcode>0 && this.member.zipcode<99999))
+            if (this.member.zipcode == null || this.member.zipcode == '') return false;
+            if (!isNaN(this.member.zipcode && Number.isInteger(this.member.zipcode) && this.member.zipcode > 0 && this.member.zipcode < 99999))
                 return true;
-                else return false;
+            else return false;
         },
-        validateDR(){
+        validateDR() {
             let verif = true;
             if (this.rep.dociden == null || this.rep.dociden == '') return false;
             if (this.rep.dociden.toString().length > 8 || isNaN(this.rep.dociden))
                 verif = false;
-            if (this.rep.dociden.toString().indexOf(".") != -1 || this.rep.dociden<0)
+            if (this.rep.dociden.toString().indexOf(".") != -1 || this.rep.dociden < 0)
                 verif = false;
             return verif;
         },
 
-        validateNR(){
-            if (this.rep.nom1 == null || this.rep.nom1 == '' || this.rep.nom1.length>20) return false;
+        validateNR() {
+            if (this.rep.nom1 == null || this.rep.nom1 == '' || this.rep.nom1.length > 20) return false;
             else return true;
         },
-        validateSNR(){
-            if (this.rep.nom2 == null || this.rep.nom2.length>20) return false;
+        validateSNR() {
+            if (this.rep.nom2 == null || this.rep.nom2.length > 20) return false;
             else return true;
         },
-        validateAR(){
-            if (this.rep.ape1 == null || this.rep.ape1 == '' || this.rep.ape1.length>20) return false;
+        validateAR() {
+            if (this.rep.ape1 == null || this.rep.ape1 == '' || this.rep.ape1.length > 20) return false;
             else return true;
         },
-        validateSAR(){
-            if (this.rep.ape2 == null || this.rep.ape2 == '' || this.rep.ape2.length>20) return false;
+        validateSAR() {
+            if (this.rep.ape2 == null || this.rep.ape2 == '' || this.rep.ape2.length > 20) return false;
             else return true;
         },
-        validateGR(){
+        validateGR() {
             return (this.rep.genero != null)
         },
-        validateFR(){
+        validateFR() {
             return (this.rep.fec_nac != null)
         },
-        validatePR(){
+        validatePR() {
             return (this.rep.pais != null);
         },
-        validateCIR(){
+        validateCIR() {
             return (this.rep.ciudad != null);
         },
-        validateUR(){
-            if (this.rep.urbanizacion == null || this.rep.urbanizacion == '' || this.rep.urbanizacion.length>20) return false;
+        validateUR() {
+            if (this.rep.urbanizacion == null || this.rep.urbanizacion == '' || this.rep.urbanizacion.length > 20) return false;
             else return true;
         },
-        validateCAR(){
-            if (this.rep.calle == null || this.rep.calle == '' || this.rep.calle.length>20) return false;
+        validateCAR() {
+            if (this.rep.calle == null || this.rep.calle == '' || this.rep.calle.length > 20) return false;
             else return true;
         },
-        validateZR(){
+        validateZR() {
             let verif = true;
-                if (this.rep.zipcode == null || this.rep.zipcode == '') return false;
-                if (!isNaN(this.rep.zipcode && Number.isInteger(this.rep.zipcode) && this.rep.zipcode>0 && this.rep.zipcode<99999))
+            if (this.rep.zipcode == null || this.rep.zipcode == '') return false;
+            if (!isNaN(this.rep.zipcode && Number.isInteger(this.rep.zipcode) && this.rep.zipcode > 0 && this.rep.zipcode < 99999))
                 return true;
-                else return false;
+            else return false;
         },
     },
     methods: {
@@ -609,7 +663,13 @@ export default {
 
         update() {
             var path = window.location.pathname;
-            path = path.replace(/\D/g, '');
+            var isbn = path.indexOf("/clubs", 0) + 7;
+            var isbnend = path.indexOf("/members", 0);
+            var id = path.substring(isbn, isbnend);
+            id = parseInt(id, 10);
+            var newpath = path.substring(isbnend, path.length);
+            newpath = newpath.replace(/\D/g, '');
+            var ide = parseInt(newpath, 10);
             const params = {
                 dociden: this.member.dociden,
                 nom1: this.member.nom1,
@@ -640,20 +700,28 @@ export default {
                 calleR: this.rep.calle,
                 zipcodeR: this.rep.zipcode,
 
-                club: path,
+                club: id,
                 today: this.today,
             };
+
+            params.ciudad = params.ciudad.substring(0, params.ciudad.indexOf("-"));
+            params.ciudad = parseInt(params.ciudad, 10);
+
+            if (params.ciudadR) {
+                params.ciudadR = params.ciudadR.substring(0, params.ciudadR.indexOf("-"));
+                params.ciudadR = parseInt(params.ciudadR, 10);
+            }
 
             console.log(params);
 
             var path = window.location.pathname;
-            var isbn = path.indexOf("/clubs", 0)+7;
-            var isbnend = path.indexOf("/members",0);
-            var id = path.substring(isbn,isbnend);
-            id = parseInt(id,10);
-            var newpath = path.substring(isbnend,path.length);
+            var isbn = path.indexOf("/clubs", 0) + 7;
+            var isbnend = path.indexOf("/members", 0);
+            var id = path.substring(isbn, isbnend);
+            id = parseInt(id, 10);
+            var newpath = path.substring(isbnend, path.length);
             newpath = newpath.replace(/\D/g, '');
-            var ide = parseInt(newpath,10);
+            var ide = parseInt(newpath, 10);
 
             //console.log('id club '+id+' id member '+ide );
 
@@ -667,7 +735,7 @@ export default {
                 })
         },
 
-        revalidate(){
+        revalidate() {
             let msg = '';
             /* MEMBER */
 
@@ -686,25 +754,24 @@ export default {
             if (this.validateU == false) msg = msg + "El campo Urbanización (Lector) no puede estar vacío ni tener más de 20 caracteres\n";
             if (this.validateCA == false) msg = msg + "El campo Calle (Lector) no puede estar vacío ni tener más de 20 caracteres\n";
             if (this.validateZ == false) msg = msg + "El campo Código postal (Lector) no puede estar vacío, debe ser numérico entero y no puede tener más de 7 caracteres\n";
-            
-            if (!this.mayoredad){
-            if (this.validateDR == false) msg = msg + "El campo Documento de Identidad debe ser un número entero positivo de no más de 8 caracteres\n";
-            if (this.validateNR == false) msg = msg + "El campo Nombre (Representante) no puede estar vacío ni tener más de 20 caracteres\n";
-            if (this.validateSNR == false) msg = msg + "El campo Segundo Nombre (Representante) no puede tener más de 20 caracteres\n";
-            if (this.validateAR == false) msg = msg + "El campo Apellido (Representante) no puede estar vacío ni tener más de 20 caracteres\n";
-            if (this.validateSAR == false) msg = msg + "El campo Segundo Apellido (Representante) no puede estar vacío ni tener más de 20 caracteres\n";
-            if (this.validateFR == false) msg = msg + "El campo Fecha de Nacimiento (Representante) no puede estar vacío";
-            if (this.validatePR == false) msg = msg + "El campo País (Representante) no puede estar vacío\n";
-            if (this.validateCIR == false) msg = msg + "El campo Ciudad (Representante) no puede estar vacío\n";
-            if (this.validateUR == false) msg = msg + "El campo Urbanización (Representante) no puede estar vacío ni tener más de 20 caracteres\n";
-            if (this.validateCAR == false) msg = msg + "El campo Calle (Representante) no puede estar vacío ni tener más de 20 caracteres\n";
-            if (this.validateZR == false) msg = msg + "El campo Código postal (Representante) no puede estar vacío, debe ser numérico entero y no puede tener más de 7 caracteres\n";
+
+            if (!this.mayoredad) {
+                if (this.validateDR == false) msg = msg + "El campo Documento de Identidad debe ser un número entero positivo de no más de 8 caracteres\n";
+                if (this.validateNR == false) msg = msg + "El campo Nombre (Representante) no puede estar vacío ni tener más de 20 caracteres\n";
+                if (this.validateSNR == false) msg = msg + "El campo Segundo Nombre (Representante) no puede tener más de 20 caracteres\n";
+                if (this.validateAR == false) msg = msg + "El campo Apellido (Representante) no puede estar vacío ni tener más de 20 caracteres\n";
+                if (this.validateSAR == false) msg = msg + "El campo Segundo Apellido (Representante) no puede estar vacío ni tener más de 20 caracteres\n";
+                if (this.validateFR == false) msg = msg + "El campo Fecha de Nacimiento (Representante) no puede estar vacío";
+                if (this.validatePR == false) msg = msg + "El campo País (Representante) no puede estar vacío\n";
+                if (this.validateCIR == false) msg = msg + "El campo Ciudad (Representante) no puede estar vacío\n";
+                if (this.validateUR == false) msg = msg + "El campo Urbanización (Representante) no puede estar vacío ni tener más de 20 caracteres\n";
+                if (this.validateCAR == false) msg = msg + "El campo Calle (Representante) no puede estar vacío ni tener más de 20 caracteres\n";
+                if (this.validateZR == false) msg = msg + "El campo Código postal (Representante) no puede estar vacío, debe ser numérico entero y no puede tener más de 7 caracteres\n";
             }
 
-            if (msg == ''){
+            if (msg == '') {
                 this.update();
-            }
-            else{
+            } else {
                 alert(msg);
             }
         }
