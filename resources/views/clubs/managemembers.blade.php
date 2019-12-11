@@ -19,16 +19,23 @@
                                 <i class="material-icons">group</i>
                             </div>
                             <div class="row">
-                                <div class="col-lg-10">
+                                <div class="col-lg-4">
                                     <h4 class="card-title">Miembros del club</h4>
                                 </div>
-                                <div class="col-lg-2">
+                                <div class="col-lg-8">
 
                                     <b-link href="/clubs/{{$club}}/members/create" class="btn btn-default float-right mt-3">
                                         <span class="btn-label">
                                             <i class="material-icons">add</i>
                                         </span>
                                         Añadir nuevo miembro
+                                    </b-link>
+
+                                    <b-link href="#" class="btn btn-default float-right mt-3">
+                                        <span class="btn-label">
+                                            <i class="material-icons">account_box</i>
+                                        </span>
+                                        Añadir agente libre
                                     </b-link>
                                 </div>
                             </div>
@@ -61,6 +68,23 @@
                                                         <b-link href="/clubs/{{$club}}/members/{{$member->doc_iden}}/edit" type="button" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Modificar" class="btn btn-success">
                                                             <i class="material-icons">edit</i>
                                                         </b-link>
+                                                        <b-button class="btn btn-danger" id="show-btn" @click=";$bvModal.show('bv-modal-{{$loop->iteration}}') "><i class="material-icons" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Retirar">close</i>
+                                                        </b-button>
+                                                        <b-modal id="bv-modal-{{$loop->iteration}}" hide-footer>
+                                                                    <template v-slot:modal-title>
+                                                                    <div>
+                                                                    Está apunto de eliminar al miembro
+                                                                    </div><div>
+                                                                    <code>{{$member->nom}}</code> 
+                                                                    </div>
+                                                                    </template>                                                          
+                                                                    <div>                                                                
+                                                                    {!! Form::open(['route'=> ['members.changest', $member->id_club, $member->doc_iden], 'method'=>'PUT']) !!}
+                                                                    {!! Form::button('Eliminar', ['type' => 'submit','class' => 'btn btn-danger btn-block','size'=>'sm']) !!}
+                                                                    {!! Form::close() !!}
+                                                                    </div>
+                                                                    <b-button class="mt-3" block @click="$bvModal.hide('bv-modal')">Cancelar</b-button>
+                                                        </b-modal>
                                                     </td>
                                                 </tr>
                                                 @endforeach

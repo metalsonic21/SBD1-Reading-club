@@ -23,7 +23,7 @@ class MembersController extends Controller
      */
     public function index($id)
     {
-        $members = DB::select(DB::raw("SELECT doc_iden, nom1 as nom, ape1 as ape, fec_nac FROM sjl_lectores WHERE id_club = '$id'"));
+        $members = DB::select(DB::raw("SELECT doc_iden, nom1 as nom, ape1 as ape, fec_nac, id_club FROM sjl_lectores WHERE id_club = '$id'"));
         return view('clubs.managemembers')->with('members', $members)->with('club', $id);
     }
 
@@ -522,4 +522,28 @@ class MembersController extends Controller
     {
         //
     }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+
+     public function delete(Request $request, $idclub, $id){
+        $trash = null;
+        $trash2 = '';
+        Member::where('doc_iden',$id)->update(array(
+            'id_club'=> $trash,
+        ));
+
+        /* MEMBERSHIP */
+        Membresia::where(['id_lec'=>$id,'id_club'=>$idclub,'fec_f'=>$trash])->update(array(
+            'fec_f'=>date('Y-m-d'),
+            'motivo_b'=>'R',
+        ));
+
+        return redirect()->route('members.index', [$idclub]);
+        }
 }

@@ -27,6 +27,9 @@ Route::get('/selectclubg', 'clubs\SelectClubGController@index')->name('selectclu
 Route::get('/selectclubgm', 'clubs\SelectClubGMController@index')->name('selectclub');
 Route::get('/selectclubr', 'clubs\SelectClubRController@index')->name('selectclub');
 Route::resource('/clubs/{club}/members', 'clubs\MembersController');
+Route::patch('/clubs/{club}/deletemember/{id}', 'clubs\MembersController@delete')->name('members.changest');
+Route::put('/clubs/{club}/deletemember/{id}', 'clubs\MembersController@delete')->name('members.changest');
+Route::get('/clubs/{club}/deletemember/{id}', 'clubs\MembersController@delete')->name('members.changest');
 
 /*GROUPS*/
 Route::resource('/browsegroups', 'groups\BrowseGroupsController');

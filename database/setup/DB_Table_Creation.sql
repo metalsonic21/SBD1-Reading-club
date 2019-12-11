@@ -15,7 +15,7 @@ CREATE TABLE SJL_lectores (
     ape2                     VARCHAR(15) NOT NULL,
     fec_nac                  DATE NOT NULL,
     genero                   VARCHAR(2) NOT NULL,
-    id_club                  INTEGER NOT NULL,
+    id_club                  INTEGER,
     id_grup                  INTEGER,
     id_calle                 INTEGER NOT NULL,
     id_rep                   INTEGER,
