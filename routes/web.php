@@ -26,10 +26,15 @@ Route::get('/selectclub', 'clubs\SelectClubController@index')->name('selectclub'
 Route::get('/selectclubg', 'clubs\SelectClubGController@index')->name('selectclub');
 Route::get('/selectclubgm', 'clubs\SelectClubGMController@index')->name('selectclub');
 Route::get('/selectclubr', 'clubs\SelectClubRController@index')->name('selectclub');
+
+/* MEMBERS */
 Route::resource('/clubs/{club}/members', 'clubs\MembersController');
 Route::patch('/clubs/{club}/deletemember/{id}', 'clubs\MembersController@delete')->name('members.changest');
 Route::put('/clubs/{club}/deletemember/{id}', 'clubs\MembersController@delete')->name('members.changest');
 Route::get('/clubs/{club}/deletemember/{id}', 'clubs\MembersController@delete')->name('members.changest');
+
+/* PAYMENTS */
+Route::resource('/clubs/{club}/members/{id}/payments', 'clubs\PagosController');
 
 /*GROUPS*/
 Route::resource('/browsegroups', 'groups\BrowseGroupsController');

@@ -16,27 +16,21 @@
                     <div class="card">
                         <div class="card-header card-header-log card-header-icon">
                             <div class="card-icon">
-                                <i class="material-icons">group</i>
+                                <i class="material-icons">euro</i>
                             </div>
                             <div class="row">
-                                <div class="col-lg-4">
-                                    <h4 class="card-title">Miembros del club</h4>
+                                <div class="col-lg-7">
+                                <h4 class="card-title">Control de pagos para {{$member->nom1}} {{$member->ape1}}</h4>
                                 </div>
-                                <div class="col-lg-8">
+                                <div class="col-lg-5">
 
                                     <b-link href="/clubs/{{$club}}/members/create" class="btn btn-default float-right mt-3">
                                         <span class="btn-label">
                                             <i class="material-icons">add</i>
                                         </span>
-                                        Añadir nuevo miembro
+                                        Registrar nuevo pago
                                     </b-link>
 
-                                    <b-link href="#" class="btn btn-default float-right mt-3">
-                                        <span class="btn-label">
-                                            <i class="material-icons">account_box</i>
-                                        </span>
-                                        Añadir agente libre
-                                    </b-link>
                                 </div>
                             </div>
                         </div>
@@ -47,24 +41,17 @@
                                         <table class="table">
                                             <thead>
                                                 <tr>
-                                                    <th class="text-center">Documento de identidad</th>
-                                                    <th class="text-center">Nombre</th>
-                                                    <th class="text-center">Apellido</th>
-                                                    <th class="text-center">Fecha de nacimiento</th>
+                                                    <th class="text-center">Código</th>
+                                                    <th class="text-center">Fecha de emisión de pago</th>
                                                     <th class="text-center">Acción</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @foreach ($members as $member)
+                                                @foreach ($pagos as $pago)
                                                 <tr>
-                                                    <td class="text-center">{{$member->doc_iden}}</td>
-                                                    <td class="text-center">{{$member->nom}}</td>
-                                                    <td class="text-center">{{$member->ape}}</td>
-                                                    <td class="text-center">{{$member->fec_nac}}</td>
+                                                    <td class="text-center">{{$pago->id}}</td>
+                                                    <td class="text-center">{{$pago->fechapago}}</td>
                                                         <td class="td-actions text-center">
-                                                        <b-link href="/clubs/{{$club}}/members/{{$member->doc_iden}}" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Visualizar" class="btn btn-info">
-                                                            <i class="material-icons">remove_red_eye</i>
-                                                        </b-link>
                                                         <b-link href="/clubs/{{$club}}/members/{{$member->doc_iden}}/edit" type="button" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Modificar" class="btn btn-success">
                                                             <i class="material-icons">edit</i>
                                                         </b-link>
@@ -85,10 +72,6 @@
                                                                     </div>
                                                                     <b-button class="mt-3" block @click="$bvModal.hide('bv-modal')">Cancelar</b-button>
                                                         </b-modal>
-
-                                                        <b-link href="/clubs/{{$club}}/members/{{$member->doc_iden}}/payments" type="button" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Control de pagos" class="btn btn-warning">
-                                                            <i class="material-icons">euro</i>
-                                                        </b-link>
                                                     </td>
                                                 </tr>
                                                 @endforeach
