@@ -11,7 +11,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-lg-10">
-                                    <h4 class="card-title">Añadir nuev  o libro</h4>
+                                    <h4 class="card-title">Añadir nuevo libro</h4>
                                 </div>
                             </div>
                         </div>

@@ -1,0 +1,42 @@
+Vistas:
+
+-Home
+-Clubes de lectura:{
+  *Reportes Miembros del Club(Sin las subvistas "Libros analizados","pagos","actividad","clubes anteriores")
+  *Gestion miembros club de lectura{
+        -Miembros del club:
+        *Añadir.
+  }     
+  *Reportes por Club.
+  *Explorar Clubes de Lectura:
+     -Añadir club de lectura
+}
+
+*Grupos de lectura:{
+    -Explorar grupos de Lectura:{
+        *Seleccione un club de lectura (sleccionar)
+        -Explorar grupos de lectura (again): -> Crear grupo de lectura
+    }
+      
+   -Gestion de miembros de grupo:{
+      *Seleccione un club de lectura :
+            -Seleccione un grupo de lectura 
+                *Miembros del grupo -> Añadir nuevo miembro.
+   }
+}
+-Explorar Reuniones:{
+*Seleccione un club de lectura -> seleccionar
+      -Seleccione grupo de lectura-> seleccionar
+         *Reuniones para el grupo (Botones "Detalles","Control de asistencia reunión","Modificar Datos reunión
+          ","Eliminar Reunion")-> Consultar calendario (falta regresar)
+}    
+-Explorar libros: (botones "Detalle", "Modificar", "Eliminar") -> Crear Libro:{
+    *Añadir nuevo libro:
+}
+   
+-Obras de teatro:{
+    *Obras Actuadas por club -> Ver obras
+      -SELECCIONE UNA OBRA ("Detalle"."Presemtaciones"."Ver Elenco")  -> Agregar nueva obra
+    -Ganancia por obra ("Detalles") //Aca me parece que deberiamos seguir lo de siempre y pedir antes el club para ver sus obras.
+    -Explorar obras de teatro ("Detalle","presentaciones", "Ver Elenco") -> Crear obra de teatro (se repite arriba xd)
+}

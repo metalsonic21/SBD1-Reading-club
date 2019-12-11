@@ -136,7 +136,7 @@ CREATE TABLE SJL_locales_eventos (
     CONSTRAINT locales_eventos_pk PRIMARY KEY (id)
 );
 
-CREATE TABLE SJL_inansistencias (
+CREATE TABLE SJL_inasistencias (
     id_fec_i      DATE NOT NULL,
     id_fec_mem    DATE NOT NULL,
     id_club       INTEGER NOT NULL,
@@ -234,7 +234,7 @@ CREATE TABLE SJL_obras (
     nom        VARCHAR(20) NOT NULL,
     resum      VARCHAR(200) NOT NULL,
     costo      INTEGER NOT NULL,
-    durac      DATE NOT NULL,
+    durac      TIMESTAMP NOT NULL,
     estatus    BOOLEAN,
     id_local   INTEGER NOT NULL,
     CONSTRAINT obras_pk PRIMARY KEY (id)
@@ -334,8 +334,8 @@ ALTER TABLE SJL_telefonos ADD CONSTRAINT telefonos_lectores_fk FOREIGN KEY(id_le
 ALTER TABLE SJL_locales_eventos ADD CONSTRAINT locales_calles_fk FOREIGN KEY(id_dir) REFERENCES SJL_calles(id);
 ALTER TABLE SJL_locales_eventos ADD CONSTRAINT locales_clubes_fk FOREIGN KEY(id_club) REFERENCES SJL_clubes_lectura(id);
 
-ALTER TABLE SJL_inansistencias ADD CONSTRAINT inasistencias_grupos_fk FOREIGN KEY(id_fec_i,id_fec_mem,id_club,id_lec,id_grupo) REFERENCES SJL_grupos_lectores(id_fec_i,id_fec_mem,id_club,id_lec,id_grupo);
-ALTER TABLE SJL_inansistencias ADD CONSTRAINT inasistencias_reuniones_fk FOREIGN KEY(fec_reu_men,id_lib,id_grupo,id_club) REFERENCES SJL_reuniones_mensuales(fec,id_lib,id_grupo,id_club);
+ALTER TABLE SJL_inasistencias ADD CONSTRAINT inasistencias_grupos_fk FOREIGN KEY(id_fec_i,id_fec_mem,id_club,id_lec,id_grupo) REFERENCES SJL_grupos_lectores(id_fec_i,id_fec_mem,id_club,id_lec,id_grupo);
+ALTER TABLE SJL_inasistencias ADD CONSTRAINT inasistencias_reuniones_fk FOREIGN KEY(fec_reu_men,id_lib,id_grupo,id_club) REFERENCES SJL_reuniones_mensuales(fec,id_lib,id_grupo,id_club);
 
 ALTER TABLE SJL_reuniones_mensuales ADD CONSTRAINT reuniones_libros_fk FOREIGN KEY(id_lib) REFERENCES SJL_libros(isbn);
 ALTER TABLE SJL_reuniones_mensuales ADD CONSTRAINT reuniones_grupos_fk FOREIGN KEY(id_grupo,id_club) REFERENCES SJL_grupos_lectura(id,id_club);
@@ -408,3 +408,4 @@ CREATE SEQUENCE IF NOT EXISTS id_urbanizacion INCREMENT BY 1 MINVALUE 1 NO MAXVA
 CREATE SEQUENCE IF NOT EXISTS id_calle INCREMENT BY 1 MINVALUE 1 NO MAXVALUE START WITH 1 OWNED BY sjl_calles.id;
 CREATE SEQUENCE IF NOT EXISTS id_inst INCREMENT BY 1 MINVALUE 1 NO MAXVALUE START WITH 1 OWNED BY SJL_instituciones.id;
 CREATE SEQUENCE IF NOT EXISTS id_idioma INCREMENT BY 1 MINVALUE 1 NO MAXVALUE START WITH 1 OWNED BY SJL_idiomas.id;
+CREATE SEQUENCE IF NOT EXISTS id_obras INCREMENT BY 1 MINVALUE 1 NO MAXVALUE START WITH 1 OWNED BY SJL_obras.id;
