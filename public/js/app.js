@@ -2685,6 +2685,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2725,6 +2730,7 @@ __webpack_require__.r(__webpack_exports__);
     var ide = parseInt(newpath, 10);
     axios.get("/clubs/".concat(id, "/members/").concat(ide, "/favorites")).then(function (res) {
       _this.items = res.data.data;
+      _this.member = res.data.member;
     })["catch"](function (e) {
       console.log(e);
     });
@@ -2732,6 +2738,18 @@ __webpack_require__.r(__webpack_exports__);
   computed: {
     rows: function rows() {
       return this.items.length;
+    },
+    validateOne: function validateOne() {
+      if (this.prefOne != null) if (this.prefOne != this.prefTwo && this.prefOne != this.prefThree) return true;
+      return false;
+    },
+    validateTwo: function validateTwo() {
+      if (this.prefTwo != null) if (this.prefTwo != this.prefOne && this.prefTwo != this.prefThree) return true;
+      return false;
+    },
+    validateThree: function validateThree() {
+      if (this.prefThree != null) if (this.prefOne != this.prefTwo && this.prefOne != this.prefThree) return true;
+      return false;
     }
   },
   methods: {
@@ -2753,10 +2771,11 @@ __webpack_require__.r(__webpack_exports__);
         selectedthree: this.selected[2].isbn,
         prefOne: this.prefOne,
         prefTwo: this.prefTwo,
-        prefThree: this.prefThree
+        prefThree: this.prefThree,
+        member: ide
       };
       console.log(params);
-      axios.post("/clubs/".concat(id, "/members/").concat(ide, "/favorites")).then(function (res) {
+      axios.post("/clubs/".concat(id, "/members/").concat(ide, "/favorites"), params).then(function (res) {
         //window.location = `/clubs/${path}/members`;
         console.log(res.data);
       })["catch"](function (e) {
@@ -2765,7 +2784,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     validateSelect: function validateSelect() {
       if (this.selected.length > 2) {
-        this.add();
+        if (!this.validateOne || !this.validateTwo || !this.validateThree) alert("Debe seleccionar una preferencia y esta debe ser distinta a las demás seleccionadas\n");else this.add();
       } else {
         alert("Seleccione tres libros favoritos\n");
       }
@@ -74999,7 +75018,28 @@ var render = function() {
       _c("div", { staticClass: "row" }, [
         _c("div", { staticClass: "col-md-12" }, [
           _c("div", { staticClass: "card" }, [
-            _vm._m(0),
+            _c(
+              "div",
+              { staticClass: "card-header card-header-log card-header-icon" },
+              [
+                _vm._m(0),
+                _vm._v(" "),
+                _c("div", { staticClass: "row" }, [
+                  _c("div", { staticClass: "col-lg-10" }, [
+                    _c("h4", { staticClass: "card-title" }, [
+                      _vm._v(
+                        "Lista de libros favoritos para " +
+                          _vm._s(_vm.member.nom1) +
+                          " " +
+                          _vm._s(_vm.member.ape1)
+                      )
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-lg-2" })
+                ])
+              ]
+            ),
             _vm._v(" "),
             _c("div", { staticClass: "card-body" }, [
               _c("div", { staticClass: "row" }, [
@@ -75122,7 +75162,17 @@ var render = function() {
                                       },
                                       expression: "prefOne"
                                     }
-                                  })
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "b-form-invalid-feedback",
+                                    { attrs: { state: _vm.validateOne } },
+                                    [
+                                      _vm._v(
+                                        "Debe seleccionar una preferencia y esta debe ser distinta a las demás seleccionadas"
+                                      )
+                                    ]
+                                  )
                                 ],
                                 1
                               ),
@@ -75157,7 +75207,17 @@ var render = function() {
                                       },
                                       expression: "prefTwo"
                                     }
-                                  })
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "b-form-invalid-feedback",
+                                    { attrs: { state: _vm.validateTwo } },
+                                    [
+                                      _vm._v(
+                                        "Debe seleccionar una preferencia y esta debe ser distinta a las demás seleccionadas"
+                                      )
+                                    ]
+                                  )
                                 ],
                                 1
                               ),
@@ -75192,7 +75252,17 @@ var render = function() {
                                       },
                                       expression: "prefThree"
                                     }
-                                  })
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "b-form-invalid-feedback",
+                                    { attrs: { state: _vm.validateThree } },
+                                    [
+                                      _vm._v(
+                                        "Debe seleccionar una preferencia y esta debe ser distinta a las demás seleccionadas"
+                                      )
+                                    ]
+                                  )
                                 ],
                                 1
                               )
@@ -75274,25 +75344,9 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      { staticClass: "card-header card-header-log card-header-icon" },
-      [
-        _c("div", { staticClass: "card-icon" }, [
-          _c("i", { staticClass: "material-icons" }, [_vm._v("list")])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "row" }, [
-          _c("div", { staticClass: "col-lg-10" }, [
-            _c("h4", { staticClass: "card-title" }, [
-              _vm._v("Lista de libros favoritos para")
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-lg-2" })
-        ])
-      ]
-    )
+    return _c("div", { staticClass: "card-icon" }, [
+      _c("i", { staticClass: "material-icons" }, [_vm._v("list")])
+    ])
   }
 ]
 render._withStripped = true

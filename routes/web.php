@@ -57,7 +57,7 @@ Route::resource('/books', 'books\BooksController');
 Route::resource('/books/{isbn}/structure', 'books\StructuresController');
 
 /* FAVORITE BOOKS */
-Route::resource('/clubs/{club}/members/{id}/favorites', 'books\StructuresController');
+Route::resource('/clubs/{club}/members/{id}/favorites', 'books\FavoriteBooksController');
 
 /*THEATER_PLAYS*/
 Route::get('/playsclubs', 'theater_plays\PlaysClubsController@index')->name('playsclubs');

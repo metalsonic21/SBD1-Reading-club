@@ -1,7 +1,11 @@
 <?php
 
 namespace App\Http\Controllers\Books;
-
+use App\Models\Lista;
+use App\Models\Book;
+use App\Models\Member;
+use DB;
+use Response;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -12,16 +16,17 @@ class FavoriteBooksController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request, $idclub, $id)
     {        
         if($request->ajax()){
             $books = DB::select(DB::raw("SELECT isbn, titulo_esp as titulo_en_español, titulo_ori as titulo_original, fec_pub as fecha_de_publicacion, autor from sjl_libros"));
-            return Response::json(array('data'=>$books));
-    }
-    else{
-        return view('books.favorites');
-    }
-        //return $structure;
+            $member = Member::find($id);
+            return Response::json(array('data'=>$books,'member'=>$member));
+        }
+        else{
+            return view('books.favorites');
+        }
+        //return $id;
     }
 
     /**
@@ -42,7 +47,29 @@ class FavoriteBooksController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        DB::table('sjl_lista_favoritos')
+        ->where('id_lec',$request->member)
+        ->delete();
+
+        $bookOne = new Lista();
+        $bookOne->id_lec = $request->member;
+        $bookOne->id_lib = $request->selectedone;
+        $bookOne->pref = $request->prefOne;
+        $bookOne->save();
+
+        $bookTwo = new Lista();
+        $bookTwo->id_lec = $request->member;
+        $bookTwo->id_lib = $request->selectedtwo;
+        $bookTwo->pref = $request->prefTwo;
+        $bookTwo->save();
+
+        $bookT = new Lista();
+        $bookT->id_lec = $request->member;
+        $bookT->id_lib = $request->selectedthree;
+        $bookT->pref = $request->prefThree;
+        $bookT->save();
+
+        //return $request->selectedtwo;
     }
 
     /**

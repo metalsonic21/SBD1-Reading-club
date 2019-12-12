@@ -10,7 +10,7 @@
                         </div>
                         <div class="row">
                             <div class="col-lg-10">
-                                <h4 class="card-title">Lista de libros favoritos para</h4>
+                                <h4 class="card-title">Lista de libros favoritos para {{member.nom1}} {{member.ape1}}</h4>
                             </div>
                             <div class="col-lg-2">
 
@@ -48,16 +48,21 @@
                                             <b-col cols="4">
                                                 <label for="prefOne">Preferencia para <em v-if="selected[0]">{{selected[0].titulo_en_español}}</em> </label>
                                                 <b-form-select v-model="prefOne" :options="preferencias" id="prefOne" name="prefOne"></b-form-select>
+                                                <b-form-invalid-feedback :state="validateOne">Debe seleccionar una preferencia y esta debe ser distinta a las demás seleccionadas</b-form-invalid-feedback>
                                             </b-col>
 
                                             <b-col cols="4">
                                                 <label for="prefTwo">Preferencia para <em v-if="selected[1]">{{selected[1].titulo_en_español}}</em></label>
                                                 <b-form-select v-model="prefTwo" :options="preferencias" id="prefTwo" name="prefTwo"></b-form-select>
+                                                <b-form-invalid-feedback :state="validateTwo">Debe seleccionar una preferencia y esta debe ser distinta a las demás seleccionadas</b-form-invalid-feedback>
+
                                             </b-col>
 
                                             <b-col cols="4">
                                                 <label for="prefThree">Preferencia para <em v-if="selected[2]">{{selected[2].titulo_en_español}}</em></label>
                                                 <b-form-select v-model="prefThree" :options="preferencias" id="prefThree" name="prefThree"></b-form-select>
+                                                <b-form-invalid-feedback :state="validateThree">Debe seleccionar una preferencia y esta debe ser distinta a las demás seleccionadas</b-form-invalid-feedback>
+
                                             </b-col>
                                         </b-row>
                                         <br>
@@ -130,6 +135,7 @@ export default {
         axios.get(`/clubs/${id}/members/${ide}/favorites`)
             .then(res => {
                 this.items = res.data.data;
+                this.member = res.data.member;
             }).catch(e => {
                 console.log(e);
             })
@@ -137,7 +143,26 @@ export default {
     computed: {
         rows() {
             return this.items.length
-        }
+        },
+        validateOne(){
+            if (this.prefOne != null)
+                if (this.prefOne != this.prefTwo && this.prefOne != this.prefThree)
+                    return true;
+            return false;
+        },
+        validateTwo(){
+            if (this.prefTwo != null)
+                if (this.prefTwo != this.prefOne && this.prefTwo != this.prefThree)
+                    return true;
+            return false;
+        },
+
+        validateThree(){
+            if (this.prefThree != null)
+                if (this.prefOne != this.prefTwo && this.prefOne != this.prefThree)
+                    return true;
+            return false;
+        },
     },
 
     methods: {
@@ -163,11 +188,12 @@ export default {
                 prefOne: this.prefOne,
                 prefTwo: this.prefTwo,
                 prefThree: this.prefThree,
+                member: ide,
             }
 
             console.log(params);
 
-            axios.post(`/clubs/${id}/members/${ide}/favorites`)
+            axios.post(`/clubs/${id}/members/${ide}/favorites`, params)
                 .then(res => {
                     //window.location = `/clubs/${path}/members`;
 
@@ -179,7 +205,10 @@ export default {
 
         validateSelect() {
             if (this.selected.length > 2) {
-                this.add();
+                if (!this.validateOne || !this.validateTwo || !this.validateThree) 
+                    alert("Debe seleccionar una preferencia y esta debe ser distinta a las demás seleccionadas\n");
+                else
+                    this.add();
             } else {
                 alert("Seleccione tres libros favoritos\n");
             }
