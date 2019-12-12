@@ -374,7 +374,7 @@ ALTER TABLE SJL_elenco ADD CONSTRAINT elenco_personajes_fk FOREIGN KEY(id_pers,i
 ALTER TABLE SJL_elenco_lectores ADD CONSTRAINT elenco_lectores_membresias_fk FOREIGN KEY(id_fec_mem,id_club,id_lec,id_pers,id_obra) REFERENCES SJL_elenco(id_fec_mem,id_club,id_lec,id_pers,id_obra);
 ALTER TABLE SJL_elenco_lectores ADD CONSTRAINT elenco_historiales_fk FOREIGN KEY(id_hist_pre) REFERENCES SJL_historicos_presentaciones(fec);
 
-ALTER TABLE SJL_historicos_pagos_memb ADD CONSTRAINT historicos_membrecias_fk FOREIGN KEY(id_fec_mem,id_lec,id_club) REFERENCES SJL_membresias(fec_i,id_lec,id_club);
+ALTER TABLE SJL_historicos_pagos_memb ADD CONSTRAINT historicos_membrecias_fk FOREIGN KEY(id_fec_mem,id_lec,id_club) REFERENCES SJL_membresias(fec_i,id_lec,id_club) ON UPDATE CASCADE;
 
 /* Constraint Checks */
 

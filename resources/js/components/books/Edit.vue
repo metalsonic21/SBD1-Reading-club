@@ -22,7 +22,7 @@
                                         <b-row>
                                             <b-col cols="4">
                                                 <label for="isbn">ISBN</label>
-                                                <b-form-input type="text" disabled v-model="book.isbn" id="isbn" name="isbn"></b-form-input>
+                                                <b-form-input type="text" v-model="book.isbn" id="isbn" name="isbn"></b-form-input>
                                             </b-col>
 
                                             <b-col cols="4">
@@ -137,6 +137,7 @@ export default {
         return {
             book: {
                 isbn: 0,
+                oldisbn: 0,
                 titulo_ori: '',
                 titulo_esp: '',
                 tema_princ: '',
@@ -174,6 +175,7 @@ export default {
         axios.get(`/books/${params}/edit`)
             .then(res => {
                 this.book = res.data.data;
+                this.oldisbn = res.data.data.isbn;
                 this.editoriales = res.data.editoriales;
                 this.book.editorial = res.data.data.id_edit;
                 this.generos = res.data.generos;
@@ -312,6 +314,7 @@ export default {
                 fec_pub: this.book.fec_pub,
                 prev: this.book.prev,
                 editorial: this.book.editorial,
+                oldisbn: this.oldisbn,
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }

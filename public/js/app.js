@@ -2362,6 +2362,7 @@ __webpack_require__.r(__webpack_exports__);
     return {
       book: {
         isbn: 0,
+        oldisbn: 0,
         titulo_ori: '',
         titulo_esp: '',
         tema_princ: '',
@@ -2399,6 +2400,7 @@ __webpack_require__.r(__webpack_exports__);
 
     axios.get("/books/".concat(params, "/edit")).then(function (res) {
       _this.book = res.data.data;
+      _this.oldisbn = res.data.data.isbn;
       _this.editoriales = res.data.editoriales;
       _this.book.editorial = res.data.data.id_edit;
       _this.generos = res.data.generos;
@@ -2535,6 +2537,7 @@ __webpack_require__.r(__webpack_exports__);
         fec_pub: this.book.fec_pub,
         prev: this.book.prev,
         editorial: this.book.editorial,
+        oldisbn: this.oldisbn,
         headers: {
           'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
@@ -4698,6 +4701,7 @@ __webpack_require__.r(__webpack_exports__);
     return {
       member: {
         dociden: null,
+        oldid: null,
         nom1: null,
         nom2: null,
         ape1: null,
@@ -4774,6 +4778,7 @@ __webpack_require__.r(__webpack_exports__);
     axios.get("/clubs/".concat(id, "/members/").concat(ide, "/edit")).then(function (res) {
       _this.paises = res.data.paises;
       _this.ciudadesbackup = res.data.ciudades;
+      _this.member.oldid = res.data.data.doc_iden;
       _this.member.dociden = res.data.data.doc_iden;
       _this.member.nom1 = res.data.data.nom1;
       _this.member.nom2 = res.data.data.nom2;
@@ -5071,6 +5076,7 @@ __webpack_require__.r(__webpack_exports__);
       var ide = parseInt(newpath, 10);
       var params = {
         dociden: this.member.dociden,
+        oldid: this.member.oldid,
         nom1: this.member.nom1,
         nom2: this.member.nom2,
         ape1: this.member.ape1,
@@ -5101,15 +5107,18 @@ __webpack_require__.r(__webpack_exports__);
         club: id,
         today: this.today
       };
-      params.ciudad = params.ciudad.substring(0, params.ciudad.indexOf("-"));
-      params.ciudad = parseInt(params.ciudad, 10);
+      console.log(params);
 
-      if (params.ciudadR) {
+      if (isNaN(params.ciudad)) {
+        params.ciudad = params.ciudad.substring(0, params.ciudad.indexOf("-"));
+        params.ciudad = parseInt(params.ciudad, 10);
+      }
+
+      if (params.ciudadR && isNaN(params.ciudadR)) {
         params.ciudadR = params.ciudadR.substring(0, params.ciudadR.indexOf("-"));
         params.ciudadR = parseInt(params.ciudadR, 10);
       }
 
-      console.log(params);
       var path = window.location.pathname;
       var isbn = path.indexOf("/clubs", 0) + 7;
       var isbnend = path.indexOf("/members", 0);
@@ -5121,7 +5130,8 @@ __webpack_require__.r(__webpack_exports__);
       //console.log(params);
 
       axios.put("/clubs/".concat(id, "/members/").concat(ide), params).then(function (res) {
-        console.log(res.data); //window.location = `/clubs/${path}/members`;
+        //console.log(res.data);
+        window.location = "/clubs/".concat(id, "/members/");
       })["catch"](function (e) {
         console.log(e);
       });
@@ -74480,7 +74490,6 @@ var render = function() {
                                     _c("b-form-input", {
                                       attrs: {
                                         type: "text",
-                                        disabled: "",
                                         id: "isbn",
                                         name: "isbn"
                                       },
@@ -79124,7 +79133,6 @@ var render = function() {
                                   _c("b-form-input", {
                                     attrs: {
                                       type: "text",
-                                      disabled: "",
                                       id: "dociden",
                                       name: "dociden",
                                       placeholder: "Documento de identidad"

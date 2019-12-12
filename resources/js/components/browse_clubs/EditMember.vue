@@ -26,7 +26,7 @@
                                         <b-row>
                                             <b-col cols="4">
                                                 <label for="dociden">Documento de identidad</label>
-                                                <b-form-input type="text" v-model="member.dociden" disabled id="dociden" name="dociden" placeholder="Documento de identidad"></b-form-input>
+                                                <b-form-input type="text" v-model="member.dociden" id="dociden" name="dociden" placeholder="Documento de identidad"></b-form-input>
                                                 <b-form-invalid-feedback :state="validateD">El documento de identidad debe ser un número entero de 8 caracteres</b-form-invalid-feedback>
                                             </b-col>
 
@@ -256,6 +256,7 @@ export default {
         return {
             member: {
                 dociden: null,
+                oldid: null,
                 nom1: null,
                 nom2: null,
                 ape1: null,
@@ -341,7 +342,7 @@ export default {
             .then(res => {
                 this.paises = res.data.paises;
                 this.ciudadesbackup = res.data.ciudades;
-
+                this.member.oldid = res.data.data.doc_iden;
                 this.member.dociden = res.data.data.doc_iden;
                 this.member.nom1 = res.data.data.nom1;
                 this.member.nom2 = res.data.data.nom2;
@@ -672,6 +673,7 @@ export default {
             var ide = parseInt(newpath, 10);
             const params = {
                 dociden: this.member.dociden,
+                oldid: this.member.oldid,
                 nom1: this.member.nom1,
                 nom2: this.member.nom2,
                 ape1: this.member.ape1,
@@ -703,16 +705,18 @@ export default {
                 club: id,
                 today: this.today,
             };
+            console.log(params);
 
+            if (isNaN(params.ciudad)){
             params.ciudad = params.ciudad.substring(0, params.ciudad.indexOf("-"));
             params.ciudad = parseInt(params.ciudad, 10);
+            }
 
-            if (params.ciudadR) {
+            if (params.ciudadR && isNaN(params.ciudadR)) {
                 params.ciudadR = params.ciudadR.substring(0, params.ciudadR.indexOf("-"));
                 params.ciudadR = parseInt(params.ciudadR, 10);
             }
 
-            console.log(params);
 
             var path = window.location.pathname;
             var isbn = path.indexOf("/clubs", 0) + 7;
@@ -728,8 +732,8 @@ export default {
             //console.log(params);
             axios.put(`/clubs/${id}/members/${ide}`, params)
                 .then(res => {
-                    console.log(res.data);
-                    //window.location = `/clubs/${path}/members`;
+                    //console.log(res.data);
+                    window.location = `/clubs/${id}/members/`;
                 }).catch(e => {
                     console.log(e);
                 })

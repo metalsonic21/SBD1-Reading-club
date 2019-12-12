@@ -436,7 +436,8 @@ class MembersController extends Controller
             /*Si agrego un lector que ya estaba en la tabla representantes actualizo todos los id de representantes y luego lo elimino de la tabla*/
             $testmem = DB::select(DB::raw("SELECT doc_iden FROM sjl_representantes WHERE doc_iden = '$request->dociden'"));
             if (!$testcalle){
-            Member::where('doc_iden',$request->dociden)->update(array(
+            Member::where('doc_iden',$request->oldid)->update(array(
+                'doc_iden'=>$member->doc_iden,
                 'nom1'=>$member->nom1,
                 'nom2'=>$member->nom2,
                 'ape1'=>$member->ape1,
@@ -447,7 +448,8 @@ class MembersController extends Controller
             ));
             }
             else{
-                Member::where('doc_iden',$request->dociden)->update(array(
+                Member::where('doc_iden',$request->oldid)->update(array(
+                    'doc_iden'=>$member->doc_iden,
                     'nom1'=>$member->nom1,
                     'nom2'=>$member->nom2,
                     'ape1'=>$member->ape1,
@@ -474,40 +476,51 @@ class MembersController extends Controller
                 }
 
 
-
-
-                
-            /* PHONE */
-
-            $telefono = new Telefono();
-            $telefono->cod_pais = $request->codp;
-            $telefono->cod_area = $request->coda;
-            $telefono->num = $request->telefono;
-            $telefono->id_lector = $member->doc_iden;
-
-            $testtel = DB::select(DB::raw("SELECT cod_pais, cod_area, num, id_lector FROM sjl_telefonos WHERE cod_pais = '$telefono->cod_pais' AND cod_area = '$telefono->cod_area' AND num = '$telefono->num' AND id_lector = '$request->dociden'"));
-            
-            if (!$testtel){
-                $telefono->save();
-            }
-
             /* MEMBERSHIP */
 
-            $mship = new Membresia();
-            $mship->fec_i = $request->today;
-            $mship->id_club = $request->club;
-            $mship->id_lec = $request->dociden;
-            $mship->estatus = 'A';
-            $mship->save();
+            if ($request->oldid != $request->dociden){
+                Membresia::where('id_lec',$request->oldid)->update(array(
+                    'id_lec'=> $request->dociden,
+                ));
 
-            /* Registrar primer pago */
+                Pago::where('id_lec',$request->oldid)->update(array(
+                    'id_lec'=> $request->dociden,
+                ));
 
-            $pago = new Pago();
-            $pago->id_fec_mem = $mship->fec_i;
-            $pago->id_club = $request->club;
-            $pago->id_lec = $request->dociden;
-            $pago->fec_emi = $request->today;
-            $pago->save();
+                /* PHONE */
+
+                Telefono::where('id_lector',$request->oldid)->update(array(
+                    'id_lector'=> $request->dociden,
+                ));
+
+                $telefono = new Telefono();
+                $telefono->cod_pais = $request->codp;
+                $telefono->cod_area = $request->coda;
+                $telefono->num = $request->telefono;
+                $telefono->id_lector = $request->dociden;
+
+                $testtel = DB::select(DB::raw("SELECT cod_pais, cod_area, num, id_lector FROM sjl_telefonos WHERE cod_pais = '$telefono->cod_pais' AND cod_area = '$telefono->cod_area' AND num = '$telefono->num' AND id_lector = '$request->dociden'"));
+                
+                if (!$testtel){
+                    $telefono->save();
+                }
+            }
+
+            else if ($request->oldid == $request->dociden){         
+                /* PHONE */
+
+                $telefono = new Telefono();
+                $telefono->cod_pais = $request->codp;
+                $telefono->cod_area = $request->coda;
+                $telefono->num = $request->telefono;
+                $telefono->id_lector = $member->doc_iden;
+
+                $testtel = DB::select(DB::raw("SELECT cod_pais, cod_area, num, id_lector FROM sjl_telefonos WHERE cod_pais = '$telefono->cod_pais' AND cod_area = '$telefono->cod_area' AND num = '$telefono->num' AND id_lector = '$request->dociden'"));
+                
+                if (!$testtel){
+                    $telefono->save();
+                }
+            }
 
             return $testmem;
     }

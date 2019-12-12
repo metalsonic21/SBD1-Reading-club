@@ -163,7 +163,8 @@ class BooksController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $book = Book::find($id);
+        $book = new Book();
+        $book->isbn = $request->isbn;
         $book->titulo_esp = $request->titulo_esp;
         $book->titulo_ori = $request->titulo_ori;
         $book->tema_princ = $request->tema_princ;
@@ -173,7 +174,19 @@ class BooksController extends Controller
         $book->id_edit = $request->editorial;
         $book->autor = $request->autor;
         $book->id_prev = $request->prev;
-        $book->save();
+        
+        Book::where('isbn',$request->oldisbn)->update(array(
+            'isbn'=> $book->isbn,
+            'titulo_esp'=>$book->titulo_esp,
+            'titulo_ori'=>$book->titulo_ori,
+            'tema_princ'=>$book->tema_princ,
+            'sinop'=>$book->sinop,
+            'n_pag'=>$book->n_pag,
+            'fec_pub'=>$book->fec_pub,
+            'id_edit'=>$book->id_edit,
+            'autor'=>$book->autor,
+            'id_prev'=>$book->id_prev,
+        ));
 
         DB::table('sjl_generos_libros')
         ->where('id_lib',$book->isbn)
