@@ -82628,7 +82628,7 @@ var render = function() {
                           [
                             _vm._m(2),
                             _vm._v(
-                              "\n                                        Crear obra de teatro\n                                    "
+                              "\r\n                                        Crear obra de teatro\r\n                                    "
                             )
                           ]
                         )
@@ -82679,7 +82679,7 @@ var render = function() {
                                       },
                                       [
                                         _vm._v(
-                                          " Detalles \n                                                        "
+                                          " Detalles \r\n                                                        "
                                         )
                                       ]
                                     ),
@@ -82702,7 +82702,7 @@ var render = function() {
                                       },
                                       [
                                         _vm._v(
-                                          " Presentaciones \n                                                        "
+                                          " Presentaciones \r\n                                                        "
                                         )
                                       ]
                                     ),
@@ -82722,7 +82722,7 @@ var render = function() {
                                           },
                                           [
                                             _vm._v(
-                                              " Ver Elenco \n                                                        "
+                                              " Ver Elenco \r\n                                                        "
                                             )
                                           ]
                                         )
@@ -83037,7 +83037,7 @@ var render = function() {
                                 ])
                               ]),
                               _vm._v(
-                                "\n                                        Agregar Nueva Obra\n                                    "
+                                "\r\n                                        Agregar Nueva Obra\r\n                                    "
                               )
                             ]
                           )
@@ -83090,7 +83090,7 @@ var render = function() {
                                       },
                                       [
                                         _vm._v(
-                                          " Detalles \n                                                        "
+                                          " Detalles \r\n                                                        "
                                         )
                                       ]
                                     ),
@@ -83113,7 +83113,7 @@ var render = function() {
                                       },
                                       [
                                         _vm._v(
-                                          " Presentaciones \n                                                        "
+                                          " Presentaciones \r\n                                                        "
                                         )
                                       ]
                                     ),
@@ -83133,7 +83133,7 @@ var render = function() {
                                           },
                                           [
                                             _vm._v(
-                                              " Ver Elenco \n                                                        "
+                                              " Ver Elenco \r\n                                                        "
                                             )
                                           ]
                                         )
@@ -83403,7 +83403,7 @@ var render = function() {
                                 ])
                               ]),
                               _vm._v(
-                                "\n                                        Agregar Personaje\n                                    "
+                                "\r\n                                        Agregar Personaje\r\n                                    "
                               )
                             ]
                           )
@@ -83463,7 +83463,7 @@ var render = function() {
                                       },
                                       [
                                         _vm._v(
-                                          " Datos Personaje \n                                                        "
+                                          " Datos Personaje \r\n                                                        "
                                         )
                                       ]
                                     )
@@ -83620,7 +83620,7 @@ var render = function() {
                           [
                             _vm._m(2),
                             _vm._v(
-                              "\n                                        Añadir nuevo personaje\n                                    "
+                              "\r\n                                        Añadir nuevo personaje\r\n                                    "
                             )
                           ]
                         )
@@ -83678,7 +83678,7 @@ var render = function() {
                                       },
                                       [
                                         _vm._v(
-                                          " Datos Personaje \n                                                        "
+                                          " Datos Personaje \r\n                                                        "
                                         )
                                       ]
                                     )
@@ -83899,7 +83899,7 @@ var render = function() {
                                       },
                                       [
                                         _vm._v(
-                                          " Detalles \n                                                        "
+                                          " Detalles \r\n                                                        "
                                         )
                                       ]
                                     )
@@ -84095,7 +84095,7 @@ var render = function() {
                                       },
                                       [
                                         _vm._v(
-                                          " Ver Obras \n                                                        "
+                                          " Ver Obras \r\n                                                        "
                                         )
                                       ]
                                     )
@@ -99630,8 +99630,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\Hyper\Documents\GitHub\SBD1-Reading-club\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\Hyper\Documents\GitHub\SBD1-Reading-club\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! E:\SBD1-Reading-club\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! E:\SBD1-Reading-club\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
