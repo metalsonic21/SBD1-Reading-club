@@ -18,8 +18,12 @@
                                 <i class="material-icons">theaters</i>
                             </div>
                             <div class="row">
-                                <div class="col-lg-10">
+                                <div class="col-lg-9">
                                     <h4 class="card-title">Obras acutuadas por club</h4>
+                                </div>
+                                <div class="col-lg-3">
+                                <b-link href="/castplays"> <button type="button" rel="tooltip" class="btn btn-default"> Ver todas las obras 
+                                    </button></b-link>
                                 </div>
                             </div>
                         </div>
