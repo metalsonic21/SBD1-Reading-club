@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Clubs;
 use App\Models\Pago;
 use App\Models\Member;
+use App\Models\Membresia;
 use DB;
 use Response;
 use App\Http\Controllers\Controller;
@@ -27,9 +28,15 @@ class PagosController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($club, $member, Request $request)
     {
-        //
+        if ($request->ajax()){
+            $memberinfo = Member::find($member);
+            return Response::json(array('data'=>$memberinfo));
+        }
+        else{
+        return view('clubs.createpayment');
+        }
     }
 
     /**
@@ -40,7 +47,13 @@ class PagosController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $membresia = DB::select(DB::raw("SELECT fec_i FROM sjl_membresias WHERE fec_f IS NULL AND id_lec = '$request->member'"));
+        $pago = new Pago();
+        $pago->id_fec_mem = $membresia[0]->fec_i;
+        $pago->id_club = $request->club;
+        $pago->id_lec = $request->member;
+        $pago->fec_emi = date('Y-m-d');
+        $pago->save();
     }
 
     /**
@@ -60,9 +73,16 @@ class PagosController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($club, $member, $codpay, Request $request)
     {
-        //
+        if ($request->ajax()){
+            $memberinfo = Member::find($member);
+            $payinfo = Pago::find($codpay);
+            return Response::json(array('data'=>$memberinfo,'pago'=>$payinfo));
+        }
+        else{
+            return view('clubs.editpayment');
+        }
     }
 
     /**
@@ -72,9 +92,15 @@ class PagosController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $membresia = DB::select(DB::raw("SELECT fec_i FROM sjl_membresias WHERE fec_f IS NULL AND id_lec = '$request->member'"));
+        $pago = new Pago();
+        $pago->id_fec_mem = $membresia[0]->fec_i;
+        $pago->id_club = $request->club;
+        $pago->id_lec = $request->member;
+        $pago->fec_emi = $request->date;
+        $pago->save();
     }
 
     /**
@@ -83,8 +109,10 @@ class PagosController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($idclub, $idmember, $idpay)
     {
-        //
+        $pago = Pago::find($idpay);
+        $pago->delete();
+        return redirect()->route('payments.index', [$idclub, $idmember]);
     }
 }

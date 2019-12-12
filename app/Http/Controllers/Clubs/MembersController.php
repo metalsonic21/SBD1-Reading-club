@@ -541,6 +541,7 @@ class MembersController extends Controller
         /* MEMBERSHIP */
         Membresia::where(['id_lec'=>$id,'id_club'=>$idclub,'fec_f'=>$trash])->update(array(
             'fec_f'=>date('Y-m-d'),
+            'estatus'=>'I',
             'motivo_b'=>'R',
         ));
 

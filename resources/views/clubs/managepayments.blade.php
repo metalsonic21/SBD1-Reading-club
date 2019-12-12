@@ -24,7 +24,7 @@
                                 </div>
                                 <div class="col-lg-5">
 
-                                    <b-link href="/clubs/{{$club}}/members/create" class="btn btn-default float-right mt-3">
+                                <b-link href="/clubs/{{$club}}/members/{{$member->doc_iden}}/payments/create" class="btn btn-default float-right mt-3">
                                         <span class="btn-label">
                                             <i class="material-icons">add</i>
                                         </span>
@@ -52,7 +52,7 @@
                                                     <td class="text-center">{{$pago->id}}</td>
                                                     <td class="text-center">{{$pago->fechapago}}</td>
                                                         <td class="td-actions text-center">
-                                                        <b-link href="/clubs/{{$club}}/members/{{$member->doc_iden}}/edit" type="button" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Modificar" class="btn btn-success">
+                                                        <b-link href="/clubs/{{$club}}/members/{{$member->doc_iden}}/payments/{{$pago->id}}/edit" type="button" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Modificar" class="btn btn-success">
                                                             <i class="material-icons">edit</i>
                                                         </b-link>
                                                         <b-button class="btn btn-danger" id="show-btn" @click=";$bvModal.show('bv-modal-{{$loop->iteration}}') "><i class="material-icons" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Retirar">close</i>
@@ -60,13 +60,13 @@
                                                         <b-modal id="bv-modal-{{$loop->iteration}}" hide-footer>
                                                                     <template v-slot:modal-title>
                                                                     <div>
-                                                                    Está apunto de eliminar al miembro
+                                                                    Por favor confirme que desea eliminar el pago
                                                                     </div><div>
-                                                                    <code>{{$member->nom}}</code> 
+                                                                    <code>{{$pago->id}}</code> 
                                                                     </div>
                                                                     </template>                                                          
                                                                     <div>                                                                
-                                                                    {!! Form::open(['route'=> ['members.changest', $member->id_club, $member->doc_iden], 'method'=>'PUT']) !!}
+                                                                    {!! Form::open(['route'=> ['payments.destroy', $club, $member->doc_iden, $pago->id], 'method'=>'DELETE']) !!}
                                                                     {!! Form::button('Eliminar', ['type' => 'submit','class' => 'btn btn-danger btn-block','size'=>'sm']) !!}
                                                                     {!! Form::close() !!}
                                                                     </div>

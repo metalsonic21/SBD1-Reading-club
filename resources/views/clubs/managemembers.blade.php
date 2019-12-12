@@ -31,7 +31,7 @@
                                         Añadir nuevo miembro
                                     </b-link>
 
-                                    <b-link href="#" class="btn btn-default float-right mt-3">
+                                    <b-link href="/clubs/{{$club}}/freeagent" class="btn btn-default float-right mt-3">
                                         <span class="btn-label">
                                             <i class="material-icons">account_box</i>
                                         </span>

@@ -30,9 +30,15 @@ Vue.component('edit-club', require('./components/browse_clubs/Edit.vue').default
 Vue.component('club-members', require('./components/club_members/ClubMembers.vue').default); //reports
 Vue.component('browse-members', require('./components/club_members/BrowseMembers.vue').default); //crud members
 
+/* PAYMENTS */
+Vue.component('create-payment', require('./components/club_members/CreatePayment.vue').default);
+Vue.component('edit-payment', require('./components/club_members/EditPayment.vue').default); 
+
 /* CRUD MEMBERS */
 Vue.component('create-member', require('./components/browse_clubs/CreateMember.vue').default);
 Vue.component('edit-member', require('./components/browse_clubs/EditMember.vue').default);
+Vue.component('free-agent', require('./components/club_members/AddFreeAgent.vue').default);
+
 
 /* REVIEWED BOOKS*/
 Vue.component('available-reports-club', require('./components/club_reports/AvailableReportsClub.vue').default);

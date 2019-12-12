@@ -29,9 +29,14 @@ Route::get('/selectclubr', 'clubs\SelectClubRController@index')->name('selectclu
 
 /* MEMBERS */
 Route::resource('/clubs/{club}/members', 'clubs\MembersController');
+
+/* DELETE MEMBER FROM CLUB BUT NOT FROM DATABASE */
 Route::patch('/clubs/{club}/deletemember/{id}', 'clubs\MembersController@delete')->name('members.changest');
 Route::put('/clubs/{club}/deletemember/{id}', 'clubs\MembersController@delete')->name('members.changest');
 Route::get('/clubs/{club}/deletemember/{id}', 'clubs\MembersController@delete')->name('members.changest');
+
+/* MAKE FREE AGENT JOIN A NEW CLUB*/
+Route::resource('/clubs/{clubs}/freeagent', 'clubs\FreeAgentController');
 
 /* PAYMENTS */
 Route::resource('/clubs/{club}/members/{id}/payments', 'clubs\PagosController');
