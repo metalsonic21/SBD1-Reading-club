@@ -7333,6 +7333,7 @@ __webpack_require__.r(__webpack_exports__);
     return {
       member: {},
       date: null,
+      prevdate: null,
       club: null,
       idmember: null,
       idpay: null
@@ -7359,6 +7360,7 @@ __webpack_require__.r(__webpack_exports__);
       console.log(res.data);
       _this.member = res.data.data;
       _this.date = res.data.pago.fec_emi;
+      _this.prevdate = res.data.pago.fec_emi;
     })["catch"](function (e) {
       console.log(e);
     });
@@ -7387,11 +7389,13 @@ __webpack_require__.r(__webpack_exports__);
       var params = {
         date: this.date,
         club: this.club,
-        member: this.idmember
+        member: this.idmember,
+        prevdate: this.prevdate
       };
       console.log(params);
       axios.put("/clubs/".concat(idclub, "/members/").concat(idmember, "/payments/").concat(idpay), params).then(function (res) {
-        console.log(res.data); //window.location = `/clubs/${id}/members/${ide}/payments`;
+        //console.log(res.data);
+        window.location = "/clubs/".concat(idclub, "/members/").concat(idmember, "/payments");
       })["catch"](function (e) {
         console.log(e);
       });

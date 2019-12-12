@@ -52,7 +52,7 @@ class PagosController extends Controller
         $pago->id_fec_mem = $membresia[0]->fec_i;
         $pago->id_club = $request->club;
         $pago->id_lec = $request->member;
-        $pago->fec_emi = date('Y-m-d');
+        $pago->fec_emi = $request->date;
         $pago->save();
     }
 
@@ -95,12 +95,10 @@ class PagosController extends Controller
     public function update(Request $request)
     {
         $membresia = DB::select(DB::raw("SELECT fec_i FROM sjl_membresias WHERE fec_f IS NULL AND id_lec = '$request->member'"));
-        $pago = new Pago();
-        $pago->id_fec_mem = $membresia[0]->fec_i;
-        $pago->id_club = $request->club;
-        $pago->id_lec = $request->member;
-        $pago->fec_emi = $request->date;
-        $pago->save();
+        Pago::where(['id_fec_mem'=>$membresia[0]->fec_i,'id_club'=>$request->club,'id_lec'=>$request->member,'fec_emi'=>$request->prevdate])->update(array(
+            'fec_emi'=> $request->date,
+        ));
+        
     }
 
     /**

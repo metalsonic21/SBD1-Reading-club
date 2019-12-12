@@ -58,6 +58,7 @@ export default {
         return {
             member: {},
             date: null,
+            prevdate: null,
             club: null,
             idmember: null,
             idpay: null,
@@ -91,6 +92,7 @@ export default {
                 console.log(res.data);
                 this.member = res.data.data;
                 this.date = res.data.pago.fec_emi;
+                this.prevdate = res.data.pago.fec_emi;
             }).catch(e => {
                 console.log(e);
             })
@@ -127,14 +129,15 @@ export default {
                 date: this.date,
                 club: this.club,
                 member: this.idmember,
+                prevdate: this.prevdate,
             };
 
             console.log(params);
 
             axios.put(`/clubs/${idclub}/members/${idmember}/payments/${idpay}`, params)
                 .then(res => {
-                    console.log(res.data);
-                    //window.location = `/clubs/${id}/members/${ide}/payments`;
+                    //console.log(res.data);
+                    window.location = `/clubs/${idclub}/members/${idmember}/payments`;
                 }).catch(e => {
                     console.log(e);
                 })
