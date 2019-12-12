@@ -88,50 +88,37 @@
 export default {
     data() {
         return {
-            isbn: null,
-            titulo_ori: null,
-            titulo_esp: null,
-            tema_princ: null,
-            sinop: null,
-            n_pag: null,
-            subg: null,
-            subgeneros: [{
+            id: '',
+            nombre: null,
+            resumen: null,
+            costo: null,
+            fecha: null,
+            hora_i: null,
+            hora_f: null,
+            ObraBase: [{
                 value: null,
                 text: 'Seleccionar'
             }],
-            fec_pub: null,
-            editorial: null,
-            editoriales: [{
+            lugar: [{
                 value: null,
                 text: 'Seleccionar'
             }],
-            prev: null,
             wants_to_add: false,
             wants_to_edit: false,
-            nombre: null,
-            tipo: null,
-            tipos: [{
-                value: null,
-                text: 'Seleccionar'
-            }],
-            titulo: null,
-            selected: null,
-                options: [
-                    { value: null, text: 'Por favor elija una obra base' },
-                    { value: 'Novela 1', text: 'Novela 1' },
-                    { value: 'Epica 1', text: 'Epica 1' },
-                    { value: 'Narrativa 1', text: 'Narrativa 1' },
-                    { value: 'Poemario 1', text: 'Poemario 1' },
-                ],
-                selected2: null,
-                options2: [
-                    { value: null, text: 'Por favor elija un lugar' },
-                    { value: 'Petare', text: 'Petare' },
-                    { value: 'Tierra de nadie 420', text: 'Tierra de nadie 420' },
-                    { value: 'Grama de Letras UCAB', text: 'Grama de Letras UCAB' },
-                    { value: 'Poemario 1', text: 'Poemario 1' }
-                    ]
         }
+    },
+    created() {
+        axios.get('castplays/create')
+            .then(res => {
+                this.editoriales = res.data.data;
+                this.generos = res.data.genres;
+                this.subgbackup = res.data.sg;
+                this.libros = res.data.prev;
+
+                console.log (this.libros.findIndex(isbn => isbn.isbn === 21354)!=-1);
+            }).catch(e => {
+                console.log(e);
+            })
     },
     methods: {
         showAddForm() {

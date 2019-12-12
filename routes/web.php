@@ -41,10 +41,6 @@ Route::resource('/clubs/{clubs}/freeagent', 'clubs\FreeAgentController');
 /* PAYMENTS */
 Route::resource('/clubs/{club}/members/{id}/payments', 'clubs\PagosController');
 
-/* FAVORITE BOOKS */
-
-Route::resource('clubs/{club}/members/{id}/favorites', 'books\FavoriteBooksController');
-
 /*GROUPS*/
 Route::resource('/browsegroups', 'groups\BrowseGroupsController');
 Route::resource('/managemembersg', 'groups\GroupMembersController');
@@ -60,11 +56,15 @@ Route::get('/managemeetings/calendar', 'meetings\MeetingsController@calendar')->
 Route::resource('/books', 'books\BooksController');
 Route::resource('/books/{isbn}/structure', 'books\StructuresController');
 
+/* FAVORITE BOOKS */
+Route::resource('/clubs/{club}/members/{id}/favorites', 'books\FavoriteBooksController');
+
 /*THEATER_PLAYS*/
 Route::get('/playsclubs', 'theater_plays\PlaysClubsController@index')->name('playsclubs');
-Route::resource('/castplays', 'theater_plays\CastPlaysController');
+Route::get('/castplays/{id}','theater_plays\CastPlaysController@obrasclub');
 Route::get('charactercast/character_add', 'theater_plays\CastPlaysController@add'); 
 Route::get('/charactercast', 'theater_plays\CharacterCastController@index')->name('charactercast');
 Route::get('/earningplays', 'theater_plays\EarningPlaysController@index')->name('earningplays');
 Route::get('/browseplays', 'theater_plays\BrowsePlaysController@index')->name('browseplays');
 Route::get('/charactercastadd', 'theater_plays\CharacterCastAddController@index')->name('charactercastadd');
+Route::resource('/castplays', 'theater_plays\CastPlaysController');

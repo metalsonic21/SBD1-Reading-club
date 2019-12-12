@@ -1,0 +1,2 @@
+insert into sjl_obras values(nextval('id_obras'),'Resmasteripollo 1','Erase una vez en un convento de monjas asesinas un pollo, el cual estaba a punto de ser asesinado cuando...',200,TO_TIMESTAMP('01:22:00','HH:MI:SS'),true,2);
+insert into sjl_obras values(nextval('id_obras'),'Resmasteripollo 2','El pollo ahora mata monjitas y curas...',200,TO_TIMESTAMP('01:40:00','HH:MI:SS'),true,2);

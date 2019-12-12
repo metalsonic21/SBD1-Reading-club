@@ -123,30 +123,31 @@ class BooksController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
     public function edit(Request $request, Book $book)
     {   
 
         if($request->ajax()){
-            $edit = DB::select( DB::raw("SELECT nom FROM sjl_editoriales WHERE id = '$book->id_edit'"))[0];
-            $book->editorial = $edit->nom;
-    
-            $editoriales = DB::select( DB::raw("SELECT id as value , nom as text FROM sjl_editoriales"));
-    
-            $generos = DB::select( DB::raw("SELECT id as value, nom as text FROM sjl_subgeneros WHERE id_subg IS NULL"));
-            $currentgenero = DB::select(DB::raw("SELECT x.id_lib, (
-                SELECT sg.nom FROM sjl_subgeneros sg WHERE (x.id_gen = sg.id)
-            )as genname, x.id_gen
-                FROM sjl_generos_libros x WHERE x.id_lib = '$book->isbn' AND (
-                SELECT sg.id FROM sjl_subgeneros sg WHERE (x.id_gen = sg.id) AND (sg.tipo LIKE 'SG%')
-            ) IS NULL"));
-            $aux = $currentgenero[0]->id_gen;
-            $sg = DB::select( DB::raw("SELECT id || '-' || id_subg as value, nom as text FROM sjl_subgeneros WHERE id_subg IS NOT NULL"));
-                    
-            $currentsubg = DB::select(DB::raw("SELECT sg.id_gen from sjl_generos_libros sg WHERE sg.id_lib = '$book->isbn' AND sg.id_gen<>'$aux'"));
-            $prev = DB::select( DB::raw("SELECT isbn FROM sjl_libros"));
+            $gen = NULL;
+            $subgen = NULL;
+
+            $editoriales = DB::select(DB::raw("SELECT id as value, nom as text from sjl_editoriales"));
+            $generos = DB::select(DB::raw("SELECT id as value, nom as text from sjl_subgeneros WHERE id_subg IS NULL"));
+            $currentgenero = DB::select(DB::raw("SELECT g.nom as text, g.id as value from sjl_subgeneros g, sjl_generos_libros gl WHERE gl.id_lib = '$book->isbn' AND gl.id_gen = g.id AND g.id_subg IS NULL"));
+
+            if ($currentgenero){
+                $gen = $currentgenero[0]->value;
+            }
+
+            $sg = DB::select(DB::raw("SELECT g.nom as text, g.id_subg || '-' || g.id as value from sjl_subgeneros g WHERE g.id_subg IS NOT NULL"));
+            $currentsubg = DB::select(DB::raw("SELECT g.nom as text, g.id_subg || '-' || g.id as value from sjl_subgeneros g, sjl_generos_libros gl WHERE gl.id_lib = '$book->isbn' AND gl.id_gen = g.id AND g.id_subg IS NOT NULL"));
             
-            return Response::json(array('data'=>$book,'editoriales'=>$editoriales,'generos'=>$generos, 'currentg'=>$aux
-            ,'subgeneros'=>$sg,'currentsubg'=>$currentsubg[0]->id_gen,'prev'=>$prev));
+            if ($currentsubg){
+                $subgen = $currentsubg[0]->value;
+            }
+
+            return Response::json(array('data'=>$book,'editoriales'=>$editoriales,'generos'=>$generos, 'currentg'=>$gen
+            ,'subgeneros'=>$sg,'currentsubg'=>$subgen));
         }
         else{
             return view('books.edit');
@@ -162,7 +163,8 @@ class BooksController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $book = Book::find($id);
+        $book = new Book();
+        $book->isbn = $request->isbn;
         $book->titulo_esp = $request->titulo_esp;
         $book->titulo_ori = $request->titulo_ori;
         $book->tema_princ = $request->tema_princ;
@@ -172,7 +174,19 @@ class BooksController extends Controller
         $book->id_edit = $request->editorial;
         $book->autor = $request->autor;
         $book->id_prev = $request->prev;
-        $book->save();
+        
+        Book::where('isbn',$request->oldisbn)->update(array(
+            'isbn'=> $book->isbn,
+            'titulo_esp'=>$book->titulo_esp,
+            'titulo_ori'=>$book->titulo_ori,
+            'tema_princ'=>$book->tema_princ,
+            'sinop'=>$book->sinop,
+            'n_pag'=>$book->n_pag,
+            'fec_pub'=>$book->fec_pub,
+            'id_edit'=>$book->id_edit,
+            'autor'=>$book->autor,
+            'id_prev'=>$book->id_prev,
+        ));
 
         DB::table('sjl_generos_libros')
         ->where('id_lib',$book->isbn)

@@ -1,27 +1,30 @@
 <?php
 
-namespace App\Http\Controllers\Clubs;
-
-use App\Http\Controllers\Controller;
+namespace App\Http\Controllers\clubs;
 use DB;
+use Response;
+use App\Models\Member;
+use App\Models\Membresia;
+use App\Models\Pago;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class SelectClubController extends Controller
+class FreeAgentController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request, $id)
     {
-        $clubs = DB::select( DB::raw("SELECT c.id, c.nom, c.fec_crea, (
-            SELECT nom from sjl_idiomas WHERE id = c.id_idiom 
-        ) idioma, (
-            SELECT p.nom from sjl_calles ca, sjl_urbanizaciones u, sjl_ciudades e, sjl_paises p WHERE ca.id = c.id_dir AND ca.id_urb = u.id AND u.id_ciudad = e.id AND e.id_pais = p.id
-        ) as direccion FROM sjl_clubes_lectura c"));
-        return view ('clubs.showlist', compact('clubs'));
-        //return $clubs;
+        if ($request->ajax()){
+            $freeagents = DB::select(DB::raw("SELECT doc_iden as documento_de_identidad, nom1 as nombre, ape1 as apellido, fec_nac as fecha_de_nacimiento FROM sjl_lectores WHERE id_club IS NULL"));
+            return Response::json(array('freeagents'=>$freeagents));
+            }
+            else{
+                return view('clubs.freeagent');
+        }
     }
 
     /**
@@ -76,7 +79,25 @@ class SelectClubController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        Member::where('doc_iden',$request->selected)->update(array(
+            'id_club'=> $id,
+        ));
+
+        $today = date('Y-m-d');
+
+        $mship = new Membresia();
+        $mship->fec_i = $today;
+        $mship->id_club = $id;
+        $mship->id_lec = $request->selected;
+        $mship->estatus = 'A';
+        $mship->save();
+
+        $pago = new Pago();
+        $pago->id_fec_mem = $mship->fec_i;
+        $pago->id_club = $id;
+        $pago->id_lec = $request->selected;
+        $pago->fec_emi = $today;
+        $pago->save();
     }
 
     /**

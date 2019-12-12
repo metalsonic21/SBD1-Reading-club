@@ -30,9 +30,17 @@ Vue.component('edit-club', require('./components/browse_clubs/Edit.vue').default
 Vue.component('club-members', require('./components/club_members/ClubMembers.vue').default); //reports
 Vue.component('browse-members', require('./components/club_members/BrowseMembers.vue').default); //crud members
 
+/* PAYMENTS */
+Vue.component('create-payment', require('./components/club_members/CreatePayment.vue').default);
+Vue.component('edit-payment', require('./components/club_members/EditPayment.vue').default); 
+
 /* CRUD MEMBERS */
 Vue.component('create-member', require('./components/browse_clubs/CreateMember.vue').default);
 Vue.component('edit-member', require('./components/browse_clubs/EditMember.vue').default);
+Vue.component('free-agent', require('./components/club_members/AddFreeAgent.vue').default);
+
+/* FAVORITE BOOKS */
+Vue.component('favorite-books', require('./components/books/Favorites.vue').default);
 
 /* REVIEWED BOOKS*/
 Vue.component('available-reports-club', require('./components/club_reports/AvailableReportsClub.vue').default);
@@ -56,8 +64,6 @@ Vue.component('books-create', require('./components/books/Create.vue').default);
 Vue.component('books-edit', require('./components/books/Edit.vue').default);
 Vue.component('struct-create', require('./components/books/StructAdd.vue').default);
 Vue.component('struct-edit', require('./components/books/StructEdit.vue').default);
-
-Vue.component('genres', require('./components/books/Genres.vue').default);
 
 /*THEATER PLAYS*/
 Vue.component('plays-clubs', require('./components/theater_plays/PlaysClubs.vue').default);
