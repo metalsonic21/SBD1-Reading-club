@@ -27,7 +27,7 @@ CREATE TABLE SJL_lectores (
 CREATE TABLE SJL_grupos_lectura (
     id                	SERIAL NOT NULL,
     id_club           	INTEGER NOT NULL,
-    nom               	VARCHAR(20) NOT NULL,
+    nom               	VARCHAR(40) NOT NULL,
     tipo 				VARCHAR(2) NOT NULL,
     dia_sem           	INTEGER NOT NULL,
     hora_i            	TIME NOT NULL,
