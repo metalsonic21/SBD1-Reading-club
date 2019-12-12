@@ -50,7 +50,7 @@
                                                         <b-link href="/clubs/{{$club->id}}/members" class="btn btn-default">Seleccionar</b-link>
                                                     @endif
                                                     @if ($current == 2)
-                                                        <b-link href="#" class="btn btn-default">Seleccionar</b-link>
+                                                        <b-link href="/clubs/{{$club->id}}/groups" class="btn btn-default">Seleccionar</b-link>
                                                     @endif
                                                 </td>
                                                 </tr>

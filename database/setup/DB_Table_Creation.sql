@@ -30,8 +30,8 @@ CREATE TABLE SJL_grupos_lectura (
     nom               	VARCHAR(20) NOT NULL,
     tipo 				VARCHAR(2) NOT NULL,
     dia_sem           	INTEGER NOT NULL,
-    hora_i            	DATE NOT NULL,
-    hora_f            	DATE NOT NULL,
+    hora_i            	TIME NOT NULL,
+    hora_f            	TIME NOT NULL,
     CONSTRAINT grupos_lectura_pk PRIMARY KEY (id,id_club)
 );
 
