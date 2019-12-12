@@ -7946,54 +7946,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
     console.log('Component mounted.');
@@ -84562,7 +84514,7 @@ var render = function() {
                           [
                             _vm._m(2),
                             _vm._v(
-                              "\n                                        Crear obra de teatro\n                                    "
+                              "\r\n                                        Crear obra de teatro\r\n                                    "
                             )
                           ]
                         )
@@ -84613,7 +84565,7 @@ var render = function() {
                                       },
                                       [
                                         _vm._v(
-                                          " Detalles \n                                                        "
+                                          " Detalles \r\n                                                        "
                                         )
                                       ]
                                     ),
@@ -84636,7 +84588,7 @@ var render = function() {
                                       },
                                       [
                                         _vm._v(
-                                          " Presentaciones \n                                                        "
+                                          " Presentaciones \r\n                                                        "
                                         )
                                       ]
                                     ),
@@ -84656,7 +84608,7 @@ var render = function() {
                                           },
                                           [
                                             _vm._v(
-                                              " Ver Elenco \n                                                        "
+                                              " Ver Elenco \r\n                                                        "
                                             )
                                           ]
                                         )
@@ -84995,7 +84947,7 @@ var render = function() {
                                 ])
                               ]),
                               _vm._v(
-                                "\n                                        Agregar Personaje\n                                    "
+                                "\r\n                                        Agregar Personaje\r\n                                    "
                               )
                             ]
                           )
@@ -85055,7 +85007,7 @@ var render = function() {
                                       },
                                       [
                                         _vm._v(
-                                          " Datos Personaje \n                                                        "
+                                          " Datos Personaje \r\n                                                        "
                                         )
                                       ]
                                     )
@@ -85212,7 +85164,7 @@ var render = function() {
                           [
                             _vm._m(2),
                             _vm._v(
-                              "\n                                        Añadir nuevo personaje\n                                    "
+                              "\r\n                                        Añadir nuevo personaje\r\n                                    "
                             )
                           ]
                         )
@@ -85270,7 +85222,7 @@ var render = function() {
                                       },
                                       [
                                         _vm._v(
-                                          " Datos Personaje \n                                                        "
+                                          " Datos Personaje \r\n                                                        "
                                         )
                                       ]
                                     )
@@ -85491,7 +85443,7 @@ var render = function() {
                                       },
                                       [
                                         _vm._v(
-                                          " Detalles \n                                                        "
+                                          " Detalles \r\n                                                        "
                                         )
                                       ]
                                     )
@@ -85643,109 +85595,9 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c("div", { staticClass: "content" }, [
-      _c("div", { staticClass: "container-fluid" }, [
-        _c("div", { staticClass: "row" }, [
-          _c("div", { staticClass: "col-md-12" }, [
-            _c("div", { staticClass: "card" }, [
-              _vm._m(0),
-              _vm._v(" "),
-              _c("div", { staticClass: "card-body" }, [
-                _c("div", { staticClass: "row" }, [
-                  _c("div", { staticClass: "col-lg-12" }, [
-                    _c("h6", { staticClass: "text-center" }, [
-                      _vm._v("Seleccione un club de lectura")
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "table-responsive table-sales" }, [
-                      _c("table", { staticClass: "table" }, [
-                        _vm._m(1),
-                        _vm._v(" "),
-                        _c("tbody", [
-                          _c("tr", [
-                            _c("td", { staticClass: "text-center" }, [
-                              _vm._v("Readaholics")
-                            ]),
-                            _vm._v(" "),
-                            _c(
-                              "td",
-                              { staticClass: "td-actions text-center" },
-                              [
-                                _c(
-                                  "b-link",
-                                  { attrs: { href: "/castplays" } },
-                                  [
-                                    _c(
-                                      "button",
-                                      {
-                                        staticClass: "btn btn-default",
-                                        attrs: {
-                                          type: "button",
-                                          rel: "tooltip"
-                                        }
-                                      },
-                                      [
-                                        _vm._v(
-                                          " Ver Obras \n                                                        "
-                                        )
-                                      ]
-                                    )
-                                  ]
-                                )
-                              ],
-                              1
-                            )
-                          ])
-                        ])
-                      ])
-                    ])
-                  ])
-                ])
-              ])
-            ])
-          ])
-        ])
-      ])
-    ])
-  ])
+  return _c("div")
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      { staticClass: "card-header card-header-log card-header-icon" },
-      [
-        _c("div", { staticClass: "card-icon" }, [
-          _c("i", { staticClass: "material-icons" }, [_vm._v("theaters")])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "row" }, [
-          _c("div", { staticClass: "col-lg-10" }, [
-            _c("h4", { staticClass: "card-title" }, [
-              _vm._v("Obras acutuadas por club")
-            ])
-          ])
-        ])
-      ]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("thead", [
-      _c("tr", [
-        _c("th", { staticClass: "text-center" }, [_vm._v("Clubes de lectura")]),
-        _vm._v(" "),
-        _c("th", { staticClass: "text-center" }, [_vm._v("Acción")])
-      ])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -101364,8 +101216,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\Hyper\Documents\GitHub\SBD1-Reading-club\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\Hyper\Documents\GitHub\SBD1-Reading-club\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! E:\SBD1-Reading-club\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! E:\SBD1-Reading-club\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
