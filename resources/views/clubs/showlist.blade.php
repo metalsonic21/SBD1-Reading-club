@@ -46,8 +46,13 @@
                                                     <td class="text-center">{{$club->idioma}}</td>
                                                     <td class="text-center">{{$club->direccion}}</td>
                                                     <td class="td-actions text-center">
-                                                    <b-link href="/clubs/{{$club->id}}/members" class="btn btn-default">Seleccionar</b-link>
-                                                    </td>
+                                                    @if ($current == 1)
+                                                        <b-link href="/clubs/{{$club->id}}/members" class="btn btn-default">Seleccionar</b-link>
+                                                    @endif
+                                                    @if ($current == 2)
+                                                        <b-link href="#" class="btn btn-default">Seleccionar</b-link>
+                                                    @endif
+                                                </td>
                                                 </tr>
                                                 @endforeach
 

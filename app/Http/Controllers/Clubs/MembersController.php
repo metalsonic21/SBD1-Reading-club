@@ -218,9 +218,73 @@ class MembersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($club, $id, Request $request)
     {
-        //
+        $representante = '';
+        $currentUMR = '';
+        $currentCMR = '';
+        $currentZMR = '';
+        $currentPMR = '';
+        $currentSMR = '';
+        $member = Member::find($id);
+
+        if ($member->genero == 'M')
+            $member->genero = "Masculino";
+        else $member->genero = "Femenino";
+
+        $telefonos = DB::select(DB::raw("SELECT cod_pais || '' || cod_area || '' || num as numero
+        FROM sjl_telefonos WHERE id_lector = '$id'"));
+
+        $currentP = DB::select(DB::raw("SELECT nom FROM sjl_paises WHERE id = '$member->id_nac'"));
+        $currentPM = $currentP[0]->nom;
+
+        $currentCMB = DB::select(DB::raw("SELECT e.nom as text, e.id || '-' || e.id_pais as value from sjl_calles ca, sjl_urbanizaciones u, sjl_ciudades e WHERE ca.id = '$member->id_calle' AND ca.id_urb = u.id AND u.id_ciudad = e.id"));
+        $currentCM = $currentCMB[0]->text;
+
+        $currentUMB = DB::select(DB::raw("SELECT u.nom as nombre from sjl_calles ca, sjl_urbanizaciones u WHERE ca.id = '$member->id_calle' AND ca.id_urb = u.id"));
+        $currentUM = $currentUMB[0]->nombre;
+            
+        $currentSMB = DB::select(DB::raw("SELECT ca.nom as nombre from sjl_calles ca WHERE ca.id = '$member->id_calle'"));
+        $currentSM = $currentSMB[0]->nombre;
+
+        $currentZMB = DB::select(DB::raw("SELECT cod_post as code from sjl_calles WHERE id = '$member->id_calle'"));
+        $currentZM = $currentZMB[0]->code;
+
+        $favbooks = DB::select(DB::raw("SELECT b.titulo_esp, b.autor, l.pref FROM sjl_libros b, sjl_lista_favoritos l WHERE l.id_lec = '$id' AND l.id_lib = b.isbn ORDER BY l.pref"));
+        
+        $Tedad = DB::select(DB::raw("SELECT DATE_PART('year', (SELECT CURRENT_DATE)::date) - DATE_PART('year', '$member->fec_nac'::date) as edad"));
+        $edad = $Tedad[0]->edad;
+
+        /* REPRESENTANTE */
+
+        if ($edad < 18){
+            if ($member->id_rep != null)
+                $representante = Representante::find($member->id_rep);
+            else $representante = Member::find($member->id_rep_lec);
+
+            $currentPR = DB::select(DB::raw("SELECT p.nom as text, p.id as value from sjl_calles ca, sjl_urbanizaciones u, sjl_ciudades e, sjl_paises p WHERE ca.id = '$representante->id_dir' AND ca.id_urb = u.id AND u.id_ciudad = e.id AND e.id_pais = p.id"));
+            $currentPMR = $currentPR[0]->text;
+    
+            $currentCMBR = DB::select(DB::raw("SELECT e.nom as text, e.id || '-' || e.id_pais as value from sjl_calles ca, sjl_urbanizaciones u, sjl_ciudades e WHERE ca.id = '$representante->id_dir' AND ca.id_urb = u.id AND u.id_ciudad = e.id"));
+            $currentCMR = $currentCMBR[0]->text;
+    
+            $currentUMBR = DB::select(DB::raw("SELECT u.nom as nombre from sjl_calles ca, sjl_urbanizaciones u WHERE ca.id = '$representante->id_dir' AND ca.id_urb = u.id"));
+            $currentUMR = $currentUMBR[0]->nombre;
+                
+            $currentSMBR = DB::select(DB::raw("SELECT ca.nom as nombre from sjl_calles ca WHERE ca.id = '$representante->id_dir'"));
+            $currentSMR = $currentSMBR[0]->nombre;
+    
+            $currentZMBR = DB::select(DB::raw("SELECT cod_post as code from sjl_calles WHERE id = '$representante->id_dir'"));
+            $currentZMR = $currentZMBR[0]->code;
+    
+
+        }
+
+        return view ('clubs.showmember')->with('member', $member)->with('telefonos', $telefonos)->with('pais', $currentPM)
+        ->with('ciudad', $currentCM)->with('urbanizacion', $currentUM)->with('calle', $currentSM)->with('zipcode',$currentZM)
+        ->with('favorites',$favbooks)->with('edad',$edad)->with('paisR', $currentPMR)
+        ->with('ciudadR', $currentCMR)->with('urbanizacionR', $currentUMR)->with('calleR', $currentSMR)
+        ->with('zipcodeR',$currentZMR)->with('representante',$representante);
     }
 
     /**

@@ -195,7 +195,7 @@ export default {
 
             axios.post(`/clubs/${id}/members/${ide}/favorites`, params)
                 .then(res => {
-                    //window.location = `/clubs/${path}/members`;
+                    window.location = `/clubs/${id}/members`;
 
                     console.log(res.data);
                 }).catch(e => {

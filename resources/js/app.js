@@ -17,8 +17,6 @@ Vue.component('active-presentations', require('./components/home/ActivePresentat
 
 /*BROWSE CLUBS*/
 Vue.component('browse-clubs', require('./components/browse_clubs/BrowseClubs.vue').default);
-Vue.component('select-club', require('./components/browse_clubs/SelectClub.vue').default);
-Vue.component('select-club-group', require('./components/browse_clubs/SelectClubG.vue').default);
 Vue.component('select-club-group-member', require('./components/browse_clubs/SelectClubGM.vue').default);
 Vue.component('select-club-group-meeting', require('./components/browse_clubs/SelectClubR.vue').default);
 
