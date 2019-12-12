@@ -26,7 +26,24 @@ Route::get('/selectclub', 'clubs\SelectClubController@index')->name('selectclub'
 Route::get('/selectclubg', 'clubs\SelectClubGController@index')->name('selectclub');
 Route::get('/selectclubgm', 'clubs\SelectClubGMController@index')->name('selectclub');
 Route::get('/selectclubr', 'clubs\SelectClubRController@index')->name('selectclub');
-Route::resource('/managemembers', 'clubs\MembersController');
+
+/* MEMBERS */
+Route::resource('/clubs/{club}/members', 'clubs\MembersController');
+
+/* DELETE MEMBER FROM CLUB BUT NOT FROM DATABASE */
+Route::patch('/clubs/{club}/deletemember/{id}', 'clubs\MembersController@delete')->name('members.changest');
+Route::put('/clubs/{club}/deletemember/{id}', 'clubs\MembersController@delete')->name('members.changest');
+Route::get('/clubs/{club}/deletemember/{id}', 'clubs\MembersController@delete')->name('members.changest');
+
+/* MAKE FREE AGENT JOIN A NEW CLUB*/
+Route::resource('/clubs/{clubs}/freeagent', 'clubs\FreeAgentController');
+
+/* PAYMENTS */
+Route::resource('/clubs/{club}/members/{id}/payments', 'clubs\PagosController');
+
+/* FAVORITE BOOKS */
+
+Route::resource('clubs/{club}/members/{id}/favorites', 'books\FavoriteBooksController');
 
 /*GROUPS*/
 Route::resource('/browsegroups', 'groups\BrowseGroupsController');
