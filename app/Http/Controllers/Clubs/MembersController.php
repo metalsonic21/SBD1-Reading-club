@@ -340,7 +340,7 @@ class MembersController extends Controller
         $aux = 0;
 
         if ($test)
-        $aux = $test[0]->id;
+            $aux = $test[0]->id;
         $testcalle = DB::select(DB::raw("SELECT id from sjl_calles WHERE nom = '$request->calle' AND id_urb = '$aux'"));
 
             if (!$testcalle){
