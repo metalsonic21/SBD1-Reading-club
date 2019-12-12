@@ -44,7 +44,7 @@
                                                 <tr>
                                                     <td class="text-center">{{$club->nom}}</td>
                                                     <td class="td-actions text-center">
-                                                    <b-link href="/castplays/{{$club->id}}"> <button type="button" rel="tooltip" class="btn btn-default"> Ver Obras 
+                                                    <b-link href="/castplayss/{{$club->id}}"> <button type="button" rel="tooltip" class="btn btn-default"> Ver Obras 
                                                         </button></b-link>
                                                     </td>
                                                 </tr>

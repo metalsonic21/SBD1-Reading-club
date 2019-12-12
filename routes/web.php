@@ -61,7 +61,7 @@ Route::resource('/clubs/{club}/members/{id}/favorites', 'books\FavoriteBooksCont
 
 /*THEATER_PLAYS*/
 Route::get('/playsclubs', 'theater_plays\PlaysClubsController@index')->name('playsclubs');
-Route::get('/castplays/{id}','theater_plays\CastPlaysController@obrasclub');
+Route::get('/castplayss/{id}','theater_plays\CastPlaysController@obrasclub');
 Route::get('charactercast/character_add', 'theater_plays\CastPlaysController@add'); 
 Route::get('/charactercast', 'theater_plays\CharacterCastController@index')->name('charactercast');
 Route::get('/earningplays', 'theater_plays\EarningPlaysController@index')->name('earningplays');
