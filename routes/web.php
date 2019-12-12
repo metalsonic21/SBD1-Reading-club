@@ -42,7 +42,7 @@ Route::resource('/clubs/{clubs}/freeagent', 'clubs\FreeAgentController');
 Route::resource('/clubs/{club}/members/{id}/payments', 'clubs\PagosController');
 
 /*GROUPS*/
-Route::resource('/browsegroups', 'groups\BrowseGroupsController');
+Route::resource('/clubs/{club}/groups', 'groups\BrowseGroupsController');
 Route::resource('/managemembersg', 'groups\GroupMembersController');
 Route::get('/selectgroup', 'groups\SelectGroupController@index')->name('selectgroup');
 Route::get('/selectgroupr', 'groups\SelectGroupRController@index')->name('selectgroup');
