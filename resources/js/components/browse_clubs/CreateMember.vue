@@ -27,7 +27,7 @@
                                             <b-col cols="4">
                                                 <label for="dociden">Documento de identidad</label>
                                                 <b-form-input type="text" v-model="member.dociden" id="dociden" name="dociden" placeholder="Documento de identidad"></b-form-input>
-                                                <b-form-invalid-feedback :state="validateD">El documento de identidad debe ser un número entero de 8 caracteres</b-form-invalid-feedback>
+                                                <b-form-invalid-feedback :state="validateD">El documento de identidad debe ser un número entero de 8 caracteres que no esté registrado anteriormente en la base de datos</b-form-invalid-feedback>
                                             </b-col>
 
                                             <b-col cols="4">
@@ -320,6 +320,7 @@ export default {
             }],
             ciudadesfiltered: [{}],
             ciudadesfilteredR: [{}],
+            lectores: [{}],
             today: null,
 
         }
@@ -333,6 +334,7 @@ export default {
             .then(res => {
                 this.paises = res.data.countries;
                 this.ciudadesbackup = res.data.cities;
+                this.lectores = res.data.lectores;
             }).catch(e => {
                 console.log(e);
             })
@@ -345,6 +347,15 @@ export default {
                 verif = false;
             if (this.member.dociden.toString().indexOf(".") != -1 || this.member.dociden<0)
                 verif = false;
+            /* Already exists*/
+            let i = 0;
+            for (i = 0; i<this.lectores.length; i++){
+                if (this.lectores[i].doc_iden == this.member.dociden){
+                    verif = false;
+                    break;
+                }
+            }
+            console.log(verif);
             return verif;
         },
 
@@ -613,7 +624,7 @@ export default {
             let msg = '';
             /* MEMBER */
 
-            if (this.validateD == false) msg = msg + "El campo Documento de Identidad debe ser un número entero positivo de no más de 8 caracteres\n";
+            if (this.validateD == false) msg = msg + "El campo Documento de Identidad debe ser un número entero positivo de no más de 8 caracteres que no esté registrado anteriormente en la base de datos\n";
             if (this.validateN == false) msg = msg + "El campo Nombre de Lector no puede estar vacío ni tener más de 20 caracteres\n";
             if (this.validateSN == false) msg = msg + "El campo Segundo Nombre de Lector no puede tener más de 20 caracteres\n";
             if (this.validateA == false) msg = msg + "El campo Apellido de Lector no puede estar vacío ni tener más de 20 caracteres\n";

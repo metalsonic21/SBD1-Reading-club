@@ -37,7 +37,8 @@ class MembersController extends Controller
         if ($request->ajax()){
         $countries = DB::select(DB::raw("SELECT id as value, nom as text from sjl_paises"));
         $cities = DB::select( DB::raw("SELECT id || '-' || id_pais as value, nom as text FROM sjl_ciudades"));
-        return Response::json(array('countries'=>$countries,'cities'=>$cities));
+        $lectores = Member::all();
+        return Response::json(array('countries'=>$countries,'cities'=>$cities,'lectores'=>$lectores));
         }
         else{
             return view('clubs.createmember');
