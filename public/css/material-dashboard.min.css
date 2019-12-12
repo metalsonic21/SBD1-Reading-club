@@ -13405,10 +13405,10 @@ fieldset[disabled] .form-group .form-control {
 .pagination>.page-item.active>span,
 .pagination>.page-item.active>span:focus,
 .pagination>.page-item.active>span:hover {
-    background-color: #9c27b0;
-    border-color: #9c27b0;
+    background-color: #8C7F7F;
+    border-color: #8C7F7F;
     color: #fff;
-    box-shadow: 0 4px 5px 0 rgba(156, 39, 176, .14), 0 1px 10px 0 rgba(156, 39, 176, .12), 0 2px 4px -1px rgba(156, 39, 176, .2)
+    box-shadow: 0 4px 5px 0 rgba(131, 85, 77, .14), 0 1px 10px 0 rgba(131, 85, 77, .12), 0 2px 4px -1px rgba(131, 85, 77, .2)
 }
 
 .pagination.pagination-info>.page-item.active>a,

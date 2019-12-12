@@ -1,30 +1,31 @@
 <template>
-<div>
-    <div class="content">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="card">
-                        <div class="card-header card-header-log card-header-icon">
-                            <div class="card-icon">
-                                <i class="material-icons">add</i>
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-log card-header-icon">
+                        <div class="card-icon">
+                            <i class="material-icons">add</i>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-10">
+                                <h4 class="card-title">Añadir lector existente a club</h4>
                             </div>
-                            <div class="row">
-                                <div class="col-lg-10">
-                                    <h4 class="card-title">Añadir lector existente a club</h4>
-                                </div>
-                                <div class="col-lg-2">
+                            <div class="col-lg-2">
 
-                                </div>
                             </div>
                         </div>
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-lg-12">
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-lg-12">
+
+                                <div class="overflow-auto">
+
                                     <b-form @submit.prevent="add">
 
-                                        <b-table ref="selectableTable" selectable :select-mode="'single'" :items="items" :fields="fields" @row-selected="onRowSelected" responsive="lg">
-                                            <!-- Example scoped slot for select state illustrative purposes -->
+                                        <b-table selectable :select-mode="'single'" :items="items" :fields="fields" @row-selected="onRowSelected" responsive="lg" id="my-table" :per-page="perPage" :current-page="currentPage" small>
                                             <template v-slot:cell(seleccionado)="{ rowSelected }">
                                                 <template v-if="rowSelected">
                                                     <span aria-hidden="true">&check;</span>
@@ -36,13 +37,17 @@
                                                 </template>
                                             </template>
                                         </b-table>
+
+                                        <div class="d-flex flex-row-reverse bd-highlight">
+                                            <b-pagination v-model="currentPage" :total-rows="rows" :per-page="perPage" aria-controls="my-table"></b-pagination>
+
+                                        </div>
                                         <div class="d-flex flex-row-reverse bd-highlight">
                                             <b-button variant="default" @click="validateSelect">Continuar</b-button>
 
                                             <b-link class="btn btn-danger" href="/browseclubs">Cancelar</b-link>
                                         </div>
                                     </b-form>
-
                                 </div>
 
                             </div>
@@ -61,19 +66,14 @@
 export default {
     data() {
         return {
+            perPage: 10,
+            currentPage: 1,
             fields: ['seleccionado', 'documento_de_identidad', 'nombre', 'apellido', 'fecha_de_nacimiento'],
-            items: [{
-                documento_de_identidad: 123456,
-                nombre: 'Uno',
-                apellido: 'Dos',
-                fecha_de_nacimiento: '08-08-2019'
+            items: [
 
-            }],
-            selected: {},
-
+            ]
         }
     },
-
     created() {
         var path = window.location.pathname;
         path = path.replace(/\D/g, '');
@@ -85,6 +85,12 @@ export default {
                 console.log(e);
             })
     },
+    computed: {
+        rows() {
+            return this.items.length
+        }
+    },
+
     methods: {
         onRowSelected(items) {
             this.selected = items
@@ -114,11 +120,6 @@ export default {
                 alert("Seleccione un lector para agregar\n");
             }
         },
-
     }
 }
 </script>
-
-<style>
-
-</style>

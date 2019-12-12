@@ -6502,17 +6502,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
+      perPage: 10,
+      currentPage: 1,
       fields: ['seleccionado', 'documento_de_identidad', 'nombre', 'apellido', 'fecha_de_nacimiento'],
-      items: [{
-        documento_de_identidad: 123456,
-        nombre: 'Uno',
-        apellido: 'Dos',
-        fecha_de_nacimiento: '08-08-2019'
-      }],
-      selected: {}
+      items: []
     };
   },
   created: function created() {
@@ -6525,6 +6526,11 @@ __webpack_require__.r(__webpack_exports__);
     })["catch"](function (e) {
       console.log(e);
     });
+  },
+  computed: {
+    rows: function rows() {
+      return this.items.length;
+    }
   },
   methods: {
     onRowSelected: function onRowSelected(items) {
@@ -82849,19 +82855,19 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c("div", { staticClass: "content" }, [
-      _c("div", { staticClass: "container-fluid" }, [
-        _c("div", { staticClass: "row" }, [
-          _c("div", { staticClass: "col-md-12" }, [
-            _c("div", { staticClass: "card" }, [
-              _vm._m(0),
-              _vm._v(" "),
-              _c("div", { staticClass: "card-body" }, [
-                _c("div", { staticClass: "row" }, [
+  return _c("div", { staticClass: "content" }, [
+    _c("div", { staticClass: "container-fluid" }, [
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "col-md-12" }, [
+          _c("div", { staticClass: "card" }, [
+            _vm._m(0),
+            _vm._v(" "),
+            _c("div", { staticClass: "card-body" }, [
+              _c("div", { staticClass: "row" }, [
+                _c("div", { staticClass: "col-lg-12" }, [
                   _c(
                     "div",
-                    { staticClass: "col-lg-12" },
+                    { staticClass: "overflow-auto" },
                     [
                       _c(
                         "b-form",
@@ -82875,13 +82881,16 @@ var render = function() {
                         },
                         [
                           _c("b-table", {
-                            ref: "selectableTable",
                             attrs: {
                               selectable: "",
                               "select-mode": "single",
                               items: _vm.items,
                               fields: _vm.fields,
-                              responsive: "lg"
+                              responsive: "lg",
+                              id: "my-table",
+                              "per-page": _vm.perPage,
+                              "current-page": _vm.currentPage,
+                              small: ""
                             },
                             on: { "row-selected": _vm.onRowSelected },
                             scopedSlots: _vm._u([
@@ -82926,6 +82935,31 @@ var render = function() {
                               }
                             ])
                           }),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              staticClass:
+                                "d-flex flex-row-reverse bd-highlight"
+                            },
+                            [
+                              _c("b-pagination", {
+                                attrs: {
+                                  "total-rows": _vm.rows,
+                                  "per-page": _vm.perPage,
+                                  "aria-controls": "my-table"
+                                },
+                                model: {
+                                  value: _vm.currentPage,
+                                  callback: function($$v) {
+                                    _vm.currentPage = $$v
+                                  },
+                                  expression: "currentPage"
+                                }
+                              })
+                            ],
+                            1
+                          ),
                           _vm._v(" "),
                           _c(
                             "div",
@@ -84514,7 +84548,7 @@ var render = function() {
                           [
                             _vm._m(2),
                             _vm._v(
-                              "\r\n                                        Crear obra de teatro\r\n                                    "
+                              "\n                                        Crear obra de teatro\n                                    "
                             )
                           ]
                         )
@@ -84565,7 +84599,7 @@ var render = function() {
                                       },
                                       [
                                         _vm._v(
-                                          " Detalles \r\n                                                        "
+                                          " Detalles \n                                                        "
                                         )
                                       ]
                                     ),
@@ -84588,7 +84622,7 @@ var render = function() {
                                       },
                                       [
                                         _vm._v(
-                                          " Presentaciones \r\n                                                        "
+                                          " Presentaciones \n                                                        "
                                         )
                                       ]
                                     ),
@@ -84608,7 +84642,7 @@ var render = function() {
                                           },
                                           [
                                             _vm._v(
-                                              " Ver Elenco \r\n                                                        "
+                                              " Ver Elenco \n                                                        "
                                             )
                                           ]
                                         )
@@ -84947,7 +84981,7 @@ var render = function() {
                                 ])
                               ]),
                               _vm._v(
-                                "\r\n                                        Agregar Personaje\r\n                                    "
+                                "\n                                        Agregar Personaje\n                                    "
                               )
                             ]
                           )
@@ -85007,7 +85041,7 @@ var render = function() {
                                       },
                                       [
                                         _vm._v(
-                                          " Datos Personaje \r\n                                                        "
+                                          " Datos Personaje \n                                                        "
                                         )
                                       ]
                                     )
@@ -85164,7 +85198,7 @@ var render = function() {
                           [
                             _vm._m(2),
                             _vm._v(
-                              "\r\n                                        Añadir nuevo personaje\r\n                                    "
+                              "\n                                        Añadir nuevo personaje\n                                    "
                             )
                           ]
                         )
@@ -85222,7 +85256,7 @@ var render = function() {
                                       },
                                       [
                                         _vm._v(
-                                          " Datos Personaje \r\n                                                        "
+                                          " Datos Personaje \n                                                        "
                                         )
                                       ]
                                     )
@@ -85443,7 +85477,7 @@ var render = function() {
                                       },
                                       [
                                         _vm._v(
-                                          " Detalles \r\n                                                        "
+                                          " Detalles \n                                                        "
                                         )
                                       ]
                                     )
@@ -101216,8 +101250,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! E:\SBD1-Reading-club\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! E:\SBD1-Reading-club\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\Hyper\Documents\GitHub\SBD1-Reading-club\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\Hyper\Documents\GitHub\SBD1-Reading-club\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
