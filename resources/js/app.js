@@ -39,6 +39,8 @@ Vue.component('create-member', require('./components/browse_clubs/CreateMember.v
 Vue.component('edit-member', require('./components/browse_clubs/EditMember.vue').default);
 Vue.component('free-agent', require('./components/club_members/AddFreeAgent.vue').default);
 
+/* FAVORITE BOOKS */
+Vue.component('favorite-books', require('./components/books/Favorites.vue').default);
 
 /* REVIEWED BOOKS*/
 Vue.component('available-reports-club', require('./components/club_reports/AvailableReportsClub.vue').default);

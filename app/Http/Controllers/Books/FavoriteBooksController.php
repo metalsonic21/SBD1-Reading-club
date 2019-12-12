@@ -13,8 +13,15 @@ class FavoriteBooksController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        //
+    {        
+        if($request->ajax()){
+            $books = DB::select(DB::raw("SELECT isbn, titulo_esp as titulo_en_español, titulo_ori as titulo_original, fec_pub as fecha_de_publicacion, autor from sjl_libros"));
+            return Response::json(array('data'=>$books));
+    }
+    else{
+        return view('books.favorites');
+    }
+        //return $structure;
     }
 
     /**

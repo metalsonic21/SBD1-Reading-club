@@ -71,7 +71,8 @@ export default {
             fields: ['seleccionado', 'documento_de_identidad', 'nombre', 'apellido', 'fecha_de_nacimiento'],
             items: [
 
-            ]
+            ],
+            selected: [],
         }
     },
     created() {

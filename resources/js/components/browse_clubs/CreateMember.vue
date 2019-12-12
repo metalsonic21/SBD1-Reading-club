@@ -603,7 +603,7 @@ export default {
             axios.post(`/clubs/${path}/members`, params)
                 .then(res => {
                     //console.log(res.data);
-                    window.location = `/clubs/${path}/members`;
+                    window.location = `/clubs/${path}/members/${this.member.dociden}/favorites`;
                 }).catch(e => {
                     console.log(e);
                 })

@@ -56,6 +56,9 @@ Route::get('/managemeetings/calendar', 'meetings\MeetingsController@calendar')->
 Route::resource('/books', 'books\BooksController');
 Route::resource('/books/{isbn}/structure', 'books\StructuresController');
 
+/* FAVORITE BOOKS */
+Route::resource('/clubs/{club}/members/{id}/favorites', 'books\StructuresController');
+
 /*THEATER_PLAYS*/
 Route::get('/playsclubs', 'theater_plays\PlaysClubsController@index')->name('playsclubs');
 Route::get('/castplays/{id}','theater_plays\CastPlaysController@obrasclub');
