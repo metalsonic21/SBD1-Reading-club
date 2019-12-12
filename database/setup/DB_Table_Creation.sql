@@ -255,7 +255,8 @@ CREATE TABLE SJL_historicos_presentaciones (
     valor       NUMERIC(3),
     num_asist   INTEGER,
     id_obra     INTEGER NOT NULL,
-    CONSTRAINT hist_presentaciones_pk PRIMARY KEY (fec)
+    id_club     INTEGER NOT NULL
+    CONSTRAINT hist_presentaciones_pk PRIMARY KEY (fec,id_clubid_obra)
 );
 
 CREATE TABLE SJL_grupos_lectores (
@@ -364,6 +365,7 @@ ALTER TABLE SJL_obras ADD CONSTRAINT obras_local_fk FOREIGN KEY(id_local) REFERE
 ALTER TABLE SJL_personajes ADD CONSTRAINT personajes_obras_fk FOREIGN KEY(id_obra) REFERENCES SJL_obras(id);
 
 ALTER TABLE SJL_historicos_presentaciones ADD CONSTRAINT historicos_obras_fk FOREIGN KEY(id_obra) REFERENCES SJL_obras(id);
+ALTER TABLE SJL_historicos_presentaciones ADD CONSTRAINT historicos_obras_fk FOREIGN KEY(id_club) REFERENCES SJL_clubes(id);
 
 ALTER TABLE SJL_grupos_lectores ADD CONSTRAINT grupos_membrecias_fk FOREIGN KEY(id_fec_mem,id_club,id_lec) REFERENCES SJL_membresias(fec_i,id_lec,id_club);
 ALTER TABLE SJL_grupos_lectores ADD CONSTRAINT membrecias_grupos_fk FOREIGN KEY(id_grupo,id_club) REFERENCES SJL_grupos_lectura(id,id_club);

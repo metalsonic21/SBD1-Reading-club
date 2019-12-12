@@ -107,6 +107,19 @@ export default {
             wants_to_edit: false,
         }
     },
+    created() {
+        axios.get('castplays/create')
+            .then(res => {
+                this.editoriales = res.data.data;
+                this.generos = res.data.genres;
+                this.subgbackup = res.data.sg;
+                this.libros = res.data.prev;
+
+                console.log (this.libros.findIndex(isbn => isbn.isbn === 21354)!=-1);
+            }).catch(e => {
+                console.log(e);
+            })
+    },
     methods: {
         showAddForm() {
             this.wants_to_add = true;

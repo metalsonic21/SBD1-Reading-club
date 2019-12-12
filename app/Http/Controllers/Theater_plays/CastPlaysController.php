@@ -11,7 +11,6 @@ use App\Models\Play;
 class CastPlaysController extends Controller
 {
     public function index(Request $request){
-
         $plays = DB::select( DB::raw("SELECT id,nom,resum,costo,to_char(durac,'HH:MI:SS') duracion,estatus,id_local FROM sjl_obras"));
         return view('theater_plays.castplays',compact('plays'));
     }
@@ -21,8 +20,9 @@ class CastPlaysController extends Controller
     public function add() {
         return view('theater_plays.character_add');
     }
-    public function retrieve(){
-
+    public function obrasclub($id){
+        $plays = DB::select( DB::raw("SELECT id,nom,resum,costo,to_char(durac,'HH:MI:SS') duracion,estatus,id_local FROM sjl_obras WHERE (SELECT id_club FROM SJL_historicos_presentaciones)=$id"));
+        return view('theater_plays.castplays',compact('plays'));
     }
     /**
      * Remove the specified resource from storage.

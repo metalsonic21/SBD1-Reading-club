@@ -58,9 +58,10 @@ Route::resource('/books/{isbn}/structure', 'books\StructuresController');
 
 /*THEATER_PLAYS*/
 Route::get('/playsclubs', 'theater_plays\PlaysClubsController@index')->name('playsclubs');
-Route::resource('/castplays', 'theater_plays\CastPlaysController');
+Route::get('/castplays/{id}','theater_plays\CastPlaysController@obrasclub');
 Route::get('charactercast/character_add', 'theater_plays\CastPlaysController@add'); 
 Route::get('/charactercast', 'theater_plays\CharacterCastController@index')->name('charactercast');
 Route::get('/earningplays', 'theater_plays\EarningPlaysController@index')->name('earningplays');
 Route::get('/browseplays', 'theater_plays\BrowsePlaysController@index')->name('browseplays');
 Route::get('/charactercastadd', 'theater_plays\CharacterCastAddController@index')->name('charactercastadd');
+Route::resource('/castplays', 'theater_plays\CastPlaysController');
