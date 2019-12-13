@@ -5961,10 +5961,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -6005,9 +6001,12 @@ __webpack_require__.r(__webpack_exports__);
       this.selected = items;
     },
     add: function add() {
+      var _this2 = this;
+
       this.member = this.selected[0];
       axios.put("/clubs/".concat(this.club, "/groups/").concat(this.grupo, "/gmembers/").concat(this.member.documento_de_identidad)).then(function (res) {
-        console.log(res.data);
+        //console.log(res.data);
+        window.location = "/clubs/".concat(_this2.club, "/groups/").concat(_this2.grupo, "/gmembers");
       })["catch"](function (e) {
         console.log(e);
       });
@@ -82012,12 +82011,6 @@ var render = function() {
         ],
         1
       )
-    ]),
-    _vm._v(" "),
-    _c("p", [
-      _vm._v("\r\n        Selected Rows:"),
-      _c("br"),
-      _vm._v("\r\n        " + _vm._s(_vm.selected) + "\r\n    ")
     ])
   ])
 }

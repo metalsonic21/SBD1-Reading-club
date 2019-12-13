@@ -36,10 +36,6 @@
             </b-form>
         </div>
     </div>
-    <p>
-        Selected Rows:<br>
-        {{ selected }}
-    </p>
 </div>
 </template>
 
@@ -92,7 +88,8 @@ export default {
             this.member = this.selected[0];
             axios.put(`/clubs/${this.club}/groups/${this.grupo}/gmembers/${this.member.documento_de_identidad}`)
             .then(res => {
-                console.log(res.data);
+                //console.log(res.data);
+                window.location = `/clubs/${this.club}/groups/${this.grupo}/gmembers`;
             }).catch(e => {
                 console.log(e);
             })
