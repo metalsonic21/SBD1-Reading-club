@@ -188,6 +188,23 @@ class GroupMembersController extends Controller
                     $gl->save();                  
                 }
             }
+            Member::where('doc_iden',$dociden)->update(array(
+                'id_grup'=> $idgrupo,
+            ));
+    
+            $membresia = DB::select(DB::raw("SELECT fec_i FROM sjl_membresias WHERE fec_f IS NULL AND id_lec = '$dociden' AND id_club = '$idclub'"));
+            $cm = $membresia[0]->fec_i;
+            
+            /* MEMBERSHIP FOR GROUP */
+    
+            $gl = new Grupos_Lectores();
+            $gl->id_fec_i = date('Y-m-d');
+            $gl->id_fec_mem = $cm;
+            $gl->id_lec = $dociden;
+            $gl->id_club = $idclub;
+            $gl->id_grupo = $idgrupo;
+            $gl->save();
+            return;
         }
 
         else{
