@@ -230,40 +230,25 @@ export default {
         return{
             fec_nac: '01-03-1999',
             mayoredad: false,
+
+            member: {},
         }
+    },
+
+    created(){
+            var path = window.location.pathname;
+            var isbn = path.indexOf("/clubs", 0) + 7;
+            var isbnend = path.indexOf("/members", 0);
+            var id = path.substring(isbn, isbnend);
+            id = parseInt(id, 10);
+            var newpath = path.substring(isbnend, path.length);
+            newpath = newpath.replace(/\D/g, '');
+            var ide = parseInt(newpath, 10);
+
+            console.log('id club '+id+' id group '+ide );  
     },
     
     methods:{
-        verifyAge(memberAge){
-            var today = new Date();
-            var dd = today.getDate();
-            var mm = today.getMonth() +1;
-            var yyyy = today.getFullYear();
-
-            if (dd<10){
-                dd = '0'+dd;
-            }
-
-            if(mm<10){
-                mm='0'+mm;
-            }
-
-            var today= yyyy+'-'+mm+'-'+dd;
-            var todaydate = new Date(today);
-            var agedate = new Date(memberAge);
-            var verif = todaydate.valueOf()-agedate.valueOf();
-            var edad = verif/(1000*60*60*24);
-            edad = Math.trunc(edad/365);
-
-                if (edad < 18){
-                    this.mayoredad = false;
-                }
-                else if (edad <= 18){
-                    this.mayoredad = true;
-                }
-                console.log(this.mayoredad);
-            return this.mayoredad;
-        },
         showModal() {
             this.$refs['view-member'].show()
         },

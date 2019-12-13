@@ -47,6 +47,7 @@ class BrowseGroupsController extends Controller
     public function store(Request $request, $idclub)
     {
         $grupo = new Grupo();
+        $grupo->id = $request->count;
         $grupo->id_club = $idclub;
         $grupo->nom = $request->nom;
         $grupo->tipo = $request->tipo;

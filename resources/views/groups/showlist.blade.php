@@ -41,7 +41,27 @@
                                             @foreach ($groups as $group)
                                             <tr>
                                             <td class="text-center">{{$group->nom}}</td>
-                                            <td class="text-center">{{$group->dia_sem}}</td>
+                                            @if ($group->dia_sem == 2)
+                                            <td class="text-center">Lunes</td>
+                                            @endif
+
+                                            @if ($group->dia_sem == 3)
+                                            <td class="text-center">Martes</td>
+                                            @endif
+
+                                            @if ($group->dia_sem == 4)
+                                            <td class="text-center">Miercoles</td>
+                                            @endif
+
+                                            @if ($group->dia_sem == 5)
+                                            <td class="text-center">Jueves</td>
+                                            @endif
+
+                                            @if ($group->dia_sem == 6)
+                                            <td class="text-center">Viernes</td>
+                                            @endif
+
+
                                             <td class="text-center">{{$group->horario}}</td>
                                                 <td class="td-actions text-center">
                                                 <b-link href="/clubs/{{$group->id_club}}/groups/{{$group->id}}/gmembers">    <button type="button" rel="tooltip" class="btn btn-default"> Seleccionar 

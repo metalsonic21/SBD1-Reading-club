@@ -5680,217 +5680,40 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       fec_nac: '01-03-1999',
-      mayoredad: false
+      mayoredad: false,
+      club: null,
+      grupo: null,
+      members: [{}]
     };
   },
+  created: function created() {
+    var _this = this;
+
+    var path = window.location.pathname;
+    var isbn = path.indexOf("/clubs", 0) + 7;
+    var isbnend = path.indexOf("/groups", 0);
+    this.club = path.substring(isbn, isbnend);
+    this.club = parseInt(this.club, 10);
+    var newpath = path.substring(isbnend, path.length);
+    newpath = newpath.replace(/\D/g, '');
+    this.grupo = parseInt(newpath, 10);
+    axios.get("/clubs/".concat(this.club, "/groups/").concat(this.grupo, "/gmembers")).then(function (res) {
+      _this.members = res.data.data;
+    })["catch"](function (e) {
+      console.log(e);
+    }); //console.log('id club '+this.club+' id grupo '+this.grupo );
+  },
   methods: {
-    verifyAge: function verifyAge(memberAge) {
-      var today = new Date();
-      var dd = today.getDate();
-      var mm = today.getMonth() + 1;
-      var yyyy = today.getFullYear();
-
-      if (dd < 10) {
-        dd = '0' + dd;
-      }
-
-      if (mm < 10) {
-        mm = '0' + mm;
-      }
-
-      var today = yyyy + '-' + mm + '-' + dd;
-      var todaydate = new Date(today);
-      var agedate = new Date(memberAge);
-      var verif = todaydate.valueOf() - agedate.valueOf();
-      var edad = verif / (1000 * 60 * 60 * 24);
-      edad = Math.trunc(edad / 365);
-
-      if (edad < 18) {
-        this.mayoredad = false;
-      } else if (edad <= 18) {
-        this.mayoredad = true;
-      }
-
-      console.log(this.mayoredad);
-      return this.mayoredad;
-    },
-    showModal: function showModal() {
-      this.$refs['view-member'].show();
+    add: function add(member) {
+      axios.put("/clubs/".concat(member.id_club, "/groups/").concat(member.id_grup, "/gmembers/").concat(member.doc_iden), member).then(function (res) {
+        console.log(res.data); //window.location = `/clubs/${id}/members/`;
+      })["catch"](function (e) {
+        console.log(e);
+      });
     }
   }
 });
@@ -6136,37 +5959,63 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
+      perPage: 10,
+      currentPage: 1,
       fields: ['seleccionado', 'documento_de_identidad', 'primer_nombre', 'primer_apellido', 'fecha_de_nacimiento'],
       items: [{
         documento_de_identidad: 123456789101112,
         primer_nombre: 'Leo',
         primer_apellido: 'Barnes',
         fecha_de_nacimiento: '01-01-1992'
-      }, {
-        documento_de_identidad: 121110987654321,
-        primer_nombre: 'Frank',
-        primer_apellido: 'Hesse',
-        fecha_de_nacimiento: '02-02-1993'
-      }, {
-        documento_de_identidad: 98765432112110,
-        primer_nombre: 'Thomas',
-        primer_apellido: 'Leonhardt',
-        fecha_de_nacimiento: '03-03-1993'
-      }, {
-        documento_de_identidad: 5678912345111011,
-        primer_nombre: 'Stephan',
-        primer_apellido: 'Schonlau',
-        fecha_de_nacimiento: '04-04-1993'
       }],
-      selected: []
+      selected: [],
+      member: {},
+      club: null,
+      grupo: null
     };
+  },
+  created: function created() {
+    var _this = this;
+
+    var path = window.location.pathname;
+    var isbn = path.indexOf("/clubs", 0) + 7;
+    var isbnend = path.indexOf("/groups", 0);
+    this.club = path.substring(isbn, isbnend);
+    this.club = parseInt(this.club, 10);
+    var newpath = path.substring(isbnend, path.length);
+    newpath = newpath.replace(/\D/g, '');
+    this.grupo = parseInt(newpath, 10);
+    axios.get("/clubs/".concat(this.club, "/groups/").concat(this.grupo, "/gmembers/create")).then(function (res) {
+      _this.items = res.data.data;
+    })["catch"](function (e) {
+      console.log(e);
+    }); //console.log('id club '+this.club+' id grupo '+this.grupo );
   },
   methods: {
     onRowSelected: function onRowSelected(items) {
       this.selected = items;
+    },
+    add: function add() {
+      this.member = this.selected[0];
+      axios.put("/clubs/".concat(this.club, "/groups/").concat(this.grupo, "/gmembers/").concat(this.member.documento_de_identidad)).then(function (res) {
+        console.log(res.data);
+      })["catch"](function (e) {
+        console.log(e);
+      });
+    }
+  },
+  computed: {
+    rows: function rows() {
+      return this.items.length;
     }
   }
 });
@@ -7278,40 +7127,22 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       fec_nac: '01-03-1999',
-      mayoredad: false
+      mayoredad: false,
+      member: {}
     };
   },
+  created: function created() {
+    var path = window.location.pathname;
+    var isbn = path.indexOf("/clubs", 0) + 7;
+    var isbnend = path.indexOf("/members", 0);
+    var id = path.substring(isbn, isbnend);
+    id = parseInt(id, 10);
+    var newpath = path.substring(isbnend, path.length);
+    newpath = newpath.replace(/\D/g, '');
+    var ide = parseInt(newpath, 10);
+    console.log('id club ' + id + ' id group ' + ide);
+  },
   methods: {
-    verifyAge: function verifyAge(memberAge) {
-      var today = new Date();
-      var dd = today.getDate();
-      var mm = today.getMonth() + 1;
-      var yyyy = today.getFullYear();
-
-      if (dd < 10) {
-        dd = '0' + dd;
-      }
-
-      if (mm < 10) {
-        mm = '0' + mm;
-      }
-
-      var today = yyyy + '-' + mm + '-' + dd;
-      var todaydate = new Date(today);
-      var agedate = new Date(memberAge);
-      var verif = todaydate.valueOf() - agedate.valueOf();
-      var edad = verif / (1000 * 60 * 60 * 24);
-      edad = Math.trunc(edad / 365);
-
-      if (edad < 18) {
-        this.mayoredad = false;
-      } else if (edad <= 18) {
-        this.mayoredad = true;
-      }
-
-      console.log(this.mayoredad);
-      return this.mayoredad;
-    },
     showModal: function showModal() {
       this.$refs['view-member'].show();
     }
@@ -81599,118 +81430,128 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    [
-      _c("div", { staticClass: "content" }, [
-        _c("div", { staticClass: "container-fluid" }, [
-          _c("div", { staticClass: "row" }, [
-            _c("div", { staticClass: "col-md-12" }, [
-              _c("div", { staticClass: "card" }, [
-                _c(
-                  "div",
-                  {
-                    staticClass: "card-header card-header-log card-header-icon"
-                  },
-                  [
-                    _vm._m(0),
+  return _c("div", [
+    _c("div", { staticClass: "content" }, [
+      _c("div", { staticClass: "container-fluid" }, [
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-md-12" }, [
+            _c("div", { staticClass: "card" }, [
+              _c(
+                "div",
+                { staticClass: "card-header card-header-log card-header-icon" },
+                [
+                  _vm._m(0),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "row" }, [
+                    _vm._m(1),
                     _vm._v(" "),
-                    _c("div", { staticClass: "row" }, [
-                      _vm._m(1),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "col-lg-2" }, [
+                    _c(
+                      "div",
+                      { staticClass: "col-lg-2" },
+                      [
                         _c(
-                          "button",
+                          "b-link",
                           {
-                            directives: [
-                              {
-                                name: "b-modal",
-                                rawName: "v-b-modal.add-member",
-                                modifiers: { "add-member": true }
-                              }
-                            ],
-                            staticClass: "btn btn-default float-right mt-3"
+                            staticClass: "btn btn-default float-right mt-3",
+                            attrs: {
+                              href:
+                                "/clubs/" +
+                                _vm.club +
+                                "/groups/" +
+                                _vm.grupo +
+                                "/gmembers/create"
+                            }
                           },
                           [
-                            _vm._m(2),
+                            _c("span", { staticClass: "btn-label" }, [
+                              _c("i", { staticClass: "material-icons" }, [
+                                _vm._v("add")
+                              ])
+                            ]),
                             _vm._v(
-                              "\r\n                                        Añadir nuevo miembro\r\n                                    "
+                              "\r\n                                        Añadir miembro\r\n                                    "
                             )
                           ]
                         )
-                      ])
-                    ])
-                  ]
-                ),
-                _vm._v(" "),
-                _c("div", { staticClass: "card-body" }, [
-                  _c("div", { staticClass: "row" }, [
-                    _c("div", { staticClass: "col-lg-12" }, [
-                      _c(
-                        "div",
-                        { staticClass: "table-responsive table-sales" },
-                        [
-                          _c("table", { staticClass: "table" }, [
-                            _vm._m(3),
-                            _vm._v(" "),
-                            _c("tbody", [
-                              _c("tr", [
-                                _c("td", { staticClass: "text-center" }, [
-                                  _vm._v("123456789101112")
-                                ]),
-                                _vm._v(" "),
-                                _c("td", { staticClass: "text-center" }, [
-                                  _vm._v("Frank")
-                                ]),
-                                _vm._v(" "),
-                                _c("td", { staticClass: "text-center" }, [
-                                  _vm._v("Hesse")
-                                ]),
-                                _vm._v(" "),
-                                _c("td", { staticClass: "text-center" }, [
-                                  _vm._v("01-03-1999")
-                                ]),
-                                _vm._v(" "),
-                                _c(
-                                  "td",
-                                  { staticClass: "td-actions text-center" },
-                                  [
-                                    _c(
-                                      "button",
-                                      {
-                                        directives: [
-                                          {
-                                            name: "b-modal",
-                                            rawName: "v-b-modal.view-member",
-                                            modifiers: { "view-member": true }
-                                          }
-                                        ],
-                                        staticClass: "btn btn-info",
-                                        attrs: {
-                                          type: "button",
-                                          rel: "tooltip",
-                                          "data-toggle": "tooltip",
-                                          "data-placement": "bottom",
-                                          title: "Visualizar"
+                      ],
+                      1
+                    )
+                  ])
+                ]
+              ),
+              _vm._v(" "),
+              _c("div", { staticClass: "card-body" }, [
+                _c("div", { staticClass: "row" }, [
+                  _c("div", { staticClass: "col-lg-12" }, [
+                    _c("div", { staticClass: "table-responsive table-sales" }, [
+                      _c("table", { staticClass: "table" }, [
+                        _vm._m(2),
+                        _vm._v(" "),
+                        _c(
+                          "tbody",
+                          _vm._l(_vm.members, function(item, index) {
+                            return _c("tr", { key: index }, [
+                              _c("td", { staticClass: "text-center" }, [
+                                _vm._v(_vm._s(item.doc_iden))
+                              ]),
+                              _vm._v(" "),
+                              _c("td", { staticClass: "text-center" }, [
+                                _vm._v(_vm._s(item.nom1))
+                              ]),
+                              _vm._v(" "),
+                              _c("td", { staticClass: "text-center" }, [
+                                _vm._v(_vm._s(item.ape1))
+                              ]),
+                              _vm._v(" "),
+                              _c("td", { staticClass: "text-center" }, [
+                                _vm._v(_vm._s(item.fec_nac))
+                              ]),
+                              _vm._v(" "),
+                              _c(
+                                "td",
+                                { staticClass: "td-actions text-center" },
+                                [
+                                  _c(
+                                    "b-link",
+                                    {
+                                      directives: [
+                                        {
+                                          name: "b-modal",
+                                          rawName: "v-b-modal.view-member",
+                                          modifiers: { "view-member": true }
                                         }
-                                      },
-                                      [
-                                        _c(
-                                          "i",
-                                          { staticClass: "material-icons" },
-                                          [_vm._v("remove_red_eye")]
-                                        )
-                                      ]
-                                    ),
-                                    _vm._v(" "),
-                                    _vm._m(4)
-                                  ]
-                                )
-                              ])
+                                      ],
+                                      staticClass: "btn btn-info",
+                                      attrs: {
+                                        href:
+                                          "/clubs/" +
+                                          item.id_club +
+                                          "/members/" +
+                                          item.doc_iden,
+                                        rel: "tooltip",
+                                        "data-toggle": "tooltip",
+                                        "data-placement": "bottom",
+                                        title: "Visualizar"
+                                      }
+                                    },
+                                    [
+                                      _c(
+                                        "i",
+                                        { staticClass: "material-icons" },
+                                        [_vm._v("remove_red_eye")]
+                                      )
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _vm._m(3, true)
+                                ],
+                                1
+                              )
                             ])
-                          ])
-                        ]
-                      )
+                          }),
+                          0
+                        )
+                      ])
                     ])
                   ])
                 ])
@@ -81718,365 +81559,9 @@ var render = function() {
             ])
           ])
         ])
-      ]),
-      _vm._v(" "),
-      _c("create-group-member"),
-      _vm._v(" "),
-      _c(
-        "b-modal",
-        {
-          attrs: {
-            size: "lg",
-            id: "view-member",
-            "ok-variant": "default",
-            "ok-only": "",
-            "ok-title": "Continuar"
-          }
-        },
-        [
-          _c("div", { staticClass: "card " }, [
-            _c(
-              "div",
-              { staticClass: "card-header card-header-log card-header-icon" },
-              [
-                _c("div", { staticClass: "card-icon" }, [
-                  _c("i", { staticClass: "material-icons" }, [_vm._v("book")])
-                ]),
-                _vm._v(" "),
-                _c("h4", { staticClass: "card-title" }, [
-                  _vm._v("Detalles de miembro")
-                ])
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "card-body " },
-              [
-                _c(
-                  "b-row",
-                  [
-                    _c("b-col", { attrs: { cols: "8" } }, [
-                      _c("p", [
-                        _c("strong", [_vm._v("DOCUMENTO DE IDENTIDAD:")]),
-                        _vm._v(" 123456789101112131415")
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("b-col", { attrs: { cols: "4" } }, [
-                      _c("p", [
-                        _c("strong", [_vm._v("PRIMER NOMBRE:")]),
-                        _vm._v(" Frank")
-                      ])
-                    ])
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                _c(
-                  "b-row",
-                  [
-                    _c("b-col", { attrs: { cols: "4" } }, [
-                      _c("p", [_c("strong", [_vm._v("SEGUNDO NOMBRE: ")])])
-                    ]),
-                    _vm._v(" "),
-                    _c("b-col", { attrs: { cols: "4" } }, [
-                      _c("p", [
-                        _c("strong", [_vm._v("PRIMER APELLIDO: ")]),
-                        _vm._v("Hesse")
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("b-col", { attrs: { cols: "4" } }, [
-                      _c("p", [_c("strong", [_vm._v("SEGUNDO APELLIDO: ")])])
-                    ])
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                _c(
-                  "b-row",
-                  [
-                    _c("b-col", { attrs: { cols: "5" } }, [
-                      _c("p", [
-                        _c("strong", [_vm._v("FECHA DE NACIMIENTO: ")]),
-                        _vm._v(_vm._s(_vm.fec_nac))
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("b-col", { attrs: { cols: "3" } }, [
-                      _c("p", [
-                        _c("strong", [_vm._v("GÉNERO: ")]),
-                        _vm._v("Masculino")
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("b-col", { attrs: { cols: "4" } }, [
-                      _c("p", [
-                        _c("strong", [_vm._v("TELÉFONO: ")]),
-                        _vm._v("1234567891011")
-                      ])
-                    ])
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                _c("hr"),
-                _vm._v(" "),
-                _c(
-                  "b-row",
-                  [
-                    _c("b-col", { attrs: { cols: "4" } }, [
-                      _c("h6", [_c("strong", [_vm._v("DIRECCIÓN")])])
-                    ])
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                _c(
-                  "b-row",
-                  [
-                    _c("b-col", { attrs: { cols: "4" } }, [
-                      _c("p", [
-                        _c("strong", [_vm._v("PAÍS:")]),
-                        _vm._v(" Alemania")
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("b-col", { attrs: { cols: "4" } }, [
-                      _c("p", [
-                        _c("strong", [_vm._v("CIUDAD:")]),
-                        _vm._v(" Dresden")
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("b-col", { attrs: { cols: "4" } }, [
-                      _c("p", [
-                        _c("strong", [_vm._v("CALLE:")]),
-                        _vm._v(" Something")
-                      ])
-                    ])
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                _c(
-                  "b-row",
-                  [
-                    _c("b-col", { attrs: { cols: "4" } }, [
-                      _c("p", [
-                        _c("strong", [_vm._v("URBANIZACIÓN:")]),
-                        _vm._v(" Something2")
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("b-col", { attrs: { cols: "4" } }, [
-                      _c("p", [
-                        _c("strong", [_vm._v("CÓDIGO POSTAL:")]),
-                        _vm._v(" 676767")
-                      ])
-                    ])
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                _c("hr"),
-                _vm._v(" "),
-                _vm.mayoredad == false
-                  ? _c(
-                      "div",
-                      { attrs: { id: "datos_rep" } },
-                      [
-                        _c(
-                          "b-row",
-                          [
-                            _c("b-col", { attrs: { cols: "6" } }, [
-                              _c("h6", [
-                                _c("strong", [_vm._v("DATOS DE REPRESENTANTE")])
-                              ])
-                            ])
-                          ],
-                          1
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "b-row",
-                          [
-                            _c("b-col", { attrs: { cols: "8" } }, [
-                              _c("p", [
-                                _c("strong", [
-                                  _vm._v("DOCUMENTO DE IDENTIDAD:")
-                                ]),
-                                _vm._v(" 123456789101112131415")
-                              ])
-                            ]),
-                            _vm._v(" "),
-                            _c("b-col", { attrs: { cols: "4" } }, [
-                              _c("p", [
-                                _c("strong", [_vm._v("PRIMER NOMBRE:")]),
-                                _vm._v(" Frank")
-                              ])
-                            ])
-                          ],
-                          1
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "b-row",
-                          [
-                            _c("b-col", { attrs: { cols: "4" } }, [
-                              _c("p", [
-                                _c("strong", [_vm._v("SEGUNDO NOMBRE: ")])
-                              ])
-                            ]),
-                            _vm._v(" "),
-                            _c("b-col", { attrs: { cols: "4" } }, [
-                              _c("p", [
-                                _c("strong", [_vm._v("PRIMER APELLIDO: ")]),
-                                _vm._v("Hesse")
-                              ])
-                            ]),
-                            _vm._v(" "),
-                            _c("b-col", { attrs: { cols: "4" } }, [
-                              _c("p", [
-                                _c("strong", [_vm._v("SEGUNDO APELLIDO: ")])
-                              ])
-                            ])
-                          ],
-                          1
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "b-row",
-                          [
-                            _c("b-col", { attrs: { cols: "5" } }, [
-                              _c("p", [
-                                _c("strong", [_vm._v("FECHA DE NACIMIENTO: ")]),
-                                _vm._v("01-08-1999")
-                              ])
-                            ]),
-                            _vm._v(" "),
-                            _c("b-col", { attrs: { cols: "3" } }, [
-                              _c("p", [
-                                _c("strong", [_vm._v("GÉNERO: ")]),
-                                _vm._v("Masculino")
-                              ])
-                            ]),
-                            _vm._v(" "),
-                            _c("b-col", { attrs: { cols: "4" } }, [
-                              _c("p", [
-                                _c("strong", [_vm._v("TELÉFONO: ")]),
-                                _vm._v("1234567891011")
-                              ])
-                            ])
-                          ],
-                          1
-                        ),
-                        _vm._v(" "),
-                        _c("hr"),
-                        _vm._v(" "),
-                        _c(
-                          "b-row",
-                          [
-                            _c("b-col", { attrs: { cols: "4" } }, [
-                              _c("h6", [_c("strong", [_vm._v("DIRECCIÓN")])])
-                            ])
-                          ],
-                          1
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "b-row",
-                          [
-                            _c("b-col", { attrs: { cols: "4" } }, [
-                              _c("p", [
-                                _c("strong", [_vm._v("PAÍS:")]),
-                                _vm._v(" Alemania")
-                              ])
-                            ]),
-                            _vm._v(" "),
-                            _c("b-col", { attrs: { cols: "4" } }, [
-                              _c("p", [
-                                _c("strong", [_vm._v("CIUDAD:")]),
-                                _vm._v(" Dresden")
-                              ])
-                            ]),
-                            _vm._v(" "),
-                            _c("b-col", { attrs: { cols: "4" } }, [
-                              _c("p", [
-                                _c("strong", [_vm._v("CALLE:")]),
-                                _vm._v(" Something")
-                              ])
-                            ])
-                          ],
-                          1
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "b-row",
-                          [
-                            _c("b-col", { attrs: { cols: "4" } }, [
-                              _c("p", [
-                                _c("strong", [_vm._v("URBANIZACIÓN:")]),
-                                _vm._v(" Something2")
-                              ])
-                            ]),
-                            _vm._v(" "),
-                            _c("b-col", { attrs: { cols: "4" } }, [
-                              _c("p", [
-                                _c("strong", [_vm._v("CÓDIGO POSTAL:")]),
-                                _vm._v(" 676767")
-                              ])
-                            ])
-                          ],
-                          1
-                        )
-                      ],
-                      1
-                    )
-                  : _vm._e()
-              ],
-              1
-            )
-          ])
-        ]
-      ),
-      _vm._v(" "),
-      _c(
-        "b-modal",
-        {
-          attrs: {
-            size: "lg",
-            id: "edit-member",
-            "ok-variant": "default",
-            "cancel-variant": "danger",
-            "ok-title": "Modificar",
-            "cancel-title": "Cancelar"
-          }
-        },
-        [
-          _c("div", { staticClass: "card " }, [
-            _c(
-              "div",
-              { staticClass: "card-header card-header-log card-header-icon" },
-              [
-                _c("div", { staticClass: "card-icon" }, [
-                  _c("i", { staticClass: "material-icons" }, [_vm._v("edit")])
-                ]),
-                _vm._v(" "),
-                _c("h4", { staticClass: "card-title" }, [
-                  _vm._v("Modificar miembro")
-                ])
-              ]
-            ),
-            _vm._v(" "),
-            _c("div", { staticClass: "card-body " }, [_c("b-form")], 1)
-          ])
-        ]
-      )
-    ],
-    1
-  )
+      ])
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {
@@ -82093,14 +81578,6 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "col-lg-10" }, [
       _c("h4", { staticClass: "card-title" }, [_vm._v("Miembros del grupo")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("span", { staticClass: "btn-label" }, [
-      _c("i", { staticClass: "material-icons" }, [_vm._v("add")])
     ])
   },
   function() {
@@ -82431,114 +81908,139 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    [
+  return _c("div", [
+    _c("div", { staticClass: "card " }, [
+      _vm._m(0),
+      _vm._v(" "),
       _c(
-        "b-modal",
-        {
-          attrs: {
-            size: "xl",
-            id: "add-member",
-            "ok-variant": "default",
-            "ok-title": "Continuar",
-            "cancel-title": "Cancelar",
-            "cancel-variant": "danger"
-          }
-        },
+        "div",
+        { staticClass: "card-body " },
         [
-          _c("div", { staticClass: "card " }, [
-            _c(
-              "div",
-              { staticClass: "card-header card-header-log card-header-icon" },
-              [
-                _c("div", { staticClass: "card-icon" }, [
-                  _c("i", { staticClass: "material-icons" }, [_vm._v("add")])
-                ]),
-                _vm._v(" "),
-                _c("h4", { staticClass: "card-title" }, [
-                  _vm._v("Añadir nuevo miembro")
-                ])
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "card-body " },
-              [
-                _c("p", [
-                  _vm._v(
-                    "Seleccione uno o varios miembros del club para agregar al grupo"
-                  )
-                ]),
-                _vm._v(" "),
-                _c(
-                  "b-form",
-                  [
-                    _c("b-table", {
-                      ref: "selectableTable",
-                      attrs: {
-                        selectable: "",
-                        "select-mode": _vm.multi,
-                        items: _vm.items,
-                        fields: _vm.fields,
-                        responsive: "sm"
-                      },
-                      on: { "row-selected": _vm.onRowSelected },
-                      scopedSlots: _vm._u([
-                        {
-                          key: "cell(seleccionado)",
-                          fn: function(ref) {
-                            var rowSelected = ref.rowSelected
-                            return [
-                              rowSelected
-                                ? [
-                                    _c(
-                                      "span",
-                                      { attrs: { "aria-hidden": "true" } },
-                                      [_vm._v("✓")]
-                                    ),
-                                    _vm._v(" "),
-                                    _c("span", { staticClass: "sr-only" }, [
-                                      _vm._v("Seleccionado")
-                                    ])
-                                  ]
-                                : [
-                                    _c(
-                                      "span",
-                                      { attrs: { "aria-hidden": "true" } },
-                                      [_vm._v(" ")]
-                                    ),
-                                    _vm._v(" "),
-                                    _c("span", { staticClass: "sr-only" }, [
-                                      _vm._v("No seleccionado")
-                                    ])
-                                  ]
-                            ]
-                          }
-                        }
-                      ])
-                    })
-                  ],
-                  1
-                )
-              ],
-              1
-            )
+          _c("p", [
+            _vm._v("Seleccione un miembro del club para agregar al grupo")
           ]),
           _vm._v(" "),
-          _c("p", [
-            _vm._v("\r\n            Selected Rows:"),
-            _c("br"),
-            _vm._v("\r\n            " + _vm._s(_vm.selected) + "\r\n        ")
-          ])
-        ]
+          _c(
+            "b-form",
+            [
+              _c("b-table", {
+                ref: "selectableTable",
+                attrs: {
+                  selectable: "",
+                  "select-mode": "single",
+                  items: _vm.items,
+                  fields: _vm.fields,
+                  responsive: "sm",
+                  id: "my-table",
+                  "per-page": _vm.perPage,
+                  "current-page": _vm.currentPage,
+                  small: ""
+                },
+                on: { "row-selected": _vm.onRowSelected },
+                scopedSlots: _vm._u([
+                  {
+                    key: "cell(seleccionado)",
+                    fn: function(ref) {
+                      var rowSelected = ref.rowSelected
+                      return [
+                        rowSelected
+                          ? [
+                              _c("span", { attrs: { "aria-hidden": "true" } }, [
+                                _vm._v("✓")
+                              ]),
+                              _vm._v(" "),
+                              _c("span", { staticClass: "sr-only" }, [
+                                _vm._v("Seleccionado")
+                              ])
+                            ]
+                          : [
+                              _c("span", { attrs: { "aria-hidden": "true" } }, [
+                                _vm._v(" ")
+                              ]),
+                              _vm._v(" "),
+                              _c("span", { staticClass: "sr-only" }, [
+                                _vm._v("No seleccionado")
+                              ])
+                            ]
+                      ]
+                    }
+                  }
+                ])
+              }),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "d-flex flex-row-reverse bd-highlight" },
+                [
+                  _c("b-pagination", {
+                    attrs: {
+                      "total-rows": _vm.rows,
+                      "per-page": _vm.perPage,
+                      "aria-controls": "my-table"
+                    },
+                    model: {
+                      value: _vm.currentPage,
+                      callback: function($$v) {
+                        _vm.currentPage = $$v
+                      },
+                      expression: "currentPage"
+                    }
+                  })
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "d-flex flex-row-reverse bd-highlight" },
+                [
+                  _c(
+                    "b-button",
+                    { attrs: { variant: "default" }, on: { click: _vm.add } },
+                    [_vm._v("Continuar")]
+                  ),
+                  _vm._v(" "),
+                  _c("b-link", { staticClass: "btn btn-danger" }, [
+                    _vm._v("Cancelar")
+                  ])
+                ],
+                1
+              )
+            ],
+            1
+          )
+        ],
+        1
       )
-    ],
-    1
-  )
+    ]),
+    _vm._v(" "),
+    _c("p", [
+      _vm._v("\r\n        Selected Rows:"),
+      _c("br"),
+      _vm._v("\r\n        " + _vm._s(_vm.selected) + "\r\n    ")
+    ])
+  ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "card-header card-header-log card-header-icon" },
+      [
+        _c("div", { staticClass: "card-icon" }, [
+          _c("i", { staticClass: "material-icons" }, [_vm._v("add")])
+        ]),
+        _vm._v(" "),
+        _c("h4", { staticClass: "card-title" }, [
+          _vm._v("Añadir nuevo miembro")
+        ])
+      ]
+    )
+  }
+]
 render._withStripped = true
 
 

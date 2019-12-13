@@ -365,7 +365,7 @@ ALTER TABLE SJL_personajes ADD CONSTRAINT personajes_obras_fk FOREIGN KEY(id_obr
 
 ALTER TABLE SJL_historicos_presentaciones ADD CONSTRAINT historicos_obras_fk FOREIGN KEY(id_obra) REFERENCES SJL_obras(id);
 
-ALTER TABLE SJL_grupos_lectores ADD CONSTRAINT grupos_membrecias_fk FOREIGN KEY(id_fec_mem,id_club,id_lec) REFERENCES SJL_membresias(fec_i,id_lec,id_club);
+ALTER TABLE SJL_grupos_lectores ADD CONSTRAINT grupos_membrecias_fk FOREIGN KEY(id_fec_mem,id_club,id_lec) REFERENCES SJL_membresias(fec_i,id_club,id_lec);
 ALTER TABLE SJL_grupos_lectores ADD CONSTRAINT membrecias_grupos_fk FOREIGN KEY(id_grupo,id_club) REFERENCES SJL_grupos_lectura(id,id_club);
 
 ALTER TABLE SJL_elenco ADD CONSTRAINT elenco_membrecias_fk FOREIGN KEY(id_fec_mem,id_club,id_lec) REFERENCES SJL_membresias(fec_i,id_lec,id_club);

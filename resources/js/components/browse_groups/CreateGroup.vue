@@ -135,6 +135,7 @@ export default {
         axios.get(`/clubs/${path}/groups/create`)
             .then(res => {
                 this.count = res.data[0].count;
+
             }).catch(e => {
                 console.log(e);
             })
