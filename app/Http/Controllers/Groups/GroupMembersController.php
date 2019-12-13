@@ -86,7 +86,111 @@ class GroupMembersController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $idclub, $idgrupo, $dociden)
-    {
+    {   
+        $grupo = '';
+        /* How many members are in this group*/
+        $c = DB::select(DB::raw("SELECT count(doc_iden) as number FROM sjl_lectores WHERE id_club = '$idclub' AND id_grup = '$idgrupo'"));
+        $count = $c[0]->number;
+
+        /* I need what kind of group is it to evaluate partition conditions */
+        $ginfo = DB::select(DB::raw("SELECT tipo, dia_sem, hora_i FROM sjl_grupos_lectura WHERE id_club = '$idclub' AND id = '$idgrupo'"));
+        $tipogrupo = $ginfo[0]->tipo;
+        $dia_sem = $ginfo[0]->dia_sem;
+        $hora_i = $ginfo[0]->hora_i;
+
+        if (($tipogrupo == 'A' && $count > 14) || (($tipogrupo == 'J' || $tipogrupo == 'N') && $count>9)){
+            /* If name is Nohidea after the division it will be Nohidea 2*/
+            $newname = DB::select(DB::raw("SELECT nom FROM sjl_grupos_lectura WHERE id = '$idgrupo' AND id_club = '$idclub'"));
+            $name = $newname[0]->nom;
+
+            $newnameN = DB::select(DB::raw("SELECT count(nom) as nom FROM sjl_grupos_lectura WHERE nom LIKE (SELECT nom FROM sjl_grupos_lectura WHERE id = '$idgrupo' AND id_club = '$idclub')"));
+            $nameparttwo = $newnameN[0]->nom + 1;
+
+            /* Number of groups in this club to get the ID of the new partitioned group since composite key is fucking my existence*/
+
+            $ngrupos = DB::select(DB::raw("SELECT COUNT(id) as quantity FROM sjl_grupos_lectura WHERE id_club = '$idclub'"));
+            $ng = $ngrupos[0]->quantity+1;
+
+            $dupname = $name.' '.$nameparttwo;
+
+            /* Update group from 5 members if it's J/N, 7 if A*/
+            $members = DB::select(DB::raw("SELECT doc_iden FROM sjl_lectores WHERE id_club = '$idclub' AND id_grup = '$idgrupo'"));
+
+            if ($tipogrupo == 'A'){
+                $grupo = new Grupo();
+                $grupo->id = $ng;
+                $grupo->id_club = $idclub;
+                $grupo->nom = $dupname;
+                $grupo->tipo = $tipogrupo;
+                $grupo->dia_sem = $dia_sem;
+                $grupo->hora_i = $hora_i;
+                $grupo->hora_f = date( "H:i:s", strtotime( $grupo->hora_i ) + 2 * 3600 );
+                $grupo->save();
+                for ($i = 0; $i<=7; $i++){
+                    Member::where('doc_iden',$members[$i]->doc_iden)->update(array(
+                        'id_grup'=> $grupo->id,
+                    ));
+
+                    $aux = $members[$i]->doc_iden;
+
+                    $membresia = DB::select(DB::raw("SELECT fec_i FROM sjl_membresias WHERE fec_f IS NULL AND id_lec = '$aux' AND id_club = '$idclub'"));
+                    $cm = '';
+                        if ($membresia)
+                            $cm = $membresia[0]->fec_i;
+                    
+                    /* MEMBERSHIP FOR GROUP */
+                    Grupos_Lectores::where(['id_fec_mem'=>$cm,'id_club'=>$idclub,'id_lec'=>$aux,'id_grupo'=>$idgrupo])->update(array(
+                        'fec_f'=> date('Y-m-d'),
+                    ));
+                    $gl = new Grupos_Lectores();
+                    $gl->id_fec_i = date('Y-m-d');
+                    $gl->id_fec_mem = $cm;
+                    $gl->id_lec = $aux;
+                    $gl->id_club = $idclub;
+                    $gl->id_grupo = $ng;
+                    $gl->save();                  
+                }
+            }
+
+            /* N/J max of 10 members so I move 5 of them */
+            else if ($tipogrupo == 'J' || $tipogrupo == 'N'){
+                $grupo = new Grupo();
+                $grupo->id = $ng;
+                $grupo->id_club = $idclub;
+                $grupo->nom = $dupname;
+                $grupo->tipo = $tipogrupo;
+                $grupo->dia_sem = $dia_sem;
+                $grupo->hora_i = $hora_i;
+                $grupo->hora_f = date( "H:i:s", strtotime( $grupo->hora_i ) + 2 * 3600 );
+                $grupo->save();
+                for ($i = 0; $i<=4; $i++){
+                    Member::where('doc_iden',$members[$i]->doc_iden)->update(array(
+                        'id_grup'=> $grupo->id,
+                    ));
+
+                    $aux = $members[$i]->doc_iden;
+
+                    $membresia = DB::select(DB::raw("SELECT fec_i FROM sjl_membresias WHERE fec_f IS NULL AND id_lec = '$aux' AND id_club = '$idclub'"));
+                    $cm = '';
+                        if ($membresia)
+                            $cm = $membresia[0]->fec_i;
+                    
+                    /* MEMBERSHIP FOR GROUP */
+                    Grupos_Lectores::where(['id_fec_mem'=>$cm,'id_club'=>$idclub,'id_lec'=>$aux,'id_grupo'=>$idgrupo])->update(array(
+                        'fec_f'=> date('Y-m-d'),
+                    ));
+                    $gl = new Grupos_Lectores();
+                    $gl->id_fec_i = date('Y-m-d');
+                    $gl->id_fec_mem = $cm;
+                    $gl->id_lec = $aux;
+                    $gl->id_club = $idclub;
+                    $gl->id_grupo = $ng;
+                    $gl->save();                  
+                }
+            }
+        }
+
+        else{
         Member::where('doc_iden',$dociden)->update(array(
             'id_grup'=> $idgrupo,
         ));
@@ -103,8 +207,9 @@ class GroupMembersController extends Controller
         $gl->id_club = $idclub;
         $gl->id_grupo = $idgrupo;
         $gl->save();
-
-        return $gl;
+        }
+        
+        return $grupo;
     }
 
     /**
