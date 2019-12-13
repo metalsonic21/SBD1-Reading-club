@@ -111,7 +111,7 @@ class GroupMembersController extends Controller
             $ngrupos = DB::select(DB::raw("SELECT COUNT(id) as quantity FROM sjl_grupos_lectura WHERE id_club = '$idclub'"));
             $ng = $ngrupos[0]->quantity+1;
 
-            $dupname = $name.' '.$nameparttwo;
+            $dupname = $name.'DIVISION '.$ng;
 
             /* Update group from 5 members if it's J/N, 7 if A*/
             $members = DB::select(DB::raw("SELECT doc_iden FROM sjl_lectores WHERE id_club = '$idclub' AND id_grup = '$idgrupo'"));
