@@ -5851,9 +5851,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -81706,31 +81703,8 @@ var render = function() {
                                       ]
                                     ),
                                     _vm._v(" "),
-                                    _c(
-                                      "b-link",
-                                      {
-                                        staticClass: "btn btn-success",
-                                        attrs: {
-                                          type: "button",
-                                          href: "/managemembersg/1/edit",
-                                          rel: "tooltip",
-                                          "data-toggle": "tooltip",
-                                          "data-placement": "bottom",
-                                          title: "Modificar"
-                                        }
-                                      },
-                                      [
-                                        _c(
-                                          "i",
-                                          { staticClass: "material-icons" },
-                                          [_vm._v("edit")]
-                                        )
-                                      ]
-                                    ),
-                                    _vm._v(" "),
                                     _vm._m(4)
-                                  ],
-                                  1
+                                  ]
                                 )
                               ])
                             ])

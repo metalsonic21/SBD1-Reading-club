@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Http\Controllers\Groups;
-
+use DB;
+use Response;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -12,9 +13,11 @@ class SelectGroupController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($idclub)
     {
-        return view ('groups.showlist');
+        $groups = DB::select(DB::raw("SELECT nom, id_club, id, tipo, dia_sem, (select to_char(hora_i::time, 'HH12:MI AM')) || ' - ' || (select to_char(hora_f::time, 'HH12:MI AM')) as horario FROM sjl_grupos_lectura WHERE id_club = '$idclub'"));
+        return view ('groups.showlist')->with('groups',$groups)->with('club',$idclub);
+        //return view ('groups.showlist');
     }
 
     /**

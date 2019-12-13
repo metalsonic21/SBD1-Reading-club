@@ -48,9 +48,6 @@
                                                         <button type="button" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Visualizar" class="btn btn-info" v-b-modal.view-member>
                                                             <i class="material-icons">remove_red_eye</i>
                                                         </button>
-                                                        <b-link type="button" href="/managemembersg/1/edit" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Modificar" class="btn btn-success">
-                                                            <i class="material-icons">edit</i>
-                                                        </b-link>
                                                         <button type="button" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Eliminar" class="btn btn-danger">
                                                             <i class="material-icons">close</i>
                                                         </button>

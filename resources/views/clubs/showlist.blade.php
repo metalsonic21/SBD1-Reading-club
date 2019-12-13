@@ -52,6 +52,10 @@
                                                     @if ($current == 2)
                                                         <b-link href="/clubs/{{$club->id}}/groups" class="btn btn-default">Seleccionar</b-link>
                                                     @endif
+
+                                                    @if ($current == 3)
+                                                        <b-link href="/clubs/{{$club->id}}/selectg" class="btn btn-default">Seleccionar</b-link>
+                                                    @endif
                                                 </td>
                                                 </tr>
                                                 @endforeach

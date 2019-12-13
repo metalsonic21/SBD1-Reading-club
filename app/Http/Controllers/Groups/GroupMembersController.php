@@ -1,7 +1,9 @@
 <?php
 
 namespace App\Http\Controllers\Groups;
-
+use App\Models\Grupo;
+use App\Models\Member;
+use DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -12,9 +14,12 @@ class GroupMembersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($idclub, $idgrupo)
     {
-        return view ('groups.members');
+        $members = DB::select(DB::raw("SELECT doc_iden, nom1, ape1, fec_nac FROM sjl_lectores WHERE id_club = '$idclub' AND id_grup = '$idgrupo'"));
+        $g = DB::select(DB::raw("SELECT nom FROM sjl_grupos_lectura WHERE id = '$idgrupo' AND id_club = '$idclub'"));
+        $grupo = $g[0]->nom; 
+        return view ('groups.members')->with('members',$members)->with('grupo',$grupo);
     }
 
     /**

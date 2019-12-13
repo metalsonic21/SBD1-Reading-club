@@ -8,5 +8,59 @@
 @endif
 
 <!-- DESIGN HERE -->
-<select-group></select-group>
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-log card-header-icon">
+                        <div class="card-icon">
+                            <i class="material-icons">group</i>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-10">
+                                <h4 class="card-title">Seleccione grupo de lectura</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="table-responsive table-sales">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th class="text-center">Nombre</th>
+                                                <th class="text-center">Día disponible</th>
+                                                <th class="text-center">Horario disponible</th>
+                                                <th class="text-center">Acción</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @if ($groups)
+                                            @foreach ($groups as $group)
+                                            <tr>
+                                            <td class="text-center">{{$group->nom}}</td>
+                                            <td class="text-center">{{$group->dia_sem}}</td>
+                                            <td class="text-center">{{$group->horario}}</td>
+                                                <td class="td-actions text-center">
+                                                <b-link href="/clubs/{{$group->id_club}}/groups/{{$group->id}}/gmembers">    <button type="button" rel="tooltip" class="btn btn-default"> Seleccionar 
+                                                    </button></b-link>
+                                                </td>
+                                            </tr>
+                                            @endforeach
+                                            @endif
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
 @endsection
