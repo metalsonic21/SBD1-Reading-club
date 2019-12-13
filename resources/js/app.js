@@ -45,6 +45,8 @@ Vue.component('available-reports-club', require('./components/club_reports/Avail
 
 /*BROWSE GROUPS*/
 Vue.component('browse-groups', require('./components/browse_groups/BrowseGroups.vue').default);
+Vue.component('create-group', require('./components/browse_groups/CreateGroup.vue').default);
+Vue.component('edit-group', require('./components/browse_groups/EditGroup.vue').default);
 Vue.component('select-group', require('./components/browse_groups/SelectGroup.vue').default);
 Vue.component('select-group-meeting', require('./components/browse_groups/SelectGroupR.vue').default);
 Vue.component('group-members', require('./components/browse_groups/BrowseMembers.vue').default);

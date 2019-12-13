@@ -4,15 +4,15 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Grupo extends Model
+class Inasistencia extends Model
 {
     /**
      * The table associated with the model.
      *
      * @var string
      */
-    protected $table = 'sjl_grupos_lectura';
+    protected $table = 'sjl_inansistencias';
     public $timestamps = false;
     public $incrementing = false;
-    protected $fillable = ['id','id_club', 'nom', 'tipo', 'dia_sem', 'hora_i', 'hora_f'];
+    protected $fillable = ['id_fec_i','id_fec_mem', 'id_club', 'id_lec', 'id_grupo', 'fec_reu_men', 'id_lib'];
 }

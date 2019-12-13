@@ -5900,6 +5900,197 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/browse_groups/CreateGroup.vue?vue&type=script&lang=js&":
+/*!************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/browse_groups/CreateGroup.vue?vue&type=script&lang=js& ***!
+  \************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      group: {
+        horai: null,
+        dia: null,
+        nom: null,
+        tipo: null
+      },
+      dias: [{
+        value: null,
+        text: 'Seleccionar'
+      }, {
+        value: 2,
+        text: 'Lunes'
+      }, {
+        value: 3,
+        text: 'Martes'
+      }, {
+        value: 4,
+        text: 'Miércoles'
+      }, {
+        value: 5,
+        text: 'Jueves'
+      }, {
+        value: 6,
+        text: 'Viernes'
+      }],
+      tipos: [{
+        value: null,
+        text: 'Seleccionar'
+      }, {
+        value: 'A',
+        text: 'Grupo de Adultos'
+      }, {
+        value: 'J',
+        text: 'Grupo de Jovenes'
+      }, {
+        value: 'N',
+        text: 'Grupo de Niños'
+      }],
+      count: 0
+    };
+  },
+  created: function created() {
+    var _this = this;
+
+    var path = window.location.pathname;
+    path = path.replace(/\D/g, '');
+    axios.get("/clubs/".concat(path, "/groups/create")).then(function (res) {
+      _this.count = res.data[0].count;
+    })["catch"](function (e) {
+      console.log(e);
+    });
+  },
+  computed: {
+    validateN: function validateN() {
+      return this.group.nom != null && this.group.nom != '';
+    },
+    validateT: function validateT() {
+      return this.group.tipo != null;
+    },
+    validateD: function validateD() {
+      return this.group.dia != null;
+    },
+    validateH: function validateH() {
+      return this.group.horai != null;
+    }
+  },
+  methods: {
+    add: function add() {
+      var params = {
+        nom: this.group.nom,
+        dia: this.group.dia,
+        tipo: this.group.tipo,
+        horai: this.group.horai,
+        count: this.count + 1
+      };
+      var path = window.location.pathname;
+      path = path.replace(/\D/g, '');
+      axios.post("/clubs/".concat(path, "/groups"), params).then(function (res) {
+        //console.log(res.data);
+        window.location = "/clubs/".concat(path, "/groups");
+      })["catch"](function (e) {
+        console.log(e);
+      });
+    },
+    revalidate: function revalidate() {
+      var msg = '';
+      if (!this.validateN) msg = msg + "El campo Nombre de Grupo no puede estar vacío ni tener más de 40 caracteres\n";
+      if (!this.validateT) msg = msg + "El campo Tipo de Grupo no puede estar vacío\n";
+      if (!this.validateD) msg = msg + "El campo Día de Disponibilidad no puede estar vacío\n";
+      if (!this.validateH) msg = msg + "El campo Hora Inicio no puede estar vacío\n";
+
+      if (this.group.tipo == 'N') {
+        var test = this.group.horai.substring(0, 2);
+        if (test > 17) msg = msg + "Las reuniones de niños no pueden terminar más tarde de las 7 de la noche, seleccione una hora de inicio más temprana\n";
+      }
+
+      if (msg == '') {
+        this.add();
+      } else alert(msg);
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/browse_groups/CreateGroupMember.vue?vue&type=script&lang=js&":
 /*!******************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/browse_groups/CreateGroupMember.vue?vue&type=script&lang=js& ***!
@@ -5979,6 +6170,210 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     onRowSelected: function onRowSelected(items) {
       this.selected = items;
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/browse_groups/EditGroup.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/browse_groups/EditGroup.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      group: {
+        horai: null,
+        dia: null,
+        nom: null,
+        tipo: null
+      },
+      dias: [{
+        value: null,
+        text: 'Seleccionar'
+      }, {
+        value: 2,
+        text: 'Lunes'
+      }, {
+        value: 3,
+        text: 'Martes'
+      }, {
+        value: 4,
+        text: 'Miércoles'
+      }, {
+        value: 5,
+        text: 'Jueves'
+      }, {
+        value: 6,
+        text: 'Viernes'
+      }],
+      tipos: [{
+        value: null,
+        text: 'Seleccionar'
+      }, {
+        value: 'A',
+        text: 'Grupo de Adultos'
+      }, {
+        value: 'J',
+        text: 'Grupo de Jovenes'
+      }, {
+        value: 'N',
+        text: 'Grupo de Niños'
+      }],
+      count: 0
+    };
+  },
+  created: function created() {
+    var _this = this;
+
+    var path = window.location.pathname;
+    var isbn = path.indexOf("bs") + 3;
+    var isbnend = path.indexOf("gr") - 1;
+    var id = path.substring(isbn, isbnend);
+    id = parseInt(id, 10);
+    var newpath = path.substring(isbnend, path.length);
+    newpath = newpath.replace(/\D/g, '');
+    var ide = parseInt(newpath, 10);
+    axios.get("/clubs/".concat(id, "/groups/").concat(ide, "/edit")).then(function (res) {
+      _this.group = res.data.data[0];
+      console.log(res.data.data); //this.group = res.data.data;
+    })["catch"](function (e) {
+      console.log(e);
+    });
+  },
+  computed: {
+    validateN: function validateN() {
+      return this.group.nom != null && this.group.nom != '';
+    },
+    validateT: function validateT() {
+      return this.group.tipo != null;
+    },
+    validateD: function validateD() {
+      return this.group.dia != null;
+    },
+    validateH: function validateH() {
+      return this.group.horai != null;
+    }
+  },
+  methods: {
+    update: function update() {
+      var params = {
+        nom: this.group.nom,
+        dia: this.group.dia,
+        tipo: this.group.tipo,
+        horai: this.group.horai,
+        count: this.count + 1
+      };
+      var path = window.location.pathname;
+      var isbn = path.indexOf("bs") + 3;
+      var isbnend = path.indexOf("gr") - 1;
+      var id = path.substring(isbn, isbnend);
+      id = parseInt(id, 10);
+      var newpath = path.substring(isbnend, path.length);
+      newpath = newpath.replace(/\D/g, '');
+      var ide = parseInt(newpath, 10);
+      axios.put("/clubs/".concat(id, "/groups/").concat(ide), params).then(function (res) {
+        //console.log(res.data);
+        window.location = "/clubs/".concat(id, "/groups");
+      })["catch"](function (e) {
+        console.log(e);
+      });
+    },
+    revalidate: function revalidate() {
+      var msg = '';
+      if (!this.validateN) msg = msg + "El campo Nombre de Grupo no puede estar vacío ni tener más de 40 caracteres\n";
+      if (!this.validateT) msg = msg + "El campo Tipo de Grupo no puede estar vacío\n";
+      if (!this.validateD) msg = msg + "El campo Día de Disponibilidad no puede estar vacío\n";
+      if (!this.validateH) msg = msg + "El campo Hora Inicio no puede estar vacío\n";
+
+      if (this.group.tipo == 'N') {
+        var test = this.group.horai.substring(0, 2);
+        if (test > 17) msg = msg + "Las reuniones de niños no pueden terminar más tarde de las 7 de la noche, seleccione una hora de inicio más temprana\n";
+      }
+
+      if (msg == '') {
+        this.update();
+      } else alert(msg);
     }
   }
 });
@@ -81782,6 +82177,271 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/browse_groups/CreateGroup.vue?vue&type=template&id=987ec6bc&":
+/*!****************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/browse_groups/CreateGroup.vue?vue&type=template&id=987ec6bc& ***!
+  \****************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c("div", { staticClass: "content" }, [
+      _c("div", { staticClass: "container-fluid" }, [
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-md-12" }, [
+            _c("div", { staticClass: "card" }, [
+              _vm._m(0),
+              _vm._v(" "),
+              _c("div", { staticClass: "card-body" }, [
+                _c("div", { staticClass: "row" }, [
+                  _c(
+                    "div",
+                    { staticClass: "col-lg-12" },
+                    [
+                      _c(
+                        "b-form",
+                        {
+                          on: {
+                            submit: function($event) {
+                              $event.preventDefault()
+                              return _vm.add($event)
+                            }
+                          }
+                        },
+                        [
+                          _c(
+                            "b-row",
+                            [
+                              _c(
+                                "b-col",
+                                { attrs: { cols: "6" } },
+                                [
+                                  _c("label", { attrs: { for: "nom" } }, [
+                                    _vm._v("Nombre")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("b-form-input", {
+                                    attrs: {
+                                      type: "text",
+                                      id: "nom",
+                                      name: "nom",
+                                      placeholder: "Nombre"
+                                    },
+                                    model: {
+                                      value: _vm.group.nom,
+                                      callback: function($$v) {
+                                        _vm.$set(_vm.group, "nom", $$v)
+                                      },
+                                      expression: "group.nom"
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "b-form-invalid-feedback",
+                                    { attrs: { state: _vm.validateN } },
+                                    [
+                                      _vm._v(
+                                        "El nombre del grupo no puede estar vacío"
+                                      )
+                                    ]
+                                  )
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "b-col",
+                                [
+                                  _c("label", { attrs: { for: "tipo" } }, [
+                                    _vm._v("Tipo")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("b-form-select", {
+                                    attrs: {
+                                      options: _vm.tipos,
+                                      id: "tipo",
+                                      name: "tipo"
+                                    },
+                                    model: {
+                                      value: _vm.group.tipo,
+                                      callback: function($$v) {
+                                        _vm.$set(_vm.group, "tipo", $$v)
+                                      },
+                                      expression: "group.tipo"
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "b-form-invalid-feedback",
+                                    { attrs: { state: _vm.validateT } },
+                                    [_vm._v("Seleccione tipo de grupo")]
+                                  )
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c("hr"),
+                          _vm._v(" "),
+                          _c(
+                            "b-row",
+                            [
+                              _c("b-col", { attrs: { cols: "6" } }, [
+                                _c("h6", [
+                                  _c("strong", [_vm._v("DISPONIBILIDAD")])
+                                ])
+                              ])
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "b-row",
+                            [
+                              _c(
+                                "b-col",
+                                { attrs: { cols: "6" } },
+                                [
+                                  _c("label", { attrs: { for: "dia" } }, [
+                                    _vm._v("Día")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("b-form-select", {
+                                    attrs: {
+                                      options: _vm.dias,
+                                      id: "dia",
+                                      name: "dia"
+                                    },
+                                    model: {
+                                      value: _vm.group.dia,
+                                      callback: function($$v) {
+                                        _vm.$set(_vm.group, "dia", $$v)
+                                      },
+                                      expression: "group.dia"
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "b-form-invalid-feedback",
+                                    { attrs: { state: _vm.validateD } },
+                                    [_vm._v("Seleccione un día")]
+                                  )
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "b-col",
+                                { attrs: { cols: "6" } },
+                                [
+                                  _c("label", { attrs: { for: "horai" } }, [
+                                    _vm._v("Hora Inicio")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("b-form-input", {
+                                    attrs: {
+                                      type: "time",
+                                      id: "horai",
+                                      name: "horai"
+                                    },
+                                    model: {
+                                      value: _vm.group.horai,
+                                      callback: function($$v) {
+                                        _vm.$set(_vm.group, "horai", $$v)
+                                      },
+                                      expression: "group.horai"
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c("b-form-invalid-feedback", {
+                                    attrs: { state: _vm.validateH }
+                                  })
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c("br"),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              staticClass:
+                                "d-flex flex-row-reverse bd-highlight"
+                            },
+                            [
+                              _c(
+                                "b-button",
+                                {
+                                  attrs: { variant: "default" },
+                                  on: { click: _vm.revalidate }
+                                },
+                                [_vm._v("Continuar")]
+                              ),
+                              _vm._v(" "),
+                              _c("b-link", { staticClass: "btn btn-danger" }, [
+                                _vm._v("Cancelar")
+                              ])
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                ])
+              ])
+            ])
+          ])
+        ])
+      ])
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "card-header card-header-log card-header-icon" },
+      [
+        _c("div", { staticClass: "card-icon" }, [
+          _c("i", { staticClass: "material-icons" }, [_vm._v("group")])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-lg-10" }, [
+            _c("h4", { staticClass: "card-title" }, [
+              _vm._v("Añadir nuevo grupo")
+            ])
+          ])
+        ])
+      ]
+    )
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/browse_groups/CreateGroupMember.vue?vue&type=template&id=3ae0f6dc&":
 /*!**********************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/browse_groups/CreateGroupMember.vue?vue&type=template&id=3ae0f6dc& ***!
@@ -81905,6 +82565,269 @@ var render = function() {
   )
 }
 var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/browse_groups/EditGroup.vue?vue&type=template&id=2bd8c5d8&":
+/*!**************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/browse_groups/EditGroup.vue?vue&type=template&id=2bd8c5d8& ***!
+  \**************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c("div", { staticClass: "content" }, [
+      _c("div", { staticClass: "container-fluid" }, [
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-md-12" }, [
+            _c("div", { staticClass: "card" }, [
+              _vm._m(0),
+              _vm._v(" "),
+              _c("div", { staticClass: "card-body" }, [
+                _c("div", { staticClass: "row" }, [
+                  _c(
+                    "div",
+                    { staticClass: "col-lg-12" },
+                    [
+                      _c(
+                        "b-form",
+                        {
+                          on: {
+                            submit: function($event) {
+                              $event.preventDefault()
+                              return _vm.add($event)
+                            }
+                          }
+                        },
+                        [
+                          _c(
+                            "b-row",
+                            [
+                              _c(
+                                "b-col",
+                                { attrs: { cols: "6" } },
+                                [
+                                  _c("label", { attrs: { for: "nom" } }, [
+                                    _vm._v("Nombre")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("b-form-input", {
+                                    attrs: {
+                                      type: "text",
+                                      id: "nom",
+                                      name: "nom",
+                                      placeholder: "Nombre"
+                                    },
+                                    model: {
+                                      value: _vm.group.nom,
+                                      callback: function($$v) {
+                                        _vm.$set(_vm.group, "nom", $$v)
+                                      },
+                                      expression: "group.nom"
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "b-form-invalid-feedback",
+                                    { attrs: { state: _vm.validateN } },
+                                    [
+                                      _vm._v(
+                                        "El nombre del grupo no puede estar vacío"
+                                      )
+                                    ]
+                                  )
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "b-col",
+                                [
+                                  _c("label", { attrs: { for: "tipo" } }, [
+                                    _vm._v("Tipo")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("b-form-select", {
+                                    attrs: {
+                                      options: _vm.tipos,
+                                      id: "tipo",
+                                      name: "tipo"
+                                    },
+                                    model: {
+                                      value: _vm.group.tipo,
+                                      callback: function($$v) {
+                                        _vm.$set(_vm.group, "tipo", $$v)
+                                      },
+                                      expression: "group.tipo"
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "b-form-invalid-feedback",
+                                    { attrs: { state: _vm.validateT } },
+                                    [_vm._v("Seleccione tipo de grupo")]
+                                  )
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c("hr"),
+                          _vm._v(" "),
+                          _c(
+                            "b-row",
+                            [
+                              _c("b-col", { attrs: { cols: "6" } }, [
+                                _c("h6", [
+                                  _c("strong", [_vm._v("DISPONIBILIDAD")])
+                                ])
+                              ])
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "b-row",
+                            [
+                              _c(
+                                "b-col",
+                                { attrs: { cols: "6" } },
+                                [
+                                  _c("label", { attrs: { for: "dia" } }, [
+                                    _vm._v("Día")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("b-form-select", {
+                                    attrs: {
+                                      options: _vm.dias,
+                                      id: "dia",
+                                      name: "dia"
+                                    },
+                                    model: {
+                                      value: _vm.group.dia,
+                                      callback: function($$v) {
+                                        _vm.$set(_vm.group, "dia", $$v)
+                                      },
+                                      expression: "group.dia"
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "b-form-invalid-feedback",
+                                    { attrs: { state: _vm.validateD } },
+                                    [_vm._v("Seleccione un día")]
+                                  )
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "b-col",
+                                { attrs: { cols: "6" } },
+                                [
+                                  _c("label", { attrs: { for: "horai" } }, [
+                                    _vm._v("Hora Inicio")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("b-form-input", {
+                                    attrs: {
+                                      type: "time",
+                                      id: "horai",
+                                      name: "horai"
+                                    },
+                                    model: {
+                                      value: _vm.group.horai,
+                                      callback: function($$v) {
+                                        _vm.$set(_vm.group, "horai", $$v)
+                                      },
+                                      expression: "group.horai"
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c("b-form-invalid-feedback", {
+                                    attrs: { state: _vm.validateH }
+                                  })
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c("br"),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              staticClass:
+                                "d-flex flex-row-reverse bd-highlight"
+                            },
+                            [
+                              _c(
+                                "b-button",
+                                {
+                                  attrs: { variant: "default" },
+                                  on: { click: _vm.revalidate }
+                                },
+                                [_vm._v("Continuar")]
+                              ),
+                              _vm._v(" "),
+                              _c("b-link", { staticClass: "btn btn-danger" }, [
+                                _vm._v("Cancelar")
+                              ])
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                ])
+              ])
+            ])
+          ])
+        ])
+      ])
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "card-header card-header-log card-header-icon" },
+      [
+        _c("div", { staticClass: "card-icon" }, [
+          _c("i", { staticClass: "material-icons" }, [_vm._v("edit")])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-lg-10" }, [
+            _c("h4", { staticClass: "card-title" }, [_vm._v("Modificar grupo")])
+          ])
+        ])
+      ]
+    )
+  }
+]
 render._withStripped = true
 
 
@@ -98576,6 +99499,8 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('available-reports-club', _
 /*BROWSE GROUPS*/
 
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('browse-groups', __webpack_require__(/*! ./components/browse_groups/BrowseGroups.vue */ "./resources/js/components/browse_groups/BrowseGroups.vue")["default"]);
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('create-group', __webpack_require__(/*! ./components/browse_groups/CreateGroup.vue */ "./resources/js/components/browse_groups/CreateGroup.vue")["default"]);
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('edit-group', __webpack_require__(/*! ./components/browse_groups/EditGroup.vue */ "./resources/js/components/browse_groups/EditGroup.vue")["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('select-group', __webpack_require__(/*! ./components/browse_groups/SelectGroup.vue */ "./resources/js/components/browse_groups/SelectGroup.vue")["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('select-group-meeting', __webpack_require__(/*! ./components/browse_groups/SelectGroupR.vue */ "./resources/js/components/browse_groups/SelectGroupR.vue")["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('group-members', __webpack_require__(/*! ./components/browse_groups/BrowseMembers.vue */ "./resources/js/components/browse_groups/BrowseMembers.vue")["default"]);
@@ -99691,6 +100616,75 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/browse_groups/CreateGroup.vue":
+/*!***************************************************************!*\
+  !*** ./resources/js/components/browse_groups/CreateGroup.vue ***!
+  \***************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _CreateGroup_vue_vue_type_template_id_987ec6bc___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CreateGroup.vue?vue&type=template&id=987ec6bc& */ "./resources/js/components/browse_groups/CreateGroup.vue?vue&type=template&id=987ec6bc&");
+/* harmony import */ var _CreateGroup_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CreateGroup.vue?vue&type=script&lang=js& */ "./resources/js/components/browse_groups/CreateGroup.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _CreateGroup_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _CreateGroup_vue_vue_type_template_id_987ec6bc___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _CreateGroup_vue_vue_type_template_id_987ec6bc___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/browse_groups/CreateGroup.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/browse_groups/CreateGroup.vue?vue&type=script&lang=js&":
+/*!****************************************************************************************!*\
+  !*** ./resources/js/components/browse_groups/CreateGroup.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CreateGroup_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./CreateGroup.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/browse_groups/CreateGroup.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CreateGroup_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/browse_groups/CreateGroup.vue?vue&type=template&id=987ec6bc&":
+/*!**********************************************************************************************!*\
+  !*** ./resources/js/components/browse_groups/CreateGroup.vue?vue&type=template&id=987ec6bc& ***!
+  \**********************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CreateGroup_vue_vue_type_template_id_987ec6bc___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./CreateGroup.vue?vue&type=template&id=987ec6bc& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/browse_groups/CreateGroup.vue?vue&type=template&id=987ec6bc&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CreateGroup_vue_vue_type_template_id_987ec6bc___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CreateGroup_vue_vue_type_template_id_987ec6bc___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/js/components/browse_groups/CreateGroupMember.vue":
 /*!*********************************************************************!*\
   !*** ./resources/js/components/browse_groups/CreateGroupMember.vue ***!
@@ -99755,6 +100749,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CreateGroupMember_vue_vue_type_template_id_3ae0f6dc___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CreateGroupMember_vue_vue_type_template_id_3ae0f6dc___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/browse_groups/EditGroup.vue":
+/*!*************************************************************!*\
+  !*** ./resources/js/components/browse_groups/EditGroup.vue ***!
+  \*************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _EditGroup_vue_vue_type_template_id_2bd8c5d8___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./EditGroup.vue?vue&type=template&id=2bd8c5d8& */ "./resources/js/components/browse_groups/EditGroup.vue?vue&type=template&id=2bd8c5d8&");
+/* harmony import */ var _EditGroup_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./EditGroup.vue?vue&type=script&lang=js& */ "./resources/js/components/browse_groups/EditGroup.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _EditGroup_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _EditGroup_vue_vue_type_template_id_2bd8c5d8___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _EditGroup_vue_vue_type_template_id_2bd8c5d8___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/browse_groups/EditGroup.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/browse_groups/EditGroup.vue?vue&type=script&lang=js&":
+/*!**************************************************************************************!*\
+  !*** ./resources/js/components/browse_groups/EditGroup.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_EditGroup_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./EditGroup.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/browse_groups/EditGroup.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_EditGroup_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/browse_groups/EditGroup.vue?vue&type=template&id=2bd8c5d8&":
+/*!********************************************************************************************!*\
+  !*** ./resources/js/components/browse_groups/EditGroup.vue?vue&type=template&id=2bd8c5d8& ***!
+  \********************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_EditGroup_vue_vue_type_template_id_2bd8c5d8___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./EditGroup.vue?vue&type=template&id=2bd8c5d8& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/browse_groups/EditGroup.vue?vue&type=template&id=2bd8c5d8&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_EditGroup_vue_vue_type_template_id_2bd8c5d8___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_EditGroup_vue_vue_type_template_id_2bd8c5d8___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

@@ -43,6 +43,11 @@ Route::resource('/clubs/{club}/members/{id}/payments', 'clubs\PagosController');
 
 /*GROUPS*/
 Route::resource('/clubs/{club}/groups', 'groups\BrowseGroupsController');
+/* SPECIAL DELETE FOR GROUPS */
+Route::patch('/clubs/{club}/delgroup/{grupo}', 'groups\BrowseGroupsController@borrar')->name('groups.borrar');
+Route::put('/clubs/{club}/delgroup/{grupo}', 'groups\BrowseGroupsController@borrar')->name('groups.borrar');
+Route::get('/clubs/{club}/delgroup/{grupo}', 'groups\BrowseGroupsController@borrar')->name('groups.borrar');
+
 Route::resource('/managemembersg', 'groups\GroupMembersController');
 Route::get('/selectgroup', 'groups\SelectGroupController@index')->name('selectgroup');
 Route::get('/selectgroupr', 'groups\SelectGroupRController@index')->name('selectgroup');

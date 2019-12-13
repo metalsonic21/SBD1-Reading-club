@@ -68,7 +68,7 @@ INSERT INTO sjl_grupos_lectura(
 
 INSERT INTO sjl_grupos_lectura(
 	id, id_club, nom, tipo, dia_sem, hora_i, hora_f)
-	VALUES (18, 4, 'Peña Española', 'N', 4, '10:00:00', '12:00:00');
+	VALUES (18, 4, 'Señoras del Cafetal', 'N', 4, '10:00:00', '12:00:00');
 
 INSERT INTO sjl_grupos_lectura(
 	id, id_club, nom, tipo, dia_sem, hora_i, hora_f)

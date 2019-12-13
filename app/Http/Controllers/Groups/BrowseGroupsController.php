@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers\Groups;
 use App\Models\Grupo;
+use App\Models\Inasistencia;
+use App\Models\Member;
 use App\Http\Controllers\Controller;
+use DB;
+use Response;
 use Illuminate\Http\Request;
 
 class BrowseGroupsController extends Controller
@@ -14,7 +18,8 @@ class BrowseGroupsController extends Controller
      */
     public function index($club, Request $request)
     {
-        return view ('groups.browse');
+        $groups = DB::select(DB::raw("SELECT nom, id_club, id, tipo, dia_sem, (select to_char(hora_i::time, 'HH12:MI AM')) || ' - ' || (select to_char(hora_f::time, 'HH12:MI AM')) as horario FROM sjl_grupos_lectura WHERE id_club = '$club'"));
+        return view ('groups.browse')->with('groups',$groups)->with('club',$club);
     }
 
     /**
@@ -22,9 +27,15 @@ class BrowseGroupsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($club, Request $request)
     {
-        //
+        if($request->ajax()){
+            $ngrupos = DB::select(DB::raw("SELECT COUNT(id) FROM sjl_grupos_lectura WHERE id_club = '$club'"));
+            return $ngrupos;
+        }
+        else{
+            return view('groups.creategroup');
+        }
     }
 
     /**
@@ -33,9 +44,17 @@ class BrowseGroupsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $idclub)
     {
-        //
+        $grupo = new Grupo();
+        $grupo->id_club = $idclub;
+        $grupo->nom = $request->nom;
+        $grupo->tipo = $request->tipo;
+        $grupo->dia_sem = $request->dia;
+        $grupo->hora_i = $request->horai;
+        $grupo->hora_f = date( "H:i:s", strtotime( $grupo->hora_i ) + 2 * 3600 );
+        $grupo->save();
+        return $grupo;
     }
 
     /**
@@ -55,9 +74,15 @@ class BrowseGroupsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($club, $group, Request $request)
     {
-        //
+        if($request->ajax()){
+            $g = DB::select(DB::raw("SELECT id, id_club, nom, tipo, dia_sem as dia, hora_i as horai FROM sjl_grupos_lectura WHERE id = '$group' AND id_club = '$club'"));
+            return Response::json(array('data'=>$g));
+        }
+        else{
+            return view('groups.editgroup');
+        }
     }
 
     /**
@@ -67,9 +92,25 @@ class BrowseGroupsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $idclub, $idgrupo)
     {
-        //
+        $grupo = new Grupo();
+        $grupo->id_club = $idclub;
+        $grupo->nom = $request->nom;
+        $grupo->tipo = $request->tipo;
+        $grupo->dia_sem = $request->dia;
+        $grupo->hora_i = $request->horai;
+        $grupo->hora_f = date( "H:i:s", strtotime( $grupo->hora_i ) + 2 * 3600 );
+
+
+        Grupo::where(['id'=>$idgrupo,'id_club'=>$idclub])->update(array(
+            'nom'=> $grupo->nom,
+            'tipo'=>$grupo->tipo,
+            'dia_sem'=>$grupo->dia_sem,
+            'hora_i'=>$grupo->hora_i,
+            'hora_f'=>$grupo->hora_f,
+        ));
+        return $grupo;    
     }
 
     /**
@@ -82,4 +123,28 @@ class BrowseGroupsController extends Controller
     {
         //
     }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+
+     public function borrar(Request $request, $idclub, $idgrupo){
+        $trash = null;
+        Inasistencia::where(['id_grupo'=>$idgrupo])->update(array(
+            'id_grupo'=> $trash,
+        ));
+
+        Member::where(['id_grup'=>$idgrupo])->update(array(
+            'id_grup'=> $trash,
+        ));
+
+        $grupo = Grupo::find($idgrupo);
+        $grupo->delete();
+        return redirect()->route('groups.index', [$idclub]);
+
+     }
 }
