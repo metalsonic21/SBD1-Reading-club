@@ -69,7 +69,7 @@
                                                 @endif
 
                                                 @if ($current == 2)
-                                                <b-link href="#">    <button type="button" rel="tooltip" class="btn btn-default"> Seleccionar 
+                                                <b-link href="/clubs/{{$group->id_club}}/groups/{{$group->id}}/meetings">    <button type="button" rel="tooltip" class="btn btn-default"> Seleccionar 
                                                 </button></b-link>
                                                 @endif
                                                 </td>

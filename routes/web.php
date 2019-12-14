@@ -58,7 +58,7 @@ Route::get('/clubs/{club}/groups/{group}/dropmember/{member}', 'groups\GroupMemb
 
 
 /* MEETINGS */
-Route::get('/managemeetings', 'meetings\MeetingsController@index')->name('managemeetings');
+Route::resource('/clubs/{club}/groups/{group}/meetings', 'meetings\MeetingsController');
 Route::get('/managemeetings/calendar', 'meetings\MeetingsController@calendar')->name('managemeetings');
 
 

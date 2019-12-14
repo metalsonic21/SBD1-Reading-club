@@ -6336,14 +6336,46 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-/* harmony default export */ __webpack_exports__["default"] = ({});
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      meetings: [],
+      club: null,
+      grupo: null
+    };
+  },
+  created: function created() {
+    var _this = this;
+
+    var path = window.location.pathname;
+    var isbn = path.indexOf("/clubs", 0) + 7;
+    var isbnend = path.indexOf("/groups", 0);
+    this.club = path.substring(isbn, isbnend);
+    this.club = parseInt(this.club, 10);
+    var newpath = path.substring(isbnend, path.length);
+    newpath = newpath.replace(/\D/g, '');
+    this.grupo = parseInt(newpath, 10);
+    axios.get("/clubs/".concat(this.club, "/groups/").concat(this.grupo, "/meetings")).then(function (res) {
+      _this.meetings = res.data.data;
+    })["catch"](function (e) {
+      console.log(e);
+    });
+  },
+  methods: {}
+});
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/browse_meetings/Details.vue?vue&type=script&lang=js&":
-/*!**********************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/browse_meetings/Details.vue?vue&type=script&lang=js& ***!
-  \**********************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/browse_meetings/Create.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/browse_meetings/Create.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -6356,65 +6388,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-/* harmony default export */ __webpack_exports__["default"] = ({});
-
-/***/ }),
-
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/browse_meetings/SetMeeting.vue?vue&type=script&lang=js&":
-/*!*************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/browse_meetings/SetMeeting.vue?vue&type=script&lang=js& ***!
-  \*************************************************************************************************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
 //
 //
 //
@@ -6500,30 +6473,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      fields: ['seleccionado', 'documento_de_identidad', 'primer_nombre', 'primer_apellido', 'fecha_de_nacimiento'],
+      perPage: 10,
+      currentPage: 1,
+      fields: ['seleccionado', 'titulo_en_español', 'titulo_original', 'fecha_de_publicacion', 'autor'],
+      meeting: {
+        valoracion: null,
+        conclusion: null,
+        sesion: null,
+        moderador: null
+      },
       items: [{
-        documento_de_identidad: 123456789101112,
-        primer_nombre: 'Leo',
-        primer_apellido: 'Barnes',
-        fecha_de_nacimiento: '01-01-1992'
-      }, {
-        documento_de_identidad: 121110987654321,
-        primer_nombre: 'Frank',
-        primer_apellido: 'Hesse',
-        fecha_de_nacimiento: '02-02-1993'
-      }, {
-        documento_de_identidad: 98765432112110,
-        primer_nombre: 'Thomas',
-        primer_apellido: 'Leonhardt',
-        fecha_de_nacimiento: '03-03-1993'
-      }, {
-        documento_de_identidad: 5678912345111011,
-        primer_nombre: 'Stephan',
-        primer_apellido: 'Schonlau',
-        fecha_de_nacimiento: '04-04-1993'
+        value: null,
+        text: 'Seleccionar'
       }],
-      selected: [],
-      valoracion: null,
+      miembros: [{
+        value: null,
+        text: 'Seleccionar'
+      }],
       valoraciones: [{
         value: null,
         text: 'Seleccionar'
@@ -6543,13 +6509,6 @@ __webpack_require__.r(__webpack_exports__);
         value: 5,
         text: '5'
       }],
-      conclusion: null,
-      moderador: null,
-      miembros: [{
-        value: null,
-        text: 'Seleccionar'
-      }],
-      sesion: null,
       sesiones: [{
         value: null,
         text: 'Seleccionar'
@@ -6562,15 +6521,125 @@ __webpack_require__.r(__webpack_exports__);
       }, {
         value: 3,
         text: '3'
-      }]
+      }],
+      selected: [],
+      club: null,
+      grupo: null
     };
+  },
+  created: function created() {
+    var _this = this;
+
+    var path = window.location.pathname;
+    var isbn = path.indexOf("/clubs", 0) + 7;
+    var isbnend = path.indexOf("/groups", 0);
+    this.club = path.substring(isbn, isbnend);
+    this.club = parseInt(this.club, 10);
+    var newpath = path.substring(isbnend, path.length);
+    newpath = newpath.replace(/\D/g, '');
+    this.grupo = parseInt(newpath, 10);
+    axios.get("/clubs/".concat(this.club, "/groups/").concat(this.grupo, "/meetings/create")).then(function (res) {
+      _this.miembros = res.data.data;
+      _this.items = res.data.libros;
+    })["catch"](function (e) {
+      console.log(e);
+    });
+  },
+  computed: {
+    rows: function rows() {
+      return this.items.length;
+    }
   },
   methods: {
     onRowSelected: function onRowSelected(items) {
       this.selected = items;
+    },
+    add: function add() {
+      var params = {
+        moderador: this.meeting.moderador,
+        conclusion: this.meeting.conclusion,
+        sesion: this.meeting.sesion,
+        valoracion: this.meeting.valoracion,
+
+        /* BOOK */
+        libro: this.selected[0].id,
+        club: this.club,
+        grupo: this.grupo
+      };
+      axios.post("/clubs/".concat(this.club, "/groups/").concat(this.grupo, "/meetings"), params).then(function (res) {
+        console.log(res.data);
+      })["catch"](function (e) {
+        console.log(e);
+      });
     }
   }
 });
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/browse_meetings/Details.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/browse_meetings/Details.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({});
 
 /***/ }),
 
@@ -82222,6 +82291,31 @@ var render = function() {
                                 "\r\n                                        Consultar calendario\r\n                                    "
                               )
                             ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "b-link",
+                            {
+                              staticClass: "btn btn-default float-right mt-3",
+                              attrs: {
+                                href:
+                                  "/clubs/" +
+                                  _vm.club +
+                                  "/groups/" +
+                                  _vm.grupo +
+                                  "/meetings/create"
+                              }
+                            },
+                            [
+                              _c("span", { staticClass: "btn-label" }, [
+                                _c("i", { staticClass: "material-icons" }, [
+                                  _vm._v("add")
+                                ])
+                              ]),
+                              _vm._v(
+                                "\r\n                                        Añadir reunión\r\n                                    "
+                              )
+                            ]
                           )
                         ],
                         1
@@ -82240,125 +82334,129 @@ var render = function() {
                           _c("table", { staticClass: "table" }, [
                             _vm._m(2),
                             _vm._v(" "),
-                            _c("tbody", [
-                              _c("tr", [
-                                _c("td", { staticClass: "text-center" }, [
-                                  _vm._v("Juan Salvador Gaviota")
-                                ]),
-                                _vm._v(" "),
-                                _c("td", { staticClass: "text-center" }, [
-                                  _vm._v("05-12-2019")
-                                ]),
-                                _vm._v(" "),
-                                _c("td", { staticClass: "text-center" }, [
-                                  _vm._v("Acheron River")
-                                ]),
-                                _vm._v(" "),
-                                _c("td", { staticClass: "text-center" }, [
-                                  _vm._v("Frank Hesse")
-                                ]),
-                                _vm._v(" "),
-                                _c("td", { staticClass: "text-center" }, [
-                                  _vm._v("1")
-                                ]),
-                                _vm._v(" "),
-                                _c(
-                                  "td",
-                                  { staticClass: "td-actions text-center" },
-                                  [
-                                    _c(
-                                      "button",
-                                      {
-                                        directives: [
-                                          {
-                                            name: "b-modal",
-                                            rawName:
-                                              "v-b-modal.meeting-details",
-                                            modifiers: {
-                                              "meeting-details": true
+                            _c(
+                              "tbody",
+                              _vm._l(_vm.meetings, function(item, index) {
+                                return _c("tr", { key: index }, [
+                                  _c("td", { staticClass: "text-center" }, [
+                                    _vm._v(_vm._s(item.libro))
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("td", { staticClass: "text-center" }, [
+                                    _vm._v(_vm._s(item.fecha))
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("td", { staticClass: "text-center" }, [
+                                    _vm._v(_vm._s(item.moderador))
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("td", { staticClass: "text-center" }, [
+                                    _vm._v(_vm._s(item.sesion))
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("td", { staticClass: "text-center" }, [
+                                    _vm._v(_vm._s(item.valoracion))
+                                  ]),
+                                  _vm._v(" "),
+                                  _c(
+                                    "td",
+                                    { staticClass: "td-actions text-center" },
+                                    [
+                                      _c(
+                                        "button",
+                                        {
+                                          directives: [
+                                            {
+                                              name: "b-modal",
+                                              rawName:
+                                                "v-b-modal.meeting-details",
+                                              modifiers: {
+                                                "meeting-details": true
+                                              }
                                             }
+                                          ],
+                                          staticClass: "btn btn-info",
+                                          attrs: {
+                                            type: "button",
+                                            rel: "tooltip",
+                                            "data-toggle": "tooltip",
+                                            "data-placement": "bottom",
+                                            title: "Visualizar"
                                           }
-                                        ],
-                                        staticClass: "btn btn-info",
-                                        attrs: {
-                                          type: "button",
-                                          rel: "tooltip",
-                                          "data-toggle": "tooltip",
-                                          "data-placement": "bottom",
-                                          title: "Visualizar"
-                                        }
-                                      },
-                                      [
-                                        _c(
-                                          "i",
-                                          { staticClass: "material-icons" },
-                                          [_vm._v("remove_red_eye")]
-                                        )
-                                      ]
-                                    ),
-                                    _vm._v(" "),
-                                    _c(
-                                      "button",
-                                      {
-                                        directives: [
-                                          {
-                                            name: "b-modal",
-                                            rawName: "v-b-modal.attendance",
-                                            modifiers: { attendance: true }
+                                        },
+                                        [
+                                          _c(
+                                            "i",
+                                            { staticClass: "material-icons" },
+                                            [_vm._v("remove_red_eye")]
+                                          )
+                                        ]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "button",
+                                        {
+                                          directives: [
+                                            {
+                                              name: "b-modal",
+                                              rawName: "v-b-modal.attendance",
+                                              modifiers: { attendance: true }
+                                            }
+                                          ],
+                                          staticClass: "btn btn-default",
+                                          attrs: {
+                                            type: "button",
+                                            rel: "tooltip",
+                                            "data-toggle": "tooltip",
+                                            "data-placement": "bottom",
+                                            title:
+                                              "Control de asistencia para esta reunión"
                                           }
-                                        ],
-                                        staticClass: "btn btn-default",
-                                        attrs: {
-                                          type: "button",
-                                          rel: "tooltip",
-                                          "data-toggle": "tooltip",
-                                          "data-placement": "bottom",
-                                          title:
-                                            "Control de asistencia para esta reunión"
-                                        }
-                                      },
-                                      [
-                                        _c(
-                                          "i",
-                                          { staticClass: "material-icons" },
-                                          [_vm._v("list")]
-                                        )
-                                      ]
-                                    ),
-                                    _vm._v(" "),
-                                    _c(
-                                      "button",
-                                      {
-                                        directives: [
-                                          {
-                                            name: "b-modal",
-                                            rawName: "v-b-modal.add-meeting",
-                                            modifiers: { "add-meeting": true }
+                                        },
+                                        [
+                                          _c(
+                                            "i",
+                                            { staticClass: "material-icons" },
+                                            [_vm._v("list")]
+                                          )
+                                        ]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "button",
+                                        {
+                                          directives: [
+                                            {
+                                              name: "b-modal",
+                                              rawName: "v-b-modal.add-meeting",
+                                              modifiers: { "add-meeting": true }
+                                            }
+                                          ],
+                                          staticClass: "btn btn-success",
+                                          attrs: {
+                                            type: "button",
+                                            rel: "tooltip",
+                                            "data-toggle": "tooltip",
+                                            "data-placement": "bottom",
+                                            title: "Modificar reunión"
                                           }
-                                        ],
-                                        staticClass: "btn btn-success",
-                                        attrs: {
-                                          type: "button",
-                                          rel: "tooltip",
-                                          "data-toggle": "tooltip",
-                                          "data-placement": "bottom",
-                                          title: "Modificar reunión"
-                                        }
-                                      },
-                                      [
-                                        _c(
-                                          "i",
-                                          { staticClass: "material-icons" },
-                                          [_vm._v("edit")]
-                                        )
-                                      ]
-                                    ),
-                                    _vm._v(" "),
-                                    _vm._m(3)
-                                  ]
-                                )
-                              ])
-                            ])
+                                        },
+                                        [
+                                          _c(
+                                            "i",
+                                            { staticClass: "material-icons" },
+                                            [_vm._v("edit")]
+                                          )
+                                        ]
+                                      ),
+                                      _vm._v(" "),
+                                      _vm._m(3, true)
+                                    ]
+                                  )
+                                ])
+                              }),
+                              0
+                            )
                           ])
                         ]
                       )
@@ -82370,8 +82468,6 @@ var render = function() {
           ])
         ])
       ]),
-      _vm._v(" "),
-      _c("set-meeting"),
       _vm._v(" "),
       _c("meeting-attendance"),
       _vm._v(" "),
@@ -82409,11 +82505,11 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", { staticClass: "text-center" }, [_vm._v("Fecha")]),
         _vm._v(" "),
-        _c("th", { staticClass: "text-center" }, [_vm._v("Grupo")]),
-        _vm._v(" "),
         _c("th", { staticClass: "text-center" }, [_vm._v("Moderador")]),
         _vm._v(" "),
         _c("th", { staticClass: "text-center" }, [_vm._v("Sesión")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "text-center" }, [_vm._v("Valoración")]),
         _vm._v(" "),
         _c("th", { staticClass: "text-center" }, [_vm._v("Acción")])
       ])
@@ -82436,6 +82532,340 @@ var staticRenderFns = [
         }
       },
       [_c("i", { staticClass: "material-icons" }, [_vm._v("close")])]
+    )
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/browse_meetings/Create.vue?vue&type=template&id=838aca6e&":
+/*!*************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/browse_meetings/Create.vue?vue&type=template&id=838aca6e& ***!
+  \*************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c("div", { staticClass: "card " }, [
+      _vm._m(0),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "card-body " },
+        [
+          _c(
+            "b-form",
+            [
+              _c(
+                "b-row",
+                [
+                  _c(
+                    "b-col",
+                    { attrs: { cols: "6" } },
+                    [
+                      _c("label", { attrs: { for: "mod" } }, [
+                        _vm._v("Moderador")
+                      ]),
+                      _vm._v(" "),
+                      _c("b-form-select", {
+                        attrs: {
+                          options: _vm.miembros,
+                          id: "mod",
+                          name: "mod"
+                        },
+                        model: {
+                          value: _vm.meeting.moderador,
+                          callback: function($$v) {
+                            _vm.$set(_vm.meeting, "moderador", $$v)
+                          },
+                          expression: "meeting.moderador"
+                        }
+                      })
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "b-col",
+                    { attrs: { cols: "6" } },
+                    [
+                      _c("label", { attrs: { for: "session" } }, [
+                        _vm._v("Sesión")
+                      ]),
+                      _vm._v(" "),
+                      _c("b-form-select", {
+                        attrs: {
+                          options: _vm.sesiones,
+                          id: "session",
+                          name: "session"
+                        },
+                        model: {
+                          value: _vm.meeting.sesion,
+                          callback: function($$v) {
+                            _vm.$set(_vm.meeting, "sesion", $$v)
+                          },
+                          expression: "meeting.sesion"
+                        }
+                      })
+                    ],
+                    1
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c("hr"),
+              _vm._v(" "),
+              _c(
+                "b-row",
+                [
+                  _c("b-col", { attrs: { cols: "6" } }, [
+                    _c("h6", [_c("strong", [_vm._v("LISTA DE LIBROS")])]),
+                    _vm._v(" "),
+                    _c("small", [
+                      _vm._v(
+                        "Seleccione el libro en el que va a estar relacionada esta reunión"
+                      )
+                    ])
+                  ])
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "b-row",
+                [
+                  _c(
+                    "b-col",
+                    { attrs: { cols: "12" } },
+                    [
+                      _c("b-table", {
+                        ref: "selectableTable",
+                        attrs: {
+                          id: "my-table",
+                          selectable: "",
+                          "select-mode": "single",
+                          items: _vm.items,
+                          "per-page": _vm.perPage,
+                          "current-page": _vm.currentPage,
+                          small: "",
+                          fields: _vm.fields,
+                          responsive: "sm"
+                        },
+                        on: { "row-selected": _vm.onRowSelected },
+                        scopedSlots: _vm._u([
+                          {
+                            key: "cell(seleccionado)",
+                            fn: function(ref) {
+                              var rowSelected = ref.rowSelected
+                              return [
+                                rowSelected
+                                  ? [
+                                      _c(
+                                        "span",
+                                        { attrs: { "aria-hidden": "true" } },
+                                        [_vm._v("✓")]
+                                      ),
+                                      _vm._v(" "),
+                                      _c("span", { staticClass: "sr-only" }, [
+                                        _vm._v("Seleccionado")
+                                      ])
+                                    ]
+                                  : [
+                                      _c(
+                                        "span",
+                                        { attrs: { "aria-hidden": "true" } },
+                                        [_vm._v(" ")]
+                                      ),
+                                      _vm._v(" "),
+                                      _c("span", { staticClass: "sr-only" }, [
+                                        _vm._v("No seleccionado")
+                                      ])
+                                    ]
+                              ]
+                            }
+                          }
+                        ])
+                      })
+                    ],
+                    1
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "d-flex flex-row-reverse bd-highlight" },
+                [
+                  _c("b-pagination", {
+                    attrs: {
+                      "total-rows": _vm.rows,
+                      "per-page": _vm.perPage,
+                      "aria-controls": "my-table"
+                    },
+                    model: {
+                      value: _vm.currentPage,
+                      callback: function($$v) {
+                        _vm.currentPage = $$v
+                      },
+                      expression: "currentPage"
+                    }
+                  })
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c("p", [
+                _vm._v("\r\n                    Selected Rows:"),
+                _c("br"),
+                _vm._v(
+                  "\r\n                    " +
+                    _vm._s(_vm.selected) +
+                    "\r\n                "
+                )
+              ]),
+              _vm._v(" "),
+              _c("hr"),
+              _vm._v(" "),
+              _c(
+                "div",
+                { attrs: { id: "conclusiones" } },
+                [
+                  _c(
+                    "b-row",
+                    [
+                      _c("b-col", { attrs: { cols: "6" } }, [
+                        _c("h6", [_c("strong", [_vm._v("CONCLUSIONES")])])
+                      ])
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "b-row",
+                    [
+                      _c(
+                        "b-col",
+                        { attrs: { cols: "12" } },
+                        [
+                          _c("label", { attrs: { for: "conclusion" } }),
+                          _vm._v(" "),
+                          _c("b-form-textarea", {
+                            attrs: { id: "conclusion", name: "conclusion" },
+                            model: {
+                              value: _vm.meeting.conclusion,
+                              callback: function($$v) {
+                                _vm.$set(_vm.meeting, "conclusion", $$v)
+                              },
+                              expression: "meeting.conclusion"
+                            }
+                          })
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c("br"),
+                  _vm._v(" "),
+                  _c(
+                    "b-row",
+                    [
+                      _c(
+                        "b-col",
+                        { attrs: { cols: "6" } },
+                        [
+                          _c("label", { attrs: { for: "valoracion" } }, [
+                            _vm._v("Valoración")
+                          ]),
+                          _vm._v(" "),
+                          _c("b-form-select", {
+                            attrs: {
+                              id: "valoracion",
+                              options: _vm.valoraciones,
+                              name: "valoracion"
+                            },
+                            model: {
+                              value: _vm.meeting.valoracion,
+                              callback: function($$v) {
+                                _vm.$set(_vm.meeting, "valoracion", $$v)
+                              },
+                              expression: "meeting.valoracion"
+                            }
+                          })
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "d-flex flex-row-reverse bd-highlight" },
+                    [
+                      _c(
+                        "b-button",
+                        {
+                          attrs: { variant: "default" },
+                          on: { click: _vm.add }
+                        },
+                        [_vm._v("Continuar")]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "b-link",
+                        {
+                          staticClass: "btn btn-danger",
+                          attrs: { href: "/browseclubs" }
+                        },
+                        [_vm._v("Cancelar")]
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          )
+        ],
+        1
+      )
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "card-header card-header-log card-header-icon" },
+      [
+        _c("div", { staticClass: "card-icon" }, [
+          _c("i", { staticClass: "material-icons" }, [_vm._v("add")])
+        ]),
+        _vm._v(" "),
+        _c("h4", { staticClass: "card-title" }, [
+          _vm._v("Generar reunión mensual")
+        ])
+      ]
     )
   }
 ]
@@ -82577,312 +83007,6 @@ var render = function() {
                         )
                       ])
                     ])
-                  ],
-                  1
-                )
-              ],
-              1
-            )
-          ])
-        ]
-      )
-    ],
-    1
-  )
-}
-var staticRenderFns = []
-render._withStripped = true
-
-
-
-/***/ }),
-
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/browse_meetings/SetMeeting.vue?vue&type=template&id=75fab774&":
-/*!*****************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/browse_meetings/SetMeeting.vue?vue&type=template&id=75fab774& ***!
-  \*****************************************************************************************************************************************************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    [
-      _c(
-        "b-modal",
-        {
-          attrs: {
-            size: "lg",
-            id: "add-meeting",
-            "ok-variant": "default",
-            "ok-title": "Continuar",
-            "cancel-title": "Cancelar",
-            "cancel-variant": "danger"
-          }
-        },
-        [
-          _c("div", { staticClass: "card " }, [
-            _c(
-              "div",
-              { staticClass: "card-header card-header-log card-header-icon" },
-              [
-                _c("div", { staticClass: "card-icon" }, [
-                  _c("i", { staticClass: "material-icons" }, [_vm._v("add")])
-                ]),
-                _vm._v(" "),
-                _c("h4", { staticClass: "card-title" }, [
-                  _vm._v("Datos reunión")
-                ])
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "card-body " },
-              [
-                _c(
-                  "b-form",
-                  [
-                    _c(
-                      "b-row",
-                      [
-                        _c(
-                          "b-col",
-                          { attrs: { cols: "6" } },
-                          [
-                            _c("label", { attrs: { for: "mod" } }, [
-                              _vm._v("Moderador")
-                            ]),
-                            _vm._v(" "),
-                            _c("b-form-select", {
-                              attrs: {
-                                options: _vm.miembros,
-                                id: "mod",
-                                name: "mod"
-                              },
-                              model: {
-                                value: _vm.moderador,
-                                callback: function($$v) {
-                                  _vm.moderador = $$v
-                                },
-                                expression: "moderador"
-                              }
-                            })
-                          ],
-                          1
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "b-col",
-                          { attrs: { cols: "6" } },
-                          [
-                            _c("label", { attrs: { for: "session" } }, [
-                              _vm._v("Sesión")
-                            ]),
-                            _vm._v(" "),
-                            _c("b-form-select", {
-                              attrs: {
-                                options: _vm.sesiones,
-                                id: "session",
-                                name: "session"
-                              },
-                              model: {
-                                value: _vm.sesion,
-                                callback: function($$v) {
-                                  _vm.sesion = $$v
-                                },
-                                expression: "sesion"
-                              }
-                            })
-                          ],
-                          1
-                        )
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c("hr"),
-                    _vm._v(" "),
-                    _c(
-                      "b-row",
-                      [
-                        _c("b-col", { attrs: { cols: "6" } }, [
-                          _c("h6", [_c("strong", [_vm._v("LISTA DE LIBROS")])]),
-                          _vm._v(" "),
-                          _c("small", [
-                            _vm._v(
-                              "Seleccione el libro en el que va a estar relacionada esta reunión"
-                            )
-                          ])
-                        ])
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "b-row",
-                      [
-                        _c(
-                          "b-col",
-                          { attrs: { cols: "12" } },
-                          [
-                            _c("b-table", {
-                              ref: "selectableTable",
-                              attrs: {
-                                selectable: "",
-                                "select-mode": "single",
-                                items: _vm.items,
-                                fields: _vm.fields,
-                                responsive: "sm"
-                              },
-                              on: { "row-selected": _vm.onRowSelected },
-                              scopedSlots: _vm._u([
-                                {
-                                  key: "cell(seleccionado)",
-                                  fn: function(ref) {
-                                    var rowSelected = ref.rowSelected
-                                    return [
-                                      rowSelected
-                                        ? [
-                                            _c(
-                                              "span",
-                                              {
-                                                attrs: { "aria-hidden": "true" }
-                                              },
-                                              [_vm._v("✓")]
-                                            ),
-                                            _vm._v(" "),
-                                            _c(
-                                              "span",
-                                              { staticClass: "sr-only" },
-                                              [_vm._v("Seleccionado")]
-                                            )
-                                          ]
-                                        : [
-                                            _c(
-                                              "span",
-                                              {
-                                                attrs: { "aria-hidden": "true" }
-                                              },
-                                              [_vm._v(" ")]
-                                            ),
-                                            _vm._v(" "),
-                                            _c(
-                                              "span",
-                                              { staticClass: "sr-only" },
-                                              [_vm._v("No seleccionado")]
-                                            )
-                                          ]
-                                    ]
-                                  }
-                                }
-                              ])
-                            })
-                          ],
-                          1
-                        )
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c("p", [
-                      _vm._v("\r\n                        Selected Rows:"),
-                      _c("br"),
-                      _vm._v(
-                        "\r\n                        " +
-                          _vm._s(_vm.selected) +
-                          "\r\n                    "
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("hr"),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      { attrs: { id: "conclusiones" } },
-                      [
-                        _c(
-                          "b-row",
-                          [
-                            _c("b-col", { attrs: { cols: "6" } }, [
-                              _c("h6", [_c("strong", [_vm._v("CONCLUSIONES")])])
-                            ])
-                          ],
-                          1
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "b-row",
-                          [
-                            _c(
-                              "b-col",
-                              { attrs: { cols: "12" } },
-                              [
-                                _c("label", { attrs: { for: "conclusion" } }),
-                                _vm._v(" "),
-                                _c("b-form-textarea", {
-                                  attrs: {
-                                    id: "conclusion",
-                                    name: "conclusion"
-                                  },
-                                  model: {
-                                    value: _vm.conclusion,
-                                    callback: function($$v) {
-                                      _vm.conclusion = $$v
-                                    },
-                                    expression: "conclusion"
-                                  }
-                                })
-                              ],
-                              1
-                            )
-                          ],
-                          1
-                        ),
-                        _vm._v(" "),
-                        _c("br"),
-                        _vm._v(" "),
-                        _c(
-                          "b-row",
-                          [
-                            _c(
-                              "b-col",
-                              { attrs: { cols: "6" } },
-                              [
-                                _c("label", { attrs: { for: "valoracion" } }, [
-                                  _vm._v("Valoración")
-                                ]),
-                                _vm._v(" "),
-                                _c("b-form-select", {
-                                  attrs: {
-                                    id: "valoracion",
-                                    options: _vm.valoraciones,
-                                    name: "valoracion"
-                                  },
-                                  model: {
-                                    value: _vm.valoracion,
-                                    callback: function($$v) {
-                                      _vm.valoracion = $$v
-                                    },
-                                    expression: "valoracion"
-                                  }
-                                })
-                              ],
-                              1
-                            )
-                          ],
-                          1
-                        )
-                      ],
-                      1
-                    )
                   ],
                   1
                 )
@@ -98466,7 +98590,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('create-group-member', __we
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('meetings', __webpack_require__(/*! ./components/browse_meetings/BrowseMeetings.vue */ "./resources/js/components/browse_meetings/BrowseMeetings.vue")["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('meeting-details', __webpack_require__(/*! ./components/browse_meetings/Details.vue */ "./resources/js/components/browse_meetings/Details.vue")["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('meeting-attendance', __webpack_require__(/*! ./components/browse_meetings/Attendance.vue */ "./resources/js/components/browse_meetings/Attendance.vue")["default"]);
-vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('set-meeting', __webpack_require__(/*! ./components/browse_meetings/SetMeeting.vue */ "./resources/js/components/browse_meetings/SetMeeting.vue")["default"]);
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('create-meeting', __webpack_require__(/*! ./components/browse_meetings/Create.vue */ "./resources/js/components/browse_meetings/Create.vue")["default"]);
 /* BOOKS */
 
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('books-create', __webpack_require__(/*! ./components/books/Create.vue */ "./resources/js/components/books/Create.vue")["default"]);
@@ -99846,6 +99970,75 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/browse_meetings/Create.vue":
+/*!************************************************************!*\
+  !*** ./resources/js/components/browse_meetings/Create.vue ***!
+  \************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Create_vue_vue_type_template_id_838aca6e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Create.vue?vue&type=template&id=838aca6e& */ "./resources/js/components/browse_meetings/Create.vue?vue&type=template&id=838aca6e&");
+/* harmony import */ var _Create_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Create.vue?vue&type=script&lang=js& */ "./resources/js/components/browse_meetings/Create.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _Create_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _Create_vue_vue_type_template_id_838aca6e___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _Create_vue_vue_type_template_id_838aca6e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/browse_meetings/Create.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/browse_meetings/Create.vue?vue&type=script&lang=js&":
+/*!*************************************************************************************!*\
+  !*** ./resources/js/components/browse_meetings/Create.vue?vue&type=script&lang=js& ***!
+  \*************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Create_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./Create.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/browse_meetings/Create.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Create_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/browse_meetings/Create.vue?vue&type=template&id=838aca6e&":
+/*!*******************************************************************************************!*\
+  !*** ./resources/js/components/browse_meetings/Create.vue?vue&type=template&id=838aca6e& ***!
+  \*******************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Create_vue_vue_type_template_id_838aca6e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./Create.vue?vue&type=template&id=838aca6e& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/browse_meetings/Create.vue?vue&type=template&id=838aca6e&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Create_vue_vue_type_template_id_838aca6e___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Create_vue_vue_type_template_id_838aca6e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/js/components/browse_meetings/Details.vue":
 /*!*************************************************************!*\
   !*** ./resources/js/components/browse_meetings/Details.vue ***!
@@ -99910,75 +100103,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Details_vue_vue_type_template_id_a0039576___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Details_vue_vue_type_template_id_a0039576___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
-
-
-
-/***/ }),
-
-/***/ "./resources/js/components/browse_meetings/SetMeeting.vue":
-/*!****************************************************************!*\
-  !*** ./resources/js/components/browse_meetings/SetMeeting.vue ***!
-  \****************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _SetMeeting_vue_vue_type_template_id_75fab774___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./SetMeeting.vue?vue&type=template&id=75fab774& */ "./resources/js/components/browse_meetings/SetMeeting.vue?vue&type=template&id=75fab774&");
-/* harmony import */ var _SetMeeting_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./SetMeeting.vue?vue&type=script&lang=js& */ "./resources/js/components/browse_meetings/SetMeeting.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-
-
-
-
-
-/* normalize component */
-
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _SetMeeting_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _SetMeeting_vue_vue_type_template_id_75fab774___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _SetMeeting_vue_vue_type_template_id_75fab774___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
-  false,
-  null,
-  null,
-  null
-  
-)
-
-/* hot reload */
-if (false) { var api; }
-component.options.__file = "resources/js/components/browse_meetings/SetMeeting.vue"
-/* harmony default export */ __webpack_exports__["default"] = (component.exports);
-
-/***/ }),
-
-/***/ "./resources/js/components/browse_meetings/SetMeeting.vue?vue&type=script&lang=js&":
-/*!*****************************************************************************************!*\
-  !*** ./resources/js/components/browse_meetings/SetMeeting.vue?vue&type=script&lang=js& ***!
-  \*****************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SetMeeting_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./SetMeeting.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/browse_meetings/SetMeeting.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SetMeeting_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
-
-/***/ }),
-
-/***/ "./resources/js/components/browse_meetings/SetMeeting.vue?vue&type=template&id=75fab774&":
-/*!***********************************************************************************************!*\
-  !*** ./resources/js/components/browse_meetings/SetMeeting.vue?vue&type=template&id=75fab774& ***!
-  \***********************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SetMeeting_vue_vue_type_template_id_75fab774___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./SetMeeting.vue?vue&type=template&id=75fab774& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/browse_meetings/SetMeeting.vue?vue&type=template&id=75fab774&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SetMeeting_vue_vue_type_template_id_75fab774___WEBPACK_IMPORTED_MODULE_0__["render"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SetMeeting_vue_vue_type_template_id_75fab774___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
