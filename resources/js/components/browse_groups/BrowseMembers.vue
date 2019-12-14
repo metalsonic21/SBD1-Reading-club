@@ -59,7 +59,7 @@
                                                                 </div>
                                                             </template>
                                                             <div>
-                                                                <b-button class="btn btn-danger btn-block">Eliminar</b-button>
+                                                                <b-button class="btn btn-danger btn-block" @click="borrar(item)">Eliminar</b-button>
                                                             </div>
                                                             <b-button class="mt-3" block @click="hideModal(index)">Cancelar</b-button>
                                                         </b-modal>
@@ -131,6 +131,15 @@ export default {
         hideModal(item) {
             item = item.toString();
             this.$bvModal.hide(item);
+        },
+        borrar(item){
+            axios.put(`/clubs/${this.club}/groups/${this.grupo}/dropmember/${item.doc_iden}`, item.doc_iden)
+                .then(res => {
+                    //console.log(res.data);
+                    window.location = `/clubs/${this.club}/groups/${this.grupo}/gmembers`;
+                }).catch(e => {
+                    console.log(e);
+                })
         }
     }
 }

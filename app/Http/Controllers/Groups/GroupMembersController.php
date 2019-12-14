@@ -249,7 +249,7 @@ class GroupMembersController extends Controller
 
     public function borrar(Request $request, $idclub, $idgrupo, $dociden){
         $trash = null;
-        Member::where('doc_iden',$doc_iden)->update(array(
+        Member::where('doc_iden',$dociden)->update(array(
             'id_grup'=> $trash,
         ));
 
@@ -263,6 +263,6 @@ class GroupMembersController extends Controller
             'fec_f'=> date('Y-m-d'),
         ));
 
-        return 1;
+        return $dociden;
     }
 }

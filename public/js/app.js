@@ -5735,6 +5735,16 @@ __webpack_require__.r(__webpack_exports__);
     hideModal: function hideModal(item) {
       item = item.toString();
       this.$bvModal.hide(item);
+    },
+    borrar: function borrar(item) {
+      var _this2 = this;
+
+      axios.put("/clubs/".concat(this.club, "/groups/").concat(this.grupo, "/dropmember/").concat(item.doc_iden), item.doc_iden).then(function (res) {
+        //console.log(res.data);
+        window.location = "/clubs/".concat(_this2.club, "/groups/").concat(_this2.grupo, "/gmembers");
+      })["catch"](function (e) {
+        console.log(e);
+      });
     }
   }
 });
@@ -81637,7 +81647,12 @@ var render = function() {
                                             "b-button",
                                             {
                                               staticClass:
-                                                "btn btn-danger btn-block"
+                                                "btn btn-danger btn-block",
+                                              on: {
+                                                click: function($event) {
+                                                  return _vm.borrar(item)
+                                                }
+                                              }
                                             },
                                             [_vm._v("Eliminar")]
                                           )
