@@ -233,10 +233,6 @@ CREATE TABLE SJL_obras (
     id         SERIAL NOT NULL,
     nom        VARCHAR(20) NOT NULL,
     resum      VARCHAR(200) NOT NULL,
-    costo      INTEGER NOT NULL,
-    durac      DATE NOT NULL,
-    estatus    BOOLEAN,
-    id_local   INTEGER NOT NULL,
     CONSTRAINT obras_pk PRIMARY KEY (id)
 );
 
@@ -249,13 +245,15 @@ CREATE TABLE SJL_personajes (
 );
 
 CREATE TABLE SJL_historicos_presentaciones (
-    fec         DATE NOT NULL,
-    hora_i      DATE NOT NULL,
-    estatus     BOOLEAN,
-    valor       NUMERIC(3),
-    num_asist   INTEGER,
-    id_obra     INTEGER NOT NULL,
-    CONSTRAINT hist_presentaciones_pk PRIMARY KEY (fec)
+    fec        DATE NOT NULL,
+    id_obra    INTEGER NOT NULL,
+    id_local   INTEGER NOT NULL,
+    hora_i     TIME NOT NULL,
+    durac      TIME NOT NULL,
+    valor      NUMERIC(3),
+    num_asist  INTEGER,
+    costo      INTEGER NOT NULL,
+    CONSTRAINT hist_presentaciones_pk PRIMARY KEY (fec,id_obra,id_local)
 );
 
 CREATE TABLE SJL_grupos_lectores (
@@ -284,7 +282,8 @@ CREATE TABLE SJL_elenco_lectores (
     id_lec        INTEGER NOT NULL,
     id_pers       INTEGER NOT NULL,
     id_obra       INTEGER NOT NULL,
-    id_hist_pre   DATE NOT NULL,        
+    id_hist_pre   DATE NOT NULL,    
+    id_local      INTEGER NOT NULL,    
     mej_act       BOOLEAN,
     CONSTRAINT elenco_lectores_pk PRIMARY KEY (id_fec_mem,id_club,id_lec,id_pers,id_obra,id_hist_pre)
 );
@@ -372,7 +371,7 @@ ALTER TABLE SJL_elenco ADD CONSTRAINT elenco_membrecias_fk FOREIGN KEY(id_fec_me
 ALTER TABLE SJL_elenco ADD CONSTRAINT elenco_personajes_fk FOREIGN KEY(id_pers,id_obra) REFERENCES SJL_personajes(id,id_obra);
 
 ALTER TABLE SJL_elenco_lectores ADD CONSTRAINT elenco_lectores_membresias_fk FOREIGN KEY(id_fec_mem,id_club,id_lec,id_pers,id_obra) REFERENCES SJL_elenco(id_fec_mem,id_club,id_lec,id_pers,id_obra);
-ALTER TABLE SJL_elenco_lectores ADD CONSTRAINT elenco_historiales_fk FOREIGN KEY(id_hist_pre) REFERENCES SJL_historicos_presentaciones(fec);
+ALTER TABLE SJL_elenco_lectores ADD CONSTRAINT elenco_historiales_fk FOREIGN KEY(id_hist_pre,id_obra,id_local) REFERENCES SJL_historicos_presentaciones(fec,id_obra,id_local);
 
 ALTER TABLE SJL_historicos_pagos_memb ADD CONSTRAINT historicos_membrecias_fk FOREIGN KEY(id_fec_mem,id_lec,id_club) REFERENCES SJL_membresias(fec_i,id_lec,id_club) ON UPDATE CASCADE;
 
