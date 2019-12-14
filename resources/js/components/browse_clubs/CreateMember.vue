@@ -67,8 +67,8 @@
 
                                             <b-col cols="2">
                                                 <label for="fec_nac">Fecha de Nacimiento</label>
-                                                <b-form-input type="date" v-model="member.fec_nac" v-on:input="mayoredad=true; verifyAge(member.fec_nac)" name="fec_nac" id="fec_nac"></b-form-input>
-                                                <b-form-invalid-feedback :state="validateF">Seleccione una fecha de nacimiento</b-form-invalid-feedback>
+                                                <b-form-input type="date" v-model="member.fec_nac" v-on:input="mayoredad=true; verifyAge(member.fec_nac)" name="fec_nac" id="fec_nac" ></b-form-input>
+                                                <b-form-invalid-feedback :state="validateF">El miembro debe ser mayor de 9 años/El campo no puede estar vacio</b-form-invalid-feedback>
                                             </b-col>
 
                                             <b-col cols="2">
@@ -182,7 +182,7 @@
                                                 <b-col cols="6">
                                                     <label for="fec_nacR">Fecha de Nacimiento</label>
                                                     <b-form-input type="date" v-model="rep.fec_nac" name="fec_nacR" id="fec_nacR"></b-form-input>
-                                                    <b-form-invalid-feedback :state="validateFR">Seleccione una fecha de nacimiento</b-form-invalid-feedback>
+                                                    <b-form-invalid-feedback :state="validateFR">La edad del representante debe ser mayor a 18 años / El campo no puede estar vacio</b-form-invalid-feedback>
 
                                                 </b-col>
                                             </b-row>
@@ -340,6 +340,15 @@ export default {
             })
     },
     computed: {
+       /* createDate(days, months, years) {
+            var date = new Date(); 
+            date.setDate(date.getDate() + days);
+            date.setMonth(date.getMonth() + months);
+            date.setFullYear(date.getFullYear() + years);
+            return date;    
+        },
+        validateRep(){         
+        },*/
         validateD(){
             let verif = true;
             if (this.member.dociden == null || this.member.dociden == '') return false;
@@ -379,25 +388,32 @@ export default {
             return (this.member.genero != null)
         },
         validateF(){
-            return (this.member.fec_nac != null)
+            if ((this.member.fec_nac) == null) return false;
+            else{
+            let verif = true;
+            let a=Date.now();        
+            let b=Date.parse(this.member.fec_nac);
+            if(a-b<284012334000 )return false;            
+            else return verif;
+            }            
         },
         validateCP(){
             if (this.member.codp == null || this.member.codp == '') return false;
-            if (isNaN(this.member.codp || !Number.isInteger(this.member.codp) || this.member.codp<0 || this.member.codp>999))
+            if (this.member.codp<0 || isNaN(this.member.codp) ||  this.member.codp>999 || (this.member.codp%1 )!=0)
             return false;
             else return true;
         },
         validateCODA(){
             let verif = true;
                 if (this.member.coda == null || this.member.coda == '') return false;
-                if (isNaN(this.member.coda || !Number.isInteger(this.member.coda) || this.member.coda<0 || this.member.coda>99999))
+                if (( this.member.coda%1 )!=0 || this.member.coda<0 || this.member.coda>99999|| isNaN(this.member.coda ))
                 return false
                 else return true;
         },
         validateT(){
             let verif = true;
                 if (this.member.telefono == null || this.member.telefono == '') return false;
-                if (isNaN(this.member.telefono || !Number.isInteger(this.member.telefono) || this.member.telefono<0 || this.member.telefono>9999999))
+                if (this.member.telefono<0 ||  (this.member.telefono%1 )!=0 || this.member.telefono>9999999 ||isNaN(this.member.telefono))
                 return false
                 else return true;
         },
@@ -452,7 +468,14 @@ export default {
             return (this.rep.genero != null)
         },
         validateFR(){
-            return (this.rep.fec_nac != null)
+            if ((this.rep.fec_nac) == null) return false;
+            else{
+            let verif = true;
+            let a=Date.now();        
+            let b=Date.parse(this.rep.fec_nac);
+            if(a-b<568024668000)return false;            
+            else return verif;
+            }
         },
         validatePR(){
             return (this.rep.pais != null);

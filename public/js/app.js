@@ -3940,6 +3940,15 @@ __webpack_require__.r(__webpack_exports__);
     });
   },
   computed: {
+    /* createDate(days, months, years) {
+         var date = new Date(); 
+         date.setDate(date.getDate() + days);
+         date.setMonth(date.getMonth() + months);
+         date.setFullYear(date.getFullYear() + years);
+         return date;    
+     },
+     validateRep(){         
+     },*/
     validateD: function validateD() {
       var verif = true;
       if (this.member.dociden == null || this.member.dociden == '') return false;
@@ -3975,21 +3984,26 @@ __webpack_require__.r(__webpack_exports__);
       return this.member.genero != null;
     },
     validateF: function validateF() {
-      return this.member.fec_nac != null;
+      if (this.member.fec_nac == null) return false;else {
+        var verif = true;
+        var a = Date.now();
+        var b = Date.parse(this.member.fec_nac);
+        if (a - b < 284012334000) return false;else return verif;
+      }
     },
     validateCP: function validateCP() {
       if (this.member.codp == null || this.member.codp == '') return false;
-      if (isNaN(this.member.codp || !Number.isInteger(this.member.codp) || this.member.codp < 0 || this.member.codp > 999)) return false;else return true;
+      if (this.member.codp < 0 || isNaN(this.member.codp) || this.member.codp > 999 || this.member.codp % 1 != 0) return false;else return true;
     },
     validateCODA: function validateCODA() {
       var verif = true;
       if (this.member.coda == null || this.member.coda == '') return false;
-      if (isNaN(this.member.coda || !Number.isInteger(this.member.coda) || this.member.coda < 0 || this.member.coda > 99999)) return false;else return true;
+      if (this.member.coda % 1 != 0 || this.member.coda < 0 || this.member.coda > 99999 || isNaN(this.member.coda)) return false;else return true;
     },
     validateT: function validateT() {
       var verif = true;
       if (this.member.telefono == null || this.member.telefono == '') return false;
-      if (isNaN(this.member.telefono || !Number.isInteger(this.member.telefono) || this.member.telefono < 0 || this.member.telefono > 9999999)) return false;else return true;
+      if (this.member.telefono < 0 || this.member.telefono % 1 != 0 || this.member.telefono > 9999999 || isNaN(this.member.telefono)) return false;else return true;
     },
     validateP: function validateP() {
       return this.member.pais != null;
@@ -4031,7 +4045,12 @@ __webpack_require__.r(__webpack_exports__);
       return this.rep.genero != null;
     },
     validateFR: function validateFR() {
-      return this.rep.fec_nac != null;
+      if (this.rep.fec_nac == null) return false;else {
+        var verif = true;
+        var a = Date.now();
+        var b = Date.parse(this.rep.fec_nac);
+        if (a - b < 568024668000) return false;else return verif;
+      }
     },
     validatePR: function validatePR() {
       return this.rep.pais != null;
@@ -77551,7 +77570,7 @@ var render = function() {
                                     { attrs: { state: _vm.validateF } },
                                     [
                                       _vm._v(
-                                        "Seleccione una fecha de nacimiento"
+                                        "El miembro debe ser mayor de 9 años/El campo no puede estar vacio"
                                       )
                                     ]
                                   )
@@ -78162,7 +78181,7 @@ var render = function() {
                                             },
                                             [
                                               _vm._v(
-                                                "Seleccione una fecha de nacimiento"
+                                                "La edad del representante debe ser mayor a 18 años / El campo no puede estar vacio"
                                               )
                                             ]
                                           )
@@ -101177,15 +101196,14 @@ __webpack_require__.r(__webpack_exports__);
 /*!**********************************************************!*\
   !*** ./resources/js/components/theater_plays/create.vue ***!
   \**********************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _create_vue_vue_type_template_id_848612f6___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./create.vue?vue&type=template&id=848612f6& */ "./resources/js/components/theater_plays/create.vue?vue&type=template&id=848612f6&");
 /* harmony import */ var _create_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./create.vue?vue&type=script&lang=js& */ "./resources/js/components/theater_plays/create.vue?vue&type=script&lang=js&");
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _create_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _create_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -101215,7 +101233,7 @@ component.options.__file = "resources/js/components/theater_plays/create.vue"
 /*!***********************************************************************************!*\
   !*** ./resources/js/components/theater_plays/create.vue?vue&type=script&lang=js& ***!
   \***********************************************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
