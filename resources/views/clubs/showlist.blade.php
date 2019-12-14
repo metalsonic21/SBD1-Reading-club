@@ -56,6 +56,10 @@
                                                     @if ($current == 3)
                                                         <b-link href="/clubs/{{$club->id}}/selectg" class="btn btn-default">Seleccionar</b-link>
                                                     @endif
+
+                                                    @if ($current == 4)
+                                                    <a href="{{ route('selectgroupr', ['club' => $club->id])  }}" class="btn btn-default">Seleccionar</a>
+                                                    @endif
                                                 </td>
                                                 </tr>
                                                 @endforeach
