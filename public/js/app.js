@@ -6229,6 +6229,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -6239,8 +6240,76 @@ __webpack_require__.r(__webpack_exports__);
       }, {
         value: true,
         text: 'Sí'
-      }]
+      }],
+      members: [],
+      memberships: [],
+      club: null,
+      grupo: null,
+      libro: null,
+      moderador: null,
+      reunion: null
     };
+  },
+  created: function created() {
+    var _this = this;
+
+    var path = window.location.pathname;
+    var beginc = path.indexOf("bs/") + 3;
+    var endc = path.indexOf("/gr");
+    this.club = path.substring(beginc, endc);
+    var beging = path.indexOf("ups/") + 4;
+    var endg = path.indexOf("/mee");
+    this.grupo = path.substring(beging, endg);
+    var begin4 = path.indexOf("gs/") + 3;
+    var partial = path.substring(begin4, path.length);
+    this.reunion = partial.substring(0, partial.indexOf("/"));
+    var partial2 = partial.substring(partial.indexOf("/") + 1, partial.length);
+    this.moderador = partial2.substring(0, partial2.indexOf("/"));
+    var partial3 = partial2.substring(partial2.indexOf("/") + 1, partial2.length);
+    this.libro = partial3.substring(0, partial3.indexOf("/"));
+    axios.get("/clubs/".concat(this.club, "/groups/").concat(this.grupo, "/meetings/").concat(this.reunion, "/").concat(this.moderador, "/").concat(this.libro, "/attendance")).then(function (res) {
+      _this.members = res.data.data;
+    })["catch"](function (e) {
+      console.log(e);
+    });
+  },
+  methods: {
+    add: function add() {
+      var _this2 = this;
+
+      var i = 0;
+      var gdates = [];
+      var cdates = [];
+      var items = [];
+      var att = [];
+
+      for (i; i < this.members.length; i++) {
+        gdates[i] = this.members[i].fig;
+        cdates[i] = this.members[i].fic;
+        items[i] = this.members[i].id;
+        att[i] = this.members[i].asist;
+      }
+
+      console.log(items);
+      var params = {
+        items: items,
+        gdates: gdates,
+        cdates: cdates,
+        att: att,
+        length: this.members.length,
+        club: this.club,
+        grupo: this.grupo,
+        libro: this.libro,
+        reunion: this.reunion,
+        moderador: this.moderador
+      };
+      axios.post("/clubs/".concat(this.club, "/groups/").concat(this.grupo, "/meetings/").concat(this.reunion, "/").concat(this.moderador, "/").concat(this.libro, "/attendance"), params).then(function (res) {
+        window.location = "/clubs/".concat(_this2.club, "/groups/").concat(_this2.grupo, "/meetings");
+        console.log(res.data);
+      })["catch"](function (e) {
+        console.log(e);
+      });
+    }
   }
 });
 
@@ -6255,7 +6324,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
 //
 //
 //
@@ -82424,94 +82492,114 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    [
-      _c(
-        "b-modal",
-        {
-          attrs: {
-            size: "lg",
-            id: "attendance",
-            "ok-variant": "default",
-            "cancel-variant": "danger",
-            "ok-title": "Actualizar",
-            "cancel-title": "Cerrar"
-          }
-        },
-        [
-          _c("div", { staticClass: "card " }, [
-            _c(
-              "div",
-              { staticClass: "card-header card-header-log card-header-icon" },
-              [
-                _c("div", { staticClass: "card-icon" }, [
-                  _c("i", { staticClass: "material-icons" }, [_vm._v("list")])
+  return _c("div", [
+    _c("div", { staticClass: "card " }, [
+      _vm._m(0),
+      _vm._v(" "),
+      _c("div", { staticClass: "card-body " }, [
+        _c("table", { staticClass: "table" }, [
+          _vm._m(1),
+          _vm._v(" "),
+          _c(
+            "tbody",
+            _vm._l(_vm.members, function(item, index) {
+              return _c("tr", { key: index }, [
+                _c("td", { staticClass: "text-center" }, [
+                  _vm._v(_vm._s(item.nombre))
                 ]),
                 _vm._v(" "),
-                _c("h4", { staticClass: "card-title" }, [
-                  _vm._v("Control de asistencia reunión")
-                ])
-              ]
+                _c("td", { staticClass: "text-center" }, [
+                  _vm._v(_vm._s(item.apellido))
+                ]),
+                _vm._v(" "),
+                _c(
+                  "td",
+                  { staticClass: "td-actions text-center" },
+                  [
+                    _c("b-form-select", {
+                      attrs: {
+                        id: "asistencia",
+                        name: "asistencia",
+                        options: _vm.asistencias
+                      },
+                      model: {
+                        value: item.asist,
+                        callback: function($$v) {
+                          _vm.$set(item, "asist", $$v)
+                        },
+                        expression: "item.asist"
+                      }
+                    })
+                  ],
+                  1
+                )
+              ])
+            }),
+            0
+          )
+        ]),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "d-flex flex-row-reverse bd-highlight" },
+          [
+            _c(
+              "b-button",
+              { attrs: { variant: "default" }, on: { click: _vm.add } },
+              [_vm._v("Continuar")]
             ),
             _vm._v(" "),
-            _c("div", { staticClass: "card-body " }, [
-              _c("table", { staticClass: "table" }, [
-                _c("thead", [
-                  _c("tr", [
-                    _c("th", { staticClass: "text-center" }, [
-                      _vm._v("Nombre")
-                    ]),
-                    _vm._v(" "),
-                    _c("th", { staticClass: "text-center" }, [
-                      _vm._v("Apellido")
-                    ]),
-                    _vm._v(" "),
-                    _c("th", { staticClass: "text-center" }, [
-                      _vm._v("¿Faltó a la reunión?")
-                    ])
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("tbody", [
-                  _c("tr", [
-                    _c("td", { staticClass: "text-center" }, [_vm._v("Frank")]),
-                    _vm._v(" "),
-                    _c("td", { staticClass: "text-center" }, [_vm._v("Hesse")]),
-                    _vm._v(" "),
-                    _c(
-                      "td",
-                      { staticClass: "td-actions text-center" },
-                      [
-                        _c("b-form-select", {
-                          attrs: {
-                            id: "asistencia",
-                            name: "asistencia",
-                            options: _vm.asistencias
-                          },
-                          model: {
-                            value: _vm.asistencia,
-                            callback: function($$v) {
-                              _vm.asistencia = $$v
-                            },
-                            expression: "asistencia"
-                          }
-                        })
-                      ],
-                      1
-                    )
-                  ])
-                ])
-              ])
-            ])
-          ])
-        ]
-      )
-    ],
-    1
-  )
+            _c(
+              "b-link",
+              {
+                staticClass: "btn btn-danger",
+                attrs: { href: "/browseclubs" }
+              },
+              [_vm._v("Cancelar")]
+            )
+          ],
+          1
+        )
+      ])
+    ])
+  ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "card-header card-header-log card-header-icon" },
+      [
+        _c("div", { staticClass: "card-icon" }, [
+          _c("i", { staticClass: "material-icons" }, [_vm._v("list")])
+        ]),
+        _vm._v(" "),
+        _c("h4", { staticClass: "card-title" }, [
+          _vm._v("Control de asistencia reunión")
+        ])
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", { staticClass: "text-center" }, [_vm._v("Nombre")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "text-center" }, [_vm._v("Apellido")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "text-center" }, [
+          _vm._v("¿Faltó a la reunión?")
+        ])
+      ])
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -82675,7 +82763,7 @@ var render = function() {
                                       ),
                                       _vm._v(" "),
                                       _c(
-                                        "button",
+                                        "b-link",
                                         {
                                           directives: [
                                             {
@@ -82686,7 +82774,18 @@ var render = function() {
                                           ],
                                           staticClass: "btn btn-default",
                                           attrs: {
-                                            type: "button",
+                                            href:
+                                              "/clubs/" +
+                                              _vm.club +
+                                              "/groups/" +
+                                              _vm.grupo +
+                                              "/meetings/" +
+                                              item.fecha +
+                                              "/" +
+                                              item.idmod +
+                                              "/" +
+                                              item.idlibro +
+                                              "/attendance",
                                             rel: "tooltip",
                                             "data-toggle": "tooltip",
                                             "data-placement": "bottom",
@@ -82866,8 +82965,6 @@ var render = function() {
           ])
         ])
       ]),
-      _vm._v(" "),
-      _c("meeting-attendance"),
       _vm._v(" "),
       _c("meeting-details")
     ],

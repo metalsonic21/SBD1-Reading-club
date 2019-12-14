@@ -56,9 +56,9 @@
                                                         <button type="button" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Visualizar" class="btn btn-info" v-b-modal.meeting-details>
                                                             <i class="material-icons">remove_red_eye</i>
                                                         </button>
-                                                        <button type="button" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Control de asistencia para esta reunión" class="btn btn-default" v-b-modal.attendance>
+                                                        <b-link v-bind:href="'/clubs/'+club+'/groups/'+grupo+'/meetings/'+item.fecha+'/'+item.idmod+'/'+item.idlibro+'/attendance'" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Control de asistencia para esta reunión" class="btn btn-default" v-b-modal.attendance>
                                                             <i class="material-icons">list</i>
-                                                        </button>
+                                                        </b-link>
                                                         <b-link v-bind:href="'/clubs/'+club+'/groups/'+grupo+'/meetings/'+item.fecha+'/'+item.idmod+'/'+item.idlibro+'/edit'" rel="tooltip" data-toggle="tooltip" v-b-modal.add-meeting data-placement="bottom" title="Modificar reunión" class="btn btn-success">
                                                             <i class="material-icons">edit</i>
                                                         </b-link>
@@ -93,7 +93,6 @@
 
         </div>
     </div>
-    <meeting-attendance></meeting-attendance>
     <meeting-details></meeting-details>
 </div>
 </template>
