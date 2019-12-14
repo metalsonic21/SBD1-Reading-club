@@ -5680,6 +5680,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -5714,6 +5727,14 @@ __webpack_require__.r(__webpack_exports__);
       })["catch"](function (e) {
         console.log(e);
       });
+    },
+    showModal: function showModal(item) {
+      item = item.toString();
+      this.$bvModal.show(item);
+    },
+    hideModal: function hideModal(item) {
+      item = item.toString();
+      this.$bvModal.hide(item);
     }
   }
 });
@@ -81542,7 +81563,104 @@ var render = function() {
                                     ]
                                   ),
                                   _vm._v(" "),
-                                  _vm._m(3, true)
+                                  _c(
+                                    "b-button",
+                                    {
+                                      staticClass: "btn btn-danger",
+                                      attrs: { id: "show-btn" },
+                                      on: {
+                                        click: function($event) {
+                                          return _vm.showModal(index)
+                                        }
+                                      }
+                                    },
+                                    [
+                                      _c(
+                                        "i",
+                                        {
+                                          staticClass: "material-icons",
+                                          attrs: {
+                                            rel: "tooltip",
+                                            "data-toggle": "tooltip",
+                                            "data-placement": "bottom",
+                                            title: "Retirar"
+                                          }
+                                        },
+                                        [_vm._v("close")]
+                                      )
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "b-modal",
+                                    {
+                                      attrs: {
+                                        id: index.toString(),
+                                        "hide-footer": ""
+                                      },
+                                      scopedSlots: _vm._u(
+                                        [
+                                          {
+                                            key: "modal-title",
+                                            fn: function() {
+                                              return [
+                                                _c("div", [
+                                                  _vm._v(
+                                                    "\r\n                                                                    Está apunto de eliminar al miembro\r\n                                                                "
+                                                  )
+                                                ]),
+                                                _vm._v(" "),
+                                                _c("div", [
+                                                  _c("code", [
+                                                    _vm._v(
+                                                      _vm._s(item.nom1) +
+                                                        " " +
+                                                        _vm._s(item.ape1)
+                                                    )
+                                                  ])
+                                                ])
+                                              ]
+                                            },
+                                            proxy: true
+                                          }
+                                        ],
+                                        null,
+                                        true
+                                      )
+                                    },
+                                    [
+                                      _vm._v(" "),
+                                      _c(
+                                        "div",
+                                        [
+                                          _c(
+                                            "b-button",
+                                            {
+                                              staticClass:
+                                                "btn btn-danger btn-block"
+                                            },
+                                            [_vm._v("Eliminar")]
+                                          )
+                                        ],
+                                        1
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "b-button",
+                                        {
+                                          staticClass: "mt-3",
+                                          attrs: { block: "" },
+                                          on: {
+                                            click: function($event) {
+                                              return _vm.hideModal(index)
+                                            }
+                                          }
+                                        },
+                                        [_vm._v("Cancelar")]
+                                      )
+                                    ],
+                                    1
+                                  )
                                 ],
                                 1
                               )
@@ -81600,25 +81718,6 @@ var staticRenderFns = [
         _c("th", { staticClass: "text-center" }, [_vm._v("Acción")])
       ])
     ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "button",
-      {
-        staticClass: "btn btn-danger",
-        attrs: {
-          type: "button",
-          rel: "tooltip",
-          "data-toggle": "tooltip",
-          "data-placement": "bottom",
-          title: "Eliminar"
-        }
-      },
-      [_c("i", { staticClass: "material-icons" }, [_vm._v("close")])]
-    )
   }
 ]
 render._withStripped = true

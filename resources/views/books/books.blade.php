@@ -85,7 +85,7 @@
                                                                 {!! Form::button('Eliminar', ['type' => 'submit','class' => 'btn btn-danger btn-block','size'=>'sm']) !!}
                                                                 {!! Form::close() !!}
                                                                 </div>
-                                                                <b-button class="mt-3" block @click="$bvModal.hide('bv-modal')">Cancelar</b-button>
+                                                                <b-button class="mt-3" block @click=";$bvModal.hide('bv-modal-{{$loop->iteration}}')">Cancelar</b-button>
                                                     </b-modal>
                                                     </div>
                                                     </td>

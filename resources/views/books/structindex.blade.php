@@ -58,10 +58,24 @@
                                                         <b-link href="/books/{{$isbn}}/structure/{{$struct->id}}/edit" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Modificar" class="btn btn-success">
                                                             <i class="material-icons">edit</i>
                                                         </b-link>
-                                                        <div class="d-inline-block">
-                                                            {!! Form::open(['route'=> ['structure.destroy', $isbn, $struct->id, $isbn], 'method'=>'DELETE']) !!}
-                                                            {!! Form::button('<i class="material-icons">close</i>', ['type' => 'submit','class' => 'btn btn-danger']) !!}
-                                                            {!! Form::close() !!}
+
+                                                        <b-button class="btn btn-danger" id="show-btn" @click=";$bvModal.show('bv-modal-{{$loop->iteration}}') "><i class="material-icons">close</i>
+                                                        </b-button>
+                                                        <b-modal id="bv-modal-{{$loop->iteration}}" hide-footer>
+                                                                    <template v-slot:modal-title>
+                                                                    <div>
+                                                                    Por favor confirme que desea la estructura de nombre
+                                                                    </div><div>
+                                                                    <code>{{$struct->nom}}</code> 
+                                                                    </div>
+                                                                    </template>                                                                
+                                                                    <div>                 
+                                                                        {!! Form::open(['route'=> ['structure.destroy', $isbn, $struct->id, $isbn], 'method'=>'DELETE']) !!}
+                                                                        {!! Form::button('Eliminar', ['type' => 'submit','class' => 'btn btn-danger btn-block']) !!}
+                                                                        {!! Form::close() !!}
+                                                                    </div>
+                                                                    <b-button class="mt-3" block @click=";$bvModal.hide('bv-modal-{{$loop->iteration}}')">Cancelar</b-button>
+                                                        </b-modal>
                                                     </td>
                                                 </tr>
                                                 @endforeach

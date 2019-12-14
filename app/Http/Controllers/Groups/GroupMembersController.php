@@ -239,4 +239,30 @@ class GroupMembersController extends Controller
     {
         //
     }
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+
+    public function borrar(Request $request, $idclub, $idgrupo, $dociden){
+        $trash = null;
+        Member::where('doc_iden',$doc_iden)->update(array(
+            'id_grup'=> $trash,
+        ));
+
+        $membresia = DB::select(DB::raw("SELECT fec_i FROM sjl_membresias WHERE fec_f IS NULL AND id_lec = '$dociden' AND id_club = '$idclub'"));
+        $cm = '';
+            if ($membresia)
+                $cm = $membresia[0]->fec_i;
+        
+        /* MEMBERSHIP FOR GROUP */
+        Grupos_Lectores::where(['id_fec_mem'=>$cm,'id_club'=>$idclub,'id_lec'=>$dociden,'id_grupo'=>$idgrupo])->update(array(
+            'fec_f'=> date('Y-m-d'),
+        ));
+
+        return 1;
+    }
 }
