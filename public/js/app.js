@@ -6449,27 +6449,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -6548,6 +6527,12 @@ __webpack_require__.r(__webpack_exports__);
   computed: {
     rows: function rows() {
       return this.items.length;
+    },
+    validateM: function validateM() {
+      return this.meeting.moderador != null;
+    },
+    validateN: function validateN() {
+      return this.meeting.sesion != null;
     }
   },
   methods: {
@@ -6555,6 +6540,8 @@ __webpack_require__.r(__webpack_exports__);
       this.selected = items;
     },
     add: function add() {
+      var _this2 = this;
+
       var params = {
         moderador: this.meeting.moderador,
         conclusion: this.meeting.conclusion,
@@ -6567,10 +6554,22 @@ __webpack_require__.r(__webpack_exports__);
         grupo: this.grupo
       };
       axios.post("/clubs/".concat(this.club, "/groups/").concat(this.grupo, "/meetings"), params).then(function (res) {
-        console.log(res.data);
+        if (_this2.meeting.sesion == 3) alert("Se han generado las reuniones para el libro solicitado en los siguientes días\n" + res.data.f1 + "\n" + res.data.f2 + "\n" + res.data.f3 + "\n");else if (_this2.meeting.sesion == 2) alert("Se han generado las reuniones para el libro solicitado en los siguientes días\n" + res.data.f1 + "\n" + res.data.f2 + "\n");else if (_this2.meeting.sesion == 1) alert("Se han generado las reuniones para el libro solicitado en los siguientes días\n" + res.data.f1 + "\n");
+        window.location = "/clubs/".concat(_this2.club, "/groups/").concat(_this2.grupo, "/meetings");
       })["catch"](function (e) {
         console.log(e);
       });
+    },
+    revalidate: function revalidate() {
+      var msg = '';
+      if (!this.validateN) msg = msg + "Seleccione el número de sesiones\n";
+      if (!this.validateM) msg = msg + "Seleccione un moderador\n";
+
+      if (msg == '') {
+        this.add();
+      } else {
+        alert(msg);
+      }
     }
   }
 });
@@ -82651,67 +82650,15 @@ var render = function() {
         [
           _c(
             "b-form",
+            {
+              on: {
+                submit: function($event) {
+                  $event.preventDefault()
+                  return _vm.add($event)
+                }
+              }
+            },
             [
-              _c(
-                "b-row",
-                [
-                  _c(
-                    "b-col",
-                    { attrs: { cols: "6" } },
-                    [
-                      _c("label", { attrs: { for: "mod" } }, [
-                        _vm._v("Moderador")
-                      ]),
-                      _vm._v(" "),
-                      _c("b-form-select", {
-                        attrs: {
-                          options: _vm.miembros,
-                          id: "mod",
-                          name: "mod"
-                        },
-                        model: {
-                          value: _vm.meeting.moderador,
-                          callback: function($$v) {
-                            _vm.$set(_vm.meeting, "moderador", $$v)
-                          },
-                          expression: "meeting.moderador"
-                        }
-                      })
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "b-col",
-                    { attrs: { cols: "6" } },
-                    [
-                      _c("label", { attrs: { for: "session" } }, [
-                        _vm._v("Sesión")
-                      ]),
-                      _vm._v(" "),
-                      _c("b-form-select", {
-                        attrs: {
-                          options: _vm.sesiones,
-                          id: "session",
-                          name: "session"
-                        },
-                        model: {
-                          value: _vm.meeting.sesion,
-                          callback: function($$v) {
-                            _vm.$set(_vm.meeting, "sesion", $$v)
-                          },
-                          expression: "meeting.sesion"
-                        }
-                      })
-                    ],
-                    1
-                  )
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c("hr"),
-              _vm._v(" "),
               _c(
                 "b-row",
                 [
@@ -82812,115 +82759,104 @@ var render = function() {
                 1
               ),
               _vm._v(" "),
-              _c("p", [
-                _vm._v("\r\n                    Selected Rows:"),
-                _c("br"),
-                _vm._v(
-                  "\r\n                    " +
-                    _vm._s(_vm.selected) +
-                    "\r\n                "
-                )
-              ]),
+              _c("hr"),
+              _vm._v(" "),
+              _c(
+                "b-row",
+                [
+                  _c(
+                    "b-col",
+                    { attrs: { cols: "6" } },
+                    [
+                      _c("label", { attrs: { for: "mod" } }, [
+                        _vm._v("Moderador")
+                      ]),
+                      _vm._v(" "),
+                      _c("b-form-select", {
+                        attrs: {
+                          options: _vm.miembros,
+                          id: "mod",
+                          name: "mod"
+                        },
+                        model: {
+                          value: _vm.meeting.moderador,
+                          callback: function($$v) {
+                            _vm.$set(_vm.meeting, "moderador", $$v)
+                          },
+                          expression: "meeting.moderador"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "b-form-invalid-feedback",
+                        { attrs: { state: _vm.validateM } },
+                        [_vm._v("Seleccione un moderador")]
+                      )
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "b-col",
+                    { attrs: { cols: "6" } },
+                    [
+                      _c("label", { attrs: { for: "session" } }, [
+                        _vm._v("Número de sesiones")
+                      ]),
+                      _vm._v(" "),
+                      _c("b-form-select", {
+                        attrs: {
+                          options: _vm.sesiones,
+                          id: "session",
+                          name: "session"
+                        },
+                        model: {
+                          value: _vm.meeting.sesion,
+                          callback: function($$v) {
+                            _vm.$set(_vm.meeting, "sesion", $$v)
+                          },
+                          expression: "meeting.sesion"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "b-form-invalid-feedback",
+                        { attrs: { state: _vm.validateN } },
+                        [
+                          _vm._v(
+                            "Seleccione el número de sesiones que durará esta reunión"
+                          )
+                        ]
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              ),
               _vm._v(" "),
               _c("hr"),
               _vm._v(" "),
               _c(
                 "div",
-                { attrs: { id: "conclusiones" } },
+                { staticClass: "d-flex flex-row-reverse bd-highlight" },
                 [
                   _c(
-                    "b-row",
-                    [
-                      _c("b-col", { attrs: { cols: "6" } }, [
-                        _c("h6", [_c("strong", [_vm._v("CONCLUSIONES")])])
-                      ])
-                    ],
-                    1
+                    "b-button",
+                    {
+                      attrs: { variant: "default" },
+                      on: { click: _vm.revalidate }
+                    },
+                    [_vm._v("Continuar")]
                   ),
                   _vm._v(" "),
                   _c(
-                    "b-row",
-                    [
-                      _c(
-                        "b-col",
-                        { attrs: { cols: "12" } },
-                        [
-                          _c("label", { attrs: { for: "conclusion" } }),
-                          _vm._v(" "),
-                          _c("b-form-textarea", {
-                            attrs: { id: "conclusion", name: "conclusion" },
-                            model: {
-                              value: _vm.meeting.conclusion,
-                              callback: function($$v) {
-                                _vm.$set(_vm.meeting, "conclusion", $$v)
-                              },
-                              expression: "meeting.conclusion"
-                            }
-                          })
-                        ],
-                        1
-                      )
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c("br"),
-                  _vm._v(" "),
-                  _c(
-                    "b-row",
-                    [
-                      _c(
-                        "b-col",
-                        { attrs: { cols: "6" } },
-                        [
-                          _c("label", { attrs: { for: "valoracion" } }, [
-                            _vm._v("Valoración")
-                          ]),
-                          _vm._v(" "),
-                          _c("b-form-select", {
-                            attrs: {
-                              id: "valoracion",
-                              options: _vm.valoraciones,
-                              name: "valoracion"
-                            },
-                            model: {
-                              value: _vm.meeting.valoracion,
-                              callback: function($$v) {
-                                _vm.$set(_vm.meeting, "valoracion", $$v)
-                              },
-                              expression: "meeting.valoracion"
-                            }
-                          })
-                        ],
-                        1
-                      )
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    { staticClass: "d-flex flex-row-reverse bd-highlight" },
-                    [
-                      _c(
-                        "b-button",
-                        {
-                          attrs: { variant: "default" },
-                          on: { click: _vm.add }
-                        },
-                        [_vm._v("Continuar")]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "b-link",
-                        {
-                          staticClass: "btn btn-danger",
-                          attrs: { href: "/browseclubs" }
-                        },
-                        [_vm._v("Cancelar")]
-                      )
-                    ],
-                    1
+                    "b-link",
+                    {
+                      staticClass: "btn btn-danger",
+                      attrs: { href: "/browseclubs" }
+                    },
+                    [_vm._v("Cancelar")]
                   )
                 ],
                 1
@@ -82947,9 +82883,7 @@ var staticRenderFns = [
           _c("i", { staticClass: "material-icons" }, [_vm._v("add")])
         ]),
         _vm._v(" "),
-        _c("h4", { staticClass: "card-title" }, [
-          _vm._v("Generar reunión mensual")
-        ])
+        _c("h4", { staticClass: "card-title" }, [_vm._v("Generar reuniones")])
       ]
     )
   }
@@ -101177,15 +101111,14 @@ __webpack_require__.r(__webpack_exports__);
 /*!**********************************************************!*\
   !*** ./resources/js/components/theater_plays/create.vue ***!
   \**********************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _create_vue_vue_type_template_id_848612f6___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./create.vue?vue&type=template&id=848612f6& */ "./resources/js/components/theater_plays/create.vue?vue&type=template&id=848612f6&");
 /* harmony import */ var _create_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./create.vue?vue&type=script&lang=js& */ "./resources/js/components/theater_plays/create.vue?vue&type=script&lang=js&");
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _create_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _create_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -101215,7 +101148,7 @@ component.options.__file = "resources/js/components/theater_plays/create.vue"
 /*!***********************************************************************************!*\
   !*** ./resources/js/components/theater_plays/create.vue?vue&type=script&lang=js& ***!
   \***********************************************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -101261,8 +101194,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! E:\SBD1-Reading-club\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! E:\SBD1-Reading-club\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\Hyper\Documents\GitHub\SBD1-Reading-club\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\Hyper\Documents\GitHub\SBD1-Reading-club\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

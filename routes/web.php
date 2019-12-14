@@ -47,7 +47,7 @@ Route::resource('/clubs/{club}/groups', 'groups\BrowseGroupsController');
 Route::patch('/clubs/{club}/delgroup/{grupo}', 'groups\BrowseGroupsController@borrar')->name('groups.borrar');
 Route::put('/clubs/{club}/delgroup/{grupo}', 'groups\BrowseGroupsController@borrar')->name('groups.borrar');
 Route::get('/clubs/{club}/delgroup/{grupo}', 'groups\BrowseGroupsController@borrar')->name('groups.borrar');
-Route::get('/clubs/{club}/selectg', 'groups\SelectGroupController@index')->name('selectgroup');
+Route::get('/clubs/{club}/selectgm', 'groups\SelectGroupController@index')->name('selectgroup');
 Route::get('/clubs/{club}/selectg', 'groups\SelectGroupController@r')->name('selectgroupr');
 
 /* GROUP MEMBERS */
