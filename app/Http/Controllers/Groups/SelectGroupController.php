@@ -13,13 +13,23 @@ class SelectGroupController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($idclub)
+    public function index($idclub, Request $request)
     {
         $groups = DB::select(DB::raw("SELECT nom, id_club, id, tipo, dia_sem, (select to_char(hora_i::time, 'HH12:MI AM')) || ' - ' || (select to_char(hora_f::time, 'HH12:MI AM')) as horario FROM sjl_grupos_lectura WHERE id_club = '$idclub'"));
-        return view ('groups.showlist')->with('groups',$groups)->with('club',$idclub);
+        return view ('groups.showlist')->with('groups',$groups)->with('club',$idclub)->with('current',1);
         //return view ('groups.showlist');
     }
-
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function r($idclub , Request $request)
+    {
+        $groups = DB::select(DB::raw("SELECT nom, id_club, id, tipo, dia_sem, (select to_char(hora_i::time, 'HH12:MI AM')) || ' - ' || (select to_char(hora_f::time, 'HH12:MI AM')) as horario FROM sjl_grupos_lectura WHERE id_club = '$idclub'"));
+        return view ('groups.showlist')->with('groups',$groups)->with('club',$idclub)->with('current',2);
+        //return view ('groups.showlist');
+    }
     /**
      * Show the form for creating a new resource.
      *

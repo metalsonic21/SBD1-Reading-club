@@ -14,7 +14,7 @@
                                     <h4 class="card-title">Miembros del grupo</h4>
                                 </div>
                                 <div class="col-lg-2">
-                                    <b-link  v-bind:href="'/clubs/'+club+'/groups/'+grupo+'/gmembers/create'" class="btn btn-default float-right mt-3">
+                                    <b-link v-bind:href="'/clubs/'+club+'/groups/'+grupo+'/gmembers/create'" class="btn btn-default float-right mt-3">
                                         <span class="btn-label">
                                             <i class="material-icons">add</i>
                                         </span>
@@ -47,9 +47,22 @@
                                                         <b-link v-bind:href="'/clubs/'+item.id_club+'/members/'+item.doc_iden" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Visualizar" class="btn btn-info" v-b-modal.view-member>
                                                             <i class="material-icons">remove_red_eye</i>
                                                         </b-link>
-                                                        <button type="button" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Eliminar" class="btn btn-danger">
-                                                            <i class="material-icons">close</i>
-                                                        </button>
+                                                        <b-button class="btn btn-danger" id="show-btn" @click="showModal(index)"><i class="material-icons" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Retirar">close</i>
+                                                        </b-button>
+                                                        <b-modal v-bind:id="index.toString()" hide-footer>
+                                                            <template v-slot:modal-title>
+                                                                <div>
+                                                                    Está apunto de eliminar al miembro
+                                                                </div>
+                                                                <div>
+                                                                    <code>{{item.nom1}} {{item.ape1}}</code>
+                                                                </div>
+                                                            </template>
+                                                            <div>
+                                                                <b-button class="btn btn-danger btn-block" @click="borrar(item)">Eliminar</b-button>
+                                                            </div>
+                                                            <b-button class="mt-3" block @click="hideModal(index)">Cancelar</b-button>
+                                                        </b-modal>
                                                     </td>
                                                 </tr>
 
@@ -80,7 +93,7 @@ export default {
         }
     },
 
-    created(){
+    created() {
         var path = window.location.pathname;
         var isbn = path.indexOf("/clubs", 0) + 7;
         var isbnend = path.indexOf("/groups", 0);
@@ -91,25 +104,39 @@ export default {
         this.grupo = parseInt(newpath, 10);
 
         axios.get(`/clubs/${this.club}/groups/${this.grupo}/gmembers`)
-                .then(res => {
-                    this.members = res.data.data;
-                }).catch(e => {
-                    console.log(e);
-                })
-
-
+            .then(res => {
+                this.members = res.data.data;
+            }).catch(e => {
+                console.log(e);
+            })
 
         //console.log('id club '+this.club+' id grupo '+this.grupo );
-
 
     },
 
     methods: {
-        add(member){
+        add(member) {
             axios.put(`/clubs/${member.id_club}/groups/${member.id_grup}/gmembers/${member.doc_iden}`, member)
                 .then(res => {
                     console.log(res.data);
                     //window.location = `/clubs/${id}/members/`;
+                }).catch(e => {
+                    console.log(e);
+                })
+        },
+        showModal(item) {
+            item = item.toString();
+            this.$bvModal.show(item);
+        },
+        hideModal(item) {
+            item = item.toString();
+            this.$bvModal.hide(item);
+        },
+        borrar(item){
+            axios.put(`/clubs/${this.club}/groups/${this.grupo}/dropmember/${item.doc_iden}`, item.doc_iden)
+                .then(res => {
+                    //console.log(res.data);
+                    window.location = `/clubs/${this.club}/groups/${this.grupo}/gmembers`;
                 }).catch(e => {
                     console.log(e);
                 })

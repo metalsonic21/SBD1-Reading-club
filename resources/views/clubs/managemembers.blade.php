@@ -83,7 +83,7 @@
                                                                     {!! Form::button('Eliminar', ['type' => 'submit','class' => 'btn btn-danger btn-block','size'=>'sm']) !!}
                                                                     {!! Form::close() !!}
                                                                     </div>
-                                                                    <b-button class="mt-3" block @click="$bvModal.hide('bv-modal')">Cancelar</b-button>
+                                                                    <b-button class="mt-3" block @click=";$bvModal.hide('bv-modal-{{$loop->iteration}}')">Cancelar</b-button>
                                                         </b-modal>
 
                                                         <b-link href="/clubs/{{$club}}/members/{{$member->doc_iden}}/payments" type="button" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Control de pagos" class="btn btn-warning">

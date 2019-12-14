@@ -61,11 +61,17 @@
                                             <td class="text-center">Viernes</td>
                                             @endif
 
-
                                             <td class="text-center">{{$group->horario}}</td>
                                                 <td class="td-actions text-center">
+                                                @if ($current == 1)
                                                 <b-link href="/clubs/{{$group->id_club}}/groups/{{$group->id}}/gmembers">    <button type="button" rel="tooltip" class="btn btn-default"> Seleccionar 
                                                     </button></b-link>
+                                                @endif
+
+                                                @if ($current == 2)
+                                                <b-link href="/clubs/{{$group->id_club}}/groups/{{$group->id}}/meetings">    <button type="button" rel="tooltip" class="btn btn-default"> Seleccionar 
+                                                </button></b-link>
+                                                @endif
                                                 </td>
                                             </tr>
                                             @endforeach

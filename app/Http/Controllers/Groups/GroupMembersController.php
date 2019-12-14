@@ -111,7 +111,7 @@ class GroupMembersController extends Controller
             $ngrupos = DB::select(DB::raw("SELECT COUNT(id) as quantity FROM sjl_grupos_lectura WHERE id_club = '$idclub'"));
             $ng = $ngrupos[0]->quantity+1;
 
-            $dupname = $name.' '.$nameparttwo;
+            $dupname = $name.'DIVISION '.$ng;
 
             /* Update group from 5 members if it's J/N, 7 if A*/
             $members = DB::select(DB::raw("SELECT doc_iden FROM sjl_lectores WHERE id_club = '$idclub' AND id_grup = '$idgrupo'"));
@@ -188,6 +188,23 @@ class GroupMembersController extends Controller
                     $gl->save();                  
                 }
             }
+            Member::where('doc_iden',$dociden)->update(array(
+                'id_grup'=> $idgrupo,
+            ));
+    
+            $membresia = DB::select(DB::raw("SELECT fec_i FROM sjl_membresias WHERE fec_f IS NULL AND id_lec = '$dociden' AND id_club = '$idclub'"));
+            $cm = $membresia[0]->fec_i;
+            
+            /* MEMBERSHIP FOR GROUP */
+    
+            $gl = new Grupos_Lectores();
+            $gl->id_fec_i = date('Y-m-d');
+            $gl->id_fec_mem = $cm;
+            $gl->id_lec = $dociden;
+            $gl->id_club = $idclub;
+            $gl->id_grupo = $idgrupo;
+            $gl->save();
+            return;
         }
 
         else{
@@ -221,5 +238,31 @@ class GroupMembersController extends Controller
     public function destroy($id)
     {
         //
+    }
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+
+    public function borrar(Request $request, $idclub, $idgrupo, $dociden){
+        $trash = null;
+        Member::where('doc_iden',$dociden)->update(array(
+            'id_grup'=> $trash,
+        ));
+
+        $membresia = DB::select(DB::raw("SELECT fec_i FROM sjl_membresias WHERE fec_f IS NULL AND id_lec = '$dociden' AND id_club = '$idclub'"));
+        $cm = '';
+            if ($membresia)
+                $cm = $membresia[0]->fec_i;
+        
+        /* MEMBERSHIP FOR GROUP */
+        Grupos_Lectores::where(['id_fec_mem'=>$cm,'id_club'=>$idclub,'id_lec'=>$dociden,'id_grupo'=>$idgrupo])->update(array(
+            'fec_f'=> date('Y-m-d'),
+        ));
+
+        return $dociden;
     }
 }
