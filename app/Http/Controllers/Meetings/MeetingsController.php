@@ -20,9 +20,13 @@ class MeetingsController extends Controller
         if($request->ajax()){
             $meetings = DB::select(DB::raw("SELECT (
                 SELECT titulo_esp FROM sjl_libros WHERE isbn = r.id_lib
-            ) libro, r.fec as fecha, (
+            ) libro,(
+                SELECT isbn FROM sjl_libros WHERE isbn = r.id_lib
+            ) idlibro, r.fec as fecha, (
                 SELECT nom1 || ' ' || ape1 FROM sjl_lectores WHERE doc_iden = r.id_lec 
-            ) moderador , r.n_ses as sesion, r.valor as valoracion FROM sjl_reuniones_mensuales r"));
+            ) moderador , (
+                SELECT doc_iden FROM sjl_lectores WHERE doc_iden = r.id_lec 
+            ) idmod , r.n_ses as sesion, r.valor as valoracion FROM sjl_reuniones_mensuales r WHERE r.id_club = '$idclub' AND r.id_grupo = '$idgrupo'"));
             return Response::json(array('data'=>$meetings));
         }
         else{
@@ -117,6 +121,7 @@ class MeetingsController extends Controller
                 $reunion->id_club = $idclub;
                 $reunion->id_lec = $request->moderador;
                 $reunion->n_ses = $i;
+                $reunion->id_grupo_mod = $idgrupo;
                 $reunion->save();
             }
         }
@@ -129,7 +134,8 @@ class MeetingsController extends Controller
                 $reunion = new Reunion();
                 $reunion->fec = $fechas[$i-1];
                 $reunion->id_lib = $request->libro;
-                $reunion->id_grupo = $actualidg;
+                $reunion->id_grupo_mod = $actualidg;
+                $reunion->id_grupo = $idgrupo;
                 $reunion->id_fec_i = $actualg;
                 $reunion->id_fec_mem = $actualc;
                 $reunion->id_club = $idclub;
@@ -160,9 +166,33 @@ class MeetingsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function modificar($idclub, $idgrupo, $idreunion, $idmod, $idlibro, Request $request)
     {
-        //
+        if($request->ajax()){
+            $nsession = DB::select(DB::raw("SELECT n_ses as n FROM sjl_reuniones_mensuales WHERE id_lec = '$idmod' AND id_club = '$idclub' AND fec = '$idreunion' "));
+            $n = $nsession[0]->n;
+
+            $limit = DB::select(DB::raw("SELECT max(n_ses) as limit FROM sjl_reuniones_mensuales WHERE id_lib = '$idlibro' and id_lec = '$idmod' and id_club = '$idclub'"));
+            $l = $limit[0]->limit;
+
+            return Response::json(array('actuals'=>$n, 'limit'=>$l));
+
+        }
+        
+        else{
+            return view('meetings.edit');
+        }
+    }
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $idclub, $idgrupo, $idreunion, $idmod, $idlibro)
+    {
+        
     }
 
     /**
@@ -172,9 +202,16 @@ class MeetingsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function concluir(Request $request, $idclub, $idgrupo, $idreunion, $idmod, $idlibro)
     {
-        //
+        /* UPDATE */
+        Reunion::where(['fec'=>$idreunion,'id_lib'=>$idlibro,'id_lec'=>$idmod, 'id_club'=>$idclub])->update(array(
+            'conclu'=>$request->conclusion,
+            'valor'=>$request->valoracion,
+        ));
+
+        /* DELETE EXTRA SESSIONS */
+        DB::delete("DELETE FROM sjl_reuniones_mensuales WHERE n_ses > '$request->ses'");
     }
 
     /**
@@ -183,8 +220,9 @@ class MeetingsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($idclub, $idgrupo, $idreunion)
     {
-        //
+        DB::delete("DELETE FROM sjl_reuniones_mensuales WHERE id_club = '$idclub' AND id_grupo = '$idgrupo' AND fec = '$idreunion'");
+        return 1;
     }
 }

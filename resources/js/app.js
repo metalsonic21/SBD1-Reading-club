@@ -56,6 +56,8 @@ Vue.component('meetings', require('./components/browse_meetings/BrowseMeetings.v
 Vue.component('meeting-details', require('./components/browse_meetings/Details.vue').default);
 Vue.component('meeting-attendance', require('./components/browse_meetings/Attendance.vue').default);
 Vue.component('create-meeting', require('./components/browse_meetings/Create.vue').default);
+Vue.component('edit-meeting', require('./components/browse_meetings/Edit.vue').default);
+
 /* BOOKS */
 Vue.component('books-create', require('./components/books/Create.vue').default);
 Vue.component('books-edit', require('./components/books/Edit.vue').default);
