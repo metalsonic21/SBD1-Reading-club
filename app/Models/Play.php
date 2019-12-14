@@ -12,8 +12,6 @@ class Play extends Model
      * @var string
      */
     protected $table = 'sjl_obras';
-    protected $primaryKey = 'id';
-    public $incrementing = false;
-    protected $fillable = ['id', 'nom', 'resum', 'costo', 'durac', 'estatus', 'id_local'];
+    protected $fillable = ['id', 'nom', 'resum'];
     public $timestamps = false;
 }

@@ -51,7 +51,7 @@
                                                         </button>
                                                         <button type="button" rel="tooltip" class="btn btn-default" v-b-modal.days-plays-{{$loop->iteration}}> Presentaciones 
                                                         </button> 
-                                                    <b-link href="/charactercast"> <button type="button" rel="tooltip" class="btn btn-default"> Ver Elenco 
+                                                        <b-link href="/castplays/{{$play->id}}/edit"> <button type="button" rel="tooltip" class="btn btn-default"> Modificar 
                                                         </button></b-link>
                                                         <button type="button" rel="tooltip" class="btn btn-danger" v-b-modal.bv-modal-{{$loop->iteration}}> Eliminar 
                                                         </button> 
@@ -73,11 +73,11 @@
                                                                     <table class="table">
                                                                             <tr>
                                                                                 <td>Duracion obra:</td>
-                                                                                <td>{{$play->duracion}} Hrs.</td>
+                                                                                <td>1:00 (presentaciones) Hrs.</td>
                                                                             </tr>
                                                                             <tr>
                                                                                 <td>Costo boleto:</td>
-                                                                                <td>{{$play->costo}}$</td>
+                                                                                <td>(presentaciones)$</td>
                                                                             </tr>
                                                                     </table>
                                                                 </div>

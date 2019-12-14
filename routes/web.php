@@ -71,4 +71,5 @@ Route::get('/charactercast', 'theater_plays\CharacterCastController@index')->nam
 Route::get('/earningplays', 'theater_plays\EarningPlaysController@index')->name('earningplays');
 Route::get('/browseplays', 'theater_plays\BrowsePlaysController@index')->name('browseplays');
 Route::get('/charactercastadd', 'theater_plays\CharacterCastAddController@index')->name('charactercastadd');
-Route::resource('/castplays', 'theater_plays\CastPlaysController');
+//Route::resource('/castplays', 'theater_plays\CastPlaysController');
+Route::resource('/castplays', 'theater_plays\playsController');
