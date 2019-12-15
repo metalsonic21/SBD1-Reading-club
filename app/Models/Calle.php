@@ -13,5 +13,6 @@ class Calle extends Model
      */
     protected $table = 'sjl_calles';
     public $timestamps = false;
-    protected $fillable = ['nom', 'cod_post', 'id_urb'];
+    public $incrementing = false;
+    protected $fillable = ['id','nom', 'cod_post', 'id_urb'];
 }

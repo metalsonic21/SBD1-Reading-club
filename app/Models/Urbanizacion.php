@@ -14,5 +14,5 @@ class Urbanizacion extends Model
     protected $table = 'sjl_urbanizaciones';
     public $timestamps = false;
     public $incrementing = false;
-    protected $fillable = ['nom', 'id_ciudad'];
+    protected $fillable = ['id', 'nom', 'id_ciudad'];
 }

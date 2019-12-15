@@ -3861,7 +3861,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      member: [{
+      member: {
         dociden: null,
         nom1: null,
         nom2: null,
@@ -3877,7 +3877,7 @@ __webpack_require__.r(__webpack_exports__);
         coda: null,
         codp: null,
         telefono: null
-      }],
+      },
       rep: [{
         dociden: '',
         nom1: '',
@@ -3942,8 +3942,8 @@ __webpack_require__.r(__webpack_exports__);
   computed: {
     validateD: function validateD() {
       var verif = true;
-      if (this.member.dociden == null || this.member.dociden == '') return false;
-      if (this.member.dociden.toString().length > 8 || isNaN(this.member.dociden)) verif = false;
+      if (this.member.dociden == null || this.member.dociden == '') return null;
+      if (this.member.dociden.toString().length != 8 || isNaN(this.member.dociden)) verif = false;
       if (this.member.dociden.toString().indexOf(".") != -1 || this.member.dociden < 0) verif = false;
       /* Already exists*/
 
@@ -3960,72 +3960,82 @@ __webpack_require__.r(__webpack_exports__);
       return verif;
     },
     validateN: function validateN() {
-      if (this.member.nom1 == null || this.member.nom1 == '' || this.member.nom1.length > 20) return false;else return true;
+      if (this.member.nom1 == null || this.member.nom1 == '') return null;
+      if (this.member.nom1.length > 20) return false;else return true;
     },
     validateSN: function validateSN() {
       if (this.member.nom2 != null && this.member.nom2.length > 20) return false;else return true;
     },
     validateA: function validateA() {
-      if (this.member.ape1 == null || this.member.ape1 == '' || this.member.ape1.length > 20) return false;else return true;
+      if (this.member.ape1 == null || this.member.ape1 == '') return null;
+      if (this.member.ape1.length > 20) return false;else return true;
     },
     validateSA: function validateSA() {
-      if (this.member.ape2 == null || this.member.ape2 == '' || this.member.ape2.length > 20) return false;else return true;
+      if (this.member.ape2 == null || this.member.ape2 == '') return null;
+      if (this.member.ape2.length > 20) return false;else return true;
     },
     validateG: function validateG() {
-      return this.member.genero != null;
+      if (this.member.genero == null) return false;
     },
     validateF: function validateF() {
-      return this.member.fec_nac != null;
+      if (this.member.fec_nac == null) return false;
     },
     validateCP: function validateCP() {
-      if (this.member.codp == null || this.member.codp == '') return false;
-      if (isNaN(this.member.codp || !Number.isInteger(this.member.codp) || this.member.codp < 0 || this.member.codp > 999)) return false;else return true;
+      if (this.member.codp == null || this.member.codp == '') return null;
+      if (!isNaN(this.member.codp) && this.member.codp > 0 && this.member.codp < 999 && this.member.codp.toString().indexOf(".") == -1) return true;else return false;
     },
     validateCODA: function validateCODA() {
       var verif = true;
-      if (this.member.coda == null || this.member.coda == '') return false;
-      if (isNaN(this.member.coda || !Number.isInteger(this.member.coda) || this.member.coda < 0 || this.member.coda > 99999)) return false;else return true;
+      if (this.member.coda == null || this.member.coda == '') return null;
+      if (!isNaN(this.member.coda) && this.member.coda.toString().indexOf(".") == -1 && this.member.coda > 0 && this.member.coda < 99999) return true;else return false;
     },
     validateT: function validateT() {
       var verif = true;
-      if (this.member.telefono == null || this.member.telefono == '') return false;
-      if (isNaN(this.member.telefono || !Number.isInteger(this.member.telefono) || this.member.telefono < 0 || this.member.telefono > 9999999)) return false;else return true;
+      if (this.member.telefono == null || this.member.telefono == '') return null;
+      if (!isNaN(this.member.telefono) && this.member.telefono.toString().indexOf(".") == -1 && this.member.telefono > 0 && this.member.telefono < 9999999999) return true;else return false;
     },
     validateP: function validateP() {
-      return this.member.pais != null;
+      if (this.member.pais == null) return false;
     },
     validateCI: function validateCI() {
-      return this.member.ciudad != null;
+      if (this.member.ciudad == null) return false;
     },
     validateU: function validateU() {
-      if (this.member.urbanizacion == null || this.member.urbanizacion == '' || this.member.urbanizacion.length > 20) return false;else return true;
+      if (this.member.urbanizacion == null || this.member.urbanizacion == '') return null;
+      if (this.member.urbanizacion.length > 20) return false;else return true;
     },
     validateCA: function validateCA() {
-      if (this.member.calle == null || this.member.calle == '' || this.member.calle.length > 20) return false;else return true;
+      if (this.member.calle == null || this.member.calle == '') return null;
+      if (this.member.calle.length > 20) return false;else return true;
     },
     validateZ: function validateZ() {
       var verif = true;
-      if (this.member.zipcode == null || this.member.zipcode == '') return false;
-      if (!isNaN(this.member.zipcode && Number.isInteger(this.member.zipcode) && this.member.zipcode > 0 && this.member.zipcode < 99999)) return true;else return false;
+      if (this.member.zipcode == null || this.member.zipcode == '') return null;
+      if (!isNaN(this.member.zipcode) && this.member.zipcode.toString().indexOf(".") == -1 && this.member.zipcode > 0 && this.member.zipcode < 9999999) return true;else return false;
     },
+
+    /* REPRESENTANTE */
     validateDR: function validateDR() {
       var verif = true;
-      if (this.rep.dociden == null || this.rep.dociden == '') return false;
-      if (this.rep.dociden.toString().length > 8 || isNaN(this.rep.dociden)) verif = false;
+      if (this.rep.dociden == null || this.rep.dociden == '') return null;
+      if (this.rep.dociden.toString().length != 8 || isNaN(this.rep.dociden)) verif = false;
       if (this.rep.dociden.toString().indexOf(".") != -1 || this.rep.dociden < 0) verif = false;
       return verif;
     },
     validateNR: function validateNR() {
-      if (this.rep.nom1 == null || this.rep.nom1 == '' || this.rep.nom1.length > 20) return false;else return true;
+      if (this.rep.nom1 == null || this.rep.nom1 == '') return null;
+      if (this.rep.nom1.length > 20) return false;else return true;
     },
     validateSNR: function validateSNR() {
       if (this.rep.nom2 != null && this.rep.nom2.length > 20) return false;else return true;
     },
     validateAR: function validateAR() {
-      if (this.rep.ape1 == null || this.rep.ape1 == '' || this.rep.ape1.length > 20) return false;else return true;
+      if (this.rep.ape1 == null || this.rep.ape1 == '') return null;
+      if (this.rep.ape1.length > 20) return false;else return true;
     },
     validateSAR: function validateSAR() {
-      if (this.rep.ape2 == null || this.rep.ape2 == '' || this.rep.ape2.length > 20) return false;else return true;
+      if (this.rep.ape2 == null || this.rep.ape2 == '') return null;
+      if (this.rep.ape2.length > 20) return false;else return true;
     },
     validateGR: function validateGR() {
       return this.rep.genero != null;
@@ -4040,15 +4050,17 @@ __webpack_require__.r(__webpack_exports__);
       return this.rep.ciudad != null;
     },
     validateUR: function validateUR() {
-      if (this.rep.urbanizacion == null || this.rep.urbanizacion == '' || this.rep.urbanizacion.length > 20) return false;else return true;
+      if (this.rep.urbanizacion == null || this.rep.urbanizacion == '') return null;
+      if (this.rep.urbanizacion.length > 20) return false;else return true;
     },
     validateCAR: function validateCAR() {
-      if (this.rep.calle == null || this.rep.calle == '' || this.rep.calle.length > 20) return false;else return true;
+      if (this.rep.calle == null || this.rep.calle == '') return null;
+      if (this.rep.calle.length > 20) return false;else return true;
     },
     validateZR: function validateZR() {
       var verif = true;
-      if (this.rep.zipcode == null || this.rep.zipcode == '') return false;
-      if (!isNaN(this.rep.zipcode && Number.isInteger(this.rep.zipcode) && this.rep.zipcode > 0 && this.rep.zipcode < 99999)) return true;else return false;
+      if (this.rep.zipcode == null || this.rep.zipcode == '') return null;
+      if (!isNaN(this.rep.zipcode) && this.member.zipcode.toString().indexOf(".") == -1 && this.rep.zipcode > 0 && this.rep.zipcode < 9999999) return true;else return false;
     }
   },
   methods: {
@@ -4137,8 +4149,6 @@ __webpack_require__.r(__webpack_exports__);
       return this.mayoredad;
     },
     add: function add() {
-      var _this2 = this;
-
       var path = window.location.pathname;
       path = path.replace(/\D/g, '');
       var params = {
@@ -4172,12 +4182,10 @@ __webpack_require__.r(__webpack_exports__);
         zipcodeR: this.rep.zipcode,
         club: path,
         today: this.today
-      };
-      console.log(params); //console.log(params);
+      }; //console.log(params);
 
       axios.post("/clubs/".concat(path, "/members"), params).then(function (res) {
-        //console.log(res.data);
-        window.location = "/clubs/".concat(path, "/members/").concat(_this2.member.dociden, "/favorites");
+        console.log(res.data); //window.location = `/clubs/${path}/members/${this.member.dociden}/favorites`;
       })["catch"](function (e) {
         console.log(e);
       });
@@ -4186,34 +4194,34 @@ __webpack_require__.r(__webpack_exports__);
       var msg = '';
       /* MEMBER */
 
-      if (this.validateD == false) msg = msg + "El campo Documento de Identidad debe ser un número entero positivo de no más de 8 caracteres que no esté registrado anteriormente en la base de datos\n";
-      if (this.validateN == false) msg = msg + "El campo Nombre de Lector no puede estar vacío ni tener más de 20 caracteres\n";
+      if (this.validateD == false || this.validateD == null) msg = msg + "El campo Documento de Identidad debe ser un número entero positivo de no más de 8 caracteres que no esté registrado anteriormente en la base de datos\n";
+      if (this.validateN == false || this.validateN == null) msg = msg + "El campo Nombre de Lector no puede estar vacío ni tener más de 20 caracteres\n";
       if (this.validateSN == false) msg = msg + "El campo Segundo Nombre de Lector no puede tener más de 20 caracteres\n";
-      if (this.validateA == false) msg = msg + "El campo Apellido de Lector no puede estar vacío ni tener más de 20 caracteres\n";
-      if (this.validateSA == false) msg = msg + "El campo Segundo Apellido de Lector no puede estar vacío ni tener más de 20 caracteres\n";
+      if (this.validateA == false || this.validateA == null) msg = msg + "El campo Apellido de Lector no puede estar vacío ni tener más de 20 caracteres\n";
+      if (this.validateSA == false || this.validateSA == null) msg = msg + "El campo Segundo Apellido de Lector no puede estar vacío ni tener más de 20 caracteres\n";
       if (this.validateG == false) msg = msg + "El campo Género no puede estar vacío\n";
-      if (this.validateF == false) msg = msg + "El campo Fecha de Nacimiento de Lector no puede estar vacío";
-      if (this.validateCP == false) msg = msg + "El campo Código de País debe ser número entero, no puede estar vacío ni tener más de 3 caracteres\n";
-      if (this.validateCODA == false) msg = msg + "El campo Código de Área debe ser número entero, no puede estar vacío ni tener más de 5 caracteres\n";
-      if (this.validateT == false) msg = msg + "El campo Número de Teléfono debe ser un número entero, no puede estar vacío ni tener más de 10 caracteres\n";
+      if (this.validateF == false) msg = msg + "El campo Fecha de Nacimiento de Lector no puede estar vacío\n";
+      if (this.validateCP == false || this.validateCP == null) msg = msg + "El campo Código de País debe ser número entero, no puede estar vacío ni tener más de 3 caracteres\n";
+      if (this.validateCODA == false || this.validateCODA == null) msg = msg + "El campo Código de Área debe ser número entero, no puede estar vacío ni tener más de 5 caracteres\n";
+      if (this.validateT == false || this.validateT == null) msg = msg + "El campo Número de Teléfono debe ser un número entero, no puede estar vacío ni tener más de 10 caracteres\n";
       if (this.validateP == false) msg = msg + "El campo País de Lector no puede estar vacío\n";
       if (this.validateCI == false) msg = msg + "El campo Ciudad de Lector no puede estar vacío\n";
-      if (this.validateU == false) msg = msg + "El campo Urbanización (Lector) no puede estar vacío ni tener más de 20 caracteres\n";
-      if (this.validateCA == false) msg = msg + "El campo Calle (Lector) no puede estar vacío ni tener más de 20 caracteres\n";
-      if (this.validateZ == false) msg = msg + "El campo Código postal (Lector) no puede estar vacío, debe ser numérico entero y no puede tener más de 7 caracteres\n";
+      if (this.validateU == false || this.validateU == null) msg = msg + "El campo Urbanización (Lector) no puede estar vacío ni tener más de 20 caracteres\n";
+      if (this.validateCA == false || this.validateCA == null) msg = msg + "El campo Calle (Lector) no puede estar vacío ni tener más de 20 caracteres\n";
+      if (this.validateZ == false || this.validateZ == null) msg = msg + "El campo Código postal (Lector) no puede estar vacío, debe ser numérico entero y no puede tener más de 7 caracteres\n";
 
       if (!this.mayoredad) {
-        if (this.validateDR == false) msg = msg + "El campo Documento de Identidad debe ser un número entero positivo de no más de 8 caracteres\n";
-        if (this.validateNR == false) msg = msg + "El campo Nombre (Representante) no puede estar vacío ni tener más de 20 caracteres\n";
+        if (this.validateDR == false || this.validateDR == null) msg = msg + "El campo Documento de Identidad debe ser un número entero positivo de no más de 8 caracteres\n";
+        if (this.validateNR == false || this.validateNR == null) msg = msg + "El campo Nombre (Representante) no puede estar vacío ni tener más de 20 caracteres\n";
         if (this.validateSNR == false) msg = msg + "El campo Segundo Nombre (Representante) no puede tener más de 20 caracteres\n";
-        if (this.validateAR == false) msg = msg + "El campo Apellido (Representante) no puede estar vacío ni tener más de 20 caracteres\n";
-        if (this.validateSAR == false) msg = msg + "El campo Segundo Apellido (Representante) no puede estar vacío ni tener más de 20 caracteres\n";
+        if (this.validateAR == false || this.validateAR == null) msg = msg + "El campo Apellido (Representante) no puede estar vacío ni tener más de 20 caracteres\n";
+        if (this.validateSAR == false || this.validateSAR == null) msg = msg + "El campo Segundo Apellido (Representante) no puede estar vacío ni tener más de 20 caracteres\n";
         if (this.validateFR == false) msg = msg + "El campo Fecha de Nacimiento (Representante) no puede estar vacío";
         if (this.validatePR == false) msg = msg + "El campo País (Representante) no puede estar vacío\n";
         if (this.validateCIR == false) msg = msg + "El campo Ciudad (Representante) no puede estar vacío\n";
-        if (this.validateUR == false) msg = msg + "El campo Urbanización (Representante) no puede estar vacío ni tener más de 20 caracteres\n";
-        if (this.validateCAR == false) msg = msg + "El campo Calle (Representante) no puede estar vacío ni tener más de 20 caracteres\n";
-        if (this.validateZR == false) msg = msg + "El campo Código postal (Representante) no puede estar vacío, debe ser numérico entero y no puede tener más de 7 caracteres\n";
+        if (this.validateUR == false || this.validateUR == null) msg = msg + "El campo Urbanización (Representante) no puede estar vacío ni tener más de 20 caracteres\n";
+        if (this.validateCAR == false || this.validateCAR == null) msg = msg + "El campo Calle (Representante) no puede estar vacío ni tener más de 20 caracteres\n";
+        if (this.validateZR == false || this.validateZR == null) msg = msg + "El campo Código postal (Representante) no puede estar vacío, debe ser numérico entero y no puede tener más de 7 caracteres\n";
       }
 
       if (msg == '') {
@@ -77615,7 +77623,7 @@ var render = function() {
                                     { attrs: { state: _vm.validateN } },
                                     [
                                       _vm._v(
-                                        "El nombre no puede estar vacío y no debe tener más de 15 caracteres"
+                                        "El nombre no debe tener más de 15 caracteres"
                                       )
                                     ]
                                   )
@@ -77697,7 +77705,7 @@ var render = function() {
                                     { attrs: { state: _vm.validateA } },
                                     [
                                       _vm._v(
-                                        "El apellido no puede estar vacío ni tener más de 15 caracteres"
+                                        "El apellido no puede tener más de 15 caracteres"
                                       )
                                     ]
                                   )
@@ -77734,7 +77742,7 @@ var render = function() {
                                     { attrs: { state: _vm.validateSA } },
                                     [
                                       _vm._v(
-                                        "El segundo apellido no puede estar vacío ni tener más de 15 caracteres"
+                                        "El segundo apellido no puede tener más de 15 caracteres"
                                       )
                                     ]
                                   )
@@ -77775,7 +77783,7 @@ var render = function() {
                                   _c(
                                     "b-form-invalid-feedback",
                                     { attrs: { state: _vm.validateG } },
-                                    [_vm._v("Seleccione un género")]
+                                    [_vm._v("* Requerido")]
                                   )
                                 ],
                                 1
@@ -77813,11 +77821,7 @@ var render = function() {
                                   _c(
                                     "b-form-invalid-feedback",
                                     { attrs: { state: _vm.validateF } },
-                                    [
-                                      _vm._v(
-                                        "Seleccione una fecha de nacimiento"
-                                      )
-                                    ]
+                                    [_vm._v("* Requerido")]
                                   )
                                 ],
                                 1
@@ -78005,7 +78009,7 @@ var render = function() {
                                   _c(
                                     "b-form-invalid-feedback",
                                     { attrs: { state: _vm.validateCI } },
-                                    [_vm._v("Seleccione una ciudad")]
+                                    [_vm._v("* Requerido")]
                                   )
                                 ],
                                 1
@@ -78243,7 +78247,7 @@ var render = function() {
                                             },
                                             [
                                               _vm._v(
-                                                "El nombre no puede estar vacío y no debe tener más de 15 caracteres"
+                                                "El nombre no debe tener más de 15 caracteres"
                                               )
                                             ]
                                           )
@@ -78333,7 +78337,7 @@ var render = function() {
                                             },
                                             [
                                               _vm._v(
-                                                "El apellido no puede estar vacío ni tener más de 15 caracteres"
+                                                "El apellido no puede tener más de 15 caracteres"
                                               )
                                             ]
                                           )
@@ -78374,7 +78378,7 @@ var render = function() {
                                             },
                                             [
                                               _vm._v(
-                                                "El segundo apellido no puede estar vacío ni tener más de 15 caracteres"
+                                                "El segundo apellido no puede tener más de 15 caracteres"
                                               )
                                             ]
                                           )
@@ -78424,11 +78428,7 @@ var render = function() {
                                             {
                                               attrs: { state: _vm.validateFR }
                                             },
-                                            [
-                                              _vm._v(
-                                                "Seleccione una fecha de nacimiento"
-                                              )
-                                            ]
+                                            [_vm._v("* Requerido")]
                                           )
                                         ],
                                         1
@@ -78480,7 +78480,7 @@ var render = function() {
                                             {
                                               attrs: { state: _vm.validatePR }
                                             },
-                                            [_vm._v("Seleccione un país")]
+                                            [_vm._v("* Requerido")]
                                           )
                                         ],
                                         1
@@ -78516,7 +78516,7 @@ var render = function() {
                                             {
                                               attrs: { state: _vm.validateCIR }
                                             },
-                                            [_vm._v("Seleccione una ciudad")]
+                                            [_vm._v("* Requerido")]
                                           )
                                         ],
                                         1
@@ -78566,7 +78566,7 @@ var render = function() {
                                             },
                                             [
                                               _vm._v(
-                                                "Campo urbanización no puede estar vacío ni tener más de 20 caracteres"
+                                                "Campo urbanización no puede tener más de 20 caracteres"
                                               )
                                             ]
                                           )
@@ -78606,7 +78606,7 @@ var render = function() {
                                             },
                                             [
                                               _vm._v(
-                                                "Campo calle no puede estar vacío ni tener más de 20 caracteres"
+                                                "Campo calle no puede tener más de 20 caracteres"
                                               )
                                             ]
                                           )

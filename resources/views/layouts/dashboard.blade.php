@@ -18,7 +18,7 @@
 <meta http-equiv="content-type" content="text/html;charset=utf-8" />
 <head>
   <meta charset="utf-8" />
-  <link rel="icon" type="image/png" href="{{ asset('img/logo/ico-book.png') }}">
+  <link rel="icon" type="image/png" href="{{ asset('img/logo/book-icon.jpg') }}">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
   <!-- Vue -->
@@ -95,25 +95,13 @@
             <b-collapse class="collapse" id="d-1">
                 <ul class="nav">
                   <li class="nav-item ">
-                    <a class="nav-link" href="/members">
-                      <span class="sidebar-normal"> Reportes Miembros del club </span>
+                    <a class="nav-link" href="/browseclubs">
+                      <span class="sidebar-normal"> Gestión de clubes </span>
                     </a>
                   </li>
                   <li class="nav-item ">
                     <a class="nav-link" href="/selectclub">
-                      <span class="sidebar-normal"> Gestión de Miembros del club </span>
-                    </a>
-                  </li>
-                  <li class="nav-item ">
-                    <a class="nav-link" href="/clubreports">
-                      <span class="sidebar-normal"> Reportes por club </span>
-                    </a>
-                  </li>
-                  
-  
-                  <li class="nav-item ">
-                    <a class="nav-link" href="/browseclubs">
-                      <span class="sidebar-normal"> Explorar clubes de lectura </span>
+                      <span class="sidebar-normal"> Gestión de miembros </span>
                     </a>
                   </li>
                 </ul>
@@ -131,12 +119,12 @@
                 <ul class="nav">
                     <li class="nav-item ">
                       <a class="nav-link" href="/selectclubg">
-                        <span class="sidebar-normal"> Explorar grupos de lectura </span>
+                        <span class="sidebar-normal"> Gestión de grupos </span>
                       </a>
                     </li>
                     <li class="nav-item ">
                       <a class="nav-link" href="/selectclubgm">
-                        <span class="sidebar-normal"> Gestión de miembros de grupos</span>
+                        <span class="sidebar-normal"> Gestión de miembros</span>
                       </a>
                     </li>
                   </ul>
@@ -153,7 +141,7 @@
                 <ul class="nav">
                     <li class="nav-item ">
                       <a class="nav-link" href="/selectclubr">
-                        <span class="sidebar-normal"> Explorar reuniones </span>
+                        <span class="sidebar-normal"> Gestión de reuniones </span>
                       </a>
                     </li>
                   </ul>
@@ -161,7 +149,7 @@
           </li>
           <li class="nav-item ">
             <b-link class="nav-link" v-b-toggle.d-4>
-                <i class="material-icons">library_books</i>
+                <i class="material-icons">menu_book</i>
                 <p> Libros
                   <b class="caret"></b>
                 </p>
@@ -178,7 +166,7 @@
           </li>
           <li class="nav-item ">
             <b-link class="nav-link" v-b-toggle.d-5>
-                <i class="material-icons">emoji_people</i>
+                <i class="material-icons">camera_roll</i>
                 <p> Obras de teatro
                   <b class="caret"></b>
                 </p>
@@ -203,6 +191,29 @@
                     </li>
                   </ul>
             </b-collapse>
+
+            <li class="nav-item ">
+              <b-link class="nav-link" v-b-toggle.d-6>
+                  <i class="material-icons">file_copy</i>
+                  <p> Reportes
+                    <b class="caret"></b>
+                  </p>
+              </b-link>
+  
+              <b-collapse id="d-6" class="collapse">
+                  <ul class="nav">
+                      <li class="nav-item ">
+                        <a class="nav-link" href="/members">
+                          <span class="sidebar-normal"> Club </span>
+                        </a>
+                      </li>
+                      <li class="nav-item ">
+                        <a class="nav-link" href="/clubreports">
+                          <span class="sidebar-normal"> Miembros de club </span>
+                        </a>
+                      </li>
+                    </ul>
+              </b-collapse>
           </li>
         </ul>
       </div>
