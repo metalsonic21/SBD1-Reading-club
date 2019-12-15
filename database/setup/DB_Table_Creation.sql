@@ -157,7 +157,7 @@ CREATE TABLE SJL_reuniones_mensuales (
     id_club           INTEGER NOT NULL,
     id_lec            INTEGER NOT NULL,
     n_ses             NUMERIC(2) NOT NULL,
-    conclu            VARCHAR(200),
+    conclu            VARCHAR(1000),
     valor             NUMERIC(3),
     CONSTRAINT reuniones_mensuales_pk PRIMARY KEY (fec,id_lib,id_grupo,id_club)
 );
