@@ -66,6 +66,7 @@ Vue.component('struct-edit', require('./components/books/StructEdit.vue').defaul
 Vue.component('plays-clubs', require('./components/theater_plays/PlaysClubs.vue').default);
 Vue.component('cast-plays', require('./components/theater_plays/CastPlays.vue').default);
 Vue.component('plays-create', require('./components/theater_plays/create.vue').default);
+Vue.component('plays-edit', require('./components/theater_plays/edit.vue').default);
 Vue.component('character-cast', require('./components/theater_plays/CharacterCast.vue').default);
 Vue.component('earning-plays', require('./components/theater_plays/EarningPlays.vue').default);
 Vue.component('browse-plays',  require('./components/theater_plays/BrowsePlays.vue').default);

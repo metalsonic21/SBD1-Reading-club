@@ -8420,18 +8420,15 @@ __webpack_require__.r(__webpack_exports__);
       nom: '',
       resum: '',
       ob: '',
-      ObraBase: [{
-        value: null,
-        text: 'Seleccionar'
-      }],
-      editoriales: [{}]
+      ObraBase: '',
+      libros: [{}]
     };
   },
   created: function created() {
     var _this = this;
 
     axios.get('/castplays/create').then(function (res) {
-      _this.editoriales = res.data.libros;
+      _this.libros = res.data.libros;
       console.log(res.data.libros);
     })["catch"](function (e) {
       console.log(e);
@@ -8566,6 +8563,259 @@ __webpack_require__.r(__webpack_exports__);
             /* CRUD BOOKS */
     add: function add() {
       var params = {
+        id: this.id,
+        ObraBase: this.ObraBase,
+        nom: this.nom,
+        resum: this.resum,
+        headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+      };
+      this.ObraBase = '';
+      this.nom = '';
+      this.ob = '';
+      this.resum = '';
+      axios.post('/castplays', params).then(function (res) {
+        window.location = "/castplays";
+      })["catch"](function (e) {
+        console.log(e);
+      });
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/theater_plays/edit.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/theater_plays/edit.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      id: '',
+      nom: '',
+      resum: '',
+      ob: '',
+      ObraBase: {
+        'text': ''
+      },
+      libros: [{}]
+    };
+  },
+  created: function created() {
+    var _this = this;
+
+    var play = window.location.pathname;
+    play = play.replace(/\D/g, '');
+    axios.get("/castplays/".concat(play, "/edit")).then(function (res) {
+      _this.libros = res.data.libros;
+      _this.nom = res.data.play[0].nom;
+      _this.resum = res.data.play[0].resum;
+      _this.id = res.data.play[0].id; //this.ObraBase[0].value = res.data.value;
+
+      _this.ObraBase.text = res.data.text;
+      console.log(res.data.text);
+    })["catch"](function (e) {
+      console.log(e);
+    });
+  },
+  computed: {
+    validateISBN: function validateISBN() {
+      var isValid = null;
+      if (this.book.isbn != '' && (this.book.isbn.length != 5 || isNaN(this.book.isbn) || this.book.isbn.indexOf(".") != -1 || this.book.isbn < 0)) isValid = false;else isValid = true;
+      return isValid;
+    },
+    validateTO: function validateTO() {
+      return this.book.titulo_ori != '';
+    },
+    validateTE: function validateTE() {
+      return this.book.titulo_esp != '';
+    },
+    validateSinopsis: function validateSinopsis() {
+      return this.book.sinop.length > 9;
+    },
+    validateNP: function validateNP() {
+      var isValid = null;
+      if (this.book.n_pag != null && (isNaN(this.book.n_pag) || this.book.n_pag.indexOf(".") != -1 || this.book.n_pag < 0 || this.book.n_pag > 999999)) isValid = false;else isValid = true;
+      return isValid;
+    },
+    validateF: function validateF() {
+      return this.book.fec_pub != null;
+    },
+    validateA: function validateA() {
+      return this.book.autor != '';
+    },
+    validateG: function validateG() {
+      return this.book.genero != null;
+    },
+    validateSG: function validateSG() {
+      return this.book.subg != null;
+    },
+    validateE: function validateE() {
+      return this.book.editorial != null;
+    },
+    validateP: function validateP() {
+      var _this2 = this;
+
+      var verif = this.libros.findIndex(function (isbn) {
+        return isbn.isbn == _this2.book.prev;
+      }) != -1;
+      var validPrev = null;
+      if (this.book.prev != '' && (this.book.prev.length != 5 || isNaN(this.book.prev.isbn) || this.book.prev.indexOf(".") != -1 || this.book.prev.isbn < 0)) validPrev = false;else validPrev = true;
+      if (this.book.prev == '') return true;
+      return this.book.prev != this.book.isbn && verif || validPrev;
+    }
+  },
+  methods: {
+    /* ADD OR HIDE STRUCTURE FORM
+      showAddForm() {
+        this.wants_to_add = true;
+        this.wants_to_edit = false;
+        return this.wants_to_add;
+    },
+    hideAddForm() {
+        this.wants_to_add = false;
+        return this.wants_to_add;
+    },
+    showEditForm() {
+        this.wants_to_edit = true;
+        this.wants_to_add = false;
+        return this.wants_to_edit;
+    },
+    hideEditForm() {
+        this.wants_to_edit = false;
+        return this.wants_to_edit;
+    },
+        convert(id, length) {
+        let pos = id.indexOf("-");
+        let res = id.substring(pos + 1, length);
+        parseInt(res, 10);
+        return res;
+    },
+      filter() {
+        /* Filter subgenres according to the genre
+        this.subgeneros = [{}],
+            this.subgenerosfiltered = [{}],
+            this.book.subg = null,
+            this.subgeneros = this.subgbackup;
+          let i = 0;
+          for (i = 0; i < this.subgeneros.length; i++) {
+            /* Converted ID is id_sub
+            let convertedid = this.convert(this.subgeneros[i].value, this.subgeneros.length);
+            if (this.book.genero == convertedid) {
+                let actualid = this.subgeneros[i].value.substring(0, this.subgeneros[i].value.indexOf("-"));
+                actualid = parseInt(actualid, 10);
+                this.subgenerosfiltered.push({
+                    value: actualid,
+                    text: this.subgeneros[i].text
+                });
+            }
+        }
+          this.subgeneros = [{}];
+        this.subgeneros = this.subgenerosfiltered;
+          this.subgeneros[0].value = null;
+        this.subgeneros[0].text = 'Seleccionar';
+    },*/
+
+    /*
+            revalidate(){
+              let msg = '';
+              let isValid = true;
+    
+                if (this.validateISBN == false) msg = msg + "El ISBN debe ser un campo numérico entero de al menos 5 caracteres\n";
+                if (this.validateTO == false) msg = msg +  "El campo Título Original no puede estar vacío\n";
+                if (this.validateTE == false) msg = msg + "El campo Título en Español no puede estar vacío\n";
+                if (this.validateSinopsis == false) msg = msg + "El campo Sinopsis debe tener al menos 10 caracteres\n";
+                if (this.validateNP == false) msg = msg + "El campo número de páginas debe ser numérico entero\n";
+                if (this.validateF == false) msg = msg + "El campo Fecha de publicación no puede estar vacío\n";
+                if (this.book.editorial == null) msg = msg + "El campo Editorial no puede estar vacío\n";
+                if (this.book.genero == null) msg = msg + "El campo Genero no puede estar vacío\n";
+                if (this.book.genero != null && this.book.subg == null) msg = msg + "El campo Subgénro no puede estar vacío\n";
+                if (this.validateA == false) msg = msg + "El campo Autor no puede estar vacío\n";
+                if (this.validateG == false) msg = msg + "El campo Género no puede estar vacío\n";
+                if (this.validateSG == false) msg = msg + "El campo Subgénero no puede estar vacío\n";
+                if (this.validateE == false) msg = msg + "El campo Editorial no puede estar vacío\n";
+                if (this.validateP == false) msg = msg + "En el campo libro predecesor debe haber un ISBN válido\n";
+                if (msg!=''){
+                    isValid = false;
+                    alert(msg);
+                }
+                else {
+                    this.add();
+                }
+            },
+    
+            /* CRUD BOOKS */
+    add: function add() {
+      var play = window.location.pathname;
+      play = play.replace(/\D/g, '');
+      var params = {
+        id: this.id,
         nom: this.nom,
         resum: this.resum,
         headers: {
@@ -8575,7 +8825,7 @@ __webpack_require__.r(__webpack_exports__);
       this.nom = '';
       this.ob = '';
       this.resum = '';
-      axios.post('/castplays', params).then(function (res) {
+      axios.put("/castplays/".concat(play), params).then(function (res) {
         window.location = "/castplays";
       })["catch"](function (e) {
         console.log(e);
@@ -86232,21 +86482,19 @@ var render = function() {
                                   ]),
                                   _vm._v(" "),
                                   _c("b-form-select", {
-                                    attrs: { options: _vm.editoriales },
+                                    attrs: { options: _vm.libros },
                                     model: {
-                                      value: _vm.editoriales,
+                                      value: _vm.ObraBase,
                                       callback: function($$v) {
-                                        _vm.editoriales = $$v
+                                        _vm.ObraBase = $$v
                                       },
-                                      expression: "editoriales"
+                                      expression: "ObraBase"
                                     }
                                   }),
                                   _vm._v(" "),
                                   _c("div", { staticClass: "mt-3" }, [
                                     _vm._v("Selected: "),
-                                    _c("strong", [
-                                      _vm._v(_vm._s(_vm.editoriales))
-                                    ])
+                                    _c("strong", [_vm._v(_vm._s(_vm.ObraBase))])
                                   ])
                                 ],
                                 1
@@ -86349,6 +86597,210 @@ var staticRenderFns = [
             _c("h4", { staticClass: "card-title" }, [
               _vm._v("Añadir nueva obra")
             ])
+          ])
+        ])
+      ]
+    )
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/theater_plays/edit.vue?vue&type=template&id=f989d65a&":
+/*!*********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/theater_plays/edit.vue?vue&type=template&id=f989d65a& ***!
+  \*********************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c("div", { staticClass: "content" }, [
+      _c("div", { staticClass: "container-fluid" }, [
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-md-12" }, [
+            _c("div", { staticClass: "card" }, [
+              _vm._m(0),
+              _vm._v(" "),
+              _c("div", { staticClass: "card-body" }, [
+                _c("div", { staticClass: "row" }, [
+                  _c(
+                    "div",
+                    { staticClass: "col-lg-12" },
+                    [
+                      _c(
+                        "b-form",
+                        {
+                          on: {
+                            submit: function($event) {
+                              $event.preventDefault()
+                              return _vm.add($event)
+                            }
+                          }
+                        },
+                        [
+                          _c(
+                            "b-row",
+                            [
+                              _c(
+                                "b-col",
+                                { attrs: { cols: "6" } },
+                                [
+                                  _c("label", { attrs: { for: "Nombre" } }, [
+                                    _vm._v("Nombre")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("b-form-input", {
+                                    attrs: {
+                                      type: "text",
+                                      required: "",
+                                      id: "nombre",
+                                      name: "nombre"
+                                    },
+                                    model: {
+                                      value: _vm.nom,
+                                      callback: function($$v) {
+                                        _vm.nom = $$v
+                                      },
+                                      expression: "nom"
+                                    }
+                                  })
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "b-col",
+                                { attrs: { cols: "6  " } },
+                                [
+                                  _c("label", { attrs: { for: "Nombre" } }, [
+                                    _vm._v("Obra Base")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("b-form-select", {
+                                    attrs: { options: _vm.libros },
+                                    model: {
+                                      value: _vm.ObraBase,
+                                      callback: function($$v) {
+                                        _vm.ObraBase = $$v
+                                      },
+                                      expression: "ObraBase"
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "mt-3" }, [
+                                    _vm._v("ISBN: "),
+                                    _c("strong", [_vm._v(_vm._s(_vm.ObraBase))])
+                                  ])
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "b-row",
+                            [
+                              _c(
+                                "b-col",
+                                { attrs: { cols: "6" } },
+                                [
+                                  _c("label", { attrs: { for: "Nombre" } }, [
+                                    _vm._v("resum")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("b-form-input", {
+                                    attrs: {
+                                      type: "text",
+                                      required: "",
+                                      id: "resum",
+                                      name: "resum"
+                                    },
+                                    model: {
+                                      value: _vm.resum,
+                                      callback: function($$v) {
+                                        _vm.resum = $$v
+                                      },
+                                      expression: "resum"
+                                    }
+                                  })
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c("br"),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              staticClass:
+                                "d-flex flex-row-reverse bd-highlight"
+                            },
+                            [
+                              _c(
+                                "b-button",
+                                {
+                                  attrs: { variant: "default", type: "submit" }
+                                },
+                                [_vm._v("Continuar")]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "b-link",
+                                {
+                                  staticClass: "btn btn-danger",
+                                  attrs: { href: "/castplays" }
+                                },
+                                [_vm._v("Cancelar")]
+                              )
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                ])
+              ])
+            ])
+          ])
+        ])
+      ])
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "card-header card-header-log card-header-icon" },
+      [
+        _c("div", { staticClass: "card-icon" }, [
+          _c("i", { staticClass: "material-icons" }, [_vm._v("add")])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-lg-10" }, [
+            _c("h4", { staticClass: "card-title" }, [_vm._v("Modificar obra")])
           ])
         ])
       ]
@@ -98582,6 +99034,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('struct-edit', __webpack_re
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('plays-clubs', __webpack_require__(/*! ./components/theater_plays/PlaysClubs.vue */ "./resources/js/components/theater_plays/PlaysClubs.vue")["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('cast-plays', __webpack_require__(/*! ./components/theater_plays/CastPlays.vue */ "./resources/js/components/theater_plays/CastPlays.vue")["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('plays-create', __webpack_require__(/*! ./components/theater_plays/create.vue */ "./resources/js/components/theater_plays/create.vue")["default"]);
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('plays-edit', __webpack_require__(/*! ./components/theater_plays/edit.vue */ "./resources/js/components/theater_plays/edit.vue")["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('character-cast', __webpack_require__(/*! ./components/theater_plays/CharacterCast.vue */ "./resources/js/components/theater_plays/CharacterCast.vue")["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('earning-plays', __webpack_require__(/*! ./components/theater_plays/EarningPlays.vue */ "./resources/js/components/theater_plays/EarningPlays.vue")["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('browse-plays', __webpack_require__(/*! ./components/theater_plays/BrowsePlays.vue */ "./resources/js/components/theater_plays/BrowsePlays.vue")["default"]);
@@ -101256,6 +101709,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_create_vue_vue_type_template_id_848612f6___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_create_vue_vue_type_template_id_848612f6___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/theater_plays/edit.vue":
+/*!********************************************************!*\
+  !*** ./resources/js/components/theater_plays/edit.vue ***!
+  \********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _edit_vue_vue_type_template_id_f989d65a___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./edit.vue?vue&type=template&id=f989d65a& */ "./resources/js/components/theater_plays/edit.vue?vue&type=template&id=f989d65a&");
+/* harmony import */ var _edit_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./edit.vue?vue&type=script&lang=js& */ "./resources/js/components/theater_plays/edit.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _edit_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _edit_vue_vue_type_template_id_f989d65a___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _edit_vue_vue_type_template_id_f989d65a___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/theater_plays/edit.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/theater_plays/edit.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************!*\
+  !*** ./resources/js/components/theater_plays/edit.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_edit_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./edit.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/theater_plays/edit.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_edit_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/theater_plays/edit.vue?vue&type=template&id=f989d65a&":
+/*!***************************************************************************************!*\
+  !*** ./resources/js/components/theater_plays/edit.vue?vue&type=template&id=f989d65a& ***!
+  \***************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_edit_vue_vue_type_template_id_f989d65a___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./edit.vue?vue&type=template&id=f989d65a& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/theater_plays/edit.vue?vue&type=template&id=f989d65a&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_edit_vue_vue_type_template_id_f989d65a___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_edit_vue_vue_type_template_id_f989d65a___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

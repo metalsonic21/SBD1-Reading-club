@@ -231,7 +231,7 @@ CREATE TABLE SJL_obras_libros (
 
 CREATE TABLE SJL_obras (
     id         SERIAL NOT NULL,
-    nom        VARCHAR(20) NOT NULL,
+    nom        VARCHAR(50) NOT NULL,
     resum      VARCHAR(200) NOT NULL,
     CONSTRAINT obras_pk PRIMARY KEY (id)
 );
@@ -355,14 +355,14 @@ ALTER TABLE SJL_estructuras_libros ADD CONSTRAINT estructura_libros_fk FOREIGN K
 
 ALTER TABLE SJL_secciones_libros ADD CONSTRAINT secciones_estructuras_prev_fk FOREIGN KEY(id_est,id_lib) REFERENCES SJL_estructuras_libros(id,id_lib) ON DELETE CASCADE;
 
-ALTER TABLE SJL_obras_libros ADD CONSTRAINT obras_libros_fk FOREIGN KEY(id_obra) REFERENCES SJL_obras(id);
-ALTER TABLE SJL_obras_libros ADD CONSTRAINT libros_obras_fk FOREIGN KEY(id_lib) REFERENCES SJL_libros(isbn) ON UPDATE CASCADE;
+ALTER TABLE SJL_obras_libros ADD CONSTRAINT obras_libros_fk FOREIGN KEY(id_obra) REFERENCES SJL_obras(id)ON UPDATE CASCADE ON DELETE CASCADE;
+ALTER TABLE SJL_obras_libros ADD CONSTRAINT libros_obras_fk FOREIGN KEY(id_lib) REFERENCES SJL_libros(isbn) ON UPDATE CASCADE ON DELETE CASCADE;
 
 ALTER TABLE SJL_obras ADD CONSTRAINT obras_local_fk FOREIGN KEY(id_local) REFERENCES SJL_locales_eventos(id);
 
-ALTER TABLE SJL_personajes ADD CONSTRAINT personajes_obras_fk FOREIGN KEY(id_obra) REFERENCES SJL_obras(id);
+ALTER TABLE SJL_personajes ADD CONSTRAINT personajes_obras_fk FOREIGN KEY(id_obra) REFERENCES SJL_obras(id) ON DELETE CASCADE ON UPDATE CASCADE;
 
-ALTER TABLE SJL_historicos_presentaciones ADD CONSTRAINT historicos_obras_fk FOREIGN KEY(id_obra) REFERENCES SJL_obras(id);
+ALTER TABLE SJL_historicos_presentaciones ADD CONSTRAINT historicos_obras_fk FOREIGN KEY(id_obra) REFERENCES SJL_obras(id) ON DELETE CASCADE ON UPDATE CASCADE;
 
 ALTER TABLE SJL_grupos_lectores ADD CONSTRAINT grupos_membrecias_fk FOREIGN KEY(id_fec_mem,id_club,id_lec) REFERENCES SJL_membresias(fec_i,id_club,id_lec);
 ALTER TABLE SJL_grupos_lectores ADD CONSTRAINT membrecias_grupos_fk FOREIGN KEY(id_grupo,id_club) REFERENCES SJL_grupos_lectura(id,id_club);

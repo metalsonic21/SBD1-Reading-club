@@ -11,7 +11,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-lg-10">
-                                    <h4 class="card-title">Añadir nueva obra</h4>
+                                    <h4 class="card-title">Modificar obra</h4>
                                 </div>
                             </div>
                         </div>
@@ -27,7 +27,7 @@
                                                 <b-col cols="6  ">
                                                 <label for="Nombre">Obra Base</label>
                                                 <b-form-select v-model="ObraBase" :options="libros" ></b-form-select>
-                                                <div class="mt-3">Selected: <strong>{{ ObraBase }}</strong></div>
+                                                <div class="mt-3">ISBN: <strong>{{ ObraBase }}</strong></div>
                                             </b-col>
                                         </b-row>
                                         <b-row>
@@ -60,21 +60,29 @@
 <script>
 export default {
     data() {
-        return {            
+        return {
+                            
                         id: '',
                         nom: '',
                         resum: '',
                         ob:'',
-                        ObraBase: '',
+                        ObraBase: {'text':''},
                         libros: [{}],
     }
     },
 
     created() {
-        axios.get('/castplays/create')
-            .then(res => {                
+        var play = window.location.pathname;
+        play = play.replace(/\D/g, '');
+        axios.get(`/castplays/${play}/edit`)
+            .then(res => {                        
                 this.libros = res.data.libros;
-                console.log (res.data.libros);
+                this.nom = res.data.play[0].nom;
+                this.resum = res.data.play[0].resum;
+                this.id = res.data.play[0].id;
+                //this.ObraBase[0].value = res.data.value;
+                this.ObraBase.text = res.data.text;
+                console.log (res.data.text);
             }).catch(e => {
                 console.log(e);
             })
@@ -219,9 +227,10 @@ export default {
 
         /* CRUD BOOKS */
         add() {
+            var play = window.location.pathname;
+            play = play.replace(/\D/g, '');
             const params = {
                 id:this.id,
-                ObraBase:this.ObraBase,
                 nom: this.nom,                
                 resum: this.resum,
                 headers: {
@@ -229,11 +238,10 @@ export default {
                 }
             };
 
-            this.ObraBase='';
             this.nom = '';
             this.ob = '';
             this.resum = '';
-            axios.post('/castplays', params)
+            axios.put(`/castplays/${play}`, params)
                 .then(res => {
                     window.location = "/castplays";
                 }).catch(e => {
