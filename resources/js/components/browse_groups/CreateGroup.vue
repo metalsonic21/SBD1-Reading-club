@@ -23,12 +23,12 @@
                                             <b-col cols="6">
                                                 <label for="nom">Nombre</label>
                                                 <b-form-input type="text" v-model="group.nom" id="nom" name="nom" placeholder="Nombre"></b-form-input>
-                                                <b-form-invalid-feedback :state="validateN">El nombre del grupo no puede estar vacío</b-form-invalid-feedback>
+                                                <b-form-invalid-feedback :state="validateN">El nombre del grupo no puede estar vacío ni tener más de 40 caracteres</b-form-invalid-feedback>
                                             </b-col>
                                             <b-col>
                                                 <label for="tipo">Tipo</label>
                                                 <b-form-select v-model="group.tipo" :options="tipos" id="tipo" name="tipo"></b-form-select>
-                                                <b-form-invalid-feedback :state="validateT">Seleccione tipo de grupo</b-form-invalid-feedback>
+                                                <b-form-invalid-feedback :state="validateT">* Requerido</b-form-invalid-feedback>
                                             </b-col>
                                         </b-row>
                                         <hr>
@@ -42,7 +42,7 @@
                                             <b-col cols="6">
                                                 <label for="dia">Día</label>
                                                 <b-form-select v-model="group.dia" :options="dias" id="dia" name="dia"></b-form-select>
-                                                <b-form-invalid-feedback :state="validateD">Seleccione un día</b-form-invalid-feedback>
+                                                <b-form-invalid-feedback :state="validateD">* Requerido</b-form-invalid-feedback>
                                             </b-col>
 
                                             <b-col cols="6">
@@ -55,8 +55,6 @@
                                         <br>
                                         <div class="d-flex flex-row-reverse bd-highlight">
                                             <b-button variant="default" @click="revalidate">Continuar</b-button>
-
-                                            <b-link class="btn btn-danger">Cancelar</b-link>
                                         </div>
                                     </b-form>
                                 </div>
@@ -144,7 +142,10 @@ export default {
 
     computed: {
         validateN(){
-            return (this.group.nom != null && this.group.nom != '');
+            if (this.group.nom == null || this.group.nom == '')
+            return null;
+            if (this.group.nom.length > 40) return false;
+            else return true;
         },
         validateT(){
             return (this.group.tipo != null);
@@ -180,7 +181,7 @@ export default {
         },
         revalidate(){
             let msg = '';
-                if (!this.validateN) msg = msg + "El campo Nombre de Grupo no puede estar vacío ni tener más de 40 caracteres\n";
+                if (!this.validateN || this.validateN == null) msg = msg + "El campo Nombre de Grupo no puede estar vacío ni tener más de 40 caracteres\n";
                 if (!this.validateT) msg = msg + "El campo Tipo de Grupo no puede estar vacío\n";
                 if (!this.validateD) msg = msg + "El campo Día de Disponibilidad no puede estar vacío\n";
                 if (!this.validateH) msg = msg + "El campo Hora Inicio no puede estar vacío\n";

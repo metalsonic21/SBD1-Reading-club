@@ -77,8 +77,9 @@ class PagosController extends Controller
     {
         if ($request->ajax()){
             $memberinfo = Member::find($member);
-            $payinfo = Pago::find($codpay);
-            return Response::json(array('data'=>$memberinfo,'pago'=>$payinfo));
+            $payinfo = DB::select(DB::raw("SELECT fec_emi FROM sjl_historicos_pagos_memb WHERE id = '$codpay' AND id_club = '$club' AND id_lec = '$member'"));
+            $pi = $payinfo[0]->fec_emi;
+            return Response::json(array('data'=>$memberinfo,'pago'=>$pi));
         }
         else{
             return view('clubs.editpayment');

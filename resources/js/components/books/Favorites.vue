@@ -71,8 +71,6 @@
                                     </div>
                                     <div class="d-flex flex-row-reverse bd-highlight">
                                         <b-button variant="default" @click="validateSelect">Continuar</b-button>
-
-                                        <b-link class="btn btn-danger" href="/browseclubs">Cancelar</b-link>
                                     </div>
                                 </b-form>
                             </div>
@@ -144,22 +142,26 @@ export default {
         },
         validateOne() {
             if (this.prefOne != null)
-                if (this.prefOne != this.prefTwo && this.prefOne != this.prefThree)
+                if (this.prefOne != this.prefTwo && this.prefOne != this.prefThree){
                     return true;
-            return null;
+                }
+                else return false;
+            else return null;
         },
         validateTwo() {
             if (this.prefTwo != null)
                 if (this.prefTwo != this.prefOne && this.prefTwo != this.prefThree)
                     return true;
-            return null;
+                else return false;
+            else return null;
         },
 
         validateThree() {
             if (this.prefThree != null)
                 if (this.prefOne != this.prefTwo && this.prefOne != this.prefThree)
                     return true;
-            return null;
+                else return false;
+            else return null;
         },
     },
 

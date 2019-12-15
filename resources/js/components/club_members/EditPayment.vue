@@ -33,8 +33,6 @@
                                         <br>
                                         <div class="d-flex flex-row-reverse bd-highlight">
                                             <b-button variant="default" @click="revalidate">Continuar</b-button>
-
-                                            <b-link class="btn btn-danger" href="/managemembers">Cancelar</b-link>
                                         </div>
                                         
                                     </b-form>
@@ -91,8 +89,8 @@ export default {
             .then(res => {
                 console.log(res.data);
                 this.member = res.data.data;
-                this.date = res.data.pago.fec_emi;
-                this.prevdate = res.data.pago.fec_emi;
+                this.date = res.data.pago;
+                this.prevdate = res.data.pago;
             }).catch(e => {
                 console.log(e);
             })

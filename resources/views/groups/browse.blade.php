@@ -91,9 +91,9 @@
                                                         <b-link href="/clubs/{{$group->id_club}}/groups/{{$group->id}}" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Visualizar" class="btn btn-info">
                                                             <i class="material-icons">remove_red_eye</i>
                                                         </b-link>
-                                                        <button type="button" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Añadir miembro" v-b-modal.add-member class="btn btn-default">
+                                                        <b-link href="/clubs/{{$group->id_club}}/groups/{{$group->id}}/gmembers/create" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Añadir miembro" class="btn btn-default">
                                                             <i class="material-icons">person_add</i>
-                                                        </button>
+                                                        </b-link>
                                                     <b-link href="/clubs/{{$group->id_club}}/groups/{{$group->id}}/edit" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Modificar" class="btn btn-success">
                                                             <i class="material-icons">edit</i>
                                                         </b-link>

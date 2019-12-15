@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Groups;
 use App\Models\Grupo;
+use App\Models\Grupos_Lectores;
 use App\Models\Inasistencia;
 use App\Models\Member;
 use App\Http\Controllers\Controller;
@@ -64,9 +65,17 @@ class BrowseGroupsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($idclub, $idgrupo)
     {
-        //
+        $g = DB::select(DB::raw("SELECT nom, tipo, dia_sem as dia, (
+            SELECT to_char(hora_i::time, 'HH12:MI AM')
+        )horai,(
+            SELECT to_char(hora_f::time, 'HH12:MI AM')
+        )horaf, (
+            SELECT count(id_fec_i) FROM sjl_grupos_lectores WHERE fec_f IS NULL AND id_club = '$idclub' AND id_grupo = '$idgrupo'
+        )miembros FROM sjl_grupos_lectura WHERE id = '$idgrupo' AND id_club = '$idclub'"));
+        $grupo = $g[0];
+        return view('groups.showgroup')->with('g',$grupo);
     }
 
     /**
@@ -135,12 +144,14 @@ class BrowseGroupsController extends Controller
 
      public function borrar(Request $request, $idclub, $idgrupo){
         $trash = null;
-        Inasistencia::where(['id_grupo'=>$idgrupo])->update(array(
-            'id_grupo'=> $trash,
+
+        Member::where(['id_grup'=>$idgrupo, 'id_club'=>$idclub])->update(array(
+            'id_grup'=> $trash,
         ));
 
-        Member::where(['id_grup'=>$idgrupo])->update(array(
-            'id_grup'=> $trash,
+        /* MEMBERSHIP FOR GROUP */
+        Grupos_Lectores::where(['fec_f'=>$trash,'id_club'=>$idclub,'id_grupo'=>$idgrupo])->update(array(
+            'fec_f'=> date('Y-m-d'),
         ));
 
         $grupo = Grupo::find($idgrupo);

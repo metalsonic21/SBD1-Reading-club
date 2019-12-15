@@ -75,7 +75,7 @@
                                                                     <div>
                                                                     Está apunto de eliminar al miembro
                                                                     </div><div>
-                                                                    <code>{{$member->nom}}</code> 
+                                                                    <code>{{$member->nom}} {{$member->ape}}</code> 
                                                                     </div>
                                                                     </template>                                                          
                                                                     <div>                                                                

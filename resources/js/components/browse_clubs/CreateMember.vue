@@ -1,4 +1,4 @@
-    <template>
+<template>
 <div>
     <div class="content">
         <div class="container-fluid">
@@ -67,8 +67,8 @@
 
                                             <b-col cols="2">
                                                 <label for="fec_nac">Fecha de Nacimiento</label>
-                                                <b-form-input type="date" v-model="member.fec_nac" v-on:input="mayoredad=true; verifyAge(member.fec_nac)" name="fec_nac" id="fec_nac" ></b-form-input>
-                                                <b-form-invalid-feedback :state="validateF">El miembro debe ser mayor de 9 años/El campo no puede estar vacio</b-form-invalid-feedback>
+                                                <b-form-input type="date" v-model="member.fec_nac" v-on:input="mayoredad=true; verifyAge(member.fec_nac)" name="fec_nac" id="fec_nac"></b-form-input>
+                                                <b-form-invalid-feedback :state="validateF">Miembro debe ser mayor de 9 años</b-form-invalid-feedback>
                                             </b-col>
 
                                             <b-col cols="2">
@@ -94,7 +94,7 @@
                                             <b-col cols="6">
                                                 <label for="pais">País</label>
                                                 <b-form-select v-model="member.pais" id="pais" name="pais" :options="paises" @change="filter(member.pais, member.ciudad)"></b-form-select>
-                                                <b-form-invalid-feedback :state="validateP">Seleccione un país</b-form-invalid-feedback>
+                                                <b-form-invalid-feedback :state="validateP">* Requerido</b-form-invalid-feedback>
                                             </b-col>
 
                                             <b-col cols="6">
@@ -182,7 +182,7 @@
                                                 <b-col cols="6">
                                                     <label for="fec_nacR">Fecha de Nacimiento</label>
                                                     <b-form-input type="date" v-model="rep.fec_nac" name="fec_nacR" id="fec_nacR"></b-form-input>
-                                                    <b-form-invalid-feedback :state="validateFR">La edad del representante debe ser mayor a 18 años / El campo no puede estar vacio</b-form-invalid-feedback>
+                                                    <b-form-invalid-feedback :state="validateFR">Representante debe ser mayor de edad</b-form-invalid-feedback>
 
                                                 </b-col>
                                             </b-row>
@@ -338,15 +338,6 @@ export default {
             })
     },
     computed: {
-       /* createDate(days, months, years) {
-            var date = new Date(); 
-            date.setDate(date.getDate() + days);
-            date.setMonth(date.getMonth() + months);
-            date.setFullYear(date.getFullYear() + years);
-            return date;    
-        },
-        validateRep(){         
-        },*/
         validateD(){
             let verif = true;
             if (this.member.dociden == null || this.member.dociden == '') return null;
@@ -392,31 +383,31 @@ export default {
             if ((this.member.fec_nac) == null) return false;
             else{
             let verif = true;
-            let a=Date.now();        
+            let a=Date.now();
             let b=Date.parse(this.member.fec_nac);
-            if(a-b<284012334000 )return false;            
+            if(a-b<284012334000 )return false;
             else return verif;
-            }            
+            }
         },
         validateCP(){
-            if (this.member.codp == null || this.member.codp == '') return false;
-            if (this.member.codp<0 || isNaN(this.member.codp) ||  this.member.codp>999 || (this.member.codp%1 )!=0)
-            return false;
-            else return true;
+            if (this.member.codp == null || this.member.codp == '') return null;
+            if (!isNaN(this.member.codp) && this.member.codp>0 && this.member.codp<999 && this.member.codp.toString().indexOf(".") == -1)
+            return true;
+            else return false;
         },
         validateCODA(){
             let verif = true;
-                if (this.member.coda == null || this.member.coda == '') return false;
-                if (( this.member.coda%1 )!=0 || this.member.coda<0 || this.member.coda>99999|| isNaN(this.member.coda ))
-                return false
-                else return true;
+                if (this.member.coda == null || this.member.coda == '') return null;
+                if (!isNaN(this.member.coda) && this.member.coda.toString().indexOf(".") == -1 && this.member.coda>0 && this.member.coda<99999)
+                return true;
+                else return false;
         },
         validateT(){
             let verif = true;
-                if (this.member.telefono == null || this.member.telefono == '') return false;
-                if (this.member.telefono<0 ||  (this.member.telefono%1 )!=0 || this.member.telefono>9999999 ||isNaN(this.member.telefono))
-                return false
-                else return true;
+                if (this.member.telefono == null || this.member.telefono == '') return null;
+                if (!isNaN(this.member.telefono) && this.member.telefono.toString().indexOf(".") == -1 && this.member.telefono>0 && this.member.telefono<9999999999)
+                return true;
+                else return false;
         },
         validateP(){
             if (this.member.pais == null) return false;
@@ -479,9 +470,9 @@ export default {
             if ((this.rep.fec_nac) == null) return false;
             else{
             let verif = true;
-            let a=Date.now();        
+            let a=Date.now();
             let b=Date.parse(this.rep.fec_nac);
-            if(a-b<568024668000)return false;            
+            if(a-b<568024668000)return false;
             else return verif;
             }
         },
@@ -661,7 +652,7 @@ export default {
             if (this.validateA == false || this.validateA == null) msg = msg + "El campo Apellido de Lector no puede estar vacío ni tener más de 20 caracteres\n";
             if (this.validateSA == false || this.validateSA == null) msg = msg + "El campo Segundo Apellido de Lector no puede estar vacío ni tener más de 20 caracteres\n";
             if (this.validateG == false) msg = msg + "El campo Género no puede estar vacío\n";
-            if (this.validateF == false) msg = msg + "El campo Fecha de Nacimiento de Lector no puede estar vacío\n";
+            if (this.validateF == false) msg = msg + "El campo Fecha de Nacimiento de Lector no puede estar vacío y miembro debe tener más de 9 años\n";
             if (this.validateCP == false || this.validateCP == null) msg = msg + "El campo Código de País debe ser número entero, no puede estar vacío ni tener más de 3 caracteres\n";
             if (this.validateCODA == false || this.validateCODA == null) msg = msg + "El campo Código de Área debe ser número entero, no puede estar vacío ni tener más de 5 caracteres\n";
             if (this.validateT == false || this.validateT == null) msg = msg + "El campo Número de Teléfono debe ser un número entero, no puede estar vacío ni tener más de 10 caracteres\n";

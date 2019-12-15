@@ -2688,8 +2688,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2740,16 +2738,21 @@ __webpack_require__.r(__webpack_exports__);
       return this.items.length;
     },
     validateOne: function validateOne() {
-      if (this.prefOne != null) if (this.prefOne != this.prefTwo && this.prefOne != this.prefThree) return true;
-      return null;
+      if (this.prefOne != null) {
+        if (this.prefOne != this.prefTwo && this.prefOne != this.prefThree) {
+          return true;
+        } else return false;
+      } else return null;
     },
     validateTwo: function validateTwo() {
-      if (this.prefTwo != null) if (this.prefTwo != this.prefOne && this.prefTwo != this.prefThree) return true;
-      return null;
+      if (this.prefTwo != null) {
+        if (this.prefTwo != this.prefOne && this.prefTwo != this.prefThree) return true;else return false;
+      } else return null;
     },
     validateThree: function validateThree() {
-      if (this.prefThree != null) if (this.prefOne != this.prefTwo && this.prefOne != this.prefThree) return true;
-      return null;
+      if (this.prefThree != null) {
+        if (this.prefOne != this.prefTwo && this.prefOne != this.prefThree) return true;else return false;
+      } else return null;
     }
   },
   methods: {
@@ -3600,9 +3603,647 @@ __webpack_require__.r(__webpack_exports__);
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/browse_clubs/CreateMember.vue?vue&type=script&lang=js& ***!
   \************************************************************************************************************************************************************************************/
 /*! exports provided: default */
-/***/ (function(module, exports) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nSyntaxError: E:\\SBD1-Reading-club\\resources\\js\\components\\browse_clubs\\CreateMember.vue: Unexpected token (401:0)\n\n\u001b[0m \u001b[90m 399 | \u001b[39m        }\u001b[33m,\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 400 | \u001b[39m        validateF(){\u001b[0m\n\u001b[0m\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 401 | \u001b[39m\u001b[33m<<\u001b[39m\u001b[33m<<\u001b[39m\u001b[33m<<\u001b[39m\u001b[33m<\u001b[39m \u001b[33mHEAD\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m     | \u001b[39m\u001b[31m\u001b[1m^\u001b[22m\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 402 | \u001b[39m            \u001b[36mif\u001b[39m ((\u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mmember\u001b[33m.\u001b[39mfec_nac) \u001b[33m==\u001b[39m \u001b[36mnull\u001b[39m) \u001b[36mreturn\u001b[39m \u001b[36mfalse\u001b[39m\u001b[33m;\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 403 | \u001b[39m            \u001b[36melse\u001b[39m{\u001b[0m\n\u001b[0m \u001b[90m 404 | \u001b[39m            let verif \u001b[33m=\u001b[39m \u001b[36mtrue\u001b[39m\u001b[33m;\u001b[39m\u001b[0m\n    at Parser.raise (E:\\SBD1-Reading-club\\node_modules\\@babel\\parser\\lib\\index.js:6930:17)\n    at Parser.unexpected (E:\\SBD1-Reading-club\\node_modules\\@babel\\parser\\lib\\index.js:8323:16)\n    at Parser.parseExprAtom (E:\\SBD1-Reading-club\\node_modules\\@babel\\parser\\lib\\index.js:9582:20)\n    at Parser.parseExprSubscripts (E:\\SBD1-Reading-club\\node_modules\\@babel\\parser\\lib\\index.js:9165:23)\n    at Parser.parseMaybeUnary (E:\\SBD1-Reading-club\\node_modules\\@babel\\parser\\lib\\index.js:9145:21)\n    at Parser.parseExprOps (E:\\SBD1-Reading-club\\node_modules\\@babel\\parser\\lib\\index.js:9011:23)\n    at Parser.parseMaybeConditional (E:\\SBD1-Reading-club\\node_modules\\@babel\\parser\\lib\\index.js:8984:23)\n    at Parser.parseMaybeAssign (E:\\SBD1-Reading-club\\node_modules\\@babel\\parser\\lib\\index.js:8930:21)\n    at Parser.parseExpression (E:\\SBD1-Reading-club\\node_modules\\@babel\\parser\\lib\\index.js:8880:23)\n    at Parser.parseStatementContent (E:\\SBD1-Reading-club\\node_modules\\@babel\\parser\\lib\\index.js:10740:23)\n    at Parser.parseStatement (E:\\SBD1-Reading-club\\node_modules\\@babel\\parser\\lib\\index.js:10611:17)\n    at Parser.parseBlockOrModuleBlockBody (E:\\SBD1-Reading-club\\node_modules\\@babel\\parser\\lib\\index.js:11187:25)\n    at Parser.parseBlockBody (E:\\SBD1-Reading-club\\node_modules\\@babel\\parser\\lib\\index.js:11174:10)\n    at Parser.parseBlock (E:\\SBD1-Reading-club\\node_modules\\@babel\\parser\\lib\\index.js:11158:10)\n    at Parser.parseFunctionBody (E:\\SBD1-Reading-club\\node_modules\\@babel\\parser\\lib\\index.js:10177:24)\n    at Parser.parseFunctionBodyAndFinish (E:\\SBD1-Reading-club\\node_modules\\@babel\\parser\\lib\\index.js:10147:10)\n    at Parser.parseMethod (E:\\SBD1-Reading-club\\node_modules\\@babel\\parser\\lib\\index.js:10101:10)\n    at Parser.parseObjectMethod (E:\\SBD1-Reading-club\\node_modules\\@babel\\parser\\lib\\index.js:10017:19)\n    at Parser.parseObjPropValue (E:\\SBD1-Reading-club\\node_modules\\@babel\\parser\\lib\\index.js:10059:23)\n    at Parser.parseObjectMember (E:\\SBD1-Reading-club\\node_modules\\@babel\\parser\\lib\\index.js:9983:10)\n    at Parser.parseObj (E:\\SBD1-Reading-club\\node_modules\\@babel\\parser\\lib\\index.js:9903:25)\n    at Parser.parseExprAtom (E:\\SBD1-Reading-club\\node_modules\\@babel\\parser\\lib\\index.js:9525:28)\n    at Parser.parseExprSubscripts (E:\\SBD1-Reading-club\\node_modules\\@babel\\parser\\lib\\index.js:9165:23)\n    at Parser.parseMaybeUnary (E:\\SBD1-Reading-club\\node_modules\\@babel\\parser\\lib\\index.js:9145:21)\n    at Parser.parseExprOps (E:\\SBD1-Reading-club\\node_modules\\@babel\\parser\\lib\\index.js:9011:23)\n    at Parser.parseMaybeConditional (E:\\SBD1-Reading-club\\node_modules\\@babel\\parser\\lib\\index.js:8984:23)\n    at Parser.parseMaybeAssign (E:\\SBD1-Reading-club\\node_modules\\@babel\\parser\\lib\\index.js:8930:21)\n    at Parser.parseObjectProperty (E:\\SBD1-Reading-club\\node_modules\\@babel\\parser\\lib\\index.js:10034:101)\n    at Parser.parseObjPropValue (E:\\SBD1-Reading-club\\node_modules\\@babel\\parser\\lib\\index.js:10059:101)\n    at Parser.parseObjectMember (E:\\SBD1-Reading-club\\node_modules\\@babel\\parser\\lib\\index.js:9983:10)\n    at Parser.parseObj (E:\\SBD1-Reading-club\\node_modules\\@babel\\parser\\lib\\index.js:9903:25)\n    at Parser.parseExprAtom (E:\\SBD1-Reading-club\\node_modules\\@babel\\parser\\lib\\index.js:9525:28)\n    at Parser.parseExprSubscripts (E:\\SBD1-Reading-club\\node_modules\\@babel\\parser\\lib\\index.js:9165:23)\n    at Parser.parseMaybeUnary (E:\\SBD1-Reading-club\\node_modules\\@babel\\parser\\lib\\index.js:9145:21)\n    at Parser.parseExprOps (E:\\SBD1-Reading-club\\node_modules\\@babel\\parser\\lib\\index.js:9011:23)\n    at Parser.parseMaybeConditional (E:\\SBD1-Reading-club\\node_modules\\@babel\\parser\\lib\\index.js:8984:23)");
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      member: {
+        dociden: null,
+        nom1: null,
+        nom2: null,
+        ape1: null,
+        ape2: null,
+        genero: null,
+        fec_nac: null,
+        pais: null,
+        ciudad: null,
+        urbanizacion: null,
+        calle: null,
+        zipcode: null,
+        coda: null,
+        codp: null,
+        telefono: null
+      },
+      rep: [{
+        dociden: '',
+        nom1: '',
+        nom2: '',
+        ape1: '',
+        ape2: '',
+        genero: '',
+        fec_nac: null,
+        pais: null,
+        ciudad: null,
+        calle: '',
+        urbanizacion: '',
+        zipcode: ''
+      }],
+      generos: [{
+        value: null,
+        text: 'Seleccionar'
+      }, {
+        value: 'M',
+        text: 'Masculino'
+      }, {
+        value: 'F',
+        text: 'Femenino'
+      }],
+      paises: [{
+        value: null,
+        text: 'Seleccionar'
+      }],
+      ciudadesbackup: [{
+        value: null,
+        text: 'Seleccionar'
+      }],
+      mayoredad: true,
+      ciudades: [{
+        value: null,
+        text: 'Seleccionar'
+      }],
+      ciudadesR: [{
+        value: null,
+        text: 'Seleccionar'
+      }],
+      ciudadesfiltered: [{}],
+      ciudadesfilteredR: [{}],
+      lectores: [{}],
+      today: null
+    };
+  },
+  created: function created() {
+    var _this = this;
+
+    var params = window.location.pathname;
+    params = params.replace(/\D/g, ''); //console.log(params);
+
+    axios.get("/clubs/".concat(params, "/members/create")).then(function (res) {
+      _this.paises = res.data.countries;
+      _this.ciudadesbackup = res.data.cities;
+      _this.lectores = res.data.lectores;
+    })["catch"](function (e) {
+      console.log(e);
+    });
+  },
+  computed: {
+    validateD: function validateD() {
+      var verif = true;
+      if (this.member.dociden == null || this.member.dociden == '') return null;
+      if (this.member.dociden.toString().length != 8 || isNaN(this.member.dociden)) verif = false;
+      if (this.member.dociden.toString().indexOf(".") != -1 || this.member.dociden < 0) verif = false;
+      /* Already exists*/
+
+      var i = 0;
+
+      for (i = 0; i < this.lectores.length; i++) {
+        if (this.lectores[i].doc_iden == this.member.dociden) {
+          verif = false;
+          break;
+        }
+      }
+
+      console.log(verif);
+      return verif;
+    },
+    validateN: function validateN() {
+      if (this.member.nom1 == null || this.member.nom1 == '') return null;
+      if (this.member.nom1.length > 20) return false;else return true;
+    },
+    validateSN: function validateSN() {
+      if (this.member.nom2 != null && this.member.nom2.length > 20) return false;else return true;
+    },
+    validateA: function validateA() {
+      if (this.member.ape1 == null || this.member.ape1 == '') return null;
+      if (this.member.ape1.length > 20) return false;else return true;
+    },
+    validateSA: function validateSA() {
+      if (this.member.ape2 == null || this.member.ape2 == '') return null;
+      if (this.member.ape2.length > 20) return false;else return true;
+    },
+    validateG: function validateG() {
+      if (this.member.genero == null) return false;
+    },
+    validateF: function validateF() {
+      if (this.member.fec_nac == null) return false;else {
+        var verif = true;
+        var a = Date.now();
+        var b = Date.parse(this.member.fec_nac);
+        if (a - b < 284012334000) return false;else return verif;
+      }
+    },
+    validateCP: function validateCP() {
+      if (this.member.codp == null || this.member.codp == '') return null;
+      if (!isNaN(this.member.codp) && this.member.codp > 0 && this.member.codp < 999 && this.member.codp.toString().indexOf(".") == -1) return true;else return false;
+    },
+    validateCODA: function validateCODA() {
+      var verif = true;
+      if (this.member.coda == null || this.member.coda == '') return null;
+      if (!isNaN(this.member.coda) && this.member.coda.toString().indexOf(".") == -1 && this.member.coda > 0 && this.member.coda < 99999) return true;else return false;
+    },
+    validateT: function validateT() {
+      var verif = true;
+      if (this.member.telefono == null || this.member.telefono == '') return null;
+      if (!isNaN(this.member.telefono) && this.member.telefono.toString().indexOf(".") == -1 && this.member.telefono > 0 && this.member.telefono < 9999999999) return true;else return false;
+    },
+    validateP: function validateP() {
+      if (this.member.pais == null) return false;
+    },
+    validateCI: function validateCI() {
+      if (this.member.ciudad == null) return false;
+    },
+    validateU: function validateU() {
+      if (this.member.urbanizacion == null || this.member.urbanizacion == '') return null;
+      if (this.member.urbanizacion.length > 20) return false;else return true;
+    },
+    validateCA: function validateCA() {
+      if (this.member.calle == null || this.member.calle == '') return null;
+      if (this.member.calle.length > 20) return false;else return true;
+    },
+    validateZ: function validateZ() {
+      var verif = true;
+      if (this.member.zipcode == null || this.member.zipcode == '') return null;
+      if (!isNaN(this.member.zipcode) && this.member.zipcode.toString().indexOf(".") == -1 && this.member.zipcode > 0 && this.member.zipcode < 9999999) return true;else return false;
+    },
+
+    /* REPRESENTANTE */
+    validateDR: function validateDR() {
+      var verif = true;
+      if (this.rep.dociden == null || this.rep.dociden == '') return null;
+      if (this.rep.dociden.toString().length != 8 || isNaN(this.rep.dociden)) verif = false;
+      if (this.rep.dociden.toString().indexOf(".") != -1 || this.rep.dociden < 0) verif = false;
+      return verif;
+    },
+    validateNR: function validateNR() {
+      if (this.rep.nom1 == null || this.rep.nom1 == '') return null;
+      if (this.rep.nom1.length > 20) return false;else return true;
+    },
+    validateSNR: function validateSNR() {
+      if (this.rep.nom2 != null && this.rep.nom2.length > 20) return false;else return true;
+    },
+    validateAR: function validateAR() {
+      if (this.rep.ape1 == null || this.rep.ape1 == '') return null;
+      if (this.rep.ape1.length > 20) return false;else return true;
+    },
+    validateSAR: function validateSAR() {
+      if (this.rep.ape2 == null || this.rep.ape2 == '') return null;
+      if (this.rep.ape2.length > 20) return false;else return true;
+    },
+    validateGR: function validateGR() {
+      return this.rep.genero != null;
+    },
+    validateFR: function validateFR() {
+      if (this.rep.fec_nac == null) return false;else {
+        var verif = true;
+        var a = Date.now();
+        var b = Date.parse(this.rep.fec_nac);
+        if (a - b < 568024668000) return false;else return verif;
+      }
+    },
+    validatePR: function validatePR() {
+      return this.rep.pais != null;
+    },
+    validateCIR: function validateCIR() {
+      return this.rep.ciudad != null;
+    },
+    validateUR: function validateUR() {
+      if (this.rep.urbanizacion == null || this.rep.urbanizacion == '') return null;
+      if (this.rep.urbanizacion.length > 20) return false;else return true;
+    },
+    validateCAR: function validateCAR() {
+      if (this.rep.calle == null || this.rep.calle == '') return null;
+      if (this.rep.calle.length > 20) return false;else return true;
+    },
+    validateZR: function validateZR() {
+      var verif = true;
+      if (this.rep.zipcode == null || this.rep.zipcode == '') return null;
+      if (!isNaN(this.rep.zipcode) && this.member.zipcode.toString().indexOf(".") == -1 && this.rep.zipcode > 0 && this.rep.zipcode < 9999999) return true;else return false;
+    }
+  },
+  methods: {
+    convert: function convert(id, length) {
+      var pos = id.indexOf("-");
+      var res = id.substring(pos + 1, length);
+      parseInt(res, 10);
+      return res;
+    },
+    filter: function filter(currentcountry, currentcity) {
+      /* Filter cities according to the country*/
+      this.ciudades = [{}], this.ciudadesfiltered = [{}], currentcity = null, this.ciudades = this.ciudadesbackup;
+      var i = 0;
+
+      for (i = 0; i < this.ciudades.length; i++) {
+        /* Converted ID is id_sub*/
+        var convertedid = this.convert(this.ciudades[i].value, this.ciudades.length);
+
+        if (currentcountry == convertedid) {
+          var actualid = this.ciudades[i].value.substring(0, this.ciudades[i].value.indexOf("-"));
+          actualid = parseInt(actualid, 10);
+          this.ciudadesfiltered.push({
+            value: actualid,
+            text: this.ciudades[i].text
+          });
+        }
+      }
+
+      this.ciudades = [{}];
+      this.ciudades = this.ciudadesfiltered;
+      this.ciudades[0].value = null;
+      this.ciudades[0].text = 'Seleccionar';
+    },
+    filterR: function filterR(currentcountry, currentcity) {
+      /* Filter cities according to the country*/
+      this.ciudadesR = [{}], this.ciudadesfilteredR = [{}], currentcity = null, this.ciudadesR = this.ciudadesbackup;
+      var i = 0;
+
+      for (i = 0; i < this.ciudadesR.length; i++) {
+        /* Converted ID is id_sub*/
+        var convertedid = this.convert(this.ciudadesR[i].value, this.ciudadesR.length);
+
+        if (currentcountry == convertedid) {
+          var actualid = this.ciudadesR[i].value.substring(0, this.ciudadesR[i].value.indexOf("-"));
+          actualid = parseInt(actualid, 10);
+          this.ciudadesfilteredR.push({
+            value: actualid,
+            text: this.ciudadesR[i].text
+          });
+        }
+      }
+
+      this.ciudadesR = [{}];
+      this.ciudadesR = this.ciudadesfilteredR;
+      this.ciudadesR[0].value = null;
+      this.ciudadesR[0].text = 'Seleccionar';
+    },
+    verifyAge: function verifyAge(memberAge) {
+      if (memberAge == '' || memberAge == null) return true;
+      this.today = new Date();
+      var dd = this.today.getDate();
+      var mm = this.today.getMonth() + 1;
+      var yyyy = this.today.getFullYear();
+
+      if (dd < 10) {
+        dd = '0' + dd;
+      }
+
+      if (mm < 10) {
+        mm = '0' + mm;
+      }
+
+      this.today = yyyy + '-' + mm + '-' + dd;
+      var todaydate = new Date(this.today);
+      var agedate = new Date(memberAge);
+      var verif = todaydate.valueOf() - agedate.valueOf();
+      var edad = verif / (1000 * 60 * 60 * 24);
+      edad = Math.trunc(edad / 365);
+
+      if (edad < 18) {
+        this.mayoredad = false;
+      } else if (edad <= 18) {
+        this.mayoredad = true;
+      }
+
+      return this.mayoredad;
+    },
+    add: function add() {
+      var _this2 = this;
+
+      var path = window.location.pathname;
+      path = path.replace(/\D/g, '');
+      var params = {
+        dociden: this.member.dociden,
+        nom1: this.member.nom1,
+        nom2: this.member.nom2,
+        ape1: this.member.ape1,
+        ape2: this.member.ape2,
+        genero: this.member.genero,
+        fec_nac: this.member.fec_nac,
+        pais: this.member.pais,
+        ciudad: this.member.ciudad,
+        urbanizacion: this.member.urbanizacion,
+        calle: this.member.calle,
+        zipcode: this.member.zipcode,
+        codp: this.member.codp,
+        coda: this.member.coda,
+        telefono: this.member.telefono,
+
+        /* Representante*/
+        docidenR: this.rep.dociden,
+        nom1R: this.rep.nom1,
+        nom2R: this.rep.nom2,
+        ape1R: this.rep.ape1,
+        ape2R: this.rep.ape2,
+        fec_nacR: this.rep.fec_nac,
+        paisR: this.rep.pais,
+        ciudadR: this.rep.ciudad,
+        urbanizacionR: this.rep.urbanizacion,
+        calleR: this.rep.calle,
+        zipcodeR: this.rep.zipcode,
+        club: path,
+        today: this.today
+      }; //console.log(params);
+
+      axios.post("/clubs/".concat(path, "/members"), params).then(function (res) {
+        //console.log(res.data);
+        window.location = "/clubs/".concat(path, "/members/").concat(_this2.member.dociden, "/favorites");
+      })["catch"](function (e) {
+        console.log(e);
+      });
+    },
+    revalidate: function revalidate() {
+      var msg = '';
+      /* MEMBER */
+
+      if (this.validateD == false || this.validateD == null) msg = msg + "El campo Documento de Identidad debe ser un número entero positivo de no más de 8 caracteres que no esté registrado anteriormente en la base de datos\n";
+      if (this.validateN == false || this.validateN == null) msg = msg + "El campo Nombre de Lector no puede estar vacío ni tener más de 20 caracteres\n";
+      if (this.validateSN == false) msg = msg + "El campo Segundo Nombre de Lector no puede tener más de 20 caracteres\n";
+      if (this.validateA == false || this.validateA == null) msg = msg + "El campo Apellido de Lector no puede estar vacío ni tener más de 20 caracteres\n";
+      if (this.validateSA == false || this.validateSA == null) msg = msg + "El campo Segundo Apellido de Lector no puede estar vacío ni tener más de 20 caracteres\n";
+      if (this.validateG == false) msg = msg + "El campo Género no puede estar vacío\n";
+      if (this.validateF == false) msg = msg + "El campo Fecha de Nacimiento de Lector no puede estar vacío y miembro debe tener más de 9 años\n";
+      if (this.validateCP == false || this.validateCP == null) msg = msg + "El campo Código de País debe ser número entero, no puede estar vacío ni tener más de 3 caracteres\n";
+      if (this.validateCODA == false || this.validateCODA == null) msg = msg + "El campo Código de Área debe ser número entero, no puede estar vacío ni tener más de 5 caracteres\n";
+      if (this.validateT == false || this.validateT == null) msg = msg + "El campo Número de Teléfono debe ser un número entero, no puede estar vacío ni tener más de 10 caracteres\n";
+      if (this.validateP == false) msg = msg + "El campo País de Lector no puede estar vacío\n";
+      if (this.validateCI == false) msg = msg + "El campo Ciudad de Lector no puede estar vacío\n";
+      if (this.validateU == false || this.validateU == null) msg = msg + "El campo Urbanización (Lector) no puede estar vacío ni tener más de 20 caracteres\n";
+      if (this.validateCA == false || this.validateCA == null) msg = msg + "El campo Calle (Lector) no puede estar vacío ni tener más de 20 caracteres\n";
+      if (this.validateZ == false) msg = msg + "El campo Código postal (Lector) no puede estar vacío, debe ser numérico entero y no puede tener más de 7 caracteres\n";
+
+      if (!this.mayoredad) {
+        if (this.validateDR == false || this.validateDR == null) msg = msg + "El campo Documento de Identidad debe ser un número entero positivo de no más de 8 caracteres\n";
+        if (this.validateNR == false || this.validateNR == null) msg = msg + "El campo Nombre (Representante) no puede estar vacío ni tener más de 20 caracteres\n";
+        if (this.validateSNR == false) msg = msg + "El campo Segundo Nombre (Representante) no puede tener más de 20 caracteres\n";
+        if (this.validateAR == false || this.validateAR == null) msg = msg + "El campo Apellido (Representante) no puede estar vacío ni tener más de 20 caracteres\n";
+        if (this.validateSAR == false || this.validateSAR == null) msg = msg + "El campo Segundo Apellido (Representante) no puede estar vacío ni tener más de 20 caracteres\n";
+        if (this.validateFR == false) msg = msg + "El campo Fecha de Nacimiento (Representante) no puede estar vacío";
+        if (this.validatePR == false) msg = msg + "El campo País (Representante) no puede estar vacío\n";
+        if (this.validateCIR == false) msg = msg + "El campo Ciudad (Representante) no puede estar vacío\n";
+        if (this.validateUR == false || this.validateUR == null) msg = msg + "El campo Urbanización (Representante) no puede estar vacío ni tener más de 20 caracteres\n";
+        if (this.validateCAR == false || this.validateCAR == null) msg = msg + "El campo Calle (Representante) no puede estar vacío ni tener más de 20 caracteres\n";
+        if (this.validateZR == false) msg = msg + "El campo Código postal (Representante) no puede estar vacío, debe ser numérico entero y no puede tener más de 7 caracteres\n";
+      }
+
+      if (msg == '') {
+        this.add();
+      } else {
+        alert(msg);
+      }
+    }
+  }
+});
 
 /***/ }),
 
@@ -4087,8 +4728,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -4217,8 +4856,8 @@ __webpack_require__.r(__webpack_exports__);
 
       var posgid = _this.member.ciudad.indexOf("-") + 1;
       _this.member.ciudad = _this.member.ciudad.substr(0, posgid);
-      _this.member.ciudad = parseInt(_this.member.ciudad, 10); //console.log(this.member.ciudad);
-
+      _this.member.ciudad = parseInt(_this.member.ciudad, 10);
+      console.log(_this.member.ciudad);
       _this.ciudades[0].value = null;
       _this.ciudades[0].text = 'Seleccionar';
       /* REPRESENTANTE */
@@ -4276,84 +4915,102 @@ __webpack_require__.r(__webpack_exports__);
   computed: {
     validateD: function validateD() {
       var verif = true;
-      if (this.member.dociden == null || this.member.dociden == '') return false;
-      if (this.member.dociden.toString().length > 8 || isNaN(this.member.dociden)) verif = false;
+      if (this.member.dociden == null || this.member.dociden == '') return null;
+      if (this.member.dociden.toString().length != 8 || isNaN(this.member.dociden)) verif = false;
       if (this.member.dociden.toString().indexOf(".") != -1 || this.member.dociden < 0) verif = false;
       return verif;
     },
     validateN: function validateN() {
-      if (this.member.nom1 == null || this.member.nom1 == '' || this.member.nom1.length > 20) return false;else return true;
+      if (this.member.nom1 == null || this.member.nom1 == '') return null;
+      if (this.member.nom1.length > 20) return false;else return true;
     },
     validateSN: function validateSN() {
-      if (this.member.nom2 == null || this.member.nom2.length > 20) return false;else return true;
+      if (this.member.nom2 != null && this.member.nom2.length > 20) return false;else return true;
     },
     validateA: function validateA() {
-      if (this.member.ape1 == null || this.member.ape1 == '' || this.member.ape1.length > 20) return false;else return true;
+      if (this.member.ape1 == null || this.member.ape1 == '') return null;
+      if (this.member.ape1.length > 20) return false;else return true;
     },
     validateSA: function validateSA() {
-      if (this.member.ape2 == null || this.member.ape2 == '' || this.member.ape2.length > 20) return false;else return true;
+      if (this.member.ape2 == null || this.member.ape2 == '') return null;
+      if (this.member.ape2.length > 20) return false;else return true;
     },
     validateG: function validateG() {
-      return this.member.genero != null;
+      if (this.member.genero == null) return false;
     },
     validateF: function validateF() {
-      return this.member.fec_nac != null;
+      if (this.member.fec_nac == null) return false;else {
+        var verif = true;
+        var a = Date.now();
+        var b = Date.parse(this.member.fec_nac);
+        if (a - b < 284012334000) return false;else return verif;
+      }
     },
     validateCP: function validateCP() {
-      if (this.member.codp == null || this.member.codp == '') return false;
-      if (isNaN(this.member.codp || !Number.isInteger(this.member.codp) || this.member.codp < 0 || this.member.codp > 999)) return false;else return true;
+      if (this.member.codp == null || this.member.codp == '') return null;
+      if (!isNaN(this.member.codp) && this.member.codp > 0 && this.member.codp < 999 && this.member.codp.toString().indexOf(".") == -1) return true;else return false;
     },
     validateCODA: function validateCODA() {
       var verif = true;
-      if (this.member.coda == null || this.member.coda == '') return false;
-      if (isNaN(this.member.coda || !Number.isInteger(this.member.coda) || this.member.coda < 0 || this.member.coda > 99999)) return false;else return true;
+      if (this.member.coda == null || this.member.coda == '') return null;
+      if (!isNaN(this.member.coda) && this.member.coda.toString().indexOf(".") == -1 && this.member.coda > 0 && this.member.coda < 99999) return true;else return false;
     },
     validateT: function validateT() {
       var verif = true;
-      if (this.member.telefono == null || this.member.telefono == '') return false;
-      if (isNaN(this.member.telefono || !Number.isInteger(this.member.telefono) || this.member.telefono < 0 || this.member.telefono > 9999999)) return false;else return true;
+      if (this.member.telefono == null || this.member.telefono == '') return null;
+      if (!isNaN(this.member.telefono) && this.member.telefono.toString().indexOf(".") == -1 && this.member.telefono > 0 && this.member.telefono < 9999999999) return true;else return false;
     },
     validateP: function validateP() {
-      return this.member.pais != null;
+      if (this.member.pais == null) return false;
     },
     validateCI: function validateCI() {
-      return this.member.ciudad != null;
+      if (this.member.ciudad == null) return false;
     },
     validateU: function validateU() {
-      if (this.member.urbanizacion == null || this.member.urbanizacion == '' || this.member.urbanizacion.length > 20) return false;else return true;
+      if (this.member.urbanizacion == null || this.member.urbanizacion == '') return null;
+      if (this.member.urbanizacion.length > 20) return false;else return true;
     },
     validateCA: function validateCA() {
-      if (this.member.calle == null || this.member.calle == '' || this.member.calle.length > 20) return false;else return true;
+      if (this.member.calle == null || this.member.calle == '') return null;
+      if (this.member.calle.length > 20) return false;else return true;
     },
     validateZ: function validateZ() {
       var verif = true;
-      if (this.member.zipcode == null || this.member.zipcode == '') return false;
-      if (!isNaN(this.member.zipcode && Number.isInteger(this.member.zipcode) && this.member.zipcode > 0 && this.member.zipcode < 99999)) return true;else return false;
+      if (this.member.zipcode == null || this.member.zipcode == '') return null;
+      if (!isNaN(this.member.zipcode) && this.member.zipcode.toString().indexOf(".") == -1 && this.member.zipcode > 0 && this.member.zipcode < 9999999) return true;else return false;
     },
     validateDR: function validateDR() {
       var verif = true;
-      if (this.rep.dociden == null || this.rep.dociden == '') return false;
-      if (this.rep.dociden.toString().length > 8 || isNaN(this.rep.dociden)) verif = false;
+      if (this.rep.dociden == null || this.rep.dociden == '') return null;
+      if (this.rep.dociden.toString().length != 8 || isNaN(this.rep.dociden)) verif = false;
       if (this.rep.dociden.toString().indexOf(".") != -1 || this.rep.dociden < 0) verif = false;
       return verif;
     },
     validateNR: function validateNR() {
-      if (this.rep.nom1 == null || this.rep.nom1 == '' || this.rep.nom1.length > 20) return false;else return true;
+      if (this.rep.nom1 == null || this.rep.nom1 == '') return null;
+      if (this.rep.nom1.length > 20) return false;else return true;
     },
     validateSNR: function validateSNR() {
-      if (this.rep.nom2 == null || this.rep.nom2.length > 20) return false;else return true;
+      if (this.rep.nom2 != null && this.rep.nom2.length > 20) return false;else return true;
     },
     validateAR: function validateAR() {
-      if (this.rep.ape1 == null || this.rep.ape1 == '' || this.rep.ape1.length > 20) return false;else return true;
+      if (this.rep.ape1 == null || this.rep.ape1 == '') return null;
+      if (this.rep.ape1.length > 20) return false;else return true;
     },
     validateSAR: function validateSAR() {
-      if (this.rep.ape2 == null || this.rep.ape2 == '' || this.rep.ape2.length > 20) return false;else return true;
+      if (this.rep.ape2 == null || this.rep.ape2 == '') return null;
+      if (this.rep.ape2.length > 20) return false;else return true;
     },
     validateGR: function validateGR() {
       return this.rep.genero != null;
     },
     validateFR: function validateFR() {
-      return this.rep.fec_nac != null;
+      if (this.rep.fec_nac == null) return false;else {
+        var verif = true;
+        var a = Date.now();
+        var b = Date.parse(this.rep.fec_nac);
+        if (a - b < 568024668000) return false;else return verif;
+      }
     },
     validatePR: function validatePR() {
       return this.rep.pais != null;
@@ -4362,15 +5019,17 @@ __webpack_require__.r(__webpack_exports__);
       return this.rep.ciudad != null;
     },
     validateUR: function validateUR() {
-      if (this.rep.urbanizacion == null || this.rep.urbanizacion == '' || this.rep.urbanizacion.length > 20) return false;else return true;
+      if (this.rep.urbanizacion == null || this.rep.urbanizacion == '') return null;
+      if (this.rep.urbanizacion.length > 20) return false;else return true;
     },
     validateCAR: function validateCAR() {
-      if (this.rep.calle == null || this.rep.calle == '' || this.rep.calle.length > 20) return false;else return true;
+      if (this.rep.calle == null || this.rep.calle == '') return null;
+      if (this.rep.calle.length > 20) return false;else return true;
     },
     validateZR: function validateZR() {
       var verif = true;
-      if (this.rep.zipcode == null || this.rep.zipcode == '') return false;
-      if (!isNaN(this.rep.zipcode && Number.isInteger(this.rep.zipcode) && this.rep.zipcode > 0 && this.rep.zipcode < 99999)) return true;else return false;
+      if (this.rep.zipcode == null || this.rep.zipcode == '') return null;
+      if (!isNaN(this.rep.zipcode) && this.member.zipcode.toString().indexOf(".") == -1 && this.rep.zipcode > 0 && this.rep.zipcode < 9999999) return true;else return false;
     }
   },
   methods: {
@@ -4539,7 +5198,7 @@ __webpack_require__.r(__webpack_exports__);
       if (this.validateA == false) msg = msg + "El campo Apellido de Lector no puede estar vacío ni tener más de 20 caracteres\n";
       if (this.validateSA == false) msg = msg + "El campo Segundo Apellido de Lector no puede estar vacío ni tener más de 20 caracteres\n";
       if (this.validateG == false) msg = msg + "El campo Género no puede estar vacío\n";
-      if (this.validateF == false) msg = msg + "El campo Fecha de Nacimiento de Lector no puede estar vacío";
+      if (this.validateF == false) msg = msg + "El campo Fecha de Nacimiento de Lector no puede estar vacío y miembro debe tener más de 9 años\n";
       if (this.validateCP == false) msg = msg + "El campo Código de País debe ser número entero, no puede estar vacío ni tener más de 3 caracteres\n";
       if (this.validateCODA == false) msg = msg + "El campo Código de Área debe ser número entero, no puede estar vacío ni tener más de 5 caracteres\n";
       if (this.validateT == false) msg = msg + "El campo Número de Teléfono debe ser un número entero, no puede estar vacío ni tener más de 10 caracteres\n";
@@ -5066,8 +5725,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -5125,7 +5782,8 @@ __webpack_require__.r(__webpack_exports__);
   },
   computed: {
     validateN: function validateN() {
-      return this.group.nom != null && this.group.nom != '';
+      if (this.group.nom == null || this.group.nom == '') return null;
+      if (this.group.nom.length > 40) return false;else return true;
     },
     validateT: function validateT() {
       return this.group.tipo != null;
@@ -5157,7 +5815,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     revalidate: function revalidate() {
       var msg = '';
-      if (!this.validateN) msg = msg + "El campo Nombre de Grupo no puede estar vacío ni tener más de 40 caracteres\n";
+      if (!this.validateN || this.validateN == null) msg = msg + "El campo Nombre de Grupo no puede estar vacío ni tener más de 40 caracteres\n";
       if (!this.validateT) msg = msg + "El campo Tipo de Grupo no puede estar vacío\n";
       if (!this.validateD) msg = msg + "El campo Día de Disponibilidad no puede estar vacío\n";
       if (!this.validateH) msg = msg + "El campo Hora Inicio no puede estar vacío\n";
@@ -5433,7 +6091,8 @@ __webpack_require__.r(__webpack_exports__);
   },
   computed: {
     validateN: function validateN() {
-      return this.group.nom != null && this.group.nom != '';
+      if (this.group.nom == null || this.group.nom == '') return null;
+      if (this.group.nom.length > 40) return false;else return true;
     },
     validateT: function validateT() {
       return this.group.tipo != null;
@@ -5471,7 +6130,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     revalidate: function revalidate() {
       var msg = '';
-      if (!this.validateN) msg = msg + "El campo Nombre de Grupo no puede estar vacío ni tener más de 40 caracteres\n";
+      if (!this.validateN || this.validateN == null) msg = msg + "El campo Nombre de Grupo no puede estar vacío ni tener más de 40 caracteres\n";
       if (!this.validateT) msg = msg + "El campo Tipo de Grupo no puede estar vacío\n";
       if (!this.validateD) msg = msg + "El campo Día de Disponibilidad no puede estar vacío\n";
       if (!this.validateH) msg = msg + "El campo Hora Inicio no puede estar vacío\n";
@@ -6357,8 +7016,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -6817,8 +7474,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -6953,8 +7608,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -6986,8 +7639,8 @@ __webpack_require__.r(__webpack_exports__);
     axios.get("/clubs/".concat(idclub, "/members/").concat(idmember, "/payments/").concat(idpay, "/edit")).then(function (res) {
       console.log(res.data);
       _this.member = res.data.data;
-      _this.date = res.data.pago.fec_emi;
-      _this.prevdate = res.data.pago.fec_emi;
+      _this.date = res.data.pago;
+      _this.prevdate = res.data.pago;
     })["catch"](function (e) {
       console.log(e);
     });
@@ -75263,15 +75916,6 @@ var render = function() {
                                 on: { click: _vm.validateSelect }
                               },
                               [_vm._v("Continuar")]
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "b-link",
-                              {
-                                staticClass: "btn btn-danger",
-                                attrs: { href: "/browseclubs" }
-                              },
-                              [_vm._v("Cancelar")]
                             )
                           ],
                           1
@@ -77404,9 +78048,7 @@ var render = function() {
                                   _c("label", { attrs: { for: "fec_nac" } }, [
                                     _vm._v("Fecha de Nacimiento")
                                   ]),
-                                  _vm._v(
-                                    "\r\n<<<<<<< HEAD\r\n                                                "
-                                  ),
+                                  _vm._v(" "),
                                   _c("b-form-input", {
                                     attrs: {
                                       type: "date",
@@ -77431,43 +78073,7 @@ var render = function() {
                                   _c(
                                     "b-form-invalid-feedback",
                                     { attrs: { state: _vm.validateF } },
-                                    [
-                                      _vm._v(
-                                        "El miembro debe ser mayor de 9 años/El campo no puede estar vacio"
-                                      )
-                                    ]
-                                  ),
-                                  _vm._v(
-                                    "\r\n=======\r\n                                                "
-                                  ),
-                                  _c("b-form-input", {
-                                    attrs: {
-                                      type: "date",
-                                      name: "fec_nac",
-                                      id: "fec_nac"
-                                    },
-                                    on: {
-                                      input: function($event) {
-                                        _vm.mayoredad = true
-                                        _vm.verifyAge(_vm.member.fec_nac)
-                                      }
-                                    },
-                                    model: {
-                                      value: _vm.member.fec_nac,
-                                      callback: function($$v) {
-                                        _vm.$set(_vm.member, "fec_nac", $$v)
-                                      },
-                                      expression: "member.fec_nac"
-                                    }
-                                  }),
-                                  _vm._v(" "),
-                                  _c(
-                                    "b-form-invalid-feedback",
-                                    { attrs: { state: _vm.validateF } },
-                                    [_vm._v("* Requerido")]
-                                  ),
-                                  _vm._v(
-                                    "\r\n>>>>>>> 6da0eb2a2d14c7a78eefd3cf1e09eafe10d3353b\r\n                                            "
+                                    [_vm._v("Miembro debe ser mayor de 9 años")]
                                   )
                                 ],
                                 1
@@ -77623,7 +78229,7 @@ var render = function() {
                                   _c(
                                     "b-form-invalid-feedback",
                                     { attrs: { state: _vm.validateP } },
-                                    [_vm._v("Seleccione un país")]
+                                    [_vm._v("* Requerido")]
                                   )
                                 ],
                                 1
@@ -78068,9 +78674,7 @@ var render = function() {
                                               expression: "rep.fec_nac"
                                             }
                                           }),
-                                          _vm._v(
-                                            "\r\n<<<<<<< HEAD\r\n                                                    "
-                                          ),
+                                          _vm._v(" "),
                                           _c(
                                             "b-form-invalid-feedback",
                                             {
@@ -78078,22 +78682,9 @@ var render = function() {
                                             },
                                             [
                                               _vm._v(
-                                                "La edad del representante debe ser mayor a 18 años / El campo no puede estar vacio"
+                                                "Representante debe ser mayor de edad"
                                               )
                                             ]
-                                          ),
-                                          _vm._v(
-                                            "\r\n=======\r\n                                                    "
-                                          ),
-                                          _c(
-                                            "b-form-invalid-feedback",
-                                            {
-                                              attrs: { state: _vm.validateFR }
-                                            },
-                                            [_vm._v("* Requerido")]
-                                          ),
-                                          _vm._v(
-                                            "\r\n>>>>>>> 6da0eb2a2d14c7a78eefd3cf1e09eafe10d3353b\r\n\r\n                                                "
                                           )
                                         ],
                                         1
@@ -79975,11 +80566,7 @@ var render = function() {
                                             {
                                               attrs: { state: _vm.validateFR }
                                             },
-                                            [
-                                              _vm._v(
-                                                "Seleccione una fecha de nacimiento"
-                                              )
-                                            ]
+                                            [_vm._v("* Requerido")]
                                           )
                                         ],
                                         1
@@ -80031,7 +80618,7 @@ var render = function() {
                                             {
                                               attrs: { state: _vm.validatePR }
                                             },
-                                            [_vm._v("Seleccione un país")]
+                                            [_vm._v("* Requerido")]
                                           )
                                         ],
                                         1
@@ -80067,7 +80654,7 @@ var render = function() {
                                             {
                                               attrs: { state: _vm.validateCIR }
                                             },
-                                            [_vm._v("Seleccione una ciudad")]
+                                            [_vm._v("* Requerido")]
                                           )
                                         ],
                                         1
@@ -80232,15 +80819,6 @@ var render = function() {
                                   on: { click: _vm.revalidate }
                                 },
                                 [_vm._v("Continuar")]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "b-link",
-                                {
-                                  staticClass: "btn btn-danger",
-                                  attrs: { href: "/managemembers" }
-                                },
-                                [_vm._v("Cancelar")]
                               )
                             ],
                             1
@@ -81395,7 +81973,7 @@ var render = function() {
                                     { attrs: { state: _vm.validateN } },
                                     [
                                       _vm._v(
-                                        "El nombre del grupo no puede estar vacío"
+                                        "El nombre del grupo no puede estar vacío ni tener más de 40 caracteres"
                                       )
                                     ]
                                   )
@@ -81428,7 +82006,7 @@ var render = function() {
                                   _c(
                                     "b-form-invalid-feedback",
                                     { attrs: { state: _vm.validateT } },
-                                    [_vm._v("Seleccione tipo de grupo")]
+                                    [_vm._v("* Requerido")]
                                   )
                                 ],
                                 1
@@ -81480,7 +82058,7 @@ var render = function() {
                                   _c(
                                     "b-form-invalid-feedback",
                                     { attrs: { state: _vm.validateD } },
-                                    [_vm._v("Seleccione un día")]
+                                    [_vm._v("* Requerido")]
                                   )
                                 ],
                                 1
@@ -81535,11 +82113,7 @@ var render = function() {
                                   on: { click: _vm.revalidate }
                                 },
                                 [_vm._v("Continuar")]
-                              ),
-                              _vm._v(" "),
-                              _c("b-link", { staticClass: "btn btn-danger" }, [
-                                _vm._v("Cancelar")
-                              ])
+                              )
                             ],
                             1
                           )
@@ -81808,7 +82382,7 @@ var render = function() {
                                     { attrs: { state: _vm.validateN } },
                                     [
                                       _vm._v(
-                                        "El nombre del grupo no puede estar vacío"
+                                        "El nombre del grupo no puede estar vacío ni tener más de 40 caracteres"
                                       )
                                     ]
                                   )
@@ -81841,7 +82415,7 @@ var render = function() {
                                   _c(
                                     "b-form-invalid-feedback",
                                     { attrs: { state: _vm.validateT } },
-                                    [_vm._v("Seleccione tipo de grupo")]
+                                    [_vm._v("* Requerido")]
                                   )
                                 ],
                                 1
@@ -81893,7 +82467,7 @@ var render = function() {
                                   _c(
                                     "b-form-invalid-feedback",
                                     { attrs: { state: _vm.validateD } },
-                                    [_vm._v("Seleccione un día")]
+                                    [_vm._v("* Requerido")]
                                   )
                                 ],
                                 1
@@ -83411,15 +83985,6 @@ var render = function() {
                                   on: { click: _vm.validateSelect }
                                 },
                                 [_vm._v("Continuar")]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "b-link",
-                                {
-                                  staticClass: "btn btn-danger",
-                                  attrs: { href: "/browseclubs" }
-                                },
-                                [_vm._v("Cancelar")]
                               )
                             ],
                             1
@@ -84353,15 +84918,6 @@ var render = function() {
                                   on: { click: _vm.revalidate }
                                 },
                                 [_vm._v("Continuar")]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "b-link",
-                                {
-                                  staticClass: "btn btn-danger",
-                                  attrs: { href: "/managemembers" }
-                                },
-                                [_vm._v("Cancelar")]
                               )
                             ],
                             1
@@ -84520,15 +85076,6 @@ var render = function() {
                                   on: { click: _vm.revalidate }
                                 },
                                 [_vm._v("Continuar")]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "b-link",
-                                {
-                                  staticClass: "btn btn-danger",
-                                  attrs: { href: "/managemembers" }
-                                },
-                                [_vm._v("Cancelar")]
                               )
                             ],
                             1
@@ -101766,8 +102313,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! E:\SBD1-Reading-club\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! E:\SBD1-Reading-club\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\Hyper\Documents\GitHub\SBD1-Reading-club\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\Hyper\Documents\GitHub\SBD1-Reading-club\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

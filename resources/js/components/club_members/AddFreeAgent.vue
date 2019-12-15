@@ -44,8 +44,6 @@
                                         </div>
                                         <div class="d-flex flex-row-reverse bd-highlight">
                                             <b-button variant="default" @click="validateSelect">Continuar</b-button>
-
-                                            <b-link class="btn btn-danger" href="/browseclubs">Cancelar</b-link>
                                         </div>
                                     </b-form>
                                 </div>
