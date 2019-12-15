@@ -24,8 +24,17 @@
                                 <div class="overflow-auto">
 
                                     <b-form @submit.prevent="add">
-
-                                        <b-table selectable :select-mode="'single'" :items="items" :fields="fields" @row-selected="onRowSelected" responsive="lg" id="my-table" :per-page="perPage" :current-page="currentPage" small>
+                                    <b-col lg="6" class="my-1">
+                                        <b-form-group label-for="filterInput" class="mb-0">
+                                            <b-input-group size="sm">
+                                                <b-form-input v-model="filter" type="search" id="filterInput" placeholder="Escribe para buscar"></b-form-input>
+                                                <b-input-group-append>
+                                                    <b-button :disabled="!filter" @click="filter = ''">Limpiar</b-button>
+                                                </b-input-group-append>
+                                            </b-input-group>
+                                        </b-form-group>
+                                    </b-col>
+                                        <b-table selectable :select-mode="'single'" :items="items" :fields="fields" @row-selected="onRowSelected" responsive="lg" id="my-table" :per-page="perPage" :current-page="currentPage" small sort-by="apellido" :filter="filter" :filterIncludedFields="filterOn" @filtered="onFiltered">
                                             <template v-slot:cell(seleccionado)="{ rowSelected }">
                                                 <template v-if="rowSelected">
                                                     <span aria-hidden="true">&check;</span>
@@ -71,6 +80,8 @@ export default {
 
             ],
             selected: [],
+            filterOn: [],
+            filter: null,
         }
     },
     created() {
@@ -93,6 +104,12 @@ export default {
     methods: {
         onRowSelected(items) {
             this.selected = items
+        },
+
+        onFiltered(filteredItems) {
+            // Trigger pagination to update the number of buttons/pages due to filtering
+            this.totalRows = filteredItems.length
+            this.currentPage = 1
         },
 
         add() {

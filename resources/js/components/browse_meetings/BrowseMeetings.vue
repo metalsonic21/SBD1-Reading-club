@@ -33,8 +33,8 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-lg-12">
-                                    <div class="table-responsive table-sales">
-                                        <table class="table" >
+                                    <div class="material-datatables">
+                                        <table class="table table-sales table-hover table-no-bordered" id="myTable">
                                             <thead>
                                                 <tr>
                                                     <th class="text-center">Libro</th>
@@ -53,9 +53,9 @@
                                                     <td class="text-center">{{item.sesion}}</td>
                                                     <td class="text-center">{{item.valoracion}}</td>
                                                     <td class="td-actions text-center">
-                                                        <button type="button" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Visualizar" class="btn btn-info" v-b-modal.meeting-details>
+                                                        <b-link v-bind:href="'/clubs/'+club+'/groups/'+grupo+'/meetings/'+item.fecha+'/'+item.idmod+'/'+item.idlibro+'/'+item.sesion+'/details'" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Visualizar" class="btn btn-info">
                                                             <i class="material-icons">remove_red_eye</i>
-                                                        </button>
+                                                        </b-link>
                                                         <b-link v-bind:href="'/clubs/'+club+'/groups/'+grupo+'/meetings/'+item.fecha+'/'+item.idmod+'/'+item.idlibro+'/attendance'" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Control de asistencia para esta reunión" class="btn btn-default" v-b-modal.attendance>
                                                             <i class="material-icons">list</i>
                                                         </b-link>
@@ -93,7 +93,6 @@
 
         </div>
     </div>
-    <meeting-details></meeting-details>
 </div>
 </template>
 
@@ -137,7 +136,7 @@ export default {
             axios.delete(`/clubs/${this.club}/groups/${this.grupo}/meetings/${item.fecha}`)
                 .then(res => {
                     console.log(res.data);
-                    //window.location = `/clubs/${this.club}/groups/${this.grupo}/gmembers`;
+                    window.location = `/clubs/${this.club}/groups/${this.grupo}/meetings`;
                 }).catch(e => {
                     console.log(e);
                 })

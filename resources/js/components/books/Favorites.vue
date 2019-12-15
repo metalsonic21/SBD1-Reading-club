@@ -22,8 +22,17 @@
                             <div class="col-lg-12">
 
                                 <b-form @submit.prevent="add">
-
-                                    <b-table selectable :select-mode="'multi'" :items="items" :fields="fields" @row-selected="onRowSelected" id="my-table" :per-page="perPage" :current-page="currentPage" small>
+                                    <b-col lg="6" class="my-1">
+                                        <b-form-group label-for="filterInput" class="mb-0">
+                                            <b-input-group size="sm">
+                                                <b-form-input v-model="filter" type="search" id="filterInput" placeholder="Escribe para buscar"></b-form-input>
+                                                <b-input-group-append>
+                                                    <b-button :disabled="!filter" @click="filter = ''">Limpiar</b-button>
+                                                </b-input-group-append>
+                                            </b-input-group>
+                                        </b-form-group>
+                                    </b-col>
+                                    <b-table ref="selectableTable" selectable :select-mode="'multi'" :items="items" :fields="fields" @row-selected="onRowSelected" id="my-table" :per-page="perPage" :current-page="currentPage" small sort-by="titulo_en_español" :filter="filter" :filterIncludedFields="filterOn" @filtered="onFiltered">
                                         <template v-slot:cell(seleccionado)="{ rowSelected }">
                                             <template v-if="rowSelected && selected.length<=3">
                                                 <span aria-hidden="true">&check;</span>
@@ -36,6 +45,10 @@
                                         </template>
                                     </b-table>
 
+                                    <div class="d-flex flex-row-reverse bd-highlight">
+                                        <b-pagination v-model="currentPage" :total-rows="rows" :per-page="perPage" aria-controls="my-table"></b-pagination>
+
+                                    </div>
                                     <b-row>
                                         <b-col cols="8">
                                             <h6>NIVEL DE PREFERENCIA</h6>
@@ -66,10 +79,6 @@
                                     <br>
 
                                     <div class="d-flex flex-row-reverse bd-highlight">
-                                        <b-pagination v-model="currentPage" :total-rows="rows" :per-page="perPage" aria-controls="my-table"></b-pagination>
-
-                                    </div>
-                                    <div class="d-flex flex-row-reverse bd-highlight">
                                         <b-button variant="default" @click="validateSelect">Continuar</b-button>
                                     </div>
                                 </b-form>
@@ -97,6 +106,8 @@ export default {
             ],
             selected: [],
             prefOne: null,
+            filterOn: [],
+            filter: null,
             prefTwo: null,
             prefThree: null,
             preferencias: [{
@@ -142,10 +153,10 @@ export default {
         },
         validateOne() {
             if (this.prefOne != null)
-                if (this.prefOne != this.prefTwo && this.prefOne != this.prefThree){
+                if (this.prefOne != this.prefTwo && this.prefOne != this.prefThree) {
                     return true;
                 }
-                else return false;
+            else return false;
             else return null;
         },
         validateTwo() {
@@ -163,13 +174,40 @@ export default {
                 else return false;
             else return null;
         },
+        sortOptions() {
+            // Create an options list from our fields
+            return this.fields
+                .filter(f => f.sortable)
+                .map(f => {
+                    return {
+                        text: f.label,
+                        value: f.key
+                    }
+                })
+        },
     },
 
     methods: {
         onRowSelected(items) {
-            if (this.selected.length < 3)
-                this.selected = items
-            else alert("Puedes seleccionar sólo tres libros\n");
+            const limit = 3
+            let selected = items
+            if (this.items.length > limit) {
+                selected = items.slice(0, limit)
+            }
+            const toUnselected = items.slice(limit)
+            toUnselected.forEach(item => {
+                const idx = this.items.findIndex(it => item == it)
+                if (idx >= 0) {
+                    this.$refs.selectableTable.unselectRow(idx)
+                }
+            })
+            this.selected = items
+        },
+
+        onFiltered(filteredItems) {
+            // Trigger pagination to update the number of buttons/pages due to filtering
+            this.totalRows = filteredItems.length
+            this.currentPage = 1
         },
 
         add() {

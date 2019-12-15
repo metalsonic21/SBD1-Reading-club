@@ -154,12 +154,42 @@ class MeetingsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($idclub, $idgrupo, $idreunion, $idmod, $idlibro)
     {
-        //
+        /*$meeting = DB::select(DB::raw("SELECT (
+            SELECT titulo_esp FROM sjl_libros WHERE isbn = r.id_lib
+        ), r.fec, (
+            SELECT nom1 || ' ' || ape1 FROM sjl_lectores WHERE doc_iden = r.id_lec
+        ), r.n_ses, r.conclu, r.valor, nom FROM sjl_reuniones_mensuales r"));*/
+
+        //$inas = DB::select(DB::raw("SELECT nom1 || ' ' || ape1 FROM sjl_lectores, sjl_inansistencias r WHERE doc_iden = r.id_lec AND id_grupo = '$idgrupo' AND id_club = '$idclub' AND fec_reu_men = '$idreunion'"));
+        //return $inas;
+        //return view('groups.details')->with('g',$grupo);
     }
 
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function details($idclub, $idgrupo, $idreunion, $idmod, $idlibro, $nses)
+    {
+        $meeting = DB::select(DB::raw("SELECT (
+            SELECT titulo_esp FROM sjl_libros WHERE isbn = '$idlibro'
+        )titulo, r.fec as fecha , (
+            SELECT to_char(g.hora_i::time, 'HH12:MI AM') FROM sjl_grupos_lectura g WHERE g.id_club = '$idclub' AND g.id = '$idgrupo'
+        )hora_i,(
+            SELECT to_char(g.hora_f::time, 'HH12:MI AM') FROM sjl_grupos_lectura g WHERE g.id_club = '$idclub' AND g.id = '$idgrupo'
+        )hora_f, (
+            SELECT nom1 || ' ' || ape1 FROM sjl_lectores WHERE doc_iden = r.id_lec
+        )moderador, r.n_ses, r.conclu, r.valor FROM sjl_reuniones_mensuales r WHERE r.n_ses='$nses' AND r.id_club = '$idclub' AND r.id_grupo = '$idgrupo'"));
 
+        $m = $meeting[0];
+        $inas = '';
+        $inas = DB::select(DB::raw("SELECT nom1 || ' ' || ape1 as nombre FROM sjl_lectores, sjl_inansistencias r WHERE doc_iden = r.id_lec AND r.id_grupo = '$idgrupo' AND r.id_club = '$idclub' AND r.fec_reu_men = '$idreunion'"));
+        return view('meetings.details')->with('meeting',$m)->with('inas', $inas);
+    }
     /**
      * Show the form for editing the specified resource.
      *

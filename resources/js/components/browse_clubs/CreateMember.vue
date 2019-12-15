@@ -86,7 +86,7 @@
                                             <b-col cols="4">
                                                 <label for="num">Número telefónico</label>
                                                 <b-form-input type="text" v-model="member.telefono" name="num" id="num"></b-form-input>
-                                                <b-form-invalid-feedback :state="validateT">El teléfono debe ser un valor numérico entero de máximo 10 caracteres</b-form-invalid-feedback>
+                                                <b-form-invalid-feedback :state="validateT">El teléfono debe ser un valor numérico entero de máximo 9 caracteres</b-form-invalid-feedback>
                                             </b-col>
                                         </b-row>
                                         <hr>
@@ -405,7 +405,7 @@ export default {
         validateT(){
             let verif = true;
                 if (this.member.telefono == null || this.member.telefono == '') return null;
-                if (!isNaN(this.member.telefono) && this.member.telefono.toString().indexOf(".") == -1 && this.member.telefono>0 && this.member.telefono<9999999999)
+                if (!isNaN(this.member.telefono) && this.member.telefono.toString().indexOf(".") == -1 && this.member.telefono>0 && this.member.telefono<999999999)
                 return true;
                 else return false;
         },

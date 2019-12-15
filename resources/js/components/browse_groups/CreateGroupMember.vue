@@ -8,10 +8,20 @@
             <h4 class="card-title">Añadir nuevo miembro</h4>
         </div>
         <div class="card-body ">
-            <p>Seleccione un miembro del club para agregar al grupo</p>
+            <p class="ml-3">Seleccione un miembro del club para agregar al grupo</p>
 
             <b-form>
-                <b-table ref="selectableTable" selectable :select-mode="'single'" :items="items" :fields="fields" @row-selected="onRowSelected" responsive="sm" id="my-table" :per-page="perPage" :current-page="currentPage" small>
+                <b-col lg="6" class="my-1">
+                    <b-form-group label-for="filterInput" class="mb-0">
+                        <b-input-group size="sm">
+                            <b-form-input v-model="filter" type="search" id="filterInput" placeholder="Escribe para buscar"></b-form-input>
+                            <b-input-group-append>
+                                <b-button :disabled="!filter" @click="filter = ''">Limpiar</b-button>
+                            </b-input-group-append>
+                        </b-input-group>
+                    </b-form-group>
+                </b-col>
+                <b-table ref="selectableTable" selectable :select-mode="'single'" :items="items" :fields="fields" @row-selected="onRowSelected" responsive="sm" id="my-table" :per-page="perPage" :current-page="currentPage" small sort-by="apellido" :filter="filter" :filterIncludedFields="filterOn" @filtered="onFiltered">
                     <!-- Example scoped slot for select state illustrative purposes -->
                     <template v-slot:cell(seleccionado)="{ rowSelected }">
                         <template v-if="rowSelected">
@@ -47,12 +57,11 @@ export default {
             currentPage: 1,
             fields: ['seleccionado', 'documento_de_identidad', 'primer_nombre', 'primer_apellido', 'fecha_de_nacimiento'],
             items: [{
-                documento_de_identidad: 123456789101112,
-                primer_nombre: 'Leo',
-                primer_apellido: 'Barnes',
-                fecha_de_nacimiento: '01-01-1992'
+
             }, ],
             selected: [],
+            filterOn: [],
+            filter: null,
             member: {},
             club: null,
             grupo: null,
@@ -83,19 +92,23 @@ export default {
         onRowSelected(items) {
             this.selected = items
         },
-
-        add(){
+        onFiltered(filteredItems) {
+            // Trigger pagination to update the number of buttons/pages due to filtering
+            this.totalRows = filteredItems.length
+            this.currentPage = 1
+        },
+        add() {
             this.member = this.selected[0];
             axios.put(`/clubs/${this.club}/groups/${this.grupo}/gmembers/${this.member.documento_de_identidad}`)
-            .then(res => {
-                //console.log(res.data);
-                window.location = `/clubs/${this.club}/groups/${this.grupo}/gmembers`;
-            }).catch(e => {
-                console.log(e);
-            })
+                .then(res => {
+                    //console.log(res.data);
+                    window.location = `/clubs/${this.club}/groups/${this.grupo}/gmembers`;
+                }).catch(e => {
+                    console.log(e);
+                })
         },
     },
-    computed:{
+    computed: {
         rows() {
             return this.items.length
         },
