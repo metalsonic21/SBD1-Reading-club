@@ -113,8 +113,6 @@
 
                                         <div class="d-flex flex-row-reverse bd-highlight">
                                             <b-button variant="default" @click="revalidate">Continuar</b-button>
-
-                                            <b-link class="btn btn-danger" href="/books">Cancelar</b-link>
                                         </div>
                                     </div>
 
@@ -204,8 +202,8 @@ export default {
                     }
                 }
                 let posgid = this.book.subg.indexOf("-") + 1;
-                this.book.subg = this.book.subg.substr(posgid,this.book.subg.length);
-                this.book.subg = parseInt(this.book.subg,10);
+                this.book.subg = this.book.subg.substr(posgid, this.book.subg.length);
+                this.book.subg = parseInt(this.book.subg, 10);
 
                 this.subgeneros[0].value = null;
                 this.subgeneros[0].text = 'Seleccionar';
@@ -214,45 +212,59 @@ export default {
                 console.log(e);
             })
     },
-        computed: {
-        validateTO(){
-            return (this.book.titulo_ori!='');
-        },
-        validateTE(){
-            return (this.book.titulo_esp!='');
-        },
-        validateSinopsis(){
-            return (this.book.sinop.length > 9);
-        },
-        validateNP(){
+    computed: {
+        validateISBN() {
             let isValid = null;
-                if (this.book.n_pag!=null && (isNaN(this.book.n_pag) || this.book.n_pag.toString().indexOf(".")!=-1 || this.book.n_pag<0 || this.book.n_pag > 999999)) isValid = false;
-                else isValid = true;
-            return isValid;
+            if (this.book.isbn == '' || this.book.isbn == null) return null;
+            if (this.book.isbn <= 99999 && !isNaN(this.book.isbn) && this.book.isbn.indexOf(".") == -1 && this.book.isbn > 0)
+                return true;
+            else return false;
         },
-        validateF(){
+        validateTO() {
+            if (this.book.titulo_ori=='' || this.book.titulo_ori == null) return null;
+            if (this.book.titulo_ori.length > 40) return false;
+            else return true; 
+        },
+        validateTE() {
+            if (this.book.titulo_esp=='' || this.book.titulo_esp == null) return null;
+            if (this.book.titulo_esp.length > 40) return false;
+            else return true;
+        },
+        validateSinopsis() {
+            if (this.book.sinop == '' || this.book.sinop == null) return null;
+            if (this.book.sinop.length > 1000 ||this.book.sinop.length < 9) return false;
+            else return true;
+        },
+        validateNP() {
+            if (this.book.n_pag == '' || this.book.n_pag == null) return null;
+            if (!isNaN(this.book.n_pag) && this.book.n_pag.toString().indexOf(".") == -1 && this.book.n_pag > 0 && this.book.n_pag < 999999) return true;
+            else return false;
+        },
+        validateF() {
             return (this.book.fec_pub != null);
         },
-        validateA(){
-            return(this.book.autor !='');
+        validateA() {
+            if (this.book.autor =='' && this.book.autor == null) return null;
+            if (this.book.autor.length > 50) return false;
+            else return true;
         },
-        validateG(){
-            return(this.book.genero != null);
+        validateG() {
+            return (this.book.genero != null);
         },
-        validateSG(){
-            return(this.book.subg != null);
+        validateSG() {
+            return (this.book.subg != null);
         },
-        validateE(){
-            return(this.book.editorial != null);
+        validateE() {
+            return (this.book.editorial != null);
         },
-        validateP(){
-            let verif = (this.libros.findIndex(isbn => isbn.isbn == this.book.prev)!=-1);
+        validateP() {
+            let verif = (this.libros.findIndex(isbn => isbn.isbn == this.book.prev) != -1);
             verif = verif && this.book.prev != this.book.isbn;
-                if (this.book.prev == '')
-                    return true;
+            if (this.book.prev == '')
+                return true;
             else return verif;
         }
-        },
+    },
     methods: {
         convert(id, length) {
             let pos = id.indexOf("-");
@@ -261,11 +273,11 @@ export default {
             return res;
         },
 
-        validatePrev(){
-            let verif = (this.libros.findIndex(isbn => isbn.isbn == this.book.prev)!=-1);
+        validatePrev() {
+            let verif = (this.libros.findIndex(isbn => isbn.isbn == this.book.prev) != -1);
             verif = verif && this.book.prev != this.book.isbn;
-                if (this.book.prev == '')
-                    return true;
+            if (this.book.prev == '')
+                return true;
             else return verif;
         },
 
@@ -343,30 +355,26 @@ export default {
                 })
         },
 
-        revalidate(){
-          let msg = '';
-          let isValid = true;
+        revalidate() {
+            let msg = '';
+            let isValid = true;
 
-            if (this.validateISBN == false) msg = msg + "El ISBN debe ser un campo numérico entero de al menos 5 caracteres\n";
-            if (this.validateTO == false) msg = msg +  "El campo Título Original no puede estar vacío\n";
-            if (this.validateTE == false) msg = msg + "El campo Título en Español no puede estar vacío\n";
-            if (this.validateSinopsis == false) msg = msg + "El campo Sinopsis debe tener al menos 10 caracteres\n";
-            if (this.validateNP == false) msg = msg + "El campo número de páginas debe ser numérico entero\n";
+            if (this.validateISBN == false || this.validateISBN == null) msg = msg + "El ISBN debe ser un campo numérico entero de 5 caracteres\n";
+            if (this.validateTO == false || this.validateTO == null) msg = msg +  "El campo Título Original no puede estar vacío\n";
+            if (this.validateTE == false || this.validateTE == null) msg = msg + "El campo Título en Español no puede estar vacío\n";
+            if (this.validateSinopsis == false || this.validateSinopsis == null) msg = msg + "El campo Sinopsis debe tener al menos 10 caracteres\n";
+            if (this.validateNP == false || this.validateNP == null) msg = msg + "El campo número de páginas debe ser numérico entero\n";
             if (this.validateF == false) msg = msg + "El campo Fecha de publicación no puede estar vacío\n";
             if (this.book.editorial == null) msg = msg + "El campo Editorial no puede estar vacío\n";
             if (this.book.genero == null) msg = msg + "El campo Genero no puede estar vacío\n";
             if (this.book.genero != null && this.book.subg == null) msg = msg + "El campo Subgénro no puede estar vacío\n";
-            if (this.validateA == false) msg = msg + "El campo Autor no puede estar vacío\n";
-            if (this.validateG == false) msg = msg + "El campo Género no puede estar vacío\n";
-            if (this.validateSG == false) msg = msg + "El campo Subgénero no puede estar vacío\n";
-            if (this.validateE == false) msg = msg + "El campo Editorial no puede estar vacío\n";
-            if (this.validatePrev == false) msg = msg + "En el campo libro predecesor debe haber un ISBN válido\n";
+            if (this.validateA == false ||this.validateA == null) msg = msg + "El campo Autor no puede estar vacío\n";
+            if (this.validateP == false) msg = msg + "En el campo libro predecesor debe haber un ISBN válido\n";
 
-            if (msg!=''){
+            if (msg != '') {
                 isValid = false;
                 alert(msg);
-            }
-            else {
+            } else {
                 this.update();
             }
         },

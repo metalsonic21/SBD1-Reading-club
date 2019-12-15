@@ -36,8 +36,8 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-lg-12">
-                                    <div class="table-responsive table-sales">
-                                        <table class="table">
+                                    <div class="material-datatables">
+                                        <table class="table table-sales table-hover table-no-bordered" id="myTable">
                                             <thead>
                                                 <tr>
                                                     <th class="text-center">Título en español</th>
@@ -64,18 +64,14 @@
                                                         <b-link href="/books/{{$book->isbn}}/structure" type="button" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Explorar Estructura" class="btn btn-default">
                                                             <i class="material-icons">list</i>
                                                         </b-link>                                       
-
-                                                       <!-- <b-link href="/books/{{$book->isbn}}" type="button" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Eliminar" class="btn btn-danger">
-                                                            <i class="material-icons">close</i>
-                                                        </b-link>                 -->                                 
-                                                                                                               
+                                                                                                                                  
 
                                                     <b-button class="btn btn-danger" id="show-btn" @click=";$bvModal.show('bv-modal-{{$loop->iteration}}') "><i class="material-icons">close</i>
                                                     </b-button>
                                                     <b-modal id="bv-modal-{{$loop->iteration}}" hide-footer>
                                                                 <template v-slot:modal-title>
                                                                 <div>
-                                                                Porfavor confirme que desea eliminar el libro
+                                                                Por favor confirme que desea eliminar el libro
                                                                 </div><div>
                                                                 <code>{{$book->titulo_ori}}</code> 
                                                                 </div>
@@ -86,7 +82,7 @@
                                                                 {!! Form::close() !!}
                                                                 </div>
                                                                 <b-button class="mt-3" block @click=";$bvModal.hide('bv-modal-{{$loop->iteration}}')">Cancelar</b-button>
-                                                    </b-modal>
+                                                            </b-modal>
                                                     </div>
                                                     </td>
                                                 </tr>
