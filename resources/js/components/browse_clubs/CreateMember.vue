@@ -1,4 +1,4 @@
-<template>
+    <template>
 <div>
     <div class="content">
         <div class="container-fluid">
@@ -33,7 +33,7 @@
                                             <b-col cols="4">
                                                 <label for="nom1">Primer nombre</label>
                                                 <b-form-input type="text" v-model="member.nom1" id="nom1" name="nom1" placeholder="Primer nombre"></b-form-input>
-                                                <b-form-invalid-feedback :state="validateN">El nombre no puede estar vacío y no debe tener más de 15 caracteres</b-form-invalid-feedback>
+                                                <b-form-invalid-feedback :state="validateN">El nombre no debe tener más de 15 caracteres</b-form-invalid-feedback>
                                             </b-col>
 
                                             <b-col cols="4">
@@ -47,13 +47,13 @@
                                             <b-col cols="6">
                                                 <label for="ape1">Primer apellido</label>
                                                 <b-form-input type="text" v-model="member.ape1" name="ape1" id="ape1" placeholder="Primer apellido"></b-form-input>
-                                                <b-form-invalid-feedback :state="validateA">El apellido no puede estar vacío ni tener más de 15 caracteres</b-form-invalid-feedback>
+                                                <b-form-invalid-feedback :state="validateA">El apellido no puede tener más de 15 caracteres</b-form-invalid-feedback>
                                             </b-col>
 
                                             <b-col cols="6">
                                                 <label for="ape2">Segundo apellido</label>
                                                 <b-form-input type="text" v-model="member.ape2" name="ape2" id="ape2" placeholder="Segundo apellido"></b-form-input>
-                                                <b-form-invalid-feedback :state="validateSA">El segundo apellido no puede estar vacío ni tener más de 15 caracteres</b-form-invalid-feedback>
+                                                <b-form-invalid-feedback :state="validateSA">El segundo apellido no puede tener más de 15 caracteres</b-form-invalid-feedback>
                                             </b-col>
 
                                         </b-row>
@@ -62,7 +62,7 @@
                                             <b-col cols="2">
                                                 <label for="genero">Género</label>
                                                 <b-form-select v-model="member.genero" :options="generos" id="genero"></b-form-select>
-                                                <b-form-invalid-feedback :state="validateG">Seleccione un género</b-form-invalid-feedback>
+                                                <b-form-invalid-feedback :state="validateG">* Requerido</b-form-invalid-feedback>
                                             </b-col>
 
                                             <b-col cols="2">
@@ -100,7 +100,7 @@
                                             <b-col cols="6">
                                                 <label for="ciudad">Ciudad</label>
                                                 <b-form-select v-model="member.ciudad" id="ciudad" name="ciudad" :options="ciudades"></b-form-select>
-                                                <b-form-invalid-feedback :state="validateCI">Seleccione una ciudad</b-form-invalid-feedback>
+                                                <b-form-invalid-feedback :state="validateCI">* Requerido</b-form-invalid-feedback>
                                             </b-col>
 
                                         </b-row>
@@ -148,7 +148,7 @@
                                                 <b-col cols="4">
                                                     <label for="nom1R">Primer nombre</label>
                                                     <b-form-input type="text" v-model="rep.nom1" id="nom1R" name="nom1R" placeholder="Primer nombre"></b-form-input>
-                                                    <b-form-invalid-feedback :state="validateNR">El nombre no puede estar vacío y no debe tener más de 15 caracteres</b-form-invalid-feedback>
+                                                    <b-form-invalid-feedback :state="validateNR">El nombre no debe tener más de 15 caracteres</b-form-invalid-feedback>
 
                                                 </b-col>
 
@@ -164,14 +164,14 @@
                                                 <b-col cols="6">
                                                     <label for="ape1R">Primer apellido</label>
                                                     <b-form-input type="text" v-model="rep.ape1" name="ape1R" id="ape1R" placeholder="Primer apellido"></b-form-input>
-                                                    <b-form-invalid-feedback :state="validateAR">El apellido no puede estar vacío ni tener más de 15 caracteres</b-form-invalid-feedback>
+                                                    <b-form-invalid-feedback :state="validateAR">El apellido no puede tener más de 15 caracteres</b-form-invalid-feedback>
 
                                                 </b-col>
 
                                                 <b-col cols="6">
                                                     <label for="ape2R">Segundo apellido</label>
                                                     <b-form-input type="text" v-model="rep.ape2" name="ape2R" id="ape2R" placeholder="Segundo apellido"></b-form-input>
-                                                <b-form-invalid-feedback :state="validateSAR">El segundo apellido no puede estar vacío ni tener más de 15 caracteres</b-form-invalid-feedback>
+                                                <b-form-invalid-feedback :state="validateSAR">El segundo apellido no puede tener más de 15 caracteres</b-form-invalid-feedback>
 
                                                 </b-col>
                                                 
@@ -191,14 +191,14 @@
                                                 <b-col cols="6">
                                                     <label for="paisR">País</label>
                                                     <b-form-select v-model="rep.pais" id="paisR" name="paisR" :options="paises" @change="filterR(rep.pais, rep.ciudad)"></b-form-select>
-                                                    <b-form-invalid-feedback :state="validatePR">Seleccione un país</b-form-invalid-feedback>
+                                                    <b-form-invalid-feedback :state="validatePR">* Requerido</b-form-invalid-feedback>
 
                                                 </b-col>
 
                                                 <b-col cols="6">
                                                     <label for="ciudadR">Ciudad</label>
                                                     <b-form-select v-model="rep.ciudad" id="ciudadR" name="ciudadR" :options="ciudadesR"></b-form-select>
-                                                    <b-form-invalid-feedback :state="validateCIR">Seleccione una ciudad</b-form-invalid-feedback>
+                                                    <b-form-invalid-feedback :state="validateCIR">* Requerido</b-form-invalid-feedback>
 
                                                 </b-col>
 
@@ -209,14 +209,14 @@
                                                 <b-col cols="4">
                                                     <label for="urbanizacionR">Urbanización</label>
                                                     <b-form-input v-model="rep.urbanizacion" id="urbanizacionR" name="urbanizacionR" placeholder="Urbanización"></b-form-input>
-                                                    <b-form-invalid-feedback :state="validateUR">Campo urbanización no puede estar vacío ni tener más de 20 caracteres</b-form-invalid-feedback>
+                                                    <b-form-invalid-feedback :state="validateUR">Campo urbanización no puede tener más de 20 caracteres</b-form-invalid-feedback>
 
                                                 </b-col>
 
                                                 <b-col cols="4">
                                                     <label for="calleR">Calle</label>
                                                     <b-form-input v-model="rep.calle" id="calle" name="calleR" placeholder="Calle"></b-form-input>
-                                                    <b-form-invalid-feedback :state="validateCA">Campo calle no puede estar vacío ni tener más de 20 caracteres</b-form-invalid-feedback>
+                                                    <b-form-invalid-feedback :state="validateCA">Campo calle no puede tener más de 20 caracteres</b-form-invalid-feedback>
 
                                                 </b-col>
 
@@ -233,8 +233,6 @@
                                         <br>
                                         <div class="d-flex flex-row-reverse bd-highlight">
                                             <b-button variant="default" @click="revalidate">Continuar</b-button>
-
-                                            <b-link class="btn btn-danger" href="/managemembers">Cancelar</b-link>
                                         </div>
                                     </b-form>
                                 </div>
@@ -254,7 +252,7 @@
 export default {
     data() {
         return {
-            member: [{
+            member: {
                 dociden: null,
                 nom1: null,
                 nom2: null,
@@ -270,7 +268,7 @@ export default {
                 coda: null,
                 codp: null,
                 telefono: null,
-            }],
+            },
 
             rep: [{
                 dociden: '',
@@ -351,8 +349,8 @@ export default {
         },*/
         validateD(){
             let verif = true;
-            if (this.member.dociden == null || this.member.dociden == '') return false;
-            if (this.member.dociden.toString().length > 8 || isNaN(this.member.dociden))
+            if (this.member.dociden == null || this.member.dociden == '') return null;
+            if (this.member.dociden.toString().length != 8 || isNaN(this.member.dociden))
                 verif = false;
             if (this.member.dociden.toString().indexOf(".") != -1 || this.member.dociden<0)
                 verif = false;
@@ -369,7 +367,8 @@ export default {
         },
 
         validateN(){
-            if (this.member.nom1 == null || this.member.nom1 == '' || this.member.nom1.length>20) return false;
+            if (this.member.nom1 == null || this.member.nom1 == '') return null;
+            if (this.member.nom1.length>20) return false;
             else return true;
         },
         validateSN(){
@@ -377,15 +376,17 @@ export default {
             else return true;
         },
         validateA(){
-            if (this.member.ape1 == null || this.member.ape1 == '' || this.member.ape1.length>20) return false;
+            if (this.member.ape1 == null || this.member.ape1 == '') return null 
+            if (this.member.ape1.length>20) return false;
             else return true;
         },
         validateSA(){
-            if (this.member.ape2 == null || this.member.ape2 == '' || this.member.ape2.length>20) return false;
+            if (this.member.ape2 == null || this.member.ape2 == '') return null;
+            if (this.member.ape2.length>20) return false;
             else return true;
         },
         validateG(){
-            return (this.member.genero != null)
+            if (this.member.genero == null) return false;
         },
         validateF(){
             if ((this.member.fec_nac) == null) return false;
@@ -418,30 +419,34 @@ export default {
                 else return true;
         },
         validateP(){
-            return (this.member.pais != null);
+            if (this.member.pais == null) return false;
         },
         validateCI(){
-            return (this.member.ciudad != null);
+            if (this.member.ciudad == null) return false;
         },
         validateU(){
-            if (this.member.urbanizacion == null || this.member.urbanizacion == '' || this.member.urbanizacion.length>20) return false;
+            if (this.member.urbanizacion == null || this.member.urbanizacion == '') return null; 
+            if (this.member.urbanizacion.length>20) return false;
             else return true;
         },
         validateCA(){
-            if (this.member.calle == null || this.member.calle == '' || this.member.calle.length>20) return false;
+            if (this.member.calle == null || this.member.calle == '') return null;
+            if (this.member.calle.length>20) return false;
             else return true;
         },
         validateZ(){
             let verif = true;
-                if (this.member.zipcode == null || this.member.zipcode == '') return false;
-                if (!isNaN(this.member.zipcode && Number.isInteger(this.member.zipcode) && this.member.zipcode>0 && this.member.zipcode<99999))
+                if (this.member.zipcode == null || this.member.zipcode == '') return null;
+                if (!isNaN(this.member.zipcode) && this.member.zipcode.toString().indexOf(".") == -1 && this.member.zipcode>0 && this.member.zipcode<9999999)
                 return true;
                 else return false;
         },
+
+        /* REPRESENTANTE */
         validateDR(){
             let verif = true;
-            if (this.rep.dociden == null || this.rep.dociden == '') return false;
-            if (this.rep.dociden.toString().length > 8 || isNaN(this.rep.dociden))
+            if (this.rep.dociden == null || this.rep.dociden == '') return null;
+            if (this.rep.dociden.toString().length != 8 || isNaN(this.rep.dociden))
                 verif = false;
             if (this.rep.dociden.toString().indexOf(".") != -1 || this.rep.dociden<0)
                 verif = false;
@@ -449,7 +454,8 @@ export default {
         },
 
         validateNR(){
-            if (this.rep.nom1 == null || this.rep.nom1 == '' || this.rep.nom1.length>20) return false;
+            if (this.rep.nom1 == null || this.rep.nom1 == '') return null;
+            if (this.rep.nom1.length>20) return false;
             else return true;
         },
         validateSNR(){
@@ -457,11 +463,13 @@ export default {
             else return true;
         },
         validateAR(){
-            if (this.rep.ape1 == null || this.rep.ape1 == '' || this.rep.ape1.length>20) return false;
+            if (this.rep.ape1 == null || this.rep.ape1 == '') return null;
+            if (this.rep.ape1.length>20) return false;
             else return true;
         },
         validateSAR(){
-            if (this.rep.ape2 == null || this.rep.ape2 == '' || this.rep.ape2.length>20) return false;
+            if (this.rep.ape2 == null || this.rep.ape2 == '') return null;
+            if (this.rep.ape2.length>20) return false;
             else return true;
         },
         validateGR(){
@@ -484,17 +492,19 @@ export default {
             return (this.rep.ciudad != null);
         },
         validateUR(){
-            if (this.rep.urbanizacion == null || this.rep.urbanizacion == '' || this.rep.urbanizacion.length>20) return false;
+            if (this.rep.urbanizacion == null || this.rep.urbanizacion == '') return null;
+            if (this.rep.urbanizacion.length>20) return false;
             else return true;
         },
         validateCAR(){
-            if (this.rep.calle == null || this.rep.calle == '' || this.rep.calle.length>20) return false;
+            if (this.rep.calle == null || this.rep.calle == '') return null;
+            if (this.rep.calle.length>20) return false;
             else return true;
         },
         validateZR(){
             let verif = true;
-                if (this.rep.zipcode == null || this.rep.zipcode == '') return false;
-                if (!isNaN(this.rep.zipcode && Number.isInteger(this.rep.zipcode) && this.rep.zipcode>0 && this.rep.zipcode<99999))
+                if (this.rep.zipcode == null || this.rep.zipcode == '') return null;
+                if (!isNaN(this.rep.zipcode) && this.member.zipcode.toString().indexOf(".") == -1 && this.rep.zipcode>0 && this.rep.zipcode<9999999)
                 return true;
                 else return false;
         },
@@ -631,8 +641,6 @@ export default {
                 today: this.today,
             };
 
-            console.log(params);
-
             //console.log(params);
             axios.post(`/clubs/${path}/members`, params)
                 .then(res => {
@@ -647,33 +655,33 @@ export default {
             let msg = '';
             /* MEMBER */
 
-            if (this.validateD == false) msg = msg + "El campo Documento de Identidad debe ser un número entero positivo de no más de 8 caracteres que no esté registrado anteriormente en la base de datos\n";
-            if (this.validateN == false) msg = msg + "El campo Nombre de Lector no puede estar vacío ni tener más de 20 caracteres\n";
+            if (this.validateD == false || this.validateD == null) msg = msg + "El campo Documento de Identidad debe ser un número entero positivo de no más de 8 caracteres que no esté registrado anteriormente en la base de datos\n";
+            if (this.validateN == false || this.validateN == null) msg = msg + "El campo Nombre de Lector no puede estar vacío ni tener más de 20 caracteres\n";
             if (this.validateSN == false) msg = msg + "El campo Segundo Nombre de Lector no puede tener más de 20 caracteres\n";
-            if (this.validateA == false) msg = msg + "El campo Apellido de Lector no puede estar vacío ni tener más de 20 caracteres\n";
-            if (this.validateSA == false) msg = msg + "El campo Segundo Apellido de Lector no puede estar vacío ni tener más de 20 caracteres\n";
+            if (this.validateA == false || this.validateA == null) msg = msg + "El campo Apellido de Lector no puede estar vacío ni tener más de 20 caracteres\n";
+            if (this.validateSA == false || this.validateSA == null) msg = msg + "El campo Segundo Apellido de Lector no puede estar vacío ni tener más de 20 caracteres\n";
             if (this.validateG == false) msg = msg + "El campo Género no puede estar vacío\n";
-            if (this.validateF == false) msg = msg + "El campo Fecha de Nacimiento de Lector no puede estar vacío";
-            if (this.validateCP == false) msg = msg + "El campo Código de País debe ser número entero, no puede estar vacío ni tener más de 3 caracteres\n";
-            if (this.validateCODA == false) msg = msg + "El campo Código de Área debe ser número entero, no puede estar vacío ni tener más de 5 caracteres\n";
-            if (this.validateT == false) msg = msg + "El campo Número de Teléfono debe ser un número entero, no puede estar vacío ni tener más de 10 caracteres\n";
+            if (this.validateF == false) msg = msg + "El campo Fecha de Nacimiento de Lector no puede estar vacío\n";
+            if (this.validateCP == false || this.validateCP == null) msg = msg + "El campo Código de País debe ser número entero, no puede estar vacío ni tener más de 3 caracteres\n";
+            if (this.validateCODA == false || this.validateCODA == null) msg = msg + "El campo Código de Área debe ser número entero, no puede estar vacío ni tener más de 5 caracteres\n";
+            if (this.validateT == false || this.validateT == null) msg = msg + "El campo Número de Teléfono debe ser un número entero, no puede estar vacío ni tener más de 10 caracteres\n";
             if (this.validateP == false) msg = msg + "El campo País de Lector no puede estar vacío\n";
             if (this.validateCI == false) msg = msg + "El campo Ciudad de Lector no puede estar vacío\n";
-            if (this.validateU == false) msg = msg + "El campo Urbanización (Lector) no puede estar vacío ni tener más de 20 caracteres\n";
-            if (this.validateCA == false) msg = msg + "El campo Calle (Lector) no puede estar vacío ni tener más de 20 caracteres\n";
+            if (this.validateU == false || this.validateU == null) msg = msg + "El campo Urbanización (Lector) no puede estar vacío ni tener más de 20 caracteres\n";
+            if (this.validateCA == false || this.validateCA == null) msg = msg + "El campo Calle (Lector) no puede estar vacío ni tener más de 20 caracteres\n";
             if (this.validateZ == false) msg = msg + "El campo Código postal (Lector) no puede estar vacío, debe ser numérico entero y no puede tener más de 7 caracteres\n";
             
             if (!this.mayoredad){
-            if (this.validateDR == false) msg = msg + "El campo Documento de Identidad debe ser un número entero positivo de no más de 8 caracteres\n";
-            if (this.validateNR == false) msg = msg + "El campo Nombre (Representante) no puede estar vacío ni tener más de 20 caracteres\n";
+            if (this.validateDR == false || this.validateDR == null) msg = msg + "El campo Documento de Identidad debe ser un número entero positivo de no más de 8 caracteres\n";
+            if (this.validateNR == false || this.validateNR == null) msg = msg + "El campo Nombre (Representante) no puede estar vacío ni tener más de 20 caracteres\n";
             if (this.validateSNR == false) msg = msg + "El campo Segundo Nombre (Representante) no puede tener más de 20 caracteres\n";
-            if (this.validateAR == false) msg = msg + "El campo Apellido (Representante) no puede estar vacío ni tener más de 20 caracteres\n";
-            if (this.validateSAR == false) msg = msg + "El campo Segundo Apellido (Representante) no puede estar vacío ni tener más de 20 caracteres\n";
+            if (this.validateAR == false || this.validateAR == null) msg = msg + "El campo Apellido (Representante) no puede estar vacío ni tener más de 20 caracteres\n";
+            if (this.validateSAR == false || this.validateSAR == null) msg = msg + "El campo Segundo Apellido (Representante) no puede estar vacío ni tener más de 20 caracteres\n";
             if (this.validateFR == false) msg = msg + "El campo Fecha de Nacimiento (Representante) no puede estar vacío";
             if (this.validatePR == false) msg = msg + "El campo País (Representante) no puede estar vacío\n";
             if (this.validateCIR == false) msg = msg + "El campo Ciudad (Representante) no puede estar vacío\n";
-            if (this.validateUR == false) msg = msg + "El campo Urbanización (Representante) no puede estar vacío ni tener más de 20 caracteres\n";
-            if (this.validateCAR == false) msg = msg + "El campo Calle (Representante) no puede estar vacío ni tener más de 20 caracteres\n";
+            if (this.validateUR == false || this.validateUR == null) msg = msg + "El campo Urbanización (Representante) no puede estar vacío ni tener más de 20 caracteres\n";
+            if (this.validateCAR == false || this.validateCAR == null) msg = msg + "El campo Calle (Representante) no puede estar vacío ni tener más de 20 caracteres\n";
             if (this.validateZR == false) msg = msg + "El campo Código postal (Representante) no puede estar vacío, debe ser numérico entero y no puede tener más de 7 caracteres\n";
             }
 

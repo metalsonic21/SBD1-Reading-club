@@ -2690,9 +2690,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2744,15 +2741,15 @@ __webpack_require__.r(__webpack_exports__);
     },
     validateOne: function validateOne() {
       if (this.prefOne != null) if (this.prefOne != this.prefTwo && this.prefOne != this.prefThree) return true;
-      return false;
+      return null;
     },
     validateTwo: function validateTwo() {
       if (this.prefTwo != null) if (this.prefTwo != this.prefOne && this.prefTwo != this.prefThree) return true;
-      return false;
+      return null;
     },
     validateThree: function validateThree() {
       if (this.prefThree != null) if (this.prefOne != this.prefTwo && this.prefOne != this.prefThree) return true;
-      return false;
+      return null;
     }
   },
   methods: {
@@ -2787,7 +2784,8 @@ __webpack_require__.r(__webpack_exports__);
     },
     validateSelect: function validateSelect() {
       if (this.selected.length > 2) {
-        if (!this.validateOne || !this.validateTwo || !this.validateThree) alert("Debe seleccionar una preferencia y esta debe ser distinta a las demás seleccionadas\n");else this.add();
+        if (!this.validateOne || !this.validateTwo || !this.validateThree) alert("Debe seleccionar una preferencia y esta debe ser distinta a las demás seleccionadas\n");
+        if (this.validateOne == null || this.validateTwo == null || this.validateThree == null) alert("Por favor rellene todas las preferencias\n");else this.add();
       } else {
         alert("Seleccione tres libros favoritos\n");
       }
@@ -3602,647 +3600,9 @@ __webpack_require__.r(__webpack_exports__);
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/browse_clubs/CreateMember.vue?vue&type=script&lang=js& ***!
   \************************************************************************************************************************************************************************************/
 /*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports) {
 
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-/* harmony default export */ __webpack_exports__["default"] = ({
-  data: function data() {
-    return {
-      member: [{
-        dociden: null,
-        nom1: null,
-        nom2: null,
-        ape1: null,
-        ape2: null,
-        genero: null,
-        fec_nac: null,
-        pais: null,
-        ciudad: null,
-        urbanizacion: null,
-        calle: null,
-        zipcode: null,
-        coda: null,
-        codp: null,
-        telefono: null
-      }],
-      rep: [{
-        dociden: '',
-        nom1: '',
-        nom2: '',
-        ape1: '',
-        ape2: '',
-        genero: '',
-        fec_nac: null,
-        pais: null,
-        ciudad: null,
-        calle: '',
-        urbanizacion: '',
-        zipcode: ''
-      }],
-      generos: [{
-        value: null,
-        text: 'Seleccionar'
-      }, {
-        value: 'M',
-        text: 'Masculino'
-      }, {
-        value: 'F',
-        text: 'Femenino'
-      }],
-      paises: [{
-        value: null,
-        text: 'Seleccionar'
-      }],
-      ciudadesbackup: [{
-        value: null,
-        text: 'Seleccionar'
-      }],
-      mayoredad: true,
-      ciudades: [{
-        value: null,
-        text: 'Seleccionar'
-      }],
-      ciudadesR: [{
-        value: null,
-        text: 'Seleccionar'
-      }],
-      ciudadesfiltered: [{}],
-      ciudadesfilteredR: [{}],
-      lectores: [{}],
-      today: null
-    };
-  },
-  created: function created() {
-    var _this = this;
-
-    var params = window.location.pathname;
-    params = params.replace(/\D/g, ''); //console.log(params);
-
-    axios.get("/clubs/".concat(params, "/members/create")).then(function (res) {
-      _this.paises = res.data.countries;
-      _this.ciudadesbackup = res.data.cities;
-      _this.lectores = res.data.lectores;
-    })["catch"](function (e) {
-      console.log(e);
-    });
-  },
-  computed: {
-    /* createDate(days, months, years) {
-         var date = new Date(); 
-         date.setDate(date.getDate() + days);
-         date.setMonth(date.getMonth() + months);
-         date.setFullYear(date.getFullYear() + years);
-         return date;    
-     },
-     validateRep(){         
-     },*/
-    validateD: function validateD() {
-      var verif = true;
-      if (this.member.dociden == null || this.member.dociden == '') return false;
-      if (this.member.dociden.toString().length > 8 || isNaN(this.member.dociden)) verif = false;
-      if (this.member.dociden.toString().indexOf(".") != -1 || this.member.dociden < 0) verif = false;
-      /* Already exists*/
-
-      var i = 0;
-
-      for (i = 0; i < this.lectores.length; i++) {
-        if (this.lectores[i].doc_iden == this.member.dociden) {
-          verif = false;
-          break;
-        }
-      }
-
-      console.log(verif);
-      return verif;
-    },
-    validateN: function validateN() {
-      if (this.member.nom1 == null || this.member.nom1 == '' || this.member.nom1.length > 20) return false;else return true;
-    },
-    validateSN: function validateSN() {
-      if (this.member.nom2 != null && this.member.nom2.length > 20) return false;else return true;
-    },
-    validateA: function validateA() {
-      if (this.member.ape1 == null || this.member.ape1 == '' || this.member.ape1.length > 20) return false;else return true;
-    },
-    validateSA: function validateSA() {
-      if (this.member.ape2 == null || this.member.ape2 == '' || this.member.ape2.length > 20) return false;else return true;
-    },
-    validateG: function validateG() {
-      return this.member.genero != null;
-    },
-    validateF: function validateF() {
-      if (this.member.fec_nac == null) return false;else {
-        var verif = true;
-        var a = Date.now();
-        var b = Date.parse(this.member.fec_nac);
-        if (a - b < 284012334000) return false;else return verif;
-      }
-    },
-    validateCP: function validateCP() {
-      if (this.member.codp == null || this.member.codp == '') return false;
-      if (this.member.codp < 0 || isNaN(this.member.codp) || this.member.codp > 999 || this.member.codp % 1 != 0) return false;else return true;
-    },
-    validateCODA: function validateCODA() {
-      var verif = true;
-      if (this.member.coda == null || this.member.coda == '') return false;
-      if (this.member.coda % 1 != 0 || this.member.coda < 0 || this.member.coda > 99999 || isNaN(this.member.coda)) return false;else return true;
-    },
-    validateT: function validateT() {
-      var verif = true;
-      if (this.member.telefono == null || this.member.telefono == '') return false;
-      if (this.member.telefono < 0 || this.member.telefono % 1 != 0 || this.member.telefono > 9999999 || isNaN(this.member.telefono)) return false;else return true;
-    },
-    validateP: function validateP() {
-      return this.member.pais != null;
-    },
-    validateCI: function validateCI() {
-      return this.member.ciudad != null;
-    },
-    validateU: function validateU() {
-      if (this.member.urbanizacion == null || this.member.urbanizacion == '' || this.member.urbanizacion.length > 20) return false;else return true;
-    },
-    validateCA: function validateCA() {
-      if (this.member.calle == null || this.member.calle == '' || this.member.calle.length > 20) return false;else return true;
-    },
-    validateZ: function validateZ() {
-      var verif = true;
-      if (this.member.zipcode == null || this.member.zipcode == '') return false;
-      if (!isNaN(this.member.zipcode && Number.isInteger(this.member.zipcode) && this.member.zipcode > 0 && this.member.zipcode < 99999)) return true;else return false;
-    },
-    validateDR: function validateDR() {
-      var verif = true;
-      if (this.rep.dociden == null || this.rep.dociden == '') return false;
-      if (this.rep.dociden.toString().length > 8 || isNaN(this.rep.dociden)) verif = false;
-      if (this.rep.dociden.toString().indexOf(".") != -1 || this.rep.dociden < 0) verif = false;
-      return verif;
-    },
-    validateNR: function validateNR() {
-      if (this.rep.nom1 == null || this.rep.nom1 == '' || this.rep.nom1.length > 20) return false;else return true;
-    },
-    validateSNR: function validateSNR() {
-      if (this.rep.nom2 != null && this.rep.nom2.length > 20) return false;else return true;
-    },
-    validateAR: function validateAR() {
-      if (this.rep.ape1 == null || this.rep.ape1 == '' || this.rep.ape1.length > 20) return false;else return true;
-    },
-    validateSAR: function validateSAR() {
-      if (this.rep.ape2 == null || this.rep.ape2 == '' || this.rep.ape2.length > 20) return false;else return true;
-    },
-    validateGR: function validateGR() {
-      return this.rep.genero != null;
-    },
-    validateFR: function validateFR() {
-      if (this.rep.fec_nac == null) return false;else {
-        var verif = true;
-        var a = Date.now();
-        var b = Date.parse(this.rep.fec_nac);
-        if (a - b < 568024668000) return false;else return verif;
-      }
-    },
-    validatePR: function validatePR() {
-      return this.rep.pais != null;
-    },
-    validateCIR: function validateCIR() {
-      return this.rep.ciudad != null;
-    },
-    validateUR: function validateUR() {
-      if (this.rep.urbanizacion == null || this.rep.urbanizacion == '' || this.rep.urbanizacion.length > 20) return false;else return true;
-    },
-    validateCAR: function validateCAR() {
-      if (this.rep.calle == null || this.rep.calle == '' || this.rep.calle.length > 20) return false;else return true;
-    },
-    validateZR: function validateZR() {
-      var verif = true;
-      if (this.rep.zipcode == null || this.rep.zipcode == '') return false;
-      if (!isNaN(this.rep.zipcode && Number.isInteger(this.rep.zipcode) && this.rep.zipcode > 0 && this.rep.zipcode < 99999)) return true;else return false;
-    }
-  },
-  methods: {
-    convert: function convert(id, length) {
-      var pos = id.indexOf("-");
-      var res = id.substring(pos + 1, length);
-      parseInt(res, 10);
-      return res;
-    },
-    filter: function filter(currentcountry, currentcity) {
-      /* Filter cities according to the country*/
-      this.ciudades = [{}], this.ciudadesfiltered = [{}], currentcity = null, this.ciudades = this.ciudadesbackup;
-      var i = 0;
-
-      for (i = 0; i < this.ciudades.length; i++) {
-        /* Converted ID is id_sub*/
-        var convertedid = this.convert(this.ciudades[i].value, this.ciudades.length);
-
-        if (currentcountry == convertedid) {
-          var actualid = this.ciudades[i].value.substring(0, this.ciudades[i].value.indexOf("-"));
-          actualid = parseInt(actualid, 10);
-          this.ciudadesfiltered.push({
-            value: actualid,
-            text: this.ciudades[i].text
-          });
-        }
-      }
-
-      this.ciudades = [{}];
-      this.ciudades = this.ciudadesfiltered;
-      this.ciudades[0].value = null;
-      this.ciudades[0].text = 'Seleccionar';
-    },
-    filterR: function filterR(currentcountry, currentcity) {
-      /* Filter cities according to the country*/
-      this.ciudadesR = [{}], this.ciudadesfilteredR = [{}], currentcity = null, this.ciudadesR = this.ciudadesbackup;
-      var i = 0;
-
-      for (i = 0; i < this.ciudadesR.length; i++) {
-        /* Converted ID is id_sub*/
-        var convertedid = this.convert(this.ciudadesR[i].value, this.ciudadesR.length);
-
-        if (currentcountry == convertedid) {
-          var actualid = this.ciudadesR[i].value.substring(0, this.ciudadesR[i].value.indexOf("-"));
-          actualid = parseInt(actualid, 10);
-          this.ciudadesfilteredR.push({
-            value: actualid,
-            text: this.ciudadesR[i].text
-          });
-        }
-      }
-
-      this.ciudadesR = [{}];
-      this.ciudadesR = this.ciudadesfilteredR;
-      this.ciudadesR[0].value = null;
-      this.ciudadesR[0].text = 'Seleccionar';
-    },
-    verifyAge: function verifyAge(memberAge) {
-      if (memberAge == '' || memberAge == null) return true;
-      this.today = new Date();
-      var dd = this.today.getDate();
-      var mm = this.today.getMonth() + 1;
-      var yyyy = this.today.getFullYear();
-
-      if (dd < 10) {
-        dd = '0' + dd;
-      }
-
-      if (mm < 10) {
-        mm = '0' + mm;
-      }
-
-      this.today = yyyy + '-' + mm + '-' + dd;
-      var todaydate = new Date(this.today);
-      var agedate = new Date(memberAge);
-      var verif = todaydate.valueOf() - agedate.valueOf();
-      var edad = verif / (1000 * 60 * 60 * 24);
-      edad = Math.trunc(edad / 365);
-
-      if (edad < 18) {
-        this.mayoredad = false;
-      } else if (edad <= 18) {
-        this.mayoredad = true;
-      }
-
-      return this.mayoredad;
-    },
-    add: function add() {
-      var _this2 = this;
-
-      var path = window.location.pathname;
-      path = path.replace(/\D/g, '');
-      var params = {
-        dociden: this.member.dociden,
-        nom1: this.member.nom1,
-        nom2: this.member.nom2,
-        ape1: this.member.ape1,
-        ape2: this.member.ape2,
-        genero: this.member.genero,
-        fec_nac: this.member.fec_nac,
-        pais: this.member.pais,
-        ciudad: this.member.ciudad,
-        urbanizacion: this.member.urbanizacion,
-        calle: this.member.calle,
-        zipcode: this.member.zipcode,
-        codp: this.member.codp,
-        coda: this.member.coda,
-        telefono: this.member.telefono,
-
-        /* Representante*/
-        docidenR: this.rep.dociden,
-        nom1R: this.rep.nom1,
-        nom2R: this.rep.nom2,
-        ape1R: this.rep.ape1,
-        ape2R: this.rep.ape2,
-        fec_nacR: this.rep.fec_nac,
-        paisR: this.rep.pais,
-        ciudadR: this.rep.ciudad,
-        urbanizacionR: this.rep.urbanizacion,
-        calleR: this.rep.calle,
-        zipcodeR: this.rep.zipcode,
-        club: path,
-        today: this.today
-      };
-      console.log(params); //console.log(params);
-
-      axios.post("/clubs/".concat(path, "/members"), params).then(function (res) {
-        //console.log(res.data);
-        window.location = "/clubs/".concat(path, "/members/").concat(_this2.member.dociden, "/favorites");
-      })["catch"](function (e) {
-        console.log(e);
-      });
-    },
-    revalidate: function revalidate() {
-      var msg = '';
-      /* MEMBER */
-
-      if (this.validateD == false) msg = msg + "El campo Documento de Identidad debe ser un número entero positivo de no más de 8 caracteres que no esté registrado anteriormente en la base de datos\n";
-      if (this.validateN == false) msg = msg + "El campo Nombre de Lector no puede estar vacío ni tener más de 20 caracteres\n";
-      if (this.validateSN == false) msg = msg + "El campo Segundo Nombre de Lector no puede tener más de 20 caracteres\n";
-      if (this.validateA == false) msg = msg + "El campo Apellido de Lector no puede estar vacío ni tener más de 20 caracteres\n";
-      if (this.validateSA == false) msg = msg + "El campo Segundo Apellido de Lector no puede estar vacío ni tener más de 20 caracteres\n";
-      if (this.validateG == false) msg = msg + "El campo Género no puede estar vacío\n";
-      if (this.validateF == false) msg = msg + "El campo Fecha de Nacimiento de Lector no puede estar vacío";
-      if (this.validateCP == false) msg = msg + "El campo Código de País debe ser número entero, no puede estar vacío ni tener más de 3 caracteres\n";
-      if (this.validateCODA == false) msg = msg + "El campo Código de Área debe ser número entero, no puede estar vacío ni tener más de 5 caracteres\n";
-      if (this.validateT == false) msg = msg + "El campo Número de Teléfono debe ser un número entero, no puede estar vacío ni tener más de 10 caracteres\n";
-      if (this.validateP == false) msg = msg + "El campo País de Lector no puede estar vacío\n";
-      if (this.validateCI == false) msg = msg + "El campo Ciudad de Lector no puede estar vacío\n";
-      if (this.validateU == false) msg = msg + "El campo Urbanización (Lector) no puede estar vacío ni tener más de 20 caracteres\n";
-      if (this.validateCA == false) msg = msg + "El campo Calle (Lector) no puede estar vacío ni tener más de 20 caracteres\n";
-      if (this.validateZ == false) msg = msg + "El campo Código postal (Lector) no puede estar vacío, debe ser numérico entero y no puede tener más de 7 caracteres\n";
-
-      if (!this.mayoredad) {
-        if (this.validateDR == false) msg = msg + "El campo Documento de Identidad debe ser un número entero positivo de no más de 8 caracteres\n";
-        if (this.validateNR == false) msg = msg + "El campo Nombre (Representante) no puede estar vacío ni tener más de 20 caracteres\n";
-        if (this.validateSNR == false) msg = msg + "El campo Segundo Nombre (Representante) no puede tener más de 20 caracteres\n";
-        if (this.validateAR == false) msg = msg + "El campo Apellido (Representante) no puede estar vacío ni tener más de 20 caracteres\n";
-        if (this.validateSAR == false) msg = msg + "El campo Segundo Apellido (Representante) no puede estar vacío ni tener más de 20 caracteres\n";
-        if (this.validateFR == false) msg = msg + "El campo Fecha de Nacimiento (Representante) no puede estar vacío";
-        if (this.validatePR == false) msg = msg + "El campo País (Representante) no puede estar vacío\n";
-        if (this.validateCIR == false) msg = msg + "El campo Ciudad (Representante) no puede estar vacío\n";
-        if (this.validateUR == false) msg = msg + "El campo Urbanización (Representante) no puede estar vacío ni tener más de 20 caracteres\n";
-        if (this.validateCAR == false) msg = msg + "El campo Calle (Representante) no puede estar vacío ni tener más de 20 caracteres\n";
-        if (this.validateZR == false) msg = msg + "El campo Código postal (Representante) no puede estar vacío, debe ser numérico entero y no puede tener más de 7 caracteres\n";
-      }
-
-      if (msg == '') {
-        this.add();
-      } else {
-        alert(msg);
-      }
-    }
-  }
-});
+throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nSyntaxError: E:\\SBD1-Reading-club\\resources\\js\\components\\browse_clubs\\CreateMember.vue: Unexpected token (401:0)\n\n\u001b[0m \u001b[90m 399 | \u001b[39m        }\u001b[33m,\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 400 | \u001b[39m        validateF(){\u001b[0m\n\u001b[0m\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 401 | \u001b[39m\u001b[33m<<\u001b[39m\u001b[33m<<\u001b[39m\u001b[33m<<\u001b[39m\u001b[33m<\u001b[39m \u001b[33mHEAD\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m     | \u001b[39m\u001b[31m\u001b[1m^\u001b[22m\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 402 | \u001b[39m            \u001b[36mif\u001b[39m ((\u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mmember\u001b[33m.\u001b[39mfec_nac) \u001b[33m==\u001b[39m \u001b[36mnull\u001b[39m) \u001b[36mreturn\u001b[39m \u001b[36mfalse\u001b[39m\u001b[33m;\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 403 | \u001b[39m            \u001b[36melse\u001b[39m{\u001b[0m\n\u001b[0m \u001b[90m 404 | \u001b[39m            let verif \u001b[33m=\u001b[39m \u001b[36mtrue\u001b[39m\u001b[33m;\u001b[39m\u001b[0m\n    at Parser.raise (E:\\SBD1-Reading-club\\node_modules\\@babel\\parser\\lib\\index.js:6930:17)\n    at Parser.unexpected (E:\\SBD1-Reading-club\\node_modules\\@babel\\parser\\lib\\index.js:8323:16)\n    at Parser.parseExprAtom (E:\\SBD1-Reading-club\\node_modules\\@babel\\parser\\lib\\index.js:9582:20)\n    at Parser.parseExprSubscripts (E:\\SBD1-Reading-club\\node_modules\\@babel\\parser\\lib\\index.js:9165:23)\n    at Parser.parseMaybeUnary (E:\\SBD1-Reading-club\\node_modules\\@babel\\parser\\lib\\index.js:9145:21)\n    at Parser.parseExprOps (E:\\SBD1-Reading-club\\node_modules\\@babel\\parser\\lib\\index.js:9011:23)\n    at Parser.parseMaybeConditional (E:\\SBD1-Reading-club\\node_modules\\@babel\\parser\\lib\\index.js:8984:23)\n    at Parser.parseMaybeAssign (E:\\SBD1-Reading-club\\node_modules\\@babel\\parser\\lib\\index.js:8930:21)\n    at Parser.parseExpression (E:\\SBD1-Reading-club\\node_modules\\@babel\\parser\\lib\\index.js:8880:23)\n    at Parser.parseStatementContent (E:\\SBD1-Reading-club\\node_modules\\@babel\\parser\\lib\\index.js:10740:23)\n    at Parser.parseStatement (E:\\SBD1-Reading-club\\node_modules\\@babel\\parser\\lib\\index.js:10611:17)\n    at Parser.parseBlockOrModuleBlockBody (E:\\SBD1-Reading-club\\node_modules\\@babel\\parser\\lib\\index.js:11187:25)\n    at Parser.parseBlockBody (E:\\SBD1-Reading-club\\node_modules\\@babel\\parser\\lib\\index.js:11174:10)\n    at Parser.parseBlock (E:\\SBD1-Reading-club\\node_modules\\@babel\\parser\\lib\\index.js:11158:10)\n    at Parser.parseFunctionBody (E:\\SBD1-Reading-club\\node_modules\\@babel\\parser\\lib\\index.js:10177:24)\n    at Parser.parseFunctionBodyAndFinish (E:\\SBD1-Reading-club\\node_modules\\@babel\\parser\\lib\\index.js:10147:10)\n    at Parser.parseMethod (E:\\SBD1-Reading-club\\node_modules\\@babel\\parser\\lib\\index.js:10101:10)\n    at Parser.parseObjectMethod (E:\\SBD1-Reading-club\\node_modules\\@babel\\parser\\lib\\index.js:10017:19)\n    at Parser.parseObjPropValue (E:\\SBD1-Reading-club\\node_modules\\@babel\\parser\\lib\\index.js:10059:23)\n    at Parser.parseObjectMember (E:\\SBD1-Reading-club\\node_modules\\@babel\\parser\\lib\\index.js:9983:10)\n    at Parser.parseObj (E:\\SBD1-Reading-club\\node_modules\\@babel\\parser\\lib\\index.js:9903:25)\n    at Parser.parseExprAtom (E:\\SBD1-Reading-club\\node_modules\\@babel\\parser\\lib\\index.js:9525:28)\n    at Parser.parseExprSubscripts (E:\\SBD1-Reading-club\\node_modules\\@babel\\parser\\lib\\index.js:9165:23)\n    at Parser.parseMaybeUnary (E:\\SBD1-Reading-club\\node_modules\\@babel\\parser\\lib\\index.js:9145:21)\n    at Parser.parseExprOps (E:\\SBD1-Reading-club\\node_modules\\@babel\\parser\\lib\\index.js:9011:23)\n    at Parser.parseMaybeConditional (E:\\SBD1-Reading-club\\node_modules\\@babel\\parser\\lib\\index.js:8984:23)\n    at Parser.parseMaybeAssign (E:\\SBD1-Reading-club\\node_modules\\@babel\\parser\\lib\\index.js:8930:21)\n    at Parser.parseObjectProperty (E:\\SBD1-Reading-club\\node_modules\\@babel\\parser\\lib\\index.js:10034:101)\n    at Parser.parseObjPropValue (E:\\SBD1-Reading-club\\node_modules\\@babel\\parser\\lib\\index.js:10059:101)\n    at Parser.parseObjectMember (E:\\SBD1-Reading-club\\node_modules\\@babel\\parser\\lib\\index.js:9983:10)\n    at Parser.parseObj (E:\\SBD1-Reading-club\\node_modules\\@babel\\parser\\lib\\index.js:9903:25)\n    at Parser.parseExprAtom (E:\\SBD1-Reading-club\\node_modules\\@babel\\parser\\lib\\index.js:9525:28)\n    at Parser.parseExprSubscripts (E:\\SBD1-Reading-club\\node_modules\\@babel\\parser\\lib\\index.js:9165:23)\n    at Parser.parseMaybeUnary (E:\\SBD1-Reading-club\\node_modules\\@babel\\parser\\lib\\index.js:9145:21)\n    at Parser.parseExprOps (E:\\SBD1-Reading-club\\node_modules\\@babel\\parser\\lib\\index.js:9011:23)\n    at Parser.parseMaybeConditional (E:\\SBD1-Reading-club\\node_modules\\@babel\\parser\\lib\\index.js:8984:23)");
 
 /***/ }),
 
@@ -6248,6 +5608,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -6258,8 +5619,76 @@ __webpack_require__.r(__webpack_exports__);
       }, {
         value: true,
         text: 'Sí'
-      }]
+      }],
+      members: [],
+      memberships: [],
+      club: null,
+      grupo: null,
+      libro: null,
+      moderador: null,
+      reunion: null
     };
+  },
+  created: function created() {
+    var _this = this;
+
+    var path = window.location.pathname;
+    var beginc = path.indexOf("bs/") + 3;
+    var endc = path.indexOf("/gr");
+    this.club = path.substring(beginc, endc);
+    var beging = path.indexOf("ups/") + 4;
+    var endg = path.indexOf("/mee");
+    this.grupo = path.substring(beging, endg);
+    var begin4 = path.indexOf("gs/") + 3;
+    var partial = path.substring(begin4, path.length);
+    this.reunion = partial.substring(0, partial.indexOf("/"));
+    var partial2 = partial.substring(partial.indexOf("/") + 1, partial.length);
+    this.moderador = partial2.substring(0, partial2.indexOf("/"));
+    var partial3 = partial2.substring(partial2.indexOf("/") + 1, partial2.length);
+    this.libro = partial3.substring(0, partial3.indexOf("/"));
+    axios.get("/clubs/".concat(this.club, "/groups/").concat(this.grupo, "/meetings/").concat(this.reunion, "/").concat(this.moderador, "/").concat(this.libro, "/attendance")).then(function (res) {
+      _this.members = res.data.data;
+    })["catch"](function (e) {
+      console.log(e);
+    });
+  },
+  methods: {
+    add: function add() {
+      var _this2 = this;
+
+      var i = 0;
+      var gdates = [];
+      var cdates = [];
+      var items = [];
+      var att = [];
+
+      for (i; i < this.members.length; i++) {
+        gdates[i] = this.members[i].fig;
+        cdates[i] = this.members[i].fic;
+        items[i] = this.members[i].id;
+        att[i] = this.members[i].asist;
+      }
+
+      console.log(items);
+      var params = {
+        items: items,
+        gdates: gdates,
+        cdates: cdates,
+        att: att,
+        length: this.members.length,
+        club: this.club,
+        grupo: this.grupo,
+        libro: this.libro,
+        reunion: this.reunion,
+        moderador: this.moderador
+      };
+      axios.post("/clubs/".concat(this.club, "/groups/").concat(this.grupo, "/meetings/").concat(this.reunion, "/").concat(this.moderador, "/").concat(this.libro, "/attendance"), params).then(function (res) {
+        window.location = "/clubs/".concat(_this2.club, "/groups/").concat(_this2.grupo, "/meetings");
+        console.log(res.data);
+      })["catch"](function (e) {
+        console.log(e);
+      });
+    }
   }
 });
 
@@ -6274,6 +5703,18 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -6386,7 +5827,24 @@ __webpack_require__.r(__webpack_exports__);
       console.log(e);
     });
   },
-  methods: {}
+  methods: {
+    showModal: function showModal(item) {
+      item = item.toString();
+      this.$bvModal.show(item);
+    },
+    hideModal: function hideModal(item) {
+      item = item.toString();
+      this.$bvModal.hide(item);
+    },
+    borrar: function borrar(item) {
+      console.log(item);
+      axios["delete"]("/clubs/".concat(this.club, "/groups/").concat(this.grupo, "/meetings/").concat(item.fecha)).then(function (res) {
+        console.log(res.data); //window.location = `/clubs/${this.club}/groups/${this.grupo}/gmembers`;
+      })["catch"](function (e) {
+        console.log(e);
+      });
+    }
+  }
 });
 
 /***/ }),
@@ -6400,27 +5858,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -6567,6 +6004,12 @@ __webpack_require__.r(__webpack_exports__);
   computed: {
     rows: function rows() {
       return this.items.length;
+    },
+    validateM: function validateM() {
+      return this.meeting.moderador != null;
+    },
+    validateN: function validateN() {
+      return this.meeting.sesion != null;
     }
   },
   methods: {
@@ -6574,6 +6017,8 @@ __webpack_require__.r(__webpack_exports__);
       this.selected = items;
     },
     add: function add() {
+      var _this2 = this;
+
       var params = {
         moderador: this.meeting.moderador,
         conclusion: this.meeting.conclusion,
@@ -6586,10 +6031,22 @@ __webpack_require__.r(__webpack_exports__);
         grupo: this.grupo
       };
       axios.post("/clubs/".concat(this.club, "/groups/").concat(this.grupo, "/meetings"), params).then(function (res) {
-        console.log(res.data);
+        if (_this2.meeting.sesion == 3) alert("Se han generado las reuniones para el libro solicitado en los siguientes días\n" + res.data.f1 + "\n" + res.data.f2 + "\n" + res.data.f3 + "\n");else if (_this2.meeting.sesion == 2) alert("Se han generado las reuniones para el libro solicitado en los siguientes días\n" + res.data.f1 + "\n" + res.data.f2 + "\n");else if (_this2.meeting.sesion == 1) alert("Se han generado las reuniones para el libro solicitado en los siguientes días\n" + res.data.f1 + "\n");
+        window.location = "/clubs/".concat(_this2.club, "/groups/").concat(_this2.grupo, "/meetings");
       })["catch"](function (e) {
         console.log(e);
       });
+    },
+    revalidate: function revalidate() {
+      var msg = '';
+      if (!this.validateN) msg = msg + "Seleccione el número de sesiones\n";
+      if (!this.validateM) msg = msg + "Seleccione un moderador\n";
+
+      if (msg == '') {
+        this.add();
+      } else {
+        alert(msg);
+      }
     }
   }
 });
@@ -6659,6 +6116,173 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/browse_meetings/Edit.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/browse_meetings/Edit.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      perPage: 10,
+      currentPage: 1,
+      fields: ['seleccionado', 'titulo_en_español', 'titulo_original', 'fecha_de_publicacion', 'autor'],
+      meeting: {
+        valoracion: null,
+        conclusion: null,
+        sesion: null,
+        moderador: null
+      },
+      miembros: [{
+        value: null,
+        text: 'Seleccionar'
+      }],
+      valoraciones: [{
+        value: null,
+        text: 'Seleccionar'
+      }, {
+        value: 1,
+        text: '1'
+      }, {
+        value: 2,
+        text: '2'
+      }, {
+        value: 3,
+        text: '3'
+      }, {
+        value: 4,
+        text: '4'
+      }, {
+        value: 5,
+        text: '5'
+      }],
+      club: null,
+      grupo: null,
+      reunion: null,
+      moderador: null,
+      libro: null,
+      actuals: null
+    };
+  },
+  created: function created() {
+    var _this = this;
+
+    var path = window.location.pathname;
+    var beginc = path.indexOf("bs/") + 3;
+    var endc = path.indexOf("/gr");
+    this.club = path.substring(beginc, endc);
+    var beging = path.indexOf("ups/") + 4;
+    var endg = path.indexOf("/mee");
+    this.grupo = path.substring(beging, endg);
+    var begin4 = path.indexOf("gs/") + 3;
+    var partial = path.substring(begin4, path.length);
+    this.reunion = partial.substring(0, partial.indexOf("/"));
+    var partial2 = partial.substring(partial.indexOf("/") + 1, partial.length);
+    this.moderador = partial2.substring(0, partial2.indexOf("/"));
+    var partial3 = partial2.substring(partial2.indexOf("/") + 1, partial2.length);
+    this.libro = partial3.substring(0, partial3.indexOf("/")); //console.log('clubs: '+this.club+' grupo: '+this.grupo+' reunion: '+this.reunion+' moderador: '+this.moderador+' libro: '+this.libro);
+
+    axios.get("/clubs/".concat(this.club, "/groups/").concat(this.grupo, "/meetings/").concat(this.reunion, "/").concat(this.moderador, "/").concat(this.libro, "/edit")).then(function (res) {
+      _this.actuals = res.data.actuals; //console.log(res.data.nsession);
+    })["catch"](function (e) {
+      console.log(e);
+    });
+  },
+  computed: {
+    validateC: function validateC() {
+      return this.meeting.conclusion != '';
+    },
+    validateV: function validateV() {
+      return this.meeting.valoracion != null;
+    }
+  },
+  methods: {
+    add: function add() {
+      var _this2 = this;
+
+      var params = {
+        conclusion: this.meeting.conclusion,
+        valoracion: this.meeting.valoracion,
+        club: this.club,
+        grupo: this.grupo,
+        libro: this.libro,
+        moderador: this.moderador,
+        ses: this.actuals
+      };
+      axios.put("/clubs/".concat(this.club, "/groups/").concat(this.grupo, "/meetings/").concat(this.reunion, "/").concat(this.moderador, "/").concat(this.libro), params).then(function (res) {
+        //console.log(res.data);
+        window.location = "/clubs/".concat(_this2.club, "/groups/").concat(_this2.grupo, "/meetings");
+      })["catch"](function (e) {
+        console.log(e);
+      });
+    },
+    revalidate: function revalidate() {
+      var msg = '';
+      if (!this.validateC) msg = msg + "Por favor, escriba una conclusión\n";
+      if (!this.validateV) msg = msg + "Seleccione valoración\n";
+
+      if (msg == '') {
+        this.add();
+      } else {
+        alert(msg);
+      }
+    }
+  }
+});
 
 /***/ }),
 
@@ -75383,294 +75007,281 @@ var render = function() {
             _vm._v(" "),
             _c("div", { staticClass: "card-body" }, [
               _c("div", { staticClass: "row" }, [
-                _c("div", { staticClass: "col-lg-12" }, [
-                  _c(
-                    "div",
-                    { staticClass: "overflow-auto" },
-                    [
-                      _c(
-                        "b-form",
-                        {
-                          on: {
-                            submit: function($event) {
-                              $event.preventDefault()
-                              return _vm.add($event)
-                            }
+                _c(
+                  "div",
+                  { staticClass: "col-lg-12" },
+                  [
+                    _c(
+                      "b-form",
+                      {
+                        on: {
+                          submit: function($event) {
+                            $event.preventDefault()
+                            return _vm.add($event)
                           }
-                        },
-                        [
-                          _c("b-table", {
-                            attrs: {
-                              selectable: "",
-                              "select-mode": "multi",
-                              items: _vm.items,
-                              fields: _vm.fields,
-                              responsive: "lg",
-                              id: "my-table",
-                              "per-page": _vm.perPage,
-                              "current-page": _vm.currentPage,
-                              small: ""
-                            },
-                            on: { "row-selected": _vm.onRowSelected },
-                            scopedSlots: _vm._u([
-                              {
-                                key: "cell(seleccionado)",
-                                fn: function(ref) {
-                                  var rowSelected = ref.rowSelected
-                                  return [
-                                    rowSelected && _vm.selected.length <= 3
-                                      ? [
-                                          _c(
-                                            "span",
-                                            {
-                                              attrs: { "aria-hidden": "true" }
-                                            },
-                                            [_vm._v("✓")]
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "span",
-                                            { staticClass: "sr-only" },
-                                            [_vm._v("Seleccionado")]
-                                          )
-                                        ]
-                                      : [
-                                          _c(
-                                            "span",
-                                            {
-                                              attrs: { "aria-hidden": "true" }
-                                            },
-                                            [_vm._v(" ")]
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "span",
-                                            { staticClass: "sr-only" },
-                                            [_vm._v("No seleccionado")]
-                                          )
-                                        ]
-                                  ]
-                                }
+                        }
+                      },
+                      [
+                        _c("b-table", {
+                          attrs: {
+                            selectable: "",
+                            "select-mode": "multi",
+                            items: _vm.items,
+                            fields: _vm.fields,
+                            id: "my-table",
+                            "per-page": _vm.perPage,
+                            "current-page": _vm.currentPage,
+                            small: ""
+                          },
+                          on: { "row-selected": _vm.onRowSelected },
+                          scopedSlots: _vm._u([
+                            {
+                              key: "cell(seleccionado)",
+                              fn: function(ref) {
+                                var rowSelected = ref.rowSelected
+                                return [
+                                  rowSelected && _vm.selected.length <= 3
+                                    ? [
+                                        _c(
+                                          "span",
+                                          { attrs: { "aria-hidden": "true" } },
+                                          [_vm._v("✓")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c("span", { staticClass: "sr-only" }, [
+                                          _vm._v("Seleccionado")
+                                        ])
+                                      ]
+                                    : [
+                                        _c(
+                                          "span",
+                                          { attrs: { "aria-hidden": "true" } },
+                                          [_vm._v(" ")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c("span", { staticClass: "sr-only" }, [
+                                          _vm._v("No seleccionado")
+                                        ])
+                                      ]
+                                ]
                               }
-                            ])
-                          }),
-                          _vm._v(" "),
-                          _c(
-                            "b-row",
-                            [
-                              _c("b-col", { attrs: { cols: "8" } }, [
-                                _c("h6", [_vm._v("NIVEL DE PREFERENCIA")]),
-                                _vm._v(" "),
-                                _c("small", [
-                                  _vm._v("1 el más alto, 3 el más bajo")
-                                ])
+                            }
+                          ])
+                        }),
+                        _vm._v(" "),
+                        _c(
+                          "b-row",
+                          [
+                            _c("b-col", { attrs: { cols: "8" } }, [
+                              _c("h6", [_vm._v("NIVEL DE PREFERENCIA")]),
+                              _vm._v(" "),
+                              _c("small", [
+                                _vm._v("1 el más alto, 3 el más bajo")
                               ])
-                            ],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "b-row",
-                            [
-                              _c(
-                                "b-col",
-                                { attrs: { cols: "4" } },
-                                [
-                                  _c("label", { attrs: { for: "prefOne" } }, [
-                                    _vm._v("Preferencia para "),
-                                    _vm.selected[0]
-                                      ? _c("em", [
-                                          _vm._v(
-                                            _vm._s(
-                                              _vm.selected[0].titulo_en_español
-                                            )
+                            ])
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "b-row",
+                          [
+                            _c(
+                              "b-col",
+                              { attrs: { cols: "4" } },
+                              [
+                                _c("label", { attrs: { for: "prefOne" } }, [
+                                  _vm._v("Preferencia para "),
+                                  _vm.selected[0]
+                                    ? _c("em", [
+                                        _vm._v(
+                                          _vm._s(
+                                            _vm.selected[0].titulo_en_español
                                           )
-                                        ])
-                                      : _vm._e()
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("b-form-select", {
-                                    attrs: {
-                                      options: _vm.preferencias,
-                                      id: "prefOne",
-                                      name: "prefOne"
-                                    },
-                                    model: {
-                                      value: _vm.prefOne,
-                                      callback: function($$v) {
-                                        _vm.prefOne = $$v
-                                      },
-                                      expression: "prefOne"
-                                    }
-                                  }),
-                                  _vm._v(" "),
-                                  _c(
-                                    "b-form-invalid-feedback",
-                                    { attrs: { state: _vm.validateOne } },
-                                    [
-                                      _vm._v(
-                                        "Debe seleccionar una preferencia y esta debe ser distinta a las demás seleccionadas"
-                                      )
-                                    ]
-                                  )
-                                ],
-                                1
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "b-col",
-                                { attrs: { cols: "4" } },
-                                [
-                                  _c("label", { attrs: { for: "prefTwo" } }, [
-                                    _vm._v("Preferencia para "),
-                                    _vm.selected[1]
-                                      ? _c("em", [
-                                          _vm._v(
-                                            _vm._s(
-                                              _vm.selected[1].titulo_en_español
-                                            )
-                                          )
-                                        ])
-                                      : _vm._e()
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("b-form-select", {
-                                    attrs: {
-                                      options: _vm.preferencias,
-                                      id: "prefTwo",
-                                      name: "prefTwo"
-                                    },
-                                    model: {
-                                      value: _vm.prefTwo,
-                                      callback: function($$v) {
-                                        _vm.prefTwo = $$v
-                                      },
-                                      expression: "prefTwo"
-                                    }
-                                  }),
-                                  _vm._v(" "),
-                                  _c(
-                                    "b-form-invalid-feedback",
-                                    { attrs: { state: _vm.validateTwo } },
-                                    [
-                                      _vm._v(
-                                        "Debe seleccionar una preferencia y esta debe ser distinta a las demás seleccionadas"
-                                      )
-                                    ]
-                                  )
-                                ],
-                                1
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "b-col",
-                                { attrs: { cols: "4" } },
-                                [
-                                  _c("label", { attrs: { for: "prefThree" } }, [
-                                    _vm._v("Preferencia para "),
-                                    _vm.selected[2]
-                                      ? _c("em", [
-                                          _vm._v(
-                                            _vm._s(
-                                              _vm.selected[2].titulo_en_español
-                                            )
-                                          )
-                                        ])
-                                      : _vm._e()
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("b-form-select", {
-                                    attrs: {
-                                      options: _vm.preferencias,
-                                      id: "prefThree",
-                                      name: "prefThree"
-                                    },
-                                    model: {
-                                      value: _vm.prefThree,
-                                      callback: function($$v) {
-                                        _vm.prefThree = $$v
-                                      },
-                                      expression: "prefThree"
-                                    }
-                                  }),
-                                  _vm._v(" "),
-                                  _c(
-                                    "b-form-invalid-feedback",
-                                    { attrs: { state: _vm.validateThree } },
-                                    [
-                                      _vm._v(
-                                        "Debe seleccionar una preferencia y esta debe ser distinta a las demás seleccionadas"
-                                      )
-                                    ]
-                                  )
-                                ],
-                                1
-                              )
-                            ],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c("br"),
-                          _vm._v(" "),
-                          _c(
-                            "div",
-                            {
-                              staticClass:
-                                "d-flex flex-row-reverse bd-highlight"
-                            },
-                            [
-                              _c("b-pagination", {
-                                attrs: {
-                                  "total-rows": _vm.rows,
-                                  "per-page": _vm.perPage,
-                                  "aria-controls": "my-table"
-                                },
-                                model: {
-                                  value: _vm.currentPage,
-                                  callback: function($$v) {
-                                    _vm.currentPage = $$v
+                                        )
+                                      ])
+                                    : _vm._e()
+                                ]),
+                                _vm._v(" "),
+                                _c("b-form-select", {
+                                  attrs: {
+                                    options: _vm.preferencias,
+                                    id: "prefOne",
+                                    name: "prefOne"
                                   },
-                                  expression: "currentPage"
-                                }
-                              })
-                            ],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "div",
-                            {
-                              staticClass:
-                                "d-flex flex-row-reverse bd-highlight"
-                            },
-                            [
-                              _c(
-                                "b-button",
-                                {
-                                  attrs: { variant: "default" },
-                                  on: { click: _vm.validateSelect }
+                                  model: {
+                                    value: _vm.prefOne,
+                                    callback: function($$v) {
+                                      _vm.prefOne = $$v
+                                    },
+                                    expression: "prefOne"
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c(
+                                  "b-form-invalid-feedback",
+                                  { attrs: { state: _vm.validateOne } },
+                                  [
+                                    _vm._v(
+                                      "Debe seleccionar una preferencia y esta debe ser distinta a las demás seleccionadas"
+                                    )
+                                  ]
+                                )
+                              ],
+                              1
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "b-col",
+                              { attrs: { cols: "4" } },
+                              [
+                                _c("label", { attrs: { for: "prefTwo" } }, [
+                                  _vm._v("Preferencia para "),
+                                  _vm.selected[1]
+                                    ? _c("em", [
+                                        _vm._v(
+                                          _vm._s(
+                                            _vm.selected[1].titulo_en_español
+                                          )
+                                        )
+                                      ])
+                                    : _vm._e()
+                                ]),
+                                _vm._v(" "),
+                                _c("b-form-select", {
+                                  attrs: {
+                                    options: _vm.preferencias,
+                                    id: "prefTwo",
+                                    name: "prefTwo"
+                                  },
+                                  model: {
+                                    value: _vm.prefTwo,
+                                    callback: function($$v) {
+                                      _vm.prefTwo = $$v
+                                    },
+                                    expression: "prefTwo"
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c(
+                                  "b-form-invalid-feedback",
+                                  { attrs: { state: _vm.validateTwo } },
+                                  [
+                                    _vm._v(
+                                      "Debe seleccionar una preferencia y esta debe ser distinta a las demás seleccionadas"
+                                    )
+                                  ]
+                                )
+                              ],
+                              1
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "b-col",
+                              { attrs: { cols: "4" } },
+                              [
+                                _c("label", { attrs: { for: "prefThree" } }, [
+                                  _vm._v("Preferencia para "),
+                                  _vm.selected[2]
+                                    ? _c("em", [
+                                        _vm._v(
+                                          _vm._s(
+                                            _vm.selected[2].titulo_en_español
+                                          )
+                                        )
+                                      ])
+                                    : _vm._e()
+                                ]),
+                                _vm._v(" "),
+                                _c("b-form-select", {
+                                  attrs: {
+                                    options: _vm.preferencias,
+                                    id: "prefThree",
+                                    name: "prefThree"
+                                  },
+                                  model: {
+                                    value: _vm.prefThree,
+                                    callback: function($$v) {
+                                      _vm.prefThree = $$v
+                                    },
+                                    expression: "prefThree"
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c(
+                                  "b-form-invalid-feedback",
+                                  { attrs: { state: _vm.validateThree } },
+                                  [
+                                    _vm._v(
+                                      "Debe seleccionar una preferencia y esta debe ser distinta a las demás seleccionadas"
+                                    )
+                                  ]
+                                )
+                              ],
+                              1
+                            )
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c("br"),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          {
+                            staticClass: "d-flex flex-row-reverse bd-highlight"
+                          },
+                          [
+                            _c("b-pagination", {
+                              attrs: {
+                                "total-rows": _vm.rows,
+                                "per-page": _vm.perPage,
+                                "aria-controls": "my-table"
+                              },
+                              model: {
+                                value: _vm.currentPage,
+                                callback: function($$v) {
+                                  _vm.currentPage = $$v
                                 },
-                                [_vm._v("Continuar")]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "b-link",
-                                {
-                                  staticClass: "btn btn-danger",
-                                  attrs: { href: "/browseclubs" }
-                                },
-                                [_vm._v("Cancelar")]
-                              )
-                            ],
-                            1
-                          )
-                        ],
-                        1
-                      )
-                    ],
-                    1
-                  )
-                ])
+                                expression: "currentPage"
+                              }
+                            })
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          {
+                            staticClass: "d-flex flex-row-reverse bd-highlight"
+                          },
+                          [
+                            _c(
+                              "b-button",
+                              {
+                                attrs: { variant: "default" },
+                                on: { click: _vm.validateSelect }
+                              },
+                              [_vm._v("Continuar")]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "b-link",
+                              {
+                                staticClass: "btn btn-danger",
+                                attrs: { href: "/browseclubs" }
+                              },
+                              [_vm._v("Cancelar")]
+                            )
+                          ],
+                          1
+                        )
+                      ],
+                      1
+                    )
+                  ],
+                  1
+                )
               ])
             ])
           ])
@@ -77620,7 +77231,7 @@ var render = function() {
                                     { attrs: { state: _vm.validateN } },
                                     [
                                       _vm._v(
-                                        "El nombre no puede estar vacío y no debe tener más de 15 caracteres"
+                                        "El nombre no debe tener más de 15 caracteres"
                                       )
                                     ]
                                   )
@@ -77702,7 +77313,7 @@ var render = function() {
                                     { attrs: { state: _vm.validateA } },
                                     [
                                       _vm._v(
-                                        "El apellido no puede estar vacío ni tener más de 15 caracteres"
+                                        "El apellido no puede tener más de 15 caracteres"
                                       )
                                     ]
                                   )
@@ -77739,7 +77350,7 @@ var render = function() {
                                     { attrs: { state: _vm.validateSA } },
                                     [
                                       _vm._v(
-                                        "El segundo apellido no puede estar vacío ni tener más de 15 caracteres"
+                                        "El segundo apellido no puede tener más de 15 caracteres"
                                       )
                                     ]
                                   )
@@ -77780,7 +77391,7 @@ var render = function() {
                                   _c(
                                     "b-form-invalid-feedback",
                                     { attrs: { state: _vm.validateG } },
-                                    [_vm._v("Seleccione un género")]
+                                    [_vm._v("* Requerido")]
                                   )
                                 ],
                                 1
@@ -77793,7 +77404,9 @@ var render = function() {
                                   _c("label", { attrs: { for: "fec_nac" } }, [
                                     _vm._v("Fecha de Nacimiento")
                                   ]),
-                                  _vm._v(" "),
+                                  _vm._v(
+                                    "\r\n<<<<<<< HEAD\r\n                                                "
+                                  ),
                                   _c("b-form-input", {
                                     attrs: {
                                       type: "date",
@@ -77823,6 +77436,38 @@ var render = function() {
                                         "El miembro debe ser mayor de 9 años/El campo no puede estar vacio"
                                       )
                                     ]
+                                  ),
+                                  _vm._v(
+                                    "\r\n=======\r\n                                                "
+                                  ),
+                                  _c("b-form-input", {
+                                    attrs: {
+                                      type: "date",
+                                      name: "fec_nac",
+                                      id: "fec_nac"
+                                    },
+                                    on: {
+                                      input: function($event) {
+                                        _vm.mayoredad = true
+                                        _vm.verifyAge(_vm.member.fec_nac)
+                                      }
+                                    },
+                                    model: {
+                                      value: _vm.member.fec_nac,
+                                      callback: function($$v) {
+                                        _vm.$set(_vm.member, "fec_nac", $$v)
+                                      },
+                                      expression: "member.fec_nac"
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "b-form-invalid-feedback",
+                                    { attrs: { state: _vm.validateF } },
+                                    [_vm._v("* Requerido")]
+                                  ),
+                                  _vm._v(
+                                    "\r\n>>>>>>> 6da0eb2a2d14c7a78eefd3cf1e09eafe10d3353b\r\n                                            "
                                   )
                                 ],
                                 1
@@ -78010,7 +77655,7 @@ var render = function() {
                                   _c(
                                     "b-form-invalid-feedback",
                                     { attrs: { state: _vm.validateCI } },
-                                    [_vm._v("Seleccione una ciudad")]
+                                    [_vm._v("* Requerido")]
                                   )
                                 ],
                                 1
@@ -78248,7 +77893,7 @@ var render = function() {
                                             },
                                             [
                                               _vm._v(
-                                                "El nombre no puede estar vacío y no debe tener más de 15 caracteres"
+                                                "El nombre no debe tener más de 15 caracteres"
                                               )
                                             ]
                                           )
@@ -78338,7 +77983,7 @@ var render = function() {
                                             },
                                             [
                                               _vm._v(
-                                                "El apellido no puede estar vacío ni tener más de 15 caracteres"
+                                                "El apellido no puede tener más de 15 caracteres"
                                               )
                                             ]
                                           )
@@ -78379,7 +78024,7 @@ var render = function() {
                                             },
                                             [
                                               _vm._v(
-                                                "El segundo apellido no puede estar vacío ni tener más de 15 caracteres"
+                                                "El segundo apellido no puede tener más de 15 caracteres"
                                               )
                                             ]
                                           )
@@ -78423,7 +78068,9 @@ var render = function() {
                                               expression: "rep.fec_nac"
                                             }
                                           }),
-                                          _vm._v(" "),
+                                          _vm._v(
+                                            "\r\n<<<<<<< HEAD\r\n                                                    "
+                                          ),
                                           _c(
                                             "b-form-invalid-feedback",
                                             {
@@ -78434,6 +78081,19 @@ var render = function() {
                                                 "La edad del representante debe ser mayor a 18 años / El campo no puede estar vacio"
                                               )
                                             ]
+                                          ),
+                                          _vm._v(
+                                            "\r\n=======\r\n                                                    "
+                                          ),
+                                          _c(
+                                            "b-form-invalid-feedback",
+                                            {
+                                              attrs: { state: _vm.validateFR }
+                                            },
+                                            [_vm._v("* Requerido")]
+                                          ),
+                                          _vm._v(
+                                            "\r\n>>>>>>> 6da0eb2a2d14c7a78eefd3cf1e09eafe10d3353b\r\n\r\n                                                "
                                           )
                                         ],
                                         1
@@ -78485,7 +78145,7 @@ var render = function() {
                                             {
                                               attrs: { state: _vm.validatePR }
                                             },
-                                            [_vm._v("Seleccione un país")]
+                                            [_vm._v("* Requerido")]
                                           )
                                         ],
                                         1
@@ -78521,7 +78181,7 @@ var render = function() {
                                             {
                                               attrs: { state: _vm.validateCIR }
                                             },
-                                            [_vm._v("Seleccione una ciudad")]
+                                            [_vm._v("* Requerido")]
                                           )
                                         ],
                                         1
@@ -78571,7 +78231,7 @@ var render = function() {
                                             },
                                             [
                                               _vm._v(
-                                                "Campo urbanización no puede estar vacío ni tener más de 20 caracteres"
+                                                "Campo urbanización no puede tener más de 20 caracteres"
                                               )
                                             ]
                                           )
@@ -78611,7 +78271,7 @@ var render = function() {
                                             },
                                             [
                                               _vm._v(
-                                                "Campo calle no puede estar vacío ni tener más de 20 caracteres"
+                                                "Campo calle no puede tener más de 20 caracteres"
                                               )
                                             ]
                                           )
@@ -78686,15 +78346,6 @@ var render = function() {
                                   on: { click: _vm.revalidate }
                                 },
                                 [_vm._v("Continuar")]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "b-link",
-                                {
-                                  staticClass: "btn btn-danger",
-                                  attrs: { href: "/managemembers" }
-                                },
-                                [_vm._v("Cancelar")]
                               )
                             ],
                             1
@@ -82497,94 +82148,114 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    [
-      _c(
-        "b-modal",
-        {
-          attrs: {
-            size: "lg",
-            id: "attendance",
-            "ok-variant": "default",
-            "cancel-variant": "danger",
-            "ok-title": "Actualizar",
-            "cancel-title": "Cerrar"
-          }
-        },
-        [
-          _c("div", { staticClass: "card " }, [
-            _c(
-              "div",
-              { staticClass: "card-header card-header-log card-header-icon" },
-              [
-                _c("div", { staticClass: "card-icon" }, [
-                  _c("i", { staticClass: "material-icons" }, [_vm._v("list")])
+  return _c("div", [
+    _c("div", { staticClass: "card " }, [
+      _vm._m(0),
+      _vm._v(" "),
+      _c("div", { staticClass: "card-body " }, [
+        _c("table", { staticClass: "table" }, [
+          _vm._m(1),
+          _vm._v(" "),
+          _c(
+            "tbody",
+            _vm._l(_vm.members, function(item, index) {
+              return _c("tr", { key: index }, [
+                _c("td", { staticClass: "text-center" }, [
+                  _vm._v(_vm._s(item.nombre))
                 ]),
                 _vm._v(" "),
-                _c("h4", { staticClass: "card-title" }, [
-                  _vm._v("Control de asistencia reunión")
-                ])
-              ]
+                _c("td", { staticClass: "text-center" }, [
+                  _vm._v(_vm._s(item.apellido))
+                ]),
+                _vm._v(" "),
+                _c(
+                  "td",
+                  { staticClass: "td-actions text-center" },
+                  [
+                    _c("b-form-select", {
+                      attrs: {
+                        id: "asistencia",
+                        name: "asistencia",
+                        options: _vm.asistencias
+                      },
+                      model: {
+                        value: item.asist,
+                        callback: function($$v) {
+                          _vm.$set(item, "asist", $$v)
+                        },
+                        expression: "item.asist"
+                      }
+                    })
+                  ],
+                  1
+                )
+              ])
+            }),
+            0
+          )
+        ]),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "d-flex flex-row-reverse bd-highlight" },
+          [
+            _c(
+              "b-button",
+              { attrs: { variant: "default" }, on: { click: _vm.add } },
+              [_vm._v("Continuar")]
             ),
             _vm._v(" "),
-            _c("div", { staticClass: "card-body " }, [
-              _c("table", { staticClass: "table" }, [
-                _c("thead", [
-                  _c("tr", [
-                    _c("th", { staticClass: "text-center" }, [
-                      _vm._v("Nombre")
-                    ]),
-                    _vm._v(" "),
-                    _c("th", { staticClass: "text-center" }, [
-                      _vm._v("Apellido")
-                    ]),
-                    _vm._v(" "),
-                    _c("th", { staticClass: "text-center" }, [
-                      _vm._v("¿Faltó a la reunión?")
-                    ])
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("tbody", [
-                  _c("tr", [
-                    _c("td", { staticClass: "text-center" }, [_vm._v("Frank")]),
-                    _vm._v(" "),
-                    _c("td", { staticClass: "text-center" }, [_vm._v("Hesse")]),
-                    _vm._v(" "),
-                    _c(
-                      "td",
-                      { staticClass: "td-actions text-center" },
-                      [
-                        _c("b-form-select", {
-                          attrs: {
-                            id: "asistencia",
-                            name: "asistencia",
-                            options: _vm.asistencias
-                          },
-                          model: {
-                            value: _vm.asistencia,
-                            callback: function($$v) {
-                              _vm.asistencia = $$v
-                            },
-                            expression: "asistencia"
-                          }
-                        })
-                      ],
-                      1
-                    )
-                  ])
-                ])
-              ])
-            ])
-          ])
-        ]
-      )
-    ],
-    1
-  )
+            _c(
+              "b-link",
+              {
+                staticClass: "btn btn-danger",
+                attrs: { href: "/browseclubs" }
+              },
+              [_vm._v("Cancelar")]
+            )
+          ],
+          1
+        )
+      ])
+    ])
+  ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "card-header card-header-log card-header-icon" },
+      [
+        _c("div", { staticClass: "card-icon" }, [
+          _c("i", { staticClass: "material-icons" }, [_vm._v("list")])
+        ]),
+        _vm._v(" "),
+        _c("h4", { staticClass: "card-title" }, [
+          _vm._v("Control de asistencia reunión")
+        ])
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", { staticClass: "text-center" }, [_vm._v("Nombre")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "text-center" }, [_vm._v("Apellido")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "text-center" }, [
+          _vm._v("¿Faltó a la reunión?")
+        ])
+      ])
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -82748,7 +82419,7 @@ var render = function() {
                                       ),
                                       _vm._v(" "),
                                       _c(
-                                        "button",
+                                        "b-link",
                                         {
                                           directives: [
                                             {
@@ -82759,7 +82430,18 @@ var render = function() {
                                           ],
                                           staticClass: "btn btn-default",
                                           attrs: {
-                                            type: "button",
+                                            href:
+                                              "/clubs/" +
+                                              _vm.club +
+                                              "/groups/" +
+                                              _vm.grupo +
+                                              "/meetings/" +
+                                              item.fecha +
+                                              "/" +
+                                              item.idmod +
+                                              "/" +
+                                              item.idlibro +
+                                              "/attendance",
                                             rel: "tooltip",
                                             "data-toggle": "tooltip",
                                             "data-placement": "bottom",
@@ -82777,7 +82459,7 @@ var render = function() {
                                       ),
                                       _vm._v(" "),
                                       _c(
-                                        "button",
+                                        "b-link",
                                         {
                                           directives: [
                                             {
@@ -82788,7 +82470,18 @@ var render = function() {
                                           ],
                                           staticClass: "btn btn-success",
                                           attrs: {
-                                            type: "button",
+                                            href:
+                                              "/clubs/" +
+                                              _vm.club +
+                                              "/groups/" +
+                                              _vm.grupo +
+                                              "/meetings/" +
+                                              item.fecha +
+                                              "/" +
+                                              item.idmod +
+                                              "/" +
+                                              item.idlibro +
+                                              "/edit",
                                             rel: "tooltip",
                                             "data-toggle": "tooltip",
                                             "data-placement": "bottom",
@@ -82804,8 +82497,114 @@ var render = function() {
                                         ]
                                       ),
                                       _vm._v(" "),
-                                      _vm._m(3, true)
-                                    ]
+                                      _c(
+                                        "b-button",
+                                        {
+                                          staticClass: "btn btn-danger",
+                                          attrs: { id: "show-btn" },
+                                          on: {
+                                            click: function($event) {
+                                              return _vm.showModal(index)
+                                            }
+                                          }
+                                        },
+                                        [
+                                          _c(
+                                            "i",
+                                            {
+                                              staticClass: "material-icons",
+                                              attrs: {
+                                                rel: "tooltip",
+                                                "data-toggle": "tooltip",
+                                                "data-placement": "bottom",
+                                                title: "Retirar"
+                                              }
+                                            },
+                                            [_vm._v("close")]
+                                          )
+                                        ]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "b-modal",
+                                        {
+                                          attrs: {
+                                            id: index.toString(),
+                                            "hide-footer": ""
+                                          },
+                                          scopedSlots: _vm._u(
+                                            [
+                                              {
+                                                key: "modal-title",
+                                                fn: function() {
+                                                  return [
+                                                    _c("div", [
+                                                      _vm._v(
+                                                        "\r\n                                                                    Está apunto de eliminar la reunión sobre\r\n                                                                "
+                                                      )
+                                                    ]),
+                                                    _vm._v(" "),
+                                                    _c("div", [
+                                                      _c("code", [
+                                                        _vm._v(
+                                                          _vm._s(item.libro) +
+                                                            " (sesión " +
+                                                            _vm._s(
+                                                              item.sesion
+                                                            ) +
+                                                            ")"
+                                                        )
+                                                      ])
+                                                    ])
+                                                  ]
+                                                },
+                                                proxy: true
+                                              }
+                                            ],
+                                            null,
+                                            true
+                                          )
+                                        },
+                                        [
+                                          _vm._v(" "),
+                                          _c(
+                                            "div",
+                                            [
+                                              _c(
+                                                "b-button",
+                                                {
+                                                  staticClass:
+                                                    "btn btn-danger btn-block",
+                                                  on: {
+                                                    click: function($event) {
+                                                      return _vm.borrar(item)
+                                                    }
+                                                  }
+                                                },
+                                                [_vm._v("Eliminar")]
+                                              )
+                                            ],
+                                            1
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "b-button",
+                                            {
+                                              staticClass: "mt-3",
+                                              attrs: { block: "" },
+                                              on: {
+                                                click: function($event) {
+                                                  return _vm.hideModal(index)
+                                                }
+                                              }
+                                            },
+                                            [_vm._v("Cancelar")]
+                                          )
+                                        ],
+                                        1
+                                      )
+                                    ],
+                                    1
                                   )
                                 ])
                               }),
@@ -82822,8 +82621,6 @@ var render = function() {
           ])
         ])
       ]),
-      _vm._v(" "),
-      _c("meeting-attendance"),
       _vm._v(" "),
       _c("meeting-details")
     ],
@@ -82868,25 +82665,6 @@ var staticRenderFns = [
         _c("th", { staticClass: "text-center" }, [_vm._v("Acción")])
       ])
     ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "button",
-      {
-        staticClass: "btn btn-danger",
-        attrs: {
-          type: "button",
-          rel: "tooltip",
-          "data-toggle": "tooltip",
-          "data-placement": "bottom",
-          title: "Eliminar"
-        }
-      },
-      [_c("i", { staticClass: "material-icons" }, [_vm._v("close")])]
-    )
   }
 ]
 render._withStripped = true
@@ -82920,67 +82698,15 @@ var render = function() {
         [
           _c(
             "b-form",
+            {
+              on: {
+                submit: function($event) {
+                  $event.preventDefault()
+                  return _vm.add($event)
+                }
+              }
+            },
             [
-              _c(
-                "b-row",
-                [
-                  _c(
-                    "b-col",
-                    { attrs: { cols: "6" } },
-                    [
-                      _c("label", { attrs: { for: "mod" } }, [
-                        _vm._v("Moderador")
-                      ]),
-                      _vm._v(" "),
-                      _c("b-form-select", {
-                        attrs: {
-                          options: _vm.miembros,
-                          id: "mod",
-                          name: "mod"
-                        },
-                        model: {
-                          value: _vm.meeting.moderador,
-                          callback: function($$v) {
-                            _vm.$set(_vm.meeting, "moderador", $$v)
-                          },
-                          expression: "meeting.moderador"
-                        }
-                      })
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "b-col",
-                    { attrs: { cols: "6" } },
-                    [
-                      _c("label", { attrs: { for: "session" } }, [
-                        _vm._v("Sesión")
-                      ]),
-                      _vm._v(" "),
-                      _c("b-form-select", {
-                        attrs: {
-                          options: _vm.sesiones,
-                          id: "session",
-                          name: "session"
-                        },
-                        model: {
-                          value: _vm.meeting.sesion,
-                          callback: function($$v) {
-                            _vm.$set(_vm.meeting, "sesion", $$v)
-                          },
-                          expression: "meeting.sesion"
-                        }
-                      })
-                    ],
-                    1
-                  )
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c("hr"),
-              _vm._v(" "),
               _c(
                 "b-row",
                 [
@@ -83081,115 +82807,104 @@ var render = function() {
                 1
               ),
               _vm._v(" "),
-              _c("p", [
-                _vm._v("\r\n                    Selected Rows:"),
-                _c("br"),
-                _vm._v(
-                  "\r\n                    " +
-                    _vm._s(_vm.selected) +
-                    "\r\n                "
-                )
-              ]),
+              _c("hr"),
+              _vm._v(" "),
+              _c(
+                "b-row",
+                [
+                  _c(
+                    "b-col",
+                    { attrs: { cols: "6" } },
+                    [
+                      _c("label", { attrs: { for: "mod" } }, [
+                        _vm._v("Moderador")
+                      ]),
+                      _vm._v(" "),
+                      _c("b-form-select", {
+                        attrs: {
+                          options: _vm.miembros,
+                          id: "mod",
+                          name: "mod"
+                        },
+                        model: {
+                          value: _vm.meeting.moderador,
+                          callback: function($$v) {
+                            _vm.$set(_vm.meeting, "moderador", $$v)
+                          },
+                          expression: "meeting.moderador"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "b-form-invalid-feedback",
+                        { attrs: { state: _vm.validateM } },
+                        [_vm._v("Seleccione un moderador")]
+                      )
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "b-col",
+                    { attrs: { cols: "6" } },
+                    [
+                      _c("label", { attrs: { for: "session" } }, [
+                        _vm._v("Número de sesiones")
+                      ]),
+                      _vm._v(" "),
+                      _c("b-form-select", {
+                        attrs: {
+                          options: _vm.sesiones,
+                          id: "session",
+                          name: "session"
+                        },
+                        model: {
+                          value: _vm.meeting.sesion,
+                          callback: function($$v) {
+                            _vm.$set(_vm.meeting, "sesion", $$v)
+                          },
+                          expression: "meeting.sesion"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "b-form-invalid-feedback",
+                        { attrs: { state: _vm.validateN } },
+                        [
+                          _vm._v(
+                            "Seleccione el número de sesiones que durará esta reunión"
+                          )
+                        ]
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              ),
               _vm._v(" "),
               _c("hr"),
               _vm._v(" "),
               _c(
                 "div",
-                { attrs: { id: "conclusiones" } },
+                { staticClass: "d-flex flex-row-reverse bd-highlight" },
                 [
                   _c(
-                    "b-row",
-                    [
-                      _c("b-col", { attrs: { cols: "6" } }, [
-                        _c("h6", [_c("strong", [_vm._v("CONCLUSIONES")])])
-                      ])
-                    ],
-                    1
+                    "b-button",
+                    {
+                      attrs: { variant: "default" },
+                      on: { click: _vm.revalidate }
+                    },
+                    [_vm._v("Continuar")]
                   ),
                   _vm._v(" "),
                   _c(
-                    "b-row",
-                    [
-                      _c(
-                        "b-col",
-                        { attrs: { cols: "12" } },
-                        [
-                          _c("label", { attrs: { for: "conclusion" } }),
-                          _vm._v(" "),
-                          _c("b-form-textarea", {
-                            attrs: { id: "conclusion", name: "conclusion" },
-                            model: {
-                              value: _vm.meeting.conclusion,
-                              callback: function($$v) {
-                                _vm.$set(_vm.meeting, "conclusion", $$v)
-                              },
-                              expression: "meeting.conclusion"
-                            }
-                          })
-                        ],
-                        1
-                      )
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c("br"),
-                  _vm._v(" "),
-                  _c(
-                    "b-row",
-                    [
-                      _c(
-                        "b-col",
-                        { attrs: { cols: "6" } },
-                        [
-                          _c("label", { attrs: { for: "valoracion" } }, [
-                            _vm._v("Valoración")
-                          ]),
-                          _vm._v(" "),
-                          _c("b-form-select", {
-                            attrs: {
-                              id: "valoracion",
-                              options: _vm.valoraciones,
-                              name: "valoracion"
-                            },
-                            model: {
-                              value: _vm.meeting.valoracion,
-                              callback: function($$v) {
-                                _vm.$set(_vm.meeting, "valoracion", $$v)
-                              },
-                              expression: "meeting.valoracion"
-                            }
-                          })
-                        ],
-                        1
-                      )
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    { staticClass: "d-flex flex-row-reverse bd-highlight" },
-                    [
-                      _c(
-                        "b-button",
-                        {
-                          attrs: { variant: "default" },
-                          on: { click: _vm.add }
-                        },
-                        [_vm._v("Continuar")]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "b-link",
-                        {
-                          staticClass: "btn btn-danger",
-                          attrs: { href: "/browseclubs" }
-                        },
-                        [_vm._v("Cancelar")]
-                      )
-                    ],
-                    1
+                    "b-link",
+                    {
+                      staticClass: "btn btn-danger",
+                      attrs: { href: "/browseclubs" }
+                    },
+                    [_vm._v("Cancelar")]
                   )
                 ],
                 1
@@ -83216,9 +82931,7 @@ var staticRenderFns = [
           _c("i", { staticClass: "material-icons" }, [_vm._v("add")])
         ]),
         _vm._v(" "),
-        _c("h4", { staticClass: "card-title" }, [
-          _vm._v("Generar reunión mensual")
-        ])
+        _c("h4", { staticClass: "card-title" }, [_vm._v("Generar reuniones")])
       ]
     )
   }
@@ -83375,6 +83088,188 @@ var render = function() {
   )
 }
 var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/browse_meetings/Edit.vue?vue&type=template&id=549cfa17&":
+/*!***********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/browse_meetings/Edit.vue?vue&type=template&id=549cfa17& ***!
+  \***********************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c("div", { staticClass: "card " }, [
+      _vm._m(0),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "card-body " },
+        [
+          _c(
+            "b-form",
+            {
+              on: {
+                submit: function($event) {
+                  $event.preventDefault()
+                  return _vm.add($event)
+                }
+              }
+            },
+            [
+              _c(
+                "div",
+                { attrs: { id: "conclusiones" } },
+                [
+                  _c(
+                    "b-row",
+                    [
+                      _c("b-col", { attrs: { cols: "12" } }, [
+                        _c("h6", [_c("strong", [_vm._v("CONCLUSIONES")])]),
+                        _vm._v(" "),
+                        _c("small", [
+                          _vm._v(
+                            "Si agrega conclusiones a este campo se da por finalizada la reunión de este libro, sólo agregue conclusiones si está segur@ de que es la última sesión debido a que esta operación es irreversible"
+                          )
+                        ])
+                      ])
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "b-row",
+                    [
+                      _c(
+                        "b-col",
+                        { attrs: { cols: "12" } },
+                        [
+                          _c("label", { attrs: { for: "conclusion" } }),
+                          _vm._v(" "),
+                          _c("b-form-textarea", {
+                            attrs: { id: "conclusion", name: "conclusion" },
+                            model: {
+                              value: _vm.meeting.conclusion,
+                              callback: function($$v) {
+                                _vm.$set(_vm.meeting, "conclusion", $$v)
+                              },
+                              expression: "meeting.conclusion"
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c(
+                            "b-form-invalid-feedback",
+                            { attrs: { state: _vm.validateC } },
+                            [_vm._v("Por favor, rellene este campo")]
+                          )
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c("br"),
+                  _vm._v(" "),
+                  _c(
+                    "b-row",
+                    [
+                      _c(
+                        "b-col",
+                        { attrs: { cols: "6" } },
+                        [
+                          _c("label", { attrs: { for: "valoracion" } }, [
+                            _vm._v("Valoración")
+                          ]),
+                          _vm._v(" "),
+                          _c("b-form-select", {
+                            attrs: {
+                              id: "valoracion",
+                              options: _vm.valoraciones,
+                              name: "valoracion"
+                            },
+                            model: {
+                              value: _vm.meeting.valoracion,
+                              callback: function($$v) {
+                                _vm.$set(_vm.meeting, "valoracion", $$v)
+                              },
+                              expression: "meeting.valoracion"
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c(
+                            "b-form-invalid-feedback",
+                            { attrs: { state: _vm.validateV } },
+                            [_vm._v("Por favor, rellene este campo")]
+                          )
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "d-flex flex-row-reverse bd-highlight" },
+                [
+                  _c(
+                    "b-button",
+                    {
+                      attrs: { variant: "default" },
+                      on: { click: _vm.revalidate }
+                    },
+                    [_vm._v("Continuar")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "b-link",
+                    { staticClass: "btn btn-danger", attrs: { href: "!#" } },
+                    [_vm._v("Cancelar")]
+                  )
+                ],
+                1
+              )
+            ]
+          )
+        ],
+        1
+      )
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "card-header card-header-log card-header-icon" },
+      [
+        _c("div", { staticClass: "card-icon" }, [
+          _c("i", { staticClass: "material-icons" }, [_vm._v("description")])
+        ]),
+        _vm._v(" "),
+        _c("h4", { staticClass: "card-title" }, [_vm._v("Finalizar reunión")])
+      ]
+    )
+  }
+]
 render._withStripped = true
 
 
@@ -99023,6 +98918,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('meetings', __webpack_requi
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('meeting-details', __webpack_require__(/*! ./components/browse_meetings/Details.vue */ "./resources/js/components/browse_meetings/Details.vue")["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('meeting-attendance', __webpack_require__(/*! ./components/browse_meetings/Attendance.vue */ "./resources/js/components/browse_meetings/Attendance.vue")["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('create-meeting', __webpack_require__(/*! ./components/browse_meetings/Create.vue */ "./resources/js/components/browse_meetings/Create.vue")["default"]);
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('edit-meeting', __webpack_require__(/*! ./components/browse_meetings/Edit.vue */ "./resources/js/components/browse_meetings/Edit.vue")["default"]);
 /* BOOKS */
 
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('books-create', __webpack_require__(/*! ./components/books/Create.vue */ "./resources/js/components/books/Create.vue")["default"]);
@@ -100536,6 +100432,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Details_vue_vue_type_template_id_a0039576___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Details_vue_vue_type_template_id_a0039576___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/browse_meetings/Edit.vue":
+/*!**********************************************************!*\
+  !*** ./resources/js/components/browse_meetings/Edit.vue ***!
+  \**********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Edit_vue_vue_type_template_id_549cfa17___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Edit.vue?vue&type=template&id=549cfa17& */ "./resources/js/components/browse_meetings/Edit.vue?vue&type=template&id=549cfa17&");
+/* harmony import */ var _Edit_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Edit.vue?vue&type=script&lang=js& */ "./resources/js/components/browse_meetings/Edit.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _Edit_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _Edit_vue_vue_type_template_id_549cfa17___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _Edit_vue_vue_type_template_id_549cfa17___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/browse_meetings/Edit.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/browse_meetings/Edit.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************!*\
+  !*** ./resources/js/components/browse_meetings/Edit.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Edit_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./Edit.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/browse_meetings/Edit.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Edit_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/browse_meetings/Edit.vue?vue&type=template&id=549cfa17&":
+/*!*****************************************************************************************!*\
+  !*** ./resources/js/components/browse_meetings/Edit.vue?vue&type=template&id=549cfa17& ***!
+  \*****************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Edit_vue_vue_type_template_id_549cfa17___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./Edit.vue?vue&type=template&id=549cfa17& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/browse_meetings/Edit.vue?vue&type=template&id=549cfa17&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Edit_vue_vue_type_template_id_549cfa17___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Edit_vue_vue_type_template_id_549cfa17___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

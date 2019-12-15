@@ -27,7 +27,7 @@ INSERT INTO sjl_calles(id, nom, id_urb)
 
 
 INSERT INTO sjl_calles(id, nom, id_urb)
-	VALUES (nextval('id_calle'), 'Paris', (
+	VALUES (nextval('id_calle'), 'Dixon', (
 	SELECT id FROM sjl_urbanizaciones WHERE nom = 'New Orleans'
 ));
 

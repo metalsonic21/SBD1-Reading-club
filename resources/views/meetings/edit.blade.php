@@ -7,6 +7,6 @@
     </div>
 @endif
 
-<!-- DESIGN HERE -->
-<select-club-group-meeting></select-club-group-meeting>
+<edit-meeting></edit-meeting>
+
 @endsection

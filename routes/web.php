@@ -47,7 +47,7 @@ Route::resource('/clubs/{club}/groups', 'groups\BrowseGroupsController');
 Route::patch('/clubs/{club}/delgroup/{grupo}', 'groups\BrowseGroupsController@borrar')->name('groups.borrar');
 Route::put('/clubs/{club}/delgroup/{grupo}', 'groups\BrowseGroupsController@borrar')->name('groups.borrar');
 Route::get('/clubs/{club}/delgroup/{grupo}', 'groups\BrowseGroupsController@borrar')->name('groups.borrar');
-Route::get('/clubs/{club}/selectg', 'groups\SelectGroupController@index')->name('selectgroup');
+Route::get('/clubs/{club}/selectgm', 'groups\SelectGroupController@index')->name('selectgroup');
 Route::get('/clubs/{club}/selectg', 'groups\SelectGroupController@r')->name('selectgroupr');
 
 /* GROUP MEMBERS */
@@ -59,6 +59,14 @@ Route::get('/clubs/{club}/groups/{group}/dropmember/{member}', 'groups\GroupMemb
 
 /* MEETINGS */
 Route::resource('/clubs/{club}/groups/{group}/meetings', 'meetings\MeetingsController');
+Route::get('/clubs/{club}/groups/{group}/meetings/{date}/{mod}/{libro}/edit', 'meetings\MeetingsController@modificar')->name('meetings.modificar');
+Route::get('/clubs/{club}/groups/{group}/meetings/{date}/{mod}/{libro}', 'meetings\MeetingsController@concluir')->name('meetings.concluir');
+Route::put('/clubs/{club}/groups/{group}/meetings/{date}/{mod}/{libro}', 'meetings\MeetingsController@concluir')->name('meetings.concluir');
+Route::patch('/clubs/{club}/groups/{group}/meetings/{date}/{mod}/{libro}', 'meetings\MeetingsController@concluir')->name('meetings.concluir');
+
+/* ATTENDANCE */
+Route::resource('/clubs/{club}/groups/{group}/meetings/{date}/{mod}/{libro}/attendance', 'meetings\AttendanceController');
+
 Route::get('/managemeetings/calendar', 'meetings\MeetingsController@calendar')->name('managemeetings');
 
 

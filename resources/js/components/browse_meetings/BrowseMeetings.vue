@@ -56,15 +56,28 @@
                                                         <button type="button" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Visualizar" class="btn btn-info" v-b-modal.meeting-details>
                                                             <i class="material-icons">remove_red_eye</i>
                                                         </button>
-                                                        <button type="button" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Control de asistencia para esta reunión" class="btn btn-default" v-b-modal.attendance>
+                                                        <b-link v-bind:href="'/clubs/'+club+'/groups/'+grupo+'/meetings/'+item.fecha+'/'+item.idmod+'/'+item.idlibro+'/attendance'" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Control de asistencia para esta reunión" class="btn btn-default" v-b-modal.attendance>
                                                             <i class="material-icons">list</i>
-                                                        </button>
-                                                        <button type="button" rel="tooltip" data-toggle="tooltip" v-b-modal.add-meeting data-placement="bottom" title="Modificar reunión" class="btn btn-success">
+                                                        </b-link>
+                                                        <b-link v-bind:href="'/clubs/'+club+'/groups/'+grupo+'/meetings/'+item.fecha+'/'+item.idmod+'/'+item.idlibro+'/edit'" rel="tooltip" data-toggle="tooltip" v-b-modal.add-meeting data-placement="bottom" title="Modificar reunión" class="btn btn-success">
                                                             <i class="material-icons">edit</i>
-                                                        </button>
-                                                        <button type="button" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Eliminar" class="btn btn-danger">
-                                                            <i class="material-icons">close</i>
-                                                        </button>
+                                                        </b-link>
+                                                        <b-button class="btn btn-danger" id="show-btn" @click="showModal(index)"><i class="material-icons" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Retirar">close</i>
+                                                        </b-button>
+                                                        <b-modal v-bind:id="index.toString()" hide-footer>
+                                                            <template v-slot:modal-title>
+                                                                <div>
+                                                                    Está apunto de eliminar la reunión sobre
+                                                                </div>
+                                                                <div>
+                                                                    <code>{{item.libro}} (sesión {{item.sesion}})</code>
+                                                                </div>
+                                                            </template>
+                                                            <div>
+                                                                <b-button class="btn btn-danger btn-block" @click="borrar(item)">Eliminar</b-button>
+                                                            </div>
+                                                            <b-button class="mt-3" block @click="hideModal(index)">Cancelar</b-button>
+                                                        </b-modal>
                                                     </td>
                                                 </tr>
 
@@ -80,7 +93,6 @@
 
         </div>
     </div>
-    <meeting-attendance></meeting-attendance>
     <meeting-details></meeting-details>
 </div>
 </template>
@@ -112,7 +124,24 @@ export default {
             })
     },
     methods: {
-
+        showModal(item) {
+            item = item.toString();
+            this.$bvModal.show(item);
+        },
+        hideModal(item) {
+            item = item.toString();
+            this.$bvModal.hide(item);
+        },
+        borrar(item){
+            console.log(item);
+            axios.delete(`/clubs/${this.club}/groups/${this.grupo}/meetings/${item.fecha}`)
+                .then(res => {
+                    console.log(res.data);
+                    //window.location = `/clubs/${this.club}/groups/${this.grupo}/gmembers`;
+                }).catch(e => {
+                    console.log(e);
+                })
+        }
     },
 }
 </script>

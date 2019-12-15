@@ -151,6 +151,7 @@ CREATE TABLE SJL_reuniones_mensuales (
     fec               DATE NOT NULL,
     id_lib            INTEGER NOT NULL,
     id_grupo          INTEGER NOT NULL,
+    id_grupo_mod       INTEGER NOT NULL,
     id_fec_mem        DATE NOT NULL,
     id_fec_i          DATE NOT NULL,
     id_club           INTEGER NOT NULL,
@@ -163,8 +164,8 @@ CREATE TABLE SJL_reuniones_mensuales (
 
 CREATE TABLE SJL_libros (
     isbn         INTEGER NOT NULL,
-    titulo_esp   VARCHAR(30),
-    titulo_ori   VARCHAR(30) NOT NULL,
+    titulo_esp   VARCHAR(40),
+    titulo_ori   VARCHAR(40) NOT NULL,
     tema_princ   VARCHAR(200),
     sinop        VARCHAR(1000) NOT NULL,
     n_pag        INTEGER NOT NULL,
@@ -333,12 +334,12 @@ ALTER TABLE SJL_telefonos ADD CONSTRAINT telefonos_lectores_fk FOREIGN KEY(id_le
 ALTER TABLE SJL_locales_eventos ADD CONSTRAINT locales_calles_fk FOREIGN KEY(id_dir) REFERENCES SJL_calles(id);
 ALTER TABLE SJL_locales_eventos ADD CONSTRAINT locales_clubes_fk FOREIGN KEY(id_club) REFERENCES SJL_clubes_lectura(id);
 
-ALTER TABLE SJL_inansistencias ADD CONSTRAINT inasistencias_grupos_fk FOREIGN KEY(id_fec_i,id_fec_mem,id_club,id_lec,id_grupo) REFERENCES SJL_grupos_lectores(id_fec_i,id_fec_mem,id_club,id_lec,id_grupo);
-ALTER TABLE SJL_inansistencias ADD CONSTRAINT inasistencias_reuniones_fk FOREIGN KEY(fec_reu_men,id_lib,id_grupo,id_club) REFERENCES SJL_reuniones_mensuales(fec,id_lib,id_grupo,id_club);
+ALTER TABLE SJL_inansistencias ADD CONSTRAINT inasistencias_grupos_fk FOREIGN KEY(id_fec_i,id_fec_mem,id_club,id_lec,id_grupo) REFERENCES SJL_grupos_lectores(id_fec_i,id_fec_mem,id_club,id_lec,id_grupo) ON DELETE CASCADE;
+ALTER TABLE SJL_inansistencias ADD CONSTRAINT inasistencias_reuniones_fk FOREIGN KEY(fec_reu_men,id_lib,id_grupo,id_club) REFERENCES SJL_reuniones_mensuales(fec,id_lib,id_grupo,id_club) ON DELETE CASCADE;
 
 ALTER TABLE SJL_reuniones_mensuales ADD CONSTRAINT reuniones_libros_fk FOREIGN KEY(id_lib) REFERENCES SJL_libros(isbn) ON UPDATE CASCADE;
 ALTER TABLE SJL_reuniones_mensuales ADD CONSTRAINT reuniones_grupos_fk FOREIGN KEY(id_grupo,id_club) REFERENCES SJL_grupos_lectura(id,id_club) ON DELETE CASCADE;
-ALTER TABLE SJL_reuniones_mensuales ADD CONSTRAINT reuniones_grupo_mod_fk FOREIGN KEY(id_fec_i,id_fec_mem,id_club,id_lec,id_grupo) REFERENCES SJL_grupos_lectores(id_fec_i,id_fec_mem,id_club,id_lec,id_grupo) ON DELETE CASCADE;
+ALTER TABLE SJL_reuniones_mensuales ADD CONSTRAINT reuniones_grupo_mod_fk FOREIGN KEY(id_fec_i,id_fec_mem,id_club,id_lec,id_grupo_mod) REFERENCES SJL_grupos_lectores(id_fec_i,id_fec_mem,id_club,id_lec,id_grupo) ON DELETE CASCADE;
 
 ALTER TABLE SJL_libros ADD CONSTRAINT libros_libro_prev_fk FOREIGN KEY(id_prev) REFERENCES SJL_libros(isbn) ON UPDATE CASCADE;
 ALTER TABLE SJL_libros ADD CONSTRAINT libros_editorial_fk FOREIGN KEY(id_edit) REFERENCES SJL_editoriales(id);
@@ -358,11 +359,11 @@ ALTER TABLE SJL_secciones_libros ADD CONSTRAINT secciones_estructuras_prev_fk FO
 ALTER TABLE SJL_obras_libros ADD CONSTRAINT obras_libros_fk FOREIGN KEY(id_obra) REFERENCES SJL_obras(id)ON UPDATE CASCADE ON DELETE CASCADE;
 ALTER TABLE SJL_obras_libros ADD CONSTRAINT libros_obras_fk FOREIGN KEY(id_lib) REFERENCES SJL_libros(isbn) ON UPDATE CASCADE ON DELETE CASCADE;
 
-ALTER TABLE SJL_obras ADD CONSTRAINT obras_local_fk FOREIGN KEY(id_local) REFERENCES SJL_locales_eventos(id);
 
 ALTER TABLE SJL_personajes ADD CONSTRAINT personajes_obras_fk FOREIGN KEY(id_obra) REFERENCES SJL_obras(id) ON DELETE CASCADE ON UPDATE CASCADE;
 
-ALTER TABLE SJL_historicos_presentaciones ADD CONSTRAINT historicos_obras_fk FOREIGN KEY(id_obra) REFERENCES SJL_obras(id) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE SJL_historicos_presentaciones ADD CONSTRAINT historicos_obras_fk FOREIGN KEY(id_obra) REFERENCES SJL_obras(id) ON DELETE CASCADE ON UPDATE CASCADE
+ALTER TABLE SJL_historicos_presentaciones ADD CONSTRAINT obras_local_fk FOREIGN KEY(id_local) REFERENCES SJL_locales_eventos(id) ON DELETE CASCADE ON UPDATE CASCADE;
 
 ALTER TABLE SJL_grupos_lectores ADD CONSTRAINT grupos_membrecias_fk FOREIGN KEY(id_fec_mem,id_club,id_lec) REFERENCES SJL_membresias(fec_i,id_club,id_lec);
 ALTER TABLE SJL_grupos_lectores ADD CONSTRAINT membrecias_grupos_fk FOREIGN KEY(id_grupo,id_club) REFERENCES SJL_grupos_lectura(id,id_club);

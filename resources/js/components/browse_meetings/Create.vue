@@ -5,22 +5,10 @@
             <div class="card-icon">
                 <i class="material-icons">add</i>
             </div>
-            <h4 class="card-title">Generar reunión mensual</h4>
+            <h4 class="card-title">Generar reuniones</h4>
         </div>
         <div class="card-body ">
-            <b-form>
-                <b-row>
-                    <b-col cols="6">
-                        <label for="mod">Moderador</label>
-                        <b-form-select v-model="meeting.moderador" :options="miembros" id="mod" name="mod"></b-form-select>
-                    </b-col>
-
-                    <b-col cols="6">
-                        <label for="session">Sesión</label>
-                        <b-form-select v-model="meeting.sesion" :options="sesiones" id="session" name="session"></b-form-select>
-                    </b-col>
-                </b-row>
-                <hr>
+            <b-form @submit.prevent="add">
                 <b-row>
                     <b-col cols="6">
                         <h6><strong>LISTA DE LIBROS</strong></h6>
@@ -49,38 +37,29 @@
                     <b-pagination v-model="currentPage" :total-rows="rows" :per-page="perPage" aria-controls="my-table"></b-pagination>
 
                 </div>
-                <p>
-                    Selected Rows:<br>
-                    {{ selected }}
-                </p>
                 <hr>
-                <div id="conclusiones">
-                    <b-row>
-                        <b-col cols="6">
-                            <h6><strong>CONCLUSIONES</strong></h6>
-                        </b-col>
-                    </b-row>
 
-                    <b-row>
-                        <b-col cols="12">
-                            <label for="conclusion"></label>
-                            <b-form-textarea v-model="meeting.conclusion" id="conclusion" name="conclusion"></b-form-textarea>
-                        </b-col>
-                    </b-row>
-                    <br>
-                    <b-row>
-                        <b-col cols="6">
-                            <label for="valoracion">Valoración</label>
-                            <b-form-select v-model="meeting.valoracion" id="valoracion" :options="valoraciones" name="valoracion"></b-form-select>
-                        </b-col>
-                    </b-row>
+                <b-row>
+                    <b-col cols="6">
+                        <label for="mod">Moderador</label>
+                        <b-form-select v-model="meeting.moderador" :options="miembros" id="mod" name="mod"></b-form-select>
+                        <b-form-invalid-feedback :state="validateM">Seleccione un moderador</b-form-invalid-feedback>
+                    </b-col>
 
+                    <b-col cols="6">
+                        <label for="session">Número de sesiones</label>
+                        <b-form-select v-model="meeting.sesion"  :options="sesiones" id="session" name="session"></b-form-select>
+                        <b-form-invalid-feedback :state="validateN">Seleccione el número de sesiones que durará esta reunión</b-form-invalid-feedback>
+                    </b-col>
+                </b-row>
+                <hr>
+
+                
                     <div class="d-flex flex-row-reverse bd-highlight">
-                        <b-button variant="default" @click="add">Continuar</b-button>
+                        <b-button variant="default" @click="revalidate">Continuar</b-button>
 
                         <b-link class="btn btn-danger" href="/browseclubs">Cancelar</b-link>
                     </div>
-                </div>
             </b-form>
         </div>
     </div>
@@ -177,12 +156,18 @@ export default {
         rows() {
             return this.items.length
         },
+        
+        validateM(){
+            return (this.meeting.moderador != null);
+        },
+        validateN(){
+            return (this.meeting.sesion != null);
+        }
     },
     methods: {
         onRowSelected(items) {
             this.selected = items
         },
-
         add() {
             const params = {
                 moderador: this.meeting.moderador,
@@ -198,10 +183,31 @@ export default {
 
             axios.post(`/clubs/${this.club}/groups/${this.grupo}/meetings`, params)
                 .then(res => {
-                    console.log(res.data);
+                    if (this.meeting.sesion == 3)
+                        alert("Se han generado las reuniones para el libro solicitado en los siguientes días\n"+res.data.f1+"\n"+res.data.f2+"\n"+res.data.f3+"\n");
+                    else if (this.meeting.sesion == 2)
+                        alert("Se han generado las reuniones para el libro solicitado en los siguientes días\n"+res.data.f1+"\n"+res.data.f2+"\n");
+                    else if (this.meeting.sesion == 1)
+                        alert("Se han generado las reuniones para el libro solicitado en los siguientes días\n"+res.data.f1+"\n");
+
+                    window.location = `/clubs/${this.club}/groups/${this.grupo}/meetings`;
                 }).catch(e => {
                     console.log(e);
                 })
+        },
+
+        revalidate(){
+            let msg = '';
+            if (!this.validateN) msg = msg + "Seleccione el número de sesiones\n";
+            if (!this.validateM) msg = msg + "Seleccione un moderador\n";
+
+            if (msg == ''){
+                this.add();
+            }
+
+            else {
+                alert (msg);
+            }
         }
     }
 
