@@ -233,8 +233,6 @@
                                         <br>
                                         <div class="d-flex flex-row-reverse bd-highlight">
                                             <b-button variant="default" @click="revalidate">Continuar</b-button>
-
-                                            <b-link class="btn btn-danger" href="/managemembers">Cancelar</b-link>
                                         </div>
                                     </b-form>
                                 </div>
@@ -623,8 +621,8 @@ export default {
             //console.log(params);
             axios.post(`/clubs/${path}/members`, params)
                 .then(res => {
-                    console.log(res.data);
-                    //window.location = `/clubs/${path}/members/${this.member.dociden}/favorites`;
+                    //console.log(res.data);
+                    window.location = `/clubs/${path}/members/${this.member.dociden}/favorites`;
                 }).catch(e => {
                     console.log(e);
                 })
@@ -648,7 +646,7 @@ export default {
             if (this.validateCI == false) msg = msg + "El campo Ciudad de Lector no puede estar vacío\n";
             if (this.validateU == false || this.validateU == null) msg = msg + "El campo Urbanización (Lector) no puede estar vacío ni tener más de 20 caracteres\n";
             if (this.validateCA == false || this.validateCA == null) msg = msg + "El campo Calle (Lector) no puede estar vacío ni tener más de 20 caracteres\n";
-            if (this.validateZ == false || this.validateZ == null) msg = msg + "El campo Código postal (Lector) no puede estar vacío, debe ser numérico entero y no puede tener más de 7 caracteres\n";
+            if (this.validateZ == false) msg = msg + "El campo Código postal (Lector) no puede estar vacío, debe ser numérico entero y no puede tener más de 7 caracteres\n";
             
             if (!this.mayoredad){
             if (this.validateDR == false || this.validateDR == null) msg = msg + "El campo Documento de Identidad debe ser un número entero positivo de no más de 8 caracteres\n";
@@ -661,7 +659,7 @@ export default {
             if (this.validateCIR == false) msg = msg + "El campo Ciudad (Representante) no puede estar vacío\n";
             if (this.validateUR == false || this.validateUR == null) msg = msg + "El campo Urbanización (Representante) no puede estar vacío ni tener más de 20 caracteres\n";
             if (this.validateCAR == false || this.validateCAR == null) msg = msg + "El campo Calle (Representante) no puede estar vacío ni tener más de 20 caracteres\n";
-            if (this.validateZR == false || this.validateZR == null) msg = msg + "El campo Código postal (Representante) no puede estar vacío, debe ser numérico entero y no puede tener más de 7 caracteres\n";
+            if (this.validateZR == false) msg = msg + "El campo Código postal (Representante) no puede estar vacío, debe ser numérico entero y no puede tener más de 7 caracteres\n";
             }
 
             if (msg == ''){

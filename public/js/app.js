@@ -2690,9 +2690,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2744,15 +2741,15 @@ __webpack_require__.r(__webpack_exports__);
     },
     validateOne: function validateOne() {
       if (this.prefOne != null) if (this.prefOne != this.prefTwo && this.prefOne != this.prefThree) return true;
-      return false;
+      return null;
     },
     validateTwo: function validateTwo() {
       if (this.prefTwo != null) if (this.prefTwo != this.prefOne && this.prefTwo != this.prefThree) return true;
-      return false;
+      return null;
     },
     validateThree: function validateThree() {
       if (this.prefThree != null) if (this.prefOne != this.prefTwo && this.prefOne != this.prefThree) return true;
-      return false;
+      return null;
     }
   },
   methods: {
@@ -2787,7 +2784,8 @@ __webpack_require__.r(__webpack_exports__);
     },
     validateSelect: function validateSelect() {
       if (this.selected.length > 2) {
-        if (!this.validateOne || !this.validateTwo || !this.validateThree) alert("Debe seleccionar una preferencia y esta debe ser distinta a las demás seleccionadas\n");else this.add();
+        if (!this.validateOne || !this.validateTwo || !this.validateThree) alert("Debe seleccionar una preferencia y esta debe ser distinta a las demás seleccionadas\n");
+        if (this.validateOne == null || this.validateTwo == null || this.validateThree == null) alert("Por favor rellene todas las preferencias\n");else this.add();
       } else {
         alert("Seleccione tres libros favoritos\n");
       }
@@ -3856,8 +3854,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -4149,6 +4145,8 @@ __webpack_require__.r(__webpack_exports__);
       return this.mayoredad;
     },
     add: function add() {
+      var _this2 = this;
+
       var path = window.location.pathname;
       path = path.replace(/\D/g, '');
       var params = {
@@ -4185,7 +4183,8 @@ __webpack_require__.r(__webpack_exports__);
       }; //console.log(params);
 
       axios.post("/clubs/".concat(path, "/members"), params).then(function (res) {
-        console.log(res.data); //window.location = `/clubs/${path}/members/${this.member.dociden}/favorites`;
+        //console.log(res.data);
+        window.location = "/clubs/".concat(path, "/members/").concat(_this2.member.dociden, "/favorites");
       })["catch"](function (e) {
         console.log(e);
       });
@@ -4208,7 +4207,7 @@ __webpack_require__.r(__webpack_exports__);
       if (this.validateCI == false) msg = msg + "El campo Ciudad de Lector no puede estar vacío\n";
       if (this.validateU == false || this.validateU == null) msg = msg + "El campo Urbanización (Lector) no puede estar vacío ni tener más de 20 caracteres\n";
       if (this.validateCA == false || this.validateCA == null) msg = msg + "El campo Calle (Lector) no puede estar vacío ni tener más de 20 caracteres\n";
-      if (this.validateZ == false || this.validateZ == null) msg = msg + "El campo Código postal (Lector) no puede estar vacío, debe ser numérico entero y no puede tener más de 7 caracteres\n";
+      if (this.validateZ == false) msg = msg + "El campo Código postal (Lector) no puede estar vacío, debe ser numérico entero y no puede tener más de 7 caracteres\n";
 
       if (!this.mayoredad) {
         if (this.validateDR == false || this.validateDR == null) msg = msg + "El campo Documento de Identidad debe ser un número entero positivo de no más de 8 caracteres\n";
@@ -4221,7 +4220,7 @@ __webpack_require__.r(__webpack_exports__);
         if (this.validateCIR == false) msg = msg + "El campo Ciudad (Representante) no puede estar vacío\n";
         if (this.validateUR == false || this.validateUR == null) msg = msg + "El campo Urbanización (Representante) no puede estar vacío ni tener más de 20 caracteres\n";
         if (this.validateCAR == false || this.validateCAR == null) msg = msg + "El campo Calle (Representante) no puede estar vacío ni tener más de 20 caracteres\n";
-        if (this.validateZR == false || this.validateZR == null) msg = msg + "El campo Código postal (Representante) no puede estar vacío, debe ser numérico entero y no puede tener más de 7 caracteres\n";
+        if (this.validateZR == false) msg = msg + "El campo Código postal (Representante) no puede estar vacío, debe ser numérico entero y no puede tener más de 7 caracteres\n";
       }
 
       if (msg == '') {
@@ -75386,294 +75385,281 @@ var render = function() {
             _vm._v(" "),
             _c("div", { staticClass: "card-body" }, [
               _c("div", { staticClass: "row" }, [
-                _c("div", { staticClass: "col-lg-12" }, [
-                  _c(
-                    "div",
-                    { staticClass: "overflow-auto" },
-                    [
-                      _c(
-                        "b-form",
-                        {
-                          on: {
-                            submit: function($event) {
-                              $event.preventDefault()
-                              return _vm.add($event)
-                            }
+                _c(
+                  "div",
+                  { staticClass: "col-lg-12" },
+                  [
+                    _c(
+                      "b-form",
+                      {
+                        on: {
+                          submit: function($event) {
+                            $event.preventDefault()
+                            return _vm.add($event)
                           }
-                        },
-                        [
-                          _c("b-table", {
-                            attrs: {
-                              selectable: "",
-                              "select-mode": "multi",
-                              items: _vm.items,
-                              fields: _vm.fields,
-                              responsive: "lg",
-                              id: "my-table",
-                              "per-page": _vm.perPage,
-                              "current-page": _vm.currentPage,
-                              small: ""
-                            },
-                            on: { "row-selected": _vm.onRowSelected },
-                            scopedSlots: _vm._u([
-                              {
-                                key: "cell(seleccionado)",
-                                fn: function(ref) {
-                                  var rowSelected = ref.rowSelected
-                                  return [
-                                    rowSelected && _vm.selected.length <= 3
-                                      ? [
-                                          _c(
-                                            "span",
-                                            {
-                                              attrs: { "aria-hidden": "true" }
-                                            },
-                                            [_vm._v("✓")]
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "span",
-                                            { staticClass: "sr-only" },
-                                            [_vm._v("Seleccionado")]
-                                          )
-                                        ]
-                                      : [
-                                          _c(
-                                            "span",
-                                            {
-                                              attrs: { "aria-hidden": "true" }
-                                            },
-                                            [_vm._v(" ")]
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "span",
-                                            { staticClass: "sr-only" },
-                                            [_vm._v("No seleccionado")]
-                                          )
-                                        ]
-                                  ]
-                                }
+                        }
+                      },
+                      [
+                        _c("b-table", {
+                          attrs: {
+                            selectable: "",
+                            "select-mode": "multi",
+                            items: _vm.items,
+                            fields: _vm.fields,
+                            id: "my-table",
+                            "per-page": _vm.perPage,
+                            "current-page": _vm.currentPage,
+                            small: ""
+                          },
+                          on: { "row-selected": _vm.onRowSelected },
+                          scopedSlots: _vm._u([
+                            {
+                              key: "cell(seleccionado)",
+                              fn: function(ref) {
+                                var rowSelected = ref.rowSelected
+                                return [
+                                  rowSelected && _vm.selected.length <= 3
+                                    ? [
+                                        _c(
+                                          "span",
+                                          { attrs: { "aria-hidden": "true" } },
+                                          [_vm._v("✓")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c("span", { staticClass: "sr-only" }, [
+                                          _vm._v("Seleccionado")
+                                        ])
+                                      ]
+                                    : [
+                                        _c(
+                                          "span",
+                                          { attrs: { "aria-hidden": "true" } },
+                                          [_vm._v(" ")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c("span", { staticClass: "sr-only" }, [
+                                          _vm._v("No seleccionado")
+                                        ])
+                                      ]
+                                ]
                               }
-                            ])
-                          }),
-                          _vm._v(" "),
-                          _c(
-                            "b-row",
-                            [
-                              _c("b-col", { attrs: { cols: "8" } }, [
-                                _c("h6", [_vm._v("NIVEL DE PREFERENCIA")]),
-                                _vm._v(" "),
-                                _c("small", [
-                                  _vm._v("1 el más alto, 3 el más bajo")
-                                ])
+                            }
+                          ])
+                        }),
+                        _vm._v(" "),
+                        _c(
+                          "b-row",
+                          [
+                            _c("b-col", { attrs: { cols: "8" } }, [
+                              _c("h6", [_vm._v("NIVEL DE PREFERENCIA")]),
+                              _vm._v(" "),
+                              _c("small", [
+                                _vm._v("1 el más alto, 3 el más bajo")
                               ])
-                            ],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "b-row",
-                            [
-                              _c(
-                                "b-col",
-                                { attrs: { cols: "4" } },
-                                [
-                                  _c("label", { attrs: { for: "prefOne" } }, [
-                                    _vm._v("Preferencia para "),
-                                    _vm.selected[0]
-                                      ? _c("em", [
-                                          _vm._v(
-                                            _vm._s(
-                                              _vm.selected[0].titulo_en_español
-                                            )
+                            ])
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "b-row",
+                          [
+                            _c(
+                              "b-col",
+                              { attrs: { cols: "4" } },
+                              [
+                                _c("label", { attrs: { for: "prefOne" } }, [
+                                  _vm._v("Preferencia para "),
+                                  _vm.selected[0]
+                                    ? _c("em", [
+                                        _vm._v(
+                                          _vm._s(
+                                            _vm.selected[0].titulo_en_español
                                           )
-                                        ])
-                                      : _vm._e()
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("b-form-select", {
-                                    attrs: {
-                                      options: _vm.preferencias,
-                                      id: "prefOne",
-                                      name: "prefOne"
-                                    },
-                                    model: {
-                                      value: _vm.prefOne,
-                                      callback: function($$v) {
-                                        _vm.prefOne = $$v
-                                      },
-                                      expression: "prefOne"
-                                    }
-                                  }),
-                                  _vm._v(" "),
-                                  _c(
-                                    "b-form-invalid-feedback",
-                                    { attrs: { state: _vm.validateOne } },
-                                    [
-                                      _vm._v(
-                                        "Debe seleccionar una preferencia y esta debe ser distinta a las demás seleccionadas"
-                                      )
-                                    ]
-                                  )
-                                ],
-                                1
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "b-col",
-                                { attrs: { cols: "4" } },
-                                [
-                                  _c("label", { attrs: { for: "prefTwo" } }, [
-                                    _vm._v("Preferencia para "),
-                                    _vm.selected[1]
-                                      ? _c("em", [
-                                          _vm._v(
-                                            _vm._s(
-                                              _vm.selected[1].titulo_en_español
-                                            )
-                                          )
-                                        ])
-                                      : _vm._e()
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("b-form-select", {
-                                    attrs: {
-                                      options: _vm.preferencias,
-                                      id: "prefTwo",
-                                      name: "prefTwo"
-                                    },
-                                    model: {
-                                      value: _vm.prefTwo,
-                                      callback: function($$v) {
-                                        _vm.prefTwo = $$v
-                                      },
-                                      expression: "prefTwo"
-                                    }
-                                  }),
-                                  _vm._v(" "),
-                                  _c(
-                                    "b-form-invalid-feedback",
-                                    { attrs: { state: _vm.validateTwo } },
-                                    [
-                                      _vm._v(
-                                        "Debe seleccionar una preferencia y esta debe ser distinta a las demás seleccionadas"
-                                      )
-                                    ]
-                                  )
-                                ],
-                                1
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "b-col",
-                                { attrs: { cols: "4" } },
-                                [
-                                  _c("label", { attrs: { for: "prefThree" } }, [
-                                    _vm._v("Preferencia para "),
-                                    _vm.selected[2]
-                                      ? _c("em", [
-                                          _vm._v(
-                                            _vm._s(
-                                              _vm.selected[2].titulo_en_español
-                                            )
-                                          )
-                                        ])
-                                      : _vm._e()
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("b-form-select", {
-                                    attrs: {
-                                      options: _vm.preferencias,
-                                      id: "prefThree",
-                                      name: "prefThree"
-                                    },
-                                    model: {
-                                      value: _vm.prefThree,
-                                      callback: function($$v) {
-                                        _vm.prefThree = $$v
-                                      },
-                                      expression: "prefThree"
-                                    }
-                                  }),
-                                  _vm._v(" "),
-                                  _c(
-                                    "b-form-invalid-feedback",
-                                    { attrs: { state: _vm.validateThree } },
-                                    [
-                                      _vm._v(
-                                        "Debe seleccionar una preferencia y esta debe ser distinta a las demás seleccionadas"
-                                      )
-                                    ]
-                                  )
-                                ],
-                                1
-                              )
-                            ],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c("br"),
-                          _vm._v(" "),
-                          _c(
-                            "div",
-                            {
-                              staticClass:
-                                "d-flex flex-row-reverse bd-highlight"
-                            },
-                            [
-                              _c("b-pagination", {
-                                attrs: {
-                                  "total-rows": _vm.rows,
-                                  "per-page": _vm.perPage,
-                                  "aria-controls": "my-table"
-                                },
-                                model: {
-                                  value: _vm.currentPage,
-                                  callback: function($$v) {
-                                    _vm.currentPage = $$v
+                                        )
+                                      ])
+                                    : _vm._e()
+                                ]),
+                                _vm._v(" "),
+                                _c("b-form-select", {
+                                  attrs: {
+                                    options: _vm.preferencias,
+                                    id: "prefOne",
+                                    name: "prefOne"
                                   },
-                                  expression: "currentPage"
-                                }
-                              })
-                            ],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "div",
-                            {
-                              staticClass:
-                                "d-flex flex-row-reverse bd-highlight"
-                            },
-                            [
-                              _c(
-                                "b-button",
-                                {
-                                  attrs: { variant: "default" },
-                                  on: { click: _vm.validateSelect }
+                                  model: {
+                                    value: _vm.prefOne,
+                                    callback: function($$v) {
+                                      _vm.prefOne = $$v
+                                    },
+                                    expression: "prefOne"
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c(
+                                  "b-form-invalid-feedback",
+                                  { attrs: { state: _vm.validateOne } },
+                                  [
+                                    _vm._v(
+                                      "Debe seleccionar una preferencia y esta debe ser distinta a las demás seleccionadas"
+                                    )
+                                  ]
+                                )
+                              ],
+                              1
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "b-col",
+                              { attrs: { cols: "4" } },
+                              [
+                                _c("label", { attrs: { for: "prefTwo" } }, [
+                                  _vm._v("Preferencia para "),
+                                  _vm.selected[1]
+                                    ? _c("em", [
+                                        _vm._v(
+                                          _vm._s(
+                                            _vm.selected[1].titulo_en_español
+                                          )
+                                        )
+                                      ])
+                                    : _vm._e()
+                                ]),
+                                _vm._v(" "),
+                                _c("b-form-select", {
+                                  attrs: {
+                                    options: _vm.preferencias,
+                                    id: "prefTwo",
+                                    name: "prefTwo"
+                                  },
+                                  model: {
+                                    value: _vm.prefTwo,
+                                    callback: function($$v) {
+                                      _vm.prefTwo = $$v
+                                    },
+                                    expression: "prefTwo"
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c(
+                                  "b-form-invalid-feedback",
+                                  { attrs: { state: _vm.validateTwo } },
+                                  [
+                                    _vm._v(
+                                      "Debe seleccionar una preferencia y esta debe ser distinta a las demás seleccionadas"
+                                    )
+                                  ]
+                                )
+                              ],
+                              1
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "b-col",
+                              { attrs: { cols: "4" } },
+                              [
+                                _c("label", { attrs: { for: "prefThree" } }, [
+                                  _vm._v("Preferencia para "),
+                                  _vm.selected[2]
+                                    ? _c("em", [
+                                        _vm._v(
+                                          _vm._s(
+                                            _vm.selected[2].titulo_en_español
+                                          )
+                                        )
+                                      ])
+                                    : _vm._e()
+                                ]),
+                                _vm._v(" "),
+                                _c("b-form-select", {
+                                  attrs: {
+                                    options: _vm.preferencias,
+                                    id: "prefThree",
+                                    name: "prefThree"
+                                  },
+                                  model: {
+                                    value: _vm.prefThree,
+                                    callback: function($$v) {
+                                      _vm.prefThree = $$v
+                                    },
+                                    expression: "prefThree"
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c(
+                                  "b-form-invalid-feedback",
+                                  { attrs: { state: _vm.validateThree } },
+                                  [
+                                    _vm._v(
+                                      "Debe seleccionar una preferencia y esta debe ser distinta a las demás seleccionadas"
+                                    )
+                                  ]
+                                )
+                              ],
+                              1
+                            )
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c("br"),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          {
+                            staticClass: "d-flex flex-row-reverse bd-highlight"
+                          },
+                          [
+                            _c("b-pagination", {
+                              attrs: {
+                                "total-rows": _vm.rows,
+                                "per-page": _vm.perPage,
+                                "aria-controls": "my-table"
+                              },
+                              model: {
+                                value: _vm.currentPage,
+                                callback: function($$v) {
+                                  _vm.currentPage = $$v
                                 },
-                                [_vm._v("Continuar")]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "b-link",
-                                {
-                                  staticClass: "btn btn-danger",
-                                  attrs: { href: "/browseclubs" }
-                                },
-                                [_vm._v("Cancelar")]
-                              )
-                            ],
-                            1
-                          )
-                        ],
-                        1
-                      )
-                    ],
-                    1
-                  )
-                ])
+                                expression: "currentPage"
+                              }
+                            })
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          {
+                            staticClass: "d-flex flex-row-reverse bd-highlight"
+                          },
+                          [
+                            _c(
+                              "b-button",
+                              {
+                                attrs: { variant: "default" },
+                                on: { click: _vm.validateSelect }
+                              },
+                              [_vm._v("Continuar")]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "b-link",
+                              {
+                                staticClass: "btn btn-danger",
+                                attrs: { href: "/browseclubs" }
+                              },
+                              [_vm._v("Cancelar")]
+                            )
+                          ],
+                          1
+                        )
+                      ],
+                      1
+                    )
+                  ],
+                  1
+                )
               ])
             ])
           ])
@@ -78681,15 +78667,6 @@ var render = function() {
                                   on: { click: _vm.revalidate }
                                 },
                                 [_vm._v("Continuar")]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "b-link",
-                                {
-                                  staticClass: "btn btn-danger",
-                                  attrs: { href: "/managemembers" }
-                                },
-                                [_vm._v("Cancelar")]
                               )
                             ],
                             1

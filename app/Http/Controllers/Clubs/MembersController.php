@@ -92,9 +92,9 @@ class MembersController extends Controller
         $testR = DB::select(DB::raw("SELECT id from sjl_urbanizaciones WHERE nom = '$request->urbanizacionR' AND id_ciudad = '$request->ciudadR'"));
             if (!$testR){
                 $urbanizacionR = new Urbanizacion();
-                $count = DB::select(DB::raw("SELECT count(nom) as numero from sjl_urbanizaciones"));
-                $c = $count[0]->numero;
-                $urbanizacion->id = $c+1;
+                $countUR = DB::select(DB::raw("SELECT count(nom) as numero from sjl_urbanizaciones"));
+                $cur = $countUR[0]->numero;
+                $urbanizacionR->id = $cur+1;
                 $urbanizacionR->nom = $request->urbanizacionR;
                 $urbanizacionR->id_ciudad = $request->ciudadR;
                 $urbanizacionR->save();
@@ -108,9 +108,9 @@ class MembersController extends Controller
 
             if (!$testcalleR){
                 $calleR = new Calle();
-                $countc = DB::select(DB::raw("SELECT count(nom) as numero from sjl_calles"));
-                $cc = $countc[0]->numero;
-                $calle->id = $cc+1;
+                $countCUR = DB::select(DB::raw("SELECT count(nom) as numero from sjl_calles"));
+                $ccur = $countCUR[0]->numero;
+                $calleR->id = $ccur+1;
                 $calleR->nom = $request->calleR;
                 $calleR->cod_post = $request->zipcodeR;
                     if (!$testR)

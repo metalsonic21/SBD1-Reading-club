@@ -188,20 +188,24 @@ INSERT INTO sjl_paises(
 
 INSERT INTO sjl_paises(
 	id, nom, nac, moneda)
-	VALUES (48, 'Suecia', 'Sueco', 'Corona Sueca');
+	VALUES (48, 'Rusia', 'Ruso', 'Rublo');
 
 INSERT INTO sjl_paises(
 	id, nom, nac, moneda)
-	VALUES (49, 'Suiza', 'Suizo', 'Franco Suizo');
+	VALUES (49, 'Suecia', 'Sueco', 'Corona Sueca');
 
 INSERT INTO sjl_paises(
 	id, nom, nac, moneda)
-	VALUES (50, 'Ucrania', 'Ucraniano', 'Grivna');
+	VALUES (50, 'Suiza', 'Suizo', 'Franco Suizo');
 
 INSERT INTO sjl_paises(
 	id, nom, nac, moneda)
-	VALUES (51, 'Uruguay', 'Uruguayo', 'Peso Uruguayo');
+	VALUES (51, 'Ucrania', 'Ucraniano', 'Grivna');
 
 INSERT INTO sjl_paises(
 	id, nom, nac, moneda)
-	VALUES (52, 'Venezuela', 'Venezolano', 'Bolivar Soberano');
+	VALUES (52, 'Uruguay', 'Uruguayo', 'Peso Uruguayo');
+
+INSERT INTO sjl_paises(
+	id, nom, nac, moneda)
+	VALUES (53, 'Venezuela', 'Venezolano', 'Bolivar Soberano');
