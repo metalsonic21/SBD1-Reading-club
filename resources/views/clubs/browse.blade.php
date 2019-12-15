@@ -8,8 +8,6 @@
 @endif
 
  <!-- DESIGN HERE -->
-
-    <template>
     <div>
         <div class="content">
             <div class="container-fluid">
@@ -104,17 +102,5 @@
             </div>
         </div>
     </div>
-    </template>
-
-    <script>
-    export default {
-
-    }
-    </script>
-
-    <style>
-
-    </style>
-
 </div>
 @endsection

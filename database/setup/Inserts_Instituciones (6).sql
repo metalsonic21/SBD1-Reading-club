@@ -1,29 +1,29 @@
 INSERT INTO sjl_instituciones(
-	id, nom, tipo, id_ciudad)
-	VALUES (nextval('id_inst'), 'One Zillion Cats', 'B', (
+	nom, tipo, id_ciudad)
+	VALUES ('One Zillion Cats', 'B', (
         SELECT id from sjl_ciudades WHERE nom = 'Zagreb'
     ));
 
 INSERT INTO sjl_instituciones(
 	id, nom, tipo, id_ciudad)
-	VALUES (nextval('id_inst'), 'Taking Back Spring', 'U', (
+	VALUES ('Taking Back Spring', 'U', (
         SELECT id from sjl_ciudades WHERE nom = 'Berlin'
     ));
 
 INSERT INTO sjl_instituciones(
 	id, nom, tipo, id_ciudad)
-	VALUES (nextval('id_inst'), 'Les Stat', 'E', (
+	VALUES ('Les Stat', 'E', (
         SELECT id from sjl_ciudades WHERE nom = 'California'
     ));
 
 INSERT INTO sjl_instituciones(
 	id, nom, tipo, id_ciudad)
-	VALUES (nextval('id_inst'), 'Doomshop', 'B', (
+	VALUES ('Doomshop', 'B', (
         SELECT id from sjl_ciudades WHERE nom = 'California'
     ));
 
 INSERT INTO sjl_instituciones(
 	id, nom, tipo, id_ciudad)
-	VALUES (nextval('id_inst'), 'John Tracy', 'E', (
+	VALUES ('John Tracy', 'E', (
         SELECT id from sjl_ciudades WHERE nom = 'Tirana'
     ));
