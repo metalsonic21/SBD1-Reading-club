@@ -3555,44 +3555,210 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      nombre: null,
-      idioma: null,
+      club: {
+        nom: null,
+        cuota: null,
+        id_idiom: null
+      },
+      dir: {
+        pais: null,
+        ciudad: null,
+        urb: null,
+        calle: null,
+        cod_post: null
+      },
+      inst: {
+        nom: null,
+        tipo: null,
+        ciudad: null,
+        pais: null
+      },
       idiomas: [{
         value: null,
         text: 'Seleccionar'
       }],
-      asociado: false,
-      nombrei: null,
-      tipo: null,
-      tipos: [{
-        value: null,
-        text: 'Seleccionar'
-      }],
-      pais: null,
-      paisI: null,
+      institucion: false,
       paises: [{
         value: null,
         text: 'Seleccionar'
       }],
-      ciudad: null,
-      ciudadI: null,
       ciudades: [{
         value: null,
         text: 'Seleccionar'
       }],
-      urbanizacion: null,
-      urbanizacionI: null,
-      calle: null,
-      calleI: null,
-      zipcode: null,
-      zipcodeI: null,
       clubasociado: false,
       asociados: [{
         value: 1,
-        text: 'Killer Bees'
+        text: 'Club Asociado'
       }],
-      cac: []
+      selectedclubs: [{}],
+      ciudadesfiltered: [{}],
+      ciudadesbackup: [{
+        value: null,
+        text: 'Seleccionar'
+      }]
     };
+  },
+  created: function created() {
+    var _this = this;
+
+    axios.get('/browseclubs/create').then(function (res) {
+      _this.idiomas = res.data.languages;
+      _this.paises = res.data.countries;
+      _this.ciudadesbackup = res.data.cities;
+      _this.asociados = res.data.aclubs;
+    })["catch"](function (e) {
+      console.log(e);
+    });
+  },
+  computed: {
+    //Validations
+    validateNom: function validateNom() {
+      return this.club.nom != null;
+    },
+    validateIdiom: function validateIdiom() {
+      return this.club.id_idiom != null;
+    },
+    validatePais: function validatePais() {
+      return this.dir.pais != null;
+    },
+    validateCiu: function validateCiu() {
+      return this.dir.ciudad != null;
+    },
+    validateUrb: function validateUrb() {
+      return this.dir.urb != null;
+    },
+    validateCalle: function validateCalle() {
+      return this.dir.calle != null;
+    },
+    validateInom: function validateInom() {
+      if (this.institucion == true) {
+        if (this.inst.nom != null) {
+          return true;
+        } else {
+          return false;
+        }
+      }
+
+      return true;
+    },
+    validateItipo: function validateItipo() {
+      if (this.institucion == true) {
+        if (this.inst.tipo != null) {
+          return true;
+        } else {
+          return false;
+        }
+      }
+
+      return true;
+    },
+    validateIpais: function validateIpais() {
+      if (this.institucion == true) {
+        if (this.inst.pais != null) {
+          return true;
+        } else {
+          return false;
+        }
+      }
+
+      return true;
+    },
+    validateIciu: function validateIciu() {
+      if (this.institucion == true) {
+        if (this.inst.ciudad != null) {
+          return true;
+        } else {
+          return false;
+        }
+      }
+
+      return true;
+    }
+  },
+  methods: {
+    convert: function convert(id, length) {
+      var pos = id.indexOf("-");
+      var res = id.substring(pos + 1, length);
+      parseInt(res, 10);
+      return res;
+    },
+    filter: function filter(currentcountry, currentcity) {
+      /* Filter cities according to the country*/
+      this.ciudades = [{}], this.ciudadesfiltered = [{}], currentcity = null, this.ciudades = this.ciudadesbackup;
+      var i = 0;
+
+      for (i = 0; i < this.ciudades.length; i++) {
+        /* Converted ID is id_sub*/
+        var convertedid = this.convert(this.ciudades[i].value, this.ciudades.length);
+
+        if (currentcountry == convertedid) {
+          var actualid = this.ciudades[i].value.substring(0, this.ciudades[i].value.indexOf("-"));
+          actualid = parseInt(actualid, 10);
+          this.ciudadesfiltered.push({
+            value: actualid,
+            text: this.ciudades[i].text
+          });
+        }
+      }
+
+      this.ciudades = [{}];
+      this.ciudades = this.ciudadesfiltered;
+      this.ciudades[0].value = null;
+      this.ciudades[0].text = 'Seleccionar';
+    },
+    revalidate: function revalidate() {
+      var msg = '';
+      var isValid = true;
+      if (this.validateNom == false) msg = msg + "Debe rellenar el campo Nombre del Club\n";
+      if (this.validateIdiom == false) msg = msg + "Debe selecionar un idioma\n";
+      if (this.validatePais == false) msg = msg + "Debe selecionar un pais\n";
+      if (this.validateCiu == false) msg = msg + "Debe selecionar una ciudad\n";
+      if (this.validateUrb == false) msg = msg + "Debe rellenar el campo Urbanización\n";
+      if (this.validateCalle == false) msg = msg + "Debe rellenar el campo calle\n";
+      if (this.validateInom == false) msg = msg + "Debe rellenar el campo Nombre de Institución\n";
+      if (this.validateItipo == false) msg = msg + "Debe rellenar el campo Tipo de Institución\n";
+      if (this.validateIpais == false) msg = msg + "Debe selecionar un pais para la Institución\n";
+      if (this.validateIciu == false) msg = msg + "Debe selecionar una ciudad para la Institución\n";
+
+      if (msg != '') {
+        isValid = false;
+        alert(msg);
+      } else {
+        this.add();
+      }
+    },
+    add: function add() {
+      if (!this.institucion) {
+        this.inst.nom = false;
+      }
+
+      var params = {
+        nom: this.club.nom,
+        cuota: this.club.cuota,
+        id_idiom: this.club.id_idiom,
+        calle: this.dir.calle,
+        ciudad: this.dir.ciudad,
+        urb: this.dir.urb,
+        cod_post: this.dir.cod_post,
+        asociados: this.selectedclubs,
+        nom_inst: this.inst.nom,
+        tipo_inst: this.inst.tipo,
+        ciudad_inst: this.inst.ciudad
+      }; //Clear 
+
+      this.club.nom = '';
+      this.club.cuota = '';
+      this.club.in_dir = '';
+      this.club.id_idiom = '';
+      this.club.id_inst = '';
+      console.log(params);
+      axios.post('/browseclubs', params).then(function (res) {
+        window.location = "/browseclubs";
+      })["catch"](function (e) {
+        console.log(e);
+      });
+    }
   }
 });
 
@@ -4421,49 +4587,271 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      nombre: null,
-      idioma: null,
+      id: null,
+      club: {
+        nom: null,
+        cuota: null,
+        id_idiom: null
+      },
+      dir: {
+        pais: null,
+        ciudad: null,
+        urb: null,
+        calle: null,
+        cod_post: null
+      },
       idiomas: [{
         value: null,
         text: 'Seleccionar'
       }],
-      asociado: false,
-      nombrei: null,
-      tipo: null,
-      tipos: [{
-        value: null,
-        text: 'Seleccionar'
-      }],
-      pais: null,
-      paisI: null,
+      institucion: false,
+      inst: {
+        nom: null,
+        tipo: null,
+        ciudad: null,
+        pais: null
+      },
       paises: [{
         value: null,
         text: 'Seleccionar'
       }],
-      ciudad: null,
-      ciudadI: null,
       ciudades: [{
         value: null,
         text: 'Seleccionar'
       }],
-      urbanizacion: null,
-      urbanizacionI: null,
-      calle: null,
-      calleI: null,
-      zipcode: null,
-      zipcodeI: null,
       clubasociado: false,
       asociados: [{
         value: 1,
-        text: 'Killer Bees'
+        text: 'Club Asociado'
       }],
-      cac: []
+      asociadosbackup: [{
+        value: 1,
+        text: 'Club Asociado'
+      }],
+      aclubid: [{
+        value: 1,
+        text: 'Club Asociado'
+      }],
+      selectedclubs: [{}],
+      selectedclubs2: [{}],
+      ciudadesfiltered: [{}],
+      ciudadesbackup: [{
+        value: null,
+        text: 'Seleccionar'
+      }]
     };
+  },
+  created: function created() {
+    var _this = this;
+
+    var params = window.location.pathname;
+    params = params.replace(/\D/g, '');
+    axios.get("/browseclubs/".concat(params, "/edit")).then(function (res) {
+      _this.idiomas = res.data.languages;
+      _this.paises = res.data.countries;
+      _this.ciudadesbackup = res.data.cities;
+      _this.asociados = res.data.aclubs;
+      _this.id = res.data.club.id;
+      _this.club.nom = res.data.club.nom;
+      _this.club.cuota = res.data.club.cuota;
+      _this.club.id_idiom = res.data.club.id_idiom;
+      _this.dir.pais = res.data.direction.pais;
+
+      _this.filter(res.data.direction.pais, res.data.direction.ciudad);
+
+      _this.dir.ciudad = res.data.direction.ciudad;
+      _this.dir.urb = res.data.direction.urb;
+      _this.dir.calle = res.data.direction.calle;
+      _this.dir.cod_post = res.data.direction.codigo;
+
+      if (res.data.club.id_inst != null) {
+        _this.institucion = true;
+        _this.inst.nom = res.data.institution.inst;
+        _this.inst.tipo = res.data.institution.tipo;
+        _this.inst.ciudad = res.data.institution.ciudad;
+
+        _this.filter(res.data.institution.pais, res.data.institution.ciudad);
+
+        _this.inst.pais = res.data.institution.pais;
+      }
+
+      _this.selectedclubs2 = res.data.aclubsid;
+
+      _this.filterasoc();
+    })["catch"](function (e) {
+      console.log(e);
+    });
+  },
+  computed: {
+    //Validations
+    validateNom: function validateNom() {
+      return this.club.nom != null;
+    },
+    validateIdiom: function validateIdiom() {
+      return this.club.id_idiom != null;
+    },
+    validatePais: function validatePais() {
+      return this.dir.pais != null;
+    },
+    validateCiu: function validateCiu() {
+      return this.dir.ciudad != null;
+    },
+    validateUrb: function validateUrb() {
+      return this.dir.urb != null;
+    },
+    validateCalle: function validateCalle() {
+      return this.dir.calle != null;
+    },
+    validateInom: function validateInom() {
+      if (this.institucion == true) {
+        if (this.inst.nom != null) {
+          return true;
+        } else {
+          return false;
+        }
+      }
+
+      return true;
+    },
+    validateItipo: function validateItipo() {
+      if (this.institucion == true) {
+        if (this.inst.tipo != null) {
+          return true;
+        } else {
+          return false;
+        }
+      }
+
+      return true;
+    },
+    validateIpais: function validateIpais() {
+      if (this.institucion == true) {
+        if (this.inst.pais != null) {
+          return true;
+        } else {
+          return false;
+        }
+      }
+
+      return true;
+    },
+    validateIciu: function validateIciu() {
+      if (this.institucion == true) {
+        if (this.inst.ciudad != null) {
+          return true;
+        } else {
+          return false;
+        }
+      }
+
+      return true;
+    }
+  },
+  methods: {
+    filterasoc: function filterasoc() {
+      //eliminar elemento repetido
+      var i = 0;
+
+      for (i = 0; i < this.asociados.length; i++) {
+        if (this.asociados[i].value == this.id) {
+          this.asociados.splice(i, 1);
+        }
+      } //mostrar panel
+
+
+      if (this.selectedclubs2.length > 0) {
+        this.clubasociado = true;
+      } //cargar marcados
+
+
+      for (i = 0; i < this.selectedclubs2.length; i++) {
+        this.selectedclubs[i + 1] = this.selectedclubs2[i].id_a;
+      }
+    },
+    convert: function convert(id, length) {
+      var pos = id.indexOf("-");
+      var res = id.substring(pos + 1, length);
+      parseInt(res, 10);
+      return res;
+    },
+    filter: function filter(currentcountry, currentcity) {
+      /* Filter cities according to the country*/
+      this.ciudades = [{}], this.ciudadesfiltered = [{}], currentcity = null, this.ciudades = this.ciudadesbackup;
+      var i = 0;
+
+      for (i = 0; i < this.ciudades.length; i++) {
+        /* Converted ID is id_sub*/
+        var convertedid = this.convert(this.ciudades[i].value, this.ciudades.length);
+
+        if (currentcountry == convertedid) {
+          var actualid = this.ciudades[i].value.substring(0, this.ciudades[i].value.indexOf("-"));
+          actualid = parseInt(actualid, 10);
+          this.ciudadesfiltered.push({
+            value: actualid,
+            text: this.ciudades[i].text
+          });
+        }
+      }
+
+      this.ciudades = [{}];
+      this.ciudades = this.ciudadesfiltered;
+      this.ciudades[0].value = null;
+      this.ciudades[0].text = 'Seleccionar';
+    },
+    revalidate: function revalidate() {
+      var msg = '';
+      var isValid = true;
+      if (this.validateNom == false) msg = msg + "Debe rellenar el campo Nombre del Club\n";
+      if (this.validateIdiom == false) msg = msg + "Debe selecionar un idioma\n";
+      if (this.validatePais == false) msg = msg + "Debe selecionar un pais\n";
+      if (this.validateCiu == false) msg = msg + "Debe selecionar una ciudad\n";
+      if (this.validateUrb == false) msg = msg + "Debe rellenar el campo Urbanización\n";
+      if (this.validateCalle == false) msg = msg + "Debe rellenar el campo calle\n";
+      if (this.validateInom == false) msg = msg + "Debe rellenar el campo Nombre de Institución\n";
+      if (this.validateItipo == false) msg = msg + "Debe rellenar el campo Tipo de Institución\n";
+      if (this.validateIpais == false) msg = msg + "Debe selecionar un pais para la Institución\n";
+      if (this.validateIciu == false) msg = msg + "Debe selecionar una ciudad para la Institución\n";
+
+      if (msg != '') {
+        isValid = false;
+        alert(msg);
+      } else {
+        this.update();
+      }
+    },
+    update: function update() {
+      if (!this.institucion) {
+        this.inst.nom = false;
+      }
+
+      var params = {
+        nom: this.club.nom,
+        cuota: this.club.cuota,
+        id_idiom: this.club.id_idiom,
+        calle: this.dir.calle,
+        ciudad: this.dir.ciudad,
+        urb: this.dir.urb,
+        cod_post: this.dir.cod_post,
+        asociados: this.selectedclubs,
+        nom_inst: this.inst.nom,
+        tipo_inst: this.inst.tipo,
+        ciudad_inst: this.inst.ciudad
+      }; //Clear 
+
+      this.club.nom = '';
+      this.club.cuota = '';
+      this.club.in_dir = '';
+      this.club.id_idiom = '';
+      this.club.id_inst = '';
+      axios.put("/browseclubs/".concat(this.id), params).then(function (res) {
+        window.location = "/browseclubs";
+      })["catch"](function (e) {
+        console.log(e);
+      });
+    }
   }
 });
 
@@ -77137,6 +77525,14 @@ var render = function() {
                     [
                       _c(
                         "b-form",
+                        {
+                          on: {
+                            submit: function($event) {
+                              $event.preventDefault()
+                              return _vm.add($event)
+                            }
+                          }
+                        },
                         [
                           _c(
                             "b-row",
@@ -77151,12 +77547,25 @@ var render = function() {
                                   _vm._v(" "),
                                   _c("b-form-input", {
                                     attrs: {
+                                      type: "text",
                                       id: "nom",
                                       name: "nom",
-                                      required: "",
                                       placeholder: "Nombre de club"
+                                    },
+                                    model: {
+                                      value: _vm.club.nom,
+                                      callback: function($$v) {
+                                        _vm.$set(_vm.club, "nom", $$v)
+                                      },
+                                      expression: "club.nom"
                                     }
-                                  })
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "b-form-invalid-feedback",
+                                    { attrs: { state: _vm.validateNom } },
+                                    [_vm._v("Debe rellenar el campo Nombre")]
+                                  )
                                 ],
                                 1
                               ),
@@ -77172,13 +77581,19 @@ var render = function() {
                                   _c("b-form-select", {
                                     attrs: { options: _vm.idiomas },
                                     model: {
-                                      value: _vm.idioma,
+                                      value: _vm.club.id_idiom,
                                       callback: function($$v) {
-                                        _vm.idioma = $$v
+                                        _vm.$set(_vm.club, "id_idiom", $$v)
                                       },
-                                      expression: "idioma"
+                                      expression: "club.id_idiom"
                                     }
-                                  })
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "b-form-invalid-feedback",
+                                    { attrs: { state: _vm.validateIdiom } },
+                                    [_vm._v("Debe selecionar un idioma")]
+                                  )
                                 ],
                                 1
                               )
@@ -77205,14 +77620,28 @@ var render = function() {
                                       name: "pais",
                                       options: _vm.paises
                                     },
+                                    on: {
+                                      change: function($event) {
+                                        return _vm.filter(
+                                          _vm.dir.pais,
+                                          _vm.dir.ciudad
+                                        )
+                                      }
+                                    },
                                     model: {
-                                      value: _vm.pais,
+                                      value: _vm.dir.pais,
                                       callback: function($$v) {
-                                        _vm.pais = $$v
+                                        _vm.$set(_vm.dir, "pais", $$v)
                                       },
-                                      expression: "pais"
+                                      expression: "dir.pais"
                                     }
-                                  })
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "b-form-invalid-feedback",
+                                    { attrs: { state: _vm.validatePais } },
+                                    [_vm._v("Debe selecionar un pais")]
+                                  )
                                 ],
                                 1
                               ),
@@ -77232,13 +77661,19 @@ var render = function() {
                                       options: _vm.ciudades
                                     },
                                     model: {
-                                      value: _vm.ciudad,
+                                      value: _vm.dir.ciudad,
                                       callback: function($$v) {
-                                        _vm.ciudad = $$v
+                                        _vm.$set(_vm.dir, "ciudad", $$v)
                                       },
-                                      expression: "ciudad"
+                                      expression: "dir.ciudad"
                                     }
-                                  })
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "b-form-invalid-feedback",
+                                    { attrs: { state: _vm.validateCiu } },
+                                    [_vm._v("Debe selecionar una ciudad")]
+                                  )
                                 ],
                                 1
                               )
@@ -77268,13 +77703,23 @@ var render = function() {
                                       placeholder: "Urbanización"
                                     },
                                     model: {
-                                      value: _vm.urbanizacion,
+                                      value: _vm.dir.urb,
                                       callback: function($$v) {
-                                        _vm.urbanizacion = $$v
+                                        _vm.$set(_vm.dir, "urb", $$v)
                                       },
-                                      expression: "urbanizacion"
+                                      expression: "dir.urb"
                                     }
-                                  })
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "b-form-invalid-feedback",
+                                    { attrs: { state: _vm.validateUrb } },
+                                    [
+                                      _vm._v(
+                                        "Debe rellenar el campo urbanización"
+                                      )
+                                    ]
+                                  )
                                 ],
                                 1
                               ),
@@ -77294,13 +77739,19 @@ var render = function() {
                                       placeholder: "Calle"
                                     },
                                     model: {
-                                      value: _vm.calle,
+                                      value: _vm.dir.calle,
                                       callback: function($$v) {
-                                        _vm.calle = $$v
+                                        _vm.$set(_vm.dir, "calle", $$v)
                                       },
-                                      expression: "calle"
+                                      expression: "dir.calle"
                                     }
-                                  })
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "b-form-invalid-feedback",
+                                    { attrs: { state: _vm.validateCalle } },
+                                    [_vm._v("Debe rellenar el campo calle")]
+                                  )
                                 ],
                                 1
                               ),
@@ -77320,11 +77771,48 @@ var render = function() {
                                       placeholder: "Código postal"
                                     },
                                     model: {
-                                      value: _vm.zipcode,
+                                      value: _vm.dir.cod_post,
                                       callback: function($$v) {
-                                        _vm.zipcode = $$v
+                                        _vm.$set(_vm.dir, "cod_post", $$v)
                                       },
-                                      expression: "zipcode"
+                                      expression: "dir.cod_post"
+                                    }
+                                  })
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c("br"),
+                          _vm._v(" "),
+                          _c(
+                            "b-row",
+                            [
+                              _c(
+                                "b-col",
+                                { attrs: { cols: "5" } },
+                                [
+                                  _c("label", { attrs: { for: "cuota" } }, [
+                                    _vm._v("Cuota del Club")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("b-form-input", {
+                                    attrs: {
+                                      type: "number",
+                                      min: "1",
+                                      pattern: "^[0-9]+",
+                                      id: "cuota",
+                                      name: "cuota",
+                                      placeholder: "Cuota del Club"
+                                    },
+                                    model: {
+                                      value: _vm.club.cuota,
+                                      callback: function($$v) {
+                                        _vm.$set(_vm.club, "cuota", $$v)
+                                      },
+                                      expression: "club.cuota"
                                     }
                                   })
                                 ],
@@ -77360,11 +77848,11 @@ var render = function() {
                                           ]
                                         },
                                         model: {
-                                          value: _vm.asociado,
+                                          value: _vm.institucion,
                                           callback: function($$v) {
-                                            _vm.asociado = $$v
+                                            _vm.institucion = $$v
                                           },
-                                          expression: "asociado"
+                                          expression: "institucion"
                                         }
                                       })
                                     ],
@@ -77377,7 +77865,7 @@ var render = function() {
                             1
                           ),
                           _vm._v(" "),
-                          _vm.asociado
+                          _vm.institucion
                             ? _c(
                                 "div",
                                 [
@@ -77404,14 +77892,26 @@ var render = function() {
                                                 placeholder: "Nombre"
                                               },
                                               model: {
-                                                value: _vm.nombrei,
+                                                value: _vm.inst.nom,
                                                 callback: function($$v) {
-                                                  _vm.nombrei = $$v
+                                                  _vm.$set(_vm.inst, "nom", $$v)
                                                 },
-                                                expression: "nombrei"
+                                                expression: "inst.nom"
                                               }
                                             },
                                             [_vm._v("Nombre")]
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "b-form-invalid-feedback",
+                                            {
+                                              attrs: { state: _vm.validateInom }
+                                            },
+                                            [
+                                              _vm._v(
+                                                "Debe rellenar el campo Nombre de Institucion"
+                                              )
+                                            ]
                                           )
                                         ],
                                         1
@@ -77425,20 +77925,35 @@ var render = function() {
                                             _vm._v("Tipo")
                                           ]),
                                           _vm._v(" "),
-                                          _c("b-form-select", {
+                                          _c("b-form-input", {
                                             attrs: {
+                                              type: "text",
                                               id: "tipo",
                                               name: "tipo",
-                                              options: _vm.tipos
+                                              placeholder: "Tipo de institucion"
                                             },
                                             model: {
-                                              value: _vm.tipo,
+                                              value: _vm.inst.tipo,
                                               callback: function($$v) {
-                                                _vm.tipo = $$v
+                                                _vm.$set(_vm.inst, "tipo", $$v)
                                               },
-                                              expression: "tipo"
+                                              expression: "inst.tipo"
                                             }
-                                          })
+                                          }),
+                                          _vm._v(" "),
+                                          _c(
+                                            "b-form-invalid-feedback",
+                                            {
+                                              attrs: {
+                                                state: _vm.validateItipo
+                                              }
+                                            },
+                                            [
+                                              _vm._v(
+                                                "Debe rellenar el campo Tipo de Institucion"
+                                              )
+                                            ]
+                                          )
                                         ],
                                         1
                                       )
@@ -77468,13 +77983,27 @@ var render = function() {
                                               options: _vm.paises
                                             },
                                             model: {
-                                              value: _vm.paisI,
+                                              value: _vm.inst.pais,
                                               callback: function($$v) {
-                                                _vm.paisI = $$v
+                                                _vm.$set(_vm.inst, "pais", $$v)
                                               },
-                                              expression: "paisI"
+                                              expression: "inst.pais"
                                             }
-                                          })
+                                          }),
+                                          _vm._v(" "),
+                                          _c(
+                                            "b-form-invalid-feedback",
+                                            {
+                                              attrs: {
+                                                state: _vm.validateIpais
+                                              }
+                                            },
+                                            [
+                                              _vm._v(
+                                                "Debe selecionar un pais para la Institucion"
+                                              )
+                                            ]
+                                          )
                                         ],
                                         1
                                       ),
@@ -77496,13 +78025,29 @@ var render = function() {
                                               options: _vm.ciudades
                                             },
                                             model: {
-                                              value: _vm.ciudadI,
+                                              value: _vm.inst.ciudad,
                                               callback: function($$v) {
-                                                _vm.ciudadI = $$v
+                                                _vm.$set(
+                                                  _vm.inst,
+                                                  "ciudad",
+                                                  $$v
+                                                )
                                               },
-                                              expression: "ciudadI"
+                                              expression: "inst.ciudad"
                                             }
-                                          })
+                                          }),
+                                          _vm._v(" "),
+                                          _c(
+                                            "b-form-invalid-feedback",
+                                            {
+                                              attrs: { state: _vm.validateIciu }
+                                            },
+                                            [
+                                              _vm._v(
+                                                "Debe selecionar una ciudad para la Institucion"
+                                              )
+                                            ]
+                                          )
                                         ],
                                         1
                                       )
@@ -77510,97 +78055,7 @@ var render = function() {
                                     1
                                   ),
                                   _vm._v(" "),
-                                  _c("br"),
-                                  _vm._v(" "),
-                                  _c(
-                                    "b-row",
-                                    [
-                                      _c(
-                                        "b-col",
-                                        { attrs: { cols: "4" } },
-                                        [
-                                          _c(
-                                            "label",
-                                            { attrs: { for: "urbanizacion" } },
-                                            [_vm._v("Urbanización")]
-                                          ),
-                                          _vm._v(" "),
-                                          _c("b-form-input", {
-                                            attrs: {
-                                              id: "urbanizacionI",
-                                              name: "urbanizacionI",
-                                              placeholder: "Urbanización"
-                                            },
-                                            model: {
-                                              value: _vm.urbanizacionI,
-                                              callback: function($$v) {
-                                                _vm.urbanizacionI = $$v
-                                              },
-                                              expression: "urbanizacionI"
-                                            }
-                                          })
-                                        ],
-                                        1
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "b-col",
-                                        { attrs: { cols: "4" } },
-                                        [
-                                          _c(
-                                            "label",
-                                            { attrs: { for: "calle" } },
-                                            [_vm._v("Calle")]
-                                          ),
-                                          _vm._v(" "),
-                                          _c("b-form-input", {
-                                            attrs: {
-                                              id: "calleI",
-                                              name: "calleI",
-                                              placeholder: "Calle"
-                                            },
-                                            model: {
-                                              value: _vm.calleI,
-                                              callback: function($$v) {
-                                                _vm.calleI = $$v
-                                              },
-                                              expression: "calleI"
-                                            }
-                                          })
-                                        ],
-                                        1
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "b-col",
-                                        { attrs: { cols: "4" } },
-                                        [
-                                          _c(
-                                            "label",
-                                            { attrs: { for: "zipcode" } },
-                                            [_vm._v("Código postal")]
-                                          ),
-                                          _vm._v(" "),
-                                          _c("b-form-input", {
-                                            attrs: {
-                                              id: "zipcodeI",
-                                              name: "zipcodeI",
-                                              placeholder: "Código postal"
-                                            },
-                                            model: {
-                                              value: _vm.zipcodeI,
-                                              callback: function($$v) {
-                                                _vm.zipcodeI = $$v
-                                              },
-                                              expression: "zipcodeI"
-                                            }
-                                          })
-                                        ],
-                                        1
-                                      )
-                                    ],
-                                    1
-                                  )
+                                  _c("br")
                                 ],
                                 1
                               )
@@ -77673,11 +78128,11 @@ var render = function() {
                                               stacked: ""
                                             },
                                             model: {
-                                              value: _vm.cac,
+                                              value: _vm.selectedclubs,
                                               callback: function($$v) {
-                                                _vm.cac = $$v
+                                                _vm.selectedclubs = $$v
                                               },
-                                              expression: "cac"
+                                              expression: "selectedclubs"
                                             }
                                           })
                                         ],
@@ -77701,7 +78156,8 @@ var render = function() {
                               _c(
                                 "b-button",
                                 {
-                                  attrs: { variant: "default", type: "submit" }
+                                  attrs: { variant: "default" },
+                                  on: { click: _vm.revalidate }
                                 },
                                 [_vm._v("Continuar")]
                               ),
@@ -79019,6 +79475,14 @@ var render = function() {
                     [
                       _c(
                         "b-form",
+                        {
+                          on: {
+                            submit: function($event) {
+                              $event.preventDefault()
+                              return _vm.update($event)
+                            }
+                          }
+                        },
                         [
                           _c(
                             "b-row",
@@ -79033,12 +79497,25 @@ var render = function() {
                                   _vm._v(" "),
                                   _c("b-form-input", {
                                     attrs: {
+                                      type: "text",
                                       id: "nom",
                                       name: "nom",
-                                      required: "",
                                       placeholder: "Nombre de club"
+                                    },
+                                    model: {
+                                      value: _vm.club.nom,
+                                      callback: function($$v) {
+                                        _vm.$set(_vm.club, "nom", $$v)
+                                      },
+                                      expression: "club.nom"
                                     }
-                                  })
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "b-form-invalid-feedback",
+                                    { attrs: { state: _vm.validateNom } },
+                                    [_vm._v("Debe rellenar el campo Nombre")]
+                                  )
                                 ],
                                 1
                               ),
@@ -79054,13 +79531,19 @@ var render = function() {
                                   _c("b-form-select", {
                                     attrs: { options: _vm.idiomas },
                                     model: {
-                                      value: _vm.idioma,
+                                      value: _vm.club.id_idiom,
                                       callback: function($$v) {
-                                        _vm.idioma = $$v
+                                        _vm.$set(_vm.club, "id_idiom", $$v)
                                       },
-                                      expression: "idioma"
+                                      expression: "club.id_idiom"
                                     }
-                                  })
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "b-form-invalid-feedback",
+                                    { attrs: { state: _vm.validateIdiom } },
+                                    [_vm._v("Debe selecionar un idioma")]
+                                  )
                                 ],
                                 1
                               )
@@ -79087,14 +79570,28 @@ var render = function() {
                                       name: "pais",
                                       options: _vm.paises
                                     },
+                                    on: {
+                                      change: function($event) {
+                                        return _vm.filter(
+                                          _vm.dir.pais,
+                                          _vm.dir.ciudad
+                                        )
+                                      }
+                                    },
                                     model: {
-                                      value: _vm.pais,
+                                      value: _vm.dir.pais,
                                       callback: function($$v) {
-                                        _vm.pais = $$v
+                                        _vm.$set(_vm.dir, "pais", $$v)
                                       },
-                                      expression: "pais"
+                                      expression: "dir.pais"
                                     }
-                                  })
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "b-form-invalid-feedback",
+                                    { attrs: { state: _vm.validatePais } },
+                                    [_vm._v("Debe selecionar un pais")]
+                                  )
                                 ],
                                 1
                               ),
@@ -79114,13 +79611,19 @@ var render = function() {
                                       options: _vm.ciudades
                                     },
                                     model: {
-                                      value: _vm.ciudad,
+                                      value: _vm.dir.ciudad,
                                       callback: function($$v) {
-                                        _vm.ciudad = $$v
+                                        _vm.$set(_vm.dir, "ciudad", $$v)
                                       },
-                                      expression: "ciudad"
+                                      expression: "dir.ciudad"
                                     }
-                                  })
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "b-form-invalid-feedback",
+                                    { attrs: { state: _vm.validateCiu } },
+                                    [_vm._v("Debe selecionar una ciudad")]
+                                  )
                                 ],
                                 1
                               )
@@ -79150,13 +79653,23 @@ var render = function() {
                                       placeholder: "Urbanización"
                                     },
                                     model: {
-                                      value: _vm.urbanizacion,
+                                      value: _vm.dir.urb,
                                       callback: function($$v) {
-                                        _vm.urbanizacion = $$v
+                                        _vm.$set(_vm.dir, "urb", $$v)
                                       },
-                                      expression: "urbanizacion"
+                                      expression: "dir.urb"
                                     }
-                                  })
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "b-form-invalid-feedback",
+                                    { attrs: { state: _vm.validateUrb } },
+                                    [
+                                      _vm._v(
+                                        "Debe rellenar el campo urbanización"
+                                      )
+                                    ]
+                                  )
                                 ],
                                 1
                               ),
@@ -79176,13 +79689,19 @@ var render = function() {
                                       placeholder: "Calle"
                                     },
                                     model: {
-                                      value: _vm.calle,
+                                      value: _vm.dir.calle,
                                       callback: function($$v) {
-                                        _vm.calle = $$v
+                                        _vm.$set(_vm.dir, "calle", $$v)
                                       },
-                                      expression: "calle"
+                                      expression: "dir.calle"
                                     }
-                                  })
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "b-form-invalid-feedback",
+                                    { attrs: { state: _vm.validateCalle } },
+                                    [_vm._v("Debe rellenar el campo calle")]
+                                  )
                                 ],
                                 1
                               ),
@@ -79202,11 +79721,48 @@ var render = function() {
                                       placeholder: "Código postal"
                                     },
                                     model: {
-                                      value: _vm.zipcode,
+                                      value: _vm.dir.cod_post,
                                       callback: function($$v) {
-                                        _vm.zipcode = $$v
+                                        _vm.$set(_vm.dir, "cod_post", $$v)
                                       },
-                                      expression: "zipcode"
+                                      expression: "dir.cod_post"
+                                    }
+                                  })
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c("br"),
+                          _vm._v(" "),
+                          _c(
+                            "b-row",
+                            [
+                              _c(
+                                "b-col",
+                                { attrs: { cols: "5" } },
+                                [
+                                  _c("label", { attrs: { for: "cuota" } }, [
+                                    _vm._v("Cuota del Club")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("b-form-input", {
+                                    attrs: {
+                                      type: "number",
+                                      min: "1",
+                                      pattern: "^[0-9]+",
+                                      id: "cuota",
+                                      name: "cuota",
+                                      placeholder: "Cuota del Club"
+                                    },
+                                    model: {
+                                      value: _vm.club.cuota,
+                                      callback: function($$v) {
+                                        _vm.$set(_vm.club, "cuota", $$v)
+                                      },
+                                      expression: "club.cuota"
                                     }
                                   })
                                 ],
@@ -79242,11 +79798,11 @@ var render = function() {
                                           ]
                                         },
                                         model: {
-                                          value: _vm.asociado,
+                                          value: _vm.institucion,
                                           callback: function($$v) {
-                                            _vm.asociado = $$v
+                                            _vm.institucion = $$v
                                           },
-                                          expression: "asociado"
+                                          expression: "institucion"
                                         }
                                       })
                                     ],
@@ -79259,7 +79815,7 @@ var render = function() {
                             1
                           ),
                           _vm._v(" "),
-                          _vm.asociado
+                          _vm.institucion
                             ? _c(
                                 "div",
                                 [
@@ -79286,14 +79842,26 @@ var render = function() {
                                                 placeholder: "Nombre"
                                               },
                                               model: {
-                                                value: _vm.nombrei,
+                                                value: _vm.inst.nom,
                                                 callback: function($$v) {
-                                                  _vm.nombrei = $$v
+                                                  _vm.$set(_vm.inst, "nom", $$v)
                                                 },
-                                                expression: "nombrei"
+                                                expression: "inst.nom"
                                               }
                                             },
                                             [_vm._v("Nombre")]
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "b-form-invalid-feedback",
+                                            {
+                                              attrs: { state: _vm.validateInom }
+                                            },
+                                            [
+                                              _vm._v(
+                                                "Debe rellenar el campo Nombre de Institucion"
+                                              )
+                                            ]
                                           )
                                         ],
                                         1
@@ -79307,20 +79875,35 @@ var render = function() {
                                             _vm._v("Tipo")
                                           ]),
                                           _vm._v(" "),
-                                          _c("b-form-select", {
+                                          _c("b-form-input", {
                                             attrs: {
+                                              type: "text",
                                               id: "tipo",
                                               name: "tipo",
-                                              options: _vm.tipos
+                                              placeholder: "Tipo de institucion"
                                             },
                                             model: {
-                                              value: _vm.tipo,
+                                              value: _vm.inst.tipo,
                                               callback: function($$v) {
-                                                _vm.tipo = $$v
+                                                _vm.$set(_vm.inst, "tipo", $$v)
                                               },
-                                              expression: "tipo"
+                                              expression: "inst.tipo"
                                             }
-                                          })
+                                          }),
+                                          _vm._v(" "),
+                                          _c(
+                                            "b-form-invalid-feedback",
+                                            {
+                                              attrs: {
+                                                state: _vm.validateItipo
+                                              }
+                                            },
+                                            [
+                                              _vm._v(
+                                                "Debe rellenar el campo Tipo de Institucion"
+                                              )
+                                            ]
+                                          )
                                         ],
                                         1
                                       )
@@ -79350,13 +79933,27 @@ var render = function() {
                                               options: _vm.paises
                                             },
                                             model: {
-                                              value: _vm.paisI,
+                                              value: _vm.inst.pais,
                                               callback: function($$v) {
-                                                _vm.paisI = $$v
+                                                _vm.$set(_vm.inst, "pais", $$v)
                                               },
-                                              expression: "paisI"
+                                              expression: "inst.pais"
                                             }
-                                          })
+                                          }),
+                                          _vm._v(" "),
+                                          _c(
+                                            "b-form-invalid-feedback",
+                                            {
+                                              attrs: {
+                                                state: _vm.validateIpais
+                                              }
+                                            },
+                                            [
+                                              _vm._v(
+                                                "Debe selecionar un pais para la Institucion"
+                                              )
+                                            ]
+                                          )
                                         ],
                                         1
                                       ),
@@ -79378,13 +79975,29 @@ var render = function() {
                                               options: _vm.ciudades
                                             },
                                             model: {
-                                              value: _vm.ciudadI,
+                                              value: _vm.inst.ciudad,
                                               callback: function($$v) {
-                                                _vm.ciudadI = $$v
+                                                _vm.$set(
+                                                  _vm.inst,
+                                                  "ciudad",
+                                                  $$v
+                                                )
                                               },
-                                              expression: "ciudadI"
+                                              expression: "inst.ciudad"
                                             }
-                                          })
+                                          }),
+                                          _vm._v(" "),
+                                          _c(
+                                            "b-form-invalid-feedback",
+                                            {
+                                              attrs: { state: _vm.validateIciu }
+                                            },
+                                            [
+                                              _vm._v(
+                                                "Debe selecionar una ciudad para la Institucion"
+                                              )
+                                            ]
+                                          )
                                         ],
                                         1
                                       )
@@ -79392,97 +80005,7 @@ var render = function() {
                                     1
                                   ),
                                   _vm._v(" "),
-                                  _c("br"),
-                                  _vm._v(" "),
-                                  _c(
-                                    "b-row",
-                                    [
-                                      _c(
-                                        "b-col",
-                                        { attrs: { cols: "4" } },
-                                        [
-                                          _c(
-                                            "label",
-                                            { attrs: { for: "urbanizacion" } },
-                                            [_vm._v("Urbanización")]
-                                          ),
-                                          _vm._v(" "),
-                                          _c("b-form-input", {
-                                            attrs: {
-                                              id: "urbanizacionI",
-                                              name: "urbanizacionI",
-                                              placeholder: "Urbanización"
-                                            },
-                                            model: {
-                                              value: _vm.urbanizacionI,
-                                              callback: function($$v) {
-                                                _vm.urbanizacionI = $$v
-                                              },
-                                              expression: "urbanizacionI"
-                                            }
-                                          })
-                                        ],
-                                        1
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "b-col",
-                                        { attrs: { cols: "4" } },
-                                        [
-                                          _c(
-                                            "label",
-                                            { attrs: { for: "calle" } },
-                                            [_vm._v("Calle")]
-                                          ),
-                                          _vm._v(" "),
-                                          _c("b-form-input", {
-                                            attrs: {
-                                              id: "calleI",
-                                              name: "calleI",
-                                              placeholder: "Calle"
-                                            },
-                                            model: {
-                                              value: _vm.calleI,
-                                              callback: function($$v) {
-                                                _vm.calleI = $$v
-                                              },
-                                              expression: "calleI"
-                                            }
-                                          })
-                                        ],
-                                        1
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "b-col",
-                                        { attrs: { cols: "4" } },
-                                        [
-                                          _c(
-                                            "label",
-                                            { attrs: { for: "zipcode" } },
-                                            [_vm._v("Código postal")]
-                                          ),
-                                          _vm._v(" "),
-                                          _c("b-form-input", {
-                                            attrs: {
-                                              id: "zipcodeI",
-                                              name: "zipcodeI",
-                                              placeholder: "Código postal"
-                                            },
-                                            model: {
-                                              value: _vm.zipcodeI,
-                                              callback: function($$v) {
-                                                _vm.zipcodeI = $$v
-                                              },
-                                              expression: "zipcodeI"
-                                            }
-                                          })
-                                        ],
-                                        1
-                                      )
-                                    ],
-                                    1
-                                  )
+                                  _c("br")
                                 ],
                                 1
                               )
@@ -79555,11 +80078,11 @@ var render = function() {
                                               stacked: ""
                                             },
                                             model: {
-                                              value: _vm.cac,
+                                              value: _vm.selectedclubs,
                                               callback: function($$v) {
-                                                _vm.cac = $$v
+                                                _vm.selectedclubs = $$v
                                               },
-                                              expression: "cac"
+                                              expression: "selectedclubs"
                                             }
                                           })
                                         ],
@@ -79583,7 +80106,8 @@ var render = function() {
                               _c(
                                 "b-button",
                                 {
-                                  attrs: { variant: "default", type: "submit" }
+                                  attrs: { variant: "default" },
+                                  on: { click: _vm.revalidate }
                                 },
                                 [_vm._v("Continuar")]
                               ),
@@ -79624,7 +80148,7 @@ var staticRenderFns = [
       { staticClass: "card-header card-header-log card-header-icon" },
       [
         _c("div", { staticClass: "card-icon" }, [
-          _c("i", { staticClass: "material-icons" }, [_vm._v("edit")])
+          _c("i", { staticClass: "material-icons" }, [_vm._v("add")])
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "row" }, [
@@ -102313,8 +102837,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\Hyper\Documents\GitHub\SBD1-Reading-club\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\Hyper\Documents\GitHub\SBD1-Reading-club\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\xampp\htdocs\SBD1_Reading_club3\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\SBD1_Reading_club3\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
