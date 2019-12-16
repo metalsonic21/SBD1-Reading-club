@@ -75,6 +75,9 @@ Vue.component('editar-presentacion', require('./components/obras/EditPresentacio
 Vue.component('personajes', require('./components/obras/Personajes.vue').default);
 Vue.component('personajes-create', require('./components/obras/PersonajesCreate.vue').default);
 Vue.component('personajes-edit', require('./components/obras/PersonajesEdit.vue').default);
+Vue.component('locales', require('./components/obras/Locales.vue').default);
+Vue.component('crear-local', require('./components/obras/CrearLocal.vue').default);
+Vue.component('edit-local', require('./components/obras/EditLocal.vue').default);
 
 /*THEATER PLAYS
 Vue.component('plays-clubs', require('./components/theater_plays/PlaysClubs.vue').default);
