@@ -75,6 +75,12 @@ Vue.component('browse-plays',  require('./components/theater_plays/BrowsePlays.v
 Vue.component('characteradd-cast', require('./components/theater_plays/CharacterCastAdd.vue').default);
 Vue.component('character-add', require('./components/theater_plays/character_add.vue').default);
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+/*CRUD PERFORMANCES*/
+Vue.component('performances', require('./components/theater_plays/performances.vue').default);
+Vue.component('performances-edit', require('./components/theater_plays/editperformance.vue').default);
+Vue.component('performances-create', require('./components/theater_plays/create_performance.vue').default);
+//Vue.commponent('performances-edit',require('').default);
+//Vue.commponent('performances-create',require('./components/theater_plays/create_performance.vue').default);
 
 const app = new Vue({
     el: '#app',

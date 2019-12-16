@@ -254,7 +254,8 @@ CREATE TABLE SJL_historicos_presentaciones (
     valor      NUMERIC(3),
     num_asist  INTEGER,
     costo      INTEGER NOT NULL,
-    CONSTRAINT hist_presentaciones_pk PRIMARY KEY (fec,id_obra,id_local)
+    id_club    INTEGER NOT NULL
+    CONSTRAINT hist_presentaciones_pk PRIMARY KEY (fec,id_obra,id_local,id_club)
 );
 
 CREATE TABLE SJL_grupos_lectores (
@@ -372,7 +373,7 @@ ALTER TABLE SJL_elenco ADD CONSTRAINT elenco_membrecias_fk FOREIGN KEY(id_fec_me
 ALTER TABLE SJL_elenco ADD CONSTRAINT elenco_personajes_fk FOREIGN KEY(id_pers,id_obra) REFERENCES SJL_personajes(id,id_obra);
 
 ALTER TABLE SJL_elenco_lectores ADD CONSTRAINT elenco_lectores_membresias_fk FOREIGN KEY(id_fec_mem,id_club,id_lec,id_pers,id_obra) REFERENCES SJL_elenco(id_fec_mem,id_club,id_lec,id_pers,id_obra);
-ALTER TABLE SJL_elenco_lectores ADD CONSTRAINT elenco_historiales_fk FOREIGN KEY(id_hist_pre,id_obra,id_local) REFERENCES SJL_historicos_presentaciones(fec,id_obra,id_local);
+ALTER TABLE SJL_elenco_lectores ADD CONSTRAINT elenco_historiales_fk FOREIGN KEY(id_hist_pre,id_obra,id_local,id_club) REFERENCES SJL_historicos_presentaciones(fec,id_obra,id_local,id_club);
 
 ALTER TABLE SJL_historicos_pagos_memb ADD CONSTRAINT historicos_membrecias_fk FOREIGN KEY(id_fec_mem,id_lec,id_club) REFERENCES SJL_membresias(fec_i,id_lec,id_club) ON UPDATE CASCADE;
 
@@ -397,6 +398,7 @@ ALTER TABLE SJL_subgeneros ADD CONSTRAINT subgeneros_tipo_chk CHECK ( tipo = 'SG
 ALTER TABLE SJL_estructuras_libros ADD CONSTRAINT estructuras_tipo_chk CHECK ( tipo = 'C' or tipo = 'O');
 
 ALTER TABLE SJL_historicos_presentaciones ADD CONSTRAINT hisorico_presentaciones_valor_chk CHECK (valor >= 1 and valor <= 5 );
+ALTER TABLE SJL_instituciones ADD CONSTRAINT instituciones_tipo_chk CHECK ( tipo = 'A' or tipo = 'E' or tipo = 'C' or tipo = 'O' or tipo = 'OT');
 
 /* Constraint Unique */
 
@@ -409,3 +411,9 @@ CREATE SEQUENCE IF NOT EXISTS id_calle INCREMENT BY 1 NO MINVALUE NO MAXVALUE ST
 CREATE SEQUENCE IF NOT EXISTS id_inst INCREMENT BY 1 NO MINVALUE NO MAXVALUE START WITH 1 OWNED BY SJL_instituciones.id;
 CREATE SEQUENCE IF NOT EXISTS id_idioma INCREMENT BY 1 MINVALUE 1 NO MAXVALUE START WITH 1 OWNED BY SJL_idiomas.id;
 CREATE SEQUENCE IF NOT EXISTS id_obras INCREMENT BY 1 MINVALUE 1 NO MAXVALUE START WITH 1 OWNED BY SJL_obras.id;
+CREATE SEQUENCE IF NOT EXISTS id_locales INCREMENT BY 1 MINVALUE 1 No MAXVALUE START WITH 1 OWNED BY SJL_locales_eventos.id;
+
+select * from sjl_lectores where (id_club=$VARIABLE) and (id_grup is null) and AGE(fec_nac)>=INTERVAL'18 years';
+SELECT id_lec FROM SJL_INANSISTENCIAS WHERE (SELECT COUNT(fec_reu_mem) WHERE AGE(fec_reu_mem)>= INTERVAL '2 months')=>3;
+
+    

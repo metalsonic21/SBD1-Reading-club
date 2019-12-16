@@ -87,3 +87,14 @@ Route::get('/browseplays', 'theater_plays\BrowsePlaysController@index')->name('b
 Route::get('/charactercastadd', 'theater_plays\CharacterCastAddController@index')->name('charactercastadd');
 //Route::resource('/castplays', 'theater_plays\CastPlaysController');
 Route::resource('/castplays', 'theater_plays\playsController');
+
+/*Performances*///{{$performance->id_club}}/{{$performance->id_obra}}/view
+//Route::get('{id}/{id_obra}/perform/view','theater_plays\performancesController@details');
+//Route::get('{id}/{id_obra}/perform/edit','theater_plays\performancesController@mod');
+//Route::get('{id}/{id_obra}/perform/create','theater_plays\performancesController@create');
+Route::post('/deleteperform/{id}/{id_obra}',[
+    'as'=>'destroy',
+    'uses'=> 'theater_plays\performancesController@destroy'
+]);
+Route::resource('{id}/{id_obra}/perform','theater_plays\performancesController');
+//Route::resource('/clubs/{id}/plays/{id_obra}/performances','theater_plays\performancesController');

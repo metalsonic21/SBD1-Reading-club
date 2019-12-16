@@ -33,7 +33,7 @@
                                         <b-row>
 
                                             <b-col cols="6">
-                                                <label for="Nombre">resum</label>
+                                                <label for="Nombre">Resumen</label>
                                                 <b-form-input type="text" required v-model="resum" id="resum" name="resum"></b-form-input>
                                             </b-col>
                                         </b-row>
