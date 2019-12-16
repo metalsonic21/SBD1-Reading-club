@@ -83,6 +83,7 @@ Route::resource('/clubs/{club}/members/{id}/favorites', 'books\FavoriteBooksCont
 /*THEATER_PLAYS*/
 Route::get('/playsclubs', 'theater_plays\PlaysClubsController@index')->name('playsclubs');
 Route::get('/castplayss/{id}','theater_plays\CastPlaysController@obrasclub');
+Route::get('/castplayss/{id_club}','theater_plays\CastPlaysController@obrasclub');
 Route::get('charactercast/character_add', 'theater_plays\CastPlaysController@add'); 
 Route::get('/charactercast', 'theater_plays\CharacterCastController@index')->name('charactercast');
 Route::get('/earningplays', 'theater_plays\EarningPlaysController@index')->name('earningplays');
@@ -102,4 +103,4 @@ Route::post('/deleteperform/{id}/{id_obra}',[
 Route::resource('{id}/{id_obra}/perform','theater_plays\performancesController');
 //Route::resource('/clubs/{id}/plays/{id_obra}/performances','theater_plays\performancesController');
 //cast
-Route::resource('club/{id_club}/play/{id_obra}/perform/{id_perform}','theater_plays\castController');
+Route::resource('club/{id_club}/play/{id_obra}/fecha/{fec}/local/{id_local}','theater_plays\castController');

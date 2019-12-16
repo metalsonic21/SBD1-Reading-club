@@ -21,19 +21,28 @@ class castController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(Request $req)
-    {
-        $id_club = $req->id_club;
+    {             
+      /*  $id_club = $req->id_club;
         $id_obra = $req->id_obra;
-        $id_perform = $req->id_perform;
+        $id_local = $req->id_local;
+        $fecha = $req->fec;
+        $obra = "";
+        $club ="";
+        $local="";
+        if($req->ajax()){
         $clubs=DB::select(DB::raw("SELECT id,nom FROM SJL_clubes_lectura WHERE id='$id_club'"));
         $obras=DB::select(DB::raw("SELECT id,nom FROM SJL_obras WHERE id='$id_obra'"));
+        $locales=DB::select(DB::raw("SELECT id,nom FROM SJL_locales_eventos WHERE id='$id_local'"));
         $obra=$obras[0];
         $club=$clubs[0];
-        if($req->ajax()){
-            $actores = DB::select(DB::raw("SELECT a.doc_iden,a.nom1,a.nom2,a.ape1,a.ape2 FROM SJL_lectores a"));
-            return Response::json(array())
-        }
-       else return view('theater_plays.cast');
+        $local=$locales[0];        
+    }
+            $actores = DB::select(DB::raw("SELECT a.doc_iden,a.nom1,a.nom2,a.ape1,a.ape2,b.id as id_pers,
+                                                b.nom,b.descrip             
+                FROM SJL_lectores a, sjl_personajes b,SJL_elenco_lectores c
+                    WHERE a.doc_iden=c.id_lec AND c.id_pers=b.id AND c.id_hist_pre='$fecha' 
+                        AND c.id_obra='$id_obra' AND c.id_local='$id_local' AND c.id_club='$id_club' "));*/
+        return view('theater_plays.cast');
     }
 
     /**
@@ -43,7 +52,25 @@ class castController extends Controller
      */
     public function create()
     {
-        //
+        if($req->ajax()){
+        $id_club = $req->id_club;
+        $id_obra = $req->id_obra;
+        $id_local = $req->id_local;
+        $fecha = $req->fec;
+        $clubs=DB::select(DB::raw("SELECT id,nom FROM SJL_clubes_lectura WHERE id='$id_club'"));
+        $obras=DB::select(DB::raw("SELECT id,nom FROM SJL_obras WHERE id='$id_obra'"));
+        $locales=DB::select(DB::raw("SELECT id,nom FROM SJL_locales_eventos WHERE id='$id_local'"));
+        $obra=$obras[0];
+        $club=$clubs[0];
+        $local=$locales[0];        
+            $actores = DB::select(DB::raw("SELECT a.doc_iden,a.nom1,a.nom2,a.ape1,a.ape2,b.id as id_pers,
+                                                b.nom,b.descrip             
+                FROM SJL_lectores a, sjl_personajes b,SJL_elenco_lectores c
+                    WHERE a.doc_iden=c.id_lec AND c.id_pers=b.id AND c.id_hist_pre='$fecha' 
+                        AND c.id_obra='$id_obra' AND c.id_local='$id_local' AND c.id_club='$id_club' "));
+            return Response::json(array('actores'=>$actores,'club'=>$club,'obra'=>$obra,'local'=>$local));
+        }
+       else return view('theater_plays.cast');
     }
 
     /**

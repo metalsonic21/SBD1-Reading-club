@@ -9031,6 +9031,163 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/theater_plays/cast.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/theater_plays/cast.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      id_obra: '',
+      nom_obra: '',
+      id_club: '',
+      nom_club: '',
+      id_lec: '',
+      nom1_lec: '',
+      nom2_lec: '',
+      ape1_lec: '',
+      ape2_lec: '',
+      id_pers: '',
+      nom_pers: '',
+      descrip_pers: '',
+      actores: '',
+      id_local: '',
+      nom_local: ''
+    };
+  },
+  created: function created() {},
+  methods: {},
+  mounted: function mounted() {
+    var _this = this;
+
+    console.log('Component mounted.');
+    var path = window.location.pathname + '/';
+    var iclub = path.indexOf("/", 0) + 6;
+    var fclub = path.indexOf('/', iclub);
+    this.link1 = parseInt(path.substring(iclub, fclub), 10);
+    var fobra = path.indexOf('/', fclub + 6);
+    this.link2 = parseInt(path.substring(fclub + 6, fobra), 10);
+    var fperf = path.indexOf('/', fobra + 7);
+    this.link3 = parseInt(path.substring(fobra + 7, fperf), 10);
+    this.link5 = parseInt(path.substring(fobra + 12, fperf), 10);
+    this.link6 = parseInt(path.substring(fobra + 15, fperf), 10);
+    var local = path.indexOf('/', fperf + 7);
+    this.link4 = parseInt(path.substring(fperf + 7, local));
+    console.log(path);
+    console.log(this.link1);
+    console.log(this.link2);
+    console.log(this.link3 + '-' + this.link5 + '-' + this.link6);
+    console.log(this.link4);
+    axios.get("create").then(function (res) {
+      _this.actores = res.data.actores;
+      _this.id_club = res.data.club.id;
+      _this.club = res.data.club.nom;
+      _this.id_obra = res.data.obra.id;
+      _this.obra = res.data.obra.nom;
+      _this.id_local = res.data.local.id;
+      _this.nom_local = res.data.local.nom;
+      console.log(res.data.locales);
+    })["catch"](function (e) {
+      console.log(e);
+    });
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/theater_plays/character_add.vue?vue&type=script&lang=js&":
 /*!**************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/theater_plays/character_add.vue?vue&type=script&lang=js& ***!
@@ -87801,6 +87958,246 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/theater_plays/cast.vue?vue&type=template&id=25d67f88&":
+/*!*********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/theater_plays/cast.vue?vue&type=template&id=25d67f88& ***!
+  \*********************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c("div", { staticClass: "content" }, [
+      _c("div", { staticClass: "container-fluid" }, [
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-md-12" }, [
+            _c("div", { staticClass: "card" }, [
+              _c(
+                "div",
+                { staticClass: "card-header card-header-log card-header-icon" },
+                [
+                  _vm._m(0),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "row" }, [
+                    _c("div", { staticClass: "col-lg-10" }, [
+                      _c("h4", { staticClass: "card-title" }, [
+                        _vm._v(
+                          "Elenco para la " +
+                            _vm._s(_vm.nom_obra) +
+                            " del club " +
+                            _vm._s(_vm.nom_club)
+                        )
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "col-lg-2" },
+                      [
+                        _c(
+                          "b-link",
+                          {
+                            staticClass: "btn btn-default float-right mt-3",
+                            attrs: { href: "#" }
+                          },
+                          [
+                            _c("span", { staticClass: "btn-label" }, [
+                              _c("i", { staticClass: "material-icons" }, [
+                                _vm._v("add")
+                              ])
+                            ]),
+                            _vm._v(
+                              "\r\n                                        Agregar Actor\r\n                                    "
+                            )
+                          ]
+                        )
+                      ],
+                      1
+                    )
+                  ])
+                ]
+              ),
+              _vm._v(" "),
+              _c("div", { staticClass: "card-body" }, [
+                _c("div", { staticClass: "row" }, [
+                  _c("div", { staticClass: "col-lg-12" }, [
+                    _c("h6", { staticClass: "text-center" }, [
+                      _vm._v("Seleccione un personaje")
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "table-responsive table-sales" }, [
+                      _c("table", { staticClass: "table" }, [
+                        _vm._m(1),
+                        _vm._v(" "),
+                        _c("tbody", [
+                          _c(
+                            "tr",
+                            _vm._l(_vm.actores, function(actor) {
+                              return _c(
+                                "div",
+                                { key: actor.id, attrs: { item: _vm.item } },
+                                [
+                                  _c("td", { staticClass: "text-center" }),
+                                  _vm._v(" "),
+                                  _c("td", { staticClass: "text-center" }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "td",
+                                    { staticClass: "td-actions text-center" },
+                                    [
+                                      _c(
+                                        "button",
+                                        {
+                                          directives: [
+                                            {
+                                              name: "b-modal",
+                                              rawName:
+                                                "v-b-modal.details-character",
+                                              modifiers: {
+                                                "details-character": true
+                                              }
+                                            }
+                                          ],
+                                          staticClass: "btn btn-default",
+                                          attrs: {
+                                            type: "button",
+                                            rel: "tooltip"
+                                          }
+                                        },
+                                        [
+                                          _vm._v(
+                                            " Datos Personaje \r\n                                                            "
+                                          )
+                                        ]
+                                      )
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "b-modal",
+                                    {
+                                      attrs: {
+                                        size: "lg",
+                                        id: "details-character",
+                                        "ok-variant": "default",
+                                        "ok-title": "Continuar",
+                                        "cancel-title": "Cancelar",
+                                        "cancel-variant": "danger"
+                                      }
+                                    },
+                                    [
+                                      _c("div", { staticClass: "card " }, [
+                                        _c(
+                                          "div",
+                                          {
+                                            staticClass:
+                                              "card-header card-header-log card-header-icon"
+                                          },
+                                          [
+                                            _c(
+                                              "div",
+                                              { staticClass: "card-icon" },
+                                              [
+                                                _c(
+                                                  "i",
+                                                  {
+                                                    staticClass:
+                                                      "material-icons"
+                                                  },
+                                                  [_vm._v("movie")]
+                                                )
+                                              ]
+                                            ),
+                                            _vm._v(" "),
+                                            _c("h3", {
+                                              staticClass: "card-title"
+                                            })
+                                          ]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "div",
+                                          { staticClass: "card-body " },
+                                          [
+                                            _c("b-form", [
+                                              _c("h4", [
+                                                _vm._v(
+                                                  "Decripción del personaje:"
+                                                )
+                                              ]),
+                                              _vm._v(" "),
+                                              _c(
+                                                "p",
+                                                { attrs: { align: "justify" } },
+                                                [
+                                                  _vm._v(
+                                                    "Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni nam labore excepturi doloremque ut laboriosam nobis, exercitationem itaque perferendis sunt. Vero quaerat, modi alias suscipit architecto maiores nam quia, ut consequuntur sed qui nobis porro a quisquam temporibus perspiciatis expedita aliquam delectus accusamus magni eaque voluptatem harum odio! Dicta, ullam."
+                                                  )
+                                                ]
+                                              )
+                                            ])
+                                          ],
+                                          1
+                                        )
+                                      ])
+                                    ]
+                                  )
+                                ],
+                                1
+                              )
+                            }),
+                            0
+                          )
+                        ])
+                      ])
+                    ])
+                  ])
+                ])
+              ])
+            ])
+          ])
+        ])
+      ])
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "card-icon" }, [
+      _c("i", { staticClass: "material-icons" }, [_vm._v("theaters")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", { staticClass: "text-center" }, [_vm._v("Elenco")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "text-center" }, [_vm._v("Personaje")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "text-center" }, [_vm._v("Detalles")])
+      ])
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/theater_plays/character_add.vue?vue&type=template&id=0268d992&":
 /*!******************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/theater_plays/character_add.vue?vue&type=template&id=0268d992& ***!
@@ -101052,6 +101449,11 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('performances-edit', __webp
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('performances-create', __webpack_require__(/*! ./components/theater_plays/create_performance.vue */ "./resources/js/components/theater_plays/create_performance.vue")["default"]); //Vue.commponent('performances-edit',require('').default);
 //Vue.commponent('performances-create',require('./components/theater_plays/create_performance.vue').default);
 
+/*CAST*/
+
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('cast', __webpack_require__(/*! ./components/theater_plays/cast.vue */ "./resources/js/components/theater_plays/cast.vue")["default"]);
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('cast-edit', __webpack_require__(/*! ./components/theater_plays/cast.vue */ "./resources/js/components/theater_plays/cast.vue")["default"]);
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('cast-create', __webpack_require__(/*! ./components/theater_plays/cast.vue */ "./resources/js/components/theater_plays/cast.vue")["default"]);
 var app = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
   el: '#app'
 });
@@ -103725,6 +104127,75 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/theater_plays/cast.vue":
+/*!********************************************************!*\
+  !*** ./resources/js/components/theater_plays/cast.vue ***!
+  \********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _cast_vue_vue_type_template_id_25d67f88___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./cast.vue?vue&type=template&id=25d67f88& */ "./resources/js/components/theater_plays/cast.vue?vue&type=template&id=25d67f88&");
+/* harmony import */ var _cast_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./cast.vue?vue&type=script&lang=js& */ "./resources/js/components/theater_plays/cast.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _cast_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _cast_vue_vue_type_template_id_25d67f88___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _cast_vue_vue_type_template_id_25d67f88___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/theater_plays/cast.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/theater_plays/cast.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************!*\
+  !*** ./resources/js/components/theater_plays/cast.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_cast_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./cast.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/theater_plays/cast.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_cast_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/theater_plays/cast.vue?vue&type=template&id=25d67f88&":
+/*!***************************************************************************************!*\
+  !*** ./resources/js/components/theater_plays/cast.vue?vue&type=template&id=25d67f88& ***!
+  \***************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_cast_vue_vue_type_template_id_25d67f88___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./cast.vue?vue&type=template&id=25d67f88& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/theater_plays/cast.vue?vue&type=template&id=25d67f88&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_cast_vue_vue_type_template_id_25d67f88___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_cast_vue_vue_type_template_id_25d67f88___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/js/components/theater_plays/character_add.vue":
 /*!*****************************************************************!*\
   !*** ./resources/js/components/theater_plays/character_add.vue ***!
@@ -104157,8 +104628,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\Hyper\Documents\GitHub\SBD1-Reading-club\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\Hyper\Documents\GitHub\SBD1-Reading-club\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! E:\SBD1-Reading-club\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! E:\SBD1-Reading-club\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

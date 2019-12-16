@@ -11,7 +11,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-lg-10">
-                                    <h4 class="card-title">Elenco</h4>
+                                    <h4 class="card-title">Elenco para la {{nom_obra}} del club {{nom_club}}</h4>
                                 </div>
                                 <div class="col-lg-2">
                                     <b-link  href="#" class="btn btn-default float-right mt-3">
@@ -38,12 +38,36 @@
                                             </thead>
                                             <tbody>
                                                 <tr>
-                                                    <td class="text-center">Juan Ramirez</td>
-                                                    <td class="text-center">Roderick</td>
-                                                    <td class="td-actions text-center">
-                                                    <button type="button" rel="tooltip" class="btn btn-default" v-b-modal.details-character> Datos Personaje 
-                                                        </button>
-                                                    </td>
+                                                    <div                                                
+                                                      v-for="actor in actores"
+                                                        v-bind:item="item"
+                                                        
+                                                        v-bind:key="actor.id"
+                                                    >
+
+                                                        <td class="text-center">  </td>
+                                                        <td class="text-center"></td>
+                                                        <td class="td-actions text-center">
+                                                        <button type="button" rel="tooltip" class="btn btn-default" v-b-modal.details-character> Datos Personaje 
+                                                            </button>
+                                                        </td>
+                                                        <b-modal size="lg" id="details-character" ok-variant="default" ok-title="Continuar" cancel-title="Cancelar" cancel-variant="danger">
+                                                            <div class="card ">
+                                                                <div class="card-header card-header-log card-header-icon">
+                                                                    <div class="card-icon">
+                                                                        <i class="material-icons">movie</i>
+                                                                    </div>
+                                                                    <h3 class="card-title"></h3>
+                                                                </div>
+                                                                <div class="card-body ">
+                                                                    <b-form>
+                                                                        <h4>Decripción del personaje:</h4>
+                                                                        <p align="justify">Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni nam labore excepturi doloremque ut laboriosam nobis, exercitationem itaque perferendis sunt. Vero quaerat, modi alias suscipit architecto maiores nam quia, ut consequuntur sed qui nobis porro a quisquam temporibus perspiciatis expedita aliquam delectus accusamus magni eaque voluptatem harum odio! Dicta, ullam.</p>
+                                                                    </b-form>
+                                                                </div>
+                                                            </div>
+                                                        </b-modal>
+                                                    </div>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -58,22 +82,7 @@
     </div>
 
 
-    <b-modal size="lg" id="details-character" ok-variant="default" ok-title="Continuar" cancel-title="Cancelar" cancel-variant="danger">
-        <div class="card ">
-            <div class="card-header card-header-log card-header-icon">
-                <div class="card-icon">
-                    <i class="material-icons">movie</i>
-                </div>
-                <h3 class="card-title">Roderick</h3>
-            </div>
-            <div class="card-body ">
-                <b-form>
-                    <h4>Decripción del personaje:</h4>
-                    <p align="justify">Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni nam labore excepturi doloremque ut laboriosam nobis, exercitationem itaque perferendis sunt. Vero quaerat, modi alias suscipit architecto maiores nam quia, ut consequuntur sed qui nobis porro a quisquam temporibus perspiciatis expedita aliquam delectus accusamus magni eaque voluptatem harum odio! Dicta, ullam.</p>
-                </b-form>
-            </div>
-        </div>
-    </b-modal>
+    
 </div>
 </template>
 
@@ -93,38 +102,54 @@
                 id_pers:'',
                 nom_pers:'',
                 descrip_pers:'',
+                actores:'',
+                id_local:'',
+                nom_local:'',
             }
         },
-        created(){            
-            let path = window.location.pathname+'/';
-            let iclub = path.indexOf("/",0)+6;
-            let fclub = path.indexOf('/',iclub);
-            this.link1 = parseInt(path.substring(iclub,fclub),10);
-            let fobra = path.indexOf('/',fclub+6);
-            this.link2 = parseInt(path.substring(fclub+6,fobra),10);
-            let fperf = path.indexOf('/',fobra+9);
-            this.link3 = parseInt(path.substring(fobra+9,fperf),10);       
-            console.log(this.link1);
-            console.log(this.link2);
-            console.log(this.link3);  
-           /* axios.get(`/${this.link1}/${this.link2}/perform/create`)
-            .then(res => {                
-                this.locales = res.data.locales;
-                this.id_club = res.data.club.id;
-                this.club = res.data.club.nom;
-                this.id_obra = res.data.obra.id;
-                this.obra = res.data.obra.nom;
-                console.log (res.data.locales);
-            }).catch(e => {
-                console.log(e);
-            })*/
+        created(){                        
         },
         methods:{
 
         },
 
         mounted() {
-            console.log('Component mounted.')
+            console.log('Component mounted.');
+            
+            let path = window.location.pathname+'/';
+            let iclub = path.indexOf("/",0)+6;
+            let fclub = path.indexOf('/',iclub);
+            this.link1 = parseInt(path.substring(iclub,fclub),10);
+            let fobra = path.indexOf('/',fclub+6);
+            this.link2 = parseInt(path.substring(fclub+6,fobra),10);
+            let fperf = path.indexOf('/',fobra+7);
+            this.link3 = parseInt(path.substring(fobra+7,fperf),10);
+            this.link5 = parseInt(path.substring(fobra+12,fperf),10);
+            this.link6 = parseInt(path.substring(fobra+15,fperf),10);
+            let local = path.indexOf('/',fperf+7);
+            this.link4 = parseInt(path.substring(fperf+7,local));     
+            console.log(path);  
+            console.log(this.link1);
+            console.log(this.link2);
+            console.log(this.link3+'-'+this.link5+'-'+this.link6); 
+            console.log(this.link4);
+            
+           axios.get(`create`)
+            .then(res => {                
+                this.actores = res.data.actores;
+                this.id_club = res.data.club.id;
+                this.club = res.data.club.nom;
+                this.id_obra = res.data.obra.id;
+                this.obra = res.data.obra.nom;
+                this.id_local = res.data.local.id;
+                this.nom_local = res.data.local.nom;                
+                
+                console.log (res.data.locales);
+            }).catch(e => {
+                console.log(e);
+            })
+        
+
         }
     }
 </script>

@@ -33,13 +33,14 @@ class performancesController extends Controller
      */
     public function create(Request $req)
     {
+        if($req->ajax()){
         $id_club=$req->id;
         $id_obra=$req->id_obra;
         $clubs=DB::select(DB::raw("SELECT id,nom FROM SJL_clubes_lectura WHERE id='$id_club'"));
         $obras=DB::select(DB::raw("SELECT id,nom FROM SJL_obras WHERE id='$id_obra'"));
         $obra=$obras[0];
         $club=$clubs[0];
-        if($req->ajax()){
+        
             $ciudades = DB::select(DB::raw("SELECT a.id FROM sjl_clubes_lectura b, sjl_calles c, sjl_urbanizaciones d, sjl_ciudades a WHERE '$id_club'=b.id AND b.id_dir=c.id AND c.id_urb=d.id AND d.id_ciudad=a.id"));
             $ciudad = $ciudades[0]->id;
             $locales = DB::select(DB::raw("SELECT a.id as value,a.nom as text,b.nom as calle,c.nom as urb,d.nom as ciudad FROM SJL_locales_eventos a,sjl_calles b,SJL_urbanizaciones c,sjl_ciudades d WHERE a.id_dir=b.id AND b.id_urb=c.id AND c.id_ciudad=d.id AND'$ciudad'=d.id "));

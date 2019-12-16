@@ -127,10 +127,9 @@ CREATE TABLE SJL_idiomas (
 
 CREATE TABLE SJL_locales_eventos (
     id        SERIAL NOT NULL,
-    nom       VARCHAR(15) NOT NULL,
+    nom       VARCHAR(40) NOT NULL,
     tipo      VARCHAR(2) NOT NULL,
-    cap       INTEGER NOT NULL,
-    num_s     INTEGER NOT NULL,
+    cap       INTEGER NOT NULL,   
     id_dir    INTEGER NOT NULL,
     id_club   INTEGER,
     CONSTRAINT locales_eventos_pk PRIMARY KEY (id)
@@ -232,8 +231,8 @@ CREATE TABLE SJL_obras_libros (
 
 CREATE TABLE SJL_obras (
     id         SERIAL NOT NULL,
-    nom        VARCHAR(20) NOT NULL,
-    resum      VARCHAR(200) NOT NULL,
+    nom        VARCHAR(40) NOT NULL,
+    resum      VARCHAR(1000) NOT NULL,
     CONSTRAINT obras_pk PRIMARY KEY (id)
 );
 
@@ -241,12 +240,12 @@ CREATE TABLE SJL_historicos_presentaciones (
     fec        DATE NOT NULL,
     id_obra    INTEGER NOT NULL,
     id_local   INTEGER NOT NULL,
+    id_club    INTEGER NOT NULL,
     hora_i     TIME NOT NULL,
     durac      TIME NOT NULL,
     valor      NUMERIC(3),
     num_asist  INTEGER,
-    costo      INTEGER NOT NULL,
-    id_club    INTEGER NOT NULL,
+    costo      INTEGER NOT NULL,    
     CONSTRAINT hist_presentaciones_pk PRIMARY KEY (fec,id_obra,id_local,id_club)
 );
 
@@ -262,31 +261,31 @@ CREATE TABLE SJL_grupos_lectores (
 CREATE TABLE SJL_personajes (
     id        SERIAL NOT NULL,
     id_obra   INTEGER NOT NULL,
-    nom       VARCHAR(15) NOT NULL,
-    descrip   VARCHAR(100) NOT NULL,
+    nom       VARCHAR(50) NOT NULL,
+    descrip   VARCHAR(600) NOT NULL,
     CONSTRAINT personajes_pk PRIMARY KEY (id,id_obra)
 );
 
 CREATE TABLE SJL_elenco (
     id_fec_mem  DATE NOT NULL,
-    id_club     INTEGER NOT NULL,
     id_lec      INTEGER NOT NULL,
+    id_club     INTEGER NOT NULL,    
     id_pers     INTEGER NOT NULL,
     id_obra     INTEGER NOT NULL,
     principal   BOOLEAN,
-    CONSTRAINT elenco_pk PRIMARY KEY (id_fec_mem,id_club,id_lec,id_pers,id_obra)
+    CONSTRAINT elenco_pk PRIMARY KEY (id_fec_mem,id_lec,id_club,id_pers,id_obra)
 );
 
 CREATE TABLE SJL_elenco_lectores (
-    id_fec_mem    DATE NOT NULL,
-    id_club       INTEGER NOT NULL,
-    id_lec        INTEGER NOT NULL,
-    id_pers       INTEGER NOT NULL,
+    id_hist_pre   DATE NOT NULL, 
     id_obra       INTEGER NOT NULL,
-    id_hist_pre   DATE NOT NULL,    
-    id_local      INTEGER NOT NULL,    
+    id_local      INTEGER NOT NULL,
+    id_club       INTEGER NOT NULL,
+    id_lec        INTEGER NOT NULL,    
+    id_pers       INTEGER NOT NULL,    
+    id_fec_mem    DATE NOT NULL,        
     mej_act       BOOLEAN,
-    CONSTRAINT elenco_lectores_pk PRIMARY KEY (id_fec_mem,id_club,id_lec,id_pers,id_obra,id_hist_pre)
+    CONSTRAINT elenco_lectores_pk PRIMARY KEY (id_hist_pre,id_obra,id_lec,id_club,id_pers,id_fec_mem)
 );
 
 CREATE TABLE SJL_historicos_pagos_memb (
@@ -319,7 +318,7 @@ ALTER TABLE SJL_clubes_clubes ADD CONSTRAINT clubes_club1_fk FOREIGN KEY(id_club
 ALTER TABLE SJL_clubes_clubes ADD CONSTRAINT clubes_club2_fk FOREIGN KEY(id_club2) REFERENCES SJL_clubes_lectura(id) ON DELETE CASCADE;
 
 ALTER TABLE SJL_membresias ADD CONSTRAINT membresias_lectores_fk FOREIGN KEY(id_lec) REFERENCES SJL_lectores(doc_iden) ON UPDATE CASCADE ON DELETE CASCADE;
-ALTER TABLE SJL_membresias ADD CONSTRAINT membresias_clubes_fk FOREIGN KEY(id_club) REFERENCES SJL_clubes_lectura(id) ON DELETE CASCADE;
+ALTER TABLE SJL_membresias ADD CONSTRAINT membresias_clubes_fk FOREIGN KEY(id_club) REFERENCES SJL_clubes_lectura(id) ON DELETE CASCADE ON UPDATE CASCADE;
 
 ALTER TABLE SJL_representantes ADD CONSTRAINT rep_calles_fk FOREIGN KEY(id_dir) REFERENCES SJL_calles(id);
 
@@ -356,8 +355,8 @@ ALTER TABLE SJL_estructuras_libros ADD CONSTRAINT estructura_libros_fk FOREIGN K
 
 ALTER TABLE SJL_secciones_libros ADD CONSTRAINT secciones_estructuras_prev_fk FOREIGN KEY(id_est,id_lib) REFERENCES SJL_estructuras_libros(id,id_lib) ON DELETE CASCADE;
 
-ALTER TABLE SJL_obras_libros ADD CONSTRAINT obras_libros_fk FOREIGN KEY(id_obra) REFERENCES SJL_obras(id);
-ALTER TABLE SJL_obras_libros ADD CONSTRAINT libros_obras_fk FOREIGN KEY(id_lib) REFERENCES SJL_libros(isbn) ON UPDATE CASCADE;
+ALTER TABLE SJL_obras_libros ADD CONSTRAINT obras_libros_fk FOREIGN KEY(id_obra) REFERENCES SJL_obras(id)ON DELETE CASCADE ON UPDATE CASCADE ;
+ALTER TABLE SJL_obras_libros ADD CONSTRAINT libros_obras_fk FOREIGN KEY(id_lib) REFERENCES SJL_libros(isbn) ON DELETE CASCADE ON UPDATE CASCADE;
 
 
 ALTER TABLE SJL_personajes ADD CONSTRAINT personajes_obras_fk FOREIGN KEY(id_obra) REFERENCES SJL_obras(id);
@@ -365,14 +364,14 @@ ALTER TABLE SJL_personajes ADD CONSTRAINT personajes_obras_fk FOREIGN KEY(id_obr
 ALTER TABLE SJL_historicos_presentaciones ADD CONSTRAINT historicos_obras_fk FOREIGN KEY(id_obra) REFERENCES SJL_obras(id);
 ALTER TABLE SJL_historicos_presentaciones ADD CONSTRAINT obras_local_fk FOREIGN KEY(id_local) REFERENCES SJL_locales_eventos(id);
 
-ALTER TABLE SJL_grupos_lectores ADD CONSTRAINT grupos_membrecias_fk FOREIGN KEY(id_fec_mem,id_club,id_lec) REFERENCES SJL_membresias(fec_i,id_club,id_lec) ON DELETE CASCADE;
+ALTER TABLE SJL_grupos_lectores ADD CONSTRAINT grupos_membresias_fk FOREIGN KEY(id_fec_mem,id_lec,id_club) REFERENCES SJL_membresias(fec_i,id_lec,id_club) ON DELETE CASCADE;
 ALTER TABLE SJL_grupos_lectores ADD CONSTRAINT membrecias_grupos_fk FOREIGN KEY(id_grupo,id_club) REFERENCES SJL_grupos_lectura(id,id_club) ON DELETE CASCADE;
 
-ALTER TABLE SJL_elenco ADD CONSTRAINT elenco_membrecias_fk FOREIGN KEY(id_fec_mem,id_club,id_lec) REFERENCES SJL_membresias(fec_i,id_lec,id_club) ON DELETE CASCADE;
+ALTER TABLE SJL_elenco ADD CONSTRAINT elenco_membresias_fk FOREIGN KEY(id_fec_mem,id_lec,id_club) REFERENCES SJL_membresias(fec_i,id_lec,id_club) ON DELETE CASCADE ON UPDATE CASCADE;
 ALTER TABLE SJL_elenco ADD CONSTRAINT elenco_personajes_fk FOREIGN KEY(id_pers,id_obra) REFERENCES SJL_personajes(id,id_obra) ON DELETE CASCADE;
 
 ALTER TABLE SJL_elenco_lectores ADD CONSTRAINT elenco_lectores_membresias_fk FOREIGN KEY(id_fec_mem,id_club,id_lec,id_pers,id_obra) REFERENCES SJL_elenco(id_fec_mem,id_club,id_lec,id_pers,id_obra) ON DELETE CASCADE;
-ALTER TABLE SJL_elenco_lectores ADD CONSTRAINT elenco_historiales_fk FOREIGN KEY(id_hist_pre,id_obra,id_local,id_club) REFERENCES SJL_historicos_presentaciones(fec,id_obra,id_local,id_club) ON DELETE CASCADE;
+ALTER TABLE SJL_elenco_lectores ADD CONSTRAINT elenco_historiales_fk FOREIGN KEY(id_hist_pre,id_obra,id_local,id_club) REFERENCES SJL_historicos_presentaciones(fec,id_obra,id_local,id_club) ON DELETE CASCADE ON UPDATE CASCADE;
 
 ALTER TABLE SJL_historicos_pagos_memb ADD CONSTRAINT historicos_membrecias_fk FOREIGN KEY(id_fec_mem,id_lec,id_club) REFERENCES SJL_membresias(fec_i,id_lec,id_club) ON UPDATE CASCADE ON DELETE CASCADE;
 

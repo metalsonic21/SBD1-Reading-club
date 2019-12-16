@@ -23,10 +23,12 @@ class CastPlaysController extends Controller
     public function obrasclub($id){
     $plays = DB::select(DB::raw("SELECT o.id,o.nom,o.resum FROM sjl_obras o WHERE '$id'=(SELECT h.id_club FROM SJL_historicos_presentaciones h WHERE h.id_obra=o.id LIMIT 1)"));
     return view('theater_plays.castplays',compact('plays'));
-        //return $plays;
-      //  $plays=DB::select(DB::raw("SELECT id,nom,resum,costo,to_char(durac,'HH:MI:SS') duracion,estatus,id_local FROM sjl_obras o WHERE WHERE (SELECT id_club FROM SJL_historicos_presentaciones hp)=$id) and (o.id=hp.id_club)"))
-       // return view('theater_plays.castplays',compact('plays'));
     }
+    public function obrasclubCreate($id_club){
+        
+        return view('theater_plays.castplays',compact('plays'));
+    }
+
     /**
      * Remove the specified resource from storage.
      *
