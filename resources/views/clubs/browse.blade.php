@@ -8,8 +8,6 @@
 @endif
 
  <!-- DESIGN HERE -->
-
-    <template>
     <div>
         <div class="content">
             <div class="container-fluid">
@@ -38,8 +36,8 @@
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-lg-12">
-                                        <div class="table-responsive table-sales">
-                                            <table class="table">
+                                        <div class="material-datatables">
+                                            <table class="table table-sales table-hover table-no-bordered" id="myTable">
                                                 <thead>
                                                     <tr>
                                                         <th class="text-center">Nombre</th>
@@ -66,7 +64,7 @@
                                                             <b-link href="/browseclubs/{{$club->id}}/edit" type="button" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Modificar" class="btn btn-success">
                                                                 <i class="material-icons">edit</i>
                                                             </b-link>
-                                                            <b-link href="/browseclubs/{{$club->id}}/editassociated" type="button" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Asociar Clubes" class="btn btn-success">
+                                                            <b-link href="/browseclubs/{{$club->id}}/editassociated" type="button" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Asociar Clubes" class="btn btn-primary">
                                                                 <i class="material-icons">people</i>
                                                             </b-link>
 
@@ -77,7 +75,7 @@
                                                             <b-modal id="bv-modal-{{$loop->iteration}}" hide-footer>
                                                                 <template v-slot:modal-title>
                                                                 <div>
-                                                                Porfavor confirme que desea eliminar el club
+                                                                Por favor confirme que desea eliminar el club
                                                                 </div><div>
                                                                 <code>{{$club->nom}}</code> 
                                                                 </div>
@@ -87,7 +85,7 @@
                                                                 {!! Form::button('Eliminar', ['type' => 'submit','class' => 'btn btn-danger btn-block','size'=>'sm']) !!}
                                                                 {!! Form::close() !!}
                                                                 </div>
-                                                                <b-button class="mt-3" block @click="$bvModal.hide('bv-modal')">Cancelar</b-button>
+                                                                <b-button class="mt-3" block @click=";$bvModal.hide('bv-modal-{{$loop->iteration}}')">Cancelar</b-button>
                                                             </b-modal>
 
 
@@ -107,17 +105,5 @@
             </div>
         </div>
     </div>
-    </template>
-
-    <script>
-    export default {
-
-    }
-    </script>
-
-    <style>
-
-    </style>
-
 </div>
 @endsection

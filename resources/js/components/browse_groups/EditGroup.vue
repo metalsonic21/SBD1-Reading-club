@@ -55,8 +55,6 @@
                                         <br>
                                         <div class="d-flex flex-row-reverse bd-highlight">
                                             <b-button variant="default" @click="revalidate">Continuar</b-button>
-
-                                            <b-link class="btn btn-danger">Cancelar</b-link>
                                         </div>
                                     </b-form>
                                 </div>
