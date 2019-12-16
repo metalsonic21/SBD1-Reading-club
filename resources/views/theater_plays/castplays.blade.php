@@ -18,7 +18,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-lg-10">
-                                    <h4 class="card-title">Obras acutuadas por club</h4>
+                                    <h4 class="card-title">Obras actuadas</h4>
                                 </div>
                                 <div class="col-lg-2">
                                     <b-link  href="castplays/create" class="btn btn-default float-right mt-3">

@@ -65,7 +65,15 @@ Vue.component('books-edit', require('./components/books/Edit.vue').default);
 Vue.component('struct-create', require('./components/books/StructAdd.vue').default);
 Vue.component('struct-edit', require('./components/books/StructEdit.vue').default);
 
-/*THEATER PLAYS*/
+/* OBRAS */
+Vue.component('obras', require('./components/obras/Obras.vue').default);
+Vue.component('crear-obra', require('./components/obras/CrearObra.vue').default);
+Vue.component('editar-obra', require('./components/obras/EditObra.vue').default);
+Vue.component('presentaciones', require('./components/obras/Presentacion.vue').default);
+Vue.component('crear-presentacion', require('./components/obras/CrearPresentacion.vue').default);
+Vue.component('editar-presentacion', require('./components/obras/EditPresentacion.vue').default);
+
+/*THEATER PLAYS
 Vue.component('plays-clubs', require('./components/theater_plays/PlaysClubs.vue').default);
 Vue.component('cast-plays', require('./components/theater_plays/CastPlays.vue').default);
 Vue.component('plays-create', require('./components/theater_plays/create.vue').default);
@@ -75,13 +83,17 @@ Vue.component('earning-plays', require('./components/theater_plays/EarningPlays.
 Vue.component('browse-plays',  require('./components/theater_plays/BrowsePlays.vue').default);
 Vue.component('characteradd-cast', require('./components/theater_plays/CharacterCastAdd.vue').default);
 Vue.component('character-add', require('./components/theater_plays/character_add.vue').default);
-Vue.component('example-component', require('./components/ExampleComponent.vue').default);
-/*CRUD PERFORMANCES*/
+Vue.component('example-component', require('./components/ExampleComponent.vue').default);*/
+
+/*Obras remake*/
+
+
+/*CRUD PERFORMANCES
 Vue.component('performances', require('./components/theater_plays/performances.vue').default);
 Vue.component('performances-edit', require('./components/theater_plays/editperformance.vue').default);
 Vue.component('performances-create', require('./components/theater_plays/create_performance.vue').default);
 //Vue.commponent('performances-edit',require('').default);
-//Vue.commponent('performances-create',require('./components/theater_plays/create_performance.vue').default);
+//Vue.commponent('performances-create',require('./components/theater_plays/create_performance.vue').default);*/
 
 const app = new Vue({
     el: '#app',

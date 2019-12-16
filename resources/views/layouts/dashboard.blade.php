@@ -161,18 +161,14 @@
                         <b-collapse id="d-5" class="collapse">
                             <ul class="nav">
                                 <li class="nav-item ">
-                                    <a class="nav-link" href="/playsclubs">
-                                        <span class="sidebar-normal"> Obras actuadas por club </span>
+                                    <a class="nav-link" href="/selectclubp">
+                                        <span class="sidebar-normal"> Presentaciones por club </span>
                                     </a>
                                 </li>
+
                                 <li class="nav-item ">
-                                    <a class="nav-link" href="/earningplays">
-                                        <span class="sidebar-normal"> Ganancias por obra </span>
-                                    </a>
-                                </li>
-                                <li class="nav-item ">
-                                    <a class="nav-link" href="/browseplays">
-                                        <span class="sidebar-normal"> Explorar obras de teatro </span>
+                                    <a class="nav-link" href="/obras">
+                                        <span class="sidebar-normal"> Gestión de obras </span>
                                     </a>
                                 </li>
                             </ul>
@@ -196,6 +192,11 @@
                                 <li class="nav-item ">
                                     <a class="nav-link" href="/clubreports">
                                         <span class="sidebar-normal"> Miembros de club </span>
+                                    </a>
+                                </li>
+                                <li class="nav-item ">
+                                    <a class="nav-link" href="/earningplays">
+                                        <span class="sidebar-normal"> Ganancias por obra </span>
                                     </a>
                                 </li>
                             </ul>
