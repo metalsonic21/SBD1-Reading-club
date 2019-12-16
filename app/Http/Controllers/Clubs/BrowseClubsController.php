@@ -13,8 +13,6 @@ use App\Models\Clubclub;
 use App\Models\Language;
 use App\Models\Street;
 use App\Models\Urbanization;
-use App\Models\Urbanizacion;
-use App\Models\Calle;
 use App\Models\City;
 use App\Models\Country;
 use App\Models\Institution;
@@ -38,10 +36,6 @@ class BrowseClubsController extends Controller
         return view ('clubs.browse', compact('clubs'));
     }
 
-    public function getid(Club $club)
-    {
-        Session::put('id', $club->id);
-    }
     /**
      * Show the form for creating a new resource.
      *
@@ -54,9 +48,8 @@ class BrowseClubsController extends Controller
             $countries = DB::table('sjl_paises')->select('id as value','nom as text')->get();
             $cities = DB::select( DB::raw("SELECT id || '-' || id_pais as value, nom as text FROM sjl_ciudades"));
             $urbanizations = DB::table('sjl_urbanizaciones')->select('id as value','nom as text')->get();
-            $aclubs = DB::table('sjl_clubes_lectura')->select('id as value','nom as text')->get();
            
-            return Response::json(array('languages'=>$languages,'countries'=>$countries,'cities'=>$cities,'urbanizations'=>$urbanizations,'aclubs'=>$aclubs));
+            return Response::json(array('languages'=>$languages,'countries'=>$countries,'cities'=>$cities,'urbanizations'=>$urbanizations));
         }
         else{
             return view('clubs.create');
@@ -75,10 +68,7 @@ class BrowseClubsController extends Controller
         $checker = DB::select(DB::raw("SELECT id FROM sjl_urbanizaciones WHERE nom = '$request->urb' AND id_ciudad = '$request->ciudad'"));
         
         if(!$checker){
-            $count = DB::select(DB::raw("SELECT count(nom) as numero from sjl_urbanizaciones"));
-            $c = $count[0]->numero;
-            $urb = new Urbanizacion();
-            $urb->id = $c+1;
+            $urb = new Urbanization();
             $urb->nom = $request->urb;
             $urb->id_ciudad = $request->ciudad;        
             $urb->save();
@@ -86,15 +76,10 @@ class BrowseClubsController extends Controller
             $auxid = $checker[0]->id;
         }
 
-        //Log::info($urb);
-
         $checker2 = DB::select(DB::raw("SELECT id FROM sjl_calles WHERE nom = '$request->calle' AND id_urb = '$auxid'"));
 
         if(!$checker2){
-            $street = new Calle();
-            $countc = DB::select(DB::raw("SELECT count(nom) as numero from sjl_calles"));
-            $cc = $countc[0]->numero;
-            $street->id = $cc+1;
+            $street = new Street();
             $street->nom = $request->calle;
             $street->cod_post = $request->cod_post;
             if (!$checker)
@@ -137,14 +122,6 @@ class BrowseClubsController extends Controller
         $club->id_idiom = $request->id_idiom;
         $club->save();
         
-        if(count($request->asociados) <> 1){
-            for ($i = 1;$i < count($request->asociados);$i++){ 
-                $clubclub = new Clubclub();
-                $clubclub->id_club1 = $club->id;
-                $clubclub->id_club2 = $request->asociados[$i];
-                $clubclub->save();
-            }
-        }
         return $club;
     }
 
@@ -200,7 +177,6 @@ class BrowseClubsController extends Controller
             $countries = DB::table('sjl_paises')->select('id as value','nom as text')->get();
             $cities = DB::select( DB::raw("SELECT id || '-' || id_pais as value, nom as text FROM sjl_ciudades"));
             $urbanizations = DB::table('sjl_urbanizaciones')->select('id as value','nom as text')->get();
-            $aclubs = DB::table('sjl_clubes_lectura')->select('id as value','nom as text')->get();
 
             $institution = DB::select(DB::raw("SELECT "));
             if($club->id_inst){
@@ -211,13 +187,7 @@ class BrowseClubsController extends Controller
                 $institution[0] = null;
             }
 
-            $aclubsid = DB::select(DB::raw("SELECT c.id as id_a
-                                            FROM sjl_clubes_lectura c, sjl_clubes_clubes cc
-                                            WHERE (c.id = cc.id_club2 AND cc.id_club1 = '$club->id') OR (c.id = cc.id_club1 AND cc.id_club2 = '$club->id') "));
-
-            
-            Log::info($aclubsid);
-            return Response::json(array('club'=>$club,'languages'=>$languages,'countries'=>$countries,'cities'=>$cities,'urbanizations'=>$urbanizations,'aclubs'=>$aclubs,'direction'=>$direction[0],'institution'=>$institution[0],'aclubsid'=>$aclubsid));
+            return Response::json(array('club'=>$club,'languages'=>$languages,'countries'=>$countries,'cities'=>$cities,'urbanizations'=>$urbanizations,'direction'=>$direction[0],'institution'=>$institution[0]));
         }
         else{
             return view('clubs.edit');
@@ -233,17 +203,12 @@ class BrowseClubsController extends Controller
      */
     public function update(Request $request,$id)
     {   
-        Log::info("+---+Update+---+");
-        Log::info($id);
         $club = Club::find($id);
         $auxid = 0;
         $checker = DB::select(DB::raw("SELECT id FROM sjl_urbanizaciones WHERE nom = '$request->urb' AND id_ciudad = '$request->ciudad'"));
         
         if(!$checker){
-            $count = DB::select(DB::raw("SELECT count(nom) as numero from sjl_urbanizaciones"));
-            $c = $count[0]->numero;
-            $urb = new Urbanizacion();
-            $urb->id = $c+1;
+            $urb = new Urbanization();
             $urb->nom = $request->urb;
             $urb->id_ciudad = $request->ciudad;        
             $urb->save();
@@ -254,10 +219,7 @@ class BrowseClubsController extends Controller
         $checker2 = DB::select(DB::raw("SELECT id FROM sjl_calles WHERE nom = '$request->calle' AND id_urb = '$auxid'"));
 
         if(!$checker2){
-            $street = new Calle();
-            $countc = DB::select(DB::raw("SELECT count(nom) as numero from sjl_calles"));
-            $cc = $countc[0]->numero;
-            $street->id = $cc+1;
+            $street = new Street();
             $street->nom = $request->calle;
             $street->cod_post = $request->cod_post;
             if (!$checker)
@@ -298,16 +260,9 @@ class BrowseClubsController extends Controller
             $club->id_inst = $auxinst;
         $club->id_idiom = $request->id_idiom;
         $club->save();
-        //Vacio los asociados antes de volver a llenarlo
-        DB::delete(DB::raw("DELETE FROM sjl_clubes_clubes WHERE id_club1 = '$id' OR id_club2 = '$id' "));
-
-        if(count($request->asociados) <> 1){
-            for ($i = 1;$i < count($request->asociados);$i++){ 
-                $clubclub = new Clubclub();
-                $clubclub->id_club1 = $club->id;
-                $clubclub->id_club2 = $request->asociados[$i];
-                $clubclub->save();
-            }
+        //Vacio los asociados antes de volver si se modificó el idioma
+        if($request->Imodificado == true){
+            DB::delete(DB::raw("DELETE FROM sjl_clubes_clubes WHERE id_club1 = '$id' OR id_club2 = '$id' "));
         }
         return $club;
     }
@@ -325,8 +280,9 @@ class BrowseClubsController extends Controller
         $club->id_inst = null;
         //Vacio los asociados
         DB::delete(DB::raw("DELETE FROM sjl_clubes_clubes WHERE id_club1 = '$id' OR id_club2 = '$id' "));
-        Log:info($club);
+        //Log:info($club);
         $club->delete();
         return redirect('browseclubs');
     }
+
 }

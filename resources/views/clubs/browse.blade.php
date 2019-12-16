@@ -8,6 +8,8 @@
 @endif
 
  <!-- DESIGN HERE -->
+
+    <template>
     <div>
         <div class="content">
             <div class="container-fluid">
@@ -64,7 +66,10 @@
                                                             <b-link href="/browseclubs/{{$club->id}}/edit" type="button" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Modificar" class="btn btn-success">
                                                                 <i class="material-icons">edit</i>
                                                             </b-link>
-                                                            
+                                                            <b-link href="/browseclubs/{{$club->id}}/editassociated" type="button" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Asociar Clubes" class="btn btn-success">
+                                                                <i class="material-icons">people</i>
+                                                            </b-link>
+
                                                             <b-button @click=";$bvModal.show('bv-modal-{{$loop->iteration}}')"  rel="tooltip" data-toggle="tooltip"  data-placement="bottom" title="Eliminar" class="btn btn-danger">
                                                                 <i class="material-icons">close</i>
                                                             </b-button>
@@ -102,5 +107,17 @@
             </div>
         </div>
     </div>
+    </template>
+
+    <script>
+    export default {
+
+    }
+    </script>
+
+    <style>
+
+    </style>
+
 </div>
 @endsection

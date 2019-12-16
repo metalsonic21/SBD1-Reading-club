@@ -20,6 +20,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 /*CLUBS*/
 Route::resource('/browseclubs', 'clubs\BrowseClubsController');
+Route::get('/browseclubs/{id}/editassociated', 'clubs\EditAssociatedController@edit');
+Route::put('/browseclubs/{id}/editassociated', 'clubs\EditAssociatedController@update');
 Route::get('/members', 'clubs\ReportsClubMembersController@index')->name('members');
 Route::get('/clubreports', 'clubs\ClubReportsController@index')->name('clubreports');
 Route::get('/selectclub', 'clubs\SelectClubController@index')->name('selectclub');
