@@ -237,14 +237,6 @@ CREATE TABLE SJL_obras (
     CONSTRAINT obras_pk PRIMARY KEY (id)
 );
 
-CREATE TABLE SJL_personajes (
-    id        SERIAL NOT NULL,
-    id_obra   INTEGER NOT NULL,
-    nom       VARCHAR(15) NOT NULL,
-    descrip   VARCHAR(100) NOT NULL,
-    CONSTRAINT personajes_pk PRIMARY KEY (id,id_obra)
-);
-
 CREATE TABLE SJL_historicos_presentaciones (
     fec        DATE NOT NULL,
     id_obra    INTEGER NOT NULL,
@@ -266,6 +258,13 @@ CREATE TABLE SJL_grupos_lectores (
     id_grupo   INTEGER NOT NULL,
     fec_f      DATE,
     CONSTRAINT grupos_lectores_pk PRIMARY KEY (id_fec_i,id_fec_mem,id_club,id_lec,id_grupo)
+);
+CREATE TABLE SJL_personajes (
+    id        SERIAL NOT NULL,
+    id_obra   INTEGER NOT NULL,
+    nom       VARCHAR(15) NOT NULL,
+    descrip   VARCHAR(100) NOT NULL,
+    CONSTRAINT personajes_pk PRIMARY KEY (id,id_obra)
 );
 
 CREATE TABLE SJL_elenco (

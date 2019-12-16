@@ -82,7 +82,10 @@ Vue.component('performances-edit', require('./components/theater_plays/editperfo
 Vue.component('performances-create', require('./components/theater_plays/create_performance.vue').default);
 //Vue.commponent('performances-edit',require('').default);
 //Vue.commponent('performances-create',require('./components/theater_plays/create_performance.vue').default);
-
+/*CAST*/
+Vue.component('cast', require('./components/theater_plays/cast.vue').default);
+Vue.component('cast-edit', require('./components/theater_plays/cast.vue').default);
+Vue.component('cast-create', require('./components/theater_plays/cast.vue').default);
 const app = new Vue({
     el: '#app',
 });

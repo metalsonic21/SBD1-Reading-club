@@ -101,3 +101,5 @@ Route::post('/deleteperform/{id}/{id_obra}',[
 ]);
 Route::resource('{id}/{id_obra}/perform','theater_plays\performancesController');
 //Route::resource('/clubs/{id}/plays/{id_obra}/performances','theater_plays\performancesController');
+//cast
+Route::resource('club/{id_club}/play/{id_obra}/perform/{id_perform}','theater_plays\castController');
