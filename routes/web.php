@@ -83,6 +83,8 @@ Route::resource('/clubs/{club}/members/{id}/favorites', 'books\FavoriteBooksCont
 
 /* OBRAS */
 Route::resource('/obras', 'obras\ObraController');
+Route::resource('/obras/{obra}/personajes', 'obras\PersonajesController');
+
 Route::resource('/clubs/{club}/presentaciones', 'obras\PresentacionController');
 Route::get('/clubs/{club}/presentaciones/{fec}/{obra}/{local}/edit', 'obras\PresentacionController@mod');
 Route::put('/clubs/{club}/presentaciones/{fec}/{obra}/{local}', 'obras\PresentacionController@modificar');

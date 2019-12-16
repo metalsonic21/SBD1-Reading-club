@@ -72,6 +72,9 @@ Vue.component('editar-obra', require('./components/obras/EditObra.vue').default)
 Vue.component('presentaciones', require('./components/obras/Presentacion.vue').default);
 Vue.component('crear-presentacion', require('./components/obras/CrearPresentacion.vue').default);
 Vue.component('editar-presentacion', require('./components/obras/EditPresentacion.vue').default);
+Vue.component('personajes', require('./components/obras/Personajes.vue').default);
+Vue.component('personajes-create', require('./components/obras/PersonajesCreate.vue').default);
+Vue.component('personajes-edit', require('./components/obras/PersonajesEdit.vue').default);
 
 /*THEATER PLAYS
 Vue.component('plays-clubs', require('./components/theater_plays/PlaysClubs.vue').default);

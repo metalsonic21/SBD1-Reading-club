@@ -9584,6 +9584,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -9615,6 +9618,401 @@ __webpack_require__.r(__webpack_exports__);
       })["catch"](function (e) {
         console.log(e);
       });
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/obras/Personajes.vue?vue&type=script&lang=js&":
+/*!***************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/obras/Personajes.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      personajes: [],
+      obra: null
+    };
+  },
+  created: function created() {
+    var _this = this;
+
+    this.obra = window.location.pathname;
+    this.obra = this.obra.replace(/\D/g, '');
+    axios.get("/obras/".concat(this.obra, "/personajes")).then(function (res) {
+      _this.personajes = res.data.data;
+      console.log(_this.personajes);
+    })["catch"](function (e) {
+      console.log(e);
+    });
+  },
+  computed: {},
+  methods: {
+    showModal: function showModal(item) {
+      item = item.toString();
+      this.$bvModal.show(item);
+    },
+    hideModal: function hideModal(item) {
+      item = item.toString();
+      this.$bvModal.hide(item);
+    },
+    borrar: function borrar(item) {
+      var _this2 = this;
+
+      axios["delete"]("/obras/".concat(this.obra, "/personajes/").concat(item.id)).then(function (res) {
+        console.log(res.data);
+        window.location = "/obras/".concat(_this2.obra, "/personajes");
+      })["catch"](function (e) {
+        console.log(e);
+      });
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/obras/PersonajesCreate.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/obras/PersonajesCreate.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      personaje: {
+        nom: null,
+        descrip: null
+      },
+      obra: null
+    };
+  },
+  methods: {
+    add: function add() {
+      var _this = this;
+
+      this.obra = window.location.pathname;
+      this.obra = this.obra.replace(/\D/g, '');
+      var params = {
+        nom: this.personaje.nom,
+        descrip: this.personaje.descrip,
+        obra: this.obra
+      };
+      axios.post("/obras/".concat(this.obra, "/personajes"), params).then(function (res) {
+        console.log(res.data);
+        window.location = "/obras/".concat(_this.obra, "/personajes");
+      })["catch"](function (e) {
+        console.log(e);
+      });
+      console.log(params);
+    },
+    revalidate: function revalidate() {
+      var msg = '';
+      if (this.personaje.nom == false || this.personaje.nom == null) msg = msg + "El nombre de personaje no puede estar vacío ni tener más de 40 caracteres\n";
+      if (this.personaje.descrip == false || this.personaje.descrip == null) msg = msg + "La descripción de personaje no puede estar vacía ni tener más de 500 caraceteres\n";
+
+      if (msg == '') {
+        this.add();
+      } else {
+        alert(msg);
+      }
+    }
+  },
+  computed: {
+    validateN: function validateN() {
+      if (this.personaje.nom == null || this.personaje.nom == '') return null;
+      if (this.personaje.nom.length > 40) return false;else return true;
+    },
+    validateD: function validateD() {
+      if (this.personaje.descrip == null || this.personaje.descrip == '') return null;
+      if (this.personaje.descrip.length > 500) return false;else return true;
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/obras/PersonajesEdit.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/obras/PersonajesEdit.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      personaje: {
+        nom: null,
+        descrip: null
+      },
+      obra: null,
+      actpersonaje: null
+    };
+  },
+  created: function created() {
+    var _this = this;
+
+    var path = window.location.pathname;
+    var begino = path.indexOf("ras/") + 4;
+    var endo = path.indexOf("/per");
+    this.obra = path.substring(begino, endo);
+    var path2 = path.substring(endo + 1, path.length);
+    var beginp = path2.indexOf("/");
+    var endp = path2.indexOf("/edit");
+    this.actpersonaje = path2.substring(beginp + 1, endp);
+    console.log(this.actpersonaje);
+    axios.get("/obras/".concat(this.obra, "/personajes/").concat(this.actpersonaje, "/edit")).then(function (res) {
+      _this.personaje = res.data.data; //window.location = `/obras/${this.obra}/personajes`;
+    })["catch"](function (e) {
+      console.log(e);
+    });
+  },
+  methods: {
+    add: function add() {
+      var _this2 = this;
+
+      var params = {
+        nom: this.personaje.nom,
+        descrip: this.personaje.descrip,
+        obra: this.obra
+      };
+      axios.put("/obras/".concat(this.obra, "/personajes/").concat(this.actpersonaje), params).then(function (res) {
+        console.log(res.data);
+        window.location = "/obras/".concat(_this2.obra, "/personajes");
+      })["catch"](function (e) {
+        console.log(e);
+      });
+    },
+    revalidate: function revalidate() {
+      var msg = '';
+      if (this.personaje.nom == false || this.personaje.nom == null) msg = msg + "El nombre de personaje no puede estar vacío ni tener más de 40 caracteres\n";
+      if (this.personaje.descrip == false || this.personaje.descrip == null) msg = msg + "La descripción de personaje no puede estar vacía ni tener más de 500 caraceteres\n";
+
+      if (msg == '') {
+        this.add();
+      } else {
+        alert(msg);
+      }
+    }
+  },
+  computed: {
+    validateN: function validateN() {
+      if (this.personaje.nom == null || this.personaje.nom == '') return null;
+      if (this.personaje.nom.length > 40) return false;else return true;
+    },
+    validateD: function validateD() {
+      if (this.personaje.descrip == null || this.personaje.descrip == '') return null;
+      if (this.personaje.descrip.length > 500) return false;else return true;
     }
   }
 });
@@ -88549,6 +88947,28 @@ var render = function() {
                                     ),
                                     _vm._v(" "),
                                     _c(
+                                      "b-link",
+                                      {
+                                        staticClass: "btn btn-default",
+                                        attrs: {
+                                          href:
+                                            "/obras/" + item.id + "/personajes",
+                                          rel: "tooltip",
+                                          "data-toggle": "tooltip",
+                                          "data-placement": "bottom",
+                                          title: "Personajes"
+                                        }
+                                      },
+                                      [
+                                        _c(
+                                          "i",
+                                          { staticClass: "material-icons" },
+                                          [_vm._v("group")]
+                                        )
+                                      ]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
                                       "b-button",
                                       {
                                         staticClass: "btn btn-danger",
@@ -88703,6 +89123,659 @@ var staticRenderFns = [
         _c("th", { staticClass: "text-center" }, [_vm._v("Acción")])
       ])
     ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/obras/Personajes.vue?vue&type=template&id=3926e796&":
+/*!*******************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/obras/Personajes.vue?vue&type=template&id=3926e796& ***!
+  \*******************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c("div", { staticClass: "content" }, [
+      _c("div", { staticClass: "container-fluid" }, [
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-md-12" }, [
+            _c("div", { staticClass: "card" }, [
+              _c(
+                "div",
+                { staticClass: "card-header card-header-log card-header-icon" },
+                [
+                  _vm._m(0),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "row" }, [
+                    _vm._m(1),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "col-lg-2" },
+                      [
+                        _c(
+                          "b-link",
+                          {
+                            directives: [
+                              {
+                                name: "b-modal",
+                                rawName: "v-b-modal.add-group",
+                                modifiers: { "add-group": true }
+                              }
+                            ],
+                            staticClass: "btn btn-default float-right mt-3",
+                            attrs: {
+                              href: "/obras/" + _vm.obra + "/personajes/create"
+                            }
+                          },
+                          [
+                            _c("span", { staticClass: "btn-label" }, [
+                              _c("i", { staticClass: "material-icons" }, [
+                                _vm._v("add")
+                              ])
+                            ]),
+                            _vm._v(
+                              "\r\n                                        Crear personaje\r\n                                    "
+                            )
+                          ]
+                        )
+                      ],
+                      1
+                    )
+                  ])
+                ]
+              ),
+              _vm._v(" "),
+              _c("div", { staticClass: "card-body" }, [
+                _c("div", { staticClass: "row" }, [
+                  _c("div", { staticClass: "col-lg-12" }, [
+                    _c("div", { staticClass: "material-datatables" }, [
+                      _c(
+                        "table",
+                        {
+                          staticClass:
+                            "table table-sales table-hover table-no-bordered",
+                          staticStyle: { width: "100%" },
+                          attrs: {
+                            id: "myTable",
+                            cellspacing: "0",
+                            width: "100%"
+                          }
+                        },
+                        [
+                          _vm._m(2),
+                          _vm._v(" "),
+                          _c(
+                            "tbody",
+                            _vm._l(_vm.personajes, function(item, index) {
+                              return _c("tr", { key: index }, [
+                                _c("td", { staticClass: "text-center" }, [
+                                  _vm._v(_vm._s(item.nom))
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "text-center" }, [
+                                  _vm._v(_vm._s(item.descrip))
+                                ]),
+                                _vm._v(" "),
+                                _c(
+                                  "td",
+                                  { staticClass: "td-actions text-center" },
+                                  [
+                                    _c(
+                                      "b-link",
+                                      {
+                                        staticClass: "btn btn-success",
+                                        attrs: {
+                                          href:
+                                            "/obras/" +
+                                            _vm.obra +
+                                            "/personajes/" +
+                                            item.id +
+                                            "/edit",
+                                          rel: "tooltip",
+                                          "data-toggle": "tooltip",
+                                          "data-placement": "bottom",
+                                          title: "Modificar"
+                                        }
+                                      },
+                                      [
+                                        _c(
+                                          "i",
+                                          { staticClass: "material-icons" },
+                                          [_vm._v("edit")]
+                                        )
+                                      ]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "b-button",
+                                      {
+                                        staticClass: "btn btn-danger",
+                                        attrs: { id: "show-btn" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.showModal(index)
+                                          }
+                                        }
+                                      },
+                                      [
+                                        _c(
+                                          "i",
+                                          {
+                                            staticClass: "material-icons",
+                                            attrs: {
+                                              rel: "tooltip",
+                                              "data-toggle": "tooltip",
+                                              "data-placement": "bottom",
+                                              title: "Retirar"
+                                            }
+                                          },
+                                          [_vm._v("close")]
+                                        )
+                                      ]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "b-modal",
+                                      {
+                                        attrs: {
+                                          id: index.toString(),
+                                          "hide-footer": ""
+                                        },
+                                        scopedSlots: _vm._u(
+                                          [
+                                            {
+                                              key: "modal-title",
+                                              fn: function() {
+                                                return [
+                                                  _c("div", [
+                                                    _vm._v(
+                                                      "\r\n                                                                    Está apunto de eliminar al personaje \r\n                                                                "
+                                                    )
+                                                  ]),
+                                                  _vm._v(" "),
+                                                  _c("div", [
+                                                    _c("code", [
+                                                      _vm._v(_vm._s(item.nom))
+                                                    ])
+                                                  ])
+                                                ]
+                                              },
+                                              proxy: true
+                                            }
+                                          ],
+                                          null,
+                                          true
+                                        )
+                                      },
+                                      [
+                                        _vm._v(" "),
+                                        _c(
+                                          "div",
+                                          [
+                                            _c(
+                                              "b-button",
+                                              {
+                                                staticClass:
+                                                  "btn btn-danger btn-block",
+                                                on: {
+                                                  click: function($event) {
+                                                    return _vm.borrar(item)
+                                                  }
+                                                }
+                                              },
+                                              [_vm._v("Eliminar")]
+                                            )
+                                          ],
+                                          1
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "b-button",
+                                          {
+                                            staticClass: "mt-3",
+                                            attrs: { block: "" },
+                                            on: {
+                                              click: function($event) {
+                                                return _vm.hideModal(index)
+                                              }
+                                            }
+                                          },
+                                          [_vm._v("Cancelar")]
+                                        )
+                                      ],
+                                      1
+                                    )
+                                  ],
+                                  1
+                                )
+                              ])
+                            }),
+                            0
+                          )
+                        ]
+                      )
+                    ])
+                  ])
+                ])
+              ])
+            ])
+          ])
+        ])
+      ])
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "card-icon" }, [
+      _c("i", { staticClass: "material-icons" }, [_vm._v("group")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-lg-10" }, [
+      _c("h4", { staticClass: "card-title" }, [_vm._v("Personajes")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", { staticClass: "text-center" }, [_vm._v("Nombre")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "text-center" }, [_vm._v("Descripcion")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "text-center" }, [_vm._v("Acción")])
+      ])
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/obras/PersonajesCreate.vue?vue&type=template&id=9d427cde&":
+/*!*************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/obras/PersonajesCreate.vue?vue&type=template&id=9d427cde& ***!
+  \*************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c("div", { staticClass: "content" }, [
+      _c("div", { staticClass: "container-fluid" }, [
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-md-12" }, [
+            _c("div", { staticClass: "card" }, [
+              _vm._m(0),
+              _vm._v(" "),
+              _c("div", { staticClass: "card-body" }, [
+                _c("div", { staticClass: "row" }, [
+                  _c(
+                    "div",
+                    { staticClass: "col-lg-12" },
+                    [
+                      _c(
+                        "b-form",
+                        [
+                          _c(
+                            "b-row",
+                            [
+                              _c(
+                                "b-col",
+                                { attrs: { cols: "6" } },
+                                [
+                                  _c("label", { attrs: { for: "nom" } }, [
+                                    _vm._v("Nombre")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("b-form-input", {
+                                    attrs: {
+                                      type: "text",
+                                      id: "nom",
+                                      name: "nom",
+                                      placeholder: "Nombre"
+                                    },
+                                    model: {
+                                      value: _vm.personaje.nom,
+                                      callback: function($$v) {
+                                        _vm.$set(_vm.personaje, "nom", $$v)
+                                      },
+                                      expression: "personaje.nom"
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "b-form-invalid-feedback",
+                                    { attrs: { state: _vm.validateN } },
+                                    [
+                                      _vm._v(
+                                        "El nombre del personaje no puede estar vacío ni tener más de 40 caracteres"
+                                      )
+                                    ]
+                                  )
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c("br"),
+                          _vm._v(" "),
+                          _c(
+                            "b-row",
+                            [
+                              _c(
+                                "b-col",
+                                { attrs: { cols: "6" } },
+                                [
+                                  _c("label", { attrs: { for: "nom" } }, [
+                                    _vm._v("Descripción")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("b-form-textarea", {
+                                    attrs: {
+                                      type: "text",
+                                      id: "resumen",
+                                      name: "resumen",
+                                      placeholder: "Resumen"
+                                    },
+                                    model: {
+                                      value: _vm.personaje.descrip,
+                                      callback: function($$v) {
+                                        _vm.$set(_vm.personaje, "descrip", $$v)
+                                      },
+                                      expression: "personaje.descrip"
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "b-form-invalid-feedback",
+                                    { attrs: { state: _vm.validateD } },
+                                    [
+                                      _vm._v(
+                                        "La descripción del personaje no puede tener más de 100 caracteres ni estar vacío"
+                                      )
+                                    ]
+                                  )
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c("br"),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        { staticClass: "d-flex flex-row-reverse bd-highlight" },
+                        [
+                          _c(
+                            "b-button",
+                            {
+                              attrs: { variant: "default" },
+                              on: { click: _vm.revalidate }
+                            },
+                            [_vm._v("Continuar")]
+                          )
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                ])
+              ])
+            ])
+          ])
+        ])
+      ])
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "card-header card-header-log card-header-icon" },
+      [
+        _c("div", { staticClass: "card-icon" }, [
+          _c("i", { staticClass: "material-icons" }, [_vm._v("add")])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-lg-10" }, [
+            _c("h4", { staticClass: "card-title" }, [
+              _vm._v("Agregar personaje")
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-lg-2" })
+        ])
+      ]
+    )
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/obras/PersonajesEdit.vue?vue&type=template&id=e2a79a42&":
+/*!***********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/obras/PersonajesEdit.vue?vue&type=template&id=e2a79a42& ***!
+  \***********************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c("div", { staticClass: "content" }, [
+      _c("div", { staticClass: "container-fluid" }, [
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-md-12" }, [
+            _c("div", { staticClass: "card" }, [
+              _vm._m(0),
+              _vm._v(" "),
+              _c("div", { staticClass: "card-body" }, [
+                _c("div", { staticClass: "row" }, [
+                  _c(
+                    "div",
+                    { staticClass: "col-lg-12" },
+                    [
+                      _c(
+                        "b-form",
+                        [
+                          _c(
+                            "b-row",
+                            [
+                              _c(
+                                "b-col",
+                                { attrs: { cols: "6" } },
+                                [
+                                  _c("label", { attrs: { for: "nom" } }, [
+                                    _vm._v("Nombre")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("b-form-input", {
+                                    attrs: {
+                                      type: "text",
+                                      id: "nom",
+                                      name: "nom",
+                                      placeholder: "Nombre"
+                                    },
+                                    model: {
+                                      value: _vm.personaje.nom,
+                                      callback: function($$v) {
+                                        _vm.$set(_vm.personaje, "nom", $$v)
+                                      },
+                                      expression: "personaje.nom"
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "b-form-invalid-feedback",
+                                    { attrs: { state: _vm.validateN } },
+                                    [
+                                      _vm._v(
+                                        "El nombre del personaje no puede estar vacío ni tener más de 40 caracteres"
+                                      )
+                                    ]
+                                  )
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c("br"),
+                          _vm._v(" "),
+                          _c(
+                            "b-row",
+                            [
+                              _c(
+                                "b-col",
+                                { attrs: { cols: "6" } },
+                                [
+                                  _c("label", { attrs: { for: "nom" } }, [
+                                    _vm._v("Descripción")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("b-form-textarea", {
+                                    attrs: {
+                                      type: "text",
+                                      id: "resumen",
+                                      name: "resumen",
+                                      placeholder: "Resumen"
+                                    },
+                                    model: {
+                                      value: _vm.personaje.descrip,
+                                      callback: function($$v) {
+                                        _vm.$set(_vm.personaje, "descrip", $$v)
+                                      },
+                                      expression: "personaje.descrip"
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "b-form-invalid-feedback",
+                                    { attrs: { state: _vm.validateD } },
+                                    [
+                                      _vm._v(
+                                        "La descripción del personaje no puede tener más de 100 caracteres ni estar vacío"
+                                      )
+                                    ]
+                                  )
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c("br"),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        { staticClass: "d-flex flex-row-reverse bd-highlight" },
+                        [
+                          _c(
+                            "b-button",
+                            {
+                              attrs: { variant: "default" },
+                              on: { click: _vm.revalidate }
+                            },
+                            [_vm._v("Continuar")]
+                          )
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                ])
+              ])
+            ])
+          ])
+        ])
+      ])
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "card-header card-header-log card-header-icon" },
+      [
+        _c("div", { staticClass: "card-icon" }, [
+          _c("i", { staticClass: "material-icons" }, [_vm._v("edit")])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-lg-10" }, [
+            _c("h4", { staticClass: "card-title" }, [
+              _vm._v("Editar personaje")
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-lg-2" })
+        ])
+      ]
+    )
   }
 ]
 render._withStripped = true
@@ -101257,6 +102330,9 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('editar-obra', __webpack_re
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('presentaciones', __webpack_require__(/*! ./components/obras/Presentacion.vue */ "./resources/js/components/obras/Presentacion.vue")["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('crear-presentacion', __webpack_require__(/*! ./components/obras/CrearPresentacion.vue */ "./resources/js/components/obras/CrearPresentacion.vue")["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('editar-presentacion', __webpack_require__(/*! ./components/obras/EditPresentacion.vue */ "./resources/js/components/obras/EditPresentacion.vue")["default"]);
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('personajes', __webpack_require__(/*! ./components/obras/Personajes.vue */ "./resources/js/components/obras/Personajes.vue")["default"]);
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('personajes-create', __webpack_require__(/*! ./components/obras/PersonajesCreate.vue */ "./resources/js/components/obras/PersonajesCreate.vue")["default"]);
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('personajes-edit', __webpack_require__(/*! ./components/obras/PersonajesEdit.vue */ "./resources/js/components/obras/PersonajesEdit.vue")["default"]);
 /*THEATER PLAYS
 Vue.component('plays-clubs', require('./components/theater_plays/PlaysClubs.vue').default);
 Vue.component('cast-plays', require('./components/theater_plays/CastPlays.vue').default);
@@ -103808,6 +104884,213 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Obras_vue_vue_type_template_id_2fcd98b8___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Obras_vue_vue_type_template_id_2fcd98b8___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/obras/Personajes.vue":
+/*!******************************************************!*\
+  !*** ./resources/js/components/obras/Personajes.vue ***!
+  \******************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Personajes_vue_vue_type_template_id_3926e796___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Personajes.vue?vue&type=template&id=3926e796& */ "./resources/js/components/obras/Personajes.vue?vue&type=template&id=3926e796&");
+/* harmony import */ var _Personajes_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Personajes.vue?vue&type=script&lang=js& */ "./resources/js/components/obras/Personajes.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _Personajes_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _Personajes_vue_vue_type_template_id_3926e796___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _Personajes_vue_vue_type_template_id_3926e796___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/obras/Personajes.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/obras/Personajes.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************!*\
+  !*** ./resources/js/components/obras/Personajes.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Personajes_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./Personajes.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/obras/Personajes.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Personajes_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/obras/Personajes.vue?vue&type=template&id=3926e796&":
+/*!*************************************************************************************!*\
+  !*** ./resources/js/components/obras/Personajes.vue?vue&type=template&id=3926e796& ***!
+  \*************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Personajes_vue_vue_type_template_id_3926e796___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./Personajes.vue?vue&type=template&id=3926e796& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/obras/Personajes.vue?vue&type=template&id=3926e796&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Personajes_vue_vue_type_template_id_3926e796___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Personajes_vue_vue_type_template_id_3926e796___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/obras/PersonajesCreate.vue":
+/*!************************************************************!*\
+  !*** ./resources/js/components/obras/PersonajesCreate.vue ***!
+  \************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _PersonajesCreate_vue_vue_type_template_id_9d427cde___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./PersonajesCreate.vue?vue&type=template&id=9d427cde& */ "./resources/js/components/obras/PersonajesCreate.vue?vue&type=template&id=9d427cde&");
+/* harmony import */ var _PersonajesCreate_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./PersonajesCreate.vue?vue&type=script&lang=js& */ "./resources/js/components/obras/PersonajesCreate.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _PersonajesCreate_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _PersonajesCreate_vue_vue_type_template_id_9d427cde___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _PersonajesCreate_vue_vue_type_template_id_9d427cde___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/obras/PersonajesCreate.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/obras/PersonajesCreate.vue?vue&type=script&lang=js&":
+/*!*************************************************************************************!*\
+  !*** ./resources/js/components/obras/PersonajesCreate.vue?vue&type=script&lang=js& ***!
+  \*************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PersonajesCreate_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./PersonajesCreate.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/obras/PersonajesCreate.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PersonajesCreate_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/obras/PersonajesCreate.vue?vue&type=template&id=9d427cde&":
+/*!*******************************************************************************************!*\
+  !*** ./resources/js/components/obras/PersonajesCreate.vue?vue&type=template&id=9d427cde& ***!
+  \*******************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PersonajesCreate_vue_vue_type_template_id_9d427cde___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./PersonajesCreate.vue?vue&type=template&id=9d427cde& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/obras/PersonajesCreate.vue?vue&type=template&id=9d427cde&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PersonajesCreate_vue_vue_type_template_id_9d427cde___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PersonajesCreate_vue_vue_type_template_id_9d427cde___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/obras/PersonajesEdit.vue":
+/*!**********************************************************!*\
+  !*** ./resources/js/components/obras/PersonajesEdit.vue ***!
+  \**********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _PersonajesEdit_vue_vue_type_template_id_e2a79a42___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./PersonajesEdit.vue?vue&type=template&id=e2a79a42& */ "./resources/js/components/obras/PersonajesEdit.vue?vue&type=template&id=e2a79a42&");
+/* harmony import */ var _PersonajesEdit_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./PersonajesEdit.vue?vue&type=script&lang=js& */ "./resources/js/components/obras/PersonajesEdit.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _PersonajesEdit_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _PersonajesEdit_vue_vue_type_template_id_e2a79a42___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _PersonajesEdit_vue_vue_type_template_id_e2a79a42___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/obras/PersonajesEdit.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/obras/PersonajesEdit.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************!*\
+  !*** ./resources/js/components/obras/PersonajesEdit.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PersonajesEdit_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./PersonajesEdit.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/obras/PersonajesEdit.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PersonajesEdit_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/obras/PersonajesEdit.vue?vue&type=template&id=e2a79a42&":
+/*!*****************************************************************************************!*\
+  !*** ./resources/js/components/obras/PersonajesEdit.vue?vue&type=template&id=e2a79a42& ***!
+  \*****************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PersonajesEdit_vue_vue_type_template_id_e2a79a42___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./PersonajesEdit.vue?vue&type=template&id=e2a79a42& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/obras/PersonajesEdit.vue?vue&type=template&id=e2a79a42&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PersonajesEdit_vue_vue_type_template_id_e2a79a42___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PersonajesEdit_vue_vue_type_template_id_e2a79a42___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
