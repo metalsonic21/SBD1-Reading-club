@@ -12,6 +12,8 @@ use App\Models\Club;
 use App\Models\Clubclub;
 use App\Models\Language;
 use App\Models\Street;
+use App\Models\Urbanizacion;
+use App\Models\Calle;
 use App\Models\Urbanization;
 use App\Models\City;
 use App\Models\Country;
@@ -68,7 +70,10 @@ class BrowseClubsController extends Controller
         $checker = DB::select(DB::raw("SELECT id FROM sjl_urbanizaciones WHERE nom = '$request->urb' AND id_ciudad = '$request->ciudad'"));
         
         if(!$checker){
-            $urb = new Urbanization();
+            $count = DB::select(DB::raw("SELECT count(nom) as numero from sjl_urbanizaciones"));
+            $c = $count[0]->numero;
+            $urb = new Urbanizacion();
+            $urb->id = $c+1;
             $urb->nom = $request->urb;
             $urb->id_ciudad = $request->ciudad;        
             $urb->save();
@@ -79,7 +84,10 @@ class BrowseClubsController extends Controller
         $checker2 = DB::select(DB::raw("SELECT id FROM sjl_calles WHERE nom = '$request->calle' AND id_urb = '$auxid'"));
 
         if(!$checker2){
-            $street = new Street();
+            $street = new Calle();
+            $countc = DB::select(DB::raw("SELECT count(nom) as numero from sjl_calles"));
+            $cc = $countc[0]->numero;
+            $street->id = $cc+1;
             $street->nom = $request->calle;
             $street->cod_post = $request->cod_post;
             if (!$checker)
@@ -208,7 +216,10 @@ class BrowseClubsController extends Controller
         $checker = DB::select(DB::raw("SELECT id FROM sjl_urbanizaciones WHERE nom = '$request->urb' AND id_ciudad = '$request->ciudad'"));
         
         if(!$checker){
-            $urb = new Urbanization();
+            $count = DB::select(DB::raw("SELECT count(nom) as numero from sjl_urbanizaciones"));
+            $c = $count[0]->numero;
+            $urb = new Urbanizacion();
+            $urb->id = $c+1;
             $urb->nom = $request->urb;
             $urb->id_ciudad = $request->ciudad;        
             $urb->save();
@@ -219,7 +230,10 @@ class BrowseClubsController extends Controller
         $checker2 = DB::select(DB::raw("SELECT id FROM sjl_calles WHERE nom = '$request->calle' AND id_urb = '$auxid'"));
 
         if(!$checker2){
-            $street = new Street();
+            $street = new Calle();
+            $countc = DB::select(DB::raw("SELECT count(nom) as numero from sjl_calles"));
+            $cc = $countc[0]->numero;
+            $street->id = $cc+1;
             $street->nom = $request->calle;
             $street->cod_post = $request->cod_post;
             if (!$checker)
@@ -278,8 +292,10 @@ class BrowseClubsController extends Controller
         $club = Club::find($id);
         $club->id_dir = -1;
         $club->id_inst = null;
+        $trash = null;
         //Vacio los asociados
         DB::delete(DB::raw("DELETE FROM sjl_clubes_clubes WHERE id_club1 = '$id' OR id_club2 = '$id' "));
+
         //Log:info($club);
         $club->delete();
         return redirect('browseclubs');

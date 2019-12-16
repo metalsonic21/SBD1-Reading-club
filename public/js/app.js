@@ -3560,7 +3560,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -4452,7 +4451,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
 //
 //
 //
@@ -6505,8 +6503,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
-//
 //
 //
 //
@@ -9447,6 +9443,176 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/theater_plays/create_performance.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/theater_plays/create_performance.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      club: '',
+      id_club: '',
+      obra: '',
+      id_obra: '',
+      calle: '',
+      urb: '',
+      ciudad: '',
+      local: '',
+      locales: [{}],
+      fecha: '',
+      hora_i: '',
+      durach: '',
+      duracm: '',
+      duracion: '',
+      costo: '',
+      link1: '',
+      link2: '',
+      id_local: ''
+    };
+  },
+  created: function created() {
+    var _this = this;
+
+    var path = window.location.pathname;
+    var iclub = path.indexOf("/", 0) + 1;
+    var fclub = path.indexOf('/', iclub);
+    this.link1 = parseInt(path.substring(iclub, fclub), 10);
+    var fobra = path.indexOf('/', fclub + 1);
+    this.link2 = parseInt(path.substring(fclub + 1, fobra), 10);
+    console.log(this.link1);
+    console.log(this.link2);
+    axios.get("/".concat(this.link1, "/").concat(this.link2, "/perform/create")).then(function (res) {
+      _this.locales = res.data.locales;
+      _this.id_club = res.data.club.id;
+      _this.club = res.data.club.nom;
+      _this.id_obra = res.data.obra.id;
+      _this.obra = res.data.obra.nom;
+      console.log(res.data.locales);
+    })["catch"](function (e) {
+      console.log(e);
+    });
+  },
+  mounted: function mounted() {
+    console.log('Component mounted.');
+  },
+  methods: {
+    add: function add() {
+      var _this2 = this;
+
+      var myDate = new Date().toTimeString().replace(/.*(\d{2}:\d{2}:\d{2}).*/, "$1");
+      var params = {
+        fec: this.fecha,
+        id_obra: this.id_obra,
+        id_local: this.local,
+        hora_i: this.hora_i,
+        durach: this.durach,
+        duracm: this.duracm,
+        costo: this.costo,
+        id_club: this.id_club,
+        headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+      };
+      axios.post("/".concat(this.link1, "/").concat(this.link2, "/perform"), params).then(function (res) {
+        _this2.fecha = '';
+        _this2.id_obra = '';
+        _this2.id_local = '';
+        _this2.hora_i = '';
+        _this2.durac = '';
+        _this2.costo = '';
+        _this2.id_club = '';
+        window.location = "/".concat(_this2.link1, "/").concat(_this2.link2, "/perform");
+      })["catch"](function (e) {
+        console.log(e);
+      });
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/theater_plays/edit.vue?vue&type=script&lang=js&":
 /*!*****************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/theater_plays/edit.vue?vue&type=script&lang=js& ***!
@@ -9692,6 +9858,75 @@ __webpack_require__.r(__webpack_exports__);
         console.log(e);
       });
     }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/theater_plays/editperformance.vue?vue&type=script&lang=js&":
+/*!****************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/theater_plays/editperformance.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  mounted: function mounted() {
+    console.log('Component mounted.');
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/theater_plays/performances.vue?vue&type=script&lang=js&":
+/*!*************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/theater_plays/performances.vue?vue&type=script&lang=js& ***!
+  \*************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      link1: '',
+      link2: ''
+    };
+  },
+  created: function created() {
+    var path = window.location.pathname;
+    var iclub = path.indexOf("/", 0) + 1;
+    var fclub = path.indexOf('/', iclub);
+    this.link1 = parseInt(path.substring(iclub, fclub), 10);
+    var fobra = path.indexOf('/', fclub + 1);
+    this.link2 = parseInt(path.substring(fclub + 1, fobra), 10);
+    console.log(this.link1);
+    console.log(this.link2);
+  },
+  mounted: function mounted() {
+    console.log('Component mounted.');
   }
 });
 
@@ -78316,15 +78551,6 @@ var render = function() {
                                   on: { click: _vm.revalidate }
                                 },
                                 [_vm._v("Continuar")]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "b-link",
-                                {
-                                  staticClass: "btn btn-danger",
-                                  attrs: { href: "/browseclubs" }
-                                },
-                                [_vm._v("Cancelar")]
                               )
                             ],
                             1
@@ -80187,15 +80413,6 @@ var render = function() {
                                   on: { click: _vm.revalidate }
                                 },
                                 [_vm._v("Continuar")]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "b-link",
-                                {
-                                  staticClass: "btn btn-danger",
-                                  attrs: { href: "/browseclubs" }
-                                },
-                                [_vm._v("Cancelar")]
                               )
                             ],
                             1
@@ -83372,11 +83589,7 @@ var render = function() {
                                   on: { click: _vm.revalidate }
                                 },
                                 [_vm._v("Continuar")]
-                              ),
-                              _vm._v(" "),
-                              _c("b-link", { staticClass: "btn btn-danger" }, [
-                                _vm._v("Cancelar")
-                              ])
+                              )
                             ],
                             1
                           )
@@ -87920,7 +88133,7 @@ var render = function() {
                                 { attrs: { cols: "6" } },
                                 [
                                   _c("label", { attrs: { for: "Nombre" } }, [
-                                    _vm._v("resum")
+                                    _vm._v("Resumen")
                                   ]),
                                   _vm._v(" "),
                                   _c("b-form-input", {
@@ -88010,6 +88223,315 @@ var staticRenderFns = [
         ])
       ]
     )
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/theater_plays/create_performance.vue?vue&type=template&id=363e48f6&":
+/*!***********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/theater_plays/create_performance.vue?vue&type=template&id=363e48f6& ***!
+  \***********************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c("div", { staticClass: "content" }, [
+      _c("div", { staticClass: "container-fluid" }, [
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-md-12" }, [
+            _c("div", { staticClass: "card" }, [
+              _c(
+                "div",
+                { staticClass: "card-header card-header-log card-header-icon" },
+                [
+                  _vm._m(0),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "row" }, [
+                    _c("div", { staticClass: "col-lg-10" }, [
+                      _c("h4", { staticClass: "card-title" }, [
+                        _vm._v(
+                          "Añadir nueva Presentación del club: " +
+                            _vm._s(_vm.club)
+                        )
+                      ])
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "row" }, [
+                    _c("div", { staticClass: "col-lg-10" }, [
+                      _c("h4", { staticClass: "card-title" }, [
+                        _vm._v("De la obra: " + _vm._s(_vm.obra))
+                      ])
+                    ])
+                  ])
+                ]
+              ),
+              _vm._v(" "),
+              _c("div", { staticClass: "card-body" }, [
+                _c("div", { staticClass: "row" }, [
+                  _c(
+                    "div",
+                    { staticClass: "col-lg-12" },
+                    [
+                      _c(
+                        "b-form",
+                        {
+                          on: {
+                            submit: function($event) {
+                              $event.preventDefault()
+                              return _vm.add($event)
+                            }
+                          }
+                        },
+                        [
+                          _c(
+                            "b-row",
+                            [
+                              _c(
+                                "b-col",
+                                { attrs: { cols: "6" } },
+                                [
+                                  _c("label", { attrs: { for: "Ubicacion" } }, [
+                                    _vm._v("Ubicación")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("b-form-select", {
+                                    attrs: { options: _vm.locales },
+                                    model: {
+                                      value: _vm.local,
+                                      callback: function($$v) {
+                                        _vm.local = $$v
+                                      },
+                                      expression: "local"
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "mt-3" }, [
+                                    _vm._v("Selected: "),
+                                    _c("strong", [_vm._v(_vm._s(_vm.local))])
+                                  ])
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "b-col",
+                                { attrs: { cols: "6" } },
+                                [
+                                  _c("label", { attrs: { for: "Fecha" } }, [
+                                    _vm._v("fecha")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("b-form-input", {
+                                    attrs: {
+                                      type: "date",
+                                      required: "",
+                                      id: "date",
+                                      name: "date1"
+                                    },
+                                    model: {
+                                      value: _vm.fecha,
+                                      callback: function($$v) {
+                                        _vm.fecha = $$v
+                                      },
+                                      expression: "fecha"
+                                    }
+                                  })
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "b-row",
+                            [
+                              _c(
+                                "b-col",
+                                { attrs: { cols: "6" } },
+                                [
+                                  _c("label", { attrs: { for: "Nombre" } }, [
+                                    _vm._v("Hora de inicio")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("b-form-input", {
+                                    attrs: {
+                                      type: "time",
+                                      required: "",
+                                      id: "hora",
+                                      name: "hora"
+                                    },
+                                    model: {
+                                      value: _vm.hora_i,
+                                      callback: function($$v) {
+                                        _vm.hora_i = $$v
+                                      },
+                                      expression: "hora_i"
+                                    }
+                                  })
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "b-col",
+                                { attrs: { cols: "3" } },
+                                [
+                                  _c("label", { attrs: { for: "Nombre" } }, [
+                                    _vm._v("Duracion de la obra(Horas)")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("b-form-input", {
+                                    attrs: {
+                                      type: "number",
+                                      required: "",
+                                      id: "duracionh",
+                                      min: "0",
+                                      name: "duracionh"
+                                    },
+                                    model: {
+                                      value: _vm.durach,
+                                      callback: function($$v) {
+                                        _vm.durach = $$v
+                                      },
+                                      expression: "durach"
+                                    }
+                                  })
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "b-col",
+                                { attrs: { cols: "3" } },
+                                [
+                                  _c("label", { attrs: { for: "Nombre" } }, [
+                                    _vm._v("Duracion de la obra(Minutos)")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("b-form-input", {
+                                    attrs: {
+                                      type: "number",
+                                      required: "",
+                                      id: "duracionh",
+                                      min: "0",
+                                      name: "duracionh"
+                                    },
+                                    model: {
+                                      value: _vm.duracm,
+                                      callback: function($$v) {
+                                        _vm.duracm = $$v
+                                      },
+                                      expression: "duracm"
+                                    }
+                                  })
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c("br"),
+                          _vm._v(" "),
+                          _c(
+                            "b-row",
+                            [
+                              _c(
+                                "b-col",
+                                { attrs: { cols: "4" } },
+                                [
+                                  _c("label", { attrs: { for: "Costo" } }, [
+                                    _vm._v("Costo de la entrada")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("b-form-input", {
+                                    attrs: {
+                                      type: "number",
+                                      required: "",
+                                      min: "0",
+                                      id: "cost",
+                                      name: "cost"
+                                    },
+                                    model: {
+                                      value: _vm.costo,
+                                      callback: function($$v) {
+                                        _vm.costo = $$v
+                                      },
+                                      expression: "costo"
+                                    }
+                                  })
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c("br"),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              staticClass:
+                                "d-flex flex-row-reverse bd-highlight"
+                            },
+                            [
+                              _c(
+                                "b-button",
+                                {
+                                  attrs: { variant: "default", type: "submit" }
+                                },
+                                [_vm._v("Continuar")]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "b-link",
+                                {
+                                  staticClass: "btn btn-danger",
+                                  attrs: { href: "/castplays" }
+                                },
+                                [_vm._v("Cancelar")]
+                              )
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                ])
+              ])
+            ])
+          ])
+        ])
+      ])
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "card-icon" }, [
+      _c("i", { staticClass: "material-icons" }, [_vm._v("add")])
+    ])
   }
 ]
 render._withStripped = true
@@ -88216,6 +88738,77 @@ var staticRenderFns = [
     )
   }
 ]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/theater_plays/editperformance.vue?vue&type=template&id=cfdcb4a6&":
+/*!********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/theater_plays/editperformance.vue?vue&type=template&id=cfdcb4a6& ***!
+  \********************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _vm._m(0)
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "container" }, [
+      _c("div", { staticClass: "row justify-content-center" }, [
+        _c("div", { staticClass: "col-md-8" }, [
+          _c("div", { staticClass: "card" }, [
+            _c("div", { staticClass: "card-header" }, [
+              _vm._v("Example Component")
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "card-body" }, [
+              _vm._v(
+                "\n                    I'm an example component.\n                "
+              )
+            ])
+          ])
+        ])
+      ])
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/theater_plays/performances.vue?vue&type=template&id=0dca178c&":
+/*!*****************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/theater_plays/performances.vue?vue&type=template&id=0dca178c& ***!
+  \*****************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div")
+}
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -100452,6 +101045,13 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('browse-plays', __webpack_r
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('characteradd-cast', __webpack_require__(/*! ./components/theater_plays/CharacterCastAdd.vue */ "./resources/js/components/theater_plays/CharacterCastAdd.vue")["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('character-add', __webpack_require__(/*! ./components/theater_plays/character_add.vue */ "./resources/js/components/theater_plays/character_add.vue")["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('example-component', __webpack_require__(/*! ./components/ExampleComponent.vue */ "./resources/js/components/ExampleComponent.vue")["default"]);
+/*CRUD PERFORMANCES*/
+
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('performances', __webpack_require__(/*! ./components/theater_plays/performances.vue */ "./resources/js/components/theater_plays/performances.vue")["default"]);
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('performances-edit', __webpack_require__(/*! ./components/theater_plays/editperformance.vue */ "./resources/js/components/theater_plays/editperformance.vue")["default"]);
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('performances-create', __webpack_require__(/*! ./components/theater_plays/create_performance.vue */ "./resources/js/components/theater_plays/create_performance.vue")["default"]); //Vue.commponent('performances-edit',require('').default);
+//Vue.commponent('performances-create',require('./components/theater_plays/create_performance.vue').default);
+
 var app = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
   el: '#app'
 });
@@ -103263,6 +103863,75 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/theater_plays/create_performance.vue":
+/*!**********************************************************************!*\
+  !*** ./resources/js/components/theater_plays/create_performance.vue ***!
+  \**********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _create_performance_vue_vue_type_template_id_363e48f6___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./create_performance.vue?vue&type=template&id=363e48f6& */ "./resources/js/components/theater_plays/create_performance.vue?vue&type=template&id=363e48f6&");
+/* harmony import */ var _create_performance_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./create_performance.vue?vue&type=script&lang=js& */ "./resources/js/components/theater_plays/create_performance.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _create_performance_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _create_performance_vue_vue_type_template_id_363e48f6___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _create_performance_vue_vue_type_template_id_363e48f6___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/theater_plays/create_performance.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/theater_plays/create_performance.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************************!*\
+  !*** ./resources/js/components/theater_plays/create_performance.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_create_performance_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./create_performance.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/theater_plays/create_performance.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_create_performance_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/theater_plays/create_performance.vue?vue&type=template&id=363e48f6&":
+/*!*****************************************************************************************************!*\
+  !*** ./resources/js/components/theater_plays/create_performance.vue?vue&type=template&id=363e48f6& ***!
+  \*****************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_create_performance_vue_vue_type_template_id_363e48f6___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./create_performance.vue?vue&type=template&id=363e48f6& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/theater_plays/create_performance.vue?vue&type=template&id=363e48f6&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_create_performance_vue_vue_type_template_id_363e48f6___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_create_performance_vue_vue_type_template_id_363e48f6___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/js/components/theater_plays/edit.vue":
 /*!********************************************************!*\
   !*** ./resources/js/components/theater_plays/edit.vue ***!
@@ -103332,6 +104001,144 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/theater_plays/editperformance.vue":
+/*!*******************************************************************!*\
+  !*** ./resources/js/components/theater_plays/editperformance.vue ***!
+  \*******************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _editperformance_vue_vue_type_template_id_cfdcb4a6___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./editperformance.vue?vue&type=template&id=cfdcb4a6& */ "./resources/js/components/theater_plays/editperformance.vue?vue&type=template&id=cfdcb4a6&");
+/* harmony import */ var _editperformance_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./editperformance.vue?vue&type=script&lang=js& */ "./resources/js/components/theater_plays/editperformance.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _editperformance_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _editperformance_vue_vue_type_template_id_cfdcb4a6___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _editperformance_vue_vue_type_template_id_cfdcb4a6___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/theater_plays/editperformance.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/theater_plays/editperformance.vue?vue&type=script&lang=js&":
+/*!********************************************************************************************!*\
+  !*** ./resources/js/components/theater_plays/editperformance.vue?vue&type=script&lang=js& ***!
+  \********************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_editperformance_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./editperformance.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/theater_plays/editperformance.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_editperformance_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/theater_plays/editperformance.vue?vue&type=template&id=cfdcb4a6&":
+/*!**************************************************************************************************!*\
+  !*** ./resources/js/components/theater_plays/editperformance.vue?vue&type=template&id=cfdcb4a6& ***!
+  \**************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_editperformance_vue_vue_type_template_id_cfdcb4a6___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./editperformance.vue?vue&type=template&id=cfdcb4a6& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/theater_plays/editperformance.vue?vue&type=template&id=cfdcb4a6&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_editperformance_vue_vue_type_template_id_cfdcb4a6___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_editperformance_vue_vue_type_template_id_cfdcb4a6___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/theater_plays/performances.vue":
+/*!****************************************************************!*\
+  !*** ./resources/js/components/theater_plays/performances.vue ***!
+  \****************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _performances_vue_vue_type_template_id_0dca178c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./performances.vue?vue&type=template&id=0dca178c& */ "./resources/js/components/theater_plays/performances.vue?vue&type=template&id=0dca178c&");
+/* harmony import */ var _performances_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./performances.vue?vue&type=script&lang=js& */ "./resources/js/components/theater_plays/performances.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _performances_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _performances_vue_vue_type_template_id_0dca178c___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _performances_vue_vue_type_template_id_0dca178c___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/theater_plays/performances.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/theater_plays/performances.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************************!*\
+  !*** ./resources/js/components/theater_plays/performances.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_performances_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./performances.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/theater_plays/performances.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_performances_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/theater_plays/performances.vue?vue&type=template&id=0dca178c&":
+/*!***********************************************************************************************!*\
+  !*** ./resources/js/components/theater_plays/performances.vue?vue&type=template&id=0dca178c& ***!
+  \***********************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_performances_vue_vue_type_template_id_0dca178c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./performances.vue?vue&type=template&id=0dca178c& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/theater_plays/performances.vue?vue&type=template&id=0dca178c&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_performances_vue_vue_type_template_id_0dca178c___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_performances_vue_vue_type_template_id_0dca178c___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/sass/app.scss":
 /*!*********************************!*\
   !*** ./resources/sass/app.scss ***!
@@ -103350,8 +104157,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\xampp\htdocs\SBD1-Reading-club\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\SBD1-Reading-club\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\Hyper\Documents\GitHub\SBD1-Reading-club\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\Hyper\Documents\GitHub\SBD1-Reading-club\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
