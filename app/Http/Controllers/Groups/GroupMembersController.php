@@ -38,7 +38,20 @@ class GroupMembersController extends Controller
     public function create($club, $grupo, Request $request)
     {
         if($request->ajax()){
-            $members = DB::select(DB::raw("SELECT doc_iden as documento_de_identidad, nom1 as primer_nombre, ape1 as primer_apellido, fec_nac as fecha_de_nacimiento, id_club, id_grup FROM sjl_lectores WHERE id_club = '$club' AND id_grup IS NULL"));
+            /* Get type of group to filter possible members to add */
+            $members = '';
+            $tg = DB::select(DB::raw("SELECT tipo FROM sjl_grupos_lectura WHERE id_club = '$club' AND id = '$grupo'"));
+            $tipog = $tg[0]->tipo;
+
+            if ($tipog == 'A'){
+                $members = DB::select(DB::raw("SELECT doc_iden as documento_de_identidad, nom1 as primer_nombre, ape1 as primer_apellido, fec_nac as fecha_de_nacimiento, id_club, id_grup from sjl_lectores where (id_club='$club') and (id_grup is null) and AGE(fec_nac)>=INTERVAL'18 years';
+                "));
+            }
+
+            else{
+                $members = DB::select(DB::raw("SELECT doc_iden as documento_de_identidad, nom1 as primer_nombre, ape1 as primer_apellido, fec_nac as fecha_de_nacimiento, id_club, id_grup from sjl_lectores where (id_club='$club') and (id_grup is null) and AGE(fec_nac)<INTERVAL'18 years';
+                "));
+            }
             return Response::json(array('data'=>$members));
         }
         else{

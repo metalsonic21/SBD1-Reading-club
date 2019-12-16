@@ -79,7 +79,6 @@
                     <h6> <strong>DIRECCIÓN</strong></h6>
                     </b-col>
                 </b-row>
-                <hr>
                 <b-row>
                     <b-col cols="4">
                     <p><strong>PAÍS:</strong> {{$pais}}</p>

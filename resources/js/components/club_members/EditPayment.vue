@@ -97,7 +97,7 @@ export default {
     },
     computed: {
         validateF(){
-            return (this.date != null);
+            return (this.date != null || this.date != '');
         }
     },
     methods: {

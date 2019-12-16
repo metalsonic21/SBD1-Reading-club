@@ -26,8 +26,8 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-lg-12">
-                                <div class="table-responsive table-sales">
-                                    <table class="table">
+                                <div class="material-datatables">
+                                    <table class="table table-sales table-hover table-no-bordered" id="myTable">
                                         <thead>
                                             <tr>
                                                 <th class="text-center">Nombre</th>

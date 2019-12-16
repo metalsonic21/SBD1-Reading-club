@@ -14,6 +14,18 @@ INSERT INTO sjl_historicos_pagos_memb(
 	id, id_fec_mem, id_club, id_lec, fec_emi)
 	VALUES (1, '08-01-2008', 1, 12345, '08-01-2008');
 
+INSERT INTO sjl_lista_favoritos(
+	id_lec, id_lib, pref)
+	VALUES (12345, 55200, 1);
+
+INSERT INTO sjl_lista_favoritos(
+	id_lec, id_lib, pref)
+	VALUES (12345, 27136, 3);
+
+INSERT INTO sjl_lista_favoritos(
+	id_lec, id_lib, pref)
+	VALUES (12345, 99876, 2);
+
 /* Members */
 
 INSERT INTO sjl_lectores(
@@ -32,6 +44,18 @@ INSERT INTO sjl_historicos_pagos_memb(
 	id, id_fec_mem, id_club, id_lec, fec_emi)
 	VALUES (2, '06-06-2017', 1, 78965, '06-06-2017');
 
+INSERT INTO sjl_lista_favoritos(
+	id_lec, id_lib, pref)
+	VALUES (78965, 58992, 1);
+
+INSERT INTO sjl_lista_favoritos(
+	id_lec, id_lib, pref)
+	VALUES (78965, 27136, 3);
+
+INSERT INTO sjl_lista_favoritos(
+	id_lec, id_lib, pref)
+	VALUES (78965, 79561, 2);
+
 /* Members */
 
 INSERT INTO sjl_lectores(
@@ -49,6 +73,18 @@ INSERT INTO sjl_membresias(
 INSERT INTO sjl_historicos_pagos_memb(
 	id, id_fec_mem, id_club, id_lec, fec_emi)
 	VALUES (3, '02-06-2018', 1, 5521, '02-06-2018');
+
+INSERT INTO sjl_lista_favoritos(
+	id_lec, id_lib, pref)
+	VALUES (5521, 98564, 1);
+
+INSERT INTO sjl_lista_favoritos(
+	id_lec, id_lib, pref)
+	VALUES (5521, 27136, 3);
+
+INSERT INTO sjl_lista_favoritos(
+	id_lec, id_lib, pref)
+	VALUES (5521, 89986, 2);
 
 /* Members with group */
 
@@ -452,7 +488,7 @@ INSERT INTO sjl_grupos_lectores(
 /* Kid */
 INSERT INTO sjl_lectores(
 	doc_iden, nom1, nom2, ape1, ape2, fec_nac, genero, id_club, id_grup, id_calle, id_rep, id_rep_lec, id_nac)
-	VALUES (0178, 'Bryan', null, 'Matos', 'A', '05-19-2012', 'M', 1, 2, 1, null, 5871, 17);
+	VALUES (0178, 'Bryan', null, 'Matos', 'A', '05-19-2012', 'M', 1, 2, 1, 49281, null, 17);
 
 INSERT INTO sjl_telefonos(
 	cod_pais, cod_area, num, id_lector)
@@ -473,7 +509,7 @@ INSERT INTO sjl_grupos_lectores(
 /* Kid */
 INSERT INTO sjl_lectores(
 	doc_iden, nom1, nom2, ape1, ape2, fec_nac, genero, id_club, id_grup, id_calle, id_rep, id_rep_lec, id_nac)
-	VALUES (0520, 'Piero', null, 'Vilchez', 'A', '05-19-2012', 'M', 1, 2, 1, null, 5871, 17);
+	VALUES (0520, 'Piero', null, 'Vilchez', 'A', '05-19-2012', 'M', 1, 2, 1, 84288, null, 17);
 
 INSERT INTO sjl_telefonos(
 	cod_pais, cod_area, num, id_lector)
@@ -494,7 +530,7 @@ INSERT INTO sjl_grupos_lectores(
 /* Kid */
 INSERT INTO sjl_lectores(
 	doc_iden, nom1, nom2, ape1, ape2, fec_nac, genero, id_club, id_grup, id_calle, id_rep, id_rep_lec, id_nac)
-	VALUES (6768, 'Sarah', null, 'Wildes', 'A', '01-04-2011', 'F', 1, 2, 1, null, 6661, 17);
+	VALUES (6768, 'Sarah', null, 'Wildes', 'A', '01-04-2011', 'F', 1, 2, 1, 83919, null, 17);
 
 INSERT INTO sjl_telefonos(
 	cod_pais, cod_area, num, id_lector)
@@ -515,7 +551,7 @@ INSERT INTO sjl_grupos_lectores(
 /* Kid */
 INSERT INTO sjl_lectores(
 	doc_iden, nom1, nom2, ape1, ape2, fec_nac, genero, id_club, id_grup, id_calle, id_rep, id_rep_lec, id_nac)
-	VALUES (1012, 'Anna', null, 'Wildes', 'A', '01-04-2011', 'F', 1, 2, 1, null, 6661, 17);
+	VALUES (1012, 'Anna', null, 'Wildes', 'A', '01-04-2011', 'F', 1, 2, 1, 18232, null, 17);
 
 INSERT INTO sjl_telefonos(
 	cod_pais, cod_area, num, id_lector)
@@ -536,7 +572,7 @@ INSERT INTO sjl_grupos_lectores(
 /* Kid */
 INSERT INTO sjl_lectores(
 	doc_iden, nom1, nom2, ape1, ape2, fec_nac, genero, id_club, id_grup, id_calle, id_rep, id_rep_lec, id_nac)
-	VALUES (1013, 'Melvin', null, 'Rodriguez', 'A', '01-17-2008', 'M', 1, 2, 1, null, 6661, 17);
+	VALUES (1013, 'Melvin', null, 'Rodriguez', 'A', '01-17-2008', 'M', 1, 2, 1, 78212, null, 17);
 
 INSERT INTO sjl_telefonos(
 	cod_pais, cod_area, num, id_lector)
@@ -557,7 +593,7 @@ INSERT INTO sjl_grupos_lectores(
 /* Kid */
 INSERT INTO sjl_lectores(
 	doc_iden, nom1, nom2, ape1, ape2, fec_nac, genero, id_club, id_grup, id_calle, id_rep, id_rep_lec, id_nac)
-	VALUES (2015, 'Mike', null, 'Havenaar', 'A', '01-17-2008', 'M', 1, 2, 1, null, 4141, 20);
+	VALUES (2015, 'Mike', null, 'Havenaar', 'A', '01-17-2008', 'M', 1, 2, 1, 48291, null, 20);
 
 INSERT INTO sjl_telefonos(
 	cod_pais, cod_area, num, id_lector)
@@ -578,7 +614,7 @@ INSERT INTO sjl_grupos_lectores(
 /* Kid */
 INSERT INTO sjl_lectores(
 	doc_iden, nom1, nom2, ape1, ape2, fec_nac, genero, id_club, id_grup, id_calle, id_rep, id_rep_lec, id_nac)
-	VALUES (1710, 'Louis', null, 'Poirot', 'A', '05-17-2009', 'M', 1, 2, 1, null, 4141, 20);
+	VALUES (1710, 'Louis', null, 'Poirot', 'A', '05-17-2009', 'M', 1, 2, 1, 48131, null, 20);
 
 INSERT INTO sjl_telefonos(
 	cod_pais, cod_area, num, id_lector)
@@ -599,7 +635,7 @@ INSERT INTO sjl_grupos_lectores(
 /* Kid */
 INSERT INTO sjl_lectores(
 	doc_iden, nom1, nom2, ape1, ape2, fec_nac, genero, id_club, id_grup, id_calle, id_rep, id_rep_lec, id_nac)
-	VALUES (1111, 'Brittany', null, 'Jazz', 'A', '09-11-2007', 'M', 1, 2, 1, null, 4141, 20);
+	VALUES (1111, 'Brittany', null, 'Jazz', 'A', '09-11-2007', 'M', 1, 2, 1, 78192, null, 20);
 
 INSERT INTO sjl_telefonos(
 	cod_pais, cod_area, num, id_lector)

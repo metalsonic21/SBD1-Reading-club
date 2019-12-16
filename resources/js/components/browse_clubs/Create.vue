@@ -72,7 +72,7 @@
 
                                         </b-row>
                                         <br>
-                                        <b-row>
+                                        <b-row v-if="cuota">
 
                                             <b-col cols="5">
                                                 <label for="cuota">Cuota del Club</label>
@@ -87,7 +87,8 @@
                                             <b-col cols="6">
                                                 <b-form-group>
                                                     <label>¿Está asociado este club a alguna institución?</label>
-                                                    <b-radio-group v-model="institucion" :options="[{text: 'Sí', value:true}, {text: 'No', value: false}]"></b-radio-group>
+                                                    <b-radio-group v-model="institucion" :options="[{text: 'Sí', value:true}, {text: 'No', value: false}]"
+                                                    @change="checkamount()"></b-radio-group>
                                                 </b-form-group>
                                             </b-col>
                                         </b-row>
@@ -101,8 +102,8 @@
 
                                                 <b-col cols="6">
                                                     <label for="">Tipo</label>
-                                                    <b-form-input type="text" v-model="inst.tipo" id="tipo" name="tipo" placeholder="Tipo de institucion"></b-form-input>
-                                                    <b-form-invalid-feedback :state="validateItipo">Debe rellenar el campo Tipo de Institucion</b-form-invalid-feedback>
+                                                    <b-form-select v-model="inst.tipo" id="tipo" name="tipo" :options="tiposinst"></b-form-select>
+                                                    <b-form-invalid-feedback :state="validateItipo">Debe seleccionar un Tipo de Institucion</b-form-invalid-feedback>
                                                 </b-col>
                                             </b-row>
                                             <br>
@@ -122,28 +123,7 @@
                                             </b-row>
                                             <br>
                                         </div>
-                                        <hr>
-
-                                        <b-row>
-                                            <b-col cols="6">
-                                                <b-form-group>
-                                                    <label>¿Está asociado este club con otro club?</label>
-                                                    <b-radio-group v-model="clubasociado" :options="[{text: 'Sí', value:true}, {text: 'No', value: false}]">
-                                                    </b-radio-group>
-                                                </b-form-group>
-                                            </b-col>
-                                        </b-row>
-
-                                        <b-row v-if="clubasociado">
-                                            <b-col cols="6">
-                                                <label>Seleccione los clubes asociados</label>
-                                                
-                                                <b-form-group>
-                                                    <b-form-checkbox-group v-model="selectedclubs" :options="asociados" name="asociados" stacked></b-form-checkbox-group>
-                                                </b-form-group>
-                                                  
-                                            </b-col>
-                                        </b-row>
+                                        
                                         <div class="d-flex flex-row-reverse bd-highlight">
                                             <b-button variant="default" @click="revalidate">Continuar</b-button>
 
@@ -156,7 +136,6 @@
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 
@@ -188,11 +167,38 @@ export default {
                 pais: null,
             },
             
+            tiposinst: [{
+                    value: null,
+                    text: 'Seleccionar'
+                },
+                {
+                    value: 'A',
+                    text: 'Academico'
+                },
+                {
+                    value: 'E',
+                    text: 'Estatal'
+                },
+                {
+                    value: 'C',
+                    text: 'Cultural'
+                },
+                {
+                    value: 'O',
+                    text: 'ONG'
+                },
+                {
+                    value: 'O',
+                    text: 'Otro'
+                }
+            ],
+            
             idiomas: [{
                 value: null,
                 text: 'Seleccionar',
             }],
 
+            cuota: true,
             institucion: false,
  
             paises: [{
@@ -205,18 +211,12 @@ export default {
                 text: 'Seleccionar',
             }],
 
-            clubasociado: false,
-
-            asociados: [{
-                value: 1,
-                text: 'Club Asociado'
-            }],
-            selectedclubs: [{}],
             ciudadesfiltered: [{}],
             ciudadesbackup: [{
                 value: null,
                 text: 'Seleccionar'
             }],
+
         }
     },
 
@@ -227,7 +227,6 @@ export default {
                 this.idiomas = res.data.languages;
                 this.paises = res.data.countries;
                 this.ciudadesbackup = res.data.cities;
-                this.asociados = res.data.aclubs;
                 
             }).catch(e => {
                 console.log(e);
@@ -298,7 +297,15 @@ export default {
 
     },
     methods: {
-        
+        //validar que no haya cuota si esta asociado a alguna institucion
+        checkamount(){
+            if(!this.institucion){
+                this.club.cuota = null;
+                this.cuota = false;
+            }else{
+                this.cuota = true;
+            }
+        },
         convert(id, length) {
 
             let pos = id.indexOf("-");
@@ -348,7 +355,7 @@ export default {
                 if (this.validateUrb == false) msg = msg + "Debe rellenar el campo Urbanización\n";
                 if (this.validateCalle == false) msg = msg + "Debe rellenar el campo calle\n";                
                 if (this.validateInom == false) msg = msg + "Debe rellenar el campo Nombre de Institución\n";
-                if (this.validateItipo == false) msg = msg + "Debe rellenar el campo Tipo de Institución\n";
+                if (this.validateItipo == false) msg = msg + "Debe seleccionar un Tipo de Institución\n";
                 if (this.validateIpais == false) msg = msg + "Debe selecionar un pais para la Institución\n";
                 if (this.validateIciu == false) msg = msg + "Debe selecionar una ciudad para la Institución\n";
 
@@ -375,12 +382,12 @@ export default {
                 ciudad: this.dir.ciudad,
                 urb: this.dir.urb,
                 cod_post: this.dir.cod_post,
-                asociados: this.selectedclubs,
                 
                 nom_inst: this.inst.nom,
                 tipo_inst: this.inst.tipo,
                 ciudad_inst: this.inst.ciudad,
             }
+            
 
             //Clear 
             this.club.nom = '';

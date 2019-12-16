@@ -8,7 +8,7 @@
             <h4 class="card-title">Control de asistencia reunión</h4>
         </div>
         <div class="card-body ">
-            <table class="table">
+            <table class="table table-sales table-hover table-no-bordered" id="myTable">
                 <thead>
                     <tr>
                         <th class="text-center">Nombre</th>
@@ -27,11 +27,9 @@
 
                 </tbody>
             </table>
-                    <div class="d-flex flex-row-reverse bd-highlight">
-                        <b-button variant="default" @click="add">Continuar</b-button>
-
-                        <b-link class="btn btn-danger" href="/browseclubs">Cancelar</b-link>
-                    </div>
+            <div class="d-flex flex-row-reverse bd-highlight">
+                <b-button variant="default" @click="add">Continuar</b-button>
+            </div>
         </div>
     </div>
 </div>
@@ -60,28 +58,27 @@ export default {
             reunion: null,
         }
     },
-    created(){
+    created() {
         var path = window.location.pathname;
-        let beginc = path.indexOf("bs/")+3;
+        let beginc = path.indexOf("bs/") + 3;
         let endc = path.indexOf("/gr");
 
-        this.club = path.substring(beginc,endc);
+        this.club = path.substring(beginc, endc);
 
-        let beging = path.indexOf("ups/")+4;
+        let beging = path.indexOf("ups/") + 4;
         let endg = path.indexOf("/mee");
 
-        this.grupo = path.substring(beging,endg);
-        
+        this.grupo = path.substring(beging, endg);
 
-        let begin4 = path.indexOf("gs/")+3;
-        let partial = path.substring(begin4,path.length);
-        this.reunion = partial.substring(0,partial.indexOf("/"));
+        let begin4 = path.indexOf("gs/") + 3;
+        let partial = path.substring(begin4, path.length);
+        this.reunion = partial.substring(0, partial.indexOf("/"));
 
-        let partial2 = partial.substring(partial.indexOf("/")+1,partial.length);
-        this.moderador = partial2.substring(0,partial2.indexOf("/"));
+        let partial2 = partial.substring(partial.indexOf("/") + 1, partial.length);
+        this.moderador = partial2.substring(0, partial2.indexOf("/"));
 
-        let partial3 = partial2.substring(partial2.indexOf("/")+1,partial2.length);
-        this.libro = partial3.substring(0,partial3.indexOf("/"));
+        let partial3 = partial2.substring(partial2.indexOf("/") + 1, partial2.length);
+        this.libro = partial3.substring(0, partial3.indexOf("/"));
 
         axios.get(`/clubs/${this.club}/groups/${this.grupo}/meetings/${this.reunion}/${this.moderador}/${this.libro}/attendance`)
             .then(res => {
@@ -92,8 +89,8 @@ export default {
 
     },
 
-    methods:{
-        add(){
+    methods: {
+        add() {
 
             let i = 0
             let gdates = [];
@@ -101,10 +98,10 @@ export default {
             let items = [];
             let att = [];
 
-            for (i ; i<this.members.length ; i++){
+            for (i; i < this.members.length; i++) {
                 gdates[i] = this.members[i].fig;
                 cdates[i] = this.members[i].fic;
-                items[i] = this.members[i].id; 
+                items[i] = this.members[i].id;
                 att[i] = this.members[i].asist;
             }
 
@@ -121,13 +118,13 @@ export default {
                 reunion: this.reunion,
                 moderador: this.moderador,
             }
-        axios.post(`/clubs/${this.club}/groups/${this.grupo}/meetings/${this.reunion}/${this.moderador}/${this.libro}/attendance`,params)
-            .then(res => {
-                window.location = `/clubs/${this.club}/groups/${this.grupo}/meetings`;
-                console.log(res.data);
-            }).catch(e => {
-                console.log(e);
-            })
+            axios.post(`/clubs/${this.club}/groups/${this.grupo}/meetings/${this.reunion}/${this.moderador}/${this.libro}/attendance`, params)
+                .then(res => {
+                    window.location = `/clubs/${this.club}/groups/${this.grupo}/meetings`;
+                    console.log(res.data);
+                }).catch(e => {
+                    console.log(e);
+                })
 
         }
     }

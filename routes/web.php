@@ -20,6 +20,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 /*CLUBS*/
 Route::resource('/browseclubs', 'clubs\BrowseClubsController');
+Route::get('/browseclubs/{id}/editassociated', 'clubs\EditAssociatedController@edit');
+Route::put('/browseclubs/{id}/editassociated', 'clubs\EditAssociatedController@update');
 Route::get('/members', 'clubs\ReportsClubMembersController@index')->name('members');
 Route::get('/clubreports', 'clubs\ClubReportsController@index')->name('clubreports');
 Route::get('/selectclub', 'clubs\SelectClubController@index')->name('selectclub');
@@ -63,6 +65,7 @@ Route::get('/clubs/{club}/groups/{group}/meetings/{date}/{mod}/{libro}/edit', 'm
 Route::get('/clubs/{club}/groups/{group}/meetings/{date}/{mod}/{libro}', 'meetings\MeetingsController@concluir')->name('meetings.concluir');
 Route::put('/clubs/{club}/groups/{group}/meetings/{date}/{mod}/{libro}', 'meetings\MeetingsController@concluir')->name('meetings.concluir');
 Route::patch('/clubs/{club}/groups/{group}/meetings/{date}/{mod}/{libro}', 'meetings\MeetingsController@concluir')->name('meetings.concluir');
+Route::get('/clubs/{club}/groups/{group}/meetings/{date}/{mod}/{libro}/{sesion}/details', 'meetings\MeetingsController@details')->name('meetings.details');
 
 /* ATTENDANCE */
 Route::resource('/clubs/{club}/groups/{group}/meetings/{date}/{mod}/{libro}/attendance', 'meetings\AttendanceController');

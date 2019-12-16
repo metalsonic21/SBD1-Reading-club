@@ -157,7 +157,7 @@ CREATE TABLE SJL_reuniones_mensuales (
     id_club           INTEGER NOT NULL,
     id_lec            INTEGER NOT NULL,
     n_ses             NUMERIC(2) NOT NULL,
-    conclu            VARCHAR(200),
+    conclu            VARCHAR(1000),
     valor             NUMERIC(3),
     CONSTRAINT reuniones_mensuales_pk PRIMARY KEY (fec,id_lib,id_grupo,id_club)
 );
@@ -208,17 +208,17 @@ CREATE TABLE SJL_generos_libros (
 CREATE TABLE SJL_estructuras_libros (
     id       SERIAL NOT NULL,
     id_lib   INTEGER NOT NULL,
-    nom      VARCHAR(20) NOT NULL,
+    nom      VARCHAR(50) NOT NULL,
     tipo     VARCHAR(2) NOT NULL,
-    titulo   VARCHAR(20),
+    titulo   VARCHAR(50),
     CONSTRAINT estructuras_libros_pk PRIMARY KEY(id,id_lib)
 );
 
 CREATE TABLE SJL_secciones_libros (
     id       SERIAL NOT NULL,
-    nom      VARCHAR(20) NOT NULL,
+    nom      VARCHAR(50) NOT NULL,
     num      NUMERIC NOT NULL,
-    titulo   VARCHAR(20),
+    titulo   VARCHAR(50),
     id_est   INTEGER NOT NULL,
     id_lib   INTEGER NOT NULL,
     CONSTRAINT secciones_libros_pk PRIMARY KEY (id)

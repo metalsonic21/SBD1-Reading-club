@@ -95,7 +95,22 @@
                             </b-col>
 
                             <b-col cols="6">
-                                <p><strong>TIPO: </strong>{{$asoc[0]->tipo }}</p>
+                                @if ($asoc[0]->tipo == 'A')
+                                <p><strong>TIPO: </strong>Academico</p>
+                                @endif
+                                @if ($asoc[0]->tipo == 'E')
+                                <p><strong>TIPO: </strong>Estatal</p>
+                                @endif
+                                @if ($asoc[0]->tipo == 'C')
+                                <p><strong>TIPO: </strong>Cultural</p>
+                                @endif
+                                @if ($asoc[0]->tipo == 'O')
+                                <p><strong>TIPO: </strong>ONG</p>
+                                @endif
+                                @if ($asoc[0]->tipo == 'OT')
+                                <p><strong>TIPO: </strong>Otro</p>
+                                @endif
+
                             </b-col>
                         </b-row>
 

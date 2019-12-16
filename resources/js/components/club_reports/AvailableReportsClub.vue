@@ -1,6 +1,6 @@
 <template>
-    <div>
-      <div class="content">
+<div>
+    <div class="content">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
@@ -18,8 +18,8 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-lg-12">
-                                    <div class="table-responsive table-sales">
-                                        <table class="table">
+                                    <div class="material-datatables">
+                                        <table class="table table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
                                             <thead>
                                                 <tr>
                                                     <th class="text-center">Nombre de club</th>
@@ -52,12 +52,14 @@
 
         </div>
     </div>
-  
-    </div>
+
+</div>
+
+</div>
 </template>
 
 <script>
 export default {
-    
+
 }
 </script>

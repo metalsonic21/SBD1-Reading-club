@@ -18,6 +18,26 @@ INSERT INTO sjl_urbanizaciones(id, nom, id_ciudad)
 	SELECT id FROM sjl_ciudades WHERE nom = 'Antofagasta'
 ));
 
+INSERT INTO sjl_urbanizaciones(id, nom, id_ciudad)
+	VALUES (nextval('id_urbanizacion'), 'Lafayette', (
+	SELECT id FROM sjl_ciudades WHERE nom = 'Lousiana'
+));
+
+INSERT INTO sjl_urbanizaciones(id, nom, id_ciudad)
+	VALUES (nextval('id_urbanizacion'), 'Lake Charles', (
+	SELECT id FROM sjl_ciudades WHERE nom = 'Lousiana'
+));
+
+INSERT INTO sjl_urbanizaciones(id, nom, id_ciudad)
+	VALUES (nextval('id_urbanizacion'), 'Yosemite', (
+	SELECT id FROM sjl_ciudades WHERE nom = 'California'
+));
+
+INSERT INTO sjl_urbanizaciones(id, nom, id_ciudad)
+	VALUES (nextval('id_urbanizacion'), 'Austin', (
+	SELECT id FROM sjl_ciudades WHERE nom = 'Texas'
+));
+
 /* STREETS */
 
 INSERT INTO sjl_calles(id, nom, id_urb)

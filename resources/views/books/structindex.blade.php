@@ -36,8 +36,8 @@
                         <div class="card-body">
                             <b-row>
                                 <b-col cols="12">
-                                    <div class="table-responsive table-sales">
-                                        <table class="table">
+                                    <div class="material-datatables">
+                                        <table class="table table-sales table-hover table-no-bordered" id="myTable">
                                             <thead>
                                                 <tr>
                                                     <th class="text-center">Nombre Estructura</th>
