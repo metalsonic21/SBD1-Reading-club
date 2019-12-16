@@ -225,11 +225,11 @@ INSERT INTO sjl_libros(
 
 INSERT INTO sjl_generos_libros(
 	id_gen, id_lib)
-	VALUES (1, 68821);
+	VALUES (1, 02145);
 
 INSERT INTO sjl_generos_libros(
 	id_gen, id_lib)
-	VALUES (23, 68821);
+	VALUES (23, 02145);
 
 INSERT INTO sjl_estructuras_libros(
 	id_lib, nom, tipo, titulo)
@@ -376,11 +376,11 @@ INSERT INTO sjl_libros(
 
 INSERT INTO sjl_generos_libros(
 	id_gen, id_lib)
-	VALUES (1, 87515);
+	VALUES (1, 48915);
 
 INSERT INTO sjl_generos_libros(
 	id_gen, id_lib)
-	VALUES (25, 87515);
+	VALUES (25, 48915);
 
 INSERT INTO sjl_libros(
 	isbn, titulo_esp, titulo_ori, tema_princ, sinop, n_pag, fec_pub, autor, id_prev, id_edit)
