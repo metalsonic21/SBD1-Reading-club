@@ -83,13 +83,16 @@ Route::resource('/clubs/{club}/members/{id}/favorites', 'books\FavoriteBooksCont
 
 /* OBRAS */
 Route::resource('/obras', 'obras\ObraController');
+Route::resource('/obras/{obra}/personajes', 'obras\PersonajesController');
+
 Route::resource('/clubs/{club}/presentaciones', 'obras\PresentacionController');
+Route::resource('/clubs/{club}/locales', 'obras\LocalController');
 Route::get('/clubs/{club}/presentaciones/{fec}/{obra}/{local}/edit', 'obras\PresentacionController@mod');
 Route::put('/clubs/{club}/presentaciones/{fec}/{obra}/{local}', 'obras\PresentacionController@modificar');
 Route::patch('/clubs/{club}/presentaciones/{fec}/{obra}/{local}', 'obras\PresentacionController@modificar');
 Route::get('/clubs/{club}/presentaciones/{fec}/{obra}/{local}', 'obras\PresentacionController@modificar');
 Route::delete('/clubs/{club}/presentaciones/{fec}/{obra}/{local}', 'obras\PresentacionController@borrar');
-
+//Route::resource('/clubs/{club}/presentaciones/{fec}/{obra}/{local}/elenco', 'obras\ElencoController');
 /*THEATER_PLAYS
 Route::get('/playsclubs', 'theater_plays\PlaysClubsController@index')->name('playsclubs');
 Route::get('/castplayss/{id}','theater_plays\CastPlaysController@obrasclub');

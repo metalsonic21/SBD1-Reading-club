@@ -2151,3 +2151,123 @@ INSERT INTO sjl_reuniones_mensuales(
 INSERT INTO sjl_reuniones_mensuales(
 	fec, id_lib, id_grupo, id_grupo_mod, id_fec_mem, id_fec_i, id_club, id_lec, n_ses, conclu, valor)
 	VALUES ('04-10-2019', 99876, 2, 1, '03-26-2019', '03-26-2019', 1, 5616, 2, 'Muy bueno', 5);
+
+/*Insert Obras Actuadas*/
+INSERT INTO sjl_obras (nom, resum) VALUES ('Cien Años de Soledad','Muchos años después, frente al pelotón de fusilamiento, el coronel Aureliano Buendía había de recordar aquella tarde remota en que su padre lo llevó a conocer el hielo...", con estas palabras empieza una novela ya legendaria en los anales de la literatura universal, una de las aventuras literarias más fascinantes de nuestro siglo.');
+
+INSERT INTO sjl_obras (nom, resum) VALUES ('El Viejo y El Mar','En un pueblo costero pequeño, un viejo pescador hace ya mucho tiempo que intenta, en vano, pescar un gran pez. Un día se hace a la mar, y tras mucho esfuerzo, consigue que este pique su cebo.');
+
+INSERT INTO sjl_obras (nom, resum) VALUES ('Los Miserables','El relato de Los Miserables comienza cuando Juan Valjean es condenado a prisión por un pequeño hurto. Cuando logra huir, la cárcel lo ha convertido en un ser embrutecido y marginado por la sociedad. Pero la aparición de un buen hombre le hará comprender que puede elegir entre el bien y el mal. Desde ese momento sus actos serán desinteresados y estarán encaminados a ayudar a los demás.');
+
+INSERT INTO sjl_obras (nom, resum) VALUES ('El Conde de Montecristo','Es un marino joven y exitoso. Enamorado de Mercedes, viene a casarse con ella. Pero no sabe y no presiente que la envidia lo circunda en silencio... La trampa está cerca. Traicionado en su inocencia, acusado de ser un agente bonapartista, lo encarcelan sin juicio previo en la isla de If, lugar del que nadie sale vivo.');
+
+INSERT INTO sjl_obras (nom, resum) VALUES ('Don Quijote de la Mancha','El ingenioso hidalgo don Quijote de la Mancha narra las aventuras de Alonso Quijano, un hidalgo pobre que de tanto leer novelas de caballería acaba enloqueciendo y creyendo ser un caballero andante, nombrándose a sí mismo como don Quijote de la Mancha. Sus intenciones son ayudar a los pobres y desfavorecidos, y lograr el amor de la supuesta Dulcinea del Toboso, que es en realidad es una campesina llamada Aldonza Lorenzo. Decide nombrar a Sancho Panza, un empleado suyo, su escudero. Juntos viven muchas aventuras y tras ser vencido por el Caballero de la Blanca Luna se retira a su hogar, donde, tras adquirir de nuevo la cordura, fallece.');
+
+INSERT INTO sjl_obras (nom, resum) VALUES ('Sueño de una noche de verano','Durante la boda de Teseo e Hipólita tiene lugar una obra plagada de fantasía, sueños, amor y magia que se entremezclan en las historias de amor de dos parejas nobles, de unos cómicos despreocupados y un grupo de miembros del mundo de las hadas. La historia está ambientada en Atenas y tiene cinco actos. Hermia está comprometida con Demetrio pero está enamorada de Lisandro y no puede casarse con él porque su padre no lo acepta. Entonces esta pareja de enamorados decide fugarse al bosque.');
+
+INSERT INTO sjl_obras (nom, resum) VALUES ('La Celestina','La loca pasión por Melibea, hija de un rico mercader, lleva al joven Calisto a romper todas las barreras y a aliarse con una vieja alcahueta. Desde el momento en que entra en escena, Celestina avasalla toda la obra hasta convertirse en un personaje literario de fama universal. Reflejo de una sociedad conflictiva, Celestina resume y liquida la tradición medieval y abre las puertas a nuevos aires y tiempos nuevos.');
+
+INSERT INTO sjl_obras (nom, resum) VALUES ('Divina Comedia','Dante comienza su viaje imaginario, “perdido en una selva oscura” (alegoría de la vida humana, sus dificultades y tentaciones), debiendo ser guiado por el poeta Virgilio (en inglés) para conseguir salir, atravesando el infierno, el purgatorio y el paraíso.');
+
+INSERT INTO sjl_obras (nom, resum) VALUES ('Romeo y Julieta','La historia narra el amor prohibido entre dos adolescentes, Romeo Montesco y Julieta Capuleto, miembros de dos familias rivales de Verona, en la Italia del renacimiento. Comienza con una pelea callejera entre hombres de las dos familias, que es interrumpida por el Príncipe de Verona, con la amenaza de condenar a muerte a quien provoque otra de estas disputas.');
+
+INSERT INTO sjl_obras (nom, resum) VALUES ('Hamlet','Esta obra de teatro gira en torno a las tribulaciones de Hamlet, cuyo padre, el rey de Dinamarca, ha muerto. Luego de que el fantasma de éste le revela que ha sido asesinado por Claudio, su hermano y actual rey (que además ha casado con la madre de Hamlet, Gertrudis), lo urge a vengarse.');
+
+
+/*Insert Personajes*/
+
+INSERT INTO sjl_personajes (nom, descrip, id_obra) VALUES ('Príncipe Hamlet','El melancólico joven Príncipe titubea constantemente entre la venganza y el suicidio.',(SELECT id FROM sjl_obras WHERE nom = 'Hamlet'));
+
+INSERT INTO sjl_personajes (nom, descrip, id_obra) VALUES ('Polonio','Un distinguido noble que se desempeña como el principal asesor del Rey.',(SELECT id FROM sjl_obras WHERE nom = 'Hamlet'));
+
+INSERT INTO sjl_personajes (nom, descrip, id_obra) VALUES ('Horacio','Horacio es un sabio erudito y un verdadero amigo en quien el Príncipe Hamlet confía regularmente.',(SELECT id FROM sjl_obras WHERE nom = 'Hamlet'));
+
+INSERT INTO sjl_personajes (nom, descrip, id_obra) VALUES ('Ofelia','Una casta doncella, hija de Polonio, y en quien Hamlet tiene interés en amoríos.',(SELECT id FROM sjl_obras WHERE nom = 'Hamlet'));
+
+INSERT INTO sjl_personajes (nom, descrip, id_obra) VALUES ('Romeo Montesco',' Romeo está enamorado de Rosalinda, hasta que conoce a Julieta en un baile al que acude de manera secreta con Mercurio y Benvolio, su mejor amigo y su primo respectivamente.',(SELECT id FROM sjl_obras WHERE nom = 'Romeo y Julieta'));
+
+INSERT INTO sjl_personajes (nom, descrip, id_obra) VALUES ('Julieta Capuleto','Bella dama, hija de los Capuleto. Se enamora y casa en secreto con Romeo y para no ser obligada a casarse posteriormente con el conde Paris, decide beberse un brebaje para parecer muerta hasta la llegada de su amor verdadero, Romeo.',(SELECT id FROM sjl_obras WHERE nom = 'Romeo y Julieta'));
+
+INSERT INTO sjl_personajes (nom, descrip, id_obra) VALUES ('Fray Lorenzo','El religioso encargado de casar a los amantes secretos. ',(SELECT id FROM sjl_obras WHERE nom = 'Romeo y Julieta'));
+
+INSERT INTO sjl_personajes (nom, descrip, id_obra) VALUES ('Mercurio',' Debido a su muerte a manos de Teobaldo, Romeo, cegado por la ira, mata a este y se condena al exilio.',(SELECT id FROM sjl_obras WHERE nom = 'Romeo y Julieta'));
+
+INSERT INTO sjl_personajes (nom, descrip, id_obra) VALUES ('Don Quijote de la Mancha','Nombre Alonso Quijano, mejor conocido como El Caballero de la Triste Figura, El Caballero de los Leones',(SELECT id FROM sjl_obras WHERE nom = 'Don Quijote de la Mancha'));
+
+INSERT INTO sjl_personajes (nom, descrip, id_obra) VALUES ('Sancho Panza','El fiel escudero y fiel amigo de Don Quijote.',(SELECT id FROM sjl_obras WHERE nom = 'Don Quijote de la Mancha'));
+
+/*inserts Elenco*/
+
+INSERT INTO sjl_elenco (id_fec_mem, id_lec, id_club, id_pers, id_obra, principal) VALUES ('06-06-2017', 78965, 1,(SELECT id FROM sjl_personajes WHERE nom='Príncipe Hamlet'),(SELECT id FROM sjl_obras WHERE nom='Hamlet'),'true');
+
+INSERT INTO sjl_elenco (id_fec_mem, id_lec, id_club, id_pers, id_obra, principal) VALUES ('02-06-2018', 5521, 1,(SELECT id FROM sjl_personajes WHERE nom='Polonio'),(SELECT id FROM sjl_obras WHERE nom='Hamlet'),'false');
+
+INSERT INTO sjl_elenco (id_fec_mem, id_lec, id_club, id_pers, id_obra, principal) VALUES ('02-06-2018', 4521, 1,(SELECT id FROM sjl_personajes WHERE nom='Horacio'),(SELECT id FROM sjl_obras WHERE nom='Hamlet'),'false');
+
+INSERT INTO sjl_elenco (id_fec_mem, id_lec, id_club, id_pers, id_obra, principal) VALUES ('08-01-2008', 12345, 1,(SELECT id FROM sjl_personajes WHERE nom='Ofelia'),(SELECT id FROM sjl_obras WHERE nom='Hamlet'),'false');
+
+INSERT INTO sjl_elenco (id_fec_mem, id_lec, id_club, id_pers, id_obra, principal) VALUES ('04-08-2019', 8962, 1,(SELECT id FROM sjl_personajes WHERE nom LIKE 'Romeo%'), (SELECT id FROM sjl_obras WHERE nom='Romeo y Julieta'),'true');
+
+INSERT INTO sjl_elenco (id_fec_mem, id_lec, id_club, id_pers, id_obra, principal) VALUES ('04-04-2004', 6661, 1,(SELECT id FROM sjl_personajes WHERE nom LIKE 'Julieta%'),(SELECT id FROM sjl_obras WHERE nom='Romeo y Julieta'),'true');
+
+INSERT INTO sjl_elenco (id_fec_mem, id_lec, id_club, id_pers, id_obra, principal) VALUES ('07-01-2011', 9987, 1,(SELECT id FROM sjl_personajes WHERE nom='Fray Lorenzo'),(SELECT id FROM sjl_obras WHERE nom='Romeo y Julieta'),'false');
+
+INSERT INTO sjl_elenco (id_fec_mem, id_lec, id_club, id_pers, id_obra, principal) VALUES ('03-05-2015', 1414, 1,(SELECT id FROM sjl_personajes WHERE nom='Mercurio'),(SELECT id FROM sjl_obras WHERE nom='Romeo y Julieta'),'false');
+
+INSERT INTO sjl_elenco (id_fec_mem, id_lec, id_club, id_pers, id_obra, principal) VALUES ('04-04-2014', 8743, 1,(SELECT id FROM sjl_personajes WHERE nom='Don Quijote de la Mancha'),(SELECT id FROM sjl_obras WHERE nom='Don Quijote de la Mancha'),'true');
+
+INSERT INTO sjl_elenco (id_fec_mem, id_lec, id_club, id_pers, id_obra, principal) VALUES ('03-06-2019', 4141, 1,(SELECT id FROM sjl_personajes WHERE nom='Sancho Panza'),(SELECT id FROM sjl_obras WHERE nom='Don Quijote de la Mancha'),'false');
+
+/*inserts Locales Eventos*/
+
+INSERT INTO sjl_locales_eventos (nom,tipo,cap,id_dir,id_club) VALUES ('Salon Cristal','S',250,6,null);
+
+INSERT INTO sjl_locales_eventos (nom,tipo,cap,id_dir,id_club) VALUES ('AuditoriumX','A',600,3,null);
+
+INSERT INTO sjl_locales_eventos (nom,tipo,cap,id_dir,id_club) VALUES ('Aula Paradaise','A',500,5,null);
+
+INSERT INTO sjl_locales_eventos (nom,tipo,cap,id_dir,id_club) VALUES ('Teatro Alta Gama','A',250,3,null);
+
+INSERT INTO sjl_locales_eventos (nom,tipo,cap,id_dir,id_club) VALUES ('Sala Ramiro','S',250,2,null);
+
+INSERT INTO sjl_locales_eventos (nom,tipo,cap,id_dir,id_club) VALUES ('Happy rooms','S',50,2,null);
+
+INSERT INTO sjl_locales_eventos (nom,tipo,cap,id_dir,id_club) VALUES ('Auditorio de Paris','A',550,2,1);
+
+INSERT INTO sjl_locales_eventos (nom,tipo,cap,id_dir,id_club) VALUES ('Salon Ernesto','S',250,2,1);
+
+/* insert historico de presentaciones */
+
+INSERT INTO sjl_historicos_presentaciones VALUES ('12-14-2019',(SELECT id FROM sjl_obras WHERE nom='Hamlet'),2,1,'20:00:00','03:00:00',4.5,158,40);
+
+INSERT INTO sjl_historicos_presentaciones  VALUES ('12-15-2019',(SELECT id FROM sjl_obras WHERE nom='Hamlet'),2,1,'20:00:00','03:00:00',3.8,131,40);
+
+INSERT INTO sjl_historicos_presentaciones  VALUES ('12-16-2019',(SELECT id FROM sjl_obras WHERE nom='Hamlet'),2,1,'21:00:00','03:00:00',null,null,40);
+
+INSERT INTO sjl_historicos_presentaciones  VALUES ('12-17-2019',(SELECT id FROM sjl_obras WHERE nom='Hamlet'),3,1,'21:00:00','03:00:00',null,null,40);
+
+INSERT INTO sjl_historicos_presentaciones  VALUES ('02-05-2017',(SELECT id FROM sjl_obras WHERE nom='Don Quijote de la Mancha'),6,1,'15:00:00','02:30:00',3.5,60,140);
+
+INSERT INTO sjl_historicos_presentaciones VALUES ('02-09-2017',(SELECT id FROM sjl_obras WHERE nom='Don Quijote de la Mancha'),6,1,'15:00:00','02:30:00',4.5,158,120);
+
+INSERT INTO sjl_historicos_presentaciones  VALUES ('03-15-2019',(SELECT id FROM sjl_obras WHERE nom='Romeo y Julieta'),7,1,'17:00:00','03:15:00',null,null,55);
+
+INSERT INTO sjl_historicos_presentaciones  VALUES ('03-07-2019',(SELECT id FROM sjl_obras WHERE nom='Romeo y Julieta'),8,1,'17:00:00','03:15:00',null,null,55);
+/*insert Elenco lectores */
+
+
+INSERT INTO sjl_elenco_lectores (id_fec_mem, id_lec, id_club, id_pers, id_obra, id_hist_pre,id_local, mej_act) VALUES ('06-06-2017', 78965, 1,(SELECT id FROM sjl_personajes WHERE nom='Príncipe Hamlet'),(SELECT id FROM sjl_obras WHERE nom='Hamlet'),'12-14-2019',2,'false');
+
+INSERT INTO sjl_elenco_lectores (id_fec_mem, id_lec, id_club, id_pers, id_obra, id_hist_pre,id_local, mej_act) VALUES ('02-06-2018', 5521, 1,(SELECT id FROM sjl_personajes WHERE nom='Polonio'),(SELECT id FROM sjl_obras WHERE nom='Hamlet'),'12-14-2019',2,'false');
+
+INSERT INTO sjl_elenco_lectores (id_fec_mem, id_lec, id_club, id_pers, id_obra, id_hist_pre,id_local, mej_act) VALUES ('02-06-2018', 4521, 1,(SELECT id FROM sjl_personajes WHERE nom='Horacio'),(SELECT id FROM sjl_obras WHERE nom='Hamlet'),'12-14-2019',2,'true');
+
+INSERT INTO sjl_elenco_lectores (id_fec_mem, id_lec, id_club, id_pers, id_obra, id_hist_pre,id_local, mej_act) VALUES ('08-01-2008', 12345, 1,(SELECT id FROM sjl_personajes WHERE nom='Ofelia'),(SELECT id FROM sjl_obras WHERE nom='Hamlet'),'12-14-2019',2,'false');
+
+INSERT INTO sjl_elenco_lectores (id_fec_mem, id_lec, id_club, id_pers, id_obra, id_hist_pre,id_local, mej_act) VALUES ('04-08-2019', 8962, 1,(SELECT id FROM sjl_personajes WHERE nom LIKE 'Romeo%'),(SELECT id FROM sjl_obras WHERE nom='Romeo y Julieta'),'03-07-2019',8,'false');
+
+INSERT INTO sjl_elenco_lectores (id_fec_mem, id_lec, id_club, id_pers, id_obra, id_hist_pre,id_local, mej_act) VALUES ('04-04-2004', 6661, 1,(SELECT id FROM sjl_personajes WHERE nom LIKE'Julieta%'),(SELECT id FROM sjl_obras WHERE nom='Romeo y Julieta'),'03-07-2019',8,'false');
+
+INSERT INTO sjl_elenco_lectores (id_fec_mem, id_lec, id_club, id_pers, id_obra, id_hist_pre,id_local, mej_act) VALUES ('07-01-2011', 9987, 1,(SELECT id FROM sjl_personajes WHERE nom='Fray Lorenzo'),(SELECT id FROM sjl_obras WHERE nom='Romeo y Julieta'),'03-07-2019',8,'false');
+
+INSERT INTO sjl_elenco_lectores (id_fec_mem, id_lec, id_club, id_pers, id_obra, id_hist_pre,id_local, mej_act) VALUES ('03-05-2015', 1414, 1,(SELECT id FROM sjl_personajes WHERE nom='Mercurio'),(SELECT id FROM sjl_obras WHERE nom='Romeo y Julieta'),'03-07-2019',8,'false');

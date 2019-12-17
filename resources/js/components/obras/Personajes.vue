@@ -7,19 +7,19 @@
                     <div class="card">
                         <div class="card-header card-header-log card-header-icon">
                             <div class="card-icon">
-                                <i class="material-icons">videocam</i>
+                                <i class="material-icons">group</i>
                             </div>
                             <div class="row">
                                 <div class="col-lg-10">
-                                    <h4 class="card-title">Obras actuadas</h4>
+                                    <h4 class="card-title">Personajes</h4>
                                 </div>
                                 <div class="col-lg-2">
 
-                                    <b-link href="/obras/create" class="btn btn-default float-right mt-3" v-b-modal.add-group>
+                                    <b-link v-bind:href="'/obras/'+obra+'/personajes/create'" class="btn btn-default float-right mt-3" v-b-modal.add-group>
                                         <span class="btn-label">
                                             <i class="material-icons">add</i>
                                         </span>
-                                        Crear nueva obra
+                                        Crear personaje
                                     </b-link>
                                 </div>
                             </div>
@@ -32,34 +32,27 @@
                                             <thead>
                                                 <tr>
                                                     <th class="text-center">Nombre</th>
-                                                    <th class="text-center">Libro relacionado</th>
-                                                    <th class="text-center">Resumen</th>
+                                                    <th class="text-center">Descripcion</th>
                                                     <th class="text-center">Acción</th>
-
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr v-for="(item, index) in obras" :key="index">
+                                                <tr v-for="(item,index) in personajes" :key="index">
                                                     <td class="text-center">{{item.nom}}</td>
-                                                    <td class="text-center">{{item.libro}}</td>
-                                                    <td class="text-center">{{item.resum}}</td>
-
+                                                    <td class="text-center">{{item.descrip}}</td>
                                                     <td class="td-actions text-center">
-                                                        <b-link v-bind:href="'/obras/'+item.id+'/edit'" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Modificar" class="btn btn-success">
+                                                        <b-link v-bind:href="'/obras/'+obra+'/personajes/'+item.id+'/edit'" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Modificar" class="btn btn-success">
                                                             <i class="material-icons">edit</i>
-                                                        </b-link>
-                                                        <b-link v-bind:href="'/obras/'+item.id+'/personajes'" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Personajes" class="btn btn-default">
-                                                            <i class="material-icons">group</i>
                                                         </b-link>
                                                         <b-button class="btn btn-danger" id="show-btn" @click="showModal(index)"><i class="material-icons" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Retirar">close</i>
                                                         </b-button>
                                                         <b-modal v-bind:id="index.toString()" hide-footer>
                                                             <template v-slot:modal-title>
                                                                 <div>
-                                                                    Está apunto de eliminar la obra
+                                                                    Está apunto de eliminar al personaje 
                                                                 </div>
                                                                 <div>
-                                                                    <code>{{item.nom}} sobre el libro {{item.libro}}</code>
+                                                                    <code>{{item.nom}}</code>
                                                                 </div>
                                                             </template>
                                                             <div>
@@ -89,17 +82,25 @@
 export default {
     data() {
         return {
-            obras: [],
+            personajes: [],
+            obra: null,
         }
     },
-    created() {
-        axios.get(`/obras`)
+
+    created(){
+        this.obra = window.location.pathname;
+        this.obra = this.obra.replace(/\D/g, '');
+
+        axios.get(`/obras/${this.obra}/personajes`)
             .then(res => {
-                this.obras = res.data.data;
-                console.log(this.obras);
+                this.personajes = res.data.data;
+                console.log(this.personajes);
             }).catch(e => {
                 console.log(e);
             })
+    },
+    computed: {
+
     },
     methods: {
         showModal(item) {
@@ -111,9 +112,10 @@ export default {
             this.$bvModal.hide(item);
         },
         borrar(item) {
-            axios.delete(`/obras/${item.id}`)
+            axios.delete(`/obras/${this.obra}/personajes/${item.id}`)
                 .then(res => {
-                    window.location = `/obras`;
+                    console.log(res.data);
+                    window.location = `/obras/${this.obra}/personajes`;
                 }).catch(e => {
                     console.log(e);
                 })

@@ -626,6 +626,7 @@ class MembersController extends Controller
         $trash2 = '';
         Member::where('doc_iden',$id)->update(array(
             'id_club'=> $trash,
+            'id_grup'=> $trash,
         ));
 
         /* MEMBERSHIP */

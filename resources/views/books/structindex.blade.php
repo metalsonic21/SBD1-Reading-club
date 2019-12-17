@@ -70,7 +70,7 @@
                                                                     </div>
                                                                     </template>                                                                
                                                                     <div>                 
-                                                                        {!! Form::open(['route'=> ['structure.destroy', $isbn, $struct->id, $isbn], 'method'=>'DELETE']) !!}
+                                                                        {!! Form::open(['route'=> ['structure.destroy', $isbn, $struct->id], 'method'=>'DELETE']) !!}
                                                                         {!! Form::button('Eliminar', ['type' => 'submit','class' => 'btn btn-danger btn-block']) !!}
                                                                         {!! Form::close() !!}
                                                                     </div>

@@ -137,9 +137,8 @@ class StructuresController extends Controller
      */
     public function destroy($id, $isbn)
     {
-        $structure = new Structure();
-        $structure = Structure::find($isbn)->first();
-        $structure->delete();
+        DB::delete("DELETE from sjl_secciones_libros WHERE id_lib = '$id' AND id_est = '$isbn'");
+        DB::delete("DELETE from sjl_estructuras_libros WHERE id_lib = '$id' AND id = '$isbn'");
         return redirect()->route('structure.index', [$id]);
         }
 }

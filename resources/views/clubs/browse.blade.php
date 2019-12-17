@@ -64,6 +64,9 @@
                                                             <b-link href="/browseclubs/{{$club->id}}/edit" type="button" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Modificar" class="btn btn-success">
                                                                 <i class="material-icons">edit</i>
                                                             </b-link>
+                                                            <b-link href="/clubs/{{$club->id}}/locales" type="button" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Locales" class="btn btn-info">
+                                                                <i class="material-icons">explore</i>
+                                                            </b-link>
                                                             <b-link href="/browseclubs/{{$club->id}}/editassociated" type="button" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Asociar Clubes" class="btn btn-primary">
                                                                 <i class="material-icons">people</i>
                                                             </b-link>
