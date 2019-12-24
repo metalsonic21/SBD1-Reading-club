@@ -64,10 +64,10 @@
                                                             <b-link href="/browseclubs/{{$club->id}}/edit" type="button" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Modificar" class="btn btn-success">
                                                                 <i class="material-icons">edit</i>
                                                             </b-link>
-                                                            <b-link href="/clubs/{{$club->id}}/locales" type="button" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Locales" class="btn btn-info">
+                                                            <b-link href="/clubs/{{$club->id}}/locales" type="button" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Locales" class="btn btn-primary" style="background-color:#a5a2cb;border-color:#a5a2cb">
                                                                 <i class="material-icons">explore</i>
                                                             </b-link>
-                                                            <b-link href="/browseclubs/{{$club->id}}/editassociated" type="button" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Asociar Clubes" class="btn btn-primary">
+                                                            <b-link href="/browseclubs/{{$club->id}}/editassociated" type="button" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Asociar Clubes" class="btn btn-primary" style="background-color:#339999;border-color:#339999">
                                                                 <i class="material-icons">people</i>
                                                             </b-link>
 

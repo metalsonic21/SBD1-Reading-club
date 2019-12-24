@@ -10,16 +10,23 @@
                                 <i class="material-icons">group</i>
                             </div>
                             <div class="row">
-                                <div class="col-lg-10">
+                                <div class="col-lg-6">
                                     <h4 class="card-title">Explorar locales para club</h4>
                                 </div>
-                                <div class="col-lg-2">
+                                <div class="col-lg-6">
 
                                     <b-link v-bind:href="'/clubs/'+id+'/locales/create'" class="btn btn-default float-right mt-3">
                                         <span class="btn-label">
                                             <i class="material-icons">add</i>
                                         </span>
                                         Crear local
+                                    </b-link>
+
+                                    <b-link v-bind:href="'/browseclubs'" class="btn btn-danger float-right mt-3">
+                                        <span class="btn-label">
+                                            <i class="material-icons">keyboard_backspace</i>
+                                        </span>
+                                        Volver a explorar clubes
                                     </b-link>
                                 </div>
                             </div>

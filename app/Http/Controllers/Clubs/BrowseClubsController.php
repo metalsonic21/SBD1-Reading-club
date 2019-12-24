@@ -11,12 +11,10 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Club\Club;
 use App\Models\Club\Clubclub;
 use App\Models\Language;
-use App\Models\Street;
-use App\Models\Urbanizacion;
-use App\Models\Calle;
-use App\Models\Urbanization;
-use App\Models\City;
-use App\Models\Country;
+use App\Models\Lugar\Urbanizacion;
+use App\Models\Lugar\Calle;
+use App\Models\Lugar\City;
+use App\Models\Lugar\Country;
 use App\Models\Institution;
 
 class BrowseClubsController extends Controller
@@ -112,7 +110,6 @@ class BrowseClubsController extends Controller
             }
         }else{
             $auxinst= null;
-            $club->cuota = 100;
         }
 
         $club = new Club();
@@ -131,6 +128,11 @@ class BrowseClubsController extends Controller
             $club->id_inst = $auxinst;
             $club->cuota = 0;
         }
+
+        /* No institution provided means that it has a membership price */
+        if ($request->nom_inst == null || $request->tipo_inst == null || $request->ciudad_inst == null)
+            $club->cuota = 100;
+
         $club->id_idiom = $request->id_idiom;
         $club->save();
         

@@ -13,8 +13,8 @@ use App\Models\Club\Clubclub;
 use App\Models\Language;
 use App\Models\Street;
 use App\Models\Urbanization;
-use App\Models\City;
-use App\Models\Country;
+use App\Models\Lugar\City;
+use App\Models\Lugar\Country;
 use App\Models\Institution;
 
 class EditAssociatedController extends Controller

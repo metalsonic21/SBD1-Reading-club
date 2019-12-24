@@ -33,19 +33,19 @@
                                         <hr>
                                         <b-row>
                                             <b-col>
-                                                <h5 class="text-center">Seleccione los clubes asociados</h5>
+                                                <h5>Seleccione un club para asociar con {{this.club.nom}}</h5>
                                                 <br>
                                                 <h6>Clubes disponibles</h6>                      
 
                                                 <b-form-group>
                                                     <b-form-checkbox-group v-model="selectedclubs" :options="asociados" name="asociados" stacked></b-form-checkbox-group>
                                                 </b-form-group>
+
+                                                <small>Sólo pueden asociarse clubes que hablen el mismo idioma</small>
                                             </b-col>
                                         </b-row>
                                         <div class="d-flex flex-row-reverse bd-highlight">
                                             <b-button variant="default" @click="update">Continuar</b-button>
-
-                                            <b-link class="btn btn-danger" href="/browseclubs">Cancelar</b-link>
                                         </div>
                                     </b-form>
                                 </div>
