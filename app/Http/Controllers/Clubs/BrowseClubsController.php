@@ -8,8 +8,8 @@ use Response;
 use Log;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\DB;
-use App\Models\Club;
-use App\Models\Clubclub;
+use App\Models\Club\Club;
+use App\Models\Club\Clubclub;
 use App\Models\Language;
 use App\Models\Street;
 use App\Models\Urbanizacion;
@@ -101,7 +101,7 @@ class BrowseClubsController extends Controller
 
         $inst = new Institution();
         if($request->nom_inst <> null && $request->tipo_inst <> null && $request->ciudad_inst <> null){
-            $checker3 = DB::select(DB::raw("SELECT id FROM sjl_instituciones WHERE nom = '$request->nom_inst' AND id_ciudad = '$request->ciudad_inst'"));            
+            $checker3 = DB::select(DB::raw("SELECT id FROM sjl_instituciones WHERE nom = initcap('$request->nom_inst') AND id_ciudad = '$request->ciudad_inst' AND tipo = '$request->tipo_inst'"));            
             if(!$checker3){
                 $inst->nom = $request->nom_inst;
                 $inst->tipo = $request->tipo_inst;
@@ -112,21 +112,25 @@ class BrowseClubsController extends Controller
             }
         }else{
             $auxinst= null;
+            $club->cuota = 100;
         }
 
         $club = new Club();
         $club->nom = $request->nom;
         $club->fec_crea = date("Y-m-d");
-        $club->cuota = $request->cuota;
         if (!$checker2)
             $club->id_dir = $street->id;
         else
             $club->id_dir = $auxid;
 
         if($request->nom_inst <> null && $request->tipo_inst <> null && $request->ciudad_inst <> null && !$checker3)
-            $club->id_inst = $inst->id;
-        else
+        {        $club->cuota = 0;
+                 $club->id_inst = $inst->id;
+        }
+        else{
             $club->id_inst = $auxinst;
+            $club->cuota = 0;
+        }
         $club->id_idiom = $request->id_idiom;
         $club->save();
         
@@ -247,7 +251,7 @@ class BrowseClubsController extends Controller
 
         $inst = new Institution();
         if($request->nom_inst <> null && $request->tipo_inst <> null && $request->ciudad_inst <> null){
-            $checker3 = DB::select(DB::raw("SELECT id FROM sjl_instituciones WHERE nom = '$request->nom_inst' AND id_ciudad = '$request->ciudad_inst'"));            
+            $checker3 = DB::select(DB::raw("SELECT id FROM sjl_instituciones WHERE nom = initcap('$request->nom_inst') AND id_ciudad = '$request->ciudad_inst' AND tipo = '$request->tipo_inst'"));            
             if(!$checker3){
                 $inst->nom = $request->nom_inst;
                 $inst->tipo = $request->tipo_inst;
@@ -258,22 +262,35 @@ class BrowseClubsController extends Controller
             }
         }else{
             $auxinst= null;
+            $club->cuota = 100;
         }
 
         $club->nom = $request->nom;
         //$club->fec_crea = date("Y-m-d"); no se deberia modificar la fecha de creacion del club... creo
-        $club->cuota = $request->cuota;
         if (!$checker2)
             $club->id_dir = $street->id;
         else
             $club->id_dir = $auxid;
 
         if($request->nom_inst <> null && $request->tipo_inst <> null && $request->ciudad_inst <> null && !$checker3)
+        {        
+            $club->cuota = 0;
             $club->id_inst = $inst->id;
-        else
+        }
+        else{
+            $club->cuota = 0;
             $club->id_inst = $auxinst;
+        }
+        /* Unlink an institution if required */
+        $linked = $request->linked;
+            if ($linked != 1){
+                $club->id_inst = null;
+                $club->cuota = 100;
+            }
         $club->id_idiom = $request->id_idiom;
         $club->save();
+        
+
         //Vacio los asociados antes de volver si se modificó el idioma
         if($request->Imodificado == true){
             DB::delete(DB::raw("DELETE FROM sjl_clubes_clubes WHERE id_club1 = '$id' OR id_club2 = '$id' "));

@@ -15,8 +15,6 @@ Vue.component('last-discussed', require('./components/home/LastDiscussed.vue').d
 Vue.component('active-presentations', require('./components/home/ActivePresentations.vue').default);
 
 
-/*BROWSE CLUBS*/
-Vue.component('browse-clubs', require('./components/browse_clubs/BrowseClubs.vue').default);
 
 /* CRUD CLUBS */
 Vue.component('create-club', require('./components/browse_clubs/Create.vue').default);
