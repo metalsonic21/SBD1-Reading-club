@@ -31,18 +31,20 @@ Route::get('/selectclubr', 'clubs\SelectClubController@r')->name('selectclub');
 Route::get('/selectclubp', 'clubs\SelectClubController@pres')->name('selectclub');
 
 /* MEMBERS */
-Route::resource('/clubs/{club}/members', 'clubs\MembersController');
+Route::resource('/clubs/{club}/members', 'members\MembersController');
+Route::get('/clubs/{club}/members/{member}/canAddPayment', 'members\MembersController@canAddPayment')->name('members.verify');
 
 /* DELETE MEMBER FROM CLUB BUT NOT FROM DATABASE */
-Route::patch('/clubs/{club}/deletemember/{id}', 'clubs\MembersController@delete')->name('members.changest');
-Route::put('/clubs/{club}/deletemember/{id}', 'clubs\MembersController@delete')->name('members.changest');
-Route::get('/clubs/{club}/deletemember/{id}', 'clubs\MembersController@delete')->name('members.changest');
+Route::patch('/clubs/{club}/deletemember/{id}', 'members\MembersController@delete')->name('members.changest');
+Route::put('/clubs/{club}/deletemember/{id}', 'members\MembersController@delete')->name('members.changest');
+Route::get('/clubs/{club}/deletemember/{id}', 'members\MembersController@delete')->name('members.changest');
 
 /* MAKE FREE AGENT JOIN A NEW CLUB*/
-Route::resource('/clubs/{clubs}/freeagent', 'clubs\FreeAgentController');
+Route::resource('/clubs/{clubs}/freeagent', 'members\FreeAgentController');
+Route::get('clubs/{club}/freeagent/{member}/verify', 'members\FreeAgentController@verifyDay')->name('agent.verify');
 
 /* PAYMENTS */
-Route::resource('/clubs/{club}/members/{id}/payments', 'clubs\PagosController');
+Route::resource('/clubs/{club}/members/{id}/payments', 'members\PagosController');
 
 /*GROUPS*/
 Route::resource('/clubs/{club}/groups', 'groups\BrowseGroupsController');
@@ -79,7 +81,7 @@ Route::resource('/books', 'books\BooksController');
 Route::resource('/books/{isbn}/structure', 'books\StructuresController');
 
 /* FAVORITE BOOKS */
-Route::resource('/clubs/{club}/members/{id}/favorites', 'books\FavoriteBooksController');
+Route::resource('/clubs/{club}/members/{id}/favorites', 'members\FavoriteBooksController');
 
 /* OBRAS */
 Route::resource('/obras', 'obras\ObraController');

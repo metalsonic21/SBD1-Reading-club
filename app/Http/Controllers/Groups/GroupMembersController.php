@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Groups;
 use App\Models\Grupo;
-use App\Models\Member;
-use App\Models\Membresia;
+use App\Models\Member\Member;
+use App\Models\Member\Membresia;
 use App\Models\Grupos_Lectores;
 use DB;
 use Response;

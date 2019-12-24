@@ -24,16 +24,16 @@
                                 <div class="overflow-auto">
 
                                     <b-form @submit.prevent="add">
-                                    <b-col lg="6" class="my-1">
-                                        <b-form-group label-for="filterInput" class="mb-0">
-                                            <b-input-group size="sm">
-                                                <b-form-input v-model="filter" type="search" id="filterInput" placeholder="Escribe para buscar"></b-form-input>
-                                                <b-input-group-append>
-                                                    <b-button :disabled="!filter" @click="filter = ''">Limpiar</b-button>
-                                                </b-input-group-append>
-                                            </b-input-group>
-                                        </b-form-group>
-                                    </b-col>
+                                        <b-col lg="6" class="my-1">
+                                            <b-form-group label-for="filterInput" class="mb-0">
+                                                <b-input-group size="sm">
+                                                    <b-form-input v-model="filter" type="search" id="filterInput" placeholder="Escribe para buscar"></b-form-input>
+                                                    <b-input-group-append>
+                                                        <b-button :disabled="!filter" @click="filter = ''">Limpiar</b-button>
+                                                    </b-input-group-append>
+                                                </b-input-group>
+                                            </b-form-group>
+                                        </b-col>
                                         <b-table selectable :select-mode="'single'" :items="items" :fields="fields" @row-selected="onRowSelected" responsive="lg" id="my-table" :per-page="perPage" :current-page="currentPage" small sort-by="apellido" :filter="filter" :filterIncludedFields="filterOn" @filtered="onFiltered">
                                             <template v-slot:cell(seleccionado)="{ rowSelected }">
                                                 <template v-if="rowSelected">
@@ -70,6 +70,7 @@
 </template>
 
 <script>
+import Swal from 'sweetalert2';
 export default {
     data() {
         return {
@@ -131,9 +132,35 @@ export default {
 
         validateSelect() {
             if (this.selected.length > 0) {
-                this.add();
+                var path = window.location.pathname;
+                path = path.replace(/\D/g, '');
+                axios.get(`/clubs/${path}/freeagent/${this.selected[0].documento_de_identidad}/verify`)
+                    .then(res => {
+                        //window.location = `/clubs/${path}/members`;
+                        if (res.data.length == 0) {
+                            this.add();
+                        } else {
+                            Swal.fire({
+                                title: 'Error',
+                                text: 'Este miembro ya fue añadido al club hoy, intente de nuevo mañana',
+                                icon: 'error',
+                                confirmButtonText: 'Ok',
+                                confirmButtonColor: '#8C7F7F',
+                            })
+                        }
+                        //console.log(res.data);
+                    }).catch(e => {
+                        console.log(e);
+                    })
+
             } else {
-                alert("Seleccione un lector para agregar\n");
+                Swal.fire({
+                    title: 'Error',
+                    text: 'Seleccione un lector para agregar',
+                    icon: 'error',
+                    confirmButtonText: 'Ok',
+                    confirmButtonColor: '#8C7F7F',
+                })
             }
         },
     }
