@@ -162,7 +162,7 @@ CREATE TABLE SJL_reuniones_mensuales (
 );
 
 CREATE TABLE SJL_libros (
-    isbn         INTEGER NOT NULL,
+    isbn         BIGINT NOT NULL,
     titulo_esp   VARCHAR(40),
     titulo_ori   VARCHAR(40) NOT NULL,
     tema_princ   VARCHAR(200),

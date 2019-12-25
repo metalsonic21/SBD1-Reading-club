@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Members;
 use App\Models\Member\Lista;
-use App\Models\Book;
+use App\Models\Book\Book;
 use App\Models\Member\Member;
 use DB;
 use Response;

@@ -216,7 +216,7 @@ export default {
         validateISBN() {
             let isValid = null;
             if (this.book.isbn == '' || this.book.isbn == null) return null;
-            if (this.book.isbn <= 99999 && !isNaN(this.book.isbn) && this.book.isbn.indexOf(".") == -1 && this.book.isbn > 0)
+            if (this.book.isbn <= 99999 && !isNaN(this.book.isbn) && this.book.isbn.toString().indexOf(".") == -1 && this.book.isbn > 0)
                 return true;
             else return false;
         },

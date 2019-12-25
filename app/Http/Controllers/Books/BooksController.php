@@ -7,11 +7,11 @@ use Illuminate\Http\Request;
 use Response;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\DB;
-use App\Models\Book;
-use App\Models\Editorial;
-use App\Models\Genre;
-use App\Models\Structure;
-use App\Models\Section;
+use App\Models\Book\Book;
+use App\Models\Book\Editorial;
+use App\Models\Book\Genre;
+use App\Models\Book\Structure;
+use App\Models\Book\Section;
 
 class BooksController extends Controller
 {

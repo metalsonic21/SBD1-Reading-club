@@ -8,8 +8,8 @@ use App\Models\Structure;
 use Response;
 use Redirect;
 use Illuminate\Support\Facades\DB;
-use App\Models\Section;
-use App\Models\Book;
+use App\Models\Book\Section;
+use App\Models\Book\Book;
 
 class StructuresController extends Controller
 {

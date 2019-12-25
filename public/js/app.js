@@ -2391,7 +2391,7 @@ __webpack_require__.r(__webpack_exports__);
     validateISBN: function validateISBN() {
       var isValid = null;
       if (this.book.isbn == '' || this.book.isbn == null) return null;
-      if (this.book.isbn <= 99999 && !isNaN(this.book.isbn) && this.book.isbn.indexOf(".") == -1 && this.book.isbn > 0) return true;else return false;
+      if (this.book.isbn <= 99999 && !isNaN(this.book.isbn) && this.book.isbn.toString().indexOf(".") == -1 && this.book.isbn > 0) return true;else return false;
     },
     validateTO: function validateTO() {
       if (this.book.titulo_ori == '' || this.book.titulo_ori == null) return null;
