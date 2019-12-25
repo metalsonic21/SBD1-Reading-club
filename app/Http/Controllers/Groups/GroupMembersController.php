@@ -82,6 +82,22 @@ class GroupMembersController extends Controller
     }
 
     /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function verifyDay(Request $request, $idclub, $idgrupo, $idmember)
+    {
+        /* Si tratas de añadir un miembro que fue retirado del club el mismo día te dara un error */
+        $today = date('Y-m-d');
+        $checkermem = DB::select(DB::raw("SELECT fec_i FROM sjl_membresias WHERE id_lec = '$idmember' AND id_club = '$idclub' AND fec_f IS NULL"));
+        $mem = $checkermem[0]->fec_i;
+        $checker = DB::select(DB::raw("SELECT * from sjl_grupos_lectores WHERE id_fec_i = '$today' AND id_lec = '$idmember' AND id_club = '$idclub' AND id_fec_mem = '$mem'"));
+        return $checker;
+    }
+
+    /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id

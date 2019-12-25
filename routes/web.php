@@ -60,6 +60,8 @@ Route::resource('/clubs/{club}/groups/{group}/gmembers', 'groups\GroupMembersCon
 Route::put('/clubs/{club}/groups/{group}/dropmember/{member}', 'groups\GroupMembersController@borrar')->name('gmembers.borrar');
 Route::patch('/clubs/{club}/groups/{group}/dropmember/{member}', 'groups\GroupMembersController@borrar')->name('gmembers.borrar');
 Route::get('/clubs/{club}/groups/{group}/dropmember/{member}', 'groups\GroupMembersController@borrar')->name('gmembers.borrar');
+/*Verify if I can add a member to a group (conflict with people joining and leaving the same day and primary keys)*/
+Route::get('/clubs/{club}/groups/{group}/gmembers/{member}/verify', 'groups\GroupMembersController@verifyDay')->name('gmembers.verify');
 
 
 /* MEETINGS */

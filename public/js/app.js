@@ -4592,6 +4592,26 @@ __webpack_require__.r(__webpack_exports__);
       })["catch"](function (e) {
         console.log(e);
       });
+    },
+    verify: function verify() {
+      var _this3 = this;
+
+      this.member = this.selected[0];
+      axios.get("/clubs/".concat(this.club, "/groups/").concat(this.grupo, "/gmembers/").concat(this.member.documento_de_identidad, "/verify")).then(function (res) {
+        if (res.data.length == 0) {
+          _this3.add();
+        } else {
+          sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire({
+            title: 'Error',
+            text: 'Este miembro ya fue añadido al grupo hoy, intente de nuevo mañana',
+            icon: 'error',
+            confirmButtonText: 'Ok',
+            confirmButtonColor: '#8C7F7F'
+          });
+        }
+      })["catch"](function (e) {
+        console.log(e);
+      });
     }
   },
   computed: {
@@ -82927,7 +82947,10 @@ var render = function() {
                 [
                   _c(
                     "b-button",
-                    { attrs: { variant: "default" }, on: { click: _vm.add } },
+                    {
+                      attrs: { variant: "default" },
+                      on: { click: _vm.verify }
+                    },
                     [_vm._v("Continuar")]
                   )
                 ],

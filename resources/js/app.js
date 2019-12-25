@@ -14,8 +14,6 @@ Vue.component('popular-books', require('./components/home/PopularBooks.vue').def
 Vue.component('last-discussed', require('./components/home/LastDiscussed.vue').default);
 Vue.component('active-presentations', require('./components/home/ActivePresentations.vue').default);
 
-
-
 /* CRUD CLUBS */
 Vue.component('create-club', require('./components/browse_clubs/Create.vue').default);
 Vue.component('edit-club', require('./components/browse_clubs/Edit.vue').default);

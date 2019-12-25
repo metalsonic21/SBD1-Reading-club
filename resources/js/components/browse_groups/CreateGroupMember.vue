@@ -39,7 +39,7 @@
 
                 </div>
                 <div class="d-flex flex-row-reverse bd-highlight">
-                    <b-button variant="default" @click="add">Continuar</b-button>
+                    <b-button variant="default" @click="verify">Continuar</b-button>
                 </div>
             </b-form>
         </div>
@@ -106,6 +106,26 @@ export default {
                     console.log(e);
                 })
         },
+
+        verify() {
+            this.member = this.selected[0];
+            axios.get(`/clubs/${this.club}/groups/${this.grupo}/gmembers/${this.member.documento_de_identidad}/verify`)
+                .then(res => {
+                    if (res.data.length == 0) {
+                        this.add();
+                    } else {
+                        Swal.fire({
+                            title: 'Error',
+                            text: 'Este miembro ya fue añadido al grupo hoy, intente de nuevo mañana',
+                            icon: 'error',
+                            confirmButtonText: 'Ok',
+                            confirmButtonColor: '#8C7F7F',
+                        })
+                    }
+                }).catch(e => {
+                    console.log(e);
+                })
+        }
     },
     computed: {
         rows() {
