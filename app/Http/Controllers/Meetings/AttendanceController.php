@@ -98,8 +98,11 @@ class AttendanceController extends Controller
                 $total = $checkerT[0]->count;
                 $checkerN = DB::select(DB::raw("SELECT count (*) from sjl_inansistencias WHERE id_grupo = '$idgrupo' AND id_lec = '$falta->id_lec' AND fec_reu_men > CURRENT_DATE - INTERVAL '2 months'"));
                 $totalI = $checkerN[0]->count;
-
-                $percentage = ($totalI*100)/$total;
+                
+                $percentage = 0;
+                if ($total != 0){
+                    $percentage = ($totalI*100)/$total;
+                }
                 
                 /* Delete member if >30% non attendance */
                 if ($percentage>30){
