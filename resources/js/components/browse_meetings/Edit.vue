@@ -21,7 +21,7 @@
                         <b-col cols="12">
                             <label for="conclusion"></label>
                             <b-form-textarea v-model="meeting.conclusion" id="conclusion" name="conclusion"></b-form-textarea>
-                            <b-form-invalid-feedback :state="validateC">Por favor, rellene este campo</b-form-invalid-feedback>
+                            <b-form-invalid-feedback :state="validateC">El campo conclusión no puede superar los 1000 caracteres</b-form-invalid-feedback>
                         </b-col>
                     </b-row>
                     <br>
@@ -44,6 +44,7 @@
 </template>
 
 <script>
+import Swal from 'sweetalert2';
 export default {
     data() {
         return {
@@ -95,29 +96,27 @@ export default {
     },
     created() {
         var path = window.location.pathname;
-        let beginc = path.indexOf("bs/")+3;
+        let beginc = path.indexOf("bs/") + 3;
         let endc = path.indexOf("/gr");
 
-        this.club = path.substring(beginc,endc);
+        this.club = path.substring(beginc, endc);
 
-        let beging = path.indexOf("ups/")+4;
+        let beging = path.indexOf("ups/") + 4;
         let endg = path.indexOf("/mee");
 
-        this.grupo = path.substring(beging,endg);
-        
+        this.grupo = path.substring(beging, endg);
 
-        let begin4 = path.indexOf("gs/")+3;
-        let partial = path.substring(begin4,path.length);
-        this.reunion = partial.substring(0,partial.indexOf("/"));
+        let begin4 = path.indexOf("gs/") + 3;
+        let partial = path.substring(begin4, path.length);
+        this.reunion = partial.substring(0, partial.indexOf("/"));
 
-        let partial2 = partial.substring(partial.indexOf("/")+1,partial.length);
-        this.moderador = partial2.substring(0,partial2.indexOf("/"));
+        let partial2 = partial.substring(partial.indexOf("/") + 1, partial.length);
+        this.moderador = partial2.substring(0, partial2.indexOf("/"));
 
-        let partial3 = partial2.substring(partial2.indexOf("/")+1,partial2.length);
-        this.libro = partial3.substring(0,partial3.indexOf("/"));
+        let partial3 = partial2.substring(partial2.indexOf("/") + 1, partial2.length);
+        this.libro = partial3.substring(0, partial3.indexOf("/"));
 
         //console.log('clubs: '+this.club+' grupo: '+this.grupo+' reunion: '+this.reunion+' moderador: '+this.moderador+' libro: '+this.libro);
-
 
         axios.get(`/clubs/${this.club}/groups/${this.grupo}/meetings/${this.reunion}/${this.moderador}/${this.libro}/edit`)
             .then(res => {
@@ -129,9 +128,11 @@ export default {
     },
     computed: {
         validateC() {
-            return (this.meeting.conclusion != '');
+            if (this.meeting.conclusion == null || this.meeting.conclusion == '') return null;
+            if (this.meeting.conclusion.length>1000) return false;
+            else return true;
         },
-        validateV(){
+        validateV() {
             return (this.meeting.valoracion != null);
         }
     },
@@ -159,13 +160,34 @@ export default {
 
         revalidate() {
             let msg = '';
-            if (!this.validateC) msg = msg + "Por favor, escriba una conclusión\n";
-            if (!this.validateV) msg = msg + "Seleccione valoración\n";
+            if (this.validateC == null) msg = msg + "Por favor, escriba una conclusión<br>";
+            if (this.validateC == false) msg = msg + "El campo conclusión no puede superar los 1000 caracteres<br>";
+            if (!this.validateV) msg = msg + "Seleccione valoración<br>";
 
             if (msg == '') {
-                this.add();
+                Swal.fire({
+                    title: '¿Estás seguro de esta acción?',
+                    text: "No podrás revertirla!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#8C7F7F',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Sí',
+                    cancelButtonText: 'No',
+                }).then((result) => {
+                    if (result.value) {
+                        this.add();
+                    }
+                })
+
             } else {
-                alert(msg);
+                Swal.fire({
+                    title: 'Error',
+                    html: '<p class="text-left">' + msg + '</p>',
+                    icon: 'error',
+                    confirmButtonText: 'Ok',
+                    confirmButtonColor: '#8C7F7F',
+                })
             }
         }
     }

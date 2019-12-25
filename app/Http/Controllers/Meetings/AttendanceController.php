@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Meetings;
 use DB;
 use Response;
-use App\Models\Inasistencia;
+use App\Models\Meeting\Inasistencia;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 

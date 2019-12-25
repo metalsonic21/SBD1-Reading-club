@@ -1,8 +1,8 @@
 <?php
 
 namespace App\Http\Controllers\Meetings;
-use App\Models\Reunion;
-use App\Models\Inasistencia;
+use App\Models\Meeting\Reunion;
+use App\Models\Meeting\Inasistencia;
 use DB;
 use Response;
 use App\Http\Controllers\Controller;
@@ -20,22 +20,42 @@ class MeetingsController extends Controller
         if($request->ajax()){
             $meetings = DB::select(DB::raw("SELECT (
                 SELECT titulo_esp FROM sjl_libros WHERE isbn = r.id_lib
-            ) libro,(
-                SELECT isbn FROM sjl_libros WHERE isbn = r.id_lib
-            ) idlibro, r.fec as fecha, (
-                SELECT nom1 || ' ' || ape1 FROM sjl_lectores WHERE doc_iden = r.id_lec 
-            ) moderador , (
-                SELECT doc_iden FROM sjl_lectores WHERE doc_iden = r.id_lec 
-            ) idmod , r.n_ses as sesion, r.valor as valoracion FROM sjl_reuniones_mensuales r WHERE r.id_club = '$idclub' AND r.id_grupo = '$idgrupo'"));
-            return Response::json(array('data'=>$meetings));
-        }
-        else{
-            return view('meetings.browsemeetings');
-        }
+                ) libro,(
+                    SELECT isbn FROM sjl_libros WHERE isbn = r.id_lib
+                ) idlibro, r.fec as fecha, (
+                    SELECT nom1 || ' ' || ape1 FROM sjl_lectores WHERE doc_iden = r.id_lec 
+                ) moderador , (
+                    SELECT doc_iden FROM sjl_lectores WHERE doc_iden = r.id_lec 
+                ) idmod , r.n_ses as sesion, r.valor as valoracion FROM sjl_reuniones_mensuales r WHERE r.id_club = '$idclub' AND r.id_grupo = '$idgrupo'"));
+                return Response::json(array('data'=>$meetings));
+            }
+            else{
+                return view('meetings.browsemeetings');
+            }
     }
 
     public function calendar(){
         return view ('meetings.meetings');
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+
+    public function verifyAdd($idclub, $idgrupo, Request $request){
+        $checkerM = DB::select(DB::raw("SELECT count(id_fec_i) FROM sjl_grupos_lectores WHERE fec_f IS NULL AND id_club = '$idclub' AND id_grupo = '$idgrupo'"));
+        $typeG = DB::select(DB::raw("SELECT tipo from sjl_grupos_lectura WHERE id_club = '$idclub' AND id = '$idgrupo'"));
+        
+        $miembros = $checkerM[0]->count;
+        $tipo = $typeG[0]->tipo;
+
+        if ($tipo == 'A' && $miembros<10) return 0;
+        if ($tipo == 'J' && $miembros<5) return 2;
+        if ($tipo == 'N' && $miembros<7) return 3;
+        return 1;
     }
 
     /**
@@ -45,28 +65,34 @@ class MeetingsController extends Controller
      */
     public function create($idclub, $idgrupo, Request $request)
     {
-        if($request->ajax()){
-
-            /* Get type of group */
-            $member = '';
-            $type = DB::select(DB::raw("SELECT tipo from sjl_grupos_lectura WHERE id = '$idgrupo' AND id_club = '$idclub'"));
-            $typeg = $type[0]->tipo;
-
-            if ($typeg == 'A'){
-            $members = DB::select(DB::raw("SELECT nom1 || ' ' || ape1 as text, doc_iden as value FROM sjl_lectores WHERE id_club = '$idclub' AND id_grup = '$idgrupo'"));
-            }
-
-            else {
-                $members = DB::select(DB::raw("SELECT l.nom1 || ' ' || l.ape1 as text, l.doc_iden as value FROM sjl_lectores l WHERE '$idclub'=(SELECT h.id_club FROM sjl_grupos_lectura h WHERE (l.id_grup=h.id)AND(h.tipo='A')) "));
-            }
-            $libros = DB::select(DB::raw("SELECT l.isbn as id, l.titulo_esp as titulo_en_español, l.titulo_ori as titulo_original, l.fec_pub as fecha_de_publicacion, l.autor FROM sjl_libros l WHERE NOT EXISTS (
-                SELECT id_lib FROM sjl_reuniones_mensuales WHERE id_club = '$idclub' AND id_grupo = '$idgrupo' AND n_ses = 1 AND id_lib = l.isbn
-            )"));
-            return Response::json(array('data'=>$members,'libros'=>$libros));
+        if ($this->verifyAdd($idclub,$idgrupo,$request)!=1){
+            return view ('error.402');
         }
+
         else{
-            return view('meetings.create');
-        }
+            if($request->ajax()){
+
+                /* Get type of group */
+                $member = '';
+                $type = DB::select(DB::raw("SELECT tipo from sjl_grupos_lectura WHERE id = '$idgrupo' AND id_club = '$idclub'"));
+                $typeg = $type[0]->tipo;
+
+                if ($typeg == 'A'){
+                $members = DB::select(DB::raw("SELECT nom1 || ' ' || ape1 as text, doc_iden as value FROM sjl_lectores WHERE id_club = '$idclub' AND id_grup = '$idgrupo'"));
+                }
+
+                else {
+                    $members = DB::select(DB::raw("SELECT l.nom1 || ' ' || l.ape1 as text, l.doc_iden as value FROM sjl_lectores l WHERE '$idclub'=(SELECT h.id_club FROM sjl_grupos_lectura h WHERE (l.id_grup=h.id)AND(h.tipo='A')) "));
+                }
+                $libros = DB::select(DB::raw("SELECT l.isbn as id, l.titulo_esp as titulo_en_español, l.titulo_ori as titulo_original, l.fec_pub as fecha_de_publicacion, l.autor FROM sjl_libros l WHERE NOT EXISTS (
+                    SELECT id_lib FROM sjl_reuniones_mensuales WHERE id_club = '$idclub' AND id_grupo = '$idgrupo' AND n_ses = 1 AND id_lib = l.isbn
+                )"));
+                return Response::json(array('data'=>$members,'libros'=>$libros));
+            }
+            else{
+                return view('meetings.create');
+            }
+    }
     }
 
     /**
@@ -146,25 +172,6 @@ class MeetingsController extends Controller
         }
         return Response::json(array('f1'=>$ED,'f2'=>$ED2, 'f3'=>$ED3));
 
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($idclub, $idgrupo, $idreunion, $idmod, $idlibro)
-    {
-        /*$meeting = DB::select(DB::raw("SELECT (
-            SELECT titulo_esp FROM sjl_libros WHERE isbn = r.id_lib
-        ), r.fec, (
-            SELECT nom1 || ' ' || ape1 FROM sjl_lectores WHERE doc_iden = r.id_lec
-        ), r.n_ses, r.conclu, r.valor, nom FROM sjl_reuniones_mensuales r"));*/
-
-        //$inas = DB::select(DB::raw("SELECT nom1 || ' ' || ape1 FROM sjl_lectores, sjl_inansistencias r WHERE doc_iden = r.id_lec AND id_grupo = '$idgrupo' AND id_club = '$idclub' AND fec_reu_men = '$idreunion'"));
-        //return $inas;
-        //return view('groups.details')->with('g',$grupo);
     }
 
     /**

@@ -5052,6 +5052,8 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_0__);
 //
 //
 //
@@ -5150,6 +5152,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -5194,6 +5197,41 @@ __webpack_require__.r(__webpack_exports__);
       })["catch"](function (e) {
         console.log(e);
       });
+    },
+    verify: function verify() {
+      var _this3 = this;
+
+      axios.get("/clubs/".concat(this.club, "/groups/").concat(this.grupo, "/verifyM")).then(function (res) {
+        if (res.data == 1) {
+          window.location = "/clubs/".concat(_this3.club, "/groups/").concat(_this3.grupo, "/meetings/create");
+        } else if (res.data == 0) {
+          sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire({
+            title: 'Error',
+            text: 'No se puede programar ninguna reunión para este grupo debido a que tiene menos de 10 miembros',
+            icon: 'error',
+            confirmButtonText: 'Ok',
+            confirmButtonColor: '#8C7F7F'
+          });
+        } else if (res.data == 2) {
+          sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire({
+            title: 'Error',
+            text: 'No se puede programar ninguna reunión para este grupo debido a que tiene menos de 5 miembros',
+            icon: 'error',
+            confirmButtonText: 'Ok',
+            confirmButtonColor: '#8C7F7F'
+          });
+        } else if (res.data == 3) {
+          sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire({
+            title: 'Error',
+            text: 'No se puede programar ninguna reunión para este grupo debido a que tiene menos de 7 miembros',
+            icon: 'error',
+            confirmButtonText: 'Ok',
+            confirmButtonColor: '#8C7F7F'
+          });
+        }
+      })["catch"](function (e) {
+        console.log(e);
+      });
     }
   }
 });
@@ -5209,6 +5247,8 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_0__);
 //
 //
 //
@@ -5285,7 +5325,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -5398,8 +5438,19 @@ __webpack_require__.r(__webpack_exports__);
         grupo: this.grupo
       };
       axios.post("/clubs/".concat(this.club, "/groups/").concat(this.grupo, "/meetings"), params).then(function (res) {
-        if (_this2.meeting.sesion == 3) alert("Se han generado las reuniones para el libro solicitado en los siguientes días\n" + res.data.f1 + "\n" + res.data.f2 + "\n" + res.data.f3 + "\n");else if (_this2.meeting.sesion == 2) alert("Se han generado las reuniones para el libro solicitado en los siguientes días\n" + res.data.f1 + "\n" + res.data.f2 + "\n");else if (_this2.meeting.sesion == 1) alert("Se han generado las reuniones para el libro solicitado en los siguientes días\n" + res.data.f1 + "\n");
-        window.location = "/clubs/".concat(_this2.club, "/groups/").concat(_this2.grupo, "/meetings");
+        var msg = '';
+        if (_this2.meeting.sesion == 3) msg = msg + "Se han generado las reuniones para el libro solicitado en los siguientes días<br>" + res.data.f1 + "<br>" + res.data.f2 + "<br>" + res.data.f3;else if (_this2.meeting.sesion == 2) msg = msg + "Se han generado las reuniones para el libro solicitado en los siguientes días<br>" + res.data.f1 + "<br>" + res.data.f2;else if (_this2.meeting.sesion == 1) msg = msg + "Se han generado las reuniones para el libro solicitado en los siguientes días<br>" + res.data.f1;
+        sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire({
+          title: 'Listo',
+          html: msg,
+          icon: 'success',
+          confirmButtonColor: '#8C7F7F',
+          confirmButtonText: 'Ok'
+        }).then(function (result) {
+          if (result.value) {
+            window.location = "/clubs/".concat(_this2.club, "/groups/").concat(_this2.grupo, "/meetings");
+          }
+        });
       })["catch"](function (e) {
         console.log(e);
       });
@@ -5493,6 +5544,8 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_0__);
 //
 //
 //
@@ -5538,6 +5591,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -5607,7 +5661,8 @@ __webpack_require__.r(__webpack_exports__);
   },
   computed: {
     validateC: function validateC() {
-      return this.meeting.conclusion != '';
+      if (this.meeting.conclusion == null || this.meeting.conclusion == '') return null;
+      if (this.meeting.conclusion.length > 1000) return false;else return true;
     },
     validateV: function validateV() {
       return this.meeting.valoracion != null;
@@ -5634,14 +5689,36 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     revalidate: function revalidate() {
+      var _this3 = this;
+
       var msg = '';
-      if (!this.validateC) msg = msg + "Por favor, escriba una conclusión\n";
-      if (!this.validateV) msg = msg + "Seleccione valoración\n";
+      if (this.validateC == null) msg = msg + "Por favor, escriba una conclusión<br>";
+      if (this.validateC == false) msg = msg + "El campo conclusión no puede superar los 1000 caracteres<br>";
+      if (!this.validateV) msg = msg + "Seleccione valoración<br>";
 
       if (msg == '') {
-        this.add();
+        sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire({
+          title: '¿Estás seguro de esta acción?',
+          text: "No podrás revertirla!",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#8C7F7F',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Sí',
+          cancelButtonText: 'No'
+        }).then(function (result) {
+          if (result.value) {
+            _this3.add();
+          }
+        });
       } else {
-        alert(msg);
+        sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire({
+          title: 'Error',
+          html: '<p class="text-left">' + msg + '</p>',
+          icon: 'error',
+          confirmButtonText: 'Ok',
+          confirmButtonColor: '#8C7F7F'
+        });
       }
     }
   }
@@ -83567,14 +83644,7 @@ var render = function() {
                           "b-link",
                           {
                             staticClass: "btn btn-default float-right mt-3",
-                            attrs: {
-                              href:
-                                "/clubs/" +
-                                _vm.club +
-                                "/groups/" +
-                                _vm.grupo +
-                                "/meetings/create"
-                            }
+                            on: { click: _vm.verify }
                           },
                           [
                             _c("span", { staticClass: "btn-label" }, [
@@ -84207,15 +84277,6 @@ var render = function() {
                       on: { click: _vm.revalidate }
                     },
                     [_vm._v("Continuar")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "b-link",
-                    {
-                      staticClass: "btn btn-danger",
-                      attrs: { href: "/browseclubs" }
-                    },
-                    [_vm._v("Cancelar")]
                   )
                 ],
                 1
@@ -84463,7 +84524,11 @@ var render = function() {
                           _c(
                             "b-form-invalid-feedback",
                             { attrs: { state: _vm.validateC } },
-                            [_vm._v("Por favor, rellene este campo")]
+                            [
+                              _vm._v(
+                                "El campo conclusión no puede superar los 1000 caracteres"
+                              )
+                            ]
                           )
                         ],
                         1

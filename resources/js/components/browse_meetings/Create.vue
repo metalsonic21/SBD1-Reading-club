@@ -67,7 +67,6 @@
                 <div class="d-flex flex-row-reverse bd-highlight">
                     <b-button variant="default" @click="revalidate">Continuar</b-button>
 
-                    <b-link class="btn btn-danger" href="/browseclubs">Cancelar</b-link>
                 </div>
             </b-form>
         </div>
@@ -76,6 +75,7 @@
 </template>
 
 <script>
+import Swal from 'sweetalert2';
 export default {
     data() {
         return {
@@ -200,14 +200,25 @@ export default {
 
             axios.post(`/clubs/${this.club}/groups/${this.grupo}/meetings`, params)
                 .then(res => {
+                    let msg = '';
                     if (this.meeting.sesion == 3)
-                        alert("Se han generado las reuniones para el libro solicitado en los siguientes días\n" + res.data.f1 + "\n" + res.data.f2 + "\n" + res.data.f3 + "\n");
+                        msg = msg + "Se han generado las reuniones para el libro solicitado en los siguientes días<br>" + res.data.f1 + "<br>" + res.data.f2 + "<br>" + res.data.f3;
                     else if (this.meeting.sesion == 2)
-                        alert("Se han generado las reuniones para el libro solicitado en los siguientes días\n" + res.data.f1 + "\n" + res.data.f2 + "\n");
+                        msg = msg + "Se han generado las reuniones para el libro solicitado en los siguientes días<br>" + res.data.f1 + "<br>" + res.data.f2;
                     else if (this.meeting.sesion == 1)
-                        alert("Se han generado las reuniones para el libro solicitado en los siguientes días\n" + res.data.f1 + "\n");
+                        msg = msg + "Se han generado las reuniones para el libro solicitado en los siguientes días<br>" + res.data.f1;
+                    Swal.fire({
+                        title: 'Listo',
+                        html: msg,
+                        icon: 'success',
+                        confirmButtonColor: '#8C7F7F',
+                        confirmButtonText: 'Ok',
+                    }).then((result) => {
+                        if (result.value) {
+                            window.location = `/clubs/${this.club}/groups/${this.grupo}/meetings`;
+                        }
+                    })
 
-                    window.location = `/clubs/${this.club}/groups/${this.grupo}/meetings`;
                 }).catch(e => {
                     console.log(e);
                 })

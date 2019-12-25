@@ -66,6 +66,7 @@ Route::get('/clubs/{club}/groups/{group}/gmembers/{member}/verify', 'groups\Grou
 
 /* MEETINGS */
 Route::resource('/clubs/{club}/groups/{group}/meetings', 'meetings\MeetingsController');
+Route::get('/clubs/{club}/groups/{group}/verifyM', 'meetings\MeetingsController@verifyAdd')->name('meetings.verify');
 Route::get('/clubs/{club}/groups/{group}/meetings/{date}/{mod}/{libro}/edit', 'meetings\MeetingsController@modificar')->name('meetings.modificar');
 Route::get('/clubs/{club}/groups/{group}/meetings/{date}/{mod}/{libro}', 'meetings\MeetingsController@concluir')->name('meetings.concluir');
 Route::put('/clubs/{club}/groups/{group}/meetings/{date}/{mod}/{libro}', 'meetings\MeetingsController@concluir')->name('meetings.concluir');

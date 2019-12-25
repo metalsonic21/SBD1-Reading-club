@@ -21,7 +21,7 @@
                                         Consultar calendario
                                     </b-link>
 
-                                    <b-link v-bind:href="'/clubs/'+club+'/groups/'+grupo+'/meetings/create'" class="btn btn-default float-right mt-3">
+                                    <b-link @click="verify" class="btn btn-default float-right mt-3">
                                         <span class="btn-label">
                                             <i class="material-icons">add</i>
                                         </span>
@@ -97,6 +97,7 @@
 </template>
 
 <script>
+import Swal from 'sweetalert2';
 export default {
     data() {
         return {
@@ -131,12 +132,46 @@ export default {
             item = item.toString();
             this.$bvModal.hide(item);
         },
-        borrar(item){
+        borrar(item) {
             console.log(item);
             axios.delete(`/clubs/${this.club}/groups/${this.grupo}/meetings/${item.fecha}`)
                 .then(res => {
                     console.log(res.data);
                     window.location = `/clubs/${this.club}/groups/${this.grupo}/meetings`;
+                }).catch(e => {
+                    console.log(e);
+                })
+        },
+        verify() {
+            axios.get(`/clubs/${this.club}/groups/${this.grupo}/verifyM`)
+                .then(res => {
+                    if (res.data == 1) {
+                        window.location = `/clubs/${this.club}/groups/${this.grupo}/meetings/create`;
+                    } else if (res.data == 0) {
+                        Swal.fire({
+                            title: 'Error',
+                            text: 'No se puede programar ninguna reunión para este grupo debido a que tiene menos de 10 miembros',
+                            icon: 'error',
+                            confirmButtonText: 'Ok',
+                            confirmButtonColor: '#8C7F7F',
+                        })
+                    } else if (res.data == 2) {
+                        Swal.fire({
+                            title: 'Error',
+                            text: 'No se puede programar ninguna reunión para este grupo debido a que tiene menos de 5 miembros',
+                            icon: 'error',
+                            confirmButtonText: 'Ok',
+                            confirmButtonColor: '#8C7F7F',
+                        })
+                    } else if (res.data == 3) {
+                        Swal.fire({
+                            title: 'Error',
+                            text: 'No se puede programar ninguna reunión para este grupo debido a que tiene menos de 7 miembros',
+                            icon: 'error',
+                            confirmButtonText: 'Ok',
+                            confirmButtonColor: '#8C7F7F',
+                        })
+                    }
                 }).catch(e => {
                     console.log(e);
                 })

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Groups;
 use App\Models\Grupo\Grupo;
 use App\Models\Grupo\Grupos_Lectores;
-use App\Models\Inasistencia;
+use App\Models\Meeting\Inasistencia;
 use App\Models\Member\Member;
 use App\Http\Controllers\Controller;
 use DB;
