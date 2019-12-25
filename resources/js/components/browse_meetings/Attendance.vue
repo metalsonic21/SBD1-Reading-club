@@ -36,6 +36,7 @@
 </template>
 
 <script>
+import Swal from 'sweetalert2';
 export default {
     data() {
         return {
@@ -120,7 +121,34 @@ export default {
             }
             axios.post(`/clubs/${this.club}/groups/${this.grupo}/meetings/${this.reunion}/${this.moderador}/${this.libro}/attendance`, params)
                 .then(res => {
-                    window.location = `/clubs/${this.club}/groups/${this.grupo}/meetings`;
+                    if (res.data.length > 0){
+                        let msg = '';
+                        let msg2 = '';
+                        let i = 0;
+                            for (i; i<res.data.length; i++){
+                                msg = msg + res.data[i] + '<br>';
+                            }
+
+                            if (msg != ''){
+                                msg2 = 'Se han eliminado los siguientes miembros del club por inasistencia: <br>'
+                            }
+                        Swal.fire({
+                            title: 'Asistencia pasada',
+                            html: msg2 + msg,
+                            icon: 'success',
+                            confirmButtonColor: '#8C7F7F',
+                            confirmButtonText: 'Ok',
+                        }).then((result) => {
+                            if (result.value) {
+                                window.location = `/clubs/${this.club}/groups/${this.grupo}/meetings`;
+                            }
+                        })
+                    }
+
+                    else{
+                        window.location = `/clubs/${this.club}/groups/${this.grupo}/meetings`;
+                    }
+
                     console.log(res.data);
                 }).catch(e => {
                     console.log(e);

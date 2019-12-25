@@ -18,7 +18,7 @@
 <meta http-equiv="content-type" content="text/html;charset=utf-8" />
 <head>
     <meta charset="utf-8" />
-    <link rel="icon" type="image/png" href="./img/logo/ico-book.png">
+    <link rel="icon" type="image/png" href="{{ asset('img/logo/book-icon.jpg') }}">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   
     <!-- Vue -->

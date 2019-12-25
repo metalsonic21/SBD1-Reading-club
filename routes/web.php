@@ -75,7 +75,7 @@ Route::get('/clubs/{club}/groups/{group}/meetings/{date}/{mod}/{libro}/{sesion}/
 
 /* ATTENDANCE */
 Route::resource('/clubs/{club}/groups/{group}/meetings/{date}/{mod}/{libro}/attendance', 'meetings\AttendanceController');
-
+Route::get('/clubs/{club}/groups/{group}/meetings/{date}/{mod}/{libro}/verify', 'meetings\AttendanceController@verifyA')->name('meetings.verifyA');
 Route::get('/managemeetings/calendar', 'meetings\MeetingsController@calendar')->name('managemeetings');
 
 

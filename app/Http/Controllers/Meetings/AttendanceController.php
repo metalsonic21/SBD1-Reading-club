@@ -4,11 +4,27 @@ namespace App\Http\Controllers\Meetings;
 use DB;
 use Response;
 use App\Models\Meeting\Inasistencia;
+use App\Models\Member\Member;
+use App\Models\Member\Membresia;
+use App\Models\Grupo\Grupos_Lectores;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 class AttendanceController extends Controller
 {
+
+        /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function verifyA($idclub, $idgrupo, $idreunion, $idmod, $idlibro, Request $request)
+    {
+        $checker = DB::select(DB::raw("SELECT count(*) FROM sjl_inansistencias WHERE id_club = '$idclub' AND id_grupo = '$idgrupo' AND fec_reu_men = '$idreunion'"));
+        /* If non attendances were already registered throw an error */
+        return ($checker[0]->count);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -57,6 +73,8 @@ class AttendanceController extends Controller
         $gmemberships = $request->gdates;
         $cmemberships = $request->cdates;
         $atts = $request->att;
+        $retired_members = [];
+        $retired = 0;
 
         for ($i=0 ; $i<$request->length; $i++){
             if ($atts[$i] == true){
@@ -69,9 +87,48 @@ class AttendanceController extends Controller
                 $falta->fec_reu_men = $idreunion;
                 $falta->id_lib = $idlibro;
                 $falta->save();
+
+                /* Calculate if this member has >30% of non attendance the last 2 months */
+                // Step 1: Calculate how many meetings this group had in the last two months
+                // Step 2: Calculate the number of non attendance of this member
+                // Step 3: Calculate the percentage of non attendance
+                // Step 4: Compare with 30%
+
+                $checkerT = DB::select(DB::raw("SELECT count(*) FROM sjl_reuniones_mensuales WHERE id_grupo = '$idgrupo' AND fec > CURRENT_DATE - INTERVAL '2 months'"));
+                $total = $checkerT[0]->count;
+                $checkerN = DB::select(DB::raw("SELECT count (*) from sjl_inansistencias WHERE id_grupo = '$idgrupo' AND id_lec = '$falta->id_lec' AND fec_reu_men > CURRENT_DATE - INTERVAL '2 months'"));
+                $totalI = $checkerN[0]->count;
+
+                $percentage = ($totalI*100)/$total;
+                
+                /* Delete member if >30% non attendance */
+                if ($percentage>30){
+                    $namelect = DB::select(DB::raw("SELECT nom1 || ' ' || ape1 as name FROM sjl_lectores WHERE doc_iden = '$falta->id_lec'"));
+                    $name = $namelect[0]->name;
+                    $retired_members[$retired] = $name;
+                    $retired++;
+                    $trash = null;
+                    $trash2 = '';
+                    Member::where('doc_iden',$falta->id_lec)->update(array(
+                        'id_club'=> $trash,
+                        'id_grup'=> $trash,
+                    ));
+            
+                    /* MEMBERSHIP */
+                    Membresia::where(['id_lec'=>$falta->id_lec,'id_club'=>$idclub,'fec_f'=>$trash])->update(array(
+                        'fec_f'=>date('Y-m-d'),
+                        'estatus'=>'I',
+                        'motivo_b'=>'I',
+                    ));
+
+                    /* MEMBERSHIP FOR GROUP */
+                    Grupos_Lectores::where(['id_fec_mem'=>$falta->id_fec_mem,'id_club'=>$idclub,'id_lec'=>$falta->id_lec,'id_grupo'=>$idgrupo])->update(array(
+                    'fec_f'=> date('Y-m-d'),
+                    ));
+                }
             }
         }
-        return 1;
+        return $retired_members;
     }
 
     /**

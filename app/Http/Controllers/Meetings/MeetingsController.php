@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Meetings;
 use App\Models\Meeting\Reunion;
 use App\Models\Meeting\Inasistencia;
 use DB;
+use Log;
 use Response;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -107,8 +108,17 @@ class MeetingsController extends Controller
         /* If there are meetings select the last one generated to generate one the month after that one*/
         $nextr = DB::select(DB::raw("SELECT fec FROM sjl_reuniones_mensuales WHERE fec IN (SELECT max(fec) FROM sjl_reuniones_mensuales WHERE id_club = '$idclub' AND id_grupo = '$idgrupo')"));
             if ($nextr){
+                /* If there hasn't been any meeting in a while you have to set the next meeting from this date to the next available day */
+                $today = strtotime(date('Y-m-d'));
+                $basedate = $nextr[0]->fec;
+                $basedate = strtotime(($basedate));
+                $datediff = $today-$basedate;
+                $datediff = ($datediff / (60 * 60 * 24));
 
+                if ($datediff > 7) $nextr = DB::select(DB::raw("SELECT CURRENT_DATE as fec"));
             }
+
+        /* First meeting */
         else $nextr = DB::select(DB::raw("SELECT CURRENT_DATE as fec"));
         $basedate = $nextr[0]->fec;
 

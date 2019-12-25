@@ -4921,6 +4921,8 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_0__);
 //
 //
 //
@@ -4958,6 +4960,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -5032,7 +5035,34 @@ __webpack_require__.r(__webpack_exports__);
         moderador: this.moderador
       };
       axios.post("/clubs/".concat(this.club, "/groups/").concat(this.grupo, "/meetings/").concat(this.reunion, "/").concat(this.moderador, "/").concat(this.libro, "/attendance"), params).then(function (res) {
-        window.location = "/clubs/".concat(_this2.club, "/groups/").concat(_this2.grupo, "/meetings");
+        if (res.data.length > 0) {
+          var msg = '';
+          var msg2 = '';
+          var _i = 0;
+
+          for (_i; _i < res.data.length; _i++) {
+            msg = msg + res.data[_i] + '<br>';
+          }
+
+          if (msg != '') {
+            msg2 = 'Se han eliminado los siguientes miembros del club por inasistencia: <br>';
+          }
+
+          sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire({
+            title: 'Asistencia pasada',
+            html: msg2 + msg,
+            icon: 'success',
+            confirmButtonColor: '#8C7F7F',
+            confirmButtonText: 'Ok'
+          }).then(function (result) {
+            if (result.value) {
+              window.location = "/clubs/".concat(_this2.club, "/groups/").concat(_this2.grupo, "/meetings");
+            }
+          });
+        } else {
+          window.location = "/clubs/".concat(_this2.club, "/groups/").concat(_this2.grupo, "/meetings");
+        }
+
         console.log(res.data);
       })["catch"](function (e) {
         console.log(e);
@@ -5224,6 +5254,29 @@ __webpack_require__.r(__webpack_exports__);
           sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire({
             title: 'Error',
             text: 'No se puede programar ninguna reunión para este grupo debido a que tiene menos de 7 miembros',
+            icon: 'error',
+            confirmButtonText: 'Ok',
+            confirmButtonColor: '#8C7F7F'
+          });
+        }
+      })["catch"](function (e) {
+        console.log(e);
+      });
+    },
+
+    /* Verificar si ya la asistencia fue pasada contando el numero de inasistencia que hay en la reunion */
+    verifyA: function verifyA(item) {
+      var _this4 = this;
+
+      axios.get("/clubs/".concat(this.club, "/groups/").concat(this.grupo, "/meetings/").concat(item.fecha, "/").concat(item.idmod, "/").concat(item.idlibro, "/verify")).then(function (res) {
+        console.log(res.data);
+
+        if (res.data == 0) {
+          window.location = "/clubs/".concat(_this4.club, "/groups/").concat(_this4.grupo, "/meetings/").concat(item.fecha, "/").concat(item.idmod, "/").concat(item.idlibro, "/attendance");
+        } else if (res.data != 0) {
+          sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire({
+            title: 'Error',
+            text: 'Ya usted pasó asistencia para esta reunión',
             icon: 'error',
             confirmButtonText: 'Ok',
             confirmButtonColor: '#8C7F7F'
@@ -83752,23 +83805,16 @@ var render = function() {
                                         ],
                                         staticClass: "btn btn-default",
                                         attrs: {
-                                          href:
-                                            "/clubs/" +
-                                            _vm.club +
-                                            "/groups/" +
-                                            _vm.grupo +
-                                            "/meetings/" +
-                                            item.fecha +
-                                            "/" +
-                                            item.idmod +
-                                            "/" +
-                                            item.idlibro +
-                                            "/attendance",
                                           rel: "tooltip",
                                           "data-toggle": "tooltip",
                                           "data-placement": "bottom",
                                           title:
                                             "Control de asistencia para esta reunión"
+                                        },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.verifyA(item)
+                                          }
                                         }
                                       },
                                       [

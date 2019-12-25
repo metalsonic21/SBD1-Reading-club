@@ -56,7 +56,7 @@
                                                         <b-link v-bind:href="'/clubs/'+club+'/groups/'+grupo+'/meetings/'+item.fecha+'/'+item.idmod+'/'+item.idlibro+'/'+item.sesion+'/details'" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Visualizar" class="btn btn-info">
                                                             <i class="material-icons">remove_red_eye</i>
                                                         </b-link>
-                                                        <b-link v-bind:href="'/clubs/'+club+'/groups/'+grupo+'/meetings/'+item.fecha+'/'+item.idmod+'/'+item.idlibro+'/attendance'" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Control de asistencia para esta reunión" class="btn btn-default" v-b-modal.attendance>
+                                                        <b-link @click="verifyA(item)" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Control de asistencia para esta reunión" class="btn btn-default" v-b-modal.attendance>
                                                             <i class="material-icons">list</i>
                                                         </b-link>
                                                         <b-link v-bind:href="'/clubs/'+club+'/groups/'+grupo+'/meetings/'+item.fecha+'/'+item.idmod+'/'+item.idlibro+'/edit'" rel="tooltip" data-toggle="tooltip" v-b-modal.add-meeting data-placement="bottom" title="Modificar reunión" class="btn btn-success">
@@ -172,6 +172,27 @@ export default {
                             confirmButtonColor: '#8C7F7F',
                         })
                     }
+                }).catch(e => {
+                    console.log(e);
+                })
+        },
+
+        /* Verificar si ya la asistencia fue pasada contando el numero de inasistencia que hay en la reunion */
+        verifyA(item){
+            axios.get(`/clubs/${this.club}/groups/${this.grupo}/meetings/${item.fecha}/${item.idmod}/${item.idlibro}/verify`)
+                .then(res => {
+                    console.log(res.data);
+                    if (res.data == 0) {
+                        window.location = `/clubs/${this.club}/groups/${this.grupo}/meetings/${item.fecha}/${item.idmod}/${item.idlibro}/attendance`;
+                    } else if (res.data != 0) {
+                        Swal.fire({
+                            title: 'Error',
+                            text: 'Ya usted pasó asistencia para esta reunión',
+                            icon: 'error',
+                            confirmButtonText: 'Ok',
+                            confirmButtonColor: '#8C7F7F',
+                        })
+                    } 
                 }).catch(e => {
                     console.log(e);
                 })
