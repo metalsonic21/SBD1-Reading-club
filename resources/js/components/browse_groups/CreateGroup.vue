@@ -71,6 +71,7 @@
 </template>
 
 <script>
+import Swal from 'sweetalert2';
 export default {
     data() {
         return {
@@ -181,21 +182,33 @@ export default {
         },
         revalidate(){
             let msg = '';
-                if (!this.validateN || this.validateN == null) msg = msg + "El campo Nombre de Grupo no puede estar vacío ni tener más de 40 caracteres\n";
-                if (!this.validateT) msg = msg + "El campo Tipo de Grupo no puede estar vacío\n";
-                if (!this.validateD) msg = msg + "El campo Día de Disponibilidad no puede estar vacío\n";
-                if (!this.validateH) msg = msg + "El campo Hora Inicio no puede estar vacío\n";
+                if (this.validateN == null) msg = msg + "El campo Nombre de Grupo no puede estar vacío<br>";
+                if (this.validateN == false) msg = msg + "El campo Nombre de Grupo no puede tener más de 40 caracteres<br>";
+                if (!this.validateT) msg = msg + "El campo Tipo de Grupo no puede estar vacío<br>";
+                if (!this.validateD) msg = msg + "El campo Día de Disponibilidad no puede estar vacío<br>";
+                if (!this.validateH) msg = msg + "El campo Hora Inicio no puede estar vacío<br>";
 
             
             if (this.group.tipo == 'N'){
                 var test = this.group.horai.substring(0,2);
-                if (test>17) msg = msg + "Las reuniones de niños no pueden terminar más tarde de las 7 de la noche, seleccione una hora de inicio más temprana\n";
+                if (test>17) msg = msg + "Las reuniones de niños no pueden terminar más tarde de las 7 de la noche, seleccione una hora de inicio más temprana<br>";
             }
+
+            var test = this.group.horai.substring(0,2);
+                if (test<7) msg = msg + "Las reuniones no pueden empezar antes de las 7 AM<br>";
 
             if (msg == ''){
                 this.add();
             }
-            else alert(msg);
+            else {
+                Swal.fire({
+                    title: 'Error',
+                    html: '<p class="text-left">'+msg+'</p>',
+                    icon: 'error',
+                    confirmButtonText: 'Ok',
+                    confirmButtonColor: '#8C7F7F',
+                })
+            }
         }
     }
 }

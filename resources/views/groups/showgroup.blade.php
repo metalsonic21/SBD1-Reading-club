@@ -76,7 +76,7 @@
                 </b-col>
 
                 <b-col cols="4">
-                    <p><strong>HORA FIN: </strong>{{$g->horai}}</p>
+                    <p><strong>HORA FIN: </strong>{{$g->horaf}}</p>
                 </b-col>
             </b-row>
         </div>

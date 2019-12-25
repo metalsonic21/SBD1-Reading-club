@@ -40,8 +40,6 @@
                 </div>
                 <div class="d-flex flex-row-reverse bd-highlight">
                     <b-button variant="default" @click="add">Continuar</b-button>
-
-                    <b-link class="btn btn-danger">Cancelar</b-link>
                 </div>
             </b-form>
         </div>
@@ -50,6 +48,7 @@
 </template>
 
 <script>
+import Swal from 'sweetalert2';
 export default {
     data() {
         return {

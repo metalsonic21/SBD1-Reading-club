@@ -42,7 +42,6 @@ Vue.component('favorite-books', require('./components/books/Favorites.vue').defa
 Vue.component('available-reports-club', require('./components/club_reports/AvailableReportsClub.vue').default);
 
 /*BROWSE GROUPS*/
-Vue.component('browse-groups', require('./components/browse_groups/BrowseGroups.vue').default);
 Vue.component('create-group', require('./components/browse_groups/CreateGroup.vue').default);
 Vue.component('edit-group', require('./components/browse_groups/EditGroup.vue').default);
 Vue.component('select-group', require('./components/browse_groups/SelectGroup.vue').default);
