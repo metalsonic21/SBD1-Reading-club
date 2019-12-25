@@ -5906,7 +5906,7 @@ __webpack_require__.r(__webpack_exports__);
         selected: this.selected[0].documento_de_identidad
       };
       axios.put("/clubs/".concat(path, "/freeagent/").concat(params.selected), params).then(function (res) {
-        window.location = "/clubs/".concat(path, "/members");
+        window.location = "/clubs/".concat(path, "/members/").concat(params.selected, "/favorites");
         console.log(res.data);
       })["catch"](function (e) {
         console.log(e);

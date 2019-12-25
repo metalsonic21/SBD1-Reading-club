@@ -122,7 +122,7 @@ export default {
 
             axios.put(`/clubs/${path}/freeagent/${params.selected}`, params)
                 .then(res => {
-                    window.location = `/clubs/${path}/members`;
+                    window.location = `/clubs/${path}/members/${params.selected}/favorites`;
 
                     console.log(res.data);
                 }).catch(e => {
