@@ -91,6 +91,7 @@ Route::resource('/obras', 'obras\ObraController');
 Route::resource('/obras/{obra}/personajes', 'obras\PersonajesController');
 
 Route::resource('/clubs/{club}/presentaciones', 'obras\PresentacionController');
+Route::get('/clubs/{club}/presentaciones/{fecha}/{obra}/{local}/verifyP', 'obras\PresentacionController@verifyP')->name('presentaciones.verify'); //Verify if presentation exists in DB
 Route::resource('/clubs/{club}/locales', 'obras\LocalController');
 Route::get('/clubs/{club}/presentaciones/{fec}/{obra}/{local}/edit', 'obras\PresentacionController@mod');
 Route::put('/clubs/{club}/presentaciones/{fec}/{obra}/{local}', 'obras\PresentacionController@modificar');

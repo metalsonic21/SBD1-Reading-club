@@ -161,14 +161,14 @@
                         <b-collapse id="d-5" class="collapse">
                             <ul class="nav">
                                 <li class="nav-item ">
-                                    <a class="nav-link" href="/selectclubp">
-                                        <span class="sidebar-normal"> Presentaciones por club </span>
-                                    </a>
-                                </li>
-
-                                <li class="nav-item ">
                                     <a class="nav-link" href="/obras">
                                         <span class="sidebar-normal"> Gestión de obras </span>
+                                    </a>
+                                </li>
+                                
+                                <li class="nav-item ">
+                                    <a class="nav-link" href="/selectclubp">
+                                        <span class="sidebar-normal"> Presentaciones por club </span>
                                     </a>
                                 </li>
                             </ul>

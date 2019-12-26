@@ -77,7 +77,7 @@
                                             <b-col cols="6">
                                                 <b-form-group>
                                                     <label>¿Está asociado este club a alguna institución?</label>
-                                                    <b-radio-group v-model="institucion" :options="[{text: 'Sí', value:true}, {text: 'No', value: false}]" @change="checkamount()"></b-radio-group>
+                                                    <b-radio-group v-model="institucion" :options="[{text: 'Sí', value:true}, {text: 'No', value: false}]"></b-radio-group>
                                                 </b-form-group>
                                             </b-col>
                                         </b-row>

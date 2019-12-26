@@ -99,6 +99,7 @@
 </template>
 
 <script>
+import Swal from 'sweetalert2';
 export default {
     data() {
         return {
@@ -124,8 +125,9 @@ export default {
         axios.get(`/obras/${this.id}/edit`)
             .then(res => {
                 this.items = res.data.data;
-                this.obra.nom = res.data.obra.nom;
-                this.obra.resum = res.data.obra.resum;
+                this.obra = res.data.obra;
+                //this.obra.nom = res.data.obra.nom;
+                //this.obra.resum = res.data.obra.resum;
             }).catch(e => {
                 console.log(e);
             })
@@ -139,10 +141,6 @@ export default {
             // Trigger pagination to update the number of buttons/pages due to filtering
             this.totalRows = filteredItems.length
             this.currentPage = 1
-        },
-        validateS(){
-            if (!selected) return false;
-            else return true;
         },
         add(){
             const params = {
@@ -163,15 +161,23 @@ export default {
         },
         revalidate(){
             let msg = '';
-            if (this.obra.nom == false || this.obra.nom == null) msg = msg + "El nombre de obra no puede estar vacío ni tener más de 40 caracteres\n";
-            if (this.obra.resum == false || this.obra.resum == null) msg = msg +  "El resumen de obra no puede estar vacío ni tener más de 200 caraceteres\n";
-            if (!this.validateS) msg = msg + "Seleccione un libro\n";
+            if (this.obra.nom == null) msg = msg + "El nombre de obra no puede estar vacío<br>";
+            if (this.obra.nom == false) msg = msg + "El nombre de obra no puede tener más de 40 caracteres<br>";
+            if (this.obra.resum == null) msg = msg + "El resumen de obra no puede estar vacío<br>";
+            if (this.obra.resum == false) msg = msg + "El resumen de obra no puede tener más de 200 caraceteres<br>";
+            if (this.selected.length == 0) msg = msg + "Seleccione un libro<br>";
 
             if (msg == ''){
                 this.add();
             }
             else {
-                alert(msg);
+                Swal.fire({
+                    title: 'Error',
+                    html: '<p class="text-left">' + msg + '</p>',
+                    icon: 'error',
+                    confirmButtonText: 'Ok',
+                    confirmButtonColor: '#8C7F7F',
+                })
             }
         }
     },

@@ -22,13 +22,24 @@ class PresentacionController extends Controller
             SELECT o.nom FROM sjl_obras o WHERE p.id_obra = o.id
         )nombre, (
             SELECT l.nom FROM sjl_locales_eventos l WHERE l.id = p.id_local
-        )lugar, p.hora_i, p.durac, p.valor, p.id_local as idlugar, p.id_obra as obra FROM sjl_historicos_presentaciones p WHERE id_club = '$idclub'"));
+        )lugar, (select to_char(p.hora_i::time, 'HH12:MI AM')) as hora_i, (select to_char(p.durac::time, 'HH12:MI')) as durac, p.valor, p.id_local as idlugar, p.id_obra as obra FROM sjl_historicos_presentaciones p WHERE id_club = '$idclub'"));
         if($request->ajax()){
             return Response::json(array('data'=>$presentaciones));
         }
         else{
             return view('obras.presentaciones');
         }
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function verifyP($club, $fecha, $obra, $local, Request $request)
+    {
+        $checker = DB::select(DB::raw("SELECT * FROM sjl_historicos_presentaciones WHERE id_club = '$club' AND id_local = '$local' AND id_obra = '$obra' AND fec = '$fecha'"));
+        return $checker;
     }
 
     /**
@@ -112,7 +123,7 @@ class PresentacionController extends Controller
 
         $locales = DB::select(DB::raw("SELECT id as value, nom as text FROM sjl_locales_eventos WHERE id_club = '$club'"));
 
-        $currentp = DB::select(DB::raw("SELECT fec as fecha, id_obra as obra, id_local as ubicacion, hora_i, durac, valor, num_asist, costo, id_club FROM sjl_historicos_presentaciones WHERE fec = '$fecha' AND id_club = '$club' AND id_obra = '$obra' AND id_local = '$local'"));
+        $currentp = DB::select(DB::raw("SELECT fec as fecha, id_obra as obra, id_local as ubicacion, hora_i, (select to_char(durac::time, 'HH12:MI')) as durac, valor, num_asist, costo, id_club FROM sjl_historicos_presentaciones WHERE fec = '$fecha' AND id_club = '$club' AND id_obra = '$obra' AND id_local = '$local'"));
         $presentacion = $currentp[0];
 
 

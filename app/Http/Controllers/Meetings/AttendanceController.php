@@ -105,7 +105,8 @@ class AttendanceController extends Controller
                 }
                 
                 /* Delete member if >30% non attendance */
-                if ($percentage>30){
+                // Evaluate that the number of total meetings is equal or greater than 6 so if there hasn't been meetings in a while don't delete a member in the first non attendance
+                if ($percentage>30 && $total >= 6){
                     $namelect = DB::select(DB::raw("SELECT nom1 || ' ' || ape1 as name FROM sjl_lectores WHERE doc_iden = '$falta->id_lec'"));
                     $name = $namelect[0]->name;
                     $retired_members[$retired] = $name;

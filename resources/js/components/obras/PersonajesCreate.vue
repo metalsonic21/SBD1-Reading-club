@@ -58,6 +58,7 @@
 </template>
 
 <script>
+import Swal from 'sweetalert2';
 export default {
     data() {
         return {
@@ -92,14 +93,21 @@ export default {
         },
         revalidate(){
             let msg = '';
-            if (this.personaje.nom == false || this.personaje.nom == null) msg = msg + "El nombre de personaje no puede estar vacío ni tener más de 40 caracteres\n";
-            if (this.personaje.descrip == false || this.personaje.descrip == null) msg = msg +  "La descripción de personaje no puede estar vacía ni tener más de 500 caraceteres\n";
-
+                if (this.validateN == null) msg = msg + "El nombre de personaje no puede estar vacío<br>";
+                if (this.validateN == false) msg = msg + "El nombre de personaje no puede tener más de 40 caracteres<br>";
+                if (this.validateD == null) msg = msg + "La descripción de personaje no puede estar vacía<br>";
+                if (this.validateD == false) msg = msg +  "La descripción de personaje no puede tener más de 500 caracteres<br>";
             if (msg == ''){
                 this.add();
             }
             else {
-                alert(msg);
+                Swal.fire({
+                    title: 'Error',
+                    html: '<p class="text-left">' + msg + '</p>',
+                    icon: 'error',
+                    confirmButtonText: 'Ok',
+                    confirmButtonColor: '#8C7F7F',
+                })
             }
         }
     },

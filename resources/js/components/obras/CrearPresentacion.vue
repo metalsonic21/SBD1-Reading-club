@@ -70,6 +70,8 @@
                                                 <label for="local">Local</label>
                                                 <b-form-select v-model="presentacion.ubicacion" :options="locales" name="local"></b-form-select>
                                                 <b-form-invalid-feedback :state="validateL">* Requerido</b-form-invalid-feedback>
+                                                <small v-if="isThereAnyLocal() == false">Este club no tiene ningún local asociado, presione <a v-bind:href="'/clubs/'+club+'/locales/create'">aquí</a> para agregar un local </small>
+                                                <small v-if="isThereAnyLocal() == true">Si quiere añadir un nuevo local presione <a v-bind:href="'/clubs/'+club+'/locales/create'">aquí</a></small>
                                             </b-col>
 
                                             <b-col cols="4">
@@ -145,6 +147,7 @@
 </template>
 
 <script>
+import Swal from 'sweetalert2';
 export default {
     data() {
         return {
@@ -205,7 +208,7 @@ export default {
             .then(res => {
                 this.items = res.data.data;
                 this.locales = res.data.locales;
-                console.log(this.items);
+                //console.log(this.items);
             }).catch(e => {
                 console.log(e);
             })
@@ -221,6 +224,11 @@ export default {
             this.totalRows = filteredItems.length
             this.currentPage = 1
         },
+
+        isThereAnyLocal() {
+            //console.log(this.locales.length);
+            return (this.locales.length != 0);
+        },
         add() {
             const params = {
                 obra: this.selected[0].id,
@@ -235,32 +243,61 @@ export default {
                 club: this.club,
             };
 
-            console.log(params);
+            /* Verify if presentation exists in DB */
 
-            axios.post(`/clubs/${this.club}/presentaciones`, params)
+            axios.get(`/clubs/${this.club}/presentaciones/${params.fecha}/${params.obra}/${params.local}/verifyP`)
                 .then(res => {
-                    window.location = `/clubs/${this.club}/presentaciones`;
+                    //console.log(res.data);
+                    if (res.data.length == 0) {
+                        axios.post(`/clubs/${this.club}/presentaciones`, params)
+                            .then(res => {
+                                window.location = `/clubs/${this.club}/presentaciones`;
+                            }).catch(e => {
+                                console.log(e);
+                            })
+                    } else {
+                        Swal.fire({
+                            title: 'Error',
+                            html: 'Presentación de esta obra en el lugar y fecha seleccionados ya existen en la base de datos',
+                            icon: 'error',
+                            confirmButtonText: 'Ok',
+                            confirmButtonColor: '#8C7F7F',
+                        })
+                    }
                 }).catch(e => {
                     console.log(e);
                 })
+
+            //console.log(params);
+
         },
 
         revalidate() {
             let msg = '';
-            if (!this.validateS) msg = msg + "Debe seleccionar una obra que estará relacionada con la presentación\n";
-            if (!this.validateL) msg = msg + "Debe seleccionar un local\n";
-            if (!this.validateV) msg = msg + "Debe seleccionar una valoración para la presentación\n";
-            if (!this.validateC || this.validateC == null) msg = msg + "Campo costo no puede estar vacío, debe ser un número entero positivo no demasiado grande\n";
-            if (!this.validateF) msg = msg + "Debe seleccionar una fecha para la presentación\n";
-            if (!this.validateH) msg = msg + "El campo hora inicio de presentación no puede estar vacío\n";
-            if (!this.validateD || this.validateD == null) msg = msg + "El campo duración en horas debe ser un número entero positivo de el 0 al 23\n";
-            if (!this.validateDM || this.validateDM == null) msg = msg + "El duración en minutos debe ser un número entero positivo de el 0 al 59\n";
-            if (!this.validateN || this.validateN == null) msg = msg + "El campo número de asistentes debe ser un número entero positivo\n";
-            if (this.presentacion.durac == 0 && this.presentacion.duracm == 0) msg = msg + "Rellene una duración para la presentación\n";
+            if (this.selected.length == 0) msg = msg + "Debe seleccionar una obra que estará relacionada con la presentación<br>";
+            if (!this.validateL) msg = msg + "Debe seleccionar un local<br>";
+            if (!this.validateV) msg = msg + "Debe seleccionar una valoración para la presentación<br>";
+            if (this.validateC == null) msg = msg + "Campo costo no puede estar vacío<br>";
+            if (this.validateC == false) msg = msg + "Campo costo debe ser un número entero positivo no demasiado grande<br>";
+            if (this.validateF == false) msg = msg + "Debe seleccionar una fecha para la presentación<br>";
+            if (this.validateH == false) msg = msg + "El campo hora de inicio de presentación no puede estar vacío<br>";
+            if (this.validateD == null) msg = msg + "El campo duración en horas no puede estar vacío<br>";
+            if (this.validateD == false) msg = msg + "El campo duración en horas debe ser un número entero positivo de el 0 al 23<br>";
+            if (this.validateDM == null) msg = msg + "El campo duración en minutos no puede estar vacío<br>";
+            if (this.validateDM == false) msg = msg + "El duración en minutos debe ser un número entero positivo de el 0 al 59<br>";
+            if (this.validateN == null) msg = msg + "El campo número de asistentes no puede estar vacío<br>";
+            if (this.validateN == false) msg = msg + "El campo número de asistentes debe ser un número entero positivo<br>";
+            if (this.presentacion.durac == 0 && this.presentacion.duracm == 0) msg = msg + "Rellene una duración para la presentación<br>";
             if (msg == '') {
                 this.add();
             } else {
-                alert(msg);
+                Swal.fire({
+                    title: 'Error',
+                    html: '<p class="text-left">' + msg + '</p>',
+                    icon: 'error',
+                    confirmButtonText: 'Ok',
+                    confirmButtonColor: '#8C7F7F',
+                })
             }
         }
     },
@@ -270,6 +307,7 @@ export default {
         rows() {
             return this.items.length
         },
+
         validateS() {
             return (this.items.length > 0);
         },

@@ -99,6 +99,7 @@
 </template>
 
 <script>
+import Swal from 'sweetalert2';
 export default {
     data() {
         return {
@@ -136,11 +137,7 @@ export default {
             this.totalRows = filteredItems.length
             this.currentPage = 1
         },
-        validateS(){
-            if (!selected) return false;
-            else return true;
-        },
-        add(){
+        add() {
             const params = {
                 nom: this.obra.nom,
                 resum: this.obra.resum,
@@ -148,25 +145,32 @@ export default {
             };
 
             axios.post(`/obras`, params)
-            .then(res => {
-                window.location = "/obras";
-            }).catch(e => {
-                console.log(e);
-            })
+                .then(res => {
+                    window.location = "/obras";
+                }).catch(e => {
+                    console.log(e);
+                })
 
             console.log(params);
         },
-        revalidate(){
+        revalidate() {
             let msg = '';
-            if (this.obra.nom == false || this.obra.nom == null) msg = msg + "El nombre de obra no puede estar vacío ni tener más de 40 caracteres\n";
-            if (this.obra.resum == false || this.obra.resum == null) msg = msg +  "El resumen de obra no puede estar vacío ni tener más de 200 caraceteres\n";
-            if (!this.validateS) msg = msg + "Seleccione un libro\n";
+            if (this.obra.nom == null) msg = msg + "El nombre de obra no puede estar vacío<br>";
+            if (this.obra.nom == false) msg = msg + "El nombre de obra no puede tener más de 40 caracteres<br>";
+            if (this.obra.resum == null) msg = msg + "El resumen de obra no puede estar vacío<br>";
+            if (this.obra.resum == false) msg = msg + "El resumen de obra no puede tener más de 200 caraceteres<br>";
+            if (this.selected.length == 0) msg = msg + "Seleccione un libro<br>";
 
-            if (msg == ''){
+            if (msg == '') {
                 this.add();
-            }
-            else {
-                alert(msg);
+            } else {
+                Swal.fire({
+                    title: 'Error',
+                    html: '<p class="text-left">' + msg + '</p>',
+                    icon: 'error',
+                    confirmButtonText: 'Ok',
+                    confirmButtonColor: '#8C7F7F',
+                })
             }
         }
     },
@@ -174,12 +178,12 @@ export default {
         rows() {
             return this.items.length
         },
-        validateN(){
+        validateN() {
             if (this.obra.nom == null || this.obra.nom == '') return null;
             if (this.obra.nom.length > 40) return false;
             else return true;
         },
-        validateR(){
+        validateR() {
             if (this.obra.resum == null || this.obra.resum == '') return null;
             if (this.obra.resum.length > 200) return false;
             else return true;
