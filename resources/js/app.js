@@ -75,32 +75,6 @@ Vue.component('locales', require('./components/obras/Locales.vue').default);
 Vue.component('crear-local', require('./components/obras/CrearLocal.vue').default);
 Vue.component('edit-local', require('./components/obras/EditLocal.vue').default);
 
-/*THEATER PLAYS
-Vue.component('plays-clubs', require('./components/theater_plays/PlaysClubs.vue').default);
-Vue.component('cast-plays', require('./components/theater_plays/CastPlays.vue').default);
-Vue.component('plays-create', require('./components/theater_plays/create.vue').default);
-Vue.component('plays-edit', require('./components/theater_plays/edit.vue').default);
-Vue.component('character-cast', require('./components/theater_plays/CharacterCast.vue').default);
-Vue.component('earning-plays', require('./components/theater_plays/EarningPlays.vue').default);
-Vue.component('browse-plays',  require('./components/theater_plays/BrowsePlays.vue').default);
-Vue.component('characteradd-cast', require('./components/theater_plays/CharacterCastAdd.vue').default);
-Vue.component('character-add', require('./components/theater_plays/character_add.vue').default);
-Vue.component('example-component', require('./components/ExampleComponent.vue').default);*/
-
-/*Obras remake*/
-
-
-/*CRUD PERFORMANCES
-Vue.component('performances', require('./components/theater_plays/performances.vue').default);
-Vue.component('performances-edit', require('./components/theater_plays/editperformance.vue').default);
-Vue.component('performances-create', require('./components/theater_plays/create_performance.vue').default);
-//Vue.commponent('performances-edit',require('').default);
-//Vue.commponent('performances-create',require('./components/theater_plays/create_performance.vue').default);*/
-//Vue.commponent('performances-create',require('./components/theater_plays/create_performance.vue').default);
-/*CAST
-Vue.component('cast', require('./components/theater_plays/cast.vue').default);
-Vue.component('cast-edit', require('./components/theater_plays/cast.vue').default);
-Vue.component('cast-create', require('./components/theater_plays/cast.vue').default);*/
 const app = new Vue({
     el: '#app',
 });

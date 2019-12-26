@@ -97,25 +97,3 @@ Route::put('/clubs/{club}/presentaciones/{fec}/{obra}/{local}', 'obras\Presentac
 Route::patch('/clubs/{club}/presentaciones/{fec}/{obra}/{local}', 'obras\PresentacionController@modificar');
 Route::get('/clubs/{club}/presentaciones/{fec}/{obra}/{local}', 'obras\PresentacionController@modificar');
 Route::delete('/clubs/{club}/presentaciones/{fec}/{obra}/{local}', 'obras\PresentacionController@borrar');
-//Route::resource('/clubs/{club}/presentaciones/{fec}/{obra}/{local}/elenco', 'obras\ElencoController');
-/*THEATER_PLAYS
-Route::get('/playsclubs', 'theater_plays\PlaysClubsController@index')->name('playsclubs');
-Route::get('/castplayss/{id}','theater_plays\CastPlaysController@obrasclub');
-Route::get('charactercast/character_add', 'theater_plays\CastPlaysController@add'); 
-Route::get('/charactercast', 'theater_plays\CharacterCastController@index')->name('charactercast');
-Route::get('/earningplays', 'theater_plays\EarningPlaysController@index')->name('earningplays');
-//Route::get('/browseplays', 'theater_plays\BrowsePlaysController@index')->name('browseplays');
-Route::get('/charactercastadd', 'theater_plays\CharacterCastAddController@index')->name('charactercastadd');
-//Route::resource('/castplays', 'theater_plays\CastPlaysController');
-Route::resource('/castplays', 'theater_plays\playsController');
-
-/*Performances*///{{$performance->id_club}}/{{$performance->id_obra}}/view
-//Route::get('{id}/{id_obra}/perform/view','theater_plays\performancesController@details');
-//Route::get('{id}/{id_obra}/perform/edit','theater_plays\performancesController@mod');
-//Route::get('{id}/{id_obra}/perform/create','theater_plays\performancesController@create');
-/*Route::post('/deleteperform/{id}/{id_obra}',[
-    'as'=>'destroy',
-    'uses'=> 'theater_plays\performancesController@destroy'
-]);
-Route::resource('{id}/{id_obra}/perform','theater_plays\performancesController');
-//Route::resource('/clubs/{id}/plays/{id_obra}/performances','theater_plays\performancesController');*/
