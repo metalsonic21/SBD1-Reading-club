@@ -344,7 +344,7 @@ ALTER TABLE SJL_libros ADD CONSTRAINT libros_libro_prev_fk FOREIGN KEY(id_prev) 
 ALTER TABLE SJL_libros ADD CONSTRAINT libros_editorial_fk FOREIGN KEY(id_edit) REFERENCES SJL_editoriales(id);
 
 ALTER TABLE SJL_lista_favoritos ADD CONSTRAINT favoritos_lectores_fk FOREIGN KEY(id_lec) REFERENCES SJL_lectores(doc_iden) ON UPDATE CASCADE ON DELETE CASCADE;
-ALTER TABLE SJL_lista_favoritos ADD CONSTRAINT favoritos_libros_fk FOREIGN KEY(id_lib) REFERENCES SJL_libros(isbn) ON UPDATE CASCADE;
+ALTER TABLE SJL_lista_favoritos ADD CONSTRAINT favoritos_libros_fk FOREIGN KEY(id_lib) REFERENCES SJL_libros(isbn) ON UPDATE CASCADE ON DELETE CASCADE;
 
 ALTER TABLE SJL_subgeneros ADD CONSTRAINT subgeneros_subgeneros_fk FOREIGN KEY(id_subg) REFERENCES SJL_subgeneros(id);
 
