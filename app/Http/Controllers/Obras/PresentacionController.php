@@ -125,10 +125,13 @@ class PresentacionController extends Controller
 
         $currentp = DB::select(DB::raw("SELECT fec as fecha, id_obra as obra, id_local as ubicacion, hora_i, (select to_char(durac::time, 'HH12:MI')) as durac, valor, num_asist, costo, id_club FROM sjl_historicos_presentaciones WHERE fec = '$fecha' AND id_club = '$club' AND id_obra = '$obra' AND id_local = '$local'"));
         $presentacion = $currentp[0];
+        $checkerDurac = $currentp[0]->durac;
+        $h = substr($checkerDurac, 0, stripos($checkerDurac, ':'));
+        $m = substr($checkerDurac, stripos($checkerDurac, ':')+1, strlen($checkerDurac));
 
 
         if($request->ajax()){
-            return Response::json(array('data'=>$obras, 'locales'=>$locales, 'presentacion'=>$presentacion));
+            return Response::json(array('data'=>$obras, 'locales'=>$locales, 'presentacion'=>$presentacion, 'hours'=>$h, 'minutes'=>$m));
         }
         else{
             return view('obras.editpresentacion');

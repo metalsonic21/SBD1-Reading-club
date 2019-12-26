@@ -234,6 +234,8 @@ export default {
                 this.items = res.data.data;
                 this.locales = res.data.locales;
                 this.presentacion = res.data.presentacion;
+                this.presentacion.durac = res.data.hours;
+                this.presentacion.duracm = res.data.minutes;
                 this.prevdate = this.presentacion.fecha;
                 this.prevobra = this.presentacion.obra;
                 this.prevlocal = this.presentacion.ubicacion;
