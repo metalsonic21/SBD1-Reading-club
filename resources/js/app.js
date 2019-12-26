@@ -75,6 +75,9 @@ Vue.component('locales', require('./components/obras/Locales.vue').default);
 Vue.component('crear-local', require('./components/obras/CrearLocal.vue').default);
 Vue.component('edit-local', require('./components/obras/EditLocal.vue').default);
 
+Vue.component('elenco', require('./components/obras/Elenco.vue').default);
+Vue.component('create-role', require('./components/obras/Role.vue').default);
+
 const app = new Vue({
     el: '#app',
 });

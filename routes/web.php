@@ -98,3 +98,8 @@ Route::put('/clubs/{club}/presentaciones/{fec}/{obra}/{local}', 'obras\Presentac
 Route::patch('/clubs/{club}/presentaciones/{fec}/{obra}/{local}', 'obras\PresentacionController@modificar');
 Route::get('/clubs/{club}/presentaciones/{fec}/{obra}/{local}', 'obras\PresentacionController@modificar');
 Route::delete('/clubs/{club}/presentaciones/{fec}/{obra}/{local}', 'obras\PresentacionController@borrar');
+
+
+Route::resource('/clubs/{club}/presentaciones/{fec}/{obra}/{local}/cast', 'obras\ElencoController');
+Route::delete('/clubs/{club}/presentaciones/{fec}/{obra}/{local}/{actor}/{personaje}', 'obras\ElencoController@borrar')->name('role.delete');
+Route::get('/clubs/{club}/presentaciones/{fec}/{obra}/{local}/castable', 'obras\ElencoController@castable')->name('cast.verify');

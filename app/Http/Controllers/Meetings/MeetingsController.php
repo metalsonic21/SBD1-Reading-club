@@ -258,7 +258,7 @@ class MeetingsController extends Controller
         ));
 
         /* DELETE EXTRA SESSIONS */
-        DB::delete("DELETE FROM sjl_reuniones_mensuales WHERE n_ses > '$request->ses'");
+        DB::delete("DELETE FROM sjl_reuniones_mensuales WHERE n_ses > '$request->ses' AND id_club = '$idclub' AND id_grupo = '$idgrupo' AND id_grupo_mod = '$idmod'");
     }
 
     /**

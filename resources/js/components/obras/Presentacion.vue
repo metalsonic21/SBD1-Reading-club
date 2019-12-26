@@ -52,6 +52,9 @@
                                                         <b-link v-bind:href="'/clubs/'+club+'/presentaciones/'+item.fec+'/'+item.obra+'/'+item.idlugar+'/edit'" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Modificar" class="btn btn-success">
                                                             <i class="material-icons">edit</i>
                                                         </b-link>
+                                                        <b-link v-bind:href="'/clubs/'+club+'/presentaciones/'+item.fec+'/'+item.obra+'/'+item.idlugar+'/cast'" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Elenco" class="btn btn-default">
+                                                            <i class="material-icons">group</i>
+                                                        </b-link>
                                                         <b-button class="btn btn-danger" id="show-btn" @click="showModal(index)"><i class="material-icons" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Retirar">close</i>
                                                         </b-button>
                                                         <b-modal v-bind:id="index.toString()" hide-footer>
