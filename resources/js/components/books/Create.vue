@@ -22,8 +22,8 @@
                                         <b-row>
                                             <b-col cols="4">
                                                 <label for="isbn">ISBN</label>
-                                                <b-form-input type="text" v-model="book.isbn" id="isbn" name="isbn" placeholder="Tip: el ISBN tiene 5 caracteres"></b-form-input>
-                                                <b-form-invalid-feedback :state="validateISBN">El código ISBN es numérico entero debe tener al menos 5 caracteres</b-form-invalid-feedback>
+                                                <b-form-input type="text" v-model="book.isbn" id="isbn" name="isbn" placeholder="Tip: el ISBN tiene 13 caracteres"></b-form-input>
+                                                <b-form-invalid-feedback :state="validateISBN">El código ISBN es numérico entero debe 13 caracteres</b-form-invalid-feedback>
                                             </b-col>
 
                                             <b-col cols="4">
@@ -130,6 +130,7 @@
 </template>
 
 <script>
+import Swal from 'sweetalert2';
 export default {
     data() {
         return {
@@ -173,7 +174,7 @@ export default {
                 this.subgbackup = res.data.sg;
                 this.libros = res.data.prev;
 
-                console.log (this.libros.findIndex(isbn => isbn.isbn === 21354)!=-1);
+                //console.log (this.libros.findIndex(isbn => isbn.isbn === 21354)!=-1);
             }).catch(e => {
                 console.log(e);
             })
@@ -183,7 +184,7 @@ export default {
         validateISBN(){
             let isValid = null;
                 if (this.book.isbn=='' || this.book.isbn == null) return null;
-                if (this.book.isbn<=99999 && !isNaN(this.book.isbn) && this.book.isbn.indexOf(".")==-1 && this.book.isbn>0)
+                if (this.book.isbn.toString().length == 13 && !isNaN(this.book.isbn) && this.book.isbn.indexOf(".")==-1 && this.book.isbn>0)
                 return true;
                 else return false;
         },
@@ -229,7 +230,7 @@ export default {
         validateP(){
             let verif = (this.libros.findIndex(isbn => isbn.isbn == this.book.prev)!=-1);
             let validPrev=null;
-                if (this.book.prev!='' && (this.book.prev.length != 5 || isNaN(this.book.prev.isbn) || this.book.prev.indexOf(".")!=-1 || this.book.prev.isbn<0)) validPrev = false;
+                if (this.book.prev!='' && (this.book.prev.toString().length != 13 || isNaN(this.book.prev.isbn) || this.book.prev.indexOf(".")!=-1 || this.book.prev.isbn<0)) validPrev = false;
                 else validPrev = true;
                 if (this.book.prev == '')
                     return true;
@@ -243,6 +244,11 @@ export default {
             let res = id.substring(pos + 1, length);
             parseInt(res, 10);
             return res;
+        },
+
+        isBookInDB(){
+            let verif = (this.libros.findIndex(isbn => isbn.isbn == this.book.isbn)!=-1);
+            return verif;
         },
 
         filter() {
@@ -280,20 +286,32 @@ export default {
           let msg = '';
           let isValid = true;
 
-            if (this.validateISBN == false || this.validateISBN == null) msg = msg + "El ISBN debe ser un campo numérico entero de 5 caracteres\n";
-            if (this.validateTO == false || this.validateTO == null) msg = msg +  "El campo Título Original no puede estar vacío\n";
-            if (this.validateTE == false || this.validateTE == null) msg = msg + "El campo Título en Español no puede estar vacío\n";
-            if (this.validateSinopsis == false || this.validateSinopsis == null) msg = msg + "El campo Sinopsis debe tener al menos 10 caracteres\n";
-            if (this.validateNP == false || this.validateNP == null) msg = msg + "El campo número de páginas debe ser numérico entero\n";
-            if (this.validateF == false) msg = msg + "El campo Fecha de publicación no puede estar vacío\n";
-            if (this.book.editorial == null) msg = msg + "El campo Editorial no puede estar vacío\n";
-            if (this.book.genero == null) msg = msg + "El campo Genero no puede estar vacío\n";
-            if (this.book.genero != null && this.book.subg == null) msg = msg + "El campo Subgénro no puede estar vacío\n";
-            if (this.validateA == false ||this.validateA == null) msg = msg + "El campo Autor no puede estar vacío\n";
-            if (this.validateP == false) msg = msg + "En el campo libro predecesor debe haber un ISBN válido\n";
+            if (this.validateISBN == null) msg = msg + "El ISBN no puede estar vacío<br>";
+            if (this.validateISBN == false) msg = msg + "El ISBN debe ser un campo numérico entero de 13 caracteres<br>";
+            if (this.isBookInDB == true) msg = msg + "Libro con este ISBN ya existe en la base de datos<br>";
+            if (this.validateTO == null) msg = msg + "El campo Título Original no puede estar vacío<br>";
+            if (this.validateTO == false) msg = msg +  "El campo Título Original no puede estar vacío<br>";
+            if (this.validateTE == null) msg = msg + "El campo Título en Español no puede estar vacío<br>";
+            if (this.validateTE == false) msg = msg + "El campo Título en Español no puede tener más de 40 caracteres<br>";
+            if (this.validateSinopsis == null) msg = msg + "El campo Sinopsis no puede estar vacío<br>";
+            if (this.validateSinopsis == false) msg = msg + "El campo Sinopsis no puede tener más de 10 caracteres<br>";
+            if (this.validateNP == null) msg = msg + "El campo Número de Páginas no puede estar vacío<br>";
+            if (this.validateNP == false) msg = msg + "El campo número de páginas debe ser numérico entero<br>";
+            if (this.validateF == false) msg = msg + "El campo Fecha de publicación no puede estar vacío<br>";
+            if (this.book.editorial == null) msg = msg + "El campo Editorial no puede estar vacío<br>";
+            if (this.book.genero == null) msg = msg + "El campo Genero no puede estar vacío<br>";
+            if (this.book.genero != null && this.book.subg == null) msg = msg + "El campo Subgénro no puede estar vacío<br>";
+            if (this.validateA == false ||this.validateA == null) msg = msg + "El campo Autor no puede estar vacío<br>";
+            if (this.validateP == false) msg = msg + "En el campo libro predecesor debe haber un ISBN válido<br>";
             if (msg!=''){
                 isValid = false;
-                alert(msg);
+                Swal.fire({
+                    title: 'Error',
+                    html: '<p class="text-left">'+msg+'</p>',
+                    icon: 'error',
+                    confirmButtonText: 'Ok',
+                    confirmButtonColor: '#8C7F7F',
+                })
             }
             else {
                 this.add();

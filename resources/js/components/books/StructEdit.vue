@@ -26,7 +26,7 @@
                                             <b-col cols="4">
                                                 <label for="nombre">Nombre</label>
                                                 <b-form-input type="text" v-model="struct.nom" id="nom" name="nom" placeholder="Nombre"></b-form-input>
-                                                <b-form-invalid-feedback :state="validateN">Nombre de estructura no puede estar vacío</b-form-invalid-feedback>
+                                                <b-form-invalid-feedback :state="validateN">Nombre de estructura no puede tener más de 50 caracteres</b-form-invalid-feedback>
                                             </b-col>
 
                                             <b-col cols="4">
@@ -38,6 +38,8 @@
                                             <b-col cols="4">
                                                 <label for="titulo">Título</label>
                                                 <b-form-input type="text" v-model="struct.titulo" id="titulo" name="tipo"></b-form-input>
+                                                <b-form-invalid-feedback :state="validateTitle">Título de estructura no puede tener más de 50 caracteres</b-form-invalid-feedback>
+
                                             </b-col>
                                         </b-row>
                                         <hr>
@@ -57,12 +59,14 @@
                                             <b-col cols="4">
                                                 <label for="secnom">Nombre de la sección</label>
                                                 <b-form-input type="text" v-model="struct.secnom" id="secnom" name="secnom"></b-form-input>
-                                                <b-form-invalid-feedback :state="validateSN">Nombre de la sección no puede estar vacío</b-form-invalid-feedback>
+                                                <b-form-invalid-feedback :state="validateSN">Nombre de la sección no puede tener más de 50 caracteres</b-form-invalid-feedback>
                                             </b-col>
-                                            
+
                                             <b-col cols="4">
                                                 <label for="sectitulo">Título de la sección</label>
                                                 <b-form-input type="text" v-model="struct.sectit" id="sectitulo" name="sectitulo"></b-form-input>
+                                                <b-form-invalid-feedback :state="validateST">Título de la sección no puede tener más de 50 caracteres</b-form-invalid-feedback>
+
                                             </b-col>
                                         </b-row>
                                         <br>
@@ -84,9 +88,10 @@
 </template>
 
 <script>
+import Swal from 'sweetalert2';
 export default {
-    data(){
-        return{
+    data() {
+        return {
             struct: {
                 titulo: '',
                 tipo: '',
@@ -96,50 +101,62 @@ export default {
                 num: '',
             },
 
-            tipos:[{
-                value: null,
-                text: 'Seleccionar',
-            },
-            {
-                value: 'C',
-                text: 'Capítulo'
-            },
-            {
-                value: 'O',
-                text: 'Otro'
-            }],
+            tipos: [{
+                    value: null,
+                    text: 'Seleccionar',
+                },
+                {
+                    value: 'C',
+                    text: 'Capítulo'
+                },
+                {
+                    value: 'O',
+                    text: 'Otro'
+                }
+            ],
         }
     },
 
-    computed:{
-        validateN(){
-            if (this.struct.nom == '' || this.struct.nom == undefined || this.struct.nom == null) return false;
+    computed: {
+        validateN() {
+            if (this.struct.nom == '' || this.struct.nom == undefined || this.struct.nom == null) return null;
+            if (this.struct.nom.length > 50) return false;
             else return true;
         },
 
-        validateT(){
+        validateT() {
             return (this.struct.tipo != null);
         },
 
-        validateSN(){
-            if (this.struct.secnom == '') return false;
+        validateTitle() {
+            if (this.struct.titulo && this.struct.titulo.length > 50) return false;
+        },
+
+        validateSN() {
+            if (this.struct.secnom == '' || this.struct.secnom == null) return null;
+            if (this.struct.secnom.length > 50) return false;
             else return true;
         },
-        validateNUM(){
-            if (this.struct.num == '') return false;
+
+        validateST() {
+            if (this.struct.sectit && this.struct.sectit.length > 50) return false;
+            else return true;
+        },
+        validateNUM() {
+            if (this.struct.num == '') return null;
             return (this.struct.num != null && !isNaN(this.struct.num) && this.struct.num < 99999);
         }
     },
 
-    created(){
+    created() {
         var path = window.location.pathname;
-        var isbn = path.indexOf("k")+3;
-        var isbnend = path.indexOf("t")-2;
-        var id = path.substring(isbn,isbnend);
-        id = parseInt(id,10);
-        var newpath = path.substring(isbnend,path.length);
+        var isbn = path.indexOf("k") + 3;
+        var isbnend = path.indexOf("t") - 2;
+        var id = path.substring(isbn, isbnend);
+        id = parseInt(id, 10);
+        var newpath = path.substring(isbnend, path.length);
         newpath = newpath.replace(/\D/g, '');
-        var ide = parseInt(newpath,10);
+        var ide = parseInt(newpath, 10);
 
         axios.get(`/books/${id}/structure/${ide}/edit`)
             .then(res => {
@@ -158,17 +175,17 @@ export default {
 
     },
 
-    methods:{
-        update(){
+    methods: {
+        update() {
             var path = window.location.pathname;
-            var isbn = path.indexOf("k")+3;
-            var isbnend = path.indexOf("t")-2;
-            var id = path.substring(isbn,isbnend);
-            id = parseInt(id,10);
-            var newpath = path.substring(isbnend,path.length);
+            var isbn = path.indexOf("k") + 3;
+            var isbnend = path.indexOf("t") - 2;
+            var id = path.substring(isbn, isbnend);
+            id = parseInt(id, 10);
+            var newpath = path.substring(isbnend, path.length);
             newpath = newpath.replace(/\D/g, '');
-            var ide = parseInt(newpath,10);
-                
+            var ide = parseInt(newpath, 10);
+
             const params = {
                 tipo: this.struct.tipo,
                 titulo: this.struct.titulo,
@@ -182,9 +199,9 @@ export default {
             this.struct.titulo = '';
             this.struct.nom = '';
             this.struct.num = 0,
-            this.struct.sectit = '',
-            this.struct.secnom = '',
-            console.log(params);
+                this.struct.sectit = '',
+                this.struct.secnom = '',
+                console.log(params);
             axios.put(`/books/${id}/structure/${ide}`, params)
                 .then(res => {
                     window.location = `/books/${id}/structure`;
@@ -193,18 +210,27 @@ export default {
                 })
         },
 
-        revalidate(){
+        revalidate() {
             let msg = '';
-            if (!this.validateN) msg = msg + "El campo Nombre de Estructura no puede estar vacío\n";
-            if (!this.validateT) msg = msg + "El campo Tipo de Estructura no puede estar vacío\n";
-            if (!this.validateSN) msg = msg + "El campo Nombre de Sección no puede estar vacío\n"; 
-            if (!this.validateNUM) msg = msg + "El campo Número de Sección debe ser numérico\n";
+            if (this.validateN == false) msg = msg + "El campo Nombre de Estructura no puede tener más de 50 caracteres<br>";
+            if (this.validateN == null) msg = msg + "El campo Nombre de Estructura no puede estar vacío<br>";
+            if (!this.validateT) msg = msg + "El campo Tipo de Estructura no puede estar vacío<br>";
+            if (this.validateSN == null) msg = msg + "El campo Nombre de Sección no puede estar vacío<br>";
+            if (this.validateSN == false) msg = msg + "El campo Nombre de Sección no puede tener más de 50 caracteres<br>";
+            if (!this.validateNUM) msg = msg + "El campo Número de Sección debe ser numérico<br>";
+            if (this.validateTitle == false) msg = msg + "El campo Título de Estructura no puede tener más de 50 caracteres<br>";
+            if (this.validateST == false) msg = msg + "El campo Título de Sección no puede tener más de 50 caracteres<br>";
 
-            if (msg==''){
+            if (msg == '') {
                 this.update();
-            }
-            else{
-                alert(msg);
+            } else {
+                Swal.fire({
+                    title: 'Error',
+                    html: '<p class="text-left">' + msg + '</p>',
+                    icon: 'error',
+                    confirmButtonText: 'Ok',
+                    confirmButtonColor: '#8C7F7F',
+                })
             }
         }
     }

@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Books;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Structure;
+use App\Models\Book\Structure;
 use Response;
 use Redirect;
 use Illuminate\Support\Facades\DB;

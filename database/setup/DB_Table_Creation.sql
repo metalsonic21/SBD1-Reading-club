@@ -142,13 +142,13 @@ CREATE TABLE SJL_inansistencias (
     id_lec        INTEGER NOT NULL,
     id_grupo	  INTEGER NOT NULL,
     fec_reu_men   DATE NOT NULL,
-    id_lib        INTEGER NOT NULL,
+    id_lib        BIGINT NOT NULL,
     CONSTRAINT inasistencias_pk PRIMARY KEY (id_fec_i,id_fec_mem,id_club,id_lec,id_grupo,fec_reu_men,id_lib)
 );
 
 CREATE TABLE SJL_reuniones_mensuales (
     fec               DATE NOT NULL,
-    id_lib            INTEGER NOT NULL,
+    id_lib            BIGINT NOT NULL,
     id_grupo          INTEGER NOT NULL,
     id_grupo_mod       INTEGER NOT NULL,
     id_fec_mem        DATE NOT NULL,
@@ -170,14 +170,14 @@ CREATE TABLE SJL_libros (
     n_pag        INTEGER NOT NULL,
     fec_pub      DATE NOT NULL,
     autor        VARCHAR(50) NOT NULL,
-    id_prev      INTEGER,
+    id_prev      BIGINT,
     id_edit      INTEGER NOT NULL,
     CONSTRAINT libros_pk PRIMARY KEY (isbn)
 );
 
 CREATE TABLE SJL_lista_favoritos (
     id_lec   INTEGER NOT NULL,
-    id_lib   INTEGER NOT NULL,
+    id_lib   BIGINT NOT NULL,
     pref     NUMERIC(2) NOT NULL,
     CONSTRAINT lista_favoritos_pk PRIMARY KEY (id_lec,id_lib)
 );
@@ -199,14 +199,14 @@ CREATE TABLE SJL_subgeneros (
 
 CREATE TABLE SJL_generos_libros (
     id_gen   INTEGER NOT NULL,
-    id_lib   INTEGER NOT NULL,
+    id_lib   BIGINT NOT NULL,
     CONSTRAINT generos_libros_pk PRIMARY KEY(id_gen,id_lib)
 );
 
 
 CREATE TABLE SJL_estructuras_libros (
     id       SERIAL NOT NULL,
-    id_lib   INTEGER NOT NULL,
+    id_lib   BIGINT NOT NULL,
     nom      VARCHAR(50) NOT NULL,
     tipo     VARCHAR(2) NOT NULL,
     titulo   VARCHAR(50),
@@ -219,13 +219,13 @@ CREATE TABLE SJL_secciones_libros (
     num      NUMERIC NOT NULL,
     titulo   VARCHAR(50),
     id_est   INTEGER NOT NULL,
-    id_lib   INTEGER NOT NULL,
+    id_lib   BIGINT NOT NULL,
     CONSTRAINT secciones_libros_pk PRIMARY KEY (id)
 );
 
 CREATE TABLE SJL_obras_libros (
     id_obra   INTEGER NOT NULL,
-    id_lib    INTEGER NOT NULL,
+    id_lib    BIGINT NOT NULL,
     CONSTRAINT obras_libros_pk PRIMARY KEY (id_obra,id_lib)
 );
 
@@ -334,7 +334,7 @@ ALTER TABLE SJL_locales_eventos ADD CONSTRAINT locales_calles_fk FOREIGN KEY(id_
 ALTER TABLE SJL_locales_eventos ADD CONSTRAINT locales_clubes_fk FOREIGN KEY(id_club) REFERENCES SJL_clubes_lectura(id);
 
 ALTER TABLE SJL_inansistencias ADD CONSTRAINT inasistencias_grupos_fk FOREIGN KEY(id_fec_i,id_fec_mem,id_club,id_lec,id_grupo) REFERENCES SJL_grupos_lectores(id_fec_i,id_fec_mem,id_club,id_lec,id_grupo) ON DELETE CASCADE;
-ALTER TABLE SJL_inansistencias ADD CONSTRAINT inasistencias_reuniones_fk FOREIGN KEY(fec_reu_men,id_lib,id_grupo,id_club) REFERENCES SJL_reuniones_mensuales(fec,id_lib,id_grupo,id_club) ON DELETE CASCADE;
+ALTER TABLE SJL_inansistencias ADD CONSTRAINT inasistencias_reuniones_fk FOREIGN KEY(fec_reu_men,id_lib,id_grupo,id_club) REFERENCES SJL_reuniones_mensuales(fec,id_lib,id_grupo,id_club) ON DELETE CASCADE ON UPDATE CASCADE;
 
 ALTER TABLE SJL_reuniones_mensuales ADD CONSTRAINT reuniones_libros_fk FOREIGN KEY(id_lib) REFERENCES SJL_libros(isbn) ON UPDATE CASCADE;
 ALTER TABLE SJL_reuniones_mensuales ADD CONSTRAINT reuniones_grupos_fk FOREIGN KEY(id_grupo,id_club) REFERENCES SJL_grupos_lectura(id,id_club) ON DELETE CASCADE;
@@ -353,7 +353,7 @@ ALTER TABLE SJL_generos_libros ADD CONSTRAINT libros_generos_fk FOREIGN KEY(id_l
 
 ALTER TABLE SJL_estructuras_libros ADD CONSTRAINT estructura_libros_fk FOREIGN KEY(id_lib) REFERENCES SJL_libros(isbn) ON DELETE CASCADE ON UPDATE CASCADE;
 
-ALTER TABLE SJL_secciones_libros ADD CONSTRAINT secciones_estructuras_prev_fk FOREIGN KEY(id_est,id_lib) REFERENCES SJL_estructuras_libros(id,id_lib) ON DELETE CASCADE;
+ALTER TABLE SJL_secciones_libros ADD CONSTRAINT secciones_estructuras_prev_fk FOREIGN KEY(id_est,id_lib) REFERENCES SJL_estructuras_libros(id,id_lib) ON DELETE CASCADE ON UPDATE CASCADE;
 
 ALTER TABLE SJL_obras_libros ADD CONSTRAINT obras_libros_fk FOREIGN KEY(id_obra) REFERENCES SJL_obras(id)ON DELETE CASCADE ON UPDATE CASCADE ;
 ALTER TABLE SJL_obras_libros ADD CONSTRAINT libros_obras_fk FOREIGN KEY(id_lib) REFERENCES SJL_libros(isbn) ON DELETE CASCADE ON UPDATE CASCADE;
