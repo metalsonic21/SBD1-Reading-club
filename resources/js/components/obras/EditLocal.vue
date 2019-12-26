@@ -62,6 +62,7 @@
 </template>
 
 <script>
+import Swal from 'sweetalert2';
 export default {
     data() {
         return {
@@ -143,16 +144,24 @@ export default {
         revalidate(){
             let msg = '';
 
-            if (this.validateN == null || !this.validateN) msg = msg + "El campo Nombre de Local no puede estar vacío ni tener más de 15 caracteres\n";
-            if (!this.validateT == null) msg = msg + "El campo Tipo de Local no puede estar vacío\n";
-            if (!this.validateC || this.validateC == null) msg = msg + "El campo Capacidad debe ser un número entero positivo\n";
+            if (this.validateN == null) msg = msg + "El campo Nombre de Local no puede estar vacío<br>";
+            if (this.validateN == false) msg = msg + "El campo Nombre de Local no puede estar vacío ni tener más de 15 caracteres<br>";
+            if (this.validateT == null) msg = msg + "El campo Tipo de Local no puede estar vacío<br>";
+            if (this.validateC == null) msg = msg + "El campo Capacidad no puede estar vacío<br>";
+            if (this.validateC == false) msg = msg + "El campo Capacidad debe ser un número entero positivo<br>";
 
             if (msg == ''){
                 this.add();
             }
 
             else {
-                alert(msg);
+                Swal.fire({
+                    title: 'Error',
+                    html: '<p class="text-left">' + msg + '</p>',
+                    icon: 'error',
+                    confirmButtonText: 'Ok',
+                    confirmButtonColor: '#8C7F7F',
+                })
             }
         }
     }
