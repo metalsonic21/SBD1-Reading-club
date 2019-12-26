@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Obras;
 use DB;
 use Response;
-use App\Models\Remake\Local;
+use App\Models\Obra\Local;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 

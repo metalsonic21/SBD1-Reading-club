@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Obras;
 use DB;
 use Response;
-use App\Models\Remake\Obra;
-use App\Models\Remake\Obras_Libros;
+use App\Models\Obra\Obra;
+use App\Models\Obra\Obras_Libros;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 

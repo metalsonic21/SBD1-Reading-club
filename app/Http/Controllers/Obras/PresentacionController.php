@@ -1,9 +1,9 @@
 <?php
 
 namespace App\Http\Controllers\Obras;
-use App\Models\Remake\Local;
-use App\Models\Remake\Presentacion;
-use App\Models\Remake\Obra;
+use App\Models\Obra\Local;
+use App\Models\Obra\Presentacion;
+use App\Models\Obra\Obra;
 use DB;
 use Response;
 use App\Http\Controllers\Controller;

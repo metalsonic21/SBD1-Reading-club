@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\Remake;
+namespace App\Models\Obra;
 
 use Illuminate\Database\Eloquent\Model;
 
