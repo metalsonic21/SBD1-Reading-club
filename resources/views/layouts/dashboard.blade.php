@@ -173,35 +173,6 @@
                                 </li>
                             </ul>
                         </b-collapse>
-
-                    <li class="nav-item ">
-                        <b-link class="nav-link" v-b-toggle.d-6>
-                            <i class="material-icons">file_copy</i>
-                            <p> Reportes
-                                <b class="caret"></b>
-                            </p>
-                        </b-link>
-
-                        <b-collapse id="d-6" class="collapse">
-                            <ul class="nav">
-                                <li class="nav-item ">
-                                    <a class="nav-link" href="/members">
-                                        <span class="sidebar-normal"> Club </span>
-                                    </a>
-                                </li>
-                                <li class="nav-item ">
-                                    <a class="nav-link" href="/clubreports">
-                                        <span class="sidebar-normal"> Miembros de club </span>
-                                    </a>
-                                </li>
-                                <li class="nav-item ">
-                                    <a class="nav-link" href="/earningplays">
-                                        <span class="sidebar-normal"> Ganancias por obra </span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </b-collapse>
-                    </li>
                 </ul>
             </div>
         </div>

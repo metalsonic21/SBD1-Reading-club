@@ -13,8 +13,7 @@
 
 Route::redirect('/', 'login');
 
-
-Auth::routes();
+Auth::routes(['reset' => false, 'verify' => false, 'register'=> false]);
 
 Route::get('/home', 'HomeController@index')->name('home');
 
@@ -22,8 +21,6 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('/browseclubs', 'clubs\BrowseClubsController');
 Route::get('/browseclubs/{id}/editassociated', 'clubs\EditAssociatedController@edit');
 Route::put('/browseclubs/{id}/editassociated', 'clubs\EditAssociatedController@update');
-Route::get('/members', 'clubs\ReportsClubMembersController@index')->name('members');
-Route::get('/clubreports', 'clubs\ClubReportsController@index')->name('clubreports');
 Route::get('/selectclub', 'clubs\SelectClubController@index')->name('selectclub');
 Route::get('/selectclubg', 'clubs\SelectClubController@group')->name('selectclub');
 Route::get('/selectclubgm', 'clubs\SelectClubController@gm')->name('selectclub');

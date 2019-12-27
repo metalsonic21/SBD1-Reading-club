@@ -9,11 +9,6 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 window.Vue = require('vue');
 Vue.config.productionTip = false
 
-/* HOME */
-Vue.component('popular-books', require('./components/home/PopularBooks.vue').default);
-Vue.component('last-discussed', require('./components/home/LastDiscussed.vue').default);
-Vue.component('active-presentations', require('./components/home/ActivePresentations.vue').default);
-
 /* CRUD CLUBS */
 Vue.component('create-club', require('./components/browse_clubs/Create.vue').default);
 Vue.component('edit-club', require('./components/browse_clubs/Edit.vue').default);

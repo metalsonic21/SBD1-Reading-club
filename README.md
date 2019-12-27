@@ -82,7 +82,7 @@ Password: metalsonic21
 4. Run the following commands
 
 ```
-php artisan migrate
+php artisan migrate:refresh --seed
 php artisan serve
 ```
 
@@ -90,6 +90,13 @@ php artisan serve
 
 ```
 npm run watch
+```
+
+6. Log in with the following credentials
+
+```
+E-mail: str4ngl3r@aol.com
+Password: 123456789
 ```
 ## Issues
 
@@ -123,6 +130,18 @@ Then, restart pgAdmin and the server.
 ```
 ;extension=pdo_pgsql
 ;extension=pgsql
+```
+
+4. Migration doesn't work (Class UserTableSeeder not found)
+
+**SOLUTION**: Run the following command:
+```
+composer dump-autoload
+```
+
+Then, try to migrate again
+```
+php artisan migrate:refresh -seed
 ```
 
 ## Notes
