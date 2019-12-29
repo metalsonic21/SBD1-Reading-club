@@ -177,6 +177,7 @@ return [
 
         /*Laravel collective*/
         'Collective\Html\HtmlServiceProvider',
+        Barryvdh\DomPDF\ServiceProvider::class,
 
     ],
 
@@ -230,7 +231,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Form' => 'Collective\Html\FormFacade',
         'Html' => 'Collective\Html\HtmlFacade',
-
+        'PDF' => Barryvdh\DomPDF\Facade::class,
     ],
 
 ];

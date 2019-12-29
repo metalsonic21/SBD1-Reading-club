@@ -102,4 +102,8 @@ Route::delete('/clubs/{club}/presentaciones/{fec}/{obra}/{local}/{actor}/{person
 Route::get('/clubs/{club}/presentaciones/{fec}/{obra}/{local}/castable', 'obras\ElencoController@castable')->name('cast.verify');
 
 /* REPORTS */
-Route::view('/reports', 'reports.list');
+Route::get('/reports', function () {
+    return view ('reports.list');
+});
+
+Route::get('/zzz', 'reports\ReportsFrankController@test')->name('zzz');

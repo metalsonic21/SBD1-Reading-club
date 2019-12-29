@@ -31,9 +31,6 @@ Vue.component('free-agent', require('./components/club_members/AddFreeAgent.vue'
 /* FAVORITE BOOKS */
 Vue.component('favorite-books', require('./components/books/Favorites.vue').default);
 
-/* REVIEWED BOOKS*/
-Vue.component('available-reports-club', require('./components/club_reports/AvailableReportsClub.vue').default);
-
 /*BROWSE GROUPS*/
 Vue.component('create-group', require('./components/browse_groups/CreateGroup.vue').default);
 Vue.component('edit-group', require('./components/browse_groups/EditGroup.vue').default);
