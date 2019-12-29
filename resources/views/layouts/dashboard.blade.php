@@ -173,6 +173,24 @@
                                 </li>
                             </ul>
                         </b-collapse>
+                    </li>
+                    <li class="nav-item ">
+                        <b-link class="nav-link" v-b-toggle.d-6>
+                            <i class="material-icons">insert_drive_file</i>
+                            <p> Reportes
+                                <b class="caret"></b>
+                            </p>
+                        </b-link>
+                        <b-collapse id="d-6" class="collapse">
+                            <ul class="nav">
+                                <li class="nav-item ">
+                                    <a class="nav-link" href="/reports">
+                                        <span class="sidebar-normal"> Lista de reportes disponibles </span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </b-collapse>
+                    </li>
                 </ul>
             </div>
         </div>

@@ -100,3 +100,6 @@ Route::delete('/clubs/{club}/presentaciones/{fec}/{obra}/{local}', 'obras\Presen
 Route::resource('/clubs/{club}/presentaciones/{fec}/{obra}/{local}/cast', 'obras\ElencoController');
 Route::delete('/clubs/{club}/presentaciones/{fec}/{obra}/{local}/{actor}/{personaje}', 'obras\ElencoController@borrar')->name('role.delete');
 Route::get('/clubs/{club}/presentaciones/{fec}/{obra}/{local}/castable', 'obras\ElencoController@castable')->name('cast.verify');
+
+/* REPORTS */
+Route::view('/reports', 'reports.list');
