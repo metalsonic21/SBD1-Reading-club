@@ -45,7 +45,7 @@
                                                     <button type="button" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Libros analizados por este club" class="btn btn-default" v-b-modal.r1>
                                                         <i class="material-icons">comment</i> Información del reporte
                                                     </button>
-                                                    <a class="btn btn-info" href="/zzz">
+                                                    <a class="btn btn-info" href="/reportbooks">
                                                         <i class="material-icons">cloud_download</i> Descargar reporte
                                                     </a>
                                                 </td>

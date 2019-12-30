@@ -106,4 +106,10 @@ Route::get('/reports', function () {
     return view ('reports.list');
 });
 
+/* REPORTS */
+Route::get('/base', function () {
+    return view ('reports.base');
+});
+
 Route::get('/zzz', 'reports\ReportsFrankController@test')->name('zzz');
+Route::get('/reportbooks', 'reports\ReportsLCIController@books')->name('books.reports');
