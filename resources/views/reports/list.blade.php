@@ -170,9 +170,9 @@
                                                     <button type="button" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Libros analizados por este club" class="btn btn-default" v-b-modal.r10>
                                                         <i class="material-icons">comment</i> Información del reporte
                                                     </button>
-                                                    <button type="button" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Ficha club" class="btn btn-info">
+                                                    <a href="/thirtypercent" class="btn btn-info">
                                                         <i class="material-icons">cloud_download</i> Descargar reporte
-                                                    </button>
+                                                    </a>
                                                 </td>
                                             </tr>
                                         </tbody>

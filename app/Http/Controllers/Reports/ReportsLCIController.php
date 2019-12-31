@@ -70,4 +70,27 @@ class ReportsLCIController extends Controller
         $pdf = PDF::loadView('reports.club_info', $data);
         return $pdf->download('clubs.pdf');
     }
+
+    public function CatchThirtythree(){
+        $clubs = DB::select(DB::raw("SELECT c.id, c.nom as nom, (
+            SELECT count(*) from sjl_membresias m WHERE m.id_club = c.id AND m.fec_f IS NOT NULL AND m.motivo_b = 'I'
+        )i FROM sjl_clubes_lectura c ORDER BY c.nom"));
+
+        $na = DB::select(DB::raw("SELECT (
+            SELECT nom1 || ' ' || ape1 from sjl_lectores WHERE doc_iden = m.id_lec
+        )victim, 
+        (
+            SELECT doc_iden from sjl_lectores WHERE doc_iden = m.id_lec
+        )victimid,
+        m.id_club FROM sjl_membresias m WHERE m.fec_f IS NOT NULL AND m.motivo_b = 'I'"));
+
+        $data = [
+            'clubs'     => $clubs,
+            'na' => $na,
+        ];
+        $pdf = PDF::loadView('reports.30', $data);
+        return $pdf->download('30.pdf');
+
+        //return view ('reports.30')->with('clubs',$clubs)->with('na',$na);
+    }
 }

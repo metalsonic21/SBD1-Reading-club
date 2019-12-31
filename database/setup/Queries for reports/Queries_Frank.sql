@@ -38,3 +38,11 @@ END)tipo FROM sjl_grupos_lectura g ORDER BY g.nom;
 SELECT a.id_club1, a.id_club2, (SELECT nom FROM sjl_clubes_lectura WHERE id = a.id_club1)clubone, (
     SELECT nom FROM sjl_clubes_lectura WHERE id = a.id_club2
 ) FROM sjl_clubes_clubes a;
+
+/* 3. EN UN BIMESTRE 30% DE INASISTENCIAS */
+
+SELECT c.id, c.nom as nom FROM sjl_clubes_lectura c ORDER BY c.nom;
+
+SELECT (
+    SELECT nom1 || ' ' || ape1 from sjl_lectores WHERE doc_iden = m.id_lec
+) FROM sjl_membresias m WHERE m.fec_f IS NULL AND m.motivo_b = 'I';

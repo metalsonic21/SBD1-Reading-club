@@ -107,6 +107,6 @@ Route::get('/reports', function () {
 });
 
 /* REPORTS */
-Route::get('/zzz', 'reports\ReportsFrankController@test')->name('zzz');
 Route::get('/reportbooks', 'reports\ReportsLCIController@books')->name('books.reports');
 Route::get('/reportclubs', 'reports\ReportsLCIController@club')->name('club.reports');
+Route::get('/thirtypercent', 'reports\ReportsLCIController@CatchThirtythree')->name('meetings.attreport');
