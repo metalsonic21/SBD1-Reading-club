@@ -113,3 +113,4 @@ Route::get('/base', function () {
 
 Route::get('/zzz', 'reports\ReportsFrankController@test')->name('zzz');
 Route::get('/reportbooks', 'reports\ReportsLCIController@books')->name('books.reports');
+Route::get('/reportclubs', 'reports\ReportsLCIController@club')->name('club.reports');

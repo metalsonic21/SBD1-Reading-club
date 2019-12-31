@@ -101,46 +101,62 @@
     .page_break { page-break-after: always; }
 </style>
 <body>
-@foreach ($books as $book)
+@foreach ($clubs as $club)
 <div class="jumbotron text-center">
-<h1>{{$book->titulo_ori}}</h1>
+<h1>{{$club->nom}}</h1>
 </div>
-  
+
 <div class="container">
-  <div class="row">
-    <div class="col-sm-4">
-        <br><br><br>
-        <img src="./img/pdfs/poster.png" alt="" style="width:250px;height:250px;">
-        <div style="margin-top:-50px">
-            <h5 style="margin-left:70px">Estructura</h5>
-            @if ($book->estructuras > 0)
-            @foreach ($structs as $struct)
-                @if ($struct->lib == $book->isbn)
-                    <p>{{$struct->fullnom}}</p>
+    <div class="row">
+        <div class="col-sm-12">
+            <h3>Grupos</h3>
+            @if ($club->grupos > 0)
+            @foreach ($grupos as $grupo)
+                @if ($grupo->club == $club->id)
+                    <p>
+                        <strong>Nombre: </strong> {{$grupo->nom}} <br>
+                        <strong>Tipo: </strong> Grupo de {{$grupo->tipo}} <br>
+                        <strong>Horario disponible: </strong> {{$grupo->dia}}, {{$grupo->horario}} <br>
+                    </p>
                 @endif
             @endforeach
             @else
-                <p>Este libro no tiene ninguna estructura <br> registrada</p>
+                    <p><strong>Este club no tiene ningún grupo registrado</strong></p>
             @endif
+        </div>
         </div>
     </div>
     
-    <div class="col-sm-8" style="margin-left:300px">
-      <h5>Información</h5>
-    <p><strong>Título en Español: </strong>{{$book->titulo_esp}} <br>
-    <strong>Autor: </strong> {{$book->autor}} <br>
-    <strong>Número de páginas: </strong> {{$book->n_pag}} <br> 
-    <strong>Género: </strong> {{$book->genero}} <br>
-    <strong>Subgéneros: </strong> {{$book->subgenero}} <br>
-    <strong>Tema principal: </strong> {{$book->tema_princ}}
-    </p>
-
-    <h5>Sinopsis</h5>
-        <p class="text-justify">{{$book->sinop}}</p>
-    </div>
-    <div class="page_break"></div>
-  </div>
-</div>
+    <div class="container" style="margin-left:430px">
+        <div class="row">
+            <div class="col-sm-12">
+                <h3>Clubes asociados</h3>
+                @if ($club->asociados > 0)
+                @foreach ($associated as $a)
+                    @if ($a->idone == $club->id)
+                        <ul>
+                            <li>
+                                {{$a->clubtwo}}
+                            </li>
+                        </ul>
+                    @endif
+    
+                    @if ($a->idtwo == $club->id)
+                    <ul>
+                        <li>
+                            {{$a->clubone}}
+                        </li>
+                    </ul>
+                    @endif
+                @endforeach
+                @else
+                        <p><strong>Este club no está asociado a ningún club</strong></p>
+                @endif
+            </div>
+            </div>
+        </div>
+    
+<div class="page_break"></div>
 @endforeach
 </body>
 </html>
