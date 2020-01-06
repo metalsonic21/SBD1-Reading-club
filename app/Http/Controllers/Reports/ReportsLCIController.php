@@ -200,18 +200,31 @@ class ReportsLCIController extends Controller
     }
     public function play_detail(){
         $plays = DB::SELECT(DB::RAW("SELECT o.id as id_obra,o.nom as nom_obra,o.resum,l.id_lib,k.titulo_esp,k.autor,p.nom as nom_edit
-                                     FROM SJL_obras o,SJL_obras_libros l,sjl_libros k, sjl_editoriales p
-                                        WHERE l.id_obra=o.id AND l.id_lib=k.isbn AND k.id_edit=p.id                                  
-                                     "));
+                            FROM SJL_obras o,SJL_obras_libros l,sjl_libros k, sjl_editoriales p
+                            WHERE l.id_obra=o.id AND l.id_lib=k.isbn AND k.id_edit=p.id                                  
+                            "));
         foreach($play as $plays){
             $play->pers = DB::SELECT(DB::RAW("SELECT id,id_obra,nom FROM SJL_Personajes WHERE '$play->id_obra'=id_obra"));
-            $play->performs = DB::SELECT(DB::RAW("SELECT a.fec, a.hora_i,b.nom FROM SJL_historicos_presentaciones a, SJL_locales_eventos b WHERE '$play->id_obra'= a.id_obra AND a.id_local=b.id"));
+            $play->performs = DB::SELECT(DB::RAW("SELECT a.fec, a.hora_i,b.nom,c.nom FROM SJL_historicos_presentaciones a, SJL_locales_eventos b,sjl_clubes_lectura c WHERE '$play->id_obra'= a.id_obra AND a.id_local=b.id AND a.id_club=c.id"));
         }
 
 }
 
     public function perform_detail(){
-        
+        $clubs = DB::select(DB::raw("SELECT c.id,c.nom FROM SJL_clubes_lectura"));
+        foreach($club as $clubs){
+            $club->plays=DB::SELECT(DB::RAW("SELECT o.id as id_obra,o.nom as nom_obra,o.resum,l.id_lib,k.titulo_esp,k.autor,p.nom as nom_edit
+            FROM SJL_obras o,SJL_obras_libros l,sjl_libros k, sjl_editoriales p,SJL_historicos_presentaciones h
+            WHERE l.id_obra=o.id AND l.id_lib=k.isbn AND k.id_edit=p.id  AND o.id=h.id_obra AND '$club->id'=h.id_club                               
+            "));
+            foreach($play as $club->$plays){
+                    $play->pers = DB::SELECT(DB::RAW("SELECT a.id,a.id_obra,nom FROM SJL_Personajes a,SJL_historicos_presentaciones h WHERE '$play->id_obra'=id_obra AND '$club->id'=h.id_club AND '$play->id_obra'=h.id_obra"));
+                    $play->performs = DB::SELECT(DB::RAW("SELECT a.fec, a.hora_i,a.durac,a.valor,a.num_asist,a.costo,b.nom,c.nom FROM SJL_historicos_presentaciones a, SJL_locales_eventos b,sjl_clubes_lectura c WHERE '$play->id_obra'= a.id_obra AND a.id_local=b.id AND a.id_club=c.id"));
+                    foreach($perform as $play->performs){
+                        $perform->elenco = DB::SELECT(DB::RAW("SELECT b.doc_iden,b.nom1,b.ape1,b.ape2 FROM sjl_elenco_lectores a,sjl_lectores b Where '$perform->fec'=a.id_hist_pre AND '$club->id'=a.id_club AND '$play->id_obra'=a.id_obra AND a.id_lec=b.doc_iden ")); 
+                    }
+            }
+    }
     }
 }
 
