@@ -171,5 +171,48 @@ class ReportsLCIController extends Controller
         $pdf = PDF::loadView('reports.presentations',$data);
         return $pdf->download('Presentaciones.pdf');
     }
+    public function book_analyzed (){
+        $clubs = DB::select(DB::raw("SELECT c.id,c.nom FROM SJL_clubes_lectura"));
+        foreach($club as $clubs){
+            $club->books=DB::select(DB::raw("SELECT l.isbn,l.titulo_esp,(SELECT(AVG(h.valor)) FROM SJL_reuniones_mensuales h,SJL_Libros j,SJL_grupos_lectura k,SJL_clubes_lectura o
+            WHERE h.valor is not null AND l.isbn=h.id_lib AND h.id_grupo=k.id AND k.id_club=o.id AND o.id='$club->id')
+              FROM SJL_reuniones_mensuales a,SJL_Libros l,SJL_grupos_lectura b,SJL_clubes_lectura c Where l.isbn=a.id_lib and a.id_grupo=b.id and a.valor is not null and a.id_grupo=b.id and b.id_club=c.id AND c.id='$club->id' ORDER BY l.isbn"));
+        }
+    }
+
+    public function club_member(){
+        $members = DB::select(DB::raw("SELECT doc_iden,nom1,nom2,ape1,id_club as club_act,id_grup as grup_act,id_rep,id_rep_lec FROM SJL_Lectores"));
+        foreach($member as $members){
+            if($member->id_rep)
+            $member->rep = DB::SELECT(DB::RAW("SELECT doc_iden,nom1,ape1,ape2 FROM SJL_representantes WHERE doc_iden='$member->id_rep'"));
+            else  if($member->id_rep_lec)
+            $member->rep = DB::SELECT(DB::RAW("SELECT doc_iden,nom1,ape1,ape2 FROM SJL_representantes WHERE doc_iden='$member->id_rep_lec'"));
+            $member->hist_clubs = DB::SELECT(DB::RAW("SELECT distinct a.id_club ,b.nom FROM SJL_membresias a,sjl_clubes_lectura b WHERE '$member->doc_iden'=a.id_lec AND a.id_club=b.id"));
+            foreach($club as $member->hist_clubs){
+                $club->hist_grups = DB::SELECT(DB::RAW("SELECT j.id_grupo,j.id_club,j.id_fec_i,k.nom FROM SJL_Grupos_lectores j,SJL_grupos_lectura k WHERE '$member->doc_iden'=j.id_lec AND '$club->id_club'=j.id_club AND j.id_club=k.id_club AND j.id_grup=k.id"));
+                $club->pagos = DB::SELECT(DB::RAW("SELECT id,fec_emi FROM SJL_historicos_pagos_memb WHERE '$member->doc_iden'=id_lec AND '$club->id_club'=id_club "));
+            }
+            foreach($grupo as $member->hist_clubs->hist_grups){
+                $grupo->inasist= DB::SELECT(DB::RAW("SELECT fec_reu_men FROM SJL_inansistencias WHERE '$grupo->id_club'=id_club AND '$grupo->id_grupo'=id_grupo AND '$member->doc_iden'=id_lec"));
+            }
+            $member->favs = DB::SELECT(DB::RAW("SELECT a.titulo_esp,b.pref FROM SJL_Libros a, SJL_Lista_favoritos b WHERE '$member->doc_iden'=b.id_lec AND a.isbn=b.id_lib"));
+        }
+    }
+    public function play_detail(){
+        $plays = DB::SELECT(DB::RAW("SELECT o.id as id_obra,o.nom as nom_obra,o.resum,l.id_lib,k.titulo_esp,k.autor,p.nom as nom_edit
+                                     FROM SJL_obras o,SJL_obras_libros l,sjl_libros k, sjl_editoriales p
+                                        WHERE l.id_obra=o.id AND l.id_lib=k.isbn AND k.id_edit=p.id                                  
+                                     "));
+        foreach($play as $plays){
+            $play->pers = DB::SELECT(DB::RAW("SELECT id,id_obra,nom FROM SJL_Personajes WHERE '$play->id_obra'=id_obra"));
+            $play->performs = DB::SELECT(DB::RAW("SELECT a.fec, a.hora_i,b.nom FROM SJL_historicos_presentaciones a, SJL_locales_eventos b WHERE '$play->id_obra'= a.id_obra AND a.id_local=b.id"));
+        }
+
 }
+
+    public function perform_detail(){
+        
+    }
+}
+
 
