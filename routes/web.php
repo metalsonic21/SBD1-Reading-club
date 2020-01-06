@@ -110,3 +110,7 @@ Route::get('/reports', function () {
 Route::get('/reportbooks', 'reports\ReportsLCIController@books')->name('books.reports');
 Route::get('/reportclubs', 'reports\ReportsLCIController@club')->name('club.reports');
 Route::get('/thirtypercent', 'reports\ReportsLCIController@CatchThirtythree')->name('meetings.attreport');
+
+Route::get('/cronomembers', 'reports\ReportsLCIController@cronoMembers')->name('crono.members');
+Route::get('/reportmeetings', 'reports\ReportsLCIController@meetings')->name('meeting.reports');
+Route::get('/reportpresentations', 'reports\ReportsLCIController@presentations')->name('presentations.reports');

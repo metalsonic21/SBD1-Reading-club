@@ -56,7 +56,7 @@
 
                                                 <td class="text-justify">Libros analizados por club</td>
                                                 <td class="td-actions text-center">
-                                                    <button type="button" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Libros analizados por este club" class="btn btn-default" v-b-modal.r2>
+                                                    <button type="button" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Librodos por este club"s analiza class="btn btn-default" v-b-modal.r2>
                                                         <i class="material-icons">comment</i> Información del reporte
                                                     </button>
                                                     <button type="button" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Ficha club" class="btn btn-info">
@@ -72,9 +72,9 @@
                                                     <button type="button" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Libros analizados por este club" class="btn btn-default" v-b-modal.r3>
                                                         <i class="material-icons">comment</i> Información del reporte
                                                     </button>
-                                                    <button type="button" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Ficha club" class="btn btn-info">
+                                                    <a href="/cronomembers" class="btn btn-info">
                                                         <i class="material-icons">cloud_download</i> Descargar reporte
-                                                    </button>
+                                                    </a>
                                                 </td>
                                             </tr>
 
@@ -142,9 +142,9 @@
                                                     <button type="button" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Libros analizados por este club" class="btn btn-default" v-b-modal.r8>
                                                         <i class="material-icons">comment</i> Información del reporte
                                                     </button>
-                                                    <button type="button" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Ficha club" class="btn btn-info">
+                                                    <a href="/reportmeetings" class="btn btn-info">
                                                         <i class="material-icons">cloud_download</i> Descargar reporte
-                                                    </button>
+                                                    </a>
                                                 </td>
                                             </tr>
 
@@ -156,9 +156,9 @@
                                                     <button type="button" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Libros analizados por este club" class="btn btn-default" v-b-modal.r9>
                                                         <i class="material-icons">comment</i> Información del reporte
                                                     </button>
-                                                    <button type="button" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Ficha club" class="btn btn-info">
+                                                    <a href="/reportpresentations" class="btn btn-info">
                                                         <i class="material-icons">cloud_download</i> Descargar reporte
-                                                    </button>
+                                                    </a>
                                                 </td>
                                             </tr>
 
