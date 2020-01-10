@@ -104,7 +104,7 @@ class ReportsLCIController extends Controller
         FROM sjl_membresias m
         ORDER BY m.fec_i;"));
 
-        $books = DB::select(DB::raw("SELECT l.isbn, l.titulo_ori, r.id_club,r.id_lec FROM sjl_libros l, sjl_reuniones_mensuales r WHERE r.id_lib = l.isbn AND n_ses = 1 "));
+        $books = DB::select(DB::raw("SELECT l.isbn, l.titulo_ori, r.id_club,r.id_lec FROM sjl_libros l, sjl_reuniones_mensuales r WHERE r.id_lib = l.isbn AND r.n_ses = 1 "));
 
         $data = [
             'clubs' => $clubs,
