@@ -122,7 +122,7 @@ export default {
         axios.get(`/obras/create`)
             .then(res => {
                 this.items = res.data.data;
-                console.log(this.obras);
+                //console.log(this.obras);
             }).catch(e => {
                 console.log(e);
             })

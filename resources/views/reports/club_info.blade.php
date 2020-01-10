@@ -101,7 +101,6 @@
     .page_break { page-break-after: always; }
 </style>
 <body>
-@foreach ($clubs as $club)
 <div class="jumbotron text-center">
 <h1>{{$club->nom}}</h1>
 </div>
@@ -110,7 +109,7 @@
     <div class="row">
         <div class="col-sm-12">
             <h3>Grupos</h3>
-            @if ($club->grupos > 0)
+            @if ($grupos)
             @foreach ($grupos as $grupo)
                 @if ($grupo->club == $club->id)
                     <p>
@@ -131,7 +130,7 @@
         <div class="row">
             <div class="col-sm-12">
                 <h3>Clubes asociados</h3>
-                @if ($club->asociados > 0)
+                @if ($associated)
                 @foreach ($associated as $a)
                     @if ($a->idone == $club->id)
                         <ul>
@@ -155,8 +154,5 @@
             </div>
             </div>
         </div>
-    
-<div class="page_break"></div>
-@endforeach
 </body>
 </html>

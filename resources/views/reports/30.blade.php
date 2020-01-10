@@ -114,12 +114,11 @@
 </style>
 <body>
 
-    @foreach ($clubs as $club)
         <div class="jumbotron text-center">
         <h1>{{$club->nom}}</h1>
         </div>
 
-        @if ($club->i > 0)
+        @if ($na)
             <table>
                 <tr>
                     <th class="text-center">Documento de identidad</th>
@@ -140,7 +139,5 @@
                 <strong>Este club no tiene miembros con más del 30% de inasistencias</strong>
             </p>
         @endif
-        <div class="page_break"></div>
-    @endforeach
 </body>
 </html>

@@ -5,46 +5,50 @@ namespace App\Http\Controllers\reports;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use DB;
+use Redirect;
 use PDF;
 
 class ReportsLCIController extends Controller
 {
-    public function books (){
-
-        /* Get all books in an array */
-        $books = DB::select(DB::raw("SELECT l.titulo_esp, l.isbn, l.titulo_ori, l.tema_princ, l.sinop
+    public function bookspdf($isbn){
+      
+        $check_book = DB::select(DB::raw("SELECT l.titulo_esp, l.isbn, l.titulo_ori, l.tema_princ, l.sinop
         , l.n_pag, l.fec_pub, l.autor, 
             (SELECT s.nom from sjl_subgeneros s, sjl_generos_libros g WHERE s.id = g.id_gen AND s.id_subg IS NULL AND 
         g.id_lib = l.isbn)genero, (
             SELECT s.nom from sjl_subgeneros s, sjl_generos_libros g WHERE s.id = g.id_gen AND s.id_subg IS NOT NULL AND 
         g.id_lib = l.isbn
-        )subgenero, (
-            SELECT COUNT(*) from sjl_estructuras_libros e WHERE e.id_lib = l.isbn
-        )estructuras
+        )subgenero
             FROM sjl_libros l
+            WHERE l.isbn = '$isbn'
             ORDER BY l.isbn;"));
+
+        $book = $check_book[0];
 
         $structures = DB::select(DB::raw("SELECT (CASE WHEN e.tipo = 'C' THEN 'Capítulo' ELSE '' END) || ' ' || s.num || ' — ' || s.nom as fullnom, e.id_lib as lib
         FROM sjl_secciones_libros s, sjl_estructuras_libros e 
-        WHERE e.id = s.id_est
+        WHERE e.id = s.id_est AND e.id_lib = '$isbn' AND s.id_lib = '$isbn'
         ORDER BY e.id_lib, s.num; "));
         $data = [
-            'books'     => $books,
+            'book'     => $book,
             'structs' => $structures,
         ];
         $pdf = PDF::loadView('reports.base', $data);
         return $pdf->download('books.pdf');
-
     }
 
-    public function club (){
-        $clubs = DB::select(DB::raw("SELECT c.id, c.nom as nom, (
-            SELECT count (*) from sjl_grupos_lectura WHERE id_club = c.id
-        )grupos, (
-            SELECT count (*) FROM sjl_clubes_clubes WHERE id_club1 = c.id OR id_club2 = c.id
-        )asociados FROM sjl_clubes_lectura c ORDER BY c.nom"));
+    public function books (Request $request){
+        return $this->bookspdf($request->libro);
+    }
+    
+    public function clubspdf ($id){
+        $club_check = DB::select(DB::raw("SELECT c.id, c.nom as nom FROM sjl_clubes_lectura c
+            WHERE c.id = '$id'
+            ORDER BY c.nom"));
 
-        $groups = DB::select(DB::raw("SELECT g.nom, g.id as id, g.id_club as club, (CASE
+        $club = $club_check[0];
+
+        $grupos = DB::select(DB::raw("SELECT g.nom, g.id as id, g.id_club as club, (CASE
         WHEN g.dia_sem = 2 THEN 'Lunes'
         WHEN g.dia_sem = 3 THEN 'Martes'
         WHEN g.dia_sem = 4 THEN 'Miercoles'
@@ -56,25 +60,33 @@ class ReportsLCIController extends Controller
         WHEN g.tipo = 'J' THEN 'Jovenes'
         ELSE 'Niños'
     END)tipo
-    FROM sjl_grupos_lectura g ORDER BY g.nom;"));
+    FROM sjl_grupos_lectura g
+    WHERE g.id_club = '$id'
+    ORDER BY g.nom;"));
 
-        $associated = DB::select(DB::raw("SELECT a.id_club1 as idone, a.id_club2 as idtwo, (SELECT nom FROM sjl_clubes_lectura WHERE id = a.id_club1)clubone, (
+    $associated = DB::select(DB::raw("SELECT a.id_club1 as idone, a.id_club2 as idtwo, (SELECT nom FROM sjl_clubes_lectura WHERE id = a.id_club1)clubone, (
             SELECT nom FROM sjl_clubes_lectura WHERE id = a.id_club2
-        )clubtwo FROM sjl_clubes_clubes a;"));
+        )clubtwo FROM sjl_clubes_clubes a
+        WHERE a.id_club1 = '$id'"));
+
 
         $data = [
-            'clubs'     => $clubs,
-            'grupos' => $groups,
+            'club'     => $club,
+            'grupos' => $grupos,
             'associated' => $associated,
         ];
         $pdf = PDF::loadView('reports.club_info', $data);
         return $pdf->download('clubs.pdf');
     }
 
-    public function CatchThirtythree(){
-        $clubs = DB::select(DB::raw("SELECT c.id, c.nom as nom, (
-            SELECT count(*) from sjl_membresias m WHERE m.id_club = c.id AND m.fec_f IS NOT NULL AND m.motivo_b = 'I'
-        )i FROM sjl_clubes_lectura c ORDER BY c.nom"));
+    public function clubs (Request $request){
+        return $this->clubspdf($request->club);
+    }
+
+    public function CatchThirtythree($club){
+        $club_check = DB::select(DB::raw("SELECT c.id, c.nom as nom FROM sjl_clubes_lectura c 
+        WHERE c.id='$club'"));
+        $club = $club_check[0];
 
         $na = DB::select(DB::raw("SELECT (
             SELECT nom1 || ' ' || ape1 from sjl_lectores WHERE doc_iden = m.id_lec
@@ -82,17 +94,21 @@ class ReportsLCIController extends Controller
         (
             SELECT doc_iden from sjl_lectores WHERE doc_iden = m.id_lec
         )victimid,
-        m.id_club FROM sjl_membresias m WHERE m.fec_f IS NOT NULL AND m.motivo_b = 'I'"));
+        m.id_club 
+            FROM sjl_membresias m WHERE m.fec_f IS NOT NULL AND m.motivo_b = 'I' AND m.id_club = '$club->id'"));
 
         $data = [
-            'clubs'     => $clubs,
+            'club'     => $club,
             'na' => $na,
         ];
         $pdf = PDF::loadView('reports.30', $data);
         return $pdf->download('30.pdf');
-
-        //return view ('reports.30')->with('clubs',$clubs)->with('na',$na);
     }
+
+    public function attendances(Request $request){
+        return $this->CatchThirtythree($request->club);
+    }
+
     public function cronoMembers(){
         $clubs = DB::select(DB::raw("SELECT c.id, c.nom, c.fec_crea,
         (SELECT count (*) FROM sjl_membresias WHERE c.id = id_club) as n_miembros
