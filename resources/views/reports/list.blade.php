@@ -45,8 +45,8 @@
                                                     <button type="button" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Libros analizados por este club" class="btn btn-default" v-b-modal.r1>
                                                         <i class="material-icons">comment</i> Información del reporte
                                                     </button>
-                                                    <a class="btn btn-info" href="/reportbooks">
-                                                        <i class="material-icons">cloud_download</i> Descargar reporte
+                                                    <a class="btn btn-info" href="/books-reports">
+                                                        <i class="material-icons">description</i> Generar reporte
                                                     </a>
                                                 </td>
                                             </tr>
@@ -60,7 +60,7 @@
                                                         <i class="material-icons">comment</i> Información del reporte
                                                     </button>
                                                     <button type="button" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Ficha club" class="btn btn-info">
-                                                        <i class="material-icons">cloud_download</i> Descargar reporte
+                                                        <i class="material-icons">description</i> Generar reporte
                                                     </button>
                                                 </td>
                                             </tr>
@@ -73,7 +73,7 @@
                                                         <i class="material-icons">comment</i> Información del reporte
                                                     </button>
                                                     <a href="/cronomembers" class="btn btn-info">
-                                                        <i class="material-icons">cloud_download</i> Descargar reporte
+                                                        <i class="material-icons">description</i> Generar reporte
                                                     </a>
                                                 </td>
                                             </tr>
@@ -86,8 +86,8 @@
                                                     <button type="button" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Libros analizados por este club" class="btn btn-default" v-b-modal.r4>
                                                         <i class="material-icons">comment</i> Información del reporte
                                                     </button>
-                                                    <a href="/reportclubs" class="btn btn-info">
-                                                        <i class="material-icons">cloud_download</i> Descargar reporte
+                                                    <a href="/clubs-reports" class="btn btn-info">
+                                                        <i class="material-icons">description</i> Generar reporte
                                                     </a>
                                                 </td>
                                             </tr>
@@ -101,7 +101,7 @@
                                                         <i class="material-icons">comment</i> Información del reporte
                                                     </button>
                                                     <button type="button" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Ficha club" class="btn btn-info">
-                                                        <i class="material-icons">cloud_download</i> Descargar reporte
+                                                        <i class="material-icons">description</i> Generar reporte
                                                     </button>
                                                 </td>
                                             </tr>
@@ -115,7 +115,7 @@
                                                         <i class="material-icons">comment</i> Información del reporte
                                                     </button>
                                                     <button type="button" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Ficha club" class="btn btn-info">
-                                                        <i class="material-icons">cloud_download</i> Descargar reporte
+                                                        <i class="material-icons">description</i> Generar reporte
                                                     </button>
                                                 </td>
                                             </tr>
@@ -129,7 +129,7 @@
                                                         <i class="material-icons">comment</i> Información del reporte
                                                     </button>
                                                     <button type="button" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Ficha club" class="btn btn-info">
-                                                        <i class="material-icons">cloud_download</i> Descargar reporte
+                                                        <i class="material-icons">description</i> Generar reporte
                                                     </button>
                                                 </td>
                                             </tr>
@@ -143,7 +143,7 @@
                                                         <i class="material-icons">comment</i> Información del reporte
                                                     </button>
                                                     <a href="/reportmeetings" class="btn btn-info">
-                                                        <i class="material-icons">cloud_download</i> Descargar reporte
+                                                        <i class="material-icons">description</i> Generar reporte
                                                     </a>
                                                 </td>
                                             </tr>
@@ -157,7 +157,7 @@
                                                         <i class="material-icons">comment</i> Información del reporte
                                                     </button>
                                                     <a href="/reportpresentations" class="btn btn-info">
-                                                        <i class="material-icons">cloud_download</i> Descargar reporte
+                                                        <i class="material-icons">description</i> Generar reporte
                                                     </a>
                                                 </td>
                                             </tr>
@@ -170,8 +170,8 @@
                                                     <button type="button" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Libros analizados por este club" class="btn btn-default" v-b-modal.r10>
                                                         <i class="material-icons">comment</i> Información del reporte
                                                     </button>
-                                                    <a href="/thirtypercent" class="btn btn-info">
-                                                        <i class="material-icons">cloud_download</i> Descargar reporte
+                                                    <a href="/attendance-reports" class="btn btn-info">
+                                                        <i class="material-icons">description</i> Generar reporte
                                                     </a>
                                                 </td>
                                             </tr>

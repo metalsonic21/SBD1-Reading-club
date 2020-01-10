@@ -106,10 +106,21 @@ Route::get('/reports', function () {
     return view ('reports.list');
 });
 
+/* GENERATE REPORTS */
+
+Route::get('/books-reports', 'reports\GenerateReportsController@bookform')->name('books.generate');
+Route::get('/clubs-reports', 'reports\GenerateReportsController@clubform')->name('clubs.generate');
+Route::get('/attendance-reports', 'reports\GenerateReportsController@attendanceform')->name('attendance.generate');
+
 /* REPORTS */
-Route::get('/reportbooks', 'reports\ReportsLCIController@books')->name('books.reports');
-Route::get('/reportclubs', 'reports\ReportsLCIController@club')->name('club.reports');
-Route::get('/thirtypercent', 'reports\ReportsLCIController@CatchThirtythree')->name('meetings.attreport');
+Route::post('/reportbooks', 'reports\ReportsLCIController@books')->name('books.reports');
+Route::get('/books-reports/{isbn}', 'reports\ReportsLCIController@bookspdf')->name('books.document');
+
+Route::post('/reportclubs', 'reports\ReportsLCIController@clubs')->name('club.reports');
+Route::get('/clubs-reports/{id}', 'reports\ReportsLCIController@clubspdf')->name('club.reports');
+
+Route::post('/reportattendances', 'reports\ReportsLCIController@attendances')->name('club.reports');
+Route::get('/attendance-reports/{club}', 'reports\ReportsLCIController@CatchThirtythree')->name('meetings.attreport');
 
 Route::get('/cronomembers', 'reports\ReportsLCIController@cronoMembers')->name('crono.members');
 Route::get('/reportmeetings', 'reports\ReportsLCIController@meetings')->name('meeting.reports');

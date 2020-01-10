@@ -101,7 +101,6 @@
     .page_break { page-break-after: always; }
 </style>
 <body>
-@foreach ($books as $book)
 <div class="jumbotron text-center">
 <h1>{{$book->titulo_ori}}</h1>
 </div>
@@ -113,7 +112,7 @@
         <img src="./img/pdfs/poster.png" alt="" style="width:250px;height:250px;">
         <div style="margin-top:-50px">
             <h5 style="margin-left:70px">Estructura</h5>
-            @if ($book->estructuras > 0)
+            @if ($structs)
             @foreach ($structs as $struct)
                 @if ($struct->lib == $book->isbn)
                     <p>{{$struct->fullnom}}</p>
@@ -138,9 +137,8 @@
     <h5>Sinopsis</h5>
         <p class="text-justify">{{$book->sinop}}</p>
     </div>
-    <div class="page_break"></div>
   </div>
 </div>
-@endforeach
+
 </body>
 </html>

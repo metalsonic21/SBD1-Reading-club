@@ -70,6 +70,11 @@ Vue.component('edit-local', require('./components/obras/EditLocal.vue').default)
 Vue.component('elenco', require('./components/obras/Elenco.vue').default);
 Vue.component('create-role', require('./components/obras/Role.vue').default);
 
+/* GENERATE REPORTS FORMS */
+Vue.component('book-form', require('./components/reports/Books.vue').default);
+Vue.component('club-form', require('./components/reports/Clubs.vue').default);
+Vue.component('at-form', require('./components/reports/Attendance.vue').default);
+
 const app = new Vue({
     el: '#app',
 });
