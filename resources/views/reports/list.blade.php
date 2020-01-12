@@ -59,14 +59,13 @@
                                                     <button type="button" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Librodos por este club"s analiza class="btn btn-default" v-b-modal.r2>
                                                         <i class="material-icons">comment</i> Información del reporte
                                                     </button>
-                                                    <button type="button" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Ficha club" class="btn btn-info">
+                                                    <a class="btn btn-info" href="/clubs-reports-book">
                                                         <i class="material-icons">description</i> Generar reporte
-                                                    </button>
+                                                    </a>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td class="text-center">3</td>
-
                                                 <td class="text-left">Ficha cronológica club</td>
                                                 <td class="td-actions text-center">
                                                     <button type="button" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Libros analizados por este club" class="btn btn-default" v-b-modal.r3>
@@ -100,9 +99,9 @@
                                                     <button type="button" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Libros analizados por este club" class="btn btn-default" v-b-modal.r5>
                                                         <i class="material-icons">comment</i> Información del reporte
                                                     </button>
-                                                    <button type="button" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Ficha club" class="btn btn-info">
+                                                    <a class="btn btn-info" href="/clubs-reports-members">
                                                         <i class="material-icons">description</i> Generar reporte
-                                                    </button>
+                                                    </a>
                                                 </td>
                                             </tr>
 

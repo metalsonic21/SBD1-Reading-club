@@ -7,7 +7,16 @@ use Illuminate\Http\Request;
 use DB;
 use Redirect;
 use PDF;
-
+use Response;
+use App\Models\Member\Member;
+use App\Models\Member\Telefono;
+use App\Models\Lugar\Calle;
+use App\Models\Lugar\Urbanizacion;
+use App\Models\Member\Representante;
+use App\Models\Member\Membresia;
+use App\Models\Member\Pago;
+use App\Models\Club\Club;
+use Log;
 class ReportsLCIController extends Controller
 {
     public function bookspdf($isbn){
@@ -187,11 +196,11 @@ class ReportsLCIController extends Controller
         $pdf = PDF::loadView('reports.presentations',$data);
         return $pdf->download('Presentaciones.pdf');
     }
-    public function book_analyzed (){
+    public function book_analyzed ($id,$fechai,$fechaf){
         $clubs = DB::select(DB::raw("SELECT c.id,c.nom FROM SJL_clubes_lectura"));
         foreach($club as $clubs){
             $club->books=DB::select(DB::raw("SELECT l.isbn,l.titulo_esp,(SELECT(AVG(h.valor)) FROM SJL_reuniones_mensuales h,SJL_Libros j,SJL_grupos_lectura k,SJL_clubes_lectura o
-            WHERE h.valor is not null AND l.isbn=h.id_lib AND h.id_grupo=k.id AND k.id_club=o.id AND o.id='$club->id')
+            WHERE h.valor is not null AND l.isbn=h.id_lib AND h.id_grupo=k.id AND k.id_club=o.id AND o.id='$club->id' AND (h.fec BETWEEN '$fechai' AND '$fechaf'))
               FROM SJL_reuniones_mensuales a,SJL_Libros l,SJL_grupos_lectura b,SJL_clubes_lectura c Where l.isbn=a.id_lib and a.id_grupo=b.id and a.valor is not null and a.id_grupo=b.id and b.id_club=c.id AND c.id='$club->id' ORDER BY l.isbn"));
         }
     }
@@ -212,7 +221,7 @@ class ReportsLCIController extends Controller
                 $grupo->inasist= DB::SELECT(DB::RAW("SELECT fec_reu_men FROM SJL_inansistencias WHERE '$grupo->id_club'=id_club AND '$grupo->id_grupo'=id_grupo AND '$member->doc_iden'=id_lec"));
             }
             $member->favs = DB::SELECT(DB::RAW("SELECT a.titulo_esp,b.pref FROM SJL_Libros a, SJL_Lista_favoritos b WHERE '$member->doc_iden'=b.id_lec AND a.isbn=b.id_lib"));
-        }
+    }
     }
     public function play_detail(){
         $plays = DB::SELECT(DB::RAW("SELECT o.id as id_obra,o.nom as nom_obra,o.resum,l.id_lib,k.titulo_esp,k.autor,p.nom as nom_edit
@@ -242,6 +251,148 @@ class ReportsLCIController extends Controller
             }
     }
     }
+
+    public function booksperclub($id,$fechai,$fechaf){        
+        $club = DB::SELECT(DB::RAW("SELECT id,nom from sjl_clubes_lectura where '$id'=id"));
+        
+        $books=DB::select(DB::raw("SELECT l.isbn,l.titulo_esp,(SELECT round((AVG(h.valor)),2) FROM SJL_reuniones_mensuales h,SJL_Libros j,SJL_grupos_lectura k,SJL_clubes_lectura o
+        WHERE h.valor is not null AND l.isbn=h.id_lib AND h.id_grupo=k.id AND k.id_club=o.id AND o.id='$id' AND (a.fec BETWEEN '$fechai' AND '$fechaf')) as valoracion
+          FROM SJL_reuniones_mensuales a,SJL_Libros l,SJL_grupos_lectura b,SJL_clubes_lectura c Where l.isbn=a.id_lib and a.id_grupo=b.id and a.valor is not null and a.id_grupo=b.id and b.id_club=c.id AND c.id='$id' AND (a.fec BETWEEN '$fechai' AND '$fechaf') ORDER BY l.isbn"));
+        $name = 'libros_analizados_'.$club[0]->nom.'.pdf';
+            $data = [
+                'club' => $club,
+                'books' => $books,
+                'fechai' =>$fechai,
+                'fechaf' =>$fechaf,
+                'name' => $name
+            ];
+        $pdf = PDF::loadView('reports.lyzed', $data);        
+        return $pdf->download($name);
+    }
+    public function fillbooksclub($id,Request $request){
+        if($request->ajax()){
+        $books= DB::SELECT(DB::RAW("SELECT distinct a.isbn,a.titulo_esp as titulo_en_español,a.titulo_ori as titulo_original,a.fec_pub as fecha_de_publicacion,a.autor from sjl_libros a where a.isbn=(SELECT b.id_lib FROM SJL_reuniones_mensuales b WHERE '$id'=b.id_club AND a.isbn=b.id_lib AND b.valor is not null limit 1) "));
+        return Response::json(array('data'=>$books));
+        }
+    }
+    public function clubbooks (Request $request){
+        return $this->booksperclub($request->club,$request->fechai,$request->fechaf);
+    }
+    public function booksperclubpdf(Request $request){
+        $pdf = file_get_contents($_POST[$pdf]);
+        return $pdf->download($name);
+    }
+
+    public function clubformmember(Request $request, $id)
+    {
+        $members = DB::select(DB::raw("SELECT doc_iden, nom1 as nom, ape1 as ape, fec_nac, id_club FROM sjl_lectores WHERE id_club = '$id'"));
+        if ($request->ajax()){
+            return Response::json(array('members'=>$members,'club'=>$id));
+        }
+        else{
+            return view ('members.managemembers');
+        }
+    }
+    public function memberpdf($miembro,$club){
+        Log::info($miembro);
+        Log::info($club);
+        $rep = '';
+        $currentUMR = '';
+        $currentCMR = '';
+        $currentZMR = '';
+        $currentPMR = '';
+        $currentSMR = '';
+        $representante ='';
+        
+        //$clubdata = Club::find($club);
+        $clubdata = DB::SELECT(DB::RAW("SELECT id,nom from sjl_clubes_lectura where '$club'=id"));
+        $member = Member::find($miembro);
+        /*$member = DB::select(DB::raw("SELECT doc_iden,(nom1 ||' '||(CASE WHEN nom2 is not null then nom2||'' ELSE '' END)) as nom,
+        ape1,ape2,id_club as club_act,id_grup as grup_act,id_rep,id_rep_lec,(CASE WHEN genero = 'M' THEN 'Masculino' ELSE 'Femenino' END) as genero,id_nac,id_calle 
+        FROM SJL_Lectores WHERE '$miembro'=doc_iden AND '$club'=id_club"));        
+        */              
+                if ($member->genero == 'M')
+                $member->genero = "Masculino";
+                else $member->genero = "Femenino";
+
+                $telefonos = DB::select(DB::raw("SELECT cod_pais || '' || cod_area || '' || num as numero
+                FROM sjl_telefonos WHERE id_lector = '$miembro'"));
+                $currentP = DB::select(DB::raw("SELECT nom FROM sjl_paises WHERE id = '$member->id_nac'"));
+                $currentPM = $currentP[0]->nom;
+        
+                $currentCMB = DB::select(DB::raw("SELECT e.nom as text, e.id || '-' || e.id_pais as value from sjl_calles ca, sjl_urbanizaciones u, sjl_ciudades e WHERE ca.id = '$member->id_calle' AND ca.id_urb = u.id AND u.id_ciudad = e.id"));
+                $currentCM = $currentCMB[0]->text;
+        
+                $currentUMB = DB::select(DB::raw("SELECT u.nom as nombre from sjl_calles ca, sjl_urbanizaciones u WHERE ca.id = '$member->id_calle' AND ca.id_urb = u.id"));
+                $currentUM = $currentUMB[0]->nombre;
+                    
+                $currentSMB = DB::select(DB::raw("SELECT ca.nom as nombre from sjl_calles ca WHERE ca.id = '$member->id_calle'"));
+                $currentSM = $currentSMB[0]->nombre;
+        
+                $currentZMB = DB::select(DB::raw("SELECT cod_post as code from sjl_calles WHERE id = '$member->id_calle'"));
+                $currentZM = $currentZMB[0]->code;
+                $Tedad = DB::select(DB::raw("SELECT DATE_PART('year', (SELECT CURRENT_DATE)::date) - DATE_PART('year', '$member->fec_nac'::date) as edad"));
+                $edad = $Tedad[0]->edad;
+
+            $representados = DB::SELECT(DB::RAW("SELECT doc_iden,(nom1|| ' ' ||(case when nom2 is not null then nom2||''else '' end))as nom,ape1,id_club as club_act,id_grup as grup_act FROM SJL_Lectores WHERE id_rep_lec='$miembro'"));
+            $groups = DB::SELECT(DB::RAW("SELECT j.id_grupo,j.id_club,j.id_fec_i,k.nom FROM SJL_Grupos_lectores j,SJL_grupos_lectura k WHERE '$member->doc_iden'=j.id_lec AND '$club'=j.id_club AND j.id_club=k.id_club AND j.id_grupo=k.id"));
+            $inasistencias = DB::SELECT(DB::RAW("SELECT fec_reu_men,id_grupo FROM SJL_inansistencias WHERE '$club'=id_club AND '$member->doc_iden'=id_lec"));
+            $pagos = DB::SELECT(DB::RAW("SELECT id,fec_emi FROM SJL_historicos_pagos_memb WHERE '$member->doc_iden'=id_lec AND '$club'=id_club "));
+            $favs = DB::SELECT(DB::RAW("SELECT a.titulo_esp,b.pref,a.autor FROM SJL_Libros a, SJL_Lista_favoritos b WHERE '$member->doc_iden'=b.id_lec AND a.isbn=b.id_lib ORDER BY b.pref asc"));
+            if ($edad < 18){
+                if ($member->id_rep != null)
+                    $representante = Representante::find($member->id_rep);
+                else $representante = Member::find($member->id_rep_lec);
+    
+                $currentPR = DB::select(DB::raw("SELECT p.nom as text, p.id as value from sjl_calles ca, sjl_urbanizaciones u, sjl_ciudades e, sjl_paises p WHERE ca.id = '$representante->id_dir' AND ca.id_urb = u.id AND u.id_ciudad = e.id AND e.id_pais = p.id"));
+                $currentPMR = $currentPR[0]->text;
+        
+                $currentCMBR = DB::select(DB::raw("SELECT e.nom as text, e.id || '-' || e.id_pais as value from sjl_calles ca, sjl_urbanizaciones u, sjl_ciudades e WHERE ca.id = '$representante->id_dir' AND ca.id_urb = u.id AND u.id_ciudad = e.id"));
+                $currentCMR = $currentCMBR[0]->text;
+        
+                $currentUMBR = DB::select(DB::raw("SELECT u.nom as nombre from sjl_calles ca, sjl_urbanizaciones u WHERE ca.id = '$representante->id_dir' AND ca.id_urb = u.id"));
+                $currentUMR = $currentUMBR[0]->nombre;
+                    
+                $currentSMBR = DB::select(DB::raw("SELECT ca.nom as nombre from sjl_calles ca WHERE ca.id = '$representante->id_dir'"));
+                $currentSMR = $currentSMBR[0]->nombre;
+        
+                $currentZMBR = DB::select(DB::raw("SELECT cod_post as code from sjl_calles WHERE id = '$representante->id_dir'"));
+                $currentZMR = $currentZMBR[0]->code;      
+    
+            }
+      
+            $name = 'reporte_miembro'.$clubdata[0]->nom.'_'.$miembro.'.pdf';
+        $data = [
+            'member' => $member,
+            'telefonos', $telefonos,
+            'pais', $currentPM,
+            'ciudad', $currentCM,
+            'urbanizacion', $currentUM,
+            'calle', $currentSM,
+            'zipcode',$currentZM,
+            'paisR', $currentPMR,
+            'ciudadR', $currentCMR,
+            'urbanizacionR', $currentUMR,
+            'calleR', $currentSMR,
+            'zipcodeR',$currentZMR,
+            'edad',$edad,
+            'clubdata' => $clubdata,
+            'favorites' => $favs,
+            'rep' => $representante,
+            'representados' => $representados,
+            'grupos' => $groups,
+            'inasistencias' => $inasistencias,
+            'pagos' => $pagos,
+        ];
+    $pdf = PDF::loadView('reports.membersclub', $data);        
+    return $pdf->download($name);
+    }
+
+
+    public function castclub(Request $request){
+        return $this->memberpdf($request->miembro,$request->club);
+    }
+
 }
 
 
