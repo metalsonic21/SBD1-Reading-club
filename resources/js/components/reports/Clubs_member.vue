@@ -11,7 +11,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-lg-10">
-                                    <h4 class="card-title">Generar reporte para club: Libros analizados</h4>
+                                    <h4 class="card-title">Generar reporte para club: Miembros</h4>
                                 </div>
                                 <div class="col-lg-2">
 
@@ -25,7 +25,7 @@
                                         <b-row>
                                             <b-col cols="6">
                                                 <h6 class="ml-3"><strong>LISTA DE CLUBES</strong></h6>
-                                                <small class="ml-3">Seleccione un club para generar el reporte de sus libros analizados</small>
+                                                <small class="ml-3">Seleccione un club para generar el reporte de uno de sus miembros</small>
                                             </b-col>
                                         </b-row>
                                         <b-row>

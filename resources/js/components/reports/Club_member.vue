@@ -97,7 +97,7 @@ export default {
             console.log(this.club);
             axios.post(`/clubs-reports-members/generate`,met)
                 .then(res =>{
-                    window.location = `/club-books-reports/${met.miembro}/${this.club}`;
+                    window.location = `/clubs-reports-members/${met.miembro}/${this.club}`;
                 }).catch(e=>{
                     console.log(e)
                 })

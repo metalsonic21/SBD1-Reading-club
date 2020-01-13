@@ -111,7 +111,7 @@ Route::get('/reports', function () {
 Route::get('/books-reports', 'reports\GenerateReportsController@bookform')->name('books.generate');
 Route::get('/clubs-reports', 'reports\GenerateReportsController@clubform')->name('clubs.generate');
 Route::get('/clubs-reports-book', 'reports\GenerateReportsController@clubformbook')->name('clubs-book.generate');
-Route::get('/clubs-reports-members', 'reports\GenerateReportsController@clubformmemberpon')->name('clubs-members.generate');
+Route::get('/clubs-reports-members', 'reports\GenerateReportsController@clubformmemberpon')->name('clubs-members2.generate');
 Route::get('/clubs-reports-members/{id}', 'reports\GenerateReportsController@clubformmember');
 Route::get('/attendance-reports', 'reports\GenerateReportsController@attendanceform')->name('attendance.generate');
 

@@ -101,24 +101,20 @@
     .page_break { page-break-after: always; }
 </style>
 <body>
-<p>&nbsp;</p>
-<div class="jumbotron text-center">
-<h1><span style="background-color: #808080;">Reporte de miembro</span></h1>
-<h1><span style="background-color: #808080;">Miembro:{{$member->nom}}{{$member->ape1}} {{$member->ape2}}</span></h1>
-<h2><span style="background-color: #808080;">Club :{{$clubdata->nom}}</span></h2>
-</div>
-<div class="container">
-<div class="row">
-<div class="col-sm-4"><br /><br /><br /> <img style="width: 250px; height: 250px;" src="./img/pdfs/poster.png" alt="" />
-<div style="margin-top: -50px;">
-<h5 style="margin-left: 70px;">Datos Personales</h5>
-<p><strong>DOCUMENTO DE IDENTIDAD:</strong> {{$member->doc_iden}}</p>
-<p><strong>NOMBRE(S):</strong> {{$member->nom1}}</p>
+    <div class='jumbotron text-center'>
+    <h1>Reporte de miembro</h1>
+    <h1> Miembro: {{$member->nom1}} {{$member->nom2}} {{$member->ape1}} {{$member->ape2}}</span></h1>
+    <h2>Club: {{$clubdata->nom}}</span></h2>
+    </div>
+    <hr>
+    <p><strong>DOCUMENTO DE IDENTIDAD:</strong> {{$member->doc_iden}}</p>
+<p><strong>NOMBRE(S):</strong> {{$member->nom1}} {{$member->nom2}}</p>
 <p><strong>PRIMER APELLIDO: </strong>{{$member->ape1}}</p>
 <p><strong>SEGUNDO APELLIDO: </strong>{{$member->ape2}}</p>
 <p><strong>FECHA DE NACIMIENTO: </strong>{{$member->fec_nac}}</p>
 <p><strong>EDAD: </strong>{{$edad}}</p>
 <p><strong>GÉNERO: </strong>{{$member->genero}}</p>
+
 <hr>
 <h6> <strong>TELÉFONOS</strong></h6>
 @if ($telefonos)
@@ -132,15 +128,8 @@
 <p><strong>CIUDAD:</strong> {{$ciudad}}</p>
 <p><strong>URBANIZACIÓN:</strong> {{$urbanizacion}}</p>
 <p><strong>CALLE:</strong> {{$calle}}</p>
+@if ($zipcode)
 <p><strong>CÓDIGO POSTAL:</strong> {{$zipcode}}</p>
-
-@if ($favorites)
-<hr>
-<p>Libros Favoritos</p>
-                @foreach ($favorites as $book)
-                <p><strong>NOMBRE: </strong>{{$book->titulo_esp}}</p>
-                <p><strong>AUTOR: </strong>{{$book->autor}}</p>
-                @endforeach
 @endif
 
 @if ($rep)
@@ -152,6 +141,7 @@
     <p><strong>PRIMER APELLIDO: </strong>{{$rep->ape1}}</p>
     <p><strong>SEGUNDO APELLIDO: </strong>{{$rep->ape2}}</p>
     <p><strong>FECHA DE NACIMIENTO: </strong>{{$rep->fec_nac}}</p>
+    <hr>
     <h6> <strong>DIRECCIÓN</strong></h6>
     <p><strong>PAÍS:</strong> {{$paisR}}</p>
     <p><strong>CIUDAD:</strong> {{$ciudadR}}</p>
@@ -159,9 +149,69 @@
     <p><strong>CALLE:</strong> {{$calleR}}</p>
     <p><strong>CÓDIGO POSTAL:</strong> {{$zipcodeR}}</p>
 @endif
-</div>
-</div>
-</div>
-</div>
+@if ($favorites)
+<hr>
+<br>
+<br>
+<hr>
+<p><strong>Libros Favoritos</strong> </p>
+<ol>
+                @foreach ($favorites as $book)                
+                <li><strong>TITULO: </strong>{{$book->titulo_esp}}  <strong>AUTOR: </strong>{{$book->autor}}</li>
+                @endforeach
+</ol>
+@endif
+<hr>
+@if ($groups)
+<br>
+<br>
+    <p><strong>Lista de grupos</strong> </p>
+        <ul>
+            @foreach ($groups as $group)
+            <p><strong>Nombre:</strong> {{$group->nom}} - ID Grupo : {{$group->id_grupo}}</p>
+            <li>Fecha de ingreso: {{$group->id_fec_i}}</li>
+            @if ($group->fec_f)
+            <li>Fecha de egreso: {{$group->fec_f}}</li>
+            <li>Duracion {{(($group->id_fec_i)-($group->fec_f))}}</li>
+            @else 
+            <li>Status: Activo</li>
+            @endif
+            @if ($inasistencias)
+                <ol>
+                    @foreach ($inasistencias as $inasistencia)
+                        @if ($group->id_grupo==$inasistencia->id_grupo)
+                        <li>{{$inasistencia->feC_reu_men}}/li>
+                        @endif
+                    @endforeach
+                </ol>
+            @endif
+            @endforeach
+        </ul>
+        <br>
+@endif
+@if ($pagos)
+<p><strong>Historial de pagos: </strong></p>
+    <P><STRONG>Cuota: </STRONG> {{$clubdata->cuota}}</P>
+    <ol>
+        @foreach ($pagos as $pago)
+        <li>Numero de pago: {{$pago->id}} - Fecha de pago: {{$pago->fec_emi}}</li>
+        @endforeach
+    </ol>
+    <br>
+@endif
+@if ($representados)
+<hr>
+    @foreach($representados as $representado)
+    <p><strong>Datos del representado:</strong></p>
+    <p><strong>DOCUMENTO DE IDENTIDAD:</strong> {{$representado->doc_iden}}</p>
+    <p><strong>PRIMER NOMBRE:</strong> {{$representado->nom1}}</p>
+    <p><strong>SEGUNDO NOMBRE: </strong>{{$representado->nom2}}</p>
+    <p><strong>PRIMER APELLIDO: </strong>{{$representado->ape1}}</p>
+    <p><strong>SEGUNDO APELLIDO: </strong>{{$representado->ape2}}</p>
+    <p><strong>FECHA DE NACIMIENTO: </strong>{{$representado->fec_nac}}</p>
+    @endforeach 
+@endif
 </body>
 </html>
+
+

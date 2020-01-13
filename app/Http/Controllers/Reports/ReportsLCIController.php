@@ -305,8 +305,11 @@ class ReportsLCIController extends Controller
         $representante ='';
         
         //$clubdata = Club::find($club);
-        $clubdata = DB::SELECT(DB::RAW("SELECT id,nom from sjl_clubes_lectura where '$club'=id"));
+        $clubdata = DB::SELECT(DB::RAW("SELECT id,nom,cuota from sjl_clubes_lectura where '$club'=id"));
+        //$nombclub = $clubdata[0];
         $member = Member::find($miembro);
+        $Tedad = DB::select(DB::raw("SELECT DATE_PART('year', (SELECT CURRENT_DATE)::date) - DATE_PART('year',(SELECT fec_nac FROM SJL_lectores WHERE doc_iden='$miembro')) as edad"));
+        $edad = $Tedad[0]->edad;
         /*$member = DB::select(DB::raw("SELECT doc_iden,(nom1 ||' '||(CASE WHEN nom2 is not null then nom2||'' ELSE '' END)) as nom,
         ape1,ape2,id_club as club_act,id_grup as grup_act,id_rep,id_rep_lec,(CASE WHEN genero = 'M' THEN 'Masculino' ELSE 'Femenino' END) as genero,id_nac,id_calle 
         FROM SJL_Lectores WHERE '$miembro'=doc_iden AND '$club'=id_club"));        
@@ -331,11 +334,10 @@ class ReportsLCIController extends Controller
         
                 $currentZMB = DB::select(DB::raw("SELECT cod_post as code from sjl_calles WHERE id = '$member->id_calle'"));
                 $currentZM = $currentZMB[0]->code;
-                $Tedad = DB::select(DB::raw("SELECT DATE_PART('year', (SELECT CURRENT_DATE)::date) - DATE_PART('year', '$member->fec_nac'::date) as edad"));
-                $edad = $Tedad[0]->edad;
+
 
             $representados = DB::SELECT(DB::RAW("SELECT doc_iden,(nom1|| ' ' ||(case when nom2 is not null then nom2||''else '' end))as nom,ape1,id_club as club_act,id_grup as grup_act FROM SJL_Lectores WHERE id_rep_lec='$miembro'"));
-            $groups = DB::SELECT(DB::RAW("SELECT j.id_grupo,j.id_club,j.id_fec_i,k.nom FROM SJL_Grupos_lectores j,SJL_grupos_lectura k WHERE '$member->doc_iden'=j.id_lec AND '$club'=j.id_club AND j.id_club=k.id_club AND j.id_grupo=k.id"));
+            $groups = DB::SELECT(DB::RAW("SELECT j.id_grupo,j.id_club,j.id_fec_i,j.fec_f,k.nom FROM SJL_Grupos_lectores j,SJL_grupos_lectura k WHERE '$member->doc_iden'=j.id_lec AND '$club'=j.id_club AND j.id_club=k.id_club AND j.id_grupo=k.id"));
             $inasistencias = DB::SELECT(DB::RAW("SELECT fec_reu_men,id_grupo FROM SJL_inansistencias WHERE '$club'=id_club AND '$member->doc_iden'=id_lec"));
             $pagos = DB::SELECT(DB::RAW("SELECT id,fec_emi FROM SJL_historicos_pagos_memb WHERE '$member->doc_iden'=id_lec AND '$club'=id_club "));
             $favs = DB::SELECT(DB::RAW("SELECT a.titulo_esp,b.pref,a.autor FROM SJL_Libros a, SJL_Lista_favoritos b WHERE '$member->doc_iden'=b.id_lec AND a.isbn=b.id_lib ORDER BY b.pref asc"));
@@ -360,31 +362,32 @@ class ReportsLCIController extends Controller
                 $currentZMR = $currentZMBR[0]->code;      
     
             }
-      
-            $name = 'reporte_miembro'.$clubdata[0]->nom.'_'.$miembro.'.pdf';
+            $newedad= compact($Tedad);
+            
         $data = [
             'member' => $member,
-            'telefonos', $telefonos,
-            'pais', $currentPM,
-            'ciudad', $currentCM,
-            'urbanizacion', $currentUM,
-            'calle', $currentSM,
-            'zipcode',$currentZM,
-            'paisR', $currentPMR,
-            'ciudadR', $currentCMR,
-            'urbanizacionR', $currentUMR,
-            'calleR', $currentSMR,
-            'zipcodeR',$currentZMR,
-            'edad',$edad,
-            'clubdata' => $clubdata,
+            'edad'=> $edad,
+            'telefonos'=> $telefonos,
+            'pais'=> $currentPM,
+            'ciudad'=> $currentCM,
+            'urbanizacion'=> $currentUM,
+            'calle'=> $currentSM,
+            'zipcode'=> $currentZM,
+            'paisR'=> $currentPMR,
+            'ciudadR'=> $currentCMR,
+            'urbanizacionR'=> $currentUMR,
+            'calleR'=> $currentSMR,
+            'zipcodeR'=> $currentZMR,            
+            'clubdata' => $clubdata[0],
             'favorites' => $favs,
             'rep' => $representante,
             'representados' => $representados,
-            'grupos' => $groups,
+            'groups' => $groups,
             'inasistencias' => $inasistencias,
             'pagos' => $pagos,
         ];
-    $pdf = PDF::loadView('reports.membersclub', $data);        
+        $name = 'reporte_miembro_'.$member->doc_iden.'_club_'.$club.'.pdf';
+    $pdf = PDF::loadView('reports.membersclub',$data);        
     return $pdf->download($name);
     }
 
