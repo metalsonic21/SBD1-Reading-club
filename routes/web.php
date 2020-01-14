@@ -142,5 +142,6 @@ Route::get('/clubs-reports-members/{miembro}/{club}','reports\ReportsLCIControll
 
 Route::post('/clubs-reports-perform/generate','reports\ReportsLCIController@performclub');
 Route::get('/reports-perform/{fec}/{obra}/{local}/{club}','reports\ReportsLCIController@performpdf');
+Route::get('/plays-reports/{obra}/{fechai}/{fechaf}','reports\ReportsLCIController@playpdf');
 
 
