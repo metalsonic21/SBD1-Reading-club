@@ -71,7 +71,7 @@
                                                     <button type="button" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Libros analizados por este club" class="btn btn-default" v-b-modal.r3>
                                                         <i class="material-icons">comment</i> Información del reporte
                                                     </button>
-                                                    <a href="/cronomembers" class="btn btn-info">
+                                                    <a href="/chronlogy-reports" class="btn btn-info">
                                                         <i class="material-icons">description</i> Generar reporte
                                                     </a>
                                                 </td>
@@ -141,7 +141,7 @@
                                                     <button type="button" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Libros analizados por este club" class="btn btn-default" v-b-modal.r8>
                                                         <i class="material-icons">comment</i> Información del reporte
                                                     </button>
-                                                    <a href="/reportmeetings" class="btn btn-info">
+                                                    <a href="/meeting-reports" class="btn btn-info">
                                                         <i class="material-icons">description</i> Generar reporte
                                                     </a>
                                                 </td>
@@ -155,7 +155,7 @@
                                                     <button type="button" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Libros analizados por este club" class="btn btn-default" v-b-modal.r9>
                                                         <i class="material-icons">comment</i> Información del reporte
                                                     </button>
-                                                    <a href="/reportpresentations" class="btn btn-info">
+                                                    <a href="/presentation-reports" class="btn btn-info">
                                                         <i class="material-icons">description</i> Generar reporte
                                                     </a>
                                                 </td>

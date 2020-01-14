@@ -101,9 +101,9 @@
     .page_break { page-break-after: always; }
 </style>
 <body>
-@foreach ($clubs as $club)
     <div class='jumbotron text-center'>
-        <h1>{{$club->nom}}</h1>
+        <h1>Ficha de presentaciones</h1>
+        <h2>{{$club->nom}}</h2>
     </div>
     @if($club->n_pres > 0)
         <div class='text-center'><strong>Presentaciones</strong></div>
@@ -137,7 +137,5 @@
     @else
         <p class='text-center'><strong>El Club no tiene presentaciones registradas</strong></p>
     @endif
-    <div class='page_break'></div>
-@endforeach
 </body>
 </html>

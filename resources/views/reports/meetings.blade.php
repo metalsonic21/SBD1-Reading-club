@@ -101,11 +101,10 @@
     .page_break { page-break-after: always; }
 </style>
 <body>
-@foreach ($clubs as $club)
     <div class='jumbotron text-center'>
-        <h1>{{$club->nom}}</h1>
+        <h1>Ficha de Reuniones</h1>
+        <h2>{{$club->nom}}</h2>
     </div>
-
     @foreach ($groups as $group)
         @if($club->id == $group->id_club)
             <div>
@@ -151,7 +150,5 @@
             @endif
         @endif
     @endforeach
-    <div class='page_break'></div>
-@endforeach
 </body>
 </html>

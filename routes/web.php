@@ -115,6 +115,10 @@ Route::get('/clubs-reports-members', 'reports\GenerateReportsController@clubform
 Route::get('/clubs-reports-members/{id}', 'reports\GenerateReportsController@clubformmember');
 Route::get('/attendance-reports', 'reports\GenerateReportsController@attendanceform')->name('attendance.generate');
 
+Route::get('/chronlogy-reports', 'reports\GenerateJReportsController@chronlogyform')->name('chronology.generate');
+Route::get('/meeting-reports', 'reports\GenerateJReportsController@meetingform')->name('meeting.generate');
+Route::get('/presentation-reports', 'reports\GenerateJReportsController@presentationform')->name('presentation.generate');
+
 /* REPORTS */
 Route::post('/reportbooks', 'reports\ReportsLCIController@books')->name('books.reports');
 Route::get('/books-reports/{isbn}', 'reports\ReportsLCIController@bookspdf')->name('books.document');
@@ -125,9 +129,14 @@ Route::get('/clubs-reports/{id}', 'reports\ReportsLCIController@clubspdf')->name
 Route::post('/reportattendances', 'reports\ReportsLCIController@attendances')->name('club.reports');
 Route::get('/attendance-reports/{club}', 'reports\ReportsLCIController@CatchThirtythree')->name('meetings.attreport');
 
-Route::get('/cronomembers', 'reports\ReportsLCIController@cronoMembers')->name('crono.members');
-Route::get('/reportmeetings', 'reports\ReportsLCIController@meetings')->name('meeting.reports');
-Route::get('/reportpresentations', 'reports\ReportsLCIController@presentations')->name('presentations.reports');
+Route::post('/cronomembers', 'reports\ReportsJController@cronoMembers')->name('crono.members');
+Route::get('/chronlogy-reports/{id}/{fec_i}/{fec_f}', 'reports\ReportsJController@cronoMemberspdf')->name('crono.members');
+
+Route::post('/reportmeetings', 'reports\ReportsJController@meetings')->name('meeting.reports');
+Route::get('/meeting-reports/{id}/{fec_i}/{fec_f}', 'reports\ReportsJController@meetingspdf')->name('meeting.reports');
+
+Route::post('/reportpresentations', 'reports\ReportsJController@presentations')->name('presentations.reports');
+Route::get('/presentation-reports/{id}/{fec_i}/{fec_f}', 'reports\ReportsJController@presentationspdf')->name('presentations.reports');
 
 Route::post('/reportclubbooks', 'reports\ReportsLCIController@clubbooks')->name('clubbooks.reports');
 Route::post('/club-books-reports/{id}', 'reports\ReportsLCIController@booksperclub')->name('booksperclub.reports');
