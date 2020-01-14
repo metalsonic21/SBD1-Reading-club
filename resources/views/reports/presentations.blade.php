@@ -106,7 +106,7 @@
         <h1>{{$club->nom}}</h1>
     </div>
     @if($club->n_pres > 0)
-        <div class='text-center'><strong>Presentaciones</strong></div>
+        <div class='text-center'><strong>Presentacion</strong></div>
         @foreach($presentations as $presentation)
             @if($club->id == $presentation->id_club)
                 <hr>

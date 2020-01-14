@@ -285,8 +285,9 @@ class ReportsLCIController extends Controller
 
     public function clubformmember(Request $request, $id)
     {
-        $members = DB::select(DB::raw("SELECT doc_iden, nom1 as nom, ape1 as ape, fec_nac, id_club FROM sjl_lectores WHERE id_club = '$id'"));
+        
         if ($request->ajax()){
+            $members = DB::select(DB::raw("SELECT doc_iden, nom1 as nom, ape1 as ape, fec_nac, id_club FROM sjl_lectores WHERE id_club = '$id'"));
             return Response::json(array('members'=>$members,'club'=>$id));
         }
         else{
@@ -294,8 +295,6 @@ class ReportsLCIController extends Controller
         }
     }
     public function memberpdf($miembro,$club){
-        Log::info($miembro);
-        Log::info($club);
         $rep = '';
         $currentUMR = '';
         $currentCMR = '';
@@ -303,17 +302,12 @@ class ReportsLCIController extends Controller
         $currentPMR = '';
         $currentSMR = '';
         $representante ='';
-        
-        //$clubdata = Club::find($club);
         $clubdata = DB::SELECT(DB::RAW("SELECT id,nom,cuota from sjl_clubes_lectura where '$club'=id"));
-        //$nombclub = $clubdata[0];
+
         $member = Member::find($miembro);
         $Tedad = DB::select(DB::raw("SELECT DATE_PART('year', (SELECT CURRENT_DATE)::date) - DATE_PART('year',(SELECT fec_nac FROM SJL_lectores WHERE doc_iden='$miembro')) as edad"));
         $edad = $Tedad[0]->edad;
-        /*$member = DB::select(DB::raw("SELECT doc_iden,(nom1 ||' '||(CASE WHEN nom2 is not null then nom2||'' ELSE '' END)) as nom,
-        ape1,ape2,id_club as club_act,id_grup as grup_act,id_rep,id_rep_lec,(CASE WHEN genero = 'M' THEN 'Masculino' ELSE 'Femenino' END) as genero,id_nac,id_calle 
-        FROM SJL_Lectores WHERE '$miembro'=doc_iden AND '$club'=id_club"));        
-        */              
+       
                 if ($member->genero == 'M')
                 $member->genero = "Masculino";
                 else $member->genero = "Femenino";
@@ -394,6 +388,87 @@ class ReportsLCIController extends Controller
 
     public function castclub(Request $request){
         return $this->memberpdf($request->miembro,$request->club);
+    }
+
+    public function performpdf($fec,$obra,$local,$club){
+        $presentaciones = DB::select(DB::raw("SELECT p.fec, (
+            SELECT o.nom FROM sjl_obras o WHERE p.id_obra = o.id
+        )nombre, (
+            SELECT l.nom FROM sjl_locales_eventos l WHERE l.id = p.id_local
+        )lugar, (select to_char(p.hora_i::time, 'HH12:MI AM')) as hora_i, (select to_char(p.durac::time, 'HH12:MI')) as durac, p.valor, p.id_local as idlugar, p.id_obra as obra,p.costo,p.num_asist,(p.costo * p.num_asist) as recaudado
+        FROM sjl_historicos_presentaciones p WHERE p.id_club = '$club' AND p.fec='$fec' AND p.id_obra='$obra' AND p.id_local='$local' AND p.valor is not null "));
+        $clubdata = DB::SELECT(DB::RAW("SELECT id,nom FROM SJL_clubes_lectura WHERE id='$club'"));
+        $elenco = DB::select(DB::raw("SELECT e.id_hist_pre as presentacion, e.id_pers, e.id_lec, e.id_obra as obra, e.id_club as club, e.id_local as local, (
+            SELECT nom1 || ' ' || ape1 as actor from sjl_lectores WHERE doc_iden = e.id_lec
+        ), (
+            SELECT nom as personaje from sjl_personajes WHERE id = e.id_pers AND id_obra = e.id_obra
+        ), (
+            CASE WHEN e.mej_act = 'true' THEN 'Si' ELSE 'No' END) as mejor
+        , e.id_fec_mem as membresia, (CASE WHEN (
+            SELECT principal FROM sjl_elenco WHERE id_fec_mem = e.id_fec_mem AND id_lec = e.id_lec AND id_club = e.id_club AND id_pers = e.id_pers AND id_obra = e.id_obra
+        ) = 'true' THEN 'Si' ELSE 'No' END) as principal FROM sjl_elenco_lectores e WHERE e.id_club = '$club' AND e.id_hist_pre = '$fec' AND e.id_obra = '$obra' AND e.id_local = '$local'"));
+        $data= [
+            'presentacion' => $presentaciones,
+            'elenco' => $elenco,
+            'clubdata' => $clubdata,
+        ];
+                $name = 'reporte_presentacion_club_'.$fec.'.pdf';
+                $pdf = PDF::loadView('reports.performrep',$data);        
+                return $pdf->download($name);    
+    }
+
+    public function performclub(Request $request){
+        return $this->performpdf($request->fec,$request->obra,$request->local,$request->club);
+    }
+
+    public function fillperform($club,$fechai,$fechaf,Request $request){
+        if($request->ajax()){
+        $presentaciones = DB::select(DB::raw("SELECT p.fec, (
+            SELECT o.nom FROM sjl_obras o WHERE p.id_obra = o.id
+        )nombre, (
+            SELECT l.nom FROM sjl_locales_eventos l WHERE l.id = p.id_local
+        )lugar, (select to_char(p.hora_i::time, 'HH12:MI AM')) as hora_i, (select to_char(p.durac::time, 'HH12:MI')) as durac, p.valor, p.id_local as idlugar, p.id_obra as obra FROM sjl_historicos_presentaciones p WHERE id_club = '$club' AND p.fec BETWEEN '$fechai' AND '$fechaf' AND p.valor is not null"));
+        
+            return Response::json(array('data'=>$presentaciones));
+        }
+        else{
+            $data = [
+                'idclub' => $club,
+                'fechai' => $fechai,                
+                'fechaf' =>$fechaf,                
+            ];
+            return view('reports.club_perform')->with($data);
+        }
+    }
+    public function playpdf($obra,$fechai,$fechaf){
+        $obras = DB::select(DB::raw("SELECT o.id, o.nom as obra, o.resum as resumen, (
+            SELECT l.titulo_esp FROM sjl_libros l WHERE l.isbn = ol.id_lib AND o.id = ol.id_obra
+        )libro_base FROM sjl_obras o, sjl_obras_libros ol WHERE '$obra' = ol.id_obra"));
+        $presentaciones = DB::select(DB::raw("SELECT p.fec, (
+                    SELECT o.nom FROM sjl_obras o WHERE p.id_obra = o.id
+                )nombre, (
+                    SELECT l.nom FROM sjl_locales_eventos l WHERE l.id = p.id_local
+                )lugar, (select to_char(p.hora_i::time, 'HH12:MI AM')) as hora_i, (select to_char(p.durac::time, 'HH12:MI')) as durac, p.valor, p.id_local as idlugar, p.id_obra as obra FROM sjl_historicos_presentaciones p WHERE id_club = '$club' AND p.fec BETWEEN '$fechai' AND '$fechaf' AND p.valor is null"));
+        $proxpres = DB::select(DB::raw("SELECT p.fec, (
+            SELECT o.nom FROM sjl_obras o WHERE p.id_obra = o.id
+        )nombre, (
+            SELECT l.nom FROM sjl_locales_eventos l WHERE l.id = p.id_local
+        )lugar, (select to_char(p.hora_i::time, 'HH12:MI AM')) as hora_i, (select to_char(p.durac::time, 'HH12:MI')) as durac, p.valor, p.id_local as idlugar, p.id_obra as obra FROM sjl_historicos_presentaciones p WHERE id_club = '$club' AND p.fec BETWEEN '$fechai' AND '$fechaf' AND p.valor is not null"));
+        $personajes=DB::SELECT(DB::RAW("SELECT id,id_obra,nom FROM SJL_Personajes WHERE '$obra'=id_obra"));
+
+        $date=[
+            'obras' => $obras,
+            'presentaciones' =>$presentaciones,
+            'proxpres' =>$proxpres,
+            'personajes' =>$personajes
+        ];
+        $name = 'reporte_obra_'.$obra.'.pdf';
+        $pdf = PDF::loadView('reports.performrep',$data);        
+        return $pdf->download($name);    
+
+    }
+    public function playreport(Request $request){
+        return $this->performpdf($request->obra,$request->fechai,$request->fechaf);
     }
 
 }

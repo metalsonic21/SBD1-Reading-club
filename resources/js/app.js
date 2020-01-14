@@ -79,6 +79,9 @@ Vue.component('bookanalyzed-form', require('./components/reports/Booksanalyzed.v
 Vue.component('clubbook-form', require('./components/reports/Clubs_book.vue').default);
 Vue.component('club-member-form', require('./components/reports/Club_member.vue').default);
 Vue.component('clubs-member', require('./components/reports/Clubs_member.vue').default);
+Vue.component('club-perform',require('./components/reports/Clubs_perform.vue').default);
+Vue.component('performs',require('./components/reports/club_perform.vue').default);
+Vue.component('plays',require('./components/reports/clubs_plays.vue').default);
 const app = new Vue({
     el: '#app',
 });
