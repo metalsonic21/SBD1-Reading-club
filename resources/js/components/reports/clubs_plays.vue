@@ -134,7 +134,7 @@ export default {
                 fechai: this.fechai,
                 fechaf: this.fechaf,
             };
-            window.location = `/clubs-reports-perform/${params.club}/${params.fechai}/${params.fechaf}`;
+            window.location = `/plays-reports/${params.club}/${params.fechai}/${params.fechaf}`;
       
                 
         },

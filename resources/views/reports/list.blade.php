@@ -118,7 +118,7 @@
                                                     </a>
                                                 </td>
                                             </tr>
-
+                                           
                                             <tr>
                                                 <td class="text-center">7</td>
 
@@ -127,9 +127,9 @@
                                                     <button type="button" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Libros analizados por este club" class="btn btn-default" v-b-modal.r7>
                                                         <i class="material-icons">comment</i> Información del reporte
                                                     </button>
-                                                    <button type="button" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Ficha club" class="btn btn-info">
+                                                    <a class="btn btn-info" href="/plays-reports">
                                                         <i class="material-icons">description</i> Generar reporte
-                                                    </button>
+                                                    </a>
                                                 </td>
                                             </tr>
 

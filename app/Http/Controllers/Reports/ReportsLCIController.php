@@ -442,34 +442,40 @@ class ReportsLCIController extends Controller
     }
     public function playpdf($obra,$fechai,$fechaf){
         $obras = DB::select(DB::raw("SELECT o.id, o.nom as obra, o.resum as resumen, (
-            SELECT l.titulo_esp FROM sjl_libros l WHERE l.isbn = ol.id_lib AND o.id = ol.id_obra
-        )libro_base FROM sjl_obras o, sjl_obras_libros ol WHERE '$obra' = ol.id_obra"));
-        $futurepres = DB::select(DB::raw("SELECT p.fec, (
-                            SELECT o.nom FROM sjl_obras o WHERE p.id_obra = o.id)nombre,
-                            (SELECT l.nom FROM sjl_locales_eventos l WHERE l.id = p.id_local)lugar
-                            ,(select to_char(p.hora_i::time, 'HH12:MI AM')) as hora_i,
-                            (select to_char(p.durac::time, 'HH12:MI')) as durac, p.valor,
-                            p.id_local as idlugar, p.id_obra as obra,
-                            (SELECT count(a.id_obra) FROM SJL_elenco_lectores a 
-                                WHERE '$obra'=a.id_obra AND p.id_local=a.id_local AND p.fec=a.id_hist_pre AND p.id_club=a.id_club) as numact
-                                    FROM sjl_historicos_presentaciones p,
-                            (SELECT a.nom FROM SJL_clubes_lectura WHERE a.id=p.id_club) as club_nom
-                 WHERE '$obra'=p.id_obra AND p.fec BETWEEN '$fechai' AND '$fechaf' AND p.valor is null order by p.fec desc"));
-        $pastpres = DB::select(DB::raw("SELECT p.fec, (
-            SELECT o.nom FROM sjl_obras o WHERE p.id_obra = o.id
-        )nombre, (
-            SELECT l.nom FROM sjl_locales_eventos l WHERE l.id = p.id_local
-        )lugar, (select to_char(p.hora_i::time, 'HH12:MI AM')) as hora_i, (select to_char(p.durac::time, 'HH12:MI')) as durac, p.valor, p.id_local as idlugar, p.id_obra as obra,
-        (SELECT count(a.id_obra) FROM SJL_elenco_lectores a WHERE '$obra'=a.id_obra AND p.id_local=a.id_local AND p.fec=a.id_hist_pre AND p.id_club=a.id_club) as numact,
-        (SELECT a.nom FROM SJL_clubes_lectura WHERE a.id=p.id_club) as club_nom
-         FROM sjl_historicos_presentaciones p WHERE p.fec BETWEEN '$fechai' AND '$fechaf' AND p.valor is not null order by p.fec desc"));
+            SELECT l.titulo_esp FROM sjl_libros l WHERE o.id ='$obra' AND l.isbn = ol.id_lib AND  o.id = ol.id_obra  
+        )libro_base FROM sjl_obras o, sjl_obras_libros ol WHERE '$obra'=o.id AND'$obra' = ol.id_obra"));
+        $valorprom = DB::SELECT (DB::RAW("SELECT round((AVG(valor)),2)as valor FROM sjl_historicos_presentaciones WHERE fec BETWEEN '$fechai' AND '$fechaf' AND id_obra='$obra' "));
+        $futurepres = DB::select(DB::raw("SELECT p.fec,(SELECT a.nom FROM SJL_clubes_lectura a WHERE a.id=p.id_club) as club_nom, (
+            SELECT o.nom FROM sjl_obras o WHERE p.id_obra = o.id)nombre,
+            (SELECT l.nom FROM sjl_locales_eventos l WHERE l.id = p.id_local)lugar
+            ,(select to_char(p.hora_i::time, 'HH12:MI AM')) as hora_i,
+            (select to_char(p.durac::time, 'HH12:MI')) as durac,
+            p.id_local as idlugar, p.id_obra as obra,p.costo,
+            (SELECT count(a.id_obra) FROM SJL_elenco_lectores a 
+                WHERE '$obra'=a.id_obra AND p.id_local=a.id_local AND p.fec=a.id_hist_pre AND p.id_club=a.id_club) as numact
+                    FROM sjl_historicos_presentaciones p
+ WHERE '$obra'=p.id_obra AND p.fec BETWEEN '$fechai' AND '$fechaf' AND p.valor is null order by p.fec desc"));
+        $pastpres = DB::select(DB::raw("SELECT p.fec,(SELECT a.nom FROM SJL_clubes_lectura a WHERE a.id=p.id_club) as club_nom, (
+            SELECT o.nom FROM sjl_obras o WHERE p.id_obra = o.id)nombre,
+            (SELECT l.nom FROM sjl_locales_eventos l WHERE l.id = p.id_local)lugar
+            ,(select to_char(p.hora_i::time, 'HH12:MI AM')) as hora_i,
+            (select to_char(p.durac::time, 'HH12:MI')) as durac, p.valor,p.num_asist,
+            p.id_local as idlugar, p.id_obra as obra,p.costo,(p.costo * p.num_asist) as recaudado,
+            (SELECT count(a.id_obra) FROM SJL_elenco_lectores a 
+                WHERE '$obra'=a.id_obra AND p.id_local=a.id_local AND p.fec=a.id_hist_pre AND p.id_club=a.id_club) as numact
+                    FROM sjl_historicos_presentaciones p
+            
+ WHERE '$obra'=p.id_obra AND p.fec BETWEEN '$fechai' AND '$fechaf' AND p.valor is not null order by p.fec desc"));
         $personajes=DB::SELECT(DB::RAW("SELECT id,id_obra,nom FROM SJL_Personajes WHERE '$obra'=id_obra"));
         
-        $date=[
+        $data=[
             'obras' => $obras,
             'futurepres' =>$futurepres,
             'pastpres' =>$pastpres,
-            'personajes' =>$personajes
+            'personajes' =>$personajes,
+            'valorprom' =>$valorprom,
+            'fechai' =>$fechai,
+            'fechaf' =>$fechaf
         ];
         $name = 'reporte_obra_'.$obra.'.pdf';
         $pdf = PDF::loadView('reports.play',$data);

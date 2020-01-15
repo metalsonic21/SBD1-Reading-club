@@ -103,33 +103,72 @@
 <body>
 
     <div class='jumbotron text-center'>
-        <h1>{{$clubdata[0]->nom}}</h1>
+        <h1>{{$obras[0]->obra}}</h1>
     </div>
+    <hr>
+    <div>Entre las fechas: {{$fechai}}  -  {{$fechaf}}</div>
         <div class='text-center'><strong>Detalles de Presentación</strong></div>
                 <hr>
                 <p>
-                    <strong>Obra: </strong> {{$presentacion[0]->nombre}}<br>
-                    <strong>Lugar: </strong> {{$presentacion[0]->lugar}}<br>
-                    <strong>Fecha: </strong> {{$presentacion[0]->fec}} <br>
-                    <strong>Horario: </strong> {{$presentacion[0]->hora_i}}<br>
-                    <strong>Duracion: </strong> {{$presentacion[0]->durac}} <br>
-                    <strong>Valoración: </strong> {{$presentacion[0]->valor}}/5 <br>
-                    <strong>Costo:</strong> {{$presentacion[0]->costo}} <br>
-                    <strong>Numero de asistentes:</strong> {{$presentacion[0]->num_asist}} <br>
-                    <strong>Monto recaudado: </strong> {{$presentacion[0]->recaudado}} <br>
-                </p>
-                    <div class='text-center'><strong>Elenco</strong></div>
-                    @foreach($elenco as $actor)                        
+                    <strong>Resumen: </strong> {{$obras[0]->resumen}}<br>
+                    <strong>Libro Base: </strong> {{$obras[0]->libro_base}}<br>
+                    
+                    <strong>Valoracion promedio: </strong> {{$valorprom[0]->valor}}<br>
+                    @if ($personajes)
+                    <strong>Personajes: </strong><br>
+                    @foreach($personajes as $personaje)    
                         <ul>
-                            <li>
-                            <strong>{{$actor->actor}}</strong>   en el papel de   <strong>{{$actor->personaje}}</strong> <br>
-                            @if($actor->principal=='Si') <strong>Como un personaje principal</strong>
-                            @else <strong>Como un personaje secundario</strong>
-                            @endif
-                            @if($actor->mejor=='Si')<strong>Con mejor actuacion</strong> <br>@endif                                 
-                            </li>
+                            <li><strong>{{$personaje->nom}} </strong> </li>
                         </ul>
                     @endforeach
+                    @endif
+                </p>
+                    <div class='text-center'><strong>Presentaciones</strong></div><br>
+                    @if($futurepres)
+                    <strong>
+                        Proximas
+                    </strong>
+                    <br>
+                        @foreach($futurepres as $pres)
+                            <ul>
+                                <li>
+                                    <strong>Obra: </strong> {{$pres->nombre}}<br>
+                                    <strong>Lugar: </strong> {{$pres->lugar}}<br>
+                                    <strong>Club: </strong> {{$pres->club_nom}}<br>
+                                    <strong>Fecha: </strong> {{$pres->fec}} <br>
+                                    <strong>Horario: </strong> {{$pres->hora_i}}<br>
+                                    <strong>Duracion: </strong> {{$pres->durac}} <br>                                    
+                                    <strong>Costo:</strong> {{$pres->costo}} <br>
+                                    <strong>Cantidad de actores: </strong> {{$pres->numact}}<br>                        
+                                </li>
+                            </ul>
+                        @endforeach
+                    @endif
+
+                    @if($pastpres)
+                    <strong>
+                        Realizadas
+                    </strong>
+                    <br>
+                        @foreach($pastpres as $pres)
+                            <ul>
+                                <li>
+                                    <strong>Obra: </strong> {{$pres->nombre}}<br>
+                                    <strong>Lugar: </strong> {{$pres->lugar}}<br>
+                                    <strong>Club: </strong> {{$pres->club_nom}}<br>
+                                    <strong>Fecha: </strong> {{$pres->fec}} <br>
+                                    <strong>Horario: </strong> {{$pres->hora_i}}<br>
+                                    <strong>Duracion: </strong> {{$pres->durac}} <br>                                    
+                                    <strong>Costo:</strong> {{$pres->costo}} <br>
+                                    <strong>Valoración: </strong> {{$pres->valor}}/5 <br>
+                                    <strong>Cantidad de actores: </strong> {{$pres->numact}}<br>
+                                    <strong>Numero de asistentes:</strong> {{$pres->num_asist}} <br>
+                                     <strong>Monto recaudado: </strong> {{$pres->recaudado}} <br>               
+                                </li>
+                            </ul>
+                        @endforeach
+                    @endif
+
 
     <div class='page_break'></div>
 
