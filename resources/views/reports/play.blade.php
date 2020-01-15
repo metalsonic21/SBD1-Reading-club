@@ -105,8 +105,9 @@
     <div class='jumbotron text-center'>
         <h1>{{$obras[0]->obra}}</h1>
     </div>
-    <hr>
+    
     <div>Entre las fechas: {{$fechai}}  -  {{$fechaf}}</div>
+    <hr>
         <div class='text-center'><strong>Detalles de Presentación</strong></div>
                 <hr>
                 <p>
