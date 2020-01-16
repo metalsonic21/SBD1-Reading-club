@@ -101,53 +101,49 @@
     .page_break { page-break-after: always; }
 </style>
 <body>
+    <div class="jumbotron text-center"><h1>Ficha Cronológica</h1><h2>{{$member->fullnom}}</h2></div>
     @foreach ($clubs as $club)
-        <div class="jumbotron text-center">
-            <h1>{{$club->nom}}</h1>
-        </div>
-        @if ($club->n_miembros > 0)
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-6">
-                        <h5>Miembros</h5>
-                    </div>
-                    <div class="col-sm-6" style="margin-left:400px">
-                        <h5>Libros analizados</h5>
-                    </div>
-                </div>
-                @foreach ($members as $member)
-                    @if ($member->id_club == $club->id)
-                    <hr>
-                    <div class="row">
-                        <div class="col-sm-6"> 
+        <div>
+            <hr>
+            <p>
+                <strong>Club: </strong>{{$club->nom}} <br>
+                <strong>Desde: </strong>{{$club->fec_i}} 
+                @if($club->fec_f != '')
+                    <strong>Hasta: </strong>{{$club->fec_f}}<br>
+                @else
+                    <strong>Hasta: </strong>presente<br>
+                @endif
+            </p>
+            @foreach ($groups as $group)
+                @if($club->id_club == $group->id_club && $club->fec_i <= $group->fec_i && $club->fec_f >= $group->fec_f)
+                <p>
+                    <strong>Grupo: </strong>{{$group->nom}} <br>
+                    <strong>Desde: </strong>{{$group->fec_i}} 
+                    @if($group->fec_f != '')
+                        <strong>Hasta: </strong>{{$group->fec_f}}<br>
+                    @else
+                        <strong>Hasta: </strong>presente<br>
+                    @endif
+                </p>
+                @foreach($books as $book)
+                    @if($group->fec_f == '')
+                        @if($club->id_club == $book->id_club && $group->id_grupo == $book->id_grupo && $book->fec >= $group->fec_i)
                             <p>
-                                <strong>Miembro desde: </strong> {{$member->fec_i}}<br>
-                                <strong>Nombre: </strong> {{$member->fullnom}}
+                                <strong>Libro leido: </strong> {{$book->libro}} 
                             </p>
-                        </div>
-                        <div class="col-sm-6" style="margin-left:400px">
-                            @if ($member->n_libros > 0)
-                                @foreach($books as $book)
-                                    @if ($member->id_lec == $book->id_lec)
-                                        <ul>
-                                            <li>
-                                                {{$book->titulo_ori}}
-                                            </li>
-                                        </ul>   
-                                    @endif
-                                @endforeach
-                            @else
-                                <p><strong>Este miembro no ha analizado ningún libro</strong></p>
-                            @endif      
-                        </div>
-                    </div>
+                        @endif
+                    @else
+                        @if($club->id_club == $book->id_club && $group->id_grupo == $book->id_grupo && $book->fec >= $group->fec_i && $book->fec <= $group->fec_f)
+                            <p>
+                                <strong>Libro leido: </strong> {{$book->libro}} 
+                            </p>
+                        @endif
                     @endif
                 @endforeach
-            </div>    
-        @else
-            <p class="text-center"><strong>Este club no tiene ningún miembro registrado</strong></p>
-        @endif
-        <div class="page_break"></div>
+    
+                @endif
+            @endforeach
+        </div>
     @endforeach
 </body>
 </html>
