@@ -124,7 +124,7 @@
                                 <strong>Valoracion del libro: </strong> No valorado aún<br>
                                 @else
                                     <strong>Valoración del libro: </strong> {{$meeting->valor}}/5 <br>
-                                    <strong>Concluciones del libro: </strong> {{$meeting->conclu}}
+                                    <strong>Conclusiones del libro: </strong> {{$meeting->conclu}}
                                 @endif
                             </p>
                         </div>
