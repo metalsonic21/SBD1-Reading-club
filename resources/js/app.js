@@ -74,6 +74,7 @@ Vue.component('create-role', require('./components/obras/Role.vue').default);
 Vue.component('book-form', require('./components/reports/Books.vue').default);
 Vue.component('club-form', require('./components/reports/Clubs.vue').default);
 Vue.component('at-form', require('./components/reports/Attendance.vue').default);
+Vue.component('atg-form', require('./components/reports/AttendanceG.vue').default);
 
 Vue.component('bookanalyzed-form', require('./components/reports/Booksanalyzed.vue').default);
 Vue.component('clubbook-form', require('./components/reports/Clubs_book.vue').default);
