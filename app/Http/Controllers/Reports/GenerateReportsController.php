@@ -75,6 +75,19 @@ class GenerateReportsController extends Controller
         return view ('reports.generate_reports.generate_attendanceg_report')->with('idclub',$idclub);
     }
 
+    public function attendanceformgetgroups(Request $request, $idclub){
+        if ($request->ajax()){
+            $groups = DB::select(DB::raw("SELECT g.id,g.nom as nombre, (
+                CASE WHEN g.dia_sem=2 THEN 'Lunes'
+                WHEN g.dia_sem = 3 THEN 'Martes'
+                WHEN g.dia_sem = 4 THEN 'Miercoles'
+                WHEN g.dia_sem = 5 THEN 'Jueves'
+                ELSE 'Viernes'
+            END) as dia_disponible,  (select to_char(hora_i::time, 'HH12:MI AM')) || ' - ' || (select to_char(hora_f::time, 'HH12:MI AM')) as horario_disponible  FROM sjl_grupos_lectura g WHERE g.id_club='$idclub'"));
+            return Response::json(array('data'=>$groups));
+        }
+    }
+
     public function clubperform(Request $request){
         if ($request->ajax()){
             $clubs = DB::select(DB::raw("SELECT c.id, c.nom as nombre, c.fec_crea as fecha_de_creacion, (

@@ -17,6 +17,7 @@ use App\Models\Member\Membresia;
 use App\Models\Member\Pago;
 use App\Models\Club\Club;
 use Log;
+use DateTime;
 class ReportsLCIController extends Controller
 {
     public function bookspdf($isbn){
@@ -92,30 +93,41 @@ class ReportsLCIController extends Controller
         return $this->clubspdf($request->club);
     }
 
-    public function CatchThirtythree($club){
-        $club_check = DB::select(DB::raw("SELECT c.id, c.nom as nom FROM sjl_clubes_lectura c 
-        WHERE c.id='$club'"));
-        $club = $club_check[0];
+    public function CatchThirtythree($club, $group, $fec){
+        $na = DB::select(DB::raw("SELECT l.doc_iden, l.nom1 || ' ' || l.ape1 as nombre, (
+            CASE WHEN m.estatus='A' THEN 'Activo'
+            WHEN m.estatus='I' THEN 'Inactivo' END) as estatus,(
+            (SELECT COUNT(i.fec_reu_men) FROM sjl_inansistencias i WHERE i.id_club='$club' AND i.id_lec = l.doc_iden AND i.id_grupo='$group' AND i.fec_reu_men>=m.fec_i AND i.fec_reu_men>=g.id_fec_i AND i.fec_reu_men BETWEEN DATE '$fec' AND DATE '$fec'+interval '2 months')*100
+            /(CASE WHEN (SELECT COUNT(r.fec) FROM sjl_reuniones_mensuales r WHERE r.id_club='$club' AND r.id_grupo='$group' AND r.fec>=m.fec_i AND r.fec>=g.id_fec_i AND r.fec BETWEEN DATE '$fec' AND DATE '$fec'+interval '2 months')=0 THEN 1 ELSE (SELECT COUNT(r.fec) FROM sjl_reuniones_mensuales r WHERE r.id_club='$club' AND r.id_grupo='$group' AND r.fec>=m.fec_i AND r.fec>=g.id_fec_i AND r.fec BETWEEN DATE '$fec' AND DATE '$fec'+interval '2 months') END)
+        )porcentaje
+        FROM sjl_lectores l, sjl_membresias m, sjl_grupos_lectores g WHERE l.id_club='$club' AND l.id_grup='$group' 
+        AND m.id_lec=l.doc_iden AND m.id_club='$club'
+        AND g.id_fec_mem = m.fec_i AND g.id_club = '$club' AND g.id_grupo='$group' AND g.id_lec = l.doc_iden
+        ORDER BY l.nom1,l.ape1"));
 
-        $na = DB::select(DB::raw("SELECT (
-            SELECT nom1 || ' ' || ape1 from sjl_lectores WHERE doc_iden = m.id_lec
-        )victim, 
-        (
-            SELECT doc_iden from sjl_lectores WHERE doc_iden = m.id_lec
-        )victimid,
-        m.id_club 
-            FROM sjl_membresias m WHERE m.fec_f IS NOT NULL AND m.motivo_b = 'I' AND m.id_club = '$club->id'"));
+        $club_check = DB::select(DB::raw("SELECT nom from sjl_clubes_lectura WHERE id = '$club'"));
+        $cname = $club_check[0]->nom;
+
+        $group_check = DB::select(DB::raw("SELECT nom from sjl_grupos_lectura WHERE id = '$group' AND id_club = '$club'"));
+        $gname = $group_check[0]->nom;
+
+        $fecha_f = DB::select(DB::raw("SELECT TO_CHAR(DATE '$fec' + INTERVAL '2 months', 'YYYY-MM-DD') as fecha"));
+        $ff = $fecha_f[0]->fecha;
 
         $data = [
-            'club'     => $club,
+            'club'     => $cname,
+            'group' => $gname,
             'na' => $na,
+            'fecha_i'=>$fec,
+            'fecha_f'=>$ff,
         ];
+        $name = $cname.'-'.$gname.'-Inasistencias.pdf';
         $pdf = PDF::loadView('reports.30', $data);
-        return $pdf->download('30.pdf');
+        return $pdf->download($name);
     }
 
     public function attendances(Request $request){
-        return $this->CatchThirtythree($request->club);
+        return $this->CatchThirtythree($request->club, $request->group, $request->fec_i);
     }
 
     public function cronoMembers(){

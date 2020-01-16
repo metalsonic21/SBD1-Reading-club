@@ -115,6 +115,7 @@ Route::get('/clubs-reports-members', 'reports\GenerateReportsController@clubform
 Route::get('/clubs-reports-members/{id}', 'reports\GenerateReportsController@clubformmember');
 Route::get('/attendance-reports', 'reports\GenerateReportsController@attendanceform')->name('attendance.generate');
 Route::get('/attendance-reports-groups/{club}', 'reports\GenerateReportsController@attendanceformg')->name('attendanceg.generate');
+Route::get('/club/{club}/get-groups', 'reports\GenerateReportsController@attendanceformgetgroups')->name('attendanceg.getg');
 
 Route::get('/clubs-reports-perform','reports\GenerateReportsController@clubperform');
 Route::get('/clubs-reports-perform/{club}/{fechai}/{fechaf}', 'reports\ReportsLCIController@fillperform')->name('booksperclub.reports');
@@ -134,7 +135,7 @@ Route::post('/reportclubs', 'reports\ReportsLCIController@clubs')->name('club.re
 Route::get('/clubs-reports/{id}', 'reports\ReportsLCIController@clubspdf')->name('club.document');
 
 Route::post('/reportattendances', 'reports\ReportsLCIController@attendances')->name('club.reports');
-Route::get('/attendance-reports/{club}', 'reports\ReportsLCIController@CatchThirtythree')->name('meetings.attreport');
+Route::get('/attendance-reports/{club}/{group}/{fec_i}', 'reports\ReportsLCIController@CatchThirtythree')->name('meetings.attreport');
 
 Route::post('/cronomembers', 'reports\ReportsJController@cronoMembers')->name('crono.members');
 Route::get('/chronlogy-reports/{id}/{fec_i}/{fec_f}', 'reports\ReportsJController@cronoMemberspdf')->name('crono.members');

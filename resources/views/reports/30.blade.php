@@ -115,23 +115,30 @@
 <body>
 
         <div class="jumbotron text-center">
-        <h1>{{$club->nom}}</h1>
+        <h1>{{$club}} - {{$group}}</h1>
         </div>
+        <h5 class="text-center"> <strong> Desde el {{$fecha_i}} hasta el {{$fecha_f}}</strong></h5>
 
         @if ($na)
             <table>
                 <tr>
                     <th class="text-center">Documento de identidad</th>
                     <th class="text-center">Nombre</th>
+                    <th class="text-center">Estatus de membresía</th>
+                    <th class="text-center">Porcentaje de inasistencias</th>
                 </tr>
             
             @foreach ($na as $n)
-                @if ($n->id_club == $club->id)
-                    <tr>
-                        <td>{{$n->victimid}}</td>
-                        <td>{{$n->victim}}</td>
-                    </tr>
-                @endif
+            @if($n->estatus >= 30)
+                <tr style="background-color:red">
+            @else
+                <tr>
+            @endif
+                    <td>{{$n->doc_iden}}</td>
+                    <td>{{$n->nombre}}</td>
+                    <td>{{$n->estatus}}</td>
+                    <td>{{$n->porcentaje}}%</td>
+                </tr>
             @endforeach
             </table>
         @else

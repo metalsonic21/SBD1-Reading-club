@@ -11,7 +11,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-lg-10">
-                                    <h4 class="card-title">Generar reporte para club</h4>
+                                    <h4 class="card-title">Generar reporte para grupo</h4>
                                 </div>
                                 <div class="col-lg-2">
 
@@ -25,8 +25,8 @@
 
                                         <b-row>
                                             <b-col cols="6">
-                                                <h6 class="ml-3"><strong>LISTA DE CLUBES</strong></h6>
-                                                <small class="ml-3">Seleccione un club para generar el reporte</small>
+                                                <h6 class="ml-3"><strong>LISTA DE GRUPOS</strong></h6>
+                                                <small class="ml-3">Seleccione un grupo para generar el reporte</small>
                                             </b-col>
                                         </b-row>
 
@@ -61,6 +61,15 @@
                                             <b-pagination v-model="currentPage" :total-rows="rows" :per-page="perPage" aria-controls="my-table"></b-pagination>
 
                                         </div>
+
+                                    <hr>
+
+                                    <b-row>
+                                        <b-col cols="6">
+                                            <label for="fec_i">Fecha de inicio</label>
+                                            <b-form-input type="date" v-model="fec_i"></b-form-input>
+                                        </b-col>
+                                    </b-row>
                                     </b-form>
                                     <br>
 
@@ -85,10 +94,11 @@ export default {
     props:['idclub'],
     data() {
         return {
+            fec_i: null,
             selected: [],
             perPage: 10,
             currentPage: 1,
-            fields: ['seleccionado', 'nombre', 'fecha_de_creacion', 'idioma'],
+            fields: ['seleccionado', 'nombre', 'dia_disponible', 'horario_disponible'],
             items: [],
             selected: [],
             filterOn: [],
@@ -98,14 +108,13 @@ export default {
     },
 
     created() {
-        console.log(this.idclub);
-        /*axios.get(`/clubs-reports`)
+        axios.get(`/club/${this.club}/get-groups`)
             .then(res => {
                 this.items = res.data.data;
                 //console.log(this.obras);
             }).catch(e => {
                 console.log(e);
-            })*/
+            })
     },
     methods: {
         onRowSelected(items) {
@@ -120,24 +129,27 @@ export default {
 
         generate() {
             const params = {
+                club: this.club,
                 group: this.selected[0].id,
+                fec_i: this.fec_i,
             };
-        console.log(this.idclub);
-            /*axios.post(`/reportattendances`, params)
+        //console.log(params);
+            axios.post(`/reportattendances`, params)
                 .then(res => {
-                    window.location = `/attendance-reports/${params.group}`;
+                    window.location = `/attendance-reports/${params.club}/${params.group}/${params.fec_i}`;
                 }).catch(e => {
                     console.log(e);
-                })*/
+                })
         },
 
         revalidate() {
             let msg = '';
-            if (this.selected.length == 0) msg = msg + "Seleccione un club<br>";
+            if (this.selected.length == 0) msg = msg + "Seleccione un grupo<br>";
+            if (this.fec_i==null || this.fec_i == ' ') msg = msg + "Seleccione una fecha inicial<br>";
 
             if (msg == '') {
                 this.generate();
-            } /*else {
+            } else {
                 Swal.fire({
                     title: 'Error',
                     html: '<p class="text-center">' + msg + '</p>',
@@ -145,7 +157,7 @@ export default {
                     confirmButtonText: 'Ok',
                     confirmButtonColor: '#8C7F7F',
                 })
-            }*/
+            }
         }
     },
 
