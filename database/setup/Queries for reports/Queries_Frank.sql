@@ -44,7 +44,10 @@ SELECT l.doc_iden, l.nom1 || ' ' || l.ape1 as nombre, m.estatus,(
     (SELECT COUNT(i.fec_reu_men) FROM sjl_inansistencias i WHERE i.id_club=1 AND i.id_lec = l.doc_iden AND i.id_grupo=1 AND i.fec_reu_men>=m.fec_i AND i.fec_reu_men>=g.id_fec_i AND i.fec_reu_men BETWEEN DATE '2019-01-01' AND DATE '2019-01-01'+interval '2 months')*100
     /(CASE WHEN (SELECT COUNT(r.fec) FROM sjl_reuniones_mensuales r WHERE r.id_club=1 AND r.id_grupo=1 AND r.fec>=m.fec_i AND r.fec>=g.id_fec_i AND r.fec BETWEEN DATE '2019-01-01' AND DATE '2019-01-01'+interval '2 months')=0 THEN 1 ELSE (SELECT COUNT(r.fec) FROM sjl_reuniones_mensuales r WHERE r.id_club=1 AND r.id_grupo=1 AND r.fec>=m.fec_i AND r.fec>=g.id_fec_i AND r.fec BETWEEN DATE '2019-01-01' AND DATE '2019-01-01'+interval '2 months') END)
 )porcentaje
-FROM sjl_lectores l, sjl_membresias m, sjl_grupos_lectores g WHERE l.id_club=1 AND l.id_grup=1 
+FROM sjl_lectores l, sjl_membresias m, sjl_grupos_lectores g
+WHERE l.id_club=1 AND l.id_grup=1 
 AND m.id_lec=l.doc_iden AND m.id_club=1
 AND g.id_fec_mem = m.fec_i AND g.id_club = 1 AND g.id_grupo=1 AND g.id_lec = l.doc_iden
+AND ((SELECT COUNT(i.fec_reu_men) FROM sjl_inansistencias i WHERE i.id_club=1 AND i.id_lec = l.doc_iden AND i.id_grupo=1 AND i.fec_reu_men>=m.fec_i AND i.fec_reu_men>=g.id_fec_i AND i.fec_reu_men BETWEEN DATE '2019-01-01' AND DATE '2019-01-01'+interval '2 months')*100
+    /(CASE WHEN (SELECT COUNT(r.fec) FROM sjl_reuniones_mensuales r WHERE r.id_club=1 AND r.id_grupo=1 AND r.fec>=m.fec_i AND r.fec>=g.id_fec_i AND r.fec BETWEEN DATE '2019-01-01' AND DATE '2019-01-01'+interval '2 months')=0 THEN 1 ELSE (SELECT COUNT(r.fec) FROM sjl_reuniones_mensuales r WHERE r.id_club=1 AND r.id_grupo=1 AND r.fec>=m.fec_i AND r.fec>=g.id_fec_i AND r.fec BETWEEN DATE '2019-01-01' AND DATE '2019-01-01'+interval '2 months') END)>0)
 ORDER BY l.nom1,l.ape1;
