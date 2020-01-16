@@ -854,6 +854,14 @@ INSERT INTO sjl_clubes_lectura(
         SELECT id from sjl_idiomas WHERE nom = 'Español'
     ));
 
+INSERT INTO sjl_clubes_lectura(
+	nom, fec_crea, cuota, id_dir, id_idiom)
+	VALUES ('Teather Book', '08-27-2069', 0, (
+        SELECT id from sjl_calles WHERE nom = 'Almeria'
+    ), (
+        SELECT id from sjl_idiomas WHERE nom = 'Español'
+    ));
+
 /*----------------------------------------- GROUPS -----------------------------------------------------*/
 
 INSERT INTO sjl_grupos_lectura(
@@ -955,6 +963,10 @@ INSERT INTO sjl_grupos_lectura(
 INSERT INTO sjl_grupos_lectura(
 	id, id_club, nom, tipo, dia_sem, hora_i, hora_f)
 	VALUES (25, 5, 'Macintosh Plus', 'A', 5, '13:00:00', '15:00:00');
+
+INSERT INTO sjl_grupos_lectura(
+	id, id_club, nom, tipo, dia_sem, hora_i, hora_f)
+	VALUES (26, 6, 'Moto Lectura', 'A', 4, '13:00:00', '15:00:00');
 
 /*------------------------------------------ BOOKS ---------------------------------------------------*/
 
@@ -1722,7 +1734,7 @@ INSERT INTO sjl_lectores(
 
 INSERT INTO sjl_telefonos(
 	cod_pais, cod_area, num, id_lector)
-	VALUES (58, 424, 125, 5616);
+	VALUES (58, 424, 125, 1414);
 
 INSERT INTO sjl_membresias(
 	fec_i, id_lec, id_club, estatus, fec_f, motivo_b)
@@ -1848,6 +1860,36 @@ INSERT INTO sjl_historicos_pagos_memb(
 INSERT INTO sjl_grupos_lectores(
 	id_fec_i, id_fec_mem, id_club, id_lec, id_grupo, fec_f)
 	VALUES ('01-19-2019', '01-19-2019', 1, 1212, 1, null);
+
+/*member 1*/
+INSERT INTO sjl_lectores(
+	doc_iden, nom1, nom2, ape1, ape2, fec_nac, genero, id_club, id_grup, id_calle, id_rep, id_rep_lec, id_nac)
+	VALUES (77965, 'Gencis', 'Jane', 'Vila', 'Quiche', '08-01-1989', 'F', 6, 26, 2, null, null, 4);
+
+INSERT INTO sjl_telefonos(
+	cod_pais, cod_area, num, id_lector)
+	VALUES (735, 556, 9874563, 77965);
+
+INSERT INTO sjl_membresias(
+	fec_i, id_lec, id_club, estatus, fec_f, motivo_b)
+	VALUES ('08-28-2016', 77965, 6, 'A', null, null);
+
+INSERT INTO sjl_historicos_pagos_memb(
+	id, id_fec_mem, id_club, id_lec, fec_emi)
+	VALUES (30, '08-28-2016', 6, 77965, '08-28-2016');
+
+INSERT INTO sjl_lista_favoritos(
+	id_lec, id_lib, pref)
+	VALUES (77965, 58992, 1);
+
+INSERT INTO sjl_lista_favoritos(
+	id_lec, id_lib, pref)
+	VALUES (77965, 27136, 3);
+
+INSERT INTO sjl_lista_favoritos(
+	id_lec, id_lib, pref)
+	VALUES (77965, 79561, 2);
+/*end member 1*/
 
 /* -------------------------------- KIDS ----------------------------------------------------- */
 
@@ -2142,7 +2184,7 @@ INSERT INTO sjl_reuniones_mensuales(
 
 INSERT INTO sjl_reuniones_mensuales(
 	fec, id_lib, id_grupo, id_grupo_mod, id_fec_mem, id_fec_i, id_club, id_lec, n_ses, conclu, valor)
-	VALUES ('02-19-2019', 02145, 1, 1, '01-01-2019', '01-01-2019', 1, 7777, 1, 'Mediocre', 2);
+	VALUES ('02-19-2019', 02145, 1, 1, '01-01-2019', '01-01-2019', 1, 7777, 3, 'Mediocre', 2);
 
 INSERT INTO sjl_reuniones_mensuales(
 	fec, id_lib, id_grupo, id_grupo_mod, id_fec_mem, id_fec_i, id_club, id_lec, n_ses, conclu, valor)
@@ -2271,3 +2313,43 @@ INSERT INTO sjl_elenco_lectores (id_fec_mem, id_lec, id_club, id_pers, id_obra, 
 INSERT INTO sjl_elenco_lectores (id_fec_mem, id_lec, id_club, id_pers, id_obra, id_hist_pre,id_local, mej_act) VALUES ('07-01-2011', 9987, 1,(SELECT id FROM sjl_personajes WHERE nom='Fray Lorenzo'),(SELECT id FROM sjl_obras WHERE nom='Romeo y Julieta'),'03-07-2019',8,'false');
 
 INSERT INTO sjl_elenco_lectores (id_fec_mem, id_lec, id_club, id_pers, id_obra, id_hist_pre,id_local, mej_act) VALUES ('03-05-2015', 1414, 1,(SELECT id FROM sjl_personajes WHERE nom='Mercurio'),(SELECT id FROM sjl_obras WHERE nom='Romeo y Julieta'),'03-07-2019',8,'false');
+
+/* CLUBES */
+
+INSERT INTO sjl_clubes_lectura(
+    nom, fec_crea, cuota, id_dir, id_idiom)
+    VALUES ('Harringtons', '01-12-2017', 100, (
+        SELECT id from sjl_calles WHERE nom = 'Paradise hills'
+    ), (
+        SELECT id from sjl_idiomas WHERE nom = 'Arabe'
+    ));
+
+INSERT INTO sjl_clubes_lectura(
+    nom, fec_crea, cuota, id_dir, id_idiom)
+    VALUES ('Excelsior Club', '03-03-2018', 100, (
+        SELECT id from sjl_calles WHERE nom = 'Dixon'
+    ), (
+        SELECT id from sjl_idiomas WHERE nom = 'Arabe'
+    ));
+
+INSERT INTO sjl_clubes_lectura(
+    nom, fec_crea, cuota, id_dir, id_idiom)
+    VALUES ('UCAB Club', '01-10-2017', 100, (
+        SELECT id from sjl_calles WHERE nom = 'San carlos'
+    ), (
+        SELECT id from sjl_idiomas WHERE nom = 'Ingles'
+    ));
+
+/*  CLUBES CLUBES  */
+
+INSERT INTO sjl_clubes_clubes(id_club1,id_club2) VALUES(1,2);
+
+INSERT INTO sjl_clubes_clubes(id_club1,id_club2) VALUES(4,5);
+
+INSERT INTO sjl_clubes_clubes(id_club1,id_club2) VALUES(8,3);
+
+INSERT INTO sjl_clubes_clubes(id_club1,id_club2) VALUES(6,7);
+
+INSERT INTO sjl_clubes_clubes(id_club1,id_club2) VALUES(6,2);
+
+INSERT INTO sjl_clubes_clubes(id_club1,id_club2) VALUES(6,1);

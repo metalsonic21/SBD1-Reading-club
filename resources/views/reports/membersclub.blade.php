@@ -168,7 +168,7 @@
     <p><strong>Lista de grupos</strong> </p>
         <ul>
             @foreach ($groups as $group)
-            <p><strong>Nombre:</strong> {{$group->nom}} - ID Grupo : {{$group->id_grupo}}</p>
+            <p><strong>Nombre del Grupo:</strong> {{$group->nom}} -ID Grupo : {{$group->id_grupo}} </p>
             <li>Fecha de ingreso: {{$group->id_fec_i}}</li>
             @if ($group->fec_f)
             <li>Fecha de egreso: {{$group->fec_f}}</li>
