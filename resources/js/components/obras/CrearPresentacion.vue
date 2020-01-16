@@ -315,7 +315,7 @@ export default {
             return (this.presentacion.ubicacion != null);
         },
         validateV() {
-            return (this.presentacion.valor != null);
+            return ((this.presentacion.valor == null) || !isNaN(this.presentacion.valor));
         },
         validateC() {
             if (this.presentacion.costo == null || this.presentacion.costo == '') return null;
@@ -339,7 +339,7 @@ export default {
             else return false;
         },
         validateN() {
-            if (this.presentacion.num_asist == null || this.presentacion.num_asist == '') return null;
+            if (this.presentacion.num_asist == null || this.presentacion.num_asist == '') return true;
             if (!isNaN(this.presentacion.num_asist) && this.presentacion.num_asist > 0 && this.presentacion.num_asist.toString().indexOf(".") == -1 && this.presentacion.num_asist < 9999999) return true;
             else return false;
         },
