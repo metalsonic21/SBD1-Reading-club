@@ -142,7 +142,7 @@ export default {
                 }).catch(e => {
                     console.log(e);
                 })
-            window.location = `/clubs-reports-perform/${params.club}/${params.fechai}/${params.fechaf}`;
+            window.location = `/clubs-reports-perform/${params.obra}/${params.fechai}/${params.fechaf}`;
       
                 
         },

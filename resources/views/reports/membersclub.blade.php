@@ -180,7 +180,8 @@
                 <ol>
                     @foreach ($inasistencias as $inasistencia)
                         @if ($group->id_grupo==$inasistencia->id_grupo)
-                        <li>{{$inasistencia->feC_reu_men}}/li>
+                        <strong>Inasistencias</strong> <br>
+                        <li>{{$inasistencia->fec_reu_men}}</li>
                         @endif
                     @endforeach
                 </ol>
