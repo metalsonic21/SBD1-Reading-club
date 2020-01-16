@@ -82,6 +82,7 @@
 <script>
 import Swal from 'sweetalert2';
 export default {
+    props:['idclub'],
     data() {
         return {
             selected: [],
@@ -92,17 +93,19 @@ export default {
             selected: [],
             filterOn: [],
             filter: null,
+            club: this.idclub,
         }
     },
 
     created() {
-        axios.get(`/clubs-reports`)
+        console.log(this.idclub);
+        /*axios.get(`/clubs-reports`)
             .then(res => {
                 this.items = res.data.data;
                 //console.log(this.obras);
             }).catch(e => {
                 console.log(e);
-            })
+            })*/
     },
     methods: {
         onRowSelected(items) {
@@ -117,14 +120,12 @@ export default {
 
         generate() {
             const params = {
-                club: this.selected[0].id,
+                group: this.selected[0].id,
             };
-
-            window.location = `/attendance-reports-groups/${params.club}`;
-
+        console.log(this.idclub);
             /*axios.post(`/reportattendances`, params)
                 .then(res => {
-                    window.location = `/attendance-reports/${params.club}`;
+                    window.location = `/attendance-reports/${params.group}`;
                 }).catch(e => {
                     console.log(e);
                 })*/
@@ -136,7 +137,7 @@ export default {
 
             if (msg == '') {
                 this.generate();
-            } else {
+            } /*else {
                 Swal.fire({
                     title: 'Error',
                     html: '<p class="text-center">' + msg + '</p>',
@@ -144,7 +145,7 @@ export default {
                     confirmButtonText: 'Ok',
                     confirmButtonColor: '#8C7F7F',
                 })
-            }
+            }*/
         }
     },
 

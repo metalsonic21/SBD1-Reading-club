@@ -164,7 +164,7 @@
                                             <tr>
                                                 <td class="text-center">10</td>
 
-                                                <td class="text-left">Inasistencias</td>
+                                                <td class="text-left">Porcentaje de inasistencia</td>
                                                 <td class="td-actions text-center">
                                                     <button type="button" rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="Libros analizados por este club" class="btn btn-default" v-b-modal.r10>
                                                         <i class="material-icons">comment</i> Información del reporte
@@ -421,9 +421,9 @@
         <div class="card-body ">
             <b-row>
                 <b-col cols="12">
-                    <h6><strong>CONTIENE POR CLUB:</strong></h6>
+                    <h6><strong>CONTIENE POR CLUB Y GRUPO EN UN BIMESTRE:</strong></h6>
                     <ul>
-                        <li>Lista de miembros con 30% o más de inasistencias</li>
+                        <li>Lista de miembros junto a su porcentaje de inasistencia</li>
                     </ul>
                 </b-col>
             </b-row>

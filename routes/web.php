@@ -114,6 +114,7 @@ Route::get('/clubs-reports-book', 'reports\GenerateReportsController@clubformboo
 Route::get('/clubs-reports-members', 'reports\GenerateReportsController@clubformmemberpon')->name('clubs-members2.generate');
 Route::get('/clubs-reports-members/{id}', 'reports\GenerateReportsController@clubformmember');
 Route::get('/attendance-reports', 'reports\GenerateReportsController@attendanceform')->name('attendance.generate');
+Route::get('/attendance-reports-groups/{club}', 'reports\GenerateReportsController@attendanceformg')->name('attendanceg.generate');
 
 Route::get('/clubs-reports-perform','reports\GenerateReportsController@clubperform');
 Route::get('/clubs-reports-perform/{club}/{fechai}/{fechaf}', 'reports\ReportsLCIController@fillperform')->name('booksperclub.reports');

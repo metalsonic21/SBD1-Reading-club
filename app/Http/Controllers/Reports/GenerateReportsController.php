@@ -71,6 +71,10 @@ class GenerateReportsController extends Controller
             return view ('reports.generate_reports.generate_attendance_report');
     }
 
+    public function attendanceformg(Request $request, $idclub){
+        return view ('reports.generate_reports.generate_attendanceg_report')->with('idclub',$idclub);
+    }
+
     public function clubperform(Request $request){
         if ($request->ajax()){
             $clubs = DB::select(DB::raw("SELECT c.id, c.nom as nombre, c.fec_crea as fecha_de_creacion, (
