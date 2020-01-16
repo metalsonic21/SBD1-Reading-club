@@ -357,7 +357,7 @@ class ReportsLCIController extends Controller
     
             }
             $newedad= compact($Tedad);
-            
+
         $data = [
             'member' => $member,
             'edad'=> $edad,
@@ -384,7 +384,6 @@ class ReportsLCIController extends Controller
     $pdf = PDF::loadView('reports.membersclub',$data);        
     return $pdf->download($name);
     }
-
 
     public function castclub(Request $request){
         return $this->memberpdf($request->miembro,$request->club);

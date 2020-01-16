@@ -62,19 +62,28 @@
                                         <b-row>
                                             <b-col cols="4">
                                                 <label for="fecha">Fecha</label>
-                                                <b-form-input type="date" v-model="fechai" name="fecha"></b-form-input>
+                                                <b-form-input type="date" v-model="fechai" :disabled='isDisabled' name="fecha"></b-form-input>
                                                 <b-form-invalid-feedback :state="validateF">* Requerido</b-form-invalid-feedback>
                                             </b-col>
                                             <b-col cols="4">
                                                 <label for="fecha">Fecha</label>
-                                                <b-form-input type="date" v-model="fechaf" name="fecha"></b-form-input>
+                                                <b-form-input type="date" v-model="fechaf" :disabled='isDisabled' name="fecha"></b-form-input>
                                                 <b-form-invalid-feedback :state="validateFf">* Requerido</b-form-invalid-feedback>
                                             </b-col>
-
                                         </b-row>
+                                        <br>
+                                            <b-col>
+                                                <b-form-checkbox    id="checkbox-1"
+                                                                    v-model="status"
+                                                                    name="checkbox-1"
+                                                                    value="accepted"
+                                                                    unchecked-value="not_accepted" @change="onCheckChange">
+                                                                    Sin rango de fecha
+                                                </b-form-checkbox>
+                                            </b-col>
                                     </b-form>
                                     <br>
-
+                                    
                                     <div class="d-flex flex-row-reverse bd-highlight">
                                         <b-button variant="default" @click="revalidate">Continuar</b-button>
                                     </div>
@@ -105,6 +114,7 @@ export default {
             filter: null,
             fechai: null,
             fechaf:null,
+            isDisabled:false            
         }
     },
 
@@ -118,6 +128,9 @@ export default {
             })
     },
     methods: {
+        onCheckChange(){
+            this.isDisabled=!this.isDisabled;
+        },
         onRowSelected(items) {
             this.selected = items
         },
@@ -129,7 +142,15 @@ export default {
         },
 
         generate() {
-            const params = {
+            let params='';
+            if(this.isDisabled)
+            params = {
+                obra: this.selected[0].id,
+                fechai: '0001-01-01',
+                fechaf: '9999-12-31',
+            };
+            else
+            params = {
                 obra: this.selected[0].id,
                 fechai: this.fechai,
                 fechaf: this.fechaf,
@@ -143,8 +164,6 @@ export default {
                     console.log(e);
                 })
             window.location = `/clubs-reports-perform/${params.obra}/${params.fechai}/${params.fechaf}`;
-      
-                
         },
 
         revalidate() {
@@ -171,9 +190,11 @@ export default {
             return this.items.length
         },
         validateF() {
+            if (this.isDisabled==true) return this.isDisabled;
             return (this.fechai != null);
         },
         validateFf() {
+            if (this.isDisabled==true) return this.isDisabled;
             return (this.fechaf != null);
         },
     }

@@ -24,10 +24,10 @@ class ReportsJController extends Controller
             FROM sjl_grupos_lectores WHERE id_lec ='$id' AND id_fec_i >= '$fec_i' AND (CASE WHEN fec_f IS NOT NULL THEN fec_f <= '$fec_f' ELSE TRUE END)
             ORDER BY id_fec_i;"));
 
-        $books = DB::select(DB::raw("SELECT fec,id_club,id_grupo,(
-            SELECT titulo_ori FROM sjl_libros WHERE isbn = id_lib ) as libro
-            FROM sjl_reuniones_mensuales
-            WHERE id_lec = '$id' AND n_ses = 1;"));
+        $books = DB::select(DB::raw("SELECT rm.fec,rm.id_club,rm.id_grupo,(
+            SELECT titulo_ori FROM sjl_libros WHERE isbn = id_lib ) as libro 
+            from sjl_reuniones_mensuales rm, sjl_grupos_lectores gl
+            WHERE rm.n_ses = 1 AND rm.id_grupo = gl.id_grupo and gl.id_lec ='$id';"));
 
         $data = [
             'clubs' => $clubs,

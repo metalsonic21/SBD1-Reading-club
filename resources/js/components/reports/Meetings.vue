@@ -33,13 +33,23 @@
                                         <b-row>
                                             <b-col cols="6">
                                                 <label for="fec__i">Fecha limite inferior</label>
-                                                <b-form-input type="date" v-model="fec_i" id="fec_i" name="fec_i"></b-form-input>
+                                                <b-form-input type="date" v-model="fec_i" id="fec_i" :disabled='isDisabled' name="fec_i"></b-form-input>
                                                 <b-form-invalid-feedback :state="validateF_i">* Requerido</b-form-invalid-feedback>
                                             </b-col>
                                             <b-col cols="6">
                                                 <label for="fec_f">Fecha limite superior</label>
-                                                <b-form-input type="date" v-model="fec_f" id="fec_f" name="fec_f"></b-form-input>
+                                                <b-form-input type="date" v-model="fec_f" id="fec_f" :disabled='isDisabled' name="fec_f"></b-form-input>
                                                 <b-form-invalid-feedback :state="validateF_f">* Requerido</b-form-invalid-feedback>
+                                            </b-col>
+                                        <br>
+                                        <b-col>
+                                                <b-form-checkbox    id="checkbox-1"
+                                                                    v-model="status"
+                                                                    name="checkbox-1"
+                                                                    value="accepted"
+                                                                    unchecked-value="not_accepted" @change="onCheckChange">
+                                                                    Sin rango de fecha
+                                                </b-form-checkbox>
                                             </b-col>
                                         </b-row>
                                         <br>
@@ -101,7 +111,8 @@ export default {
             filterOn: [],
             filter: null,
             fec_i: null,
-            fec_f: null
+            fec_f: null,
+            isDisabled:false
         }
     },
 
@@ -115,6 +126,9 @@ export default {
             })
     },
     methods: {
+        onCheckChange(){
+            this.isDisabled=!this.isDisabled;
+        },
         onRowSelected(items) {
             this.selected = items
         },
@@ -126,7 +140,15 @@ export default {
         },
 
         generate() {
-            const params = {
+            let params='';
+            if(this.isDisabled)
+            params = {
+                id: this.selected[0].id,
+                fec_i: '0001-01-01',
+                fec_f: '9999-12-31',
+            };
+            else
+            params = {
                 id: this.selected[0].id,
                 fec_i: this.fec_i,
                 fec_f: this.fec_f,
@@ -165,9 +187,11 @@ export default {
 
     computed: {
         validateF_i(){
+            if (this.isDisabled==true) return this.isDisabled;
             return (this.fec_i != null);
         },
         validateF_f(){
+            if (this.isDisabled==true) return this.isDisabled;
             return (this.fec_f != null);
         },
         rows() {
