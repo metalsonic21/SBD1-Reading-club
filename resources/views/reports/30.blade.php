@@ -124,19 +124,13 @@
                 <tr>
                     <th class="text-center">Documento de identidad</th>
                     <th class="text-center">Nombre</th>
-                    <th class="text-center">Estatus de membresía</th>
                     <th class="text-center">Porcentaje de inasistencias</th>
                 </tr>
             
             @foreach ($na as $n)
-            @if($n->estatus >= 30)
-                <tr style="background-color:red">
-            @else
                 <tr>
-            @endif
                     <td>{{$n->doc_iden}}</td>
                     <td>{{$n->nombre}}</td>
-                    <td>{{$n->estatus}}</td>
                     <td>{{$n->porcentaje}}%</td>
                 </tr>
             @endforeach
